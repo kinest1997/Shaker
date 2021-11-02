@@ -16,16 +16,14 @@ class MainViewController: UIViewController {
     let leftStackView = UIStackView()
     let middleStackView = UIStackView()
     let rightStackView = UIStackView()
-    let bigStackview = UIStackView()
+    let bigStackView = UIStackView()
     
     let topStackView = UIStackView()
     let countLabel = UILabel()
     let explainLabel = UILabel()
     
     let startButton = UIButton()
-    //리셋은 그냥 넣어두긴함.
-    let resetButton = UIButton()
-    let midStackView = UIStackView()
+    let startTryStackView = UIStackView()
     
     let tryLabel = UILabel()
     
@@ -48,74 +46,77 @@ class MainViewController: UIViewController {
         let keypadArray = [oneButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton, eightButton, nineButton]
         
         var mySetAnswer: Set<Int> = []
+        var sequence = 1
         
         keypadArray.forEach {
-            let num = (keypadArray.firstIndex(of: $0)! + 1)
-            let toggle = UIAction { [weak self]_ in
+            $0.titleLabel?.font = UIFont(name: "systemFont", size: 30)
+            $0.setTitle("\(sequence)", for: .normal)
+            $0.tag = sequence
+            sequence += 1
+            let num = $0.tag
+            let toggle = UIAction { [weak self] _ in
                 guard let self = self else { return }
                 let temp = mySetAnswer.count
                 mySetAnswer.insert(num)
                 if !(temp == mySetAnswer.count) {
                     self.myAnswer.append(num)
+                } else { self.present(self.showalert(title: "안돼", message: "이미 넣은숫자입니다 다른걸 입력하세요", buttonTitle: "그래"), animated: true, completion: nil)
                 }
-                print("템프앤서",self.answer)
-                print("템프어레이",self.myAnswer)
                 switch self.myAnswer.count {
                 case 3:
                     self.countLabel.text = "\(self.myAnswer[0])\(self.myAnswer[1])\(self.myAnswer[2])"
                     self.check()
                     self.explainLabel.text = "\(self.strikeCount)스트라이크 | \(self.ballCount)볼 | \(self.outCount)아웃"
                     if self.strikeCount == 3 {
-                        let alert = UIAlertController(title: "성공", message: "\(self.tryCount + 1)회만에 성공입니다", preferredStyle: UIAlertController.Style.alert)
-                        let okButton = UIAlertAction(title: "그래..", style: .default)
-                        alert.addAction(okButton)
                         self.firstStart()
                         mySetAnswer = []
                         self.tryLabel.text = ""
-                        self.present(alert, animated: true, completion: nil)
+                        self.present(self.showalert(title: "성공", message: "\(self.tryCount + 1)회만에 성공입니다", buttonTitle: "굿잡"), animated: true, completion: nil)
                     } else {
                         self.tryCount += 1
                         self.nextChance()
                         mySetAnswer = []
                     }
-              
                 case 2:
                     self.countLabel.text = "\(self.myAnswer[0])\(self.myAnswer[1])"
                 default:
-                    
                     self.countLabel.text = "\(self.myAnswer[0])"
                 }
             }
             $0.addAction(toggle, for: .touchUpInside)
         }
-        
-        let starting = UIAction {[weak self]_ in
+        let starting = UIAction { [weak self] _ in
             self?.firstStart()
             mySetAnswer = []
         }
         startButton.addAction(starting, for: .touchUpInside)
-
-
+        bigStackView.axis = .horizontal
+        startTryStackView.axis = .horizontal
+        startButton.setTitle("시작", for: .normal)
+        startTryStackView.spacing = 30
+        view.backgroundColor = .systemBlue
+        countLabel.backgroundColor = .systemMint
+        tryLabel.backgroundColor = .systemTeal
+        startButton.backgroundColor = .systemGray
+        [leftStackView, middleStackView, rightStackView].forEach {
+            $0.axis = .vertical
+            $0.distribution = .fillEqually
+        }
+        [topStackView, startTryStackView, bigStackView].forEach {
+            $0.distribution = .fillEqually
+        }
     }
     
     func layout() {
-        let keypadArray = [oneButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton, eightButton, nineButton]
-        var sequence = 1
-        keypadArray.forEach {
+        [oneButton, twoButton, threeButton, fourButton, fiveButton, sixButton, sevenButton, eightButton, nineButton].forEach {
             self.view.addSubview($0)
-            $0.titleLabel?.font = UIFont(name: "systemFont", size: 30)
-            $0.setTitle("\(sequence)", for: .normal)
-            $0.tag = sequence
-            sequence += 1
         }
- 
-        [topStackView, midStackView, bigStackview].forEach {
+        [topStackView, startTryStackView, bigStackView].forEach {
             view.addSubview($0)
             $0.distribution = .fillEqually
         }
-        
-        [startButton, tryLabel, resetButton].forEach {
-            self.midStackView.addArrangedSubview($0)
+        [startButton, tryLabel].forEach {
+            self.startTryStackView.addArrangedSubview($0)
         }
         self.topStackView.addArrangedSubview(countLabel)
         self.topStackView.addArrangedSubview(explainLabel)
@@ -130,35 +131,21 @@ class MainViewController: UIViewController {
             rightStackView.addArrangedSubview($0)
         }
         [leftStackView, middleStackView, rightStackView].forEach {
-            bigStackview.addArrangedSubview($0)
-            $0.axis = .vertical
-            $0.distribution = .fillEqually
+            bigStackView.addArrangedSubview($0)
         }
-        
-        bigStackview.snp.makeConstraints {
+        bigStackView.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.5)
         }
-        bigStackview.axis = .horizontal
-        midStackView.axis = .horizontal
-        
         topStackView.snp.makeConstraints {
             $0.width.equalToSuperview()
             $0.height.equalTo(100)
             $0.top.equalToSuperview().offset(100)
         }
-        midStackView.snp.makeConstraints {
+        startTryStackView.snp.makeConstraints {
             $0.top.equalTo(topStackView.snp.bottom)
             $0.width.height.equalTo(topStackView)
         }
-        startButton.setTitle("시작", for: .normal)
-        midStackView.spacing = 30
-        
-        view.backgroundColor = .systemBlue
-        countLabel.backgroundColor = .systemMint
-        tryLabel.backgroundColor = .systemTeal
-        startButton.backgroundColor = .systemGray
-        resetButton.backgroundColor = .systemBrown
     }
     
     func firstStart() {
@@ -189,7 +176,9 @@ class MainViewController: UIViewController {
                 strikeCount += 1
             }else if myAnswer.contains(answer[i]) {
                 ballCount += 1
-            }else { outCount += 1}
+            }else {
+                outCount += 1
+            }
         }
     }
     
@@ -198,6 +187,13 @@ class MainViewController: UIViewController {
         countLabel.text = ""
         myAnswer = []
         tryLabel.text = "\(tryCount)"
+    }
+    
+    func showalert(title: String, message: String, buttonTitle: String) -> UIAlertController {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: buttonTitle, style: .default)
+        alert.addAction(okButton)
+        return alert
     }
 }
 
