@@ -176,7 +176,9 @@ class MainViewController: UIViewController {
                 strikeCount += 1
             }else if myAnswer.contains(answer[i]) {
                 ballCount += 1
-            }else { outCount += 1}
+            }else {
+                outCount += 1
+            }
         }
     }
     
