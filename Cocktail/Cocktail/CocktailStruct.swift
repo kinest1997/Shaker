@@ -37,6 +37,7 @@ struct Cocktail: Codable {
     
     enum Alcohol: String, Codable {
         case high
+        case mid
         case low
     }
     

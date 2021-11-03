@@ -22,7 +22,7 @@
 		<key>base</key>
 		<string>보드카</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>투명색</string>
 	</dict>
@@ -125,7 +125,7 @@
 	</dict>
 	<dict>
 		<key>mytip</key>
-		<string>생각보다 시큼새큼하니 조심!</string>
+		<string>생각보다 시큼새큼하니 조심! 주스에 딱 알콜이 들어간맛이에요</string>
 		<key>name</key>
 		<string>시브리즈</string>
 		<key>craft</key>
@@ -286,7 +286,7 @@
 		<key>base</key>
 		<string>보드카</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>노란색</string>
 	</dict>
@@ -369,7 +369,7 @@
 		<key>craft</key>
 		<string>스터</string>
 		<key>glass</key>
-		<string>칵테일글라스</string>
+		<string>칵테일</string>
 		<key>recipe</key>
 		<string>보드카1oz, 우유1oz, 버터스카치 리큐르1oz</string>
 		<key>ingredients</key>
@@ -417,7 +417,7 @@
 		<key>craft</key>
 		<string>쉐이킹</string>
 		<key>glass</key>
-		<string>마티니글라스</string>
+		<string>마티니</string>
 		<key>recipe</key>
 		<string>보드카1.5oz, 드라이 베르무트 3/4oz</string>
 		<key>ingredients</key>
@@ -479,7 +479,7 @@
 		<key>base</key>
 		<string>진</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>파란색</string>
 		<key>mytip</key>
@@ -503,7 +503,7 @@
 		<key>base</key>
 		<string>진</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>투명색</string>
 		<key>mytip</key>
@@ -528,7 +528,7 @@
 		<key>base</key>
 		<string>진</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>투명색</string>
 		<key>mytip</key>
@@ -553,7 +553,7 @@
 		<key>base</key>
 		<string>진</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>투명색</string>
 		<key>mytip</key>
@@ -577,7 +577,7 @@
 		<key>base</key>
 		<string>진</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>투명색</string>
 		<key>mytip</key>
@@ -603,7 +603,7 @@
 		<key>base</key>
 		<string>진</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>빨간색</string>
 		<key>mytip</key>
@@ -887,7 +887,7 @@
 			<string>오렌지주스</string>
 		</array>
 		<key>base</key>
-		<string>피치트리</string>
+		<string>리큐르</string>
 		<key>alcohol</key>
 		<string>low</string>
 		<key>color</key>
@@ -935,7 +935,7 @@
 		<key>base</key>
 		<string>리큐르</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>갈색</string>
 		<key>mytip</key>
@@ -1068,7 +1068,7 @@
 		<key>base</key>
 		<string>리큐르</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>초록색</string>
 		<key>mytip</key>
@@ -1096,7 +1096,7 @@
 		<key>base</key>
 		<string>리큐르</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>빨간색</string>
 		<key>mytip</key>
@@ -1200,7 +1200,7 @@
 		<key>base</key>
 		<string>리큐르</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>빨간색</string>
 		<key>mytip</key>
@@ -1369,7 +1369,7 @@
 		<key>base</key>
 		<string>리큐르</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>파란색</string>
 		<key>mytip</key>
@@ -1418,7 +1418,7 @@
 		<key>base</key>
 		<string>리큐르</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>빨간색</string>
 		<key>mytip</key>
@@ -1444,7 +1444,7 @@
 		<key>base</key>
 		<string>리큐르</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>투명색</string>
 		<key>mytip</key>
@@ -1468,7 +1468,7 @@
 		<key>base</key>
 		<string>리큐르</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>갈색</string>
 		<key>mytip</key>
@@ -1576,7 +1576,7 @@
 		<key>craft</key>
 		<string>빌드</string>
 		<key>glass</key>
-		<string>필스터</string>
+		<string>필스너</string>
 		<key>recipe</key>
 		<string>(설탕 1ts, 라임 반개, 다크럼2oz) 앞의 재료를 머들러로 으깨며 섞어준다, 진저에일 풀업</string>
 		<key>ingredients</key>
@@ -1589,7 +1589,7 @@
 		<key>base</key>
 		<string>럼</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>갈색</string>
 		<key>mytip</key>
@@ -1613,7 +1613,7 @@
 		<key>base</key>
 		<string>럼</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>갈색</string>
 		<key>mytip</key>
@@ -1665,11 +1665,11 @@
 		<key>base</key>
 		<string>럼</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>빨간색</string>
 		<key>mytip</key>
-		<string>트로피컬 칵테일의 여왕이라고 불린대요. 근데 먹어보면 딱 정석적인 그런 열대과일이랑 상큼함이 합쳐진 맛이나요</string>
+		<string>트로피컬 칵테일의 여왕이라고 불린대요. 근데 먹어보면 딱 정석적인 그런 열대과일이랑 상큼함이 합쳐진 맛이나요. 그냥 쉐이킹해서 먹어도 괜찮아요</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -1715,7 +1715,7 @@
 		<key>base</key>
 		<string>럼</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>투명색</string>
 		<key>mytip</key>
@@ -1737,7 +1737,7 @@
 			<string>라임주스</string>
 		</array>
 		<key>base</key>
-		<string>오버프루프럼</string>
+		<string>럼</string>
 		<key>alcohol</key>
 		<string>high</string>
 		<key>color</key>
@@ -2026,7 +2026,7 @@
 		<key>base</key>
 		<string>데킬라</string>
 		<key>alcohol</key>
-		<string>high</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>노란색</string>
 		<key>mytip</key>
@@ -2074,7 +2074,7 @@
 		<key>base</key>
 		<string>데킬라</string>
 		<key>alcohol</key>
-		<string>low</string>
+		<string>mid</string>
 		<key>color</key>
 		<string>빨간색</string>
 		<key>mytip</key>

@@ -23,14 +23,16 @@ class MainViewController: UITabBarController {
     
     
     let tabBarItems: [Tab: UITabBarItem] = [
-        .today: UITabBarItem(title: "오늘의 칵테일", image: UIImage(), selectedImage: UIImage()),
-        .recipe: UITabBarItem(title: "레시피", image: UIImage(), selectedImage: UIImage()),
-        .home: UITabBarItem(title: "내술장", image: UIImage(), selectedImage: UIImage()),
-        .preference: UITabBarItem(title: "설정", image: UIImage(), selectedImage: UIImage())
+        .today: UITabBarItem(title: "추천", image: UIImage(systemName: "eyeglasses"), selectedImage: UIImage(systemName: "eyes.inverse")),
+        .recipe: UITabBarItem(title: "레시피", image: UIImage(systemName: "book.closed.fill"), selectedImage: UIImage(systemName: "list.bullet")),
+        .home: UITabBarItem(title: "내술장", image: UIImage(systemName: "mustache.fill"), selectedImage: UIImage(systemName: "mustache.fill")),
+        .preference: UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape.fill"), selectedImage: UIImage(systemName: "gearshape.fill"))
     ]
 
     
     override func viewDidLoad() {
+        
+        tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         super.viewDidLoad()
         self.tabBar.barStyle = .default
