@@ -32,7 +32,6 @@ struct Cocktail: Codable {
         case 하얀색
         case 검은색
         case 갈색
-        
     }
     
     enum Alcohol: String, Codable {
@@ -59,7 +58,6 @@ struct Cocktail: Codable {
         case 스터
         case 블렌딩
     }
-    
 }
 
 

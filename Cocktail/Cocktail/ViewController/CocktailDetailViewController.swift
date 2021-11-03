@@ -34,7 +34,6 @@ class CocktailDetailViewController: UIViewController {
         layout()
     }
     
-    
     func layout() {
         
     }

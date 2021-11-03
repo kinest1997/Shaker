@@ -7,7 +7,6 @@ class TodayCocktailViewController: UIViewController {
     
     let mainScrollView = UIScrollView()
     let mainView = UIView()
-    
     let firstButton = UIButton()
     let secondButton = UIButton()
     let thirdButton = UIButton()
@@ -24,19 +23,19 @@ class TodayCocktailViewController: UIViewController {
         let beginner = UIAction { [weak self] _ in
             guard let self = self else { return }
             print("초보자용")
-            let CVC = ChoiceViewController()
-            CVC.firstRecipe = self.bigChoice(alcohol: "low")
-            CVC.firstRecipe.append(contentsOf: self.bigChoice(alcohol: "mid"))
-            self.show(CVC, sender: nil)
+            let choiceViewController = ChoiceViewController()
+            choiceViewController.firstRecipe = self.bigChoice(alcohol: "low")
+            choiceViewController.firstRecipe.append(contentsOf: self.bigChoice(alcohol: "mid"))
+            self.show(choiceViewController, sender: nil)
         }
         
         //위아래를 뭔가 함수로 만들어서 간단하게 하고싶은데 일단 보류
         
         let expert = UIAction { [weak self]_ in
             guard let self = self else { return }
-            let CVC = ChoiceViewController()
-            CVC.firstRecipe = self.bigChoice(alcohol: "high")
-            self.show(CVC, sender: nil)
+            let choiceViewController = ChoiceViewController()
+            choiceViewController.firstRecipe = self.bigChoice(alcohol: "high")
+            self.show(choiceViewController, sender: nil)
         }
         
         firstButton.addAction(beginner, for: .touchUpInside)
@@ -112,7 +111,6 @@ class TodayCocktailViewController: UIViewController {
             rawRecipes = try PropertyListDecoder().decode([Cocktail].self, from: cocktailData)
         } catch let error{
             print("머선129",error.localizedDescription)
-            
         }
     }
 }
