@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  baseball
+//  Cocktail
 //
-//  Created by 강희성 on 2021/11/01.
+//  Created by 강희성 on 2021/11/02.
 //
 
 import UIKit

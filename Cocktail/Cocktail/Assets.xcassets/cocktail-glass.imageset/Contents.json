@@ -1,0 +1,54 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
+      "filename" : "cocktail-glass.png",
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "cocktail-glass-1.png",
+      "idiom" : "iphone",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "cocktail-glass-2.png",
+      "idiom" : "iphone",
+      "resizing" : {
+        "cap-insets" : {
+          "bottom" : 256,
+          "left" : 13,
+          "right" : 13,
+          "top" : 255
+        },
+        "center" : {
+          "height" : 1,
+          "mode" : "tile",
+          "width" : 1
+        },
+        "mode" : "9-part"
+      },
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "auto-scaling" : "auto",
+    "preserves-vector-representation" : true,
+    "template-rendering-intent" : "template"
+  }
+}
