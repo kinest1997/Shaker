@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  baseball
+//  Cocktail
 //
-//  Created by 강희성 on 2021/11/01.
+//  Created by 강희성 on 2021/11/02.
 //
 
 import UIKit
@@ -17,9 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: MainViewController())
+        let mainViewController = MainViewController()
+//        MVC.tabBar.backgroundColor = .systemPink
+        window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
     }
 

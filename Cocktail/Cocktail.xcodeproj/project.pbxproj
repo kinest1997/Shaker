@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3D6C6D3F27325F3400C70276 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */; };
+		3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */; };
+		3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D442732B86100C70276 /* CocktailListCell.swift */; };
+		3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D462732C04400C70276 /* CocktailDetailViewController.swift */; };
+		3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A302730D1CD004091CE /* AppDelegate.swift */; };
+		3DA76A332730D1CD004091CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A322730D1CD004091CE /* SceneDelegate.swift */; };
+		3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A392730D1D0004091CE /* Assets.xcassets */; };
+		3DA76A3D2730D1D0004091CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A3B2730D1D0004091CE /* LaunchScreen.storyboard */; };
+		3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A442730D244004091CE /* CocktailStruct.swift */; };
+		3DA76A472730D574004091CE /* Cocktail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A462730D574004091CE /* Cocktail.plist */; };
+		3DA76A492730D899004091CE /* TodayCocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A482730D899004091CE /* TodayCocktail.swift */; };
+		3DA76A4C2730D8B7004091CE /* CocktailRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4B2730D8B7004091CE /* CocktailRecipe.swift */; };
+		3DA76A4E2730D8C3004091CE /* HomeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4D2730D8C3004091CE /* HomeBar.swift */; };
+		3DA76A502730D8CB004091CE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4F2730D8CB004091CE /* Settings.swift */; };
+		3DA76A522730D920004091CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A512730D920004091CE /* MainViewController.swift */; };
+		3DA76A5527317CAA004091CE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3DA76A5427317CAA004091CE /* SnapKit */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
+		3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListTableView.swift; sourceTree = "<group>"; };
+		3D6C6D442732B86100C70276 /* CocktailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListCell.swift; sourceTree = "<group>"; };
+		3D6C6D462732C04400C70276 /* CocktailDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailViewController.swift; sourceTree = "<group>"; };
+		3DA76A2D2730D1CD004091CE /* Cocktail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cocktail.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3DA76A302730D1CD004091CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3DA76A322730D1CD004091CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3DA76A392730D1D0004091CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3DA76A3C2730D1D0004091CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3DA76A3E2730D1D0004091CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DA76A442730D244004091CE /* CocktailStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailStruct.swift; sourceTree = "<group>"; };
+		3DA76A462730D574004091CE /* Cocktail.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cocktail.plist; sourceTree = "<group>"; };
+		3DA76A482730D899004091CE /* TodayCocktail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktail.swift; sourceTree = "<group>"; };
+		3DA76A4B2730D8B7004091CE /* CocktailRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipe.swift; sourceTree = "<group>"; };
+		3DA76A4D2730D8C3004091CE /* HomeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBar.swift; sourceTree = "<group>"; };
+		3DA76A4F2730D8CB004091CE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		3DA76A512730D920004091CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3DA76A2A2730D1CD004091CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DA76A5527317CAA004091CE /* SnapKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3DA76A242730D1CD004091CE = {
+			isa = PBXGroup;
+			children = (
+				3DA76A2F2730D1CD004091CE /* Cocktail */,
+				3DA76A2E2730D1CD004091CE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3DA76A2E2730D1CD004091CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3DA76A2D2730D1CD004091CE /* Cocktail.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3DA76A2F2730D1CD004091CE /* Cocktail */ = {
+			isa = PBXGroup;
+			children = (
+				3DA76A3B2730D1D0004091CE /* LaunchScreen.storyboard */,
+				3DA76A302730D1CD004091CE /* AppDelegate.swift */,
+				3DA76A322730D1CD004091CE /* SceneDelegate.swift */,
+				3DA76A512730D920004091CE /* MainViewController.swift */,
+				3DA76A4A2730D8A2004091CE /* ViewController */,
+				3DA76A392730D1D0004091CE /* Assets.xcassets */,
+				3DA76A462730D574004091CE /* Cocktail.plist */,
+				3DA76A3E2730D1D0004091CE /* Info.plist */,
+				3DA76A442730D244004091CE /* CocktailStruct.swift */,
+			);
+			path = Cocktail;
+			sourceTree = "<group>";
+		};
+		3DA76A4A2730D8A2004091CE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3DA76A482730D899004091CE /* TodayCocktail.swift */,
+				3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */,
+				3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */,
+				3D6C6D462732C04400C70276 /* CocktailDetailViewController.swift */,
+				3D6C6D442732B86100C70276 /* CocktailListCell.swift */,
+				3DA76A4B2730D8B7004091CE /* CocktailRecipe.swift */,
+				3DA76A4D2730D8C3004091CE /* HomeBar.swift */,
+				3DA76A4F2730D8CB004091CE /* Settings.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3DA76A2C2730D1CD004091CE /* Cocktail */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DA76A412730D1D0004091CE /* Build configuration list for PBXNativeTarget "Cocktail" */;
+			buildPhases = (
+				3DA76A292730D1CD004091CE /* Sources */,
+				3DA76A2A2730D1CD004091CE /* Frameworks */,
+				3DA76A2B2730D1CD004091CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cocktail;
+			packageProductDependencies = (
+				3DA76A5427317CAA004091CE /* SnapKit */,
+			);
+			productName = Cocktail;
+			productReference = 3DA76A2D2730D1CD004091CE /* Cocktail.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3DA76A252730D1CD004091CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					3DA76A2C2730D1CD004091CE = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = 3DA76A282730D1CD004091CE /* Build configuration list for PBXProject "Cocktail" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3DA76A242730D1CD004091CE;
+			packageReferences = (
+				3DA76A5327317CAA004091CE /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
+			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3DA76A2C2730D1CD004091CE /* Cocktail */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3DA76A2B2730D1CD004091CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3DA76A3D2730D1D0004091CE /* LaunchScreen.storyboard in Resources */,
+				3DA76A472730D574004091CE /* Cocktail.plist in Resources */,
+				3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3DA76A292730D1CD004091CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D6C6D3F27325F3400C70276 /* ChoiceViewController.swift in Sources */,
+				3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */,
+				3DA76A4C2730D8B7004091CE /* CocktailRecipe.swift in Sources */,
+				3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */,
+				3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */,
+				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
+				3DA76A4E2730D8C3004091CE /* HomeBar.swift in Sources */,
+				3DA76A492730D899004091CE /* TodayCocktail.swift in Sources */,
+				3DA76A502730D8CB004091CE /* Settings.swift in Sources */,
+				3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */,
+				3DA76A332730D1CD004091CE /* SceneDelegate.swift in Sources */,
+				3DA76A522730D920004091CE /* MainViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3DA76A3B2730D1D0004091CE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3DA76A3C2730D1D0004091CE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3DA76A3F2730D1D0004091CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		3DA76A402730D1D0004091CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3DA76A422730D1D0004091CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3GBKG7DTJY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cocktail/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		3DA76A432730D1D0004091CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3GBKG7DTJY;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cocktail/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3DA76A282730D1CD004091CE /* Build configuration list for PBXProject "Cocktail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DA76A3F2730D1D0004091CE /* Debug */,
+				3DA76A402730D1D0004091CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3DA76A412730D1D0004091CE /* Build configuration list for PBXNativeTarget "Cocktail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3DA76A422730D1D0004091CE /* Debug */,
+				3DA76A432730D1D0004091CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3DA76A5327317CAA004091CE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3DA76A5427317CAA004091CE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DA76A5327317CAA004091CE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3DA76A252730D1CD004091CE /* Project object */;
+}
