@@ -5,11 +5,12 @@ struct Cocktail: Codable {
     let craft: Craft
     let glass: Glass
     let recipe: String
-    let ingredients: [String]
+    var ingredients: [String]
     let base: Base
     let alcohol: Alcohol
     let color: Color
-    let mytip: String?
+    let mytip: String
+    let drinkType: DrinkType?
     
     enum Base: String, Codable {
         case 럼
@@ -19,6 +20,12 @@ struct Cocktail: Codable {
         case 위스키
         case 진
         case 리큐르
+    }
+    
+    enum DrinkType: String, Codable {
+        case 롱드링크
+        case 숏드링크
+        case 슈터
     }
     
     enum Color: String, Codable {

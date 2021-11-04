@@ -29,7 +29,7 @@ class CocktailListCell: UITableViewCell {
             $0.width.equalTo(80)
         }
         nameLabel.snp.makeConstraints {
-            $0.leading.equalTo(cocktailImage.snp.trailing)
+            $0.leading.equalTo(cocktailImage.snp.trailing).offset(20)
             $0.bottom.equalTo(cocktailImage.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
         }
@@ -42,6 +42,7 @@ class CocktailListCell: UITableViewCell {
     func configure(data: Cocktail) {
         nameLabel.text = data.name
         ingredientCountLabel.text = "필요한 재료 \(data.ingredients.count)개"
-        //이미지를 어떻게 해야하나 고민중, URL 추가해서 다 넣어줘야하나?
+        //이미지를 어떻게 해야하나 고민중, URL 추가해서 다 넣어줘야하나? 에반데
+        cocktailImage.image = UIImage(named: "cocktail-glass")
     }
 }

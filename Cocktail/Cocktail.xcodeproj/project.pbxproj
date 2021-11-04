@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */; };
 		3D6C6D3F27325F3400C70276 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */; };
 		3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */; };
 		3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D442732B86100C70276 /* CocktailListCell.swift */; };
@@ -23,9 +24,11 @@
 		3DA76A502730D8CB004091CE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4F2730D8CB004091CE /* Settings.swift */; };
 		3DA76A522730D920004091CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A512730D920004091CE /* MainViewController.swift */; };
 		3DA76A5527317CAA004091CE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3DA76A5427317CAA004091CE /* SnapKit */; };
+		3DB46F0A27340E7900362A1F /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB46F0927340E7900362A1F /* FilterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
 		3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
 		3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListTableView.swift; sourceTree = "<group>"; };
 		3D6C6D442732B86100C70276 /* CocktailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListCell.swift; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 		3DA76A4D2730D8C3004091CE /* HomeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBar.swift; sourceTree = "<group>"; };
 		3DA76A4F2730D8CB004091CE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3DA76A512730D920004091CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3DB46F0927340E7900362A1F /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,11 +84,12 @@
 				3DA76A302730D1CD004091CE /* AppDelegate.swift */,
 				3DA76A322730D1CD004091CE /* SceneDelegate.swift */,
 				3DA76A512730D920004091CE /* MainViewController.swift */,
+				3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */,
+				3DA76A442730D244004091CE /* CocktailStruct.swift */,
 				3DA76A4A2730D8A2004091CE /* ViewController */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
 				3DA76A462730D574004091CE /* Cocktail.plist */,
 				3DA76A3E2730D1D0004091CE /* Info.plist */,
-				3DA76A442730D244004091CE /* CocktailStruct.swift */,
 			);
 			path = Cocktail;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 				3D6C6D442732B86100C70276 /* CocktailListCell.swift */,
 				3D6C6D462732C04400C70276 /* CocktailDetailViewController.swift */,
 				3DA76A4B2730D8B7004091CE /* CocktailRecipe.swift */,
+				3DB46F0927340E7900362A1F /* FilterViewController.swift */,
 				3DA76A4D2730D8C3004091CE /* HomeBar.swift */,
 				3DA76A4F2730D8CB004091CE /* Settings.swift */,
 			);
@@ -181,6 +187,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DB46F0A27340E7900362A1F /* FilterViewController.swift in Sources */,
 				3D6C6D3F27325F3400C70276 /* ChoiceViewController.swift in Sources */,
 				3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */,
 				3DA76A4C2730D8B7004091CE /* CocktailRecipe.swift in Sources */,
@@ -188,6 +195,7 @@
 				3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */,
 				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
 				3DA76A4E2730D8C3004091CE /* HomeBar.swift in Sources */,
+				3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */,
 				3DA76A492730D899004091CE /* TodayCocktail.swift in Sources */,
 				3DA76A502730D8CB004091CE /* Settings.swift in Sources */,
 				3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */,
