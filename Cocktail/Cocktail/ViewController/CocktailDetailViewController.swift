@@ -57,20 +57,20 @@ class CocktailDetailViewController: UIViewController {
         }
         
         [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView, recipeStackView, mytipStackView].forEach {
-            $0.spacing = 20
             groupStackView.addArrangedSubview($0)
             $0.axis = .horizontal
             $0.distribution = .fill
         }
         [nameGuideLabel, alcoholGuideLabel, colorGuideLabel, baseDrinkGuideLabel, glassGuideLabel, craftGuideLabel, recipeGuideLabel, myTipGuideLabel].forEach {
-            $0.setContentHuggingPriority(UILayoutPriority(1000), for: .horizontal)
-            $0.setContentCompressionResistancePriority(UILayoutPriority(1000), for: .horizontal)
             $0.textAlignment = .center
+            $0.snp.makeConstraints {
+                $0.width.equalTo(80)
+            }
         }
         
         [nameLabel, alcoholLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, recipeLabel, myTipLabel].forEach {
             $0.textAlignment = .left
-//            $0.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
+            $0.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
             $0.backgroundColor = .blue
             $0.numberOfLines = 0
         }
@@ -129,14 +129,14 @@ class CocktailDetailViewController: UIViewController {
         groupStackView.backgroundColor = .brown
         groupStackView.distribution = .fillEqually
         groupStackView.spacing = 20
-        nameGuideLabel.text = "이름       "
-        alcoholGuideLabel.text = "도수       "
-        colorGuideLabel.text = "색깔       "
-        baseDrinkGuideLabel.text = "기주       "
-        glassGuideLabel.text = "잔          "
+        nameGuideLabel.text = "이름"
+        alcoholGuideLabel.text = "도수"
+        colorGuideLabel.text = "색깔"
+        baseDrinkGuideLabel.text = "기주"
+        glassGuideLabel.text = "잔"
         craftGuideLabel.text = "조주방법"
-        recipeGuideLabel.text = "레시피   "
-        myTipGuideLabel.text = "팁          "
+        recipeGuideLabel.text = "레시피"
+        myTipGuideLabel.text = "팁"
     }
 
     func setData(data: Cocktail) {

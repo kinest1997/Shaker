@@ -19,6 +19,7 @@ class CocktailRecipeViewController: UITableViewController {
             $0.name < $1.name
         }
         
+        navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
         //서치바의 텍스트가 변경되는것을 알려준다. 델리게이트 선언같은것 같음
         searchController.obscuresBackgroundDuringPresentation = false

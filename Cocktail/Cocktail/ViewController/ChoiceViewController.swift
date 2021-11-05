@@ -39,6 +39,8 @@ class ChoiceViewController: UIViewController {
     
     func attribute() {
         view.addSubview(mainBigStackView)
+        view.backgroundColor = .systemBackground
+        
         view.addSubview(anyThingButton)
         mainBigStackView.addArrangedSubview(leftStackView)
         mainBigStackView.addArrangedSubview(rightStackView)

@@ -5,8 +5,6 @@ class HomeBarViewController: UIViewController {
     var myDrink: Set<String> = ["럼", "보드카", "탄산수", "설탕", "라임주스", "콜라", "레몬즙", "진저에일","진","토닉워터"]
     var originRecipe: [Cocktail] = []
     
-    var someRecipe: [Cocktail] = []
-    
     var lastRecipe: [Cocktail] = []
     
     
@@ -23,15 +21,7 @@ class HomeBarViewController: UIViewController {
         }
         print(lastRecipe)
         
-        //        for i in myDrink {
-        //            for k in originRecipe {
-        //                if k.ingredients.contains(i) && k.ingredients.isEmpty {
-        //                    lastRecipe.append(k)
-        //                } else if k.ingredients.contains(i) {
-        //                    someRecipe.append(k)
-        //                }
-        //            }
-        //        }
+
     }
 }
 
