@@ -32,7 +32,7 @@
 		<key>drinkType</key>
 		<string>숏드링크</string>
 		<key>mytip</key>
-		<string>라임즙 대신 라임주스를 사용하면 더 달아서 먹기조금 쉬워질지도?</string>
+		<string>라임즙 대신 라임시럽을 사용하면 더 달아서 먹기조금 쉬워질지도?</string>
 		<key>name</key>
 		<string>카미카제</string>
 		<key>craft</key>
@@ -119,11 +119,11 @@
 		<key>glass</key>
 		<string>하이볼</string>
 		<key>recipe</key>
-		<string>보드카 1.5oz, 라임주스 0.5oz, 진저에일 풀업</string>
+		<string>보드카 1.5oz, 라임시럽 0.5oz, 진저에일 풀업</string>
 		<key>ingredients</key>
 		<array>
 			<string>보드카</string>
-			<string>라임주스</string>
+			<string>라임시럽</string>
 			<string>진저에일</string>
 		</array>
 		<key>base</key>
@@ -171,13 +171,13 @@
 		<key>glass</key>
 		<string>칵테일</string>
 		<key>recipe</key>
-		<string>보드카 1oz, 트리플섹 0.5oz, 라임주스0.5oz, 크렌베리주스 0.5oz, 다넣고 쉐이킹</string>
+		<string>보드카 1oz, 트리플섹 0.5oz, 라임시럽0.5oz, 크렌베리주스 0.5oz, 다넣고 쉐이킹</string>
 		<key>ingredients</key>
 		<array>
 			<string>보드카</string>
 			<string>크렌베리주스</string>
 			<string>트리플섹</string>
-			<string>라임주스</string>
+			<string>라임시럽</string>
 		</array>
 		<key>base</key>
 		<string>보드카</string>
@@ -629,7 +629,7 @@
 		<key>color</key>
 		<string>투명색</string>
 		<key>mytip</key>
-		<string>정말 새큼하고 드라이한느낌..? 라임즙 대신에 라임주스를 넣으면 조금 다른느낌이니까 시도해봐요</string>
+		<string>정말 새큼하고 드라이한느낌..? 라임즙 대신에 라임시럽을 넣으면 조금 다른느낌이니까 시도해봐요</string>
 	</dict>
 	<dict>
 		<key>drinkType</key>
@@ -725,7 +725,7 @@
 		<key>ingredients</key>
 		<array>
 			<string>진</string>
-			<string>라임주스</string>
+			<string>라임시럽</string>
 			<string>설탕</string>
 		</array>
 		<key>base</key>
@@ -803,7 +803,7 @@
 		<key>ingredients</key>
 		<array>
 			<string>진</string>
-			<string>앙고스투라비터</string>
+			<string>앙고스투라비터스</string>
 		</array>
 		<key>base</key>
 		<string>진</string>
@@ -1087,7 +1087,7 @@
 		<array>
 			<string>보드카</string>
 			<string>진</string>
-			<string>럼</string>
+			<string>화이트럼</string>
 			<string>데킬라</string>
 			<string>블루큐라소</string>
 			<string>스윗앤사워믹스</string>
@@ -1117,7 +1117,7 @@
 		<array>
 			<string>보드카</string>
 			<string>진</string>
-			<string>럼</string>
+			<string>화이트럼</string>
 			<string>데킬라</string>
 			<string>트리플섹</string>
 			<string>스윗앤사워믹스</string>
@@ -1142,12 +1142,12 @@
 		<key>glass</key>
 		<string>콜린스</string>
 		<key>recipe</key>
-		<string>보드카 0.5oz, 진 0.5oz, 럼0.5oz, 데킬라 0.5oz, 미도리 1oz, 레몬즙 1/4oz, 사이다or탄산수 풀업</string>
+		<string>보드카 0.5oz, 진 0.5oz, 럼0.5oz, 데킬라 0.5oz, 멜론리큐르 1oz, 레몬즙 1/4oz, 사이다or탄산수 풀업</string>
 		<key>ingredients</key>
 		<array>
 			<string>보드카</string>
 			<string>진</string>
-			<string>럼</string>
+			<string>화이트럼</string>
 			<string>데킬라</string>
 			<string>멜론리큐르</string>
 			<string>레몬즙</string>
@@ -1177,7 +1177,7 @@
 		<array>
 			<string>보드카</string>
 			<string>진</string>
-			<string>럼</string>
+			<string>화이트럼</string>
 			<string>데킬라</string>
 			<string>트리플섹</string>
 			<string>스윗앤사워믹스</string>
@@ -1207,7 +1207,7 @@
 		<array>
 			<string>보드카</string>
 			<string>진</string>
-			<string>럼</string>
+			<string>화이트럼</string>
 			<string>데킬라</string>
 			<string>트리플섹</string>
 			<string>스윗앤사워믹스</string>
@@ -1263,7 +1263,7 @@
 		<string>미도리 1oz, 트리플섹 1oz, 레몬즙 1oz</string>
 		<key>ingredients</key>
 		<array>
-			<string>미도리</string>
+			<string>멜론리큐르</string>
 			<string>트리플섹</string>
 			<string>레몬즙</string>
 		</array>
@@ -1317,7 +1317,7 @@
 		<string>미도리 1oz, 스윗앤 사워믹스 2oz</string>
 		<key>ingredients</key>
 		<array>
-			<string>미도리</string>
+			<string>멜론리큐르</string>
 			<string>스윗앤사워믹스</string>
 		</array>
 		<key>base</key>
@@ -1342,7 +1342,7 @@
 		<string>미도리1oz, 스윗앤 사워믹스 1oz, 사이다 2oz,</string>
 		<key>ingredients</key>
 		<array>
-			<string>미도리</string>
+			<string>멜론리큐르</string>
 			<string>스윗앤사워믹스</string>
 			<string>사이다</string>
 		</array>
@@ -1449,7 +1449,7 @@
 		<key>ingredients</key>
 		<array>
 			<string>깔루아</string>
-			<string>미도리</string>
+			<string>멜론리큐르</string>
 			<string>베일리스</string>
 		</array>
 		<key>base</key>
@@ -1682,11 +1682,11 @@
 		<key>glass</key>
 		<string>칵테일</string>
 		<key>recipe</key>
-		<string>럼 1.5oz,, 라임주스 1oz, 설탕시럽 0.5oz</string>
+		<string>럼 1.5oz,, 라임시럽 1oz, 설탕시럽 0.5oz</string>
 		<key>ingredients</key>
 		<array>
-			<string>럼</string>
-			<string>라임주스</string>
+			<string>화이트럼</string>
+			<string>라임시럽</string>
 			<string>설탕시럽</string>
 		</array>
 		<key>base</key>
@@ -1711,7 +1711,7 @@
 		<string>(설탕 1ts, 라임 반개, 다크럼2oz) 앞의 재료를 머들러로 으깨며 섞어준다, 진저에일 풀업</string>
 		<key>ingredients</key>
 		<array>
-			<string>럼</string>
+			<string>다크럼</string>
 			<string>진저에일</string>
 			<string>설탕</string>
 			<string>라임</string>
@@ -1735,11 +1735,11 @@
 		<key>glass</key>
 		<string>하이볼</string>
 		<key>recipe</key>
-		<string>화이트럼 1.5oz, 라임주스 0.5oz, 콜라 풀업</string>
+		<string>화이트럼 1.5oz, 라임시럽 0.5oz, 콜라 풀업</string>
 		<key>ingredients</key>
 		<array>
-			<string>럼</string>
-			<string>라임주스</string>
+			<string>화이트럼</string>
+			<string>라임시럽</string>
 			<string>콜라</string>
 		</array>
 		<key>base</key>
@@ -1764,7 +1764,7 @@
 		<string>화이트럼 1oz, 블루큐라소 1oz, 말리부1oz, 파인애플 주스 2.5oz.</string>
 		<key>ingredients</key>
 		<array>
-			<string>럼</string>
+			<string>화이트럼</string>
 			<string>블루큐라소</string>
 			<string>말리부</string>
 			<string>파인애플주스</string>
@@ -1788,12 +1788,12 @@
 		<key>glass</key>
 		<string>필스너</string>
 		<key>recipe</key>
-		<string>화이트럼 1.25oz, 트리플섹 3/4oz, 라임주스 1oz, 파인애플주스 1oz, 오랜즈주스 1oz, 그레나딘시럽 1/4oz</string>
+		<string>화이트럼 1.25oz, 트리플섹 3/4oz, 라임시럽 1oz, 파인애플주스 1oz, 오랜즈주스 1oz, 그레나딘시럽 1/4oz</string>
 		<key>ingredients</key>
 		<array>
-			<string>럼</string>
+			<string>화이트럼</string>
 			<string>트리플섹</string>
-			<string>라임주스</string>
+			<string>라임시럽</string>
 			<string>파인애플주스</string>
 			<string>오렌지주스</string>
 			<string>그레나딘시럽</string>
@@ -1817,11 +1817,11 @@
 		<key>glass</key>
 		<string>칵테일</string>
 		<key>recipe</key>
-		<string>바카디 화이트럼 1,3/4oz, 라임주스 3/4oz, 그레나딘시럽 1tsp</string>
+		<string>바카디 화이트럼 1,3/4oz, 라임시럽 3/4oz, 그레나딘시럽 1tsp</string>
 		<key>ingredients</key>
 		<array>
-			<string>럼</string>
-			<string>라임주스</string>
+			<string>화이트럼</string>
+			<string>라임시럽</string>
 			<string>그레나딘시럽</string>
 		</array>
 		<key>base</key>
@@ -1849,7 +1849,7 @@
 			<string>라임</string>
 			<string>애플민트</string>
 			<string>설탕시럽</string>
-			<string>럼</string>
+			<string>화이트럼</string>
 			<string>탄산수</string>
 		</array>
 		<key>base</key>
@@ -1871,12 +1871,12 @@
 		<key>glass</key>
 		<string>온더락</string>
 		<key>recipe</key>
-		<string>오버프루프럼 1.5oz, 아마레또 0.5oz, 라임주스 0,5oz</string>
+		<string>오버프루프럼 1.5oz, 아마레또 0.5oz, 라임시럽 0,5oz</string>
 		<key>ingredients</key>
 		<array>
-			<string>럼</string>
+			<string>오버프루프럼</string>
 			<string>아마레또</string>
-			<string>라임주스</string>
+			<string>라임시럽</string>
 		</array>
 		<key>base</key>
 		<string>럼</string>
@@ -1901,7 +1901,7 @@
 		<key>ingredients</key>
 		<array>
 			<string>크렘드카시스</string>
-			<string>럼</string>
+			<string>화이트럼</string>
 			<string>오버프루프럼</string>
 		</array>
 		<key>base</key>
@@ -1977,7 +1977,7 @@
 		<string>버번위스키 1,1/2oz, 레몬즙 1/2oz, 설탕 1tsp, 탄산수 1oz</string>
 		<key>ingredients</key>
 		<array>
-			<string>위스키</string>
+			<string>버번위스키</string>
 			<string>레몬즙</string>
 			<string>설탕</string>
 			<string>탄산수</string>
@@ -2004,7 +2004,7 @@
 		<string>버번위스키 1,1/2oz, 설탕1tsp, 그레나딘시럽 1/2tsp </string>
 		<key>ingredients</key>
 		<array>
-			<string>위스키</string>
+			<string>버번위스키</string>
 			<string>설탕</string>
 			<string>그레나딘시럽</string>
 		</array>
@@ -2055,9 +2055,9 @@
 		<string>버번위스키 1oz, 피치트리 0.5oz, 아마레또 0.5oz, 라임즙 0.5oz 레몬껍질 가니쉬</string>
 		<key>ingredients</key>
 		<array>
-			<string>위스키</string>
+			<string>버번위스키</string>
 			<string>피치트리</string>
-			<string>아마레도</string>
+			<string>아마레또</string>
 			<string>라임즙</string>
 		</array>
 		<key>base</key>
@@ -2082,7 +2082,7 @@
 		<string>스카치 위스키 1.5oz, 아마레또 0.5oz, 레몬껍질 가니쉬</string>
 		<key>ingredients</key>
 		<array>
-			<string>위스키</string>
+			<string>스카치위스키</string>
 			<string>아마레또</string>
 		</array>
 		<key>base</key>
@@ -2104,12 +2104,12 @@
 		<key>glass</key>
 		<string>마가리타</string>
 		<key>recipe</key>
-		<string>데킬라 1.5oz, 트리플섹 0.5oz, 라임주스 0.5oz, 쉐이킹후 잔 끝에 소금 뭍혀주기</string>
+		<string>데킬라 1.5oz, 트리플섹 0.5oz, 라임시럽 0.5oz, 쉐이킹후 잔 끝에 소금 뭍혀주기</string>
 		<key>ingredients</key>
 		<array>
 			<string>데킬라</string>
 			<string>트리플섹</string>
-			<string>라임주스</string>
+			<string>라임시럽</string>
 		</array>
 		<key>base</key>
 		<string>데킬라</string>
@@ -2118,7 +2118,7 @@
 		<key>color</key>
 		<string>투명색</string>
 		<key>mytip</key>
-		<string>유명한 마가리타. 잔끝에 라임주스를 살짝 묻히고 소금을 묻히면 잘붙어요. 데킬라 특유의 풀냄새? 도 나고 매력적인 술이에요.</string>
+		<string>유명한 마가리타. 잔끝에 라임시럽을 살짝 묻히고 소금을 묻히면 잘붙어요. 데킬라 특유의 풀냄새? 도 나고 매력적인 술이에요. 라임시럽말고 라임즙을 넣어도된답니다</string>
 	</dict>
 	<dict>
 		<key>drinkType</key>
@@ -2208,10 +2208,10 @@
 		<key>glass</key>
 		<string>하이볼</string>
 		<key>recipe</key>
-		<string>데킬라 1oz, 라임주스 1/4oz, 콜라 풀업</string>
+		<string>데킬라 1oz, 라임시럽 1/4oz, 콜라 풀업</string>
 		<key>ingredients</key>
 		<array>
-			<string>라임주스</string>
+			<string>라임시럽</string>
 			<string>데킬라</string>
 			<string>콜라</string>
 		</array>
@@ -2341,9 +2341,9 @@
 		<string>탄산수 0.5oz, 각설탕 1piece, 앙고스투라 비터 1~2dash 를 섞어주고 버번위스키 1.5oz 를 넣어준다.</string>
 		<key>ingredients</key>
 		<array>
-			<string>위스키</string>
+			<string>버번위스키</string>
 			<string>설탕</string>
-			<string>앙고스투라비터</string>
+			<string>앙고스투라비터스</string>
 			<string>탄산수</string>
 		</array>
 		<key>base</key>
@@ -2473,7 +2473,7 @@
 		<array>
 			<string>레몬</string>
 			<string>브랜디</string>
-			<string>앙고스투라비터</string>
+			<string>앙고스투라비터스</string>
 			<string>진저에일</string>
 		</array>
 		<key>base</key>
@@ -2600,11 +2600,11 @@
 		<key>glass</key>
 		<string>하이볼</string>
 		<key>recipe</key>
-		<string>카카오리큐르 1.5oz, 라임주스 0.5oz, 설탕 2tsp, 탄산수 풀업</string>
+		<string>카카오리큐르 1.5oz, 라임시럽 0.5oz, 설탕 2tsp, 탄산수 풀업</string>
 		<key>ingredients</key>
 		<array>
 			<string>카카오리큐르</string>
-			<string>라임주스</string>
+			<string>라임시럽</string>
 			<string>설탕</string>
 			<string>탄산수</string>
 		</array>
@@ -2627,12 +2627,12 @@
 		<key>glass</key>
 		<string>하이볼</string>
 		<key>recipe</key>
-		<string>데킬라 1.5oz, 크렘드카시스 0.5oz, 라임주스 0.5oz, 진저에일 풀업</string>
+		<string>데킬라 1.5oz, 크렘드카시스 0.5oz, 라임시럽 0.5oz, 진저에일 풀업</string>
 		<key>ingredients</key>
 		<array>
 			<string>데킬라</string>
 			<string>크렘드카시스</string>
-			<string>라임주스</string>
+			<string>라임시럽</string>
 			<string>진저에일</string>
 		</array>
 		<key>base</key>

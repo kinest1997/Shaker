@@ -44,6 +44,8 @@ class CocktailRecipeViewController: UIViewController {
         filterView.backgroundColor = .brown
         filterView.isHidden = true
         
+        navigationController?.hidesBarsOnSwipe = true
+        //네비바 스와이프시 가리기
     }
     
     func layout() {

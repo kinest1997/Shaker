@@ -13,3 +13,5 @@ class FilteredView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+// 다른 화면에서도 재활용?
