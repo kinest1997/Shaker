@@ -39,6 +39,8 @@ class ChoiceViewController: UIViewController {
     
     func attribute() {
         view.addSubview(mainBigStackView)
+        view.backgroundColor = .systemBackground
+        
         view.addSubview(anyThingButton)
         mainBigStackView.addArrangedSubview(leftStackView)
         mainBigStackView.addArrangedSubview(rightStackView)
@@ -77,10 +79,10 @@ class ChoiceViewController: UIViewController {
     func baseDrinkAction(base: String) -> UIAction {
         let buttonAction = UIAction { [weak self]_ in
             guard let self = self else { return }
-            let CLTV = CocktailListTableView()
-            CLTV.lastRecipe = self.baseFilter(base: base)
-            CLTV.title = base
-            self.show(CLTV, sender: nil)
+            let cocktailListTableView = CocktailListTableView()
+            cocktailListTableView.lastRecipe = self.baseFilter(base: base)
+            cocktailListTableView.title = base
+            self.show(cocktailListTableView, sender: nil)
         }
         return buttonAction
     }

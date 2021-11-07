@@ -1,6 +1,10 @@
 import UIKit
+import SnapKit
 
 class CocktailDetailViewController: UIViewController {
+    
+    let mainScrollView = UIScrollView()
+    let mainView = UIView()
     
     let cocktailImageView = UIImageView()
     
@@ -28,6 +32,16 @@ class CocktailDetailViewController: UIViewController {
     let myTipGuideLabel = UILabel()
     let myTipLabel = UILabel()
     
+    let nameStackView =  UIStackView()
+    let alcoholStackView = UIStackView()
+    let colorStackView = UIStackView()
+    let baseDrinkStackView = UIStackView()
+    let glassStackView = UIStackView()
+    let craftStackView = UIStackView()
+    let recipeStackView = UIStackView()
+    let mytipStackView = UIStackView()
+    let groupStackView = UIStackView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -35,10 +49,94 @@ class CocktailDetailViewController: UIViewController {
     }
     
     func layout() {
+        view.addSubview(mainScrollView)
+        mainScrollView.addSubview(mainView)
         
+        [groupStackView, cocktailImageView].forEach {
+            mainView.addSubview($0)
+        }
+        
+        [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView, recipeStackView, mytipStackView].forEach {
+            groupStackView.addArrangedSubview($0)
+            $0.axis = .horizontal
+            $0.distribution = .fill
+        }
+        [nameGuideLabel, alcoholGuideLabel, colorGuideLabel, baseDrinkGuideLabel, glassGuideLabel, craftGuideLabel, recipeGuideLabel, myTipGuideLabel].forEach {
+            $0.textAlignment = .center
+            $0.snp.makeConstraints {
+                $0.width.equalTo(80)
+            }
+        }
+        
+        [nameLabel, alcoholLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, recipeLabel, myTipLabel].forEach {
+            $0.textAlignment = .left
+            $0.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
+            $0.backgroundColor = .blue
+            $0.numberOfLines = 0
+        }
+        
+        nameStackView.addArrangedSubview(nameGuideLabel)
+        nameStackView.addArrangedSubview(nameLabel)
+        
+        alcoholStackView.addArrangedSubview(alcoholGuideLabel)
+        alcoholStackView.addArrangedSubview(alcoholLabel)
+        
+        colorStackView.addArrangedSubview(colorGuideLabel)
+        colorStackView.addArrangedSubview(colorLabel)
+        
+        baseDrinkStackView.addArrangedSubview(baseDrinkGuideLabel)
+        baseDrinkStackView.addArrangedSubview(baseDrinkLabel)
+        
+        glassStackView.addArrangedSubview(glassGuideLabel)
+        glassStackView.addArrangedSubview(glassLabel)
+        
+        craftStackView.addArrangedSubview(craftGuideLabel)
+        craftStackView.addArrangedSubview(craftLabel)
+        
+        recipeStackView.addArrangedSubview(recipeGuideLabel)
+        recipeStackView.addArrangedSubview(recipeLabel)
+        
+        mytipStackView.addArrangedSubview(myTipGuideLabel)
+        mytipStackView.addArrangedSubview(myTipLabel)
+
+        mainScrollView.snp.makeConstraints {
+            $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalToSuperview()
+        }
+        
+        mainView.snp.makeConstraints {
+            $0.width.equalTo(mainScrollView.frameLayoutGuide)
+            $0.edges.equalTo(mainScrollView.contentLayoutGuide)
+            $0.bottom.equalTo(groupStackView.snp.bottom)
+        }
+        
+        cocktailImageView.snp.makeConstraints {
+            $0.top.equalTo(mainView).offset(30)
+            $0.width.height.equalTo(200)
+            $0.centerX.equalToSuperview()
+        }
+        
+        groupStackView.snp.makeConstraints {
+            $0.top.equalTo(cocktailImageView.snp.bottom).offset(50)
+            $0.leading.trailing.equalToSuperview()
+        }
+
     }
+    
     func attribute() {
-        
+        cocktailImageView.image = UIImage(named: "Martini")
+        groupStackView.axis = .vertical
+        groupStackView.backgroundColor = .brown
+        groupStackView.distribution = .fillEqually
+        groupStackView.spacing = 20
+        nameGuideLabel.text = "이름"
+        alcoholGuideLabel.text = "도수"
+        colorGuideLabel.text = "색깔"
+        baseDrinkGuideLabel.text = "기주"
+        glassGuideLabel.text = "잔"
+        craftGuideLabel.text = "조주방법"
+        recipeGuideLabel.text = "레시피"
+        myTipGuideLabel.text = "팁"
     }
 
     func setData(data: Cocktail) {
@@ -55,11 +153,11 @@ class CocktailDetailViewController: UIViewController {
     func alcoholSelect(data: String) -> String {
         switch data {
         case "high":
-            return "높아요"
+            return "높음"
         case "mid":
-            return "먹을만해요"
+            return "중간"
         default :
-            return "음료수같아요"
+            return "낮음"
         }
     }
 }

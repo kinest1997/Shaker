@@ -13,7 +13,7 @@ class TodayCocktailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getRecipe()
+        getRecipe(data: &rawRecipes)
         attribute()
         layout()
         navigationController?.navigationBar.isHidden = true
@@ -104,13 +104,5 @@ class TodayCocktailViewController: UIViewController {
             return filtered
         }
     }
-    
-    func getRecipe() {
-        guard let cocktailURL = Bundle.main.url(forResource: "Cocktail", withExtension: "plist"), let cocktailData = FileManager.default.contents(atPath: cocktailURL.path) else { return }
-        do {
-            rawRecipes = try PropertyListDecoder().decode([Cocktail].self, from: cocktailData)
-        } catch let error{
-            print("머선129",error.localizedDescription)
-        }
-    }
 }
+
