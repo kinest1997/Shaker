@@ -5,9 +5,10 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
     let mainImageView = UIImageView()
     let nameLabel = UILabel()
     
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.backgroundColor = .systemBlue
+        contentView.backgroundColor = .systemRed
         contentView.layer.cornerRadius = 5
         contentView.clipsToBounds = true
         

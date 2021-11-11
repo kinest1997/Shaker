@@ -12,6 +12,8 @@
 		3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */; };
 		3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D442732B86100C70276 /* CocktailListCell.swift */; };
 		3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D462732C04400C70276 /* CocktailDetailViewController.swift */; };
+		3D745F1C27395B53003E332F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 3D745F1B27395B53003E332F /* Realm */; };
+		3D745F1E27395B53003E332F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3D745F1D27395B53003E332F /* RealmSwift */; };
 		3D7481222736566F0092BD74 /* MyBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7481212736566E0092BD74 /* MyBadgeButton.swift */; };
 		3D74812427366C0E0092BD74 /* WhatIHaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74812327366C0D0092BD74 /* WhatIHaveViewController.swift */; };
 		3D7481292736BC550092BD74 /* WhatIHaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7481282736BC550092BD74 /* WhatIHaveCollectionViewCell.swift */; };
@@ -61,6 +63,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D745F1E27395B53003E332F /* RealmSwift in Frameworks */,
+				3D745F1C27395B53003E332F /* Realm in Frameworks */,
 				3DA76A5527317CAA004091CE /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +151,8 @@
 			name = Cocktail;
 			packageProductDependencies = (
 				3DA76A5427317CAA004091CE /* SnapKit */,
+				3D745F1B27395B53003E332F /* Realm */,
+				3D745F1D27395B53003E332F /* RealmSwift */,
 			);
 			productName = Cocktail;
 			productReference = 3DA76A2D2730D1CD004091CE /* Cocktail.app */;
@@ -178,6 +184,7 @@
 			mainGroup = 3DA76A242730D1CD004091CE;
 			packageReferences = (
 				3DA76A5327317CAA004091CE /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3D745F1A27395B53003E332F /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
 			projectDirPath = "";
@@ -434,6 +441,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3D745F1A27395B53003E332F /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		3DA76A5327317CAA004091CE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -445,6 +460,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3D745F1B27395B53003E332F /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D745F1A27395B53003E332F /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		3D745F1D27395B53003E332F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D745F1A27395B53003E332F /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
 		3DA76A5427317CAA004091CE /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3DA76A5327317CAA004091CE /* XCRemoteSwiftPackageReference "SnapKit" */;

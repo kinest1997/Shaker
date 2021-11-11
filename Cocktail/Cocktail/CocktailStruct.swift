@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 
 struct Cocktail: Codable {
     let name: String
@@ -67,6 +68,68 @@ struct Cocktail: Codable {
     }
 }
 
-
+//realm은 일단 보류
+//class MyDrinks: Object {
+//    @objc dynamic var name: String = ""
+//    override static func primaryKey() -> String? {
+//          return "name"
+//        }
+//}
+ 
+enum Ingredients: String {
+    case vodka = "보드카"
+    case whiskey = "위스키"
+    case gin = "진"
+    case scotchWhiskey = "스카치위스키"
+    case bourbon
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //case
+    //
+    //case
+    var base: String {
+        switch self {
+        case .vodka:
+            return "보드카"
+        default:
+            return "무언가"
+        }
+    }
+}
 
 
