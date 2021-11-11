@@ -78,34 +78,32 @@ struct Cocktail: Codable {
  
 enum Ingredients: String {
     case vodka = "보드카"
-    case whiskey = "위스키"
     case gin = "진"
+    case whiskey = "위스키"
     case scotchWhiskey = "스카치위스키"
-    case bourbon
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
-    //case
+    case bourbonWhiskey = "버번위스키"
+    case ryeWhiskey
+    case jackDanielWhiskey
+    case tequila
+    case baileys
+    case melonLiqueur
+    case whiteCacaoLiqueur
+    case sweetVermouth
+    case dryVermouth
+    case peachTree
+    case grapeFruitLiqueur
+    case cacaoLiqueur
+    case cremeDeCassis
+    case greenMintLiqueur
+    case campari
+    case kahlua
+    case blueCuraso
+    case malibu
+    case bananaliqueur
+    case amaretto
+    case triplesec
+    case butterScotchLiqueur
+    case brandy
     //case
     //case
     //case
@@ -126,8 +124,16 @@ enum Ingredients: String {
         switch self {
         case .vodka:
             return "보드카"
+        case .gin:
+            return "진"
+        case .whiskey, .ryeWhiskey, .scotchWhiskey, .bourbonWhiskey, .jackDanielWhiskey:
+            return "위스키"
+        case .tequila:
+            return "데킬라"
+        case . baileys, .melonLiqueur, .whiteCacaoLiqueur, .sweetVermouth, .peachTree, .grapeFruitLiqueur, .cacaoLiqueur, .cremeDeCassis, .greenMintLiqueur, .campari, .kahlua, .blueCuraso, .malibu, .bananaliqueur, .amaretto, .triplesec, .butterScotchLiqueur, .dryVermouth:
+            return "리큐르"
         default:
-            return "무언가"
+            return "없음"
         }
     }
 }
