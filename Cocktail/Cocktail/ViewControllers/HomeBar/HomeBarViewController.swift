@@ -3,7 +3,7 @@ import SnapKit
 
 class HomeBarViewController: UIViewController {
     
-    var myDrink: Set<String> = ["럼", "보드카", "탄산수", "설탕", "라임주스", "콜라", "레몬즙", "진저에일","진","토닉워터"]
+    var myDrink: Set<String> = []
     var originRecipe: [Cocktail] = []
     
     let mainScrollView = UIScrollView()
@@ -32,6 +32,13 @@ class HomeBarViewController: UIViewController {
         attribute()
         layout()
         navigationController?.isNavigationBarHidden = true
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let data = UserDefaults.standard.object(forKey: "myDrinks") as? [String] {
+            myDrink = Set(data)
+        }
         updateWhatICanMakeButton(data: myDrink, button: whatICanMakeButton)
     }
     //진 버튼의 경우 진 이라는 베이스를 가진 술이 배열에 있을떄마다 변수에 +1 하고 그 변수를 뱃지 값으로
@@ -42,7 +49,6 @@ class HomeBarViewController: UIViewController {
     
     func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
         button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
-        
     }
     
     func checkWhatICanMake(myIngredients data: Set<String>) -> [Cocktail] {

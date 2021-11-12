@@ -7,21 +7,21 @@ let myDi = Ingredients.vodka.base
 
 class WhatIHaveViewController: UIViewController {
     
-//    let realm = try! Realm()
-//
-//    var myDrinkList: Results<MyDrinks>?
+    //    let realm = try! Realm()
+    //
+    //    var myDrinkList: Results<MyDrinks>?
     
     var myOwnDrink: [String] = []
-
+    
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-                                              
+    
     var nowIngredients: [String] = []
     
     var whatIPicked: String? {
         didSet {
             switch whatIPicked {
             case "진":
-               nowIngredients = ["진"]
+                nowIngredients = ["진"]
             case "보드카":
                 nowIngredients = ["보드카"]
             case "위스키":
@@ -44,13 +44,21 @@ class WhatIHaveViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = false
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
         view.addSubview(mainCollectionView)
         mainCollectionView.register(WhatIHaveCollectionViewCell.self, forCellWithReuseIdentifier: "key")
         mainCollectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
-        }   
+        }
+        guard let data = UserDefaults.standard.object(forKey: "myDrinks") as? [String] else { return }
+        myOwnDrink = data
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserDefaults.standard.set(myOwnDrink, forKey: "myDrinks")
     }
 }
 
@@ -67,9 +75,9 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-           return CGSize(width: 120, height: 120)
-       }
-
+        return CGSize(width: 120, height: 120)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if myOwnDrink.contains(nowIngredients[indexPath.row]) {
             guard let state = myOwnDrink.firstIndex(of: nowIngredients[indexPath.row]) else { return }
