@@ -54,7 +54,9 @@ class HomeBarViewController: UIViewController {
     func checkWhatICanMake(myIngredients data: Set<String>) -> [Cocktail] {
         var lastRecipe = [Cocktail]()
         originRecipe.forEach {
-            let someSet = Set($0.ingredients)
+            let someSet = Set($0.ingredients.map({ baby in
+                baby.rawValue
+            }))
             if someSet.subtracting(data).isEmpty {
                 lastRecipe.append($0)
             }
