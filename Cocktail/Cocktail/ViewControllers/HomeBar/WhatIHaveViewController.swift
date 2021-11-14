@@ -3,11 +3,7 @@ import SnapKit
 
 class WhatIHaveViewController: UIViewController {
     
-    //    let realm = try! Realm()
-    //
-    //    var myDrinkList: Results<MyDrinks>?
-    
-    var ingredientsWhatIhave: [Cocktail.Ingredients] = []
+    var ingredientsWhatIhave: [String] = []
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
@@ -53,13 +49,12 @@ class WhatIHaveViewController: UIViewController {
         mainCollectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        guard let data = UserDefaults.standard.object(forKey: "firstData") as? [Cocktail.Ingredients] else { return }
+        guard let data = UserDefaults.standard.object(forKey: "firstData") as? [Cocktail.Ingredients.RawValue] else { return }
         ingredientsWhatIhave = data
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //plist에선 이 형태의 객체를 지원하지않아서 오류가 남 일단 내일 확인
         UserDefaults.standard.set(ingredientsWhatIhave, forKey: "firstData")
     }
 }
@@ -81,12 +76,12 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if ingredientsWhatIhave.contains(allIngredients[indexPath.row]) {
-            guard let index = ingredientsWhatIhave.firstIndex(of: allIngredients[indexPath.row]) else { return }
+        if ingredientsWhatIhave.contains(allIngredients[indexPath.row].rawValue) {
+            guard let index = ingredientsWhatIhave.firstIndex(of: allIngredients[indexPath.row].rawValue) else { return }
             ingredientsWhatIhave.remove(at: index)
             print(ingredientsWhatIhave)
         } else {
-            ingredientsWhatIhave.append(allIngredients[indexPath.row])
+            ingredientsWhatIhave.append(allIngredients[indexPath.row].rawValue)
             print(ingredientsWhatIhave)
         }
     }

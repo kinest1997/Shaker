@@ -3,10 +3,12 @@ import SnapKit
 
 class HomeBarViewController: UIViewController {
     
-    var myDrink: Set<Cocktail.Ingredients> = []
+    var myDrink: Set<String> = []
     var originRecipe: [Cocktail] = []
     var baseList = Cocktail.Base.allCases.map { $0.rawValue
     }
+    var baseCount: Dictionary<String, Int> = ["vodka":0]
+    //버튼에 그냥 base 를 넣어줄까? 그러면 제목도 자동으로 결정되게하고. 일단 userDefault로 전체의 숫자를 넘겨주는걸로하자
     
     let mainScrollView = UIScrollView()
     let mainView = UIView()
@@ -38,7 +40,7 @@ class HomeBarViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let data = UserDefaults.standard.object(forKey: "firstData") as? [Cocktail.Ingredients] {
+        if let data = UserDefaults.standard.object(forKey: "firstData") as? [String] {
             myDrink = Set(data)
         }
         updateWhatICanMakeButton(data: myDrink, button: whatICanMakeButton)
@@ -49,19 +51,17 @@ class HomeBarViewController: UIViewController {
 //                button.badge = "\()"
     }
     
-    func updateWhatICanMakeButton(data: Set<Cocktail.Ingredients>, button: BadgeButton) {
+    func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
         button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
     }
     
-    func checkWhatICanMake(myIngredients: Set<Cocktail.Ingredients>) -> [Cocktail] {
+    func checkWhatICanMake(myIngredients: Set<String>) -> [Cocktail] {
         var lastRecipe = [Cocktail]()
-        let data = myIngredients.map { $0.rawValue
-        }
         originRecipe.forEach {
             let someSet = Set($0.ingredients.map({ baby in
                 baby.rawValue
             }))
-            if someSet.subtracting(data).isEmpty {
+            if someSet.subtracting(myIngredients).isEmpty {
                 lastRecipe.append($0)
             }
         }
