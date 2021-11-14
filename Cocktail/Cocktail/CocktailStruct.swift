@@ -1,5 +1,4 @@
 import UIKit
-import RealmSwift
 
 struct Cocktail: Codable {
     let name: String
@@ -13,33 +12,57 @@ struct Cocktail: Codable {
     let mytip: String
     let drinkType: DrinkType?
     
-    enum Base: String, Codable {
-        case 럼
-        case 보드카
-        case 데킬라
-        case 브랜디
-        case 위스키
-        case 진
-        case 리큐르
+    enum Base: String, Codable, CaseIterable {
+        case rum = "럼"
+        case vodka = "보드카"
+        case tequila = "데킬라"
+        case brandy = "브랜디"
+        case whiskey = "위스키"
+        case gin = "진"
+        case liqueur = "리큐르"
+        case assets = "기타"
+        case beverage = "음료"
+        var list: [Ingredients] {
+            switch self {
+            case .gin:
+                return [Cocktail.Ingredients.gin]
+            case .rum:
+                return [Cocktail.Ingredients.darkRum, Cocktail.Ingredients.whiteRum, Cocktail.Ingredients.overProofRum]
+            case .vodka:
+                return [Cocktail.Ingredients.vodka]
+            case .tequila:
+                return [Cocktail.Ingredients.tequila]
+            case .brandy:
+                return [Cocktail.Ingredients.brandy]
+            case .whiskey:
+                return [Cocktail.Ingredients.whiskey, Cocktail.Ingredients.ryeWhiskey, Cocktail.Ingredients.scotchWhiskey, Cocktail.Ingredients.bourbonWhiskey, Cocktail.Ingredients.jackDanielWhiskey]
+            case .liqueur:
+                return [Cocktail.Ingredients.baileys, Cocktail.Ingredients.melonLiqueur, Cocktail.Ingredients.whiteCacaoLiqueur, Cocktail.Ingredients.sweetVermouth, Cocktail.Ingredients.dryVermouth, Cocktail.Ingredients.peachTree, Cocktail.Ingredients.grapeFruitLiqueur, Cocktail.Ingredients.cacaoLiqueur, Cocktail.Ingredients.cremeDeCassis, Cocktail.Ingredients.greenMintLiqueur, Cocktail.Ingredients.campari, Cocktail.Ingredients.kahlua, Cocktail.Ingredients.blueCuraso, Cocktail.Ingredients.malibu, Cocktail.Ingredients.bananaliqueur, Cocktail.Ingredients.amaretto, Cocktail.Ingredients.triplesec, Cocktail.Ingredients.butterScotchLiqueur, Cocktail.Ingredients.angosturaBitters]
+            case . assets:
+                return [Cocktail.Ingredients.coke, Cocktail.Ingredients.tonicWater, Cocktail.Ingredients.milk, Cocktail.Ingredients.orangeJuice, Cocktail.Ingredients.cranBerryJuice, Cocktail.Ingredients.clubSoda, Cocktail.Ingredients.grapeFruitJuice, Cocktail.Ingredients.pineappleJuice, Cocktail.Ingredients.gingerAle, Cocktail.Ingredients.sweetAndSourMix, Cocktail.Ingredients.appleJuice, Cocktail.Ingredients.cider, Cocktail.Ingredients.lemonJuice]
+            case .beverage:
+                return [Cocktail.Ingredients.lime, Cocktail.Ingredients.limeSqueeze, Cocktail.Ingredients.limeSyrup, Cocktail.Ingredients.lemon, Cocktail.Ingredients.lemonSqueeze, Cocktail.Ingredients.appleMint, Cocktail.Ingredients.whippingCream, Cocktail.Ingredients.honey, Cocktail.Ingredients.olive, Cocktail.Ingredients.oliveJuice, Cocktail.Ingredients.sugar, Cocktail.Ingredients.sugarSyrup, Cocktail.Ingredients.rawCream, Cocktail.Ingredients.grenadineSyrup]
+            }
+        }
     }
     
     enum DrinkType: String, Codable {
-        case 롱드링크
-        case 숏드링크
-        case 슈터
+        case longDrink = "롱드링크"
+        case shortDrink =  "숏드링크"
+        case shooter = "슈터"
     }
     
     enum Color: String, Codable {
-        case 빨간색
-        case 주황색
-        case 노란색
-        case 초록색
-        case 파란색
-        case 보라색
-        case 투명색
-        case 하얀색
-        case 검은색
-        case 갈색
+        case red = "빨간색"
+        case orange = "주황색"
+        case yellow = "노란색"
+        case green = "초록색"
+        case blue = "파란색"
+        case violet = "보라색"
+        case clear = "투명색"
+        case white = "하얀색"
+        case black = "검은색"
+        case brown = "갈색"
     }
     
     enum Alcohol: String, Codable {
@@ -49,26 +72,27 @@ struct Cocktail: Codable {
     }
     
     enum Glass: String, Codable {
-        case 하이볼
-        case 샷잔
-        case 온더락
-        case 칵테일
-        case 마티니
-        case 콜린스
-        case 마가리타
-        case 필스너
+        case highBall = "하이볼"
+        case shot = "샷잔"
+        case onTheRock = "온더락"
+        case cocktail = "칵테일"
+        case martini = "마티니"
+        case collins = "콜린스"
+        case margarita = "마가리타"
+        case philsner = "필스너"
     }
     
     enum Craft: String, Codable {
-        case 빌드
-        case 쉐이킹
-        case 플로팅
-        case 스터
-        case 블렌딩
+        case build = "빌드"
+        case shaking = "쉐이킹"
+        case floating = "플로팅"
+        case stir = "스터"
+        case blending = "블렌딩"
     }
+    
     enum Ingredients: String, Codable {
-        
         case gin = "진"
+        
         case vodka = "보드카"
         
         case whiskey = "위스키"
@@ -98,6 +122,7 @@ struct Cocktail: Codable {
         case triplesec = "트리플섹"
         case butterScotchLiqueur = "버터스카치리큐르"
         case angosturaBitters = "앙고스투라비터스"
+        
         case brandy = "브랜디"
         
         case coke = "콜라"
@@ -133,48 +158,22 @@ struct Cocktail: Codable {
         case rawCream = "생크림"
         case grenadineSyrup = "그레나딘시럽"
         
-//        var list: [String] {
-//            get {
-//                switch whatIPicked {
-//                case "진":
-//                    return ["진"]
-//                case "보드카":
-//                    return ["보드카"]
-//                case "위스키":
-//                    return ["스카치위스키", "버번위스키", "라이위스키", "위스키", "잭다니엘"]
-//                case "데킬라":
-//                    return ["데킬라"]
-//                case "리큐르":
-//                    return ["베일리스", "멜론리큐르", "화이트카카오리큐르", "스위트베르무트" , "피치트리", "자몽리큐르", "카카오리큐르", "크렘드카시스", "그린민트리큐르", "캄파리", "깔루아", "블루큐라소", "말리부", "바나나리큐르", "아마레또", "트리플섹", "버터스카치리큐르", "드라이베르무트" ]
-//                case "브랜디":
-//                    return ["브랜디"]
-//                case "음료":
-//                    return ["콜라", "토닉워터", "우유", "오렌지주스", "크렌베리주스", "탄산수", "자몽주스", "파인애플주스", "진저에일", "스윗앤사워믹스", "사과주스", "사이다", "레몬주스"]
-//                case "럼":
-//                    return ["오버프루프럼", "화이트럼", "다크럼"]
-//                case "Asset":
-//                    return ["라임", "라임즙", "레몬", "애플민트", "꿀", "올리브", "레몬즙", "올리브주스", "설탕시럽", "휘핑크림", "설탕", "생크림", "라임시럽", "그레나딘시럽"]
-//                default:
-//                    return []
-//                }
-//            }
-//        }
-        var base: String {
-            switch self {
-            case .vodka:
-                return "보드카"
-            case .gin:
-                return "진"
-            case .whiskey, .ryeWhiskey, .scotchWhiskey, .bourbonWhiskey, .jackDanielWhiskey:
-                return "위스키"
-            case .tequila:
-                return "데킬라"
-            case . baileys, .melonLiqueur, .whiteCacaoLiqueur, .sweetVermouth, .peachTree, .grapeFruitLiqueur, .cacaoLiqueur, .cremeDeCassis, .greenMintLiqueur, .campari, .kahlua, .blueCuraso, .malibu, .bananaliqueur, .amaretto, .triplesec, .butterScotchLiqueur, .dryVermouth:
-                return "리큐르"
-            default:
-                return "없음"
-            }
-        }
+        //        var base: String {
+        //            switch self {
+        //            case .vodka:
+        //                return "보드카"
+        //            case .gin:
+        //                return "진"
+        //            case .whiskey, .ryeWhiskey, .scotchWhiskey, .bourbonWhiskey, .jackDanielWhiskey:
+        //                return "위스키"
+        //            case .tequila:
+        //                return "데킬라"
+        //            case . baileys, .melonLiqueur, .whiteCacaoLiqueur, .sweetVermouth, .peachTree, .grapeFruitLiqueur, .cacaoLiqueur, .cremeDeCassis, .greenMintLiqueur, .campari, .kahlua, .blueCuraso, .malibu, .bananaliqueur, .amaretto, .triplesec, .butterScotchLiqueur, .dryVermouth:
+        //                return "리큐르"
+        //            default:
+        //                return "없음"
+        //            }
+        //        }
     }
     
 }

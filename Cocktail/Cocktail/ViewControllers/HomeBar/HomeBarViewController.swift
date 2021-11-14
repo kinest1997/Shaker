@@ -3,8 +3,10 @@ import SnapKit
 
 class HomeBarViewController: UIViewController {
     
-    var myDrink: Set<String> = []
+    var myDrink: Set<Cocktail.Ingredients> = []
     var originRecipe: [Cocktail] = []
+    var baseList = Cocktail.Base.allCases.map { $0.rawValue
+    }
     
     let mainScrollView = UIScrollView()
     let mainView = UIView()
@@ -32,27 +34,29 @@ class HomeBarViewController: UIViewController {
         attribute()
         layout()
         navigationController?.isNavigationBarHidden = true
-        
+        print(baseList)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let data = UserDefaults.standard.object(forKey: "myDrinks") as? [String] {
+        if let data = UserDefaults.standard.object(forKey: "firstData") as? [Cocktail.Ingredients] {
             myDrink = Set(data)
         }
         updateWhatICanMakeButton(data: myDrink, button: whatICanMakeButton)
     }
-    //진 버튼의 경우 진 이라는 베이스를 가진 술이 배열에 있을떄마다 변수에 +1 하고 그 변수를 뱃지 값으로
+    
     
     func updateIngredientsBadge(button: BadgeButton) {
-        //        button.badge = "\()"
+//                button.badge = "\()"
     }
     
-    func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
+    func updateWhatICanMakeButton(data: Set<Cocktail.Ingredients>, button: BadgeButton) {
         button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
     }
     
-    func checkWhatICanMake(myIngredients data: Set<String>) -> [Cocktail] {
+    func checkWhatICanMake(myIngredients: Set<Cocktail.Ingredients>) -> [Cocktail] {
         var lastRecipe = [Cocktail]()
+        let data = myIngredients.map { $0.rawValue
+        }
         originRecipe.forEach {
             let someSet = Set($0.ingredients.map({ baby in
                 baby.rawValue
@@ -122,15 +126,15 @@ class HomeBarViewController: UIViewController {
         whatICanMakeButton.backgroundColor = .systemBlue
         whatICanMakeButton.setTitle("만들수있는것", for: .normal)
         whatICanMakeButton.badgeBackgroundColor = .systemBlue
-        vodkaButton.setTitle("보드카", for: .normal)
-        whiskeyButton.setTitle("위스키", for: .normal)
-        tequilaButton.setTitle("데킬라", for: .normal)
-        ginButton.setTitle("진", for: .normal)
-        liquorButton.setTitle("리큐르", for: .normal)
-        brandyButton.setTitle("브랜디", for: .normal)
-        beverageButton.setTitle("음료", for: .normal)
-        rumButton.setTitle("럼", for: .normal)
-        pantryButton.setTitle("기타", for: .normal)
+        vodkaButton.setTitle(baseList[1], for: .normal)
+        whiskeyButton.setTitle(baseList[4], for: .normal)
+        tequilaButton.setTitle(baseList[2], for: .normal)
+        ginButton.setTitle(baseList[5], for: .normal)
+        liquorButton.setTitle(baseList[6], for: .normal)
+        brandyButton.setTitle(baseList[3], for: .normal)
+        beverageButton.setTitle(baseList[8], for: .normal)
+        rumButton.setTitle(baseList[0], for: .normal)
+        pantryButton.setTitle(baseList[7], for: .normal)
         
         [vodkaButton, ginButton, whiskeyButton, tequilaButton, liquorButton, brandyButton, beverageButton, rumButton, pantryButton].forEach {
             setButtonAction(buttonName: $0)

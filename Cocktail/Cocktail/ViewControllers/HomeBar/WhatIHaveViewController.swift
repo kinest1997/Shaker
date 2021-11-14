@@ -1,6 +1,5 @@
 import UIKit
 import SnapKit
-import RealmSwift
 
 class WhatIHaveViewController: UIViewController {
     
@@ -8,17 +7,41 @@ class WhatIHaveViewController: UIViewController {
     //
     //    var myDrinkList: Results<MyDrinks>?
     
-    var myOwnDrink: [String] = []
+    var ingredientsWhatIhave: [Cocktail.Ingredients] = []
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    var nowIngredients: [String] = []
+    var allIngredients: [Cocktail.Ingredients] = []
+    
     
     var whatIPicked: String? {
         didSet {
-            
+            let baseList = Cocktail.Base.allCases.map { $0.rawValue
+            }
+            switch whatIPicked {
+            case baseList[0]:
+                allIngredients = Cocktail.Base.rum.list
+            case baseList[1]:
+                allIngredients = Cocktail.Base.vodka.list
+            case baseList[2]:
+                allIngredients = Cocktail.Base.tequila.list
+            case baseList[3]:
+                allIngredients = Cocktail.Base.brandy.list
+            case baseList[4]:
+                allIngredients = Cocktail.Base.whiskey.list
+            case baseList[5]:
+                allIngredients = Cocktail.Base.gin.list
+            case baseList[6]:
+                allIngredients = Cocktail.Base.liqueur.list
+            case baseList[7]:
+                allIngredients = Cocktail.Base.assets.list
+            case baseList[8]:
+                allIngredients = Cocktail.Base.beverage.list
+            default:
+                return
+            }
+            }
         }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,25 +53,26 @@ class WhatIHaveViewController: UIViewController {
         mainCollectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        guard let data = UserDefaults.standard.object(forKey: "myDrinks") as? [String] else { return }
-        myOwnDrink = data
+        guard let data = UserDefaults.standard.object(forKey: "firstData") as? [Cocktail.Ingredients] else { return }
+        ingredientsWhatIhave = data
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UserDefaults.standard.set(myOwnDrink, forKey: "myDrinks")
+        //plist에선 이 형태의 객체를 지원하지않아서 오류가 남 일단 내일 확인
+        UserDefaults.standard.set(ingredientsWhatIhave, forKey: "firstData")
     }
 }
 
 extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        nowIngredients.count
+        allIngredients.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "key", for: indexPath) as? WhatIHaveCollectionViewCell else { return UICollectionViewCell() }
-        cell.nameLabel.text = nowIngredients[indexPath.row]
-        cell.mainImageView.image = UIImage(named: nowIngredients[indexPath.row])
+        cell.nameLabel.text = allIngredients[indexPath.row].rawValue
+        cell.mainImageView.image = UIImage(named: allIngredients[indexPath.row].rawValue)
         //asset에 이름과 같은 이미지를 다 넣고 그걸 불러오는형식으로 하는게 좋을듯?
         return cell
     }
@@ -57,13 +81,13 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if myOwnDrink.contains(nowIngredients[indexPath.row]) {
-            guard let state = myOwnDrink.firstIndex(of: nowIngredients[indexPath.row]) else { return }
-            myOwnDrink.remove(at: state)
-            print(myOwnDrink)
+        if ingredientsWhatIhave.contains(allIngredients[indexPath.row]) {
+            guard let index = ingredientsWhatIhave.firstIndex(of: allIngredients[indexPath.row]) else { return }
+            ingredientsWhatIhave.remove(at: index)
+            print(ingredientsWhatIhave)
         } else {
-            myOwnDrink.append(nowIngredients[indexPath.row])
-            print(myOwnDrink)
+            ingredientsWhatIhave.append(allIngredients[indexPath.row])
+            print(ingredientsWhatIhave)
         }
     }
 }

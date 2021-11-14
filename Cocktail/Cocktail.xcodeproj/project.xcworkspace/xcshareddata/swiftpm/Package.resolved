@@ -2,24 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "Realm",
-        "repositoryURL": "https://github.com/realm/realm-cocoa.git",
-        "state": {
-          "branch": "master",
-          "revision": "f9d2d7a30812dc2507b72dbc8f1ca0778471fb47",
-          "version": null
-        }
-      },
-      {
-        "package": "RealmDatabase",
-        "repositoryURL": "https://github.com/realm/realm-core",
-        "state": {
-          "branch": null,
-          "revision": "b170db6a47789ff5f2fbc3eeed0220b4b0a3f6b7",
-          "version": "11.6.0"
-        }
-      },
-      {
         "package": "SnapKit",
         "repositoryURL": "https://github.com/SnapKit/SnapKit.git",
         "state": {
