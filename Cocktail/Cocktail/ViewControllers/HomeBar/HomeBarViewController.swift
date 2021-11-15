@@ -4,11 +4,13 @@ import SnapKit
 class HomeBarViewController: UIViewController {
     
     var myDrink: Set<String> = []
+    
     var originRecipe: [Cocktail] = []
+    
     var baseList = Cocktail.Base.allCases.map { $0.rawValue
     }
-    var baseCount: Dictionary<String, Int> = ["vodka":0]
-    //버튼에 그냥 base 를 넣어줄까? 그러면 제목도 자동으로 결정되게하고. 일단 userDefault로 전체의 숫자를 넘겨주는걸로하자
+    
+//    var baseCount: Dictionary<String, Int> = [:]
     
     let mainScrollView = UIScrollView()
     let mainView = UIView()
@@ -32,6 +34,7 @@ class HomeBarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "내술장"
         getRecipe(data: &originRecipe)
         attribute()
         layout()
@@ -48,8 +51,12 @@ class HomeBarViewController: UIViewController {
     
     
     func updateIngredientsBadge(button: BadgeButton) {
-//                button.badge = "\()"
-    }
+//        switch button.nameLabel.text {
+//            case ""
+        }
+        
+        //                button.badge = "\()"
+//    }
     
     func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
         button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
@@ -138,6 +145,7 @@ class HomeBarViewController: UIViewController {
         
         [vodkaButton, ginButton, whiskeyButton, tequilaButton, liquorButton, brandyButton, beverageButton, rumButton, pantryButton].forEach {
             setButtonAction(buttonName: $0)
+            updateIngredientsBadge(button: $0)
         }
     }
     func setButtonAction(buttonName: BadgeButton) {

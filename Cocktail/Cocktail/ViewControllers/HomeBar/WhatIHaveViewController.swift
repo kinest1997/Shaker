@@ -8,9 +8,10 @@ class WhatIHaveViewController: UIViewController {
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     var allIngredients: [Cocktail.Ingredients] = []
+ 
+    var howMany: Int = 0
     
-    
-    var whatIPicked: String? {
+    var whatIPicked: String! {
         didSet {
             let baseList = Cocktail.Base.allCases.map { $0.rawValue
             }
@@ -51,13 +52,21 @@ class WhatIHaveViewController: UIViewController {
         }
         guard let data = UserDefaults.standard.object(forKey: "firstData") as? [Cocktail.Ingredients.RawValue] else { return }
         ingredientsWhatIhave = data
+        if let badgeNumber = UserDefaults.standard.object(forKey: whatIPicked) as? Int {
+            howMany = badgeNumber
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UserDefaults.standard.set(ingredientsWhatIhave, forKey: "firstData")
+        UserDefaults.standard.set(howMany, forKey: whatIPicked)
     }
 }
+// 해야하는것 일단은 뱃지 숫자 갱신되게 하는것. 뱃지 숫자 갱신 시키려면 내가 가진 술 배열을 받아와서 그 갯수의 카운트로 넣어준다. 근데 내가 선택했는지 안했는지는 알수가없으니까 새로운 자료 구조를 이용해서
+
+
+
 
 extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

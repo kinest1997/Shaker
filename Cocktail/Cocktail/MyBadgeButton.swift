@@ -86,9 +86,22 @@ class BadgeButton: UIButton {
         }
     }
     
+    private var baseDrink: Cocktail.Base = .vodka
+    
+    var base: Cocktail.Base {
+        get {
+            return baseDrink
+        }
+        set {
+            baseDrink = newValue
+            self.setTitle(baseDrink.rawValue, for: .normal)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addBadgeToButon(badge: nil)
+        
     }
     
     func addBadgeToButon(badge: String?) {

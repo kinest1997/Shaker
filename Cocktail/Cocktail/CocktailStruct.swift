@@ -157,6 +157,7 @@ struct Cocktail: Codable {
         case sugarSyrup = "설탕시럽"
         case rawCream = "생크림"
         case grenadineSyrup = "그레나딘시럽"
+    
         
         //        var base: String {
         //            switch self {
@@ -185,6 +186,7 @@ struct Cocktail: Codable {
 //          return "name"
 //        }
 //}
+
 
 
 

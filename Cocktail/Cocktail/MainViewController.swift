@@ -22,7 +22,7 @@ class MainViewController: UITabBarController {
     let settingsViewController = SettingsViewController()
     
     let tabBarItems: [Tab: UITabBarItem] = [
-        .today: UITabBarItem(title: "추천", image: UIImage(systemName: "eyeglasses"), selectedImage: UIImage(systemName: "eyes.inverse")),
+        .today: UITabBarItem(title: "recommendation".localized, image: UIImage(systemName: "eyeglasses"), selectedImage: UIImage(systemName: "eyes.inverse")),
         .recipe: UITabBarItem(title: "레시피", image: UIImage(systemName: "book.closed.fill"), selectedImage: UIImage(systemName: "list.bullet")),
         .home: UITabBarItem(title: "내술장", image: UIImage(systemName: "mustache.fill"), selectedImage: UIImage(systemName: "mustache.fill")),
         .preference: UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape.fill"), selectedImage: UIImage(systemName: "gearshape.fill"))
