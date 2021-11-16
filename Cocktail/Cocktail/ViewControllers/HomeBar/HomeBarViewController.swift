@@ -49,14 +49,9 @@ class HomeBarViewController: UIViewController {
         updateWhatICanMakeButton(data: myDrink, button: whatICanMakeButton)
     }
     
-    
     func updateIngredientsBadge(button: BadgeButton) {
-//        switch button.nameLabel.text {
-//            case ""
-        }
         
-        //                button.badge = "\()"
-//    }
+        }
     
     func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
         button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
@@ -73,6 +68,7 @@ class HomeBarViewController: UIViewController {
             }
         }
         return lastRecipe
+        //여기있는 lastrecipe가 만들수있는 칵테일의 목록, 이걸 내가 만들수있는 칵테일 버튼을 누를때 이것을 데이터로 전달해줘야한다. 
     }
     
     func layout() {

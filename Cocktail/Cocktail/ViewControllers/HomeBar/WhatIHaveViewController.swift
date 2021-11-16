@@ -8,8 +8,6 @@ class WhatIHaveViewController: UIViewController {
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     var allIngredients: [Cocktail.Ingredients] = []
- 
-    var howMany: Int = 0
     
     var whatIPicked: String! {
         didSet {
@@ -37,8 +35,8 @@ class WhatIHaveViewController: UIViewController {
             default:
                 return
             }
-            }
         }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,21 +50,15 @@ class WhatIHaveViewController: UIViewController {
         }
         guard let data = UserDefaults.standard.object(forKey: "firstData") as? [Cocktail.Ingredients.RawValue] else { return }
         ingredientsWhatIhave = data
-        if let badgeNumber = UserDefaults.standard.object(forKey: whatIPicked) as? Int {
-            howMany = badgeNumber
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UserDefaults.standard.set(ingredientsWhatIhave, forKey: "firstData")
-        UserDefaults.standard.set(howMany, forKey: whatIPicked)
     }
 }
-// 해야하는것 일단은 뱃지 숫자 갱신되게 하는것. 뱃지 숫자 갱신 시키려면 내가 가진 술 배열을 받아와서 그 갯수의 카운트로 넣어준다. 근데 내가 선택했는지 안했는지는 알수가없으니까 새로운 자료 구조를 이용해서
-
-
-
+// 해야하는것 일단은 뱃지 숫자 갱신되게 하는것. 뱃지 숫자 갱신 시키려면 내가 가진 술 배열을 받아와서 그 갯수의 카운트로 넣어준다. 근데 내가 선택했는지 안했는지는 알수가없으니까 새로운 자료 구조를 이용해서하자.
+// 만약 재료의 불값이 true라면 셀의 이미지에 보이는걸 다르게 보여주고, 만약 true라면 또 바꿔주고. 셀을 누를때 그 재료의 bool값이 true라면 false로 바꿔주고 내가 가진 재료 array에서 제거하고, plist에서도 제거. 그리고 반대의 경우에는 추가해주고 plist에도 추가. 내가 가진 재료로 만들수있는 칵테일을 알고싶을때, map을 이용해서 myDrinks struct의 ingredients 로 바꿔주고 그 배열을 이제 set을 이용해서 subtract를 사용하여 다시 정렬. 일단 제일먼저 myDrinks 자료 만들기, 그리고 내가 만들수있는 칵테일을 알게 되었을떄 띄울 뷰
 
 extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -95,10 +87,3 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
 }
-
-
-//렘으로 바꾸기, 뒤의 뷰로 돌아갈때 뷰디드로드 안에다가 whatICanMake 함수로 현재 가진 재료들로 만들수있는 칵테일의 종류를 갱신하고, 가진 술의 갯수를 갱신한다.
-
-//enum으로만들었을때, 만약 이넘의 base 라는 var 를 만들어서 접근할때 switch로 재료에 따라 base 를 뱉는게 다르도록,
-// 저쪽에서 뷰디드로드에서 화면의 뱃지를 새로고침할떄 내가 가진 재료의 배열을 받아오는데. 그배열로 만들수있는 술의 갯수는 차집함 개념으로 만들어주고.내가 가진 술의 목록은 enum의 var를 이용해서 필터링을 해서 .count로 갯수를 적어준다. 만약 내가 가진 재료중 switch ~~ .base == gin 일경우 이름이 ~인 버튼의 뱃지는 .count 가 되는것으로. 
-
