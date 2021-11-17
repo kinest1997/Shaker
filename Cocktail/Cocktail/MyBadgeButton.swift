@@ -64,6 +64,7 @@ class BadgeButton: UIButton {
                 addBadgeToButon(badge: badge)
             } else {
                 addBadgeToButon(badge: badge)
+                badgeBackgroundColor = .systemBlue
             }
         }
     }
@@ -83,6 +84,18 @@ class BadgeButton: UIButton {
     public var badgeFont = UIFont.systemFont(ofSize: 15) {
         didSet {
             badgeLabel.font = badgeFont
+        }
+    }
+    
+    private var baseDrink: Cocktail.Base = .vodka
+    
+    var base: Cocktail.Base {
+        get {
+            return baseDrink
+        }
+        set {
+            baseDrink = newValue
+            self.setTitle(baseDrink.rawValue, for: .normal)
         }
     }
     

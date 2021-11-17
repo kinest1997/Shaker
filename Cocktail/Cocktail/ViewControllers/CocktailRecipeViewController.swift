@@ -44,7 +44,6 @@ class CocktailRecipeViewController: UIViewController {
         filterView.backgroundColor = .brown
         filterView.isHidden = true
         
-        navigationController?.hidesBarsOnSwipe = true
         //네비바 스와이프시 가리기
     }
     
@@ -139,7 +138,9 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         filteredRecipe = originRecipe.filter({
-            return $0.name.contains(searchText) || $0.mytip.contains(searchText) || $0.ingredients[0...].contains(searchText) || $0.glass.rawValue.contains(searchText) || $0.color.rawValue.contains(searchText) || $0.recipe.contains(searchText)
+            return $0.name.contains(searchText) || $0.mytip.contains(searchText) || $0.ingredients.map({ baby in
+                baby.rawValue
+            })[0...].contains(searchText) || $0.glass.rawValue.contains(searchText) || $0.color.rawValue.contains(searchText) || $0.recipe.contains(searchText)
         })
         mainTableView.reloadData()
     }

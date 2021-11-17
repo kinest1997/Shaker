@@ -7,7 +7,7 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.backgroundColor = .systemBlue
+        contentView.backgroundColor = .systemRed
         contentView.layer.cornerRadius = 5
         contentView.clipsToBounds = true
         
