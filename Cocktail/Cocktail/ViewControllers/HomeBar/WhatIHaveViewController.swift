@@ -3,43 +3,26 @@ import SnapKit
 
 class WhatIHaveViewController: UIViewController {
     
-    var ingredientsWhatIhave: [String] = []
+    var allIngredients: [String] = []
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+
+    var whatIHave: [Cocktail.Ingredients] = []
     
-    var allIngredients: [Cocktail.Ingredients] = []
-    
-    var whatIPicked: String! {
+    var refreshList: Cocktail.Base = .vodka {
         didSet {
-            let baseList = Cocktail.Base.allCases.map { $0.rawValue
-            }
-            switch whatIPicked {
-            case baseList[0]:
-                allIngredients = Cocktail.Base.rum.list
-            case baseList[1]:
-                allIngredients = Cocktail.Base.vodka.list
-            case baseList[2]:
-                allIngredients = Cocktail.Base.tequila.list
-            case baseList[3]:
-                allIngredients = Cocktail.Base.brandy.list
-            case baseList[4]:
-                allIngredients = Cocktail.Base.whiskey.list
-            case baseList[5]:
-                allIngredients = Cocktail.Base.gin.list
-            case baseList[6]:
-                allIngredients = Cocktail.Base.liqueur.list
-            case baseList[7]:
-                allIngredients = Cocktail.Base.assets.list
-            case baseList[8]:
-                allIngredients = Cocktail.Base.beverage.list
-            default:
-                return
+            allIngredients = refreshList.list.map {
+                $0.rawValue
             }
         }
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let data = UserDefaults.standard.object(forKey: "whatIHave") as? [Cocktail.Ingredients] {
+            whatIHave = data
+        }
         navigationController?.isNavigationBarHidden = false
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
@@ -48,13 +31,24 @@ class WhatIHaveViewController: UIViewController {
         mainCollectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        guard let data = UserDefaults.standard.object(forKey: "firstData") as? [Cocktail.Ingredients.RawValue] else { return }
-        ingredientsWhatIhave = data
     }
     
+//    func upload(_ list: [MyDrinks]) {
+//            //1. 쓰고자 하는 경로 가져오기
+//            let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Ingredients.plist")
+//
+//            //2. 쓰고자 하는 Codable 객체 형태로 인코딩 하기
+//            do {
+//                let data = try PropertyListEncoder().encode(ingredientsWhatIhave)
+//                // 3. 생성된 데이터를 경로에 쓰기
+//                try data.write(to: documentURL)
+//            } catch let error {
+//                print("ERROR", error.localizedDescription)
+//            }
+//        }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UserDefaults.standard.set(ingredientsWhatIhave, forKey: "firstData")
+        UserDefaults.standard.set(whatIHave, forKey: "whatIHave")
     }
 }
 // 해야하는것 일단은 뱃지 숫자 갱신되게 하는것. 뱃지 숫자 갱신 시키려면 내가 가진 술 배열을 받아와서 그 갯수의 카운트로 넣어준다. 근데 내가 선택했는지 안했는지는 알수가없으니까 새로운 자료 구조를 이용해서하자.
@@ -67,8 +61,8 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "key", for: indexPath) as? WhatIHaveCollectionViewCell else { return UICollectionViewCell() }
-        cell.nameLabel.text = allIngredients[indexPath.row].rawValue
-        cell.mainImageView.image = UIImage(named: allIngredients[indexPath.row].rawValue)
+        cell.nameLabel.text = allIngredients[indexPath.row]
+        cell.mainImageView.image = UIImage(named: allIngredients[indexPath.row])
         //asset에 이름과 같은 이미지를 다 넣고 그걸 불러오는형식으로 하는게 좋을듯?
         return cell
     }
@@ -77,13 +71,7 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if ingredientsWhatIhave.contains(allIngredients[indexPath.row].rawValue) {
-            guard let index = ingredientsWhatIhave.firstIndex(of: allIngredients[indexPath.row].rawValue) else { return }
-            ingredientsWhatIhave.remove(at: index)
-            print(ingredientsWhatIhave)
-        } else {
-            ingredientsWhatIhave.append(allIngredients[indexPath.row].rawValue)
-            print(ingredientsWhatIhave)
-        }
+        if whatIHave
+
     }
 }

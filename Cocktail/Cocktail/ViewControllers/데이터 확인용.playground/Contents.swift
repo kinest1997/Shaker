@@ -16,10 +16,11 @@ myRecipe.forEach {
 //print("----------------")
 //
 //print(ingredients.count)
-print(ingredients)
+print(ingredients.count)
 
 
 struct MyDrinks: Codable {
     var iHave: Bool = false
+    var base: Cocktail.Base
     var ingredients: Cocktail.Ingredients
 }

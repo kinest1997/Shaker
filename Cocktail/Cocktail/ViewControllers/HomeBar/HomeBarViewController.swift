@@ -6,12 +6,8 @@ class HomeBarViewController: UIViewController {
     var myDrink: Set<String> = []
     
     var originRecipe: [Cocktail] = []
-    
-    var baseList = Cocktail.Base.allCases.map { $0.rawValue
-    }
-    
+
 //    var baseCount: Dictionary<String, Int> = [:]
-    
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     
@@ -25,21 +21,19 @@ class HomeBarViewController: UIViewController {
     let rumButton = BadgeButton()
     let tequilaButton = BadgeButton()
     let whiskeyButton = BadgeButton()
-    let liquorButton = BadgeButton()
+    let liqueurButton = BadgeButton()
     let brandyButton = BadgeButton()
     let beverageButton = BadgeButton()
-    let pantryButton = BadgeButton()
+    let assetsButton = BadgeButton()
     
     let whatICanMakeButton = BadgeButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "내술장"
         getRecipe(data: &originRecipe)
         attribute()
         layout()
         navigationController?.isNavigationBarHidden = true
-        print(baseList)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -105,7 +99,7 @@ class HomeBarViewController: UIViewController {
             $0.backgroundColor = .green
         }
         
-        [vodkaButton, ginButton, liquorButton].forEach {
+        [vodkaButton, ginButton, liqueurButton].forEach {
             leftStackView.addArrangedSubview($0)
             //넘겨주면서 변수값 정해주면 그 뷰컨의 데이터 정해주기
             $0.setImage(UIImage(named: "Martini"), for: .normal)
@@ -117,7 +111,7 @@ class HomeBarViewController: UIViewController {
             $0.setImage(UIImage(named: "Martini"), for: .normal)
             $0.badge = "22"
         }
-        [brandyButton, rumButton, pantryButton].forEach {
+        [brandyButton, rumButton, assetsButton].forEach {
             rightStackView.addArrangedSubview($0)
             $0.setImage(UIImage(named: "longone"), for: .normal)
             $0.badge = "4"
@@ -129,17 +123,17 @@ class HomeBarViewController: UIViewController {
         whatICanMakeButton.backgroundColor = .systemBlue
         whatICanMakeButton.setTitle("만들수있는것", for: .normal)
         whatICanMakeButton.badgeBackgroundColor = .systemBlue
-        vodkaButton.setTitle(baseList[1], for: .normal)
-        whiskeyButton.setTitle(baseList[4], for: .normal)
-        tequilaButton.setTitle(baseList[2], for: .normal)
-        ginButton.setTitle(baseList[5], for: .normal)
-        liquorButton.setTitle(baseList[6], for: .normal)
-        brandyButton.setTitle(baseList[3], for: .normal)
-        beverageButton.setTitle(baseList[8], for: .normal)
-        rumButton.setTitle(baseList[0], for: .normal)
-        pantryButton.setTitle(baseList[7], for: .normal)
+        vodkaButton.base = .vodka
+        whiskeyButton.base = .whiskey
+        tequilaButton.base = .tequila
+        ginButton.base = .gin
+        liqueurButton.base = .liqueur
+        brandyButton.base = .brandy
+        beverageButton.base = .beverage
+        rumButton.base = .rum
+        assetsButton.base = .assets
         
-        [vodkaButton, ginButton, whiskeyButton, tequilaButton, liquorButton, brandyButton, beverageButton, rumButton, pantryButton].forEach {
+        [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
             setButtonAction(buttonName: $0)
             updateIngredientsBadge(button: $0)
         }
@@ -148,7 +142,8 @@ class HomeBarViewController: UIViewController {
         buttonName.addAction(UIAction(handler: { [weak self]_ in
             guard let self = self else { return }
             let whatIHaveViewController = WhatIHaveViewController()
-            whatIHaveViewController.whatIPicked = buttonName.nameLabel.text
+//            whatIHaveViewController.whatIPicked = buttonName.base
+            whatIHaveViewController.refreshList = buttonName.base
             self.show(whatIHaveViewController, sender: nil)
         }), for: .touchUpInside)
     }

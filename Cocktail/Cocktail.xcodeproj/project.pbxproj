@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D0D9B752744B3FE008C75E7 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D0D9B742744B3FD008C75E7 /* Ingredients.plist */; };
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */; };
@@ -33,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D0D9B742744B3FD008C75E7 /* Ingredients.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Ingredients.plist; sourceTree = "<group>"; };
+		3D0D9B762744D714008C75E7 /* Ingredients copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ingredients copy.plist"; sourceTree = "<group>"; };
 		3D175BA12742846B00EC142B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3D175BA3274284CD00EC142B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		3D175BA4274284DD00EC142B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -115,6 +118,8 @@
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
 				3DA76A462730D574004091CE /* Cocktail.plist */,
 				3DA76A3E2730D1D0004091CE /* Info.plist */,
+				3D0D9B742744B3FD008C75E7 /* Ingredients.plist */,
+				3D0D9B762744D714008C75E7 /* Ingredients copy.plist */,
 				3D175BA22742846B00EC142B /* Localizable.strings */,
 				3D175BA5274285BB00EC142B /* String.swift */,
 			);
@@ -205,6 +210,7 @@
 				3DA76A3D2730D1D0004091CE /* LaunchScreen.storyboard in Resources */,
 				3D175BA02742846B00EC142B /* Localizable.strings in Resources */,
 				3DA76A472730D574004091CE /* Cocktail.plist in Resources */,
+				3D0D9B752744B3FE008C75E7 /* Ingredients.plist in Resources */,
 				3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
