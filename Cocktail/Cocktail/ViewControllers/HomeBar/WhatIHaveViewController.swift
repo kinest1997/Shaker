@@ -7,7 +7,7 @@ class WhatIHaveViewController: UIViewController {
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
 
-    var whatIHave: [Cocktail.Ingredients] = []
+    var ingredientsWhatIhave: [Cocktail.Ingredients] = []
     
     var refreshList: Cocktail.Base = .vodka {
         didSet {
@@ -21,7 +21,7 @@ class WhatIHaveViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let data = UserDefaults.standard.object(forKey: "whatIHave") as? [Cocktail.Ingredients] {
-            whatIHave = data
+            ingredientsWhatIhave = data
         }
         navigationController?.isNavigationBarHidden = false
         mainCollectionView.delegate = self
@@ -48,7 +48,7 @@ class WhatIHaveViewController: UIViewController {
 //        }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UserDefaults.standard.set(whatIHave, forKey: "whatIHave")
+        UserDefaults.standard.set(ingredientsWhatIhave, forKey: "whatIHave")
     }
 }
 // 해야하는것 일단은 뱃지 숫자 갱신되게 하는것. 뱃지 숫자 갱신 시키려면 내가 가진 술 배열을 받아와서 그 갯수의 카운트로 넣어준다. 근데 내가 선택했는지 안했는지는 알수가없으니까 새로운 자료 구조를 이용해서하자.
@@ -71,7 +71,13 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if whatIHave
-
+        if ingredientsWhatIhave.contains(allIngredients[indexPath.row]) {
+            guard let index = ingredientsWhatIhave.firstIndex(of: allIngredients[indexPath.row]) else { return }
+            ingredientsWhatIhave.remove(at: index)
+            print(ingredientsWhatIhave)
+        } else {
+            ingredientsWhatIhave.append(allIngredients[indexPath.row])
+            print(ingredientsWhatIhave)
+        }
     }
 }
