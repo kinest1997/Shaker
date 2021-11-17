@@ -46,32 +46,7 @@ class HomeBarViewController: UIViewController {
         }
     }
     
-    func updateIngredientsBadge(button: BadgeButton) {
-        let origin = Set(button.base.list.map {
-            $0.rawValue })
-        let subtracted = origin.subtracting(myDrink)
-        let originCount = origin.count - subtracted.count
-        button.badge = "\(originCount)"
-        }
-    
-    func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
-        button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
-    }
-    
-    func checkWhatICanMake(myIngredients: Set<String>) -> [Cocktail] {
-        var lastRecipe = [Cocktail]()
-        originRecipe.forEach {
-            let someSet = Set($0.ingredients.map({ baby in
-                baby.rawValue
-            }))
-            if someSet.subtracting(myIngredients).isEmpty {
-                lastRecipe.append($0)
-            }
-        }
-        return lastRecipe
-        //여기있는 lastrecipe가 만들수있는 칵테일의 목록, 이걸 내가 만들수있는 칵테일 버튼을 누를때 이것을 데이터로 전달해줘야한다. 
-    }
-    
+   
     func layout() {
         mainScrollView.snp.makeConstraints {
             $0.leading.trailing.top.equalToSuperview()
@@ -134,11 +109,18 @@ class HomeBarViewController: UIViewController {
         beverageButton.base = .beverage
         rumButton.base = .rum
         assetsButton.base = .assets
-        
         [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
             setButtonAction(buttonName: $0)
         }
+        
+        whatICanMakeButton.addAction(UIAction(handler: { [weak self]_ in
+            guard let self = self else { return }
+            let whatICanMakeViewController = CocktailListTableView()
+            whatICanMakeViewController.lastRecipe = self.checkWhatICanMake(myIngredients: self.myDrink)
+            self.show(whatICanMakeViewController, sender: nil)
+        }), for: .touchUpInside)
     }
+    
     func setButtonAction(buttonName: BadgeButton) {
         buttonName.addAction(UIAction(handler: { [weak self]_ in
             guard let self = self else { return }
@@ -147,6 +129,32 @@ class HomeBarViewController: UIViewController {
             whatIHaveViewController.refreshList = buttonName.base
             self.show(whatIHaveViewController, sender: nil)
         }), for: .touchUpInside)
+    }
+    
+    func updateIngredientsBadge(button: BadgeButton) {
+        let origin = Set(button.base.list.map {
+            $0.rawValue })
+        let subtracted = origin.subtracting(myDrink)
+        let originCount = origin.count - subtracted.count
+        button.badge = "\(originCount)"
+        }
+    
+    func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
+        button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
+    }
+    
+    func checkWhatICanMake(myIngredients: Set<String>) -> [Cocktail] {
+        var lastRecipe = [Cocktail]()
+        originRecipe.forEach {
+            let someSet = Set($0.ingredients.map({ baby in
+                baby.rawValue
+            }))
+            if someSet.subtracting(myIngredients).isEmpty {
+                lastRecipe.append($0)
+            }
+        }
+        return lastRecipe
+        //여기있는 lastrecipe가 만들수있는 칵테일의 목록, 이걸 내가 만들수있는 칵테일 버튼을 누를때 이것을 데이터로 전달해줘야한다.
     }
 }
 
