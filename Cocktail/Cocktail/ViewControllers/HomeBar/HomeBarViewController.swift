@@ -7,7 +7,6 @@ class HomeBarViewController: UIViewController {
     
     var originRecipe: [Cocktail] = []
 
-//    var baseCount: Dictionary<String, Int> = [:]
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     
@@ -35,16 +34,24 @@ class HomeBarViewController: UIViewController {
         layout()
         navigationController?.isNavigationBarHidden = true
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let data = UserDefaults.standard.object(forKey: "firstData") as? [String] {
+        if let data = UserDefaults.standard.object(forKey: "whatIHave") as? [String] {
             myDrink = Set(data)
         }
         updateWhatICanMakeButton(data: myDrink, button: whatICanMakeButton)
+        [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
+            updateIngredientsBadge(button: $0)
+        }
     }
     
     func updateIngredientsBadge(button: BadgeButton) {
-        
+        let origin = Set(button.base.list.map {
+            $0.rawValue })
+        let subtracted = origin.subtracting(myDrink)
+        let originCount = origin.count - subtracted.count
+        button.badge = "\(originCount)"
         }
     
     func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
@@ -101,20 +108,15 @@ class HomeBarViewController: UIViewController {
         
         [vodkaButton, ginButton, liqueurButton].forEach {
             leftStackView.addArrangedSubview($0)
-            //넘겨주면서 변수값 정해주면 그 뷰컨의 데이터 정해주기
             $0.setImage(UIImage(named: "Martini"), for: .normal)
-            $0.badge = "0"
-            //버튼이 눌리는 시점의 버튼의 이름라벨의 텍스트값을 넣어주고싶다 아직 고민중
         }
         [tequilaButton, whiskeyButton, beverageButton].forEach {
             midStackView.addArrangedSubview($0)
             $0.setImage(UIImage(named: "Martini"), for: .normal)
-            $0.badge = "22"
         }
         [brandyButton, rumButton, assetsButton].forEach {
             rightStackView.addArrangedSubview($0)
             $0.setImage(UIImage(named: "longone"), for: .normal)
-            $0.badge = "4"
         }
         groupStackView.axis = .horizontal
         groupStackView.distribution = .fillEqually
@@ -135,7 +137,6 @@ class HomeBarViewController: UIViewController {
         
         [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
             setButtonAction(buttonName: $0)
-            updateIngredientsBadge(button: $0)
         }
     }
     func setButtonAction(buttonName: BadgeButton) {
@@ -148,7 +149,5 @@ class HomeBarViewController: UIViewController {
         }), for: .touchUpInside)
     }
 }
-
-// 데이터를 저장할때, 버튼을 누를때마다 realm 에 저장되게 하고. 맨처음에 이 화면을불러올때도 realm 에서 불러오고. 버튼을 누르고 나갈때 realm 저장소에 넣고 빼고 하도록. set 형태에 먼저 넣고 그걸 array 로 감싸고
 
 

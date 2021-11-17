@@ -64,6 +64,7 @@ class BadgeButton: UIButton {
                 addBadgeToButon(badge: badge)
             } else {
                 addBadgeToButon(badge: badge)
+                badgeBackgroundColor = .systemBlue
             }
         }
     }
