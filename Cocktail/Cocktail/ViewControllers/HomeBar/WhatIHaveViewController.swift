@@ -44,11 +44,13 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "key", for: indexPath) as? WhatIHaveCollectionViewCell else { return UICollectionViewCell() }
         if ingredientsWhatIhave.contains(allIngredients[indexPath.row].rawValue) {
-            cell.nameLabel.text = "가지고있음"
+            cell.nameLabel.text = allIngredients[indexPath.row].rawValue
             cell.mainImageView.image = UIImage(named: allIngredients[indexPath.row].rawValue)
+            cell.checkBoxImage.image = UIImage(systemName: "checkmark.circle.fill")
         } else {
             cell.nameLabel.text = allIngredients[indexPath.row].rawValue
             cell.mainImageView.image = UIImage(named: allIngredients[indexPath.row].rawValue)
+            cell.checkBoxImage.image = UIImage(systemName: "checkmark.circle")
         }
         //asset에 이름과 같은 이미지를 다 넣고 그걸 불러오는형식으로 하는게 좋을듯?
         return cell
@@ -63,11 +65,14 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
             ingredientsWhatIhave.remove(at: index)
             let cell = collectionView.cellForItem(at: indexPath) as? WhatIHaveCollectionViewCell
             cell?.nameLabel.text = allIngredients[indexPath.row].rawValue
+            cell?.backgroundColor = .red
+            cell?.checkBoxImage.image = UIImage(systemName: "checkmark.circle")
             print(ingredientsWhatIhave)
         } else {
             ingredientsWhatIhave.append(allIngredients[indexPath.row].rawValue)
             let cell = collectionView.cellForItem(at: indexPath) as? WhatIHaveCollectionViewCell
-            cell?.nameLabel.text = "가지고있음"
+            cell?.checkBoxImage.image = UIImage(systemName: "checkmark.circle.fill")
+            cell?.backgroundColor = .systemBlue
             print(ingredientsWhatIhave)
         }
     }

@@ -32,7 +32,7 @@ class HomeBarViewController: UIViewController {
         getRecipe(data: &originRecipe)
         attribute()
         layout()
-        navigationController?.isNavigationBarHidden = true
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,7 +91,7 @@ class HomeBarViewController: UIViewController {
         }
         [brandyButton, rumButton, assetsButton].forEach {
             rightStackView.addArrangedSubview($0)
-            $0.setImage(UIImage(named: "longone"), for: .normal)
+            $0.setImage(UIImage(named: "Martini"), for: .normal)
         }
         groupStackView.axis = .horizontal
         groupStackView.distribution = .fillEqually

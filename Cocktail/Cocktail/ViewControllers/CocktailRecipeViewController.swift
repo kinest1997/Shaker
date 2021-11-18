@@ -4,7 +4,9 @@ import SnapKit
 class CocktailRecipeViewController: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
+    
     let filterView = FilteredView()
+    
     let saveButton = UIButton()
     
     var originRecipe: [Cocktail] = []
@@ -80,7 +82,6 @@ class CocktailRecipeViewController: UIViewController {
 
 extension CocktailRecipeViewController: UITableViewDelegate, UITableViewDataSource {
     //테이블뷰에 관한것
-    
     
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering() {

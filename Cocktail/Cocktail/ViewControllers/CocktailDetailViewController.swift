@@ -141,7 +141,7 @@ class CocktailDetailViewController: UIViewController {
 
     func setData(data: Cocktail) {
         nameLabel.text = data.name
-        alcoholLabel.text = alcoholSelect(data: data.alcohol.rawValue)
+        alcoholLabel.text = data.alcohol.rawValue
         colorLabel.text = data.color.rawValue
         baseDrinkLabel.text = data.base.rawValue
         glassLabel.text = data.glass.rawValue
@@ -150,14 +150,14 @@ class CocktailDetailViewController: UIViewController {
         myTipLabel.text = data.mytip
     }
     
-    func alcoholSelect(data: String) -> String {
-        switch data {
-        case "high":
-            return "높음"
-        case "mid":
-            return "중간"
-        default :
-            return "낮음"
-        }
-    }
+//    func alcoholSelect(data: String) -> String {
+//        switch data {
+//        case "high":
+//            return "높음"
+//        case "mid":
+//            return "중간"
+//        default :
+//            return "낮음"
+//        }
+//    }
 }

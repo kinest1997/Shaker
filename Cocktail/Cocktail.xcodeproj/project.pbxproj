@@ -31,6 +31,7 @@
 		3DA76A502730D8CB004091CE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4F2730D8CB004091CE /* Settings.swift */; };
 		3DA76A522730D920004091CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A512730D920004091CE /* MainViewController.swift */; };
 		3DA76A5527317CAA004091CE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3DA76A5427317CAA004091CE /* SnapKit */; };
+		3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEADC6D274625F600362D99 /* FilterViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		3DA76A4D2730D8C3004091CE /* HomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarViewController.swift; sourceTree = "<group>"; };
 		3DA76A4F2730D8CB004091CE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3DA76A512730D920004091CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3DEADC6D274625F600362D99 /* FilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */,
 				3DA76A442730D244004091CE /* CocktailStruct.swift */,
 				3D7F17C22734D5FF006EDCF9 /* FilteredView.swift */,
+				3DEADC6D274625F600362D99 /* FilterViewCell.swift */,
 				3D7481212736566E0092BD74 /* MyBadgeButton.swift */,
 				3DA76A4A2730D8A2004091CE /* ViewControllers */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
@@ -234,6 +237,7 @@
 				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
 				3DA76A4E2730D8C3004091CE /* HomeBarViewController.swift in Sources */,
 				3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */,
+				3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */,
 				3D175BA6274285BB00EC142B /* String.swift in Sources */,
 				3DA76A492730D899004091CE /* TodayCocktailViewController.swift in Sources */,
 				3DA76A502730D8CB004091CE /* Settings.swift in Sources */,
