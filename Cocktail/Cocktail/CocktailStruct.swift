@@ -10,18 +10,19 @@ import UIKit
 struct Cocktail: Codable {
     let name: String
     let craft: Craft
-    let glass: Glass
+    var glass: Glass
     let recipe: String
     var ingredients: [Ingredients]
     let base: Base
     let alcohol: Alcohol
     let color: Color
     let mytip: String
-    let drinkType: DrinkType?
+    let drinkType: DrinkType
     
     
     
     enum Base: String, Codable, CaseIterable {
+        
         case rum = "럼"
         case vodka = "보드카"
         case tequila = "데킬라"
@@ -55,13 +56,13 @@ struct Cocktail: Codable {
         }
     }
     
-    enum DrinkType: String, Codable {
+    enum DrinkType: String, Codable, CaseIterable {
         case longDrink = "롱드링크"
         case shortDrink =  "숏드링크"
         case shooter = "슈터"
     }
     
-    enum Color: String, Codable {
+    enum Color: String, Codable, CaseIterable {
         case red = "빨간색"
         case orange = "주황색"
         case yellow = "노란색"
@@ -74,13 +75,13 @@ struct Cocktail: Codable {
         case brown = "갈색"
     }
     
-    enum Alcohol: String, Codable {
+    enum Alcohol: String, Codable, CaseIterable {
         case high
         case mid
         case low
     }
     
-    enum Glass: String, Codable {
+    enum Glass: String, Codable, CaseIterable {
         case highBall = "하이볼"
         case shot = "샷잔"
         case onTheRock = "온더락"
@@ -91,7 +92,7 @@ struct Cocktail: Codable {
         case philsner = "필스너"
     }
     
-    enum Craft: String, Codable {
+    enum Craft: String, Codable, CaseIterable {
         case build = "빌드"
         case shaking = "쉐이킹"
         case floating = "플로팅"
@@ -99,7 +100,7 @@ struct Cocktail: Codable {
         case blending = "블렌딩"
     }
     
-    enum Ingredients: String, Codable {
+    enum Ingredients: String, Codable, CaseIterable {
         case gin = "진"
         
         case vodka = "보드카"

@@ -60,19 +60,18 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? WhatIHaveCollectionViewCell else { return }
         if ingredientsWhatIhave.contains(allIngredients[indexPath.row].rawValue) {
             guard let index = ingredientsWhatIhave.firstIndex(of: allIngredients[indexPath.row].rawValue) else { return }
             ingredientsWhatIhave.remove(at: index)
-            let cell = collectionView.cellForItem(at: indexPath) as? WhatIHaveCollectionViewCell
-            cell?.nameLabel.text = allIngredients[indexPath.row].rawValue
-            cell?.backgroundColor = .red
-            cell?.checkBoxImage.image = UIImage(systemName: "checkmark.circle")
+            cell.nameLabel.text = allIngredients[indexPath.row].rawValue
+            cell.backgroundColor = .red
+            cell.checkBoxImage.image = UIImage(systemName: "checkmark.circle")
             print(ingredientsWhatIhave)
         } else {
             ingredientsWhatIhave.append(allIngredients[indexPath.row].rawValue)
-            let cell = collectionView.cellForItem(at: indexPath) as? WhatIHaveCollectionViewCell
-            cell?.checkBoxImage.image = UIImage(systemName: "checkmark.circle.fill")
-            cell?.backgroundColor = .systemBlue
+            cell.checkBoxImage.image = UIImage(systemName: "checkmark.circle.fill")
+            cell.backgroundColor = .systemBlue
             print(ingredientsWhatIhave)
         }
     }

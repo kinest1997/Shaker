@@ -13,4 +13,11 @@
 "high" = "높음";
 "mid" = "중간";
 "low" = "낮음";
+"Alcohol" = "도수";
+"Base" = "기주";
+"DrinkType" = "용량";
+"Craft" = "조주방법";
+"Glass" = "잔";
+"Color" = "색";
+
 

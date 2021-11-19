@@ -5,12 +5,10 @@ class CocktailRecipeViewController: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     
-    let filterView = FilteredView()
-    
-    let saveButton = UIButton()
-    
     var originRecipe: [Cocktail] = []
     var filteredRecipe: [Cocktail] = []
+    
+    
     
     let mainTableView = UITableView()
     
@@ -41,42 +39,28 @@ class CocktailRecipeViewController: UIViewController {
         //화면 이동시에 서치바가 안남아있게 해준대
         searchController.searchBar.keyboardType = .default
         //필터 버튼 추가하고싶은데..
-        let filterButton = UIBarButtonItem(title: "필터", style: .plain, target: self, action: #selector(filtering))
+        let filterButton = UIBarButtonItem(title: "필터", style: .plain, target: self, action: #selector(showFilterView))
         navigationItem.rightBarButtonItem = filterButton
-        filterView.backgroundColor = .brown
-        filterView.isHidden = true
         
-//        navigationController?.hidesBarsOnSwipe = true
-        //네비바 스와이프시 가리기
     }
     
+    @objc func showFilterView() {
+        
+        let filteredViewController = FilteredViewController()
+        filteredViewController.modalPresentationStyle = .overCurrentContext
+        filteredViewController.modalTransitionStyle = .crossDissolve
+        filteredViewController.nowOn = true
+//        self.definesPresentationContext = true
+        navigationController?.present(filteredViewController, animated: true, completion: nil)
+    }
     func layout() {
         mainTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        filterView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(10)
-            $0.top.bottom.equalToSuperview().inset(100)
-        }
-        saveButton.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(100)
-        }
     }
     
     func attribute() {
-        navigationController?.view.addSubview(filterView)
         view.addSubview(mainTableView)
-        filterView.addSubview(saveButton)
-        saveButton.addAction(UIAction(handler: {[unowned self]_ in
-            self.filterView.isHidden = true
-        }), for: .touchUpInside)
-        saveButton.setTitle("저장", for: .normal)
-    }
-    
-    @objc func filtering() {
-        filterView.isHidden = false
-        print("눌림")
     }
 }
 
@@ -139,6 +123,7 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        //만약 넘겨주는 데이터에 아무것도없다면 아래의 코드대로 작동하게 하기.일단 보류
         filteredRecipe = originRecipe.filter({
             return $0.name.contains(searchText) || $0.mytip.contains(searchText) || $0.ingredients.map({ baby in
                 baby.rawValue

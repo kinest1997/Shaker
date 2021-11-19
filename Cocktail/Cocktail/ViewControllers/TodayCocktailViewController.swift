@@ -24,8 +24,8 @@ class TodayCocktailViewController: UIViewController {
             guard let self = self else { return }
             print("초보자용")
             let choiceViewController = ChoiceViewController()
-            choiceViewController.firstRecipe = self.bigChoice(alcohol: "low")
-            choiceViewController.firstRecipe.append(contentsOf: self.bigChoice(alcohol: "mid"))
+            choiceViewController.firstRecipe = self.bigChoice(alcohol: .low)
+            choiceViewController.firstRecipe.append(contentsOf: self.bigChoice(alcohol: .mid))
             self.show(choiceViewController, sender: nil)
         }
         
@@ -34,7 +34,7 @@ class TodayCocktailViewController: UIViewController {
         let expert = UIAction { [weak self]_ in
             guard let self = self else { return }
             let choiceViewController = ChoiceViewController()
-            choiceViewController.firstRecipe = self.bigChoice(alcohol: "high")
+            choiceViewController.firstRecipe = self.bigChoice(alcohol: .high)
             self.show(choiceViewController, sender: nil)
         }
         
@@ -85,24 +85,11 @@ class TodayCocktailViewController: UIViewController {
         }
     }
     
-    func bigChoice(alcohol: String) -> [Cocktail] {
-        switch alcohol {
-        case "high":
-            let filtered = rawRecipes.filter {
-                $0.alcohol.rawValue == "high"
-            }
-            return filtered
-        case "mid":
-            let filtered = rawRecipes.filter {
-                $0.alcohol.rawValue == "mid"
-            }
-            return filtered
-        default:
-            let filtered = rawRecipes.filter {
-                $0.alcohol.rawValue == "low"
-            }
-            return filtered
+    func bigChoice(alcohol: Cocktail.Alcohol) -> [Cocktail] {
+        let filtered = rawRecipes.filter {
+            $0.alcohol == alcohol
         }
+        return filtered
     }
 }
 
