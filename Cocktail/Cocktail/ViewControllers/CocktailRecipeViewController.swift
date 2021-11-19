@@ -9,6 +9,24 @@ class CocktailRecipeViewController: UIViewController {
     var filteredRecipe: [Cocktail] = []
     
     
+    //내가 클릭한 셀의 조건을 배열로 넘겨준다. 그배열에서 하나씩 필터함수를 forin 문으로 걸러준다.
+    func baseFilter(condition: [Cocktail.Base], base: [Cocktail]) -> [Cocktail] {
+            var filterviewRecipe: [Cocktail] = []
+            for condi in condition {
+                if isFiltering() {
+                    filterviewRecipe.append(contentsOf: filteredRecipe.filter {
+                        $0.base == condi
+                    })
+                } else {
+                    filterviewRecipe.append(contentsOf: originRecipe.filter {
+                        $0.base == condi
+                    })
+                }
+            }
+            return filterviewRecipe
+        }
+        
+    
     
     let mainTableView = UITableView()
     
@@ -45,7 +63,6 @@ class CocktailRecipeViewController: UIViewController {
     }
     
     @objc func showFilterView() {
-        
         let filteredViewController = FilteredViewController()
         filteredViewController.modalPresentationStyle = .overCurrentContext
         filteredViewController.modalTransitionStyle = .crossDissolve

@@ -5,6 +5,13 @@ class FilteredViewController: UIViewController {
     
     var nowOn: Bool = false
     
+    var baseCondition: (([Cocktail.Base]) -> Void)?
+    var alcoholCondition: (([Cocktail.Alcohol]) -> Void)?
+    var drinkTypeCondition: (([Cocktail.DrinkType]) -> Void)?
+    var craftConditon: (([Cocktail.Craft]) -> Void)?
+    var glassCondition: (([Cocktail.Glass]) -> Void)?
+    var colorCondition: (([Cocktail.Color]) -> Void)?
+    
     let mainView = UIView()
     
     let topStackView = UIStackView()
@@ -36,18 +43,22 @@ class FilteredViewController: UIViewController {
         topStackView.addArrangedSubview(leftCancelButton)
         topStackView.addArrangedSubview(centerLabel)
         topStackView.addArrangedSubview(rightSaveButton)
+        topStackView.backgroundColor = .red
+        mainView.backgroundColor = .blue
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.register(FilterViewCell.self, forCellReuseIdentifier: "filterCell")
         self.mainTableView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(50)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.bottom.equalToSuperview().inset(50)
+            $0.leading.trailing.equalToSuperview()
         }
         self.mainView.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.equalTo(300)
             $0.height.equalTo(600)
         }
+        self.view.addSubview(topStackView)
+        
     }
 
 }
@@ -110,7 +121,24 @@ extension FilteredViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
+//        switch indexPath.section {
+//        case 0:
+//            var suddenArray: [Cocktail.Alcohol] = []
+//            suddenArray.append(alcoholSection[indexPath.row])
+//        case 1:
+//
+//        case 2:
+//
+//        case 3:
+//
+//        case 4:
+//
+//        case 5:
+//
+//        default:
+//            break
+//        }
         
     }
 }
