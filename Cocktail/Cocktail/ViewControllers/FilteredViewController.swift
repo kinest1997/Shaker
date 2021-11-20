@@ -12,6 +12,7 @@ class FilteredViewController: UIViewController {
     var glassCondition: (([Cocktail.Glass]) -> Void)?
     var colorCondition: (([Cocktail.Color]) -> Void)?
     
+    var totalCondition: [Any] = []
     let mainView = UIView()
     
     let topStackView = UIStackView()
@@ -58,15 +59,16 @@ class FilteredViewController: UIViewController {
             $0.height.equalTo(600)
         }
         self.view.addSubview(topStackView)
-        
     }
 
 }
 
 extension FilteredViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         filterSections.count
     }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return filterSections[section]
     }
@@ -89,9 +91,11 @@ extension FilteredViewController: UITableViewDelegate, UITableViewDataSource {
             return 0
         }
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath) as? FilterViewCell else { return UITableViewCell()}
         cell.accessoryType = .checkmark
@@ -122,23 +126,25 @@ extension FilteredViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        switch indexPath.section {
-//        case 0:
-//            var suddenArray: [Cocktail.Alcohol] = []
-//            suddenArray.append(alcoholSection[indexPath.row])
-//        case 1:
-//
-//        case 2:
-//
-//        case 3:
-//
-//        case 4:
-//
-//        case 5:
-//
-//        default:
-//            break
-//        }
+        switch indexPath.section {
+        case 0:
+            if totalCondition.contains(where: alcoholSection[indexPath.row] as Any) {
+                
+            }
+            totalCondition.append(alcoholSection[indexPath.row])
+        case 1:
+            totalCondition.append(baseSection[indexPath.row])
+        case 2:
+            totalCondition.append(drinkTypeSection[indexPath.row])
+        case 3:
+            totalCondition.append(craftSection[indexPath.row])
+        case 4:
+            totalCondition.append(glassSection[indexPath.row])
+        case 5:
+            totalCondition.append(colorSection[indexPath.row])
+        default:
+            break
+        }
         
     }
 }

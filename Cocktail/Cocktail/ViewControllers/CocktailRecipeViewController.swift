@@ -8,6 +8,8 @@ class CocktailRecipeViewController: UIViewController {
     var originRecipe: [Cocktail] = []
     var filteredRecipe: [Cocktail] = []
     
+    var conditions: [Any] = []
+    
     
     //내가 클릭한 셀의 조건을 배열로 넘겨준다. 그배열에서 하나씩 필터함수를 forin 문으로 걸러준다.
     func baseFilter(condition: [Cocktail.Base], base: [Cocktail]) -> [Cocktail] {
@@ -26,6 +28,14 @@ class CocktailRecipeViewController: UIViewController {
             return filterviewRecipe
         }
         
+//    func sorting(data: [Any]) {
+//        var filterviewRecipe: [Cocktail] = []
+//        for condi in data {
+//            if let condition = condi as? [Cocktail.Alcohol] {
+//            }
+//        }
+//
+//    }
     
     
     let mainTableView = UITableView()
