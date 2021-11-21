@@ -7,7 +7,7 @@ import UIKit
 //    //    let base: String
 //    //    let name: String
 //}// 일단 이부분 보류 
-struct Cocktail: Codable {
+struct Cocktail: Codable, Hashable {
     let name: String
     let craft: Craft
     var glass: Glass
