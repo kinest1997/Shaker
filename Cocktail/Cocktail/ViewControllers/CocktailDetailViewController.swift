@@ -129,14 +129,14 @@ class CocktailDetailViewController: UIViewController {
         groupStackView.backgroundColor = .brown
         groupStackView.distribution = .fillEqually
         groupStackView.spacing = 20
-        nameGuideLabel.text = "이름"
-        alcoholGuideLabel.text = "도수"
-        colorGuideLabel.text = "색깔"
-        baseDrinkGuideLabel.text = "기주"
-        glassGuideLabel.text = "잔"
-        craftGuideLabel.text = "조주방법"
-        recipeGuideLabel.text = "레시피"
-        myTipGuideLabel.text = "팁"
+        nameGuideLabel.text = "Name".localized
+        alcoholGuideLabel.text = "Alcohol".localized
+        colorGuideLabel.text = "Color".localized
+        baseDrinkGuideLabel.text = "Base".localized
+        glassGuideLabel.text = "Glass".localized
+        craftGuideLabel.text = "Craft".localized
+        recipeGuideLabel.text = "Recipe".localized
+        myTipGuideLabel.text = "Tip".localized
     }
 
     func setData(data: Cocktail) {
@@ -153,11 +153,11 @@ class CocktailDetailViewController: UIViewController {
 //    func alcoholSelect(data: String) -> String {
 //        switch data {
 //        case "high":
-//            return "높음"
+//            return "high".localized
 //        case "mid":
-//            return "중간"
+//            return "mid".localized
 //        default :
-//            return "낮음"
+//            return "low".localized
 //        }
 //    }
 }

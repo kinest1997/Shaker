@@ -1,7 +1,7 @@
 import UIKit
 
-struct MyDrinks: Codable {
-    var iHave: Bool = false
+struct MyDrinks: Codable, Hashable {
+    var iHave: Bool
     var base: Cocktail.Base
     let name: Cocktail.Ingredients
 }
@@ -29,6 +29,35 @@ struct Cocktail: Codable, Hashable {
         case liqueur = "리큐르"
         case assets = "기타"
         case beverage = "음료"
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            let status = try container.decode(String.self)
+            
+            switch status {
+            case "rum".localized:
+                self = .rum
+            case "vodka".localized:
+                self = .vodka
+            case "tequila".localized:
+                self = .tequila
+            case "brandy".localized:
+                self = .brandy
+            case "wiskey".localized:
+                self = .whiskey
+            case "gin".localized:
+                self = .gin
+            case "liqueur".localized:
+                self = .liqueur
+            case "assets".localized:
+                self = .assets
+            case "beverage".localized:
+                self = .beverage
+            default:
+                self = .assets
+            }
+        }
+        
         var list: [Ingredients] {
             switch self {
             case .gin:
@@ -164,6 +193,134 @@ struct Cocktail: Codable, Hashable {
         case sugarSyrup = "설탕시럽"
         case rawCream = "생크림"
         case grenadineSyrup = "그레나딘시럽"
+        
+        case unknown = "무명의 재료"
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            let status = try container.decode(String.self)
+            
+            switch status {
+            case "gin".localized:
+                self = .gin
+            case "vodka".localized:
+                self = .vodka
+            case "whiskey".localized:
+                self = .whiskey
+            case "scotchWhiskey".localized:
+                self = .scotchWhiskey
+            case "bourbonWhiskey".localized:
+                self = .bourbonWhiskey
+            case "ryeWhiskey".localized:
+                self = .ryeWhiskey
+            case "jackDanielWhiskey".localized:
+                self = .jackDanielWhiskey
+            case "tequila".localized:
+                self = .tequila
+            case "baileys".localized:
+                self = .baileys
+            case "melonLiqueur".localized:
+                self = .melonLiqueur
+            case "whiteCacaoLiqueur".localized:
+                self = .whiteCacaoLiqueur
+            case "sweetVermouth".localized:
+                self = .sweetVermouth
+            case "dryVermouth".localized:
+                self = .dryVermouth
+            case "peachTree".localized:
+                self = .peachTree
+            case "grapeFruitLiqueur".localized:
+                self = .grapeFruitLiqueur
+            case "cacaoLiqueur".localized:
+                self = .cacaoLiqueur
+            case "cremeDeCassis".localized:
+                self = .cremeDeCassis
+            case "greenMintLiqueur".localized:
+                self = .greenMintLiqueur
+            case "campari".localized:
+                self = .campari
+            case "kahlua".localized:
+                self = .kahlua
+            case "blueCuraso".localized:
+                self = .kahlua
+            case "malibu".localized:
+                self = .malibu
+            case "bananaliqueur".localized:
+                self = .bananaliqueur
+            case "amaretto".localized:
+                self = .amaretto
+            case "triplesec".localized:
+                self = .triplesec
+            case "butterScotchLiqueur".localized:
+                self = .butterScotchLiqueur
+            case "angosturaBitters".localized:
+                self = .angosturaBitters
+            case "brandy".localized:
+                self = .brandy
+            case "coke".localized:
+                self = .coke
+            case "tonicWater".localized:
+                self = .tonicWater
+            case "milk".localized:
+                self = .milk
+            case "orangeJuice".localized:
+                self = .orangeJuice
+            case "cranBerryJuice".localized:
+                self = .cranBerryJuice
+            case "clubSoda".localized:
+                self = .clubSoda
+            case "grapeFruitJuice".localized:
+                self = .grapeFruitJuice
+            case "pineappleJuice".localized:
+                self = .pineappleJuice
+            case "gingerAle".localized:
+                self = .gingerAle
+            case "sweetAndSourMix".localized:
+                self = .sweetAndSourMix
+            case "appleJuice".localized:
+                self = .appleJuice
+            case "cider".localized:
+                self = .cider
+            case "lemonJuice".localized:
+                self = .lemonJuice
+            case "whiteRum".localized:
+                self = .whiteRum
+            case "darkRum".localized:
+                self = .darkRum
+            case "overProofRum".localized:
+                self = .overProofRum
+            case "lime".localized:
+                self = .lime
+            case "limeSqueeze".localized:
+                self = .limeSqueeze
+            case "limeSyrup".localized:
+                self = .limeSyrup
+            case "lemon".localized:
+                self = .lemon
+            case "lemonSqueeze".localized:
+                self = .lemonSqueeze
+            case "appleMint".localized:
+                self = .appleMint
+            case "whippingCream".localized:
+                self = .whippingCream
+            case "honey".localized:
+                self = .honey
+            case "olive".localized:
+                self = .olive
+            case "oliveJuice".localized:
+                self = .oliveJuice
+            case "sugar".localized:
+                self = .sugar
+            case "sugarSyrup".localized:
+                self = .sugarSyrup
+            case "rawCream".localized:
+                self = .rawCream
+            case "grenadineSyrup".localized:
+                self = .grenadineSyrup
+            default:
+                self = .unknown
+            }
+        }
         
         
         //        var base: String {

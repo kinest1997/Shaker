@@ -14,6 +14,33 @@ class MainViewController: UITabBarController {
         case recipe
         case home
         case preference
+        
+        var name: String {
+            switch self {
+            case .today: return "Recommendation".localized
+            case .recipe: return "Recipe".localized
+            case .home: return "My Drinks".localized
+            case .preference: return "Preferneces".localized
+            }
+        }
+        
+        var image: UIImage? {
+            switch self {
+            case .today: return UIImage(systemName: "eyeglasses")
+            case .recipe: return UIImage(systemName: "book.closed.fill")
+            case .home: return UIImage(systemName: "mustache")
+            case .preference: return UIImage(systemName: "gearshape")
+            }
+        }
+        
+        var selectedImage: UIImage? {
+            switch self {
+            case .today: return UIImage(systemName: "eyes.inverse")
+            case .recipe: return UIImage(systemName: "list.bullet")
+            case .home: return UIImage(systemName: "mustache.fill")
+            case .preference: return UIImage(systemName: "gearshape.fill")
+            }
+        }
     }
     
     let todayCocktailViewController = TodayCocktailViewController()
@@ -22,10 +49,10 @@ class MainViewController: UITabBarController {
     let settingsViewController = SettingsViewController()
     
     let tabBarItems: [Tab: UITabBarItem] = [
-        .today: UITabBarItem(title: "recommendation".localized, image: UIImage(systemName: "eyeglasses"), selectedImage: UIImage(systemName: "eyes.inverse")),
-        .recipe: UITabBarItem(title: "레시피", image: UIImage(systemName: "book.closed.fill"), selectedImage: UIImage(systemName: "list.bullet")),
-        .home: UITabBarItem(title: "내술장", image: UIImage(systemName: "mustache.fill"), selectedImage: UIImage(systemName: "mustache.fill")),
-        .preference: UITabBarItem(title: "설정", image: UIImage(systemName: "gearshape.fill"), selectedImage: UIImage(systemName: "gearshape.fill"))
+        .today: UITabBarItem(title: Tab.today.name, image: Tab.today.image, selectedImage: Tab.today.selectedImage),
+        .recipe: UITabBarItem(title: Tab.recipe.name, image: Tab.recipe.image, selectedImage: Tab.recipe.selectedImage),
+        .home: UITabBarItem(title: Tab.home.name, image: Tab.home.image, selectedImage: Tab.home.selectedImage),
+        .preference: UITabBarItem(title: Tab.preference.name, image: Tab.preference.image, selectedImage: Tab.preference.selectedImage)
     ]
 
     override func viewDidLoad() {

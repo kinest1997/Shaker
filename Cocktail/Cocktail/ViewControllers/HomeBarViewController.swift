@@ -98,7 +98,7 @@ class HomeBarViewController: UIViewController {
         groupStackView.spacing = 10
         groupStackView.backgroundColor = .systemCyan
         whatICanMakeButton.backgroundColor = .systemBlue
-        whatICanMakeButton.setTitle("만들수있는것", for: .normal)
+        whatICanMakeButton.setTitle("What I Can Make".localized, for: .normal)
         whatICanMakeButton.badgeBackgroundColor = .systemBlue
         vodkaButton.base = .vodka
         whiskeyButton.base = .whiskey
