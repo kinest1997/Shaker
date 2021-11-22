@@ -12,12 +12,13 @@ struct Cocktail: Codable, Hashable {
     let craft: Craft
     var glass: Glass
     let recipe: String
-    var ingredients: [Ingredients]?
+    var ingredients: [Ingredients]
     let base: Base
     let alcohol: Alcohol
     let color: Color
     let mytip: String
     let drinkType: DrinkType?
+    var myRecipe: Bool
 
     enum Base: String, Codable, CaseIterable{
         case rum = "럼"
@@ -29,6 +30,7 @@ struct Cocktail: Codable, Hashable {
         case liqueur = "리큐르"
         case assets = "기타"
         case beverage = "음료"
+//        case everything
         
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
@@ -78,6 +80,9 @@ struct Cocktail: Codable, Hashable {
                 return [Cocktail.Ingredients.coke, Cocktail.Ingredients.tonicWater, Cocktail.Ingredients.milk, Cocktail.Ingredients.orangeJuice, Cocktail.Ingredients.cranBerryJuice, Cocktail.Ingredients.clubSoda, Cocktail.Ingredients.grapeFruitJuice, Cocktail.Ingredients.pineappleJuice, Cocktail.Ingredients.gingerAle, Cocktail.Ingredients.sweetAndSourMix, Cocktail.Ingredients.appleJuice, Cocktail.Ingredients.cider, Cocktail.Ingredients.lemonJuice]
             case .assets:
                 return [Cocktail.Ingredients.lime, Cocktail.Ingredients.limeSqueeze, Cocktail.Ingredients.limeSyrup, Cocktail.Ingredients.lemon, Cocktail.Ingredients.lemonSqueeze, Cocktail.Ingredients.appleMint, Cocktail.Ingredients.whippingCream, Cocktail.Ingredients.honey, Cocktail.Ingredients.olive, Cocktail.Ingredients.oliveJuice, Cocktail.Ingredients.sugar, Cocktail.Ingredients.sugarSyrup, Cocktail.Ingredients.rawCream, Cocktail.Ingredients.grenadineSyrup]
+//            case .everything:
+//                return [Cocktail.Ingredients.gin, Cocktail.Ingredients.darkRum, Cocktail.Ingredients.whiteRum, Cocktail.Ingredients.overProofRum, Cocktail.Ingredients.vodka, Cocktail.Ingredients.tequila, Cocktail.Ingredients.brandy, Cocktail.Ingredients.whiskey, Cocktail.Ingredients.ryeWhiskey, Cocktail.Ingredients.scotchWhiskey, Cocktail.Ingredients.bourbonWhiskey, Cocktail.Ingredients.jackDanielWhiskey, Cocktail.Ingredients.baileys, Cocktail.Ingredients.melonLiqueur, Cocktail.Ingredients.whiteCacaoLiqueur, Cocktail.Ingredients.sweetVermouth, Cocktail.Ingredients.dryVermouth, Cocktail.Ingredients.peachTree, Cocktail.Ingredients.grapeFruitLiqueur, Cocktail.Ingredients.cacaoLiqueur, Cocktail.Ingredients.cremeDeCassis, Cocktail.Ingredients.greenMintLiqueur, Cocktail.Ingredients.campari, Cocktail.Ingredients.kahlua, Cocktail.Ingredients.blueCuraso, Cocktail.Ingredients.malibu, Cocktail.Ingredients.bananaliqueur, Cocktail.Ingredients.amaretto, Cocktail.Ingredients.triplesec, Cocktail.Ingredients.butterScotchLiqueur, Cocktail.Ingredients.angosturaBitters, Cocktail.Ingredients.coke, Cocktail.Ingredients.tonicWater, Cocktail.Ingredients.milk, Cocktail.Ingredients.orangeJuice, Cocktail.Ingredients.cranBerryJuice, Cocktail.Ingredients.clubSoda, Cocktail.Ingredients.grapeFruitJuice, Cocktail.Ingredients.pineappleJuice, Cocktail.Ingredients.gingerAle, Cocktail.Ingredients.sweetAndSourMix, Cocktail.Ingredients.appleJuice, Cocktail.Ingredients.cider, Cocktail.Ingredients.lemonJuice, Cocktail.Ingredients.lime, Cocktail.Ingredients.limeSqueeze, Cocktail.Ingredients.limeSyrup, Cocktail.Ingredients.lemon, Cocktail.Ingredients.lemonSqueeze, Cocktail.Ingredients.appleMint, Cocktail.Ingredients.whippingCream, Cocktail.Ingredients.honey, Cocktail.Ingredients.olive, Cocktail.Ingredients.oliveJuice, Cocktail.Ingredients.sugar, Cocktail.Ingredients.sugarSyrup, Cocktail.Ingredients.rawCream, Cocktail.Ingredients.grenadineSyrup
+//                ]
             }
         }
     }
@@ -185,7 +190,7 @@ struct Cocktail: Codable, Hashable {
         case lemon = "레몬"
         case lemonSqueeze = "레몬즙"
         case appleMint = "애플민트"
-        case whippingCream = "휘핑크림"
+        case whippingCream = " 크림"
         case honey = "꿀"
         case olive = "올리브"
         case oliveJuice = "올리브주스"
@@ -321,26 +326,7 @@ struct Cocktail: Codable, Hashable {
                 self = .unknown
             }
         }
-        
-        
-        //        var base: String {
-        //            switch self {
-        //            case .vodka:
-        //                return "보드카"
-        //            case .gin:
-        //                return "진"
-        //            case .whiskey, .ryeWhiskey, .scotchWhiskey, .bourbonWhiskey, .jackDanielWhiskey:
-        //                return "위스키"
-        //            case .tequila:
-        //                return "데킬라"
-        //            case . baileys, .melonLiqueur, .whiteCacaoLiqueur, .sweetVermouth, .peachTree, .grapeFruitLiqueur, .cacaoLiqueur, .cremeDeCassis, .greenMintLiqueur, .campari, .kahlua, .blueCuraso, .malibu, .bananaliqueur, .amaretto, .triplesec, .butterScotchLiqueur, .dryVermouth:
-        //                return "리큐르"
-        //            default:
-        //                return "없음"
-        //            }
-        //        }
     }
-    
 }
 
 //realm은 일단 보류

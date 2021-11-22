@@ -14,7 +14,7 @@ class CocktailRecipeViewController: UIViewController {
     lazy var filterView = FilteredView()
     
     let saveButton = UIButton()
-    let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
+//    let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
     let resetButton = UIButton()
     
     let mainTableView = UITableView()
@@ -185,8 +185,7 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
         //만약 넘겨주는 데이터에 아무것도없다면 아래의 코드대로 작동하게 하기.일단 보류
         let filterRecipe = originRecipe
         filteredRecipe = filterRecipe.filter({
-            guard let data = $0.ingredients else { return false }
-            return $0.name.contains(searchText) || $0.mytip.contains(searchText) || data.map({ baby in
+            return $0.name.contains(searchText) || $0.mytip.contains(searchText) || $0.ingredients.map({ baby in
                 baby.rawValue
             })[0...].contains(searchText) || $0.glass.rawValue.contains(searchText) || $0.color.rawValue.contains(searchText) || $0.recipe.contains(searchText)
         })

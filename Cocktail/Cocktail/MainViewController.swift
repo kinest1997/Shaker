@@ -64,6 +64,7 @@ class MainViewController: UITabBarController {
         if !FileManager.default.fileExists(atPath: documentURL.path) {
                     do {
                         try FileManager.default.copyItem(at: bundleURL, to: documentURL)
+                        print("번들에서 도큐멘트로 복사함")
                     } catch let error {
                         print("ERROR", error.localizedDescription)
                     }
