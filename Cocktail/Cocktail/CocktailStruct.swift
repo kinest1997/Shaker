@@ -12,12 +12,12 @@ struct Cocktail: Codable, Hashable {
     let craft: Craft
     var glass: Glass
     let recipe: String
-    var ingredients: [Ingredients]
+    var ingredients: [Ingredients]?
     let base: Base
     let alcohol: Alcohol
     let color: Color
     let mytip: String
-    let drinkType: DrinkType
+    let drinkType: DrinkType?
 
     enum Base: String, Codable, CaseIterable{
         case rum = "럼"

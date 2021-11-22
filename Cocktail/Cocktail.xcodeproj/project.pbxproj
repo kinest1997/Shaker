@@ -30,6 +30,8 @@
 		3DA76A502730D8CB004091CE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4F2730D8CB004091CE /* Settings.swift */; };
 		3DA76A522730D920004091CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A512730D920004091CE /* MainViewController.swift */; };
 		3DA76A5527317CAA004091CE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3DA76A5427317CAA004091CE /* SnapKit */; };
+		3DE3221B274B73D700657211 /* MyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* MyOwnCocktailRecipeViewController.swift */; };
+		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
 		3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEADC6D274625F600362D99 /* FilterViewCell.swift */; };
 		7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D0D9B762744D714008C75E7 /* Ingredients.plist */; };
 /* End PBXBuildFile section */
@@ -60,9 +62,11 @@
 		3DA76A462730D574004091CE /* Cocktail.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cocktail.plist; sourceTree = "<group>"; };
 		3DA76A482730D899004091CE /* TodayCocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktailViewController.swift; sourceTree = "<group>"; };
 		3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipeViewController.swift; sourceTree = "<group>"; };
-		3DA76A4D2730D8C3004091CE /* HomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBarViewController.swift; sourceTree = "<group>"; };
+		3DA76A4D2730D8C3004091CE /* HomeBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeBarViewController.swift; path = Cocktail/ViewControllers/HomeBarViewController.swift; sourceTree = SOURCE_ROOT; };
 		3DA76A4F2730D8CB004091CE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		3DA76A512730D920004091CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3DE3221A274B73D700657211 /* MyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
+		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
 		3DEADC6D274625F600362D99 /* FilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +85,9 @@
 		3D74812A2736BC610092BD74 /* HomeBar */ = {
 			isa = PBXGroup;
 			children = (
+				3DE3221C274B98ED00657211 /* AssistantViewController.swift */,
+				3DE3221A274B73D700657211 /* MyOwnCocktailRecipeViewController.swift */,
+				3DA76A4D2730D8C3004091CE /* HomeBarViewController.swift */,
 				3D74812327366C0D0092BD74 /* WhatIHaveViewController.swift */,
 				3D7481282736BC550092BD74 /* WhatIHaveCollectionViewCell.swift */,
 			);
@@ -131,7 +138,6 @@
 				3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */,
 				3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */,
 				3D6C6D442732B86100C70276 /* CocktailListCell.swift */,
-				3DA76A4D2730D8C3004091CE /* HomeBarViewController.swift */,
 				3D6C6D462732C04400C70276 /* CocktailDetailViewController.swift */,
 				3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */,
 				3D7F17C22734D5FF006EDCF9 /* FilteredView.swift */,
@@ -232,11 +238,13 @@
 				3DA76A4C2730D8B7004091CE /* CocktailRecipeViewController.swift in Sources */,
 				3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */,
 				3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */,
+				3DE3221B274B73D700657211 /* MyOwnCocktailRecipeViewController.swift in Sources */,
 				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
 				3DA76A4E2730D8C3004091CE /* HomeBarViewController.swift in Sources */,
 				3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */,
 				3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */,
 				3D175BA6274285BB00EC142B /* String.swift in Sources */,
+				3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */,
 				3DA76A492730D899004091CE /* TodayCocktailViewController.swift in Sources */,
 				3DA76A502730D8CB004091CE /* Settings.swift in Sources */,
 				3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */,

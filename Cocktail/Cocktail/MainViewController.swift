@@ -45,7 +45,7 @@ class MainViewController: UITabBarController {
     
     let todayCocktailViewController = TodayCocktailViewController()
     let cocktailRecipeViewController = CocktailRecipeViewController()
-    let homeBarViewController = HomeBarViewController()
+    let assistantViewController = AssistantViewController()
     let settingsViewController = SettingsViewController()
     
     let tabBarItems: [Tab: UITabBarItem] = [
@@ -75,12 +75,12 @@ class MainViewController: UITabBarController {
         //attribute
         todayCocktailViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
-        homeBarViewController.tabBarItem = tabBarItems[.home]
+        assistantViewController.tabBarItem = tabBarItems[.home]
         settingsViewController.tabBarItem = tabBarItems[.preference]
         self.viewControllers = [
             UINavigationController(rootViewController: todayCocktailViewController),
             UINavigationController(rootViewController: cocktailRecipeViewController),
-            UINavigationController(rootViewController: homeBarViewController),
+            UINavigationController(rootViewController: assistantViewController),
             UINavigationController(rootViewController: settingsViewController)
         ]
     }

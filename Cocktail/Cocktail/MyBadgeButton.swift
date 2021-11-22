@@ -134,4 +134,5 @@ class BadgeButton: UIButton {
 //        self.addBadgeToButon(badge: nil)
 //        fatalError("init(coder:) has not been implemented")
 //    }
+    //만약 알람 확인같은 용도라면 deinit 시켜서 뱃지를 아예 없애는 이부분을 두는게 맞다.
 }
