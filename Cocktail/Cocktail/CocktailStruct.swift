@@ -1,12 +1,12 @@
 import UIKit
 
-//struct MyDrinks: Codable {
-//    var iHave: Bool = false
-//    var base: Cocktail.Base
-//    let name: Cocktail.Ingredients
-//    //    let base: String
-//    //    let name: String
-//}// 일단 이부분 보류 
+struct MyDrinks: Codable {
+    var iHave: Bool = false
+    var base: Cocktail.Base
+    let name: Cocktail.Ingredients
+}
+
+
 struct Cocktail: Codable, Hashable {
     let name: String
     let craft: Craft
@@ -18,11 +18,8 @@ struct Cocktail: Codable, Hashable {
     let color: Color
     let mytip: String
     let drinkType: DrinkType
-    
-    
-    
-    enum Base: String, Codable, CaseIterable {
-        
+
+    enum Base: String, Codable, CaseIterable{
         case rum = "럼"
         case vodka = "보드카"
         case tequila = "데킬라"

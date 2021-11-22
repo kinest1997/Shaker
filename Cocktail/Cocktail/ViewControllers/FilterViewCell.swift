@@ -13,7 +13,8 @@ class FilterViewCell: UITableViewCell {
         mainStackView.addArrangedSubview(nameLabel)
         mainStackView.addArrangedSubview(appliedCheckImgageView)
         nameLabel.textAlignment = .left
-        imageApply()
+//        imageApply()
+        appliedCheckImgageView.image = isChecked ? UIImage(systemName: "checkmark.circle") : UIImage(systemName: "circle")
         mainStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

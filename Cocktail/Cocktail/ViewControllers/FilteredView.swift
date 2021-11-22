@@ -18,9 +18,11 @@ class FilteredView: UIView {
     let leftCancelButton = UIButton()
     let rightSaveButton = UIButton()
     let centerLabel = UILabel()
-    
+        
     let filterSections = ["Alcohol".localized, "Base".localized, "DrinkType".localized, "Craft".localized, "Glass".localized, "Color".localized ]
-    //    let filterSections: [Any] = [Cocktail.Alcohol.allCases, Cocktail.Base.allCases, Cocktail.DrinkType.allCases, Cocktail.Craft.allCases, Cocktail.Glass.allCases, Cocktail.Color.allCases]
+    
+    var cellIsChecked: [[Bool]] = []
+    
     let alcoholSection = Cocktail.Alcohol.allCases
     let baseSection = Cocktail.Base.allCases
     let drinkTypeSection = Cocktail.DrinkType.allCases
@@ -29,7 +31,6 @@ class FilteredView: UIView {
     let colorSection = Cocktail.Color.allCases
     
     let mainTableView = UITableView()
-    var isOn: Bool = false
     
     func sortingRecipes(origin: [Cocktail], base: [Cocktail.Base], alcohol: [Cocktail.Alcohol], drinktype: [Cocktail.DrinkType], craft: [Cocktail.Craft], glass: [Cocktail.Glass], color: [Cocktail.Color]) -> [Cocktail] {
         var baseSorted = [Cocktail]()
@@ -59,7 +60,6 @@ class FilteredView: UIView {
                 }
                 alcoholSorted.append(contentsOf: alcoholSortedRecipe)
             }
-            
         }
         
         if drinktype.isEmpty {
@@ -115,6 +115,24 @@ class FilteredView: UIView {
     //        view.backgroundColor = UIColor.white.withAlphaComponent(0.8)
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.cellIsChecked = (0...5).map {
+            switch $0 {
+            case 0:
+                return alcoholSection.map { _ in false }
+            case 1:
+                return baseSection.map { _ in false }
+            case 2:
+                return drinkTypeSection.map { _ in false }
+            case 3:
+                return craftSection.map { _ in false }
+            case 4:
+                return glassSection.map { _ in false }
+            case 5:
+                return colorSection.map { _ in false }
+            default:
+                return []
+            }
+        }
         self.addSubview(mainView)
         self.addSubview(topStackView)
         mainView.addSubview(mainTableView)
@@ -179,6 +197,7 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath) as? FilterViewCell else { return UITableViewCell()}
         
+        cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
         switch indexPath.section {
         case 0:
             cell.nameLabel.text = alcoholSection[indexPath.row].rawValue
@@ -208,70 +227,77 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case 0:
-            if cell.isChecked == true {
-                cell.isChecked = false
-                cell.imageApply()
+            if cellIsChecked[0][indexPath.row] == true {
+                cellIsChecked[0][indexPath.row] = false
+                cell.isChecked = cellIsChecked[0][indexPath.row]
                 guard let number = alcoholCondition.firstIndex(of: alcoholSection[indexPath.row]) else { return }
                 alcoholCondition.remove(at: number)
+            
             } else {
+                cellIsChecked[0][indexPath.row] = true
+                print(cellIsChecked)
                 alcoholCondition.append(alcoholSection[indexPath.row])
-                cell.isChecked = true
-                cell.imageApply()
+                cell.isChecked = cellIsChecked[0][indexPath.row]
+
             }
         case 1:
-            if cell.isChecked == true {
-                cell.isChecked = false
-                cell.imageApply()
+            if cellIsChecked[1][indexPath.row] == true {
+                cellIsChecked[1][indexPath.row] = false
+                cell.isChecked = cellIsChecked[1][indexPath.row]
                 guard let number = baseCondition.firstIndex(of: baseSection[indexPath.row]) else { return }
                 baseCondition.remove(at: number)
             } else {
+                cellIsChecked[1][indexPath.row] = true
+                cell.isChecked = cellIsChecked[1][indexPath.row]
                 baseCondition.append(baseSection[indexPath.row])
-                cell.isChecked = true
-                cell.imageApply()
+
             }
         case 2:
-            if cell.isChecked == true {
-                cell.isChecked = false
-                cell.imageApply()
+            if cellIsChecked[2][indexPath.row] == true {
+                cellIsChecked[2][indexPath.row] = false
+                cell.isChecked = cellIsChecked[2][indexPath.row]
                 guard let number = drinkTypeCondition.firstIndex(of: drinkTypeSection[indexPath.row]) else { return }
                 drinkTypeCondition.remove(at: number)
             } else {
+                cellIsChecked[2][indexPath.row] = true
+                cell.isChecked = cellIsChecked[2][indexPath.row]
                 drinkTypeCondition.append(drinkTypeSection[indexPath.row])
-                cell.isChecked = true
-                cell.imageApply()
+
             }
         case 3:
-            if cell.isChecked == true {
-                cell.isChecked = false
-                cell.imageApply()
+            if cellIsChecked[3][indexPath.row] == true {
+                cellIsChecked[3][indexPath.row] = false
+                cell.isChecked = cellIsChecked[3][indexPath.row]
                 guard let number = craftConditon.firstIndex(of: craftSection[indexPath.row]) else { return }
                 craftConditon.remove(at: number)
             } else {
+                cellIsChecked[3][indexPath.row] = true
+                cell.isChecked = cellIsChecked[3][indexPath.row]
                 craftConditon.append(craftSection[indexPath.row])
-                cell.isChecked = true
-                cell.imageApply()
             }
         case 4:
-            if cell.isChecked == true {
-                cell.isChecked = false
-                cell.imageApply()
+            if cellIsChecked[4][indexPath.row] == true {
+                cellIsChecked[4][indexPath.row] = false
+                cell.isChecked = cellIsChecked[4][indexPath.row]
                 guard let number = glassCondition.firstIndex(of: glassSection[indexPath.row]) else { return }
                 glassCondition.remove(at: number)
             } else {
+                cellIsChecked[4][indexPath.row] = true
                 glassCondition.append(glassSection[indexPath.row])
-                cell.isChecked = true
-                cell.imageApply()
+                cell.isChecked = cellIsChecked[4][indexPath.row]
+
             }
         case 5:
-            if cell.isChecked == true {
-                cell.isChecked = false
-                cell.imageApply()
+            if cellIsChecked[5][indexPath.row] == true {
+                cellIsChecked[5][indexPath.row] = false
+                cell.isChecked = cellIsChecked[5][indexPath.row]
                 guard let number = colorCondition.firstIndex(of: colorSection[indexPath.row]) else { return }
                 colorCondition.remove(at: number)
             } else {
+                cellIsChecked[5][indexPath.row] = true
                 colorCondition.append(colorSection[indexPath.row])
-                cell.isChecked = true
-                cell.imageApply()
+                cell.isChecked = cellIsChecked[5][indexPath.row]
+
             }
             //이 말도안되는 중복코드를 간단하게 적을 함수를 만들수있을까.. 제네릭을 이때 사용하는건가? 일단 보류
         default:
