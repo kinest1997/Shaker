@@ -42,10 +42,10 @@ class TodayCocktailViewController: UIViewController {
         secondButton.addAction(expert, for: .touchUpInside)
         mainScrollView.backgroundColor = .systemGray
         firstButton.backgroundColor = .systemBlue
-        firstButton.setTitle("초보추천", for: .normal)
-        secondButton.setTitle("고도수추천", for: .normal)
+        firstButton.setTitle("Beginner".localized, for: .normal)
+        secondButton.setTitle("High Proof".localized, for: .normal)
         secondButton.backgroundColor = .systemRed
-        thirdButton.setTitle("내추천", for: .normal)
+        thirdButton.setTitle("My Own".localized, for: .normal)
         thirdButton.backgroundColor = .systemPink
     }
     

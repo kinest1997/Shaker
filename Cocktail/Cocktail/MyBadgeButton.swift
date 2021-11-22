@@ -95,7 +95,7 @@ class BadgeButton: UIButton {
         }
         set {
             baseDrink = newValue
-            self.setTitle(baseDrink.rawValue, for: .normal)
+            self.setTitle(baseDrink.rawValue.localized, for: .normal)
         }
     }
     

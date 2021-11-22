@@ -5,3 +5,70 @@
   Created by 강희성 on 2021/11/15.
   
 */
+
+//Cocktail.Base
+"럼" = "rum";
+"보드카" = "vodka";
+"데킬라" = "tequila";
+"브랜디" = "brandy";
+"위스키" = "whiskey";
+"진" = "gin";
+"리큐르" = "liqueur";
+"기타" = "assets";
+"음료" = "beverage";
+
+//Cocktail.Ingredients
+"스카치위스키" = "scotchWhiskey";
+"버번위스키" = "bourbonWhiskey";
+"라이위스키" = "ryeWhiskey";
+"잭다니엘" = "jackDanielWhiskey";
+"베일리스" = "baileys";
+"멜론리큐르" = "melonLiqueur";
+"화이트카카오리큐르" = "whiteCacaoLiqueur";
+"스위트베르무트" = "sweetVermouth";
+"드라이베르무트" = "dryVermouth";
+"피치트리" = "peachTree";
+"자몽리큐르" = "grapeFruitLiqueur";
+"카카오리큐르" = "cacaoLiqueur";
+"크렘드카시스" = "cremeDeCassis";
+"그린민트리큐르" = "greenMintLiqueur";
+"캄파리" = "campari";
+"깔루아" = "kahlua";
+"블루큐라소" = "blueCuraso";
+"말리부" = "malibu";
+"바나나리큐르" = "bananaliqueur";
+"아마레또" = "amaretto";
+"트리플섹" = "triplesec";
+"버터스카치리큐르" = "butterScotchLiqueur";
+"앙고스투라비터스" = "angosturaBitters";
+"콜라" = "coke";
+"토닉워터" = "tonicWater";
+"우유" = "milk";
+"오렌지주스" = "orangeJuice";
+"크렌베리주스" = "cranBerryJuice";
+"탄산수" = "clubSoda";
+"자몽주스" = "grapeFruitJuice";
+"파인애플주스" = "pineappleJuice";
+"진저에일" = "gingerAle";
+"스윗앤사워믹스" = "sweetAndSourMix";
+"사과주스" = "appleJuice";
+"사이다" = "cider";
+"레몬주스" = "lemonJuice";
+"화이트럼" = "whiteRum";
+"다크럼" = "darkRum";
+"오버프루프럼" = "overProofRum";
+"라임" = "lime";
+"라임즙" = "limeSqueeze";
+"라임시럽" = "limeSyrup";
+"레몬" = "lemon";
+"레몬즙" = "lemonSqueeze";
+"애플민트" = "appleMint";
+"휘핑크림" = "whippingCream";
+"꿀" = "honey";
+"올리브" = "olive";
+"올리브주스" = "oliveJuice";
+"설탕" = "sugar";
+"설탕시럽" = "sugarSyrup";
+"생크림" = "rawCream";
+"그레나딘시럽" = "grenadineSyrup";
+"무명의 재료" = "unknown";
