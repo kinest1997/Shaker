@@ -49,6 +49,9 @@ class CocktailRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterButton
         let leftarrangeButton = UIBarButtonItem(title: "정렬", style: .plain, target: self, action: #selector(arrangement))
         navigationItem.leftBarButtonItem = leftarrangeButton
+
+
+
     }
     
     func layout() {
