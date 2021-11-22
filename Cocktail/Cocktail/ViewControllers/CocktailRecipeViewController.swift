@@ -4,11 +4,18 @@ import SnapKit
 class CocktailRecipeViewController: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
-    let filterView = FilteredView()
-    let saveButton = UIButton()
+    
+    var unTouchableRecipe: [Cocktail] = []
     
     var originRecipe: [Cocktail] = []
+    
     var filteredRecipe: [Cocktail] = []
+    
+    lazy var filterView = FilteredView()
+    
+    let saveButton = UIButton()
+    let filterButton = UIBarButtonItem(title: "필터", style: .plain, target: self, action: #selector(filtering))
+    let resetButton = UIButton()
     
     let mainTableView = UITableView()
     
@@ -17,14 +24,13 @@ class CocktailRecipeViewController: UIViewController {
         attribute()
         layout()
         getRecipe(data: &originRecipe)
+        getRecipe(data: &unTouchableRecipe)
+        filteredRecipe = originRecipe
         mainTableView.delegate = self
         mainTableView.dataSource = self
         title = "레시피 검색"
         view.backgroundColor = .systemCyan
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
-        originRecipe.sort {
-            $0.name < $1.name
-        }
         
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
@@ -41,10 +47,11 @@ class CocktailRecipeViewController: UIViewController {
         //필터 버튼 추가하고싶은데..
         let filterButton = UIBarButtonItem(title: "필터", style: .plain, target: self, action: #selector(filtering))
         navigationItem.rightBarButtonItem = filterButton
-        filterView.backgroundColor = .brown
-        filterView.isHidden = true
-        
-        //네비바 스와이프시 가리기
+        let leftarrangeButton = UIBarButtonItem(title: "정렬", style: .plain, target: self, action: #selector(arrangement))
+        navigationItem.leftBarButtonItem = leftarrangeButton
+
+
+
     }
     
     func layout() {
@@ -56,63 +63,101 @@ class CocktailRecipeViewController: UIViewController {
             $0.top.bottom.equalToSuperview().inset(100)
         }
         saveButton.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(100)
+            $0.top.equalTo(filterView.mainTableView.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(filterView)
+        }
+        resetButton.snp.makeConstraints {
+            $0.leading.top.equalTo(filterView)
+            $0.bottom.equalTo(filterView.mainTableView.snp.top)
+            $0.width.equalTo(100)
         }
     }
     
     func attribute() {
-        navigationController?.view.addSubview(filterView)
         view.addSubview(mainTableView)
+        navigationController?.view.addSubview(filterView)
         filterView.addSubview(saveButton)
+        filterView.addSubview(resetButton)
+        filterView.isHidden = true
         saveButton.addAction(UIAction(handler: {[unowned self]_ in
             self.filterView.isHidden = true
+            let filteredViewRecipe = filterView.sortingRecipes(origin: unTouchableRecipe, base: filterView.baseCondition, alcohol: filterView.alcoholCondition, drinktype: filterView.drinkTypeCondition, craft: filterView.craftConditon, glass: filterView.glassCondition, color: filterView.colorCondition).sorted { $0.name < $1.name }
+            self.originRecipe = filteredViewRecipe
+            mainTableView.reloadData()
         }), for: .touchUpInside)
         saveButton.setTitle("저장", for: .normal)
+        resetButton.setTitle("reset", for: .normal)
+        resetButton.addAction(UIAction(handler: { [unowned self]_ in
+            self.filterView.cellIsChecked = self.filterView.cellIsChecked.map {
+                $0.map { _ in false}
+            }
+            self.filterView.nowFiltering = false
+            self.filterView.isHidden = true
+            print(self.filterView.cellIsChecked)
+            self.filterView.mainTableView.reloadData()
+            self.mainTableView.reloadData()
+        }), for: .touchUpInside)
     }
     
     @objc func filtering() {
+        filterView.nowFiltering = true
         filterView.isHidden = false
+        mainTableView.reloadData()
         print("눌림")
+    }
+    
+    @objc func arrangement() {
+        filteredRecipe = filteredRecipe.sorted { $0.name < $1.name}
     }
 }
 
 extension CocktailRecipeViewController: UITableViewDelegate, UITableViewDataSource {
     //테이블뷰에 관한것
     
-    
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (isFiltering() && filterView.nowFiltering) || isFiltering() {
             return filteredRecipe.count
+        } else if filterView.nowFiltering {
+            return originRecipe.count
         }
-        return originRecipe.count
+        return unTouchableRecipe.count
     }
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "key", for: indexPath) as? CocktailListCell else { return UITableViewCell() }
-        if isFiltering() {
+        if (isFiltering() && filterView.nowFiltering) || isFiltering(){
             cell.configure(data: filteredRecipe[indexPath.row])
             cell.accessoryType = .disclosureIndicator
             return cell
-        } else {
+        } else if filterView.nowFiltering {
             cell.configure(data: originRecipe[indexPath.row])
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        } else {
+            cell.configure(data: unTouchableRecipe[indexPath.row])
             cell.accessoryType = .disclosureIndicator
             return cell
         }
     }
     
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
     
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if isFiltering() {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (isFiltering() && filterView.nowFiltering) || isFiltering() {
             let cocktailData = filteredRecipe[indexPath.row]
             let cocktailDetailViewController = CocktailDetailViewController()
             cocktailDetailViewController.setData(data: cocktailData)
             self.show(cocktailDetailViewController, sender: nil)
-        } else {
+        } else if filterView.nowFiltering {
             let cocktailData = originRecipe[indexPath.row]
+            let cocktailDetailViewController = CocktailDetailViewController()
+            cocktailDetailViewController.setData(data: cocktailData)
+            self.show(cocktailDetailViewController, sender: nil)
+        }
+        else {
+            let cocktailData = unTouchableRecipe[indexPath.row]
             let cocktailDetailViewController = CocktailDetailViewController()
             cocktailDetailViewController.setData(data: cocktailData)
             self.show(cocktailDetailViewController, sender: nil)
@@ -127,7 +172,7 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
     }
     
     func isFiltering() -> Bool {
-        return searchController.isActive && !searchBarIsEmpty()
+        return (searchController.isActive && !searchBarIsEmpty())
         //서치바가 활성화 되어있는지, 그리고 서치바가 비어있지않은지
     }
     
@@ -137,7 +182,9 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        filteredRecipe = originRecipe.filter({
+        //만약 넘겨주는 데이터에 아무것도없다면 아래의 코드대로 작동하게 하기.일단 보류
+        let filterRecipe = originRecipe
+        filteredRecipe = filterRecipe.filter({
             return $0.name.contains(searchText) || $0.mytip.contains(searchText) || $0.ingredients.map({ baby in
                 baby.rawValue
             })[0...].contains(searchText) || $0.glass.rawValue.contains(searchText) || $0.color.rawValue.contains(searchText) || $0.recipe.contains(searchText)

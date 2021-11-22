@@ -1,22 +1,24 @@
 import UIKit
-
-var myRecipe: [Cocktail] = []
-
-var ingredients: Set<String> = []
-getRecipe(data: &myRecipe)
 //
-myRecipe.forEach {
-    for i in $0.ingredients[0...] {
-        ingredients.insert(i.rawValue)
-    }
-}
+//var myRecipe: [Cocktail] = []
+//
+//var ingredients: Set<String> = []
+//getRecipe(data: &myRecipe)
+////
+//myRecipe.forEach {
+//    for i in $0.ingredients[0...] {
+//        ingredients.insert(i.rawValue)
+//    }
+//}
 //ingredients.sorted {$0 < $1
 //}
 //
 //print("----------------")
 //
 //print(ingredients.count)
-print(ingredients.count)
+//print(ingredients.count)
+
+print(Cocktail.Alcohol.allCases)
 
 
 struct MyDrinks: Codable {
