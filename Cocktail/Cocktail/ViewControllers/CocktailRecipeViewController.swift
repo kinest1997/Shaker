@@ -14,7 +14,7 @@ class CocktailRecipeViewController: UIViewController {
     lazy var filterView = FilteredView()
     
     let saveButton = UIButton()
-    let filterButton = UIBarButtonItem(title: "필터", style: .plain, target: self, action: #selector(filtering))
+    let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
     let resetButton = UIButton()
     
     let mainTableView = UITableView()
@@ -28,7 +28,7 @@ class CocktailRecipeViewController: UIViewController {
         filteredRecipe = originRecipe
         mainTableView.delegate = self
         mainTableView.dataSource = self
-        title = "레시피 검색"
+        title = "Recipe".localized
         view.backgroundColor = .systemCyan
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
         
@@ -37,7 +37,7 @@ class CocktailRecipeViewController: UIViewController {
         //서치바의 텍스트가 변경되는것을 알려준다. 델리게이트 선언같은것 같음
         searchController.obscuresBackgroundDuringPresentation = false
         // 표시된 뷰를 흐리게 해주는것
-        searchController.searchBar.placeholder = "이름, 재료, 기주, 잔, 색깔 등등"
+        searchController.searchBar.placeholder = "Name, Ingredients, Base, Glass, Color...".localized
         //뭐 그냥 플레이스홀더지뭐
         navigationItem.searchController = searchController
         //네비게이션바에 서치바 추가하는것
@@ -45,9 +45,9 @@ class CocktailRecipeViewController: UIViewController {
         //화면 이동시에 서치바가 안남아있게 해준대
         searchController.searchBar.keyboardType = .default
         //필터 버튼 추가하고싶은데..
-        let filterButton = UIBarButtonItem(title: "필터", style: .plain, target: self, action: #selector(filtering))
+        let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
         navigationItem.rightBarButtonItem = filterButton
-        let leftarrangeButton = UIBarButtonItem(title: "정렬", style: .plain, target: self, action: #selector(arrangement))
+        let leftarrangeButton = UIBarButtonItem(title: "Sort".localized, style: .plain, target: self, action: #selector(arrangement))
         navigationItem.leftBarButtonItem = leftarrangeButton
 
 
@@ -85,8 +85,8 @@ class CocktailRecipeViewController: UIViewController {
             self.originRecipe = filteredViewRecipe
             mainTableView.reloadData()
         }), for: .touchUpInside)
-        saveButton.setTitle("저장", for: .normal)
-        resetButton.setTitle("reset", for: .normal)
+        saveButton.setTitle("Save".localized, for: .normal)
+        resetButton.setTitle("Reset".localized, for: .normal)
         resetButton.addAction(UIAction(handler: { [unowned self]_ in
             self.filterView.cellIsChecked = self.filterView.cellIsChecked.map {
                 $0.map { _ in false}

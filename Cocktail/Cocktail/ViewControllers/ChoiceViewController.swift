@@ -58,22 +58,22 @@ class ChoiceViewController: UIViewController {
         leftStackView.axis = .vertical
         rightStackView.axis = .vertical
         
-        ginButton.setTitle("진", for: .normal)
-        tequilaButton.setTitle("데킬라", for: .normal)
-        rumButton.setTitle("럼", for: .normal)
-        vodkaButton.setTitle("보드카", for: .normal)
-        whiskeyButton.setTitle("위스키", for: .normal)
-        brandyButton.setTitle("브랜디", for: .normal)
-        anyThingButton.setTitle("다좋아!", for: .normal)
+        ginButton.setTitle("gin".localized, for: .normal)
+        tequilaButton.setTitle("tequila".localized, for: .normal)
+        rumButton.setTitle("rum".localized, for: .normal)
+        vodkaButton.setTitle("vodka".localized, for: .normal)
+        whiskeyButton.setTitle("whiskey".localized, for: .normal)
+        brandyButton.setTitle("brandy".localized, for: .normal)
+        anyThingButton.setTitle("Anything!".localized, for: .normal)
         anyThingButton.backgroundColor = .systemMint
         
-        ginButton.addAction(baseDrinkAction(base: "진"), for: .touchUpInside)
-        tequilaButton.addAction(baseDrinkAction(base: "데킬라"), for: .touchUpInside)
-        rumButton.addAction(baseDrinkAction(base: "럼"), for: .touchUpInside)
-        vodkaButton.addAction(baseDrinkAction(base: "보드카"), for: .touchUpInside)
-        whiskeyButton.addAction(baseDrinkAction(base: "위스키"), for: .touchUpInside)
-        brandyButton.addAction(baseDrinkAction(base: "브랜디"), for: .touchUpInside)
-        anyThingButton.addAction(baseDrinkAction(base: "다좋아!"), for: .touchUpInside)
+        ginButton.addAction(baseDrinkAction(base: "gin".localized), for: .touchUpInside)
+        tequilaButton.addAction(baseDrinkAction(base: "tequila".localized), for: .touchUpInside)
+        rumButton.addAction(baseDrinkAction(base: "rum".localized), for: .touchUpInside)
+        vodkaButton.addAction(baseDrinkAction(base: "vodka".localized), for: .touchUpInside)
+        whiskeyButton.addAction(baseDrinkAction(base: "whiskey".localized), for: .touchUpInside)
+        brandyButton.addAction(baseDrinkAction(base: "brandy".localized), for: .touchUpInside)
+        anyThingButton.addAction(baseDrinkAction(base: "Anything!".localized), for: .touchUpInside)
     }
     
     func baseDrinkAction(base: String) -> UIAction {
@@ -87,25 +87,27 @@ class ChoiceViewController: UIViewController {
         return buttonAction
     }
     
+    //FIXME: (보영)이 부분 왜 스트링을 받음? Base를 받는 것이 나음
     func baseFilter(base: String) -> [Cocktail] {
         switch base {
-        case "진":
-            return filterSortedRecipe(base: "진")
-        case "데킬라":
-            return filterSortedRecipe(base: "데킬라")
-        case "럼":
-            return filterSortedRecipe(base: "럼")
-        case "보드카":
-            return filterSortedRecipe(base: "보드카")
-        case "위스키":
-            return filterSortedRecipe(base: "위스키")
-        case "브랜디":
-            return filterSortedRecipe(base: "브랜디")
+        case "gin".localized:
+            return filterSortedRecipe(base: "gin".localized)
+        case "tequila".localized:
+            return filterSortedRecipe(base: "tequila".localized)
+        case "rum".localized:
+            return filterSortedRecipe(base: "rum".localized)
+        case "vodka".localized:
+            return filterSortedRecipe(base: "vodka".localized)
+        case "whiskey".localized:
+            return filterSortedRecipe(base: "whiskey".localized)
+        case "brandy".localized:
+            return filterSortedRecipe(base: "brandy".localized)
         default:
             return firstRecipe
         }
     }
     
+    //FIXME: 여기도 마찬가지
     func filterSortedRecipe(base: String) -> [Cocktail] {
         let filterdRecipe = firstRecipe.filter {
             $0.base.rawValue == base
