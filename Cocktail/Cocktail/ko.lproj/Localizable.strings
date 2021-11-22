@@ -7,9 +7,6 @@
 */
 
 "recommendation" = "추천";
-"gin" = "진";
-"vodka" = "보드카";
-"brandy" = "브랜디";
 "high" = "높음";
 "mid" = "중간";
 "low" = "낮음";
@@ -20,4 +17,69 @@
 "Glass" = "잔";
 "Color" = "색";
 
+//Cocktail.Base
+"rum" = "럼";
+"vodka" = "보드카";
+"tequila" = "데킬라";
+"brandy" = "브랜디";
+"whiskey" = "위스키";
+"gin" = "진";
+"liqueur" = "리큐르";
+"assets" = "기타";
+"beverage" = "음료";
 
+//Cocktail.Ingredients
+"scotchWhiskey" = "스카치위스키";
+"bourbonWhiskey" = "버번위스키";
+"ryeWhiskey" = "라이위스키";
+"jackDanielWhiskey" = "잭다니엘";
+"baileys" = "베일리스";
+"melonLiqueur" = "멜론리큐르";
+"whiteCacaoLiqueur" = "화이트카카오리큐르";
+"sweetVermouth" = "스위트베르무트";
+"dryVermouth" = "드라이베르무트";
+"peachTree" = "피치트리";
+"grapeFruitLiqueur" = "자몽리큐르";
+"cacaoLiqueur" = "카카오리큐르";
+"cremeDeCassis" = "크렘드카시스";
+"greenMintLiqueur" = "그린민트리큐르";
+"campari" = "캄파리";
+"kahlua" = "깔루아";
+"blueCuraso" = "블루큐라소";
+"malibu" = "말리부";
+"bananaliqueur" = "바나나리큐르";
+"amaretto" = "아마레또";
+"triplesec" = "트리플섹";
+"butterScotchLiqueur" = "버터스카치리큐르";
+"angosturaBitters" = "앙고스투라비터스";
+"coke" = "콜라";
+"tonicWater" = "토닉워터";
+"milk" = "우유";
+"orangeJuice" = "오렌지주스";
+"cranBerryJuice" = "크렌베리주스";
+"clubSoda" = "탄산수";
+"grapeFruitJuice" = "자몽주스";
+"pineappleJuice" = "파인애플주스";
+"gingerAle" = "진저에일";
+"sweetAndSourMix" = "스윗앤사워믹스";
+"appleJuice" = "사과주스";
+"cider" = "사이다";
+"lemonJuice" = "레몬주스";
+"whiteRum" = "화이트럼";
+"darkRum" = "다크럼";
+"overProofRum" = "오버프루프럼";
+"lime" = "라임";
+"limeSqueeze" = "라임즙";
+"limeSyrup" = "라임시럽";
+"lemon" = "레몬";
+"lemonSqueeze" = "레몬즙";
+"appleMint" = "애플민트";
+"whippingCream" = "휘핑크림";
+"honey" = "꿀";
+"olive" = "올리브";
+"oliveJuice" = "올리브주스";
+"sugar" = "설탕";
+"sugarSyrup" = "설탕시럽";
+"rawCream" = "생크림";
+"grenadineSyrup" = "그레나딘시럽";
+"unknown" = "무명의 재료";
