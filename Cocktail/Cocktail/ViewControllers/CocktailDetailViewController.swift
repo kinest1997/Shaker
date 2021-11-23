@@ -76,6 +76,8 @@ class CocktailDetailViewController: UIViewController {
         guard let cocktailData = cocktailData else { return }
         addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
         addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
+        addMyOwnCocktailRecipeViewController.choiceView.myIngredients = cocktailData.ingredients
+        addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
         show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
     

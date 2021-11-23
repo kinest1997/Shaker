@@ -10,7 +10,23 @@ class ChoiceIngredientsView: UIView {
     
     var cellIsChecked: [[Bool]] = []
     
-    var myIngredients: [Cocktail.Ingredients] = []
+    var myIngredients: [Cocktail.Ingredients]?
+    
+    //새로 만드는 레시피인지, 기존의 레시피를 수정하여 만드는것인지에 따른 차이
+    var havePresetData: Bool? {
+        didSet {
+            if havePresetData == true {
+                if myIngredients != nil {
+                    let preCheckedArray = findPlace()
+                    preCheckedArray.forEach {
+                        cellIsChecked[$0.0][$0.1] = true
+                    }
+                }
+            } else {
+                myIngredients = []
+            }
+        }
+    }
     
     let ingredientsData: [[Cocktail.Ingredients]] = [Cocktail.Base.rum.list, Cocktail.Base.vodka.list, Cocktail.Base.tequila.list, Cocktail.Base.brandy.list, Cocktail.Base.whiskey.list, Cocktail.Base.gin.list, Cocktail.Base.liqueur.list, Cocktail.Base.assets.list, Cocktail.Base.beverage.list]
     //이것이 누나가말한 데이터 주는법이구만
@@ -82,6 +98,27 @@ class ChoiceIngredientsView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    //사랑한다 번뜩이는 나의 전두엽 정말 사랑한다
+    func findPlace() -> [(Int, Int)] {
+        guard let myIngredients = myIngredients else { return [] }
+        let coordinate = myIngredients.map { ingredients -> (Int, Int) in
+            var section = 0
+            var row = 0
+            ingredientsData.forEach { array in
+                for i in array {
+                    if i == ingredients {
+                        guard let firstRow = array.firstIndex(of: i), let firstSection = ingredientsData.firstIndex(of: array) else { return }
+                        row = firstRow
+                        section = firstSection
+                    }
+                }
+            }
+            return (section, row)
+        }
+        print(coordinate)
+        return coordinate
+    }
 }
 
 extension ChoiceIngredientsView: UITableViewDelegate, UITableViewDataSource {
@@ -101,13 +138,9 @@ extension ChoiceIngredientsView: UITableViewDelegate, UITableViewDataSource {
         return ingredientsData[section].count
     }
     
-//    if myIngredients == [] {
-//        ingredientsData
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Ingredients") as? FilterViewCell else { return UITableViewCell()}
-        
+
         cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
         cell.nameLabel.text = ingredientsData[indexPath.section][indexPath.row].rawValue.localized
         return cell
@@ -119,13 +152,12 @@ extension ChoiceIngredientsView: UITableViewDelegate, UITableViewDataSource {
         if cellIsChecked[indexPath.section][indexPath.row] == true {
             cellIsChecked[indexPath.section][indexPath.row] = false
             cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
-            guard let number = myIngredients.firstIndex(of: ingredientsData[indexPath.section][indexPath.row]) else { return }
-            myIngredients.remove(at: number)
-            print(cellIsChecked)
+            guard let number = myIngredients?.firstIndex(of: ingredientsData[indexPath.section][indexPath.row]) else { return }
+            myIngredients?.remove(at: number)
         } else {
             cellIsChecked[indexPath.section][indexPath.row] = true
             cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
-            myIngredients.append(ingredientsData[indexPath.section][indexPath.row])
+            myIngredients?.append(ingredientsData[indexPath.section][indexPath.row])
         }
     }
 }

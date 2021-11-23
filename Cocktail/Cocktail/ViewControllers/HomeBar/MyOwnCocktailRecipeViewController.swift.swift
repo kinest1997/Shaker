@@ -58,6 +58,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     }
     
     @objc func showAddView() {
+        addMyOwnCocktailRecipeViewController.choiceView.havePresetData = false
         show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
 }
