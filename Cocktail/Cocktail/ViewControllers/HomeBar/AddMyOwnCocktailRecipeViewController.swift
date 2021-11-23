@@ -3,7 +3,6 @@ import SnapKit
 
 class AddMyOwnCocktailRecipeViewController: UIViewController {
     
-    
     var alcohol: Cocktail.Alcohol = .high
     var color: Cocktail.Color = .red
     var baseDrink: Cocktail.Base = .assets
@@ -13,6 +12,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     var drinkType: Cocktail.DrinkType = .longDrink
     var myOwnRecipeData: ((Cocktail) -> Void)?
     
+    var beforeEditingData: Cocktail?
     
     let groupStackView = UIStackView()
     let mainScrollView = UIScrollView()
@@ -28,11 +28,11 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let alcoholStackView = UIStackView()
     var alcoholSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "High".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.alcoholChoiceButton.setTitle("High".localized, for: .normal)
+            UIAction(title: "high".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.alcoholChoiceButton.setTitle("high".localized, for: .normal)
                 alcohol = .high }),
-            UIAction(title: "Mid".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.alcoholChoiceButton.setTitle("Mid".localized, for: .normal)
+            UIAction(title: "mid".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.alcoholChoiceButton.setTitle("mid".localized, for: .normal)
                 alcohol = .mid }),
-            UIAction(title: "Low".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.alcoholChoiceButton.setTitle("Low".localized, for: .normal)
+            UIAction(title: "low".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.alcoholChoiceButton.setTitle("low".localized, for: .normal)
                 alcohol = .low })
         ]
     }
@@ -247,7 +247,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             self?.choiceView.isHidden = true
         }), for: .touchUpInside)
         
-        
         cocktailImageView.image = UIImage(named: "Martini")
         groupStackView.axis = .vertical
         groupStackView.backgroundColor = .brown
@@ -264,9 +263,9 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         myTipLabel.text = "Tip".localized
         drinkTypeLabel.text = "DrinkType".localized
         ingredientsLabel.text = "Ingredients".localized
-        nameTextField.placeholder = "여기엔 이름"
-        recipeTextField.placeholder = "여기엔 레시피"
-        myTipTextField.placeholder = "여기엔 당신의 팁"
+        nameTextField.placeholder = "Your own name".localized
+        recipeTextField.placeholder = "Your own recipe".localized
+        myTipTextField.placeholder = "Your own tip".localized
     }
     
     func layout() {
@@ -294,8 +293,19 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             }
         }
         
-        [alcoholChoiceButton, colorChoiceButton, baseDrinkChoiceButton, glassChoiceButton, craftChoiceButton, drinkTypeChoiceButton, ingredientsSelectButton].forEach {
-            $0.setTitle("Choice".localized, for: .normal)
+        if let cocktailData = beforeEditingData {
+            alcoholChoiceButton.setTitle(cocktailData.alcohol.rawValue.localized, for: .normal)
+            colorChoiceButton.setTitle(cocktailData.color.rawValue.localized, for: .normal)
+            baseDrinkChoiceButton.setTitle(cocktailData.base.rawValue.localized, for: .normal)
+            glassChoiceButton.setTitle(cocktailData.glass.rawValue.localized, for: .normal)
+            craftChoiceButton.setTitle(cocktailData.craft.rawValue.localized, for: .normal)
+            drinkTypeChoiceButton.setTitle(cocktailData.drinkType.rawValue.localized, for: .normal)
+            ingredientsSelectButton.setTitle("\(cocktailData.ingredients.count)"+"EA".localized+"Selected".localized, for: .normal)
+            self.choiceView.myIngredients = cocktailData.ingredients
+        } else {
+            [alcoholChoiceButton, colorChoiceButton, baseDrinkChoiceButton, glassChoiceButton, craftChoiceButton, drinkTypeChoiceButton, ingredientsSelectButton].forEach {
+                $0.setTitle("Choice".localized, for: .normal)
+            }
         }
         
         nameStackView.addArrangedSubview(nameLabel)
@@ -351,7 +361,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         }
         
         choiceView.snp.makeConstraints {
-//            $0.edges.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(30)
             $0.top.bottom.equalToSuperview().inset(100)
         }
@@ -364,7 +373,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     @objc func keyboardNotificationHandler(_ notification: Notification) {
-        
         if recipeTextField.isEditing || myTipTextField.isEditing {
             switch notification.name {
             case UIResponder.keyboardWillShowNotification:
@@ -376,6 +384,19 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
                 return
             }
         }
+    }
+    
+    func editing(data: Cocktail) {
+        nameTextField.text = data.name
+        recipeTextField.text = data.recipe
+        ingredients = data.ingredients
+        myTipTextField.text = data.mytip
+        drinkType = data.drinkType
+        baseDrink = data.base
+        alcohol = data.alcohol
+        glass = data.glass
+        color = data.color
+        craft = data.craft
     }
     
     override func viewDidLoad() {
@@ -395,7 +416,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveRecipe))
         navigationItem.rightBarButtonItem = saveButton
     }
-    
     
     @objc func saveRecipe() {
         print("눌림")
@@ -428,9 +448,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
 extension AddMyOwnCocktailRecipeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        [nameTextField, recipeTextField, myTipTextField].forEach {
-            $0.resignFirstResponder()
-        }
+        self.view.endEditing(true)
         return true
     }
     
@@ -439,5 +457,4 @@ extension AddMyOwnCocktailRecipeViewController: UITextFieldDelegate {
         //이거 왜 안됨? 개빡치네
         //일단 다른방법 찾음 스크롤뷰는 스크롤해야해서 한번의 터치는 원래 씹는다네
     }
-    
 }

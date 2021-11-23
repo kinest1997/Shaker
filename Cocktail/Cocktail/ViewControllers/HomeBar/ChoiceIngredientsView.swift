@@ -9,7 +9,9 @@ class ChoiceIngredientsView: UIView {
     let resetButton = UIButton()
     
     var cellIsChecked: [[Bool]] = []
+    
     var myIngredients: [Cocktail.Ingredients] = []
+    
     let ingredientsData: [[Cocktail.Ingredients]] = [Cocktail.Base.rum.list, Cocktail.Base.vodka.list, Cocktail.Base.tequila.list, Cocktail.Base.brandy.list, Cocktail.Base.whiskey.list, Cocktail.Base.gin.list, Cocktail.Base.liqueur.list, Cocktail.Base.assets.list, Cocktail.Base.beverage.list]
     //이것이 누나가말한 데이터 주는법이구만
     
@@ -99,8 +101,13 @@ extension ChoiceIngredientsView: UITableViewDelegate, UITableViewDataSource {
         return ingredientsData[section].count
     }
     
+//    if myIngredients == [] {
+//        ingredientsData
+//    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Ingredients") as? FilterViewCell else { return UITableViewCell()}
+        
         cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
         cell.nameLabel.text = ingredientsData[indexPath.section][indexPath.row].rawValue.localized
         return cell

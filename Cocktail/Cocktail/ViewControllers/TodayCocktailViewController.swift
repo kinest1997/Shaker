@@ -29,8 +29,6 @@ class TodayCocktailViewController: UIViewController {
             self.show(choiceViewController, sender: nil)
         }
         
-        //위아래를 뭔가 함수로 만들어서 간단하게 하고싶은데 일단 보류
-        
         let expert = UIAction { [weak self]_ in
             guard let self = self else { return }
             let choiceViewController = ChoiceViewController()

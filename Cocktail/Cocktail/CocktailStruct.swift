@@ -17,7 +17,7 @@ struct Cocktail: Codable, Hashable {
     let alcohol: Alcohol
     let color: Color
     let mytip: String
-    let drinkType: DrinkType?
+    let drinkType: DrinkType
     var myRecipe: Bool
 
     enum Base: String, Codable, CaseIterable{

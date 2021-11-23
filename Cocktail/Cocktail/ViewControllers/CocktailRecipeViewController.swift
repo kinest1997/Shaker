@@ -4,7 +4,7 @@ import SnapKit
 class CocktailRecipeViewController: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
-    
+
     var unTouchableRecipe: [Cocktail] = []
     
     var originRecipe: [Cocktail] = []
@@ -34,17 +34,15 @@ class CocktailRecipeViewController: UIViewController {
         
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
-        //서치바의 텍스트가 변경되는것을 알려준다. 델리게이트 선언같은것 같음
+        //서치바의 텍스트가 변경되는것을 알려준다.
         searchController.obscuresBackgroundDuringPresentation = false
         // 표시된 뷰를 흐리게 해주는것
         searchController.searchBar.placeholder = "Name, Ingredients, Base, Glass, Color...".localized
-        //뭐 그냥 플레이스홀더지뭐
         navigationItem.searchController = searchController
         //네비게이션바에 서치바 추가하는것
         definesPresentationContext = true
-        //화면 이동시에 서치바가 안남아있게 해준대
+        //화면 이동시에 서치바가 안남아있게 해줌
         searchController.searchBar.keyboardType = .default
-        //필터 버튼 추가하고싶은데..
         let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
         navigationItem.rightBarButtonItem = filterButton
         let leftarrangeButton = UIBarButtonItem(title: "Sort".localized, style: .plain, target: self, action: #selector(arrangement))
@@ -116,7 +114,6 @@ class CocktailRecipeViewController: UIViewController {
 
 extension CocktailRecipeViewController: UITableViewDelegate, UITableViewDataSource {
     //테이블뷰에 관한것
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (isFiltering() && filterView.nowFiltering) || isFiltering() {
             return filteredRecipe.count
@@ -152,17 +149,20 @@ extension CocktailRecipeViewController: UITableViewDelegate, UITableViewDataSour
             let cocktailData = filteredRecipe[indexPath.row]
             let cocktailDetailViewController = CocktailDetailViewController()
             cocktailDetailViewController.setData(data: cocktailData)
+            cocktailDetailViewController.cocktailData = cocktailData
             self.show(cocktailDetailViewController, sender: nil)
         } else if filterView.nowFiltering {
             let cocktailData = originRecipe[indexPath.row]
             let cocktailDetailViewController = CocktailDetailViewController()
             cocktailDetailViewController.setData(data: cocktailData)
+            cocktailDetailViewController.cocktailData = cocktailData
             self.show(cocktailDetailViewController, sender: nil)
         }
         else {
             let cocktailData = unTouchableRecipe[indexPath.row]
             let cocktailDetailViewController = CocktailDetailViewController()
             cocktailDetailViewController.setData(data: cocktailData)
+            cocktailDetailViewController.cocktailData = cocktailData
             self.show(cocktailDetailViewController, sender: nil)
         }
     }
@@ -185,7 +185,6 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        //만약 넘겨주는 데이터에 아무것도없다면 아래의 코드대로 작동하게 하기.일단 보류
         let filterRecipe = originRecipe
         filteredRecipe = filterRecipe.filter({
             return $0.name.contains(searchText) || $0.mytip.contains(searchText) || $0.ingredients.map({ baby in

@@ -197,22 +197,22 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
         cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
         switch indexPath.section {
         case 0:
-            cell.nameLabel.text = alcoholSection[indexPath.row].rawValue
+            cell.nameLabel.text = alcoholSection[indexPath.row].rawValue.localized
         case 1:
             cell.nameLabel.text =
-            baseSection[indexPath.row].rawValue
+            baseSection[indexPath.row].rawValue.localized
         case 2:
             cell.nameLabel.text =
-            drinkTypeSection[indexPath.row].rawValue
+            drinkTypeSection[indexPath.row].rawValue.localized
         case 3:
             cell.nameLabel.text =
-            craftSection[indexPath.row].rawValue
+            craftSection[indexPath.row].rawValue.localized
         case 4:
             cell.nameLabel.text =
-            glassSection[indexPath.row].rawValue
+            glassSection[indexPath.row].rawValue.localized
         case 5:
             cell.nameLabel.text =
-            colorSection[indexPath.row].rawValue
+            colorSection[indexPath.row].rawValue.localized
         default:
             break
         }

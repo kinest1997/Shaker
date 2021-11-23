@@ -19,6 +19,41 @@
 "Hold on" = "잠깐";
 "OK" = "그래";
 
+//AddMyOwnCocktailRecipeViewController.swift
+"red" = "빨강색";
+"orange" = "주황색";
+"yellow" = "노랑색";
+"green" = "초록색";
+"blue" = "파랑색";
+"violet" = "보라색";
+"clear" = "투명색";
+"white" = "하양색";
+"black" = "검정색";
+"brown" = "갈색";
+
+"build" = "빌드";
+"shaking" = "쉐이킹";
+"floating" = "플로팅";
+"stir" = "스터";
+"blending" = "블렌딩";
+
+"highBall" = "하이볼";
+"shot" = "샷";
+"onTheRock" = "온더락";
+"cocktail" = "칵테일";
+"martini" = "마티니";
+"collins" = "콜린스";
+"margarita" = "마가리타";
+"philsner" = "필스너";
+
+"longDrink" = "롱드링크";
+"shortDrink" = "숏드링크";
+"shooter" = "슈터";
+
+"Your own name" = "당신만의 이름";
+"Your own recipe" = "당신만의 레시피";
+"Your own tip" = "당신만의 팁";
+
 //MainViewController.swift
 "Recommendation" = "추천";
 "Recipe" = "레시피";
@@ -52,6 +87,7 @@
 "mid" = "중간";
 "low" = "낮음";
 "DrinkType" = "용량";
+"editing" = "편집";
 
 //CocktailRecipeViewController.swift
 "Filter" = "필터";

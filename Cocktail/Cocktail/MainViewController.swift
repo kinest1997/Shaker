@@ -69,11 +69,10 @@ class MainViewController: UITabBarController {
                         print("ERROR", error.localizedDescription)
                     }
                 }
-        //일단 이부분 보류
         tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default
-        //attribute
+        
         todayCocktailViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
         assistantViewController.tabBarItem = tabBarItems[.home]

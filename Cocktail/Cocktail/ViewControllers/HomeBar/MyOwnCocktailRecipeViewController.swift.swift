@@ -39,6 +39,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getRecipe(data: &originRecipe)
         myOwnRecipe = originRecipe.filter {
             $0.myRecipe == true
         }
@@ -83,6 +84,7 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
         let cocktailData = myOwnRecipe[indexPath.row]
         let cocktailDetailViewController = CocktailDetailViewController()
         cocktailDetailViewController.setData(data: cocktailData)
+        cocktailDetailViewController.cocktailData = cocktailData
         self.show(cocktailDetailViewController, sender: nil)
     }
     

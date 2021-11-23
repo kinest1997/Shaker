@@ -18,7 +18,6 @@ class BadgeButton: UIButton {
         }
         buttonImage.image = image
     }
-    
     //버튼의 이름 설정
     override func setTitle(_ title: String?, for state: UIControl.State) {
         self.addSubview(nameLabel)

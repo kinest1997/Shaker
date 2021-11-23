@@ -67,50 +67,33 @@ class ChoiceViewController: UIViewController {
         anyThingButton.setTitle("Anything!".localized, for: .normal)
         anyThingButton.backgroundColor = .systemMint
         
-        ginButton.addAction(baseDrinkAction(base: "gin".localized), for: .touchUpInside)
-        tequilaButton.addAction(baseDrinkAction(base: "tequila".localized), for: .touchUpInside)
-        rumButton.addAction(baseDrinkAction(base: "rum".localized), for: .touchUpInside)
-        vodkaButton.addAction(baseDrinkAction(base: "vodka".localized), for: .touchUpInside)
-        whiskeyButton.addAction(baseDrinkAction(base: "whiskey".localized), for: .touchUpInside)
-        brandyButton.addAction(baseDrinkAction(base: "brandy".localized), for: .touchUpInside)
-        anyThingButton.addAction(baseDrinkAction(base: "Anything!".localized), for: .touchUpInside)
+        ginButton.addAction(baseDrinkAction(base: .gin), for: .touchUpInside)
+        tequilaButton.addAction(baseDrinkAction(base: .tequila), for: .touchUpInside)
+        rumButton.addAction(baseDrinkAction(base: .rum), for: .touchUpInside)
+        vodkaButton.addAction(baseDrinkAction(base: .vodka), for: .touchUpInside)
+        whiskeyButton.addAction(baseDrinkAction(base: .whiskey), for: .touchUpInside)
+        brandyButton.addAction(baseDrinkAction(base: .brandy), for: .touchUpInside)
+        anyThingButton.addAction(baseDrinkAction(base: .beverage), for: .touchUpInside)
     }
     
-    func baseDrinkAction(base: String) -> UIAction {
+    func baseDrinkAction(base: Cocktail.Base) -> UIAction {
         let buttonAction = UIAction { [weak self]_ in
             guard let self = self else { return }
             let cocktailListTableView = CocktailListTableView()
-            cocktailListTableView.lastRecipe = self.baseFilter(base: base)
-            cocktailListTableView.title = base
+            cocktailListTableView.lastRecipe = self.filterSortedRecipe(base: base)
+            cocktailListTableView.title = base.rawValue
             self.show(cocktailListTableView, sender: nil)
         }
         return buttonAction
     }
-    
-    //FIXME: (보영)이 부분 왜 스트링을 받음? Base를 받는 것이 나음
-    func baseFilter(base: String) -> [Cocktail] {
-        switch base {
-        case "gin".localized:
-            return filterSortedRecipe(base: "gin".localized)
-        case "tequila".localized:
-            return filterSortedRecipe(base: "tequila".localized)
-        case "rum".localized:
-            return filterSortedRecipe(base: "rum".localized)
-        case "vodka".localized:
-            return filterSortedRecipe(base: "vodka".localized)
-        case "whiskey".localized:
-            return filterSortedRecipe(base: "whiskey".localized)
-        case "brandy".localized:
-            return filterSortedRecipe(base: "brandy".localized)
-        default:
+    //누나가 주석단곳 수정및 간소화 완료, 근데 이제 이부분에 컨텐츠 추가를 고민해야할듯
+    func filterSortedRecipe(base: Cocktail.Base) -> [Cocktail] {
+        if base == .beverage {
             return firstRecipe
         }
-    }
-    
-    //FIXME: 여기도 마찬가지
-    func filterSortedRecipe(base: String) -> [Cocktail] {
+        
         let filterdRecipe = firstRecipe.filter {
-            $0.base.rawValue == base
+            $0.base == base
         }.sorted { $0.ingredients.count < $1.ingredients.count}
         return filterdRecipe
     }

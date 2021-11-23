@@ -11,6 +11,7 @@ class AssistantViewController: UIViewController {
         attribute()
         layout()
     }
+    
     func attribute() {
         myRecipeButton.addAction(UIAction(handler: { [weak self]_ in
             let myOwnCocktailRecipeViewController = MyOwnCocktailRecipeViewController()
