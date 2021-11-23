@@ -9,6 +9,15 @@
 //Global
 "Save" = "저장";
 "Reset" = "리셋";
+"Cancel" = "취소";
+"Save" = "저장";
+
+//AddMyOwnCocktailRecipeViewController.swift
+"Reset" = "리셋";
+"Selected" = "선택됨";
+"Choice" = "선택";
+"Hold on" = "잠깐";
+"OK" = "그래";
 
 //MainViewController.swift
 "Recommendation" = "추천";

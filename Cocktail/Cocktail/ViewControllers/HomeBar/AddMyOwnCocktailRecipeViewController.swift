@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class MyOwnCocktailRecipeViewController: UIViewController {
+class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     
     var alcohol: Cocktail.Alcohol = .high
@@ -11,7 +11,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     var glass: Cocktail.Glass = .highBall
     var ingredients: [Cocktail.Ingredients] = []
     var drinkType: Cocktail.DrinkType = .longDrink
-    
+    var myOwnRecipeData: ((Cocktail) -> Void)?
     
     
     let groupStackView = UIStackView()
@@ -201,25 +201,12 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     let myTipTextField = UITextField()
     let myTipStackView = UIStackView()
     
-    func registerKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(
-            keyboardNotificationHandler(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotificationHandler(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    @objc func keyboardNotificationHandler(_ notification: Notification) {
-        
-        if recipeTextField.isEditing || myTipTextField.isEditing {
-            switch notification.name {
-            case UIResponder.keyboardWillShowNotification:
-                let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-                self.view.frame.origin.y = 50 - keyboardSize.height
-            case UIResponder.keyboardWillHideNotification:
-                self.view.frame.origin.y = 0
-            default:
-                return
-            }
-        }
-    }
+    let ingredientsLabel = UILabel()
+    let ingredientsSelectButton = UIButton()
+    let ingredientsStackView = UIStackView()
+    
+    let choiceView = ChoiceIngredientsView()
+    
     
     func attribute() {
         alcoholChoiceButton.menu = alcoholSelectMenu
@@ -234,6 +221,32 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         craftChoiceButton.showsMenuAsPrimaryAction = true
         drinkTypeChoiceButton.menu = drinkTypeMenu
         drinkTypeChoiceButton.showsMenuAsPrimaryAction = true
+        
+        choiceView.isHidden = true
+        ingredientsSelectButton.addAction(UIAction(handler: { [weak self]_ in
+            self?.choiceView.isHidden = false
+        }), for: .touchUpInside)
+        choiceView.saveButton.addAction(UIAction(handler: { [weak self]_ in
+            self?.ingredients = self?.choiceView.myIngredients ?? []
+            self?.ingredientsSelectButton.setTitle("\(self?.ingredients.count ?? 0)"+"EA".localized+"Selected".localized, for: .normal)
+            self?.choiceView.isHidden = true
+        }), for: .touchUpInside)
+        choiceView.resetButton.addAction(UIAction(handler: { [weak self]_ in
+            guard let self = self else { return }
+            self.choiceView.cellIsChecked = self.choiceView.cellIsChecked.map {
+                $0.map { _ in false}
+            }
+            self.ingredients = []
+            self.choiceView.myIngredients = []
+            self.choiceView.mainTableview.reloadData()
+            self.ingredientsSelectButton.setTitle("Ingredients".localized, for: .normal)
+            self.choiceView.isHidden = true
+            //과연 리셋을 눌렀을때 창이 사라지는게 맞을까 그냥 선택 상태만 초기화 시키는게 맞을까
+        }), for: .touchUpInside)
+        choiceView.cancelButton.addAction(UIAction(handler: { [weak self]_ in
+            self?.choiceView.isHidden = true
+        }), for: .touchUpInside)
+        
         
         cocktailImageView.image = UIImage(named: "Martini")
         groupStackView.axis = .vertical
@@ -250,6 +263,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         recipeLabel.text = "Recipe".localized
         myTipLabel.text = "Tip".localized
         drinkTypeLabel.text = "DrinkType".localized
+        ingredientsLabel.text = "Ingredients".localized
         nameTextField.placeholder = "여기엔 이름"
         recipeTextField.placeholder = "여기엔 레시피"
         myTipTextField.placeholder = "여기엔 당신의 팁"
@@ -258,18 +272,19 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     func layout() {
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainView)
+        view.addSubview(choiceView)
         
         [groupStackView, cocktailImageView].forEach {
             mainView.addSubview($0)
         }
         
-        [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, drinkTypeStackView, glassStackView, craftStackView, recipeStackView, myTipStackView].forEach {
+        [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, drinkTypeStackView, glassStackView, craftStackView, ingredientsStackView, recipeStackView, myTipStackView].forEach {
             groupStackView.addArrangedSubview($0)
             $0.axis = .horizontal
             $0.distribution = .fill
         }
         
-        [nameLabel, alcoholLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, recipeLabel, myTipLabel, drinkTypeLabel].forEach {
+        [nameLabel, alcoholLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, recipeLabel, myTipLabel, drinkTypeLabel, ingredientsLabel].forEach {
             $0.textAlignment = .center
             $0.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
             $0.backgroundColor = .blue
@@ -279,8 +294,8 @@ class MyOwnCocktailRecipeViewController: UIViewController {
             }
         }
         
-        [alcoholChoiceButton, colorChoiceButton, baseDrinkChoiceButton, glassChoiceButton, craftChoiceButton, drinkTypeChoiceButton].forEach {
-            $0.setTitle("선택", for: .normal)
+        [alcoholChoiceButton, colorChoiceButton, baseDrinkChoiceButton, glassChoiceButton, craftChoiceButton, drinkTypeChoiceButton, ingredientsSelectButton].forEach {
+            $0.setTitle("Choice".localized, for: .normal)
         }
         
         nameStackView.addArrangedSubview(nameLabel)
@@ -310,6 +325,9 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeStackView.addArrangedSubview(drinkTypeLabel)
         drinkTypeStackView.addArrangedSubview(drinkTypeChoiceButton)
         
+        ingredientsStackView.addArrangedSubview(ingredientsLabel)
+        ingredientsStackView.addArrangedSubview(ingredientsSelectButton)
+        
         mainScrollView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalToSuperview()
@@ -332,6 +350,32 @@ class MyOwnCocktailRecipeViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
         
+        choiceView.snp.makeConstraints {
+//            $0.edges.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(30)
+            $0.top.bottom.equalToSuperview().inset(100)
+        }
+    }
+    
+    func registerKeyboardNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(
+            keyboardNotificationHandler(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotificationHandler(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardNotificationHandler(_ notification: Notification) {
+        
+        if recipeTextField.isEditing || myTipTextField.isEditing {
+            switch notification.name {
+            case UIResponder.keyboardWillShowNotification:
+                let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+                self.view.frame.origin.y = 50 - keyboardSize.height
+            case UIResponder.keyboardWillHideNotification:
+                self.view.frame.origin.y = 0
+            default:
+                return
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -352,18 +396,6 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
     }
     
-    func upload(recipe: [Cocktail]) {
-        //1. 쓰고자 하는 경로 가져오기
-        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-        do {
-            let data = try PropertyListEncoder().encode(recipe)
-            // 3. 생성된 데이터를 경로에 쓰기
-            try data.write(to: documentURL)
-            print(data)
-        } catch let error {
-            print("ERROR", error.localizedDescription)
-        }
-    }
     
     @objc func saveRecipe() {
         print("눌림")
@@ -375,8 +407,9 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         } else if myTipTextField.text?.isEmpty ?? true {
             presentAlert(message: "팁도 좀적어")
         } else {
-            upload(recipe: [myRecipe])
-            self.dismiss(animated: true, completion: nil)
+            myOwnRecipeData?(myRecipe)
+            print("성공")
+            navigationController?.popViewController(animated: true)
         } 
     }
     
@@ -385,15 +418,14 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     }
     
     func presentAlert(message: String) {
-        let alert = UIAlertController(title: "잠깐", message: message, preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "그래", style: .default, handler: nil)
+        let alert = UIAlertController(title: "Hold on".localized, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: false, completion: nil)
     }
-    
 }
 
-extension MyOwnCocktailRecipeViewController: UITextFieldDelegate {
+extension AddMyOwnCocktailRecipeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         [nameTextField, recipeTextField, myTipTextField].forEach {

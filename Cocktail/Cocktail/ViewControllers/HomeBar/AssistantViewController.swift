@@ -19,7 +19,7 @@ class AssistantViewController: UIViewController {
         }), for: .touchUpInside)
         
         myBarButton.addAction(UIAction(handler: { [weak self]_ in
-            let homeBarViewController = HomeBarViewController()
+            let homeBarViewController = MyDrinksViewController()
             print("눌림")
             self?.show(homeBarViewController, sender: nil)
         }), for: .touchUpInside)

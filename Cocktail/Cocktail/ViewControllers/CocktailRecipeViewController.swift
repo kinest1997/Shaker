@@ -14,7 +14,7 @@ class CocktailRecipeViewController: UIViewController {
     lazy var filterView = FilteredView()
     
     let saveButton = UIButton()
-//    let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
+
     let resetButton = UIButton()
     
     let mainTableView = UITableView()
@@ -23,8 +23,8 @@ class CocktailRecipeViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        getRecipe(data: &originRecipe)
         getRecipe(data: &unTouchableRecipe)
+        originRecipe = unTouchableRecipe
         filteredRecipe = originRecipe
         mainTableView.delegate = self
         mainTableView.dataSource = self
@@ -49,9 +49,12 @@ class CocktailRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterButton
         let leftarrangeButton = UIBarButtonItem(title: "Sort".localized, style: .plain, target: self, action: #selector(arrangement))
         navigationItem.leftBarButtonItem = leftarrangeButton
-
-
-
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getRecipe(data: &unTouchableRecipe)
+        mainTableView.reloadData()
     }
     
     func layout() {
