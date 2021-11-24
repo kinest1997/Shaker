@@ -57,7 +57,6 @@ class CocktailDetailViewController: UIViewController {
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
             self.originRecipe.append(data)
             self.upload(recipe: self.originRecipe)
-            print("xxxx")
         }
     }
     
