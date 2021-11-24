@@ -42,7 +42,6 @@ class CocktailListCell: UITableViewCell {
     func configure(data: Cocktail) {
         nameLabel.text = data.name
         ingredientCountLabel.text = "Ingredients".localized + "\(data.ingredients.count)" + "EA".localized
-        //이미지를 어떻게 해야하나 고민중, URL 추가해서 다 넣어줘야하나? 에반데
-        cocktailImage.image = UIImage(named: "cocktail-glass")
+        cocktailImage.image = UIImage(named: data.name)
     }
 }

@@ -3,6 +3,11 @@ import SnapKit
 
 class CocktailDetailViewController: UIViewController {
     
+    lazy var addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
+    
+    var originRecipe: [Cocktail] = []
+    
+    var cocktailData: Cocktail?
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     
@@ -46,6 +51,33 @@ class CocktailDetailViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
+        navigationItem.rightBarButtonItem = editingButton
+        getRecipe(data: &originRecipe)
+        addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
+            self.originRecipe.append(data)
+            self.upload(recipe: self.originRecipe)
+        }
+    }
+    
+    func upload(recipe: [Cocktail]) {
+        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
+        do {
+            let data = try PropertyListEncoder().encode(recipe)
+            try data.write(to: documentURL)
+            print(data)
+        } catch let error {
+            print("ERROR", error.localizedDescription)
+        }
+    }
+    
+    @objc func startEditing() {
+        guard let cocktailData = cocktailData else { return }
+        addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
+        addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
+        addMyOwnCocktailRecipeViewController.choiceView.myIngredients = cocktailData.ingredients
+        addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
+        show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
     
     func layout() {
@@ -54,6 +86,11 @@ class CocktailDetailViewController: UIViewController {
         
         [groupStackView, cocktailImageView].forEach {
             mainView.addSubview($0)
+        }
+        [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView].forEach {
+            $0.snp.makeConstraints {
+                $0.height.equalTo(40)
+            }
         }
         
         [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView, recipeStackView, mytipStackView].forEach {
@@ -120,14 +157,13 @@ class CocktailDetailViewController: UIViewController {
             $0.top.equalTo(cocktailImageView.snp.bottom).offset(50)
             $0.leading.trailing.equalToSuperview()
         }
-
     }
     
     func attribute() {
         cocktailImageView.image = UIImage(named: "Martini")
         groupStackView.axis = .vertical
         groupStackView.backgroundColor = .brown
-        groupStackView.distribution = .fillEqually
+        groupStackView.distribution = .fill
         groupStackView.spacing = 20
         nameGuideLabel.text = "Name".localized
         alcoholGuideLabel.text = "Alcohol".localized
@@ -140,24 +176,13 @@ class CocktailDetailViewController: UIViewController {
     }
 
     func setData(data: Cocktail) {
-        nameLabel.text = data.name
-        alcoholLabel.text = data.alcohol.rawValue
-        colorLabel.text = data.color.rawValue
-        baseDrinkLabel.text = data.base.rawValue
-        glassLabel.text = data.glass.rawValue
-        craftLabel.text = data.craft.rawValue
-        recipeLabel.text = data.recipe
-        myTipLabel.text = data.mytip
+        nameLabel.text = data.name.localized
+        alcoholLabel.text = data.alcohol.rawValue.localized
+        colorLabel.text = data.color.rawValue.localized
+        baseDrinkLabel.text = data.base.rawValue.localized
+        glassLabel.text = data.glass.rawValue.localized
+        craftLabel.text = data.craft.rawValue.localized
+        recipeLabel.text = data.recipe.localized
+        myTipLabel.text = data.mytip.localized
     }
-    
-//    func alcoholSelect(data: String) -> String {
-//        switch data {
-//        case "high":
-//            return "high".localized
-//        case "mid":
-//            return "mid".localized
-//        default :
-//            return "low".localized
-//        }
-//    }
 }

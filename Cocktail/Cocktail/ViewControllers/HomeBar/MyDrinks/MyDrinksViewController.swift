@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class HomeBarViewController: UIViewController {
+class MyDrinksViewController: UIViewController {
     
     var myDrink: Set<String> = []
     

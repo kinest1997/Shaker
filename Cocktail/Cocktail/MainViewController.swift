@@ -45,7 +45,7 @@ class MainViewController: UITabBarController {
     
     let todayCocktailViewController = TodayCocktailViewController()
     let cocktailRecipeViewController = CocktailRecipeViewController()
-    let homeBarViewController = HomeBarViewController()
+    let assistantViewController = AssistantViewController()
     let settingsViewController = SettingsViewController()
     
     let tabBarItems: [Tab: UITabBarItem] = [
@@ -64,23 +64,23 @@ class MainViewController: UITabBarController {
         if !FileManager.default.fileExists(atPath: documentURL.path) {
                     do {
                         try FileManager.default.copyItem(at: bundleURL, to: documentURL)
+                        print("번들에서 도큐멘트로 복사함")
                     } catch let error {
                         print("ERROR", error.localizedDescription)
                     }
                 }
-        //일단 이부분 보류
         tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default
-        //attribute
+        
         todayCocktailViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
-        homeBarViewController.tabBarItem = tabBarItems[.home]
+        assistantViewController.tabBarItem = tabBarItems[.home]
         settingsViewController.tabBarItem = tabBarItems[.preference]
         self.viewControllers = [
             UINavigationController(rootViewController: todayCocktailViewController),
             UINavigationController(rootViewController: cocktailRecipeViewController),
-            UINavigationController(rootViewController: homeBarViewController),
+            UINavigationController(rootViewController: assistantViewController),
             UINavigationController(rootViewController: settingsViewController)
         ]
     }

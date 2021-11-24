@@ -32,6 +32,7 @@ extension CocktailListTableView {
         let cocktailData = lastRecipe[indexPath.row]
         let cocktailDetailViewController = CocktailDetailViewController()
         cocktailDetailViewController.setData(data: cocktailData)
+        cocktailDetailViewController.cocktailData = cocktailData
         self.show(cocktailDetailViewController, sender: nil)
     }
 }

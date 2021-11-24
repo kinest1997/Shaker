@@ -105,14 +105,11 @@ class FilteredView: UIView {
                 colorSorted.append(contentsOf: sorted)
             }
         }
-        
         let final = Set(baseSorted).intersection(Set(alcoholSorted))
             .intersection(Set(drinktypeSorted)).intersection(Set(craftSorted)).intersection(Set(glassSorted)).intersection(Set(colorSorted))
         return Array(final)
     }
-    
-    //        view.backgroundColor = .systemGray2
-    //        view.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.cellIsChecked = (0...5).map {
@@ -200,22 +197,22 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
         cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
         switch indexPath.section {
         case 0:
-            cell.nameLabel.text = alcoholSection[indexPath.row].rawValue
+            cell.nameLabel.text = alcoholSection[indexPath.row].rawValue.localized
         case 1:
             cell.nameLabel.text =
-            baseSection[indexPath.row].rawValue
+            baseSection[indexPath.row].rawValue.localized
         case 2:
             cell.nameLabel.text =
-            drinkTypeSection[indexPath.row].rawValue
+            drinkTypeSection[indexPath.row].rawValue.localized
         case 3:
             cell.nameLabel.text =
-            craftSection[indexPath.row].rawValue
+            craftSection[indexPath.row].rawValue.localized
         case 4:
             cell.nameLabel.text =
-            glassSection[indexPath.row].rawValue
+            glassSection[indexPath.row].rawValue.localized
         case 5:
             cell.nameLabel.text =
-            colorSection[indexPath.row].rawValue
+            colorSection[indexPath.row].rawValue.localized
         default:
             break
         }
@@ -232,13 +229,11 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
                 cell.isChecked = cellIsChecked[0][indexPath.row]
                 guard let number = alcoholCondition.firstIndex(of: alcoholSection[indexPath.row]) else { return }
                 alcoholCondition.remove(at: number)
-            
             } else {
                 cellIsChecked[0][indexPath.row] = true
                 print(cellIsChecked)
                 alcoholCondition.append(alcoholSection[indexPath.row])
                 cell.isChecked = cellIsChecked[0][indexPath.row]
-
             }
         case 1:
             if cellIsChecked[1][indexPath.row] == true {
@@ -250,7 +245,6 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
                 cellIsChecked[1][indexPath.row] = true
                 cell.isChecked = cellIsChecked[1][indexPath.row]
                 baseCondition.append(baseSection[indexPath.row])
-
             }
         case 2:
             if cellIsChecked[2][indexPath.row] == true {
@@ -262,7 +256,6 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
                 cellIsChecked[2][indexPath.row] = true
                 cell.isChecked = cellIsChecked[2][indexPath.row]
                 drinkTypeCondition.append(drinkTypeSection[indexPath.row])
-
             }
         case 3:
             if cellIsChecked[3][indexPath.row] == true {
@@ -285,7 +278,6 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
                 cellIsChecked[4][indexPath.row] = true
                 glassCondition.append(glassSection[indexPath.row])
                 cell.isChecked = cellIsChecked[4][indexPath.row]
-
             }
         case 5:
             if cellIsChecked[5][indexPath.row] == true {
@@ -297,12 +289,9 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
                 cellIsChecked[5][indexPath.row] = true
                 colorCondition.append(colorSection[indexPath.row])
                 cell.isChecked = cellIsChecked[5][indexPath.row]
-
             }
-            //이 말도안되는 중복코드를 간단하게 적을 함수를 만들수있을까.. 제네릭을 이때 사용하는건가? 일단 보류
         default:
             break
         }
     }
 }
-// 다른 화면에서도 재활용?

@@ -13,10 +13,12 @@ class FilterViewCell: UITableViewCell {
         mainStackView.addArrangedSubview(nameLabel)
         mainStackView.addArrangedSubview(appliedCheckImgageView)
         nameLabel.textAlignment = .left
-//        imageApply()
         appliedCheckImgageView.image = isChecked ? UIImage(systemName: "checkmark.circle") : UIImage(systemName: "circle")
         mainStackView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+        appliedCheckImgageView.snp.makeConstraints {
+            $0.width.height.equalTo(50)
         }
     }
     func imageApply() {

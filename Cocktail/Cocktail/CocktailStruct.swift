@@ -18,6 +18,7 @@ struct Cocktail: Codable, Hashable {
     let color: Color
     let mytip: String
     let drinkType: DrinkType
+    var myRecipe: Bool
 
     enum Base: String, Codable, CaseIterable{
         case rum = "럼"
@@ -185,7 +186,7 @@ struct Cocktail: Codable, Hashable {
         case lemon = "레몬"
         case lemonSqueeze = "레몬즙"
         case appleMint = "애플민트"
-        case whippingCream = "휘핑크림"
+        case whippingCream = " 크림"
         case honey = "꿀"
         case olive = "올리브"
         case oliveJuice = "올리브주스"
@@ -321,26 +322,7 @@ struct Cocktail: Codable, Hashable {
                 self = .unknown
             }
         }
-        
-        
-        //        var base: String {
-        //            switch self {
-        //            case .vodka:
-        //                return "보드카"
-        //            case .gin:
-        //                return "진"
-        //            case .whiskey, .ryeWhiskey, .scotchWhiskey, .bourbonWhiskey, .jackDanielWhiskey:
-        //                return "위스키"
-        //            case .tequila:
-        //                return "데킬라"
-        //            case . baileys, .melonLiqueur, .whiteCacaoLiqueur, .sweetVermouth, .peachTree, .grapeFruitLiqueur, .cacaoLiqueur, .cremeDeCassis, .greenMintLiqueur, .campari, .kahlua, .blueCuraso, .malibu, .bananaliqueur, .amaretto, .triplesec, .butterScotchLiqueur, .dryVermouth:
-        //                return "리큐르"
-        //            default:
-        //                return "없음"
-        //            }
-        //        }
     }
-    
 }
 
 //realm은 일단 보류
