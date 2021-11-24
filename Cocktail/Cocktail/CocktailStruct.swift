@@ -30,7 +30,6 @@ struct Cocktail: Codable, Hashable {
         case liqueur = "리큐르"
         case assets = "기타"
         case beverage = "음료"
-//        case everything
         
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
