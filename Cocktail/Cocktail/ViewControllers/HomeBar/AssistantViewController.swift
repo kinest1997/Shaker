@@ -43,5 +43,4 @@ class AssistantViewController: UIViewController {
             $0.height.width.equalTo(150)
         }
     }
-    
 }
