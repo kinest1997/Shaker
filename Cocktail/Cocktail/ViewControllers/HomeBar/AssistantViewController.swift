@@ -42,7 +42,6 @@ class AssistantViewController: UIViewController {
             $0.center.equalToSuperview()
             $0.height.width.equalTo(150)
         }
-        
     }
     
 }
