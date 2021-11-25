@@ -66,12 +66,10 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.nameLabel.text = allIngredients[indexPath.row].rawValue
             cell.backgroundColor = .red
             cell.checkBoxImage.image = UIImage(systemName: "checkmark.circle")
-            print(ingredientsWhatIhave)
         } else {
             ingredientsWhatIhave.append(allIngredients[indexPath.row].rawValue)
             cell.checkBoxImage.image = UIImage(systemName: "checkmark.circle.fill")
             cell.backgroundColor = .systemBlue
-            print(ingredientsWhatIhave)
         }
     }
 }

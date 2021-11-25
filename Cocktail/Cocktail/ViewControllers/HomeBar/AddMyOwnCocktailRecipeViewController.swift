@@ -18,6 +18,9 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     let cocktailImageView = UIImageView()
+
+    let imagePickerController = UIImagePickerController()
+    let alertController = UIAlertController(title: "올릴 방식을 선택하세요", message: "사진 찍기 또는 앨범에서 선택", preferredStyle: .actionSheet)
     
     let nameLabel = UILabel()
     let nameTextField = UITextField()
@@ -217,6 +220,9 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         layout()
         registerKeyboardNotification()
         actions()
+        self.imagePickerController.delegate = self
+        enrollAlertEvent()
+        addGestureRecognizer()
     }
     
     func actions() {
@@ -432,7 +438,18 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         } else if myTipTextField.text?.isEmpty ?? true {
             presentJustAlert(title: "Hold on".localized, message: "Write tips".localized)
         } else {
+            let fileManager = FileManager.default
+            let url = (getDirectoryPath() as NSURL)
+              
+            let imagePath = url.appendingPathComponent((nameTextField.text ?? "NoName") + ".png") // Here Image Saved With This Name ."MyImage.png"
+            let urlString: String = imagePath!.absoluteString
+              
+            guard let ImgForSave = cocktailImageView.image else { return } // here i Want To Saved This Image In Document Directory
+            let imageData = UIImage.pngData(ImgForSave)
+           
+            fileManager.createFile(atPath: urlString as String, contents: imageData(), attributes: nil)
             myOwnRecipeData?(myRecipe)
+            
             navigationController?.popViewController(animated: true)
         } 
     }
@@ -460,3 +477,82 @@ extension AddMyOwnCocktailRecipeViewController: UITextFieldDelegate {
         self.view.endEditing(true)
     }
 }
+
+
+extension AddMyOwnCocktailRecipeViewController: UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate,
+                                        UINavigationControllerDelegate {
+    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+        if let popoverPresentationController =
+      self.alertController.popoverPresentationController {
+            popoverPresentationController.sourceView = self.view
+            popoverPresentationController.sourceRect
+            = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverPresentationController.permittedArrowDirections = []
+        }
+    }
+    
+    func openAlbum() {
+            self.imagePickerController.sourceType = .photoLibrary
+            present(self.imagePickerController, animated: false, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[UIImagePickerController.InfoKey.originalImage]
+                as? UIImage {
+                //이미지를 저장 완료하고난뒤
+                cocktailImageView.image = image
+
+            }
+            else {
+                print("error detected in didFinishPickinMediaWithInfo method")
+            }
+            dismiss(animated: true, completion: nil) // 반드시 dismiss 하기.
+        }
+    
+    func openCamera() {
+           if (UIImagePickerController.isSourceTypeAvailable(.camera)) {
+               self.imagePickerController.sourceType = .camera
+               present(self.imagePickerController, animated: false, completion: nil)
+           }
+           else {
+               print ("Camera's not available as for now.")
+           }
+       }
+    
+    func addGestureRecognizer() {
+            let tapGestureRecognizer
+      = UITapGestureRecognizer(target: self,
+                               action: #selector(self.tappedUIImageView(_:)))
+            self.cocktailImageView.addGestureRecognizer(tapGestureRecognizer)
+            self.cocktailImageView.isUserInteractionEnabled = true
+    }
+    
+    @objc func tappedUIImageView(_ gesture: UITapGestureRecognizer) {
+            self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func enrollAlertEvent() {
+            let photoLibraryAlertAction = UIAlertAction(title: "사진 앨범", style: .default) {
+                (action) in
+                self.openAlbum() // 아래에서 설명 예정.
+            }
+            let cameraAlertAction = UIAlertAction(title: "카메라", style: .default) {(action) in
+                self.openCamera() // 아래에서 설명 예정.
+            }
+            let cancelAlertAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            self.alertController.addAction(photoLibraryAlertAction)
+            self.alertController.addAction(cameraAlertAction)
+            self.alertController.addAction(cancelAlertAction)
+            guard let alertControllerPopoverPresentationController
+                    = alertController.popoverPresentationController
+            else {return}
+            prepareForPopoverPresentation(alertControllerPopoverPresentationController)
+    }
+    
+   
+}
+
+
+
+
+

@@ -8,9 +8,10 @@ class FilteredView: UIView {
     let mainView = UIView()
     let mainTableView = UITableView()
     let topStackView = UIStackView()
-    let leftCancelButton = UIButton()
-    let rightSaveButton = UIButton()
+    let resetButton = UIButton()
+    let clearAllButton = UIButton()
     let centerLabel = UILabel()
+    let saveButton = UIButton()
     
     let filterSections = ["Alcohol".localized, "Base".localized, "DrinkType".localized, "Craft".localized, "Glass".localized, "Color".localized ]
     
@@ -22,14 +23,7 @@ class FilteredView: UIView {
     var craftConditon: [Cocktail.Craft] = []
     var glassCondition: [Cocktail.Glass] = []
     var colorCondition: [Cocktail.Color] = []
-    
-    var conditionsOfCocktail: [[Any]] {
-        return [baseCondition, alcoholCondition, drinkTypeCondition, craftConditon, glassCondition, colorCondition ]
-    }
-    
-    
-    let allcompononts: [Any] = [Cocktail.Alcohol.self, Cocktail.Base.self, Cocktail.DrinkType.self, Cocktail.Craft.self, Cocktail.Craft.self, Cocktail.Glass.self, Cocktail.Color.self]
-    
+
     let alcoholSection = Cocktail.Alcohol.allCases
     let baseSection = Cocktail.Base.allCases
     let drinkTypeSection = Cocktail.DrinkType.allCases
@@ -41,38 +35,25 @@ class FilteredView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.cellIsChecked = (0...5).map {
-            switch $0 {
-            case 0:
-                return alcoholSection.map { _ in false }
-            case 1:
-                return baseSection.map { _ in false }
-            case 2:
-                return drinkTypeSection.map { _ in false }
-            case 3:
-                return craftSection.map { _ in false }
-            case 4:
-                return glassSection.map { _ in false }
-            case 5:
-                return colorSection.map { _ in false }
-            default:
-                return []
-            }
+        self.cellIsChecked = componentsOfCocktail.map {
+            $0.map { _ in false }
         }
         self.addSubview(mainView)
         self.addSubview(topStackView)
         mainView.addSubview(mainTableView)
         mainView.addSubview(topStackView)
-        topStackView.addArrangedSubview(leftCancelButton)
+        mainView.addSubview(saveButton)
+        topStackView.addArrangedSubview(resetButton)
         topStackView.addArrangedSubview(centerLabel)
-        topStackView.addArrangedSubview(rightSaveButton)
+        topStackView.addArrangedSubview(clearAllButton)
         topStackView.backgroundColor = .red
         mainView.backgroundColor = .blue
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.register(FilterViewCell.self, forCellReuseIdentifier: "filterCell")
         self.mainTableView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(50)
+            $0.top.equalToSuperview().inset(50)
+            $0.bottom.equalToSuperview().inset(100)
             $0.leading.trailing.equalToSuperview()
         }
         self.mainView.snp.makeConstraints {
@@ -80,11 +61,24 @@ class FilteredView: UIView {
             $0.width.equalTo(300)
             $0.height.equalTo(600)
         }
+        self.saveButton.snp.makeConstraints {
+            $0.top.equalTo(mainTableView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        self.topStackView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(mainTableView.snp.top)
+        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func reloadNumbers() {
+        
+    }
+    
     //걸러내는 함수
     func sortingRecipes(origin: [Cocktail], base: [Cocktail.Base], alcohol: [Cocktail.Alcohol], drinktype: [Cocktail.DrinkType], craft: [Cocktail.Craft], glass: [Cocktail.Glass], color: [Cocktail.Color]) -> [Cocktail] {
         var baseSorted = [Cocktail]()
@@ -198,15 +192,15 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
 //        if cellIsChecked[indexPath.section][indexPath.row] == true {
 //            cellIsChecked[indexPath.section][indexPath.row] = false
 //            cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
-//            guard let location = allcompononts[indexPath.section][indexPath.row]  , let number = conditionsOfCocktail[indexPath.section].firstIndex(of:  else { return }
+//            guard let number = alcoholCondition.firstIndex(of: alcoholSection[indexPath.row]) else { return }
 //            conditionsOfCocktail[indexPath.section].remove(at: number)
 //        } else {
 //            cellIsChecked[indexPath.section][indexPath.row] = true
 //            print(cellIsChecked)
-//            alcoholCondition.append(alcoholSection[indexPath.row])
+//            conditionsOfCocktail[indexPath.section].append(alcoholSection[indexPath.row])
 //            cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
 //        }
-//
+
         switch indexPath.section {
         case 0:
             if cellIsChecked[0][indexPath.row] == true {

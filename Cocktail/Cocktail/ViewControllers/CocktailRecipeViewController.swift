@@ -10,8 +10,7 @@ class CocktailRecipeViewController: UIViewController {
     var filteredRecipe: [Cocktail] = []
 
     lazy var filterView = FilteredView()
-    let saveButton = UIButton()
-    let resetButton = UIButton()
+
     let mainTableView = UITableView()
     
     override func viewDidLoad() {
@@ -58,42 +57,37 @@ class CocktailRecipeViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(10)
             $0.top.bottom.equalToSuperview().inset(100)
         }
-        saveButton.snp.makeConstraints {
-            $0.top.equalTo(filterView.mainTableView.snp.bottom)
-            $0.leading.trailing.bottom.equalTo(filterView)
-        }
-        resetButton.snp.makeConstraints {
-            $0.leading.top.equalTo(filterView)
-            $0.bottom.equalTo(filterView.mainTableView.snp.top)
-            $0.width.equalTo(100)
-        }
     }
     
     func attribute() {
         view.backgroundColor = .systemCyan
         view.addSubview(mainTableView)
         navigationController?.view.addSubview(filterView)
-        filterView.addSubview(saveButton)
-        filterView.addSubview(resetButton)
         filterView.isHidden = true
-        saveButton.setTitle("Save".localized, for: .normal)
-        resetButton.setTitle("Reset".localized, for: .normal)
+        filterView.saveButton.setTitle("Save".localized, for: .normal)
+        filterView.resetButton.setTitle("Reset".localized, for: .normal)
         
         //저장 버튼의 액션
-        saveButton.addAction(UIAction(handler: {[unowned self]_ in
+        filterView.saveButton.addAction(UIAction(handler: {[unowned self]_ in
             self.filterView.isHidden = true
             let filteredViewRecipe = filterView.sortingRecipes(origin: unTouchableRecipe, base: filterView.baseCondition, alcohol: filterView.alcoholCondition, drinktype: filterView.drinkTypeCondition, craft: filterView.craftConditon, glass: filterView.glassCondition, color: filterView.colorCondition).sorted { $0.name < $1.name }
             self.originRecipe = filteredViewRecipe
             mainTableView.reloadData()
         }), for: .touchUpInside)
         //리셋 버튼의 액션
-        resetButton.addAction(UIAction(handler: { [unowned self]_ in
+        filterView.resetButton.addAction(UIAction(handler: { [unowned self]_ in
             self.filterView.cellIsChecked = self.filterView.cellIsChecked.map {
                 $0.map { _ in false}
             }
+            self.filterView.baseCondition = []
+            self.filterView.alcoholCondition = []
+            self.filterView.drinkTypeCondition = []
+            self.filterView.craftConditon = []
+            self.filterView.glassCondition = []
+            self.filterView.colorCondition = []
+
             self.filterView.nowFiltering = false
             self.filterView.isHidden = true
-            print(self.filterView.cellIsChecked)
             self.filterView.mainTableView.reloadData()
             self.mainTableView.reloadData()
         }), for: .touchUpInside)

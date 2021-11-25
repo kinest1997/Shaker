@@ -69,6 +69,18 @@ class MainViewController: UITabBarController {
                         print("ERROR", error.localizedDescription)
                     }
                 }
+
+          let fileManager = FileManager.default
+          let PathWithFolderName = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("UserImage")
+          
+          print("Document Directory Folder Path :- ",PathWithFolderName)
+              
+          if !fileManager.fileExists(atPath: PathWithFolderName)
+          {
+              try! fileManager.createDirectory(atPath: PathWithFolderName, withIntermediateDirectories: true, attributes: nil)
+          }
+
+        
         tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default

@@ -16,3 +16,28 @@ func getRecipe(data: inout [Cocktail]) {
         print(String(describing: error))
     }
 }
+
+func getDirectoryPath() -> NSURL {
+  // path is main document directory path
+    let documentDirectoryPath = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString)
+    let pathWithFolderName = documentDirectoryPath.appendingPathComponent("UserImage")
+    guard let url = NSURL(string: pathWithFolderName) else { return NSURL() } // convert path in url
+    return url
+}
+
+func setImage(name: String, data: Cocktail, imageView: UIImageView) {
+    if data.myRecipe == true {
+        let fileManager = FileManager.default
+          
+        let imagePath = (getDirectoryPath() as NSURL).appendingPathComponent(name + ".png")
+        let urlString: String = imagePath!.absoluteString
+          
+        if fileManager.fileExists(atPath: urlString) {
+            let GetImageFromDirectory = UIImage(contentsOfFile: urlString)
+            imageView.image = GetImageFromDirectory
+        }
+        else {
+            print("No Image Found")
+        }
+    }
+}
