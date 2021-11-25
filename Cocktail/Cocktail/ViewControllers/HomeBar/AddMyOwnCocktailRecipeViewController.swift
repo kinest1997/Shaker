@@ -11,6 +11,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     var ingredients: [Cocktail.Ingredients] = []
     var drinkType: Cocktail.DrinkType = .longDrink
     var myOwnRecipeData: ((Cocktail) -> Void)?
+    var cocktailImageData: ((UIImage) -> Void)?
     
     var beforeEditingData: Cocktail?
     
@@ -449,6 +450,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
            
             fileManager.createFile(atPath: urlString as String, contents: imageData(), attributes: nil)
             myOwnRecipeData?(myRecipe)
+            cocktailImageData?(cocktailImageView.image!)
             
             navigationController?.popViewController(animated: true)
         } 
@@ -500,8 +502,7 @@ extension AddMyOwnCocktailRecipeViewController: UIPopoverPresentationControllerD
             if let image = info[UIImagePickerController.InfoKey.originalImage]
                 as? UIImage {
                 //이미지를 저장 완료하고난뒤
-                cocktailImageView.image = image
-
+                cocktailImageView.image = ImageConverter.resize(image: image)
             }
             else {
                 print("error detected in didFinishPickinMediaWithInfo method")

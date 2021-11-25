@@ -163,8 +163,6 @@ class CocktailDetailViewController: UIViewController {
         ingredientsGuideLabel.text = "Ingredients".localized
     }
     
-
-    
     func upload(recipe: [Cocktail]) {
         let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
         do {
