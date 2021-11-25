@@ -17,6 +17,7 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
         contentView.addSubview(mainImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(checkBoxImage)
+        nameLabel.font = .systemFont(ofSize: 15)
         
         mainImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -28,9 +29,8 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
             $0.trailing.equalToSuperview().inset(30)
         }
         checkBoxImage.snp.makeConstraints {
-            $0.leading.equalTo(nameLabel.snp.trailing)
-            $0.bottom.trailing.equalToSuperview()
-            $0.top.equalTo(nameLabel)
+            $0.top.trailing.equalToSuperview()
+            $0.height.width.equalTo(30)
         }
     }
 }

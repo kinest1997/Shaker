@@ -57,28 +57,7 @@ class CocktailDetailViewController: UIViewController {
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
             self.originRecipe.append(data)
             self.upload(recipe: self.originRecipe)
-            print("xxxx")
         }
-    }
-    
-    func upload(recipe: [Cocktail]) {
-        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-        do {
-            let data = try PropertyListEncoder().encode(recipe)
-            try data.write(to: documentURL)
-            print(data)
-        } catch let error {
-            print("ERROR", error.localizedDescription)
-        }
-    }
-    
-    @objc func startEditing() {
-        guard let cocktailData = cocktailData else { return }
-        addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
-        addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
-        addMyOwnCocktailRecipeViewController.choiceView.myIngredients = cocktailData.ingredients
-        addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
-        show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
     
     func layout() {
@@ -174,6 +153,26 @@ class CocktailDetailViewController: UIViewController {
         craftGuideLabel.text = "Craft".localized
         recipeGuideLabel.text = "Recipe".localized
         myTipGuideLabel.text = "Tip".localized
+    }
+    
+    func upload(recipe: [Cocktail]) {
+        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
+        do {
+            let data = try PropertyListEncoder().encode(recipe)
+            try data.write(to: documentURL)
+            print(data)
+        } catch let error {
+            print("ERROR", error.localizedDescription)
+        }
+    }
+    
+    @objc func startEditing() {
+        guard let cocktailData = cocktailData else { return }
+        addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
+        addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
+        addMyOwnCocktailRecipeViewController.choiceView.myIngredients = cocktailData.ingredients
+        addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
+        show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
 
     func setData(data: Cocktail) {

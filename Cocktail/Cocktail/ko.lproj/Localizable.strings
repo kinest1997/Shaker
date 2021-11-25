@@ -54,6 +54,11 @@
 "Your own recipe" = "당신만의 레시피";
 "Your own tip" = "당신만의 팁";
 
+"Hold on" = "잠깐만요";
+"Write name" = "이름적어!";
+"Write recipe" = "레시피적어!";
+"Write tips" = "팁도좀 적어";
+
 //MainViewController.swift
 "Recommendation" = "추천";
 "Recipe" = "레시피";

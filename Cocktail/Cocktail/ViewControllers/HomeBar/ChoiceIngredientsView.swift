@@ -116,7 +116,6 @@ class ChoiceIngredientsView: UIView {
             }
             return (section, row)
         }
-        print(coordinate)
         return coordinate
     }
 }

@@ -41,7 +41,7 @@ class CocktailListCell: UITableViewCell {
 
     func configure(data: Cocktail) {
         nameLabel.text = data.name
-        ingredientCountLabel.text = "Ingredients".localized + "\(data.ingredients.count)" + "EA".localized
+        ingredientCountLabel.text = "Ingredients".localized + " \(data.ingredients.count)" + "EA".localized
         cocktailImage.image = UIImage(named: data.name)
     }
 }

@@ -52,11 +52,10 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
             cell.mainImageView.image = UIImage(named: allIngredients[indexPath.row].rawValue)
             cell.checkBoxImage.image = UIImage(systemName: "checkmark.circle")
         }
-        //asset에 이름과 같은 이미지를 다 넣고 그걸 불러오는형식으로 하는게 좋을듯?
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 120, height: 120)
+        return CGSize(width: 110, height: 110)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

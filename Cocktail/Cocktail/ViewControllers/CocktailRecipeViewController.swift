@@ -6,17 +6,12 @@ class CocktailRecipeViewController: UIViewController {
     let searchController = UISearchController(searchResultsController: nil)
 
     var unTouchableRecipe: [Cocktail] = []
-    
     var originRecipe: [Cocktail] = []
-    
     var filteredRecipe: [Cocktail] = []
-    
-    lazy var filterView = FilteredView()
-    
-    let saveButton = UIButton()
 
+    lazy var filterView = FilteredView()
+    let saveButton = UIButton()
     let resetButton = UIButton()
-    
     let mainTableView = UITableView()
     
     override func viewDidLoad() {
@@ -29,7 +24,7 @@ class CocktailRecipeViewController: UIViewController {
         mainTableView.delegate = self
         mainTableView.dataSource = self
         title = "Recipe".localized
-        view.backgroundColor = .systemCyan
+        
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
         
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -75,19 +70,23 @@ class CocktailRecipeViewController: UIViewController {
     }
     
     func attribute() {
+        view.backgroundColor = .systemCyan
         view.addSubview(mainTableView)
         navigationController?.view.addSubview(filterView)
         filterView.addSubview(saveButton)
         filterView.addSubview(resetButton)
         filterView.isHidden = true
+        saveButton.setTitle("Save".localized, for: .normal)
+        resetButton.setTitle("Reset".localized, for: .normal)
+        
+        //저장 버튼의 액션
         saveButton.addAction(UIAction(handler: {[unowned self]_ in
             self.filterView.isHidden = true
             let filteredViewRecipe = filterView.sortingRecipes(origin: unTouchableRecipe, base: filterView.baseCondition, alcohol: filterView.alcoholCondition, drinktype: filterView.drinkTypeCondition, craft: filterView.craftConditon, glass: filterView.glassCondition, color: filterView.colorCondition).sorted { $0.name < $1.name }
             self.originRecipe = filteredViewRecipe
             mainTableView.reloadData()
         }), for: .touchUpInside)
-        saveButton.setTitle("Save".localized, for: .normal)
-        resetButton.setTitle("Reset".localized, for: .normal)
+        //리셋 버튼의 액션
         resetButton.addAction(UIAction(handler: { [unowned self]_ in
             self.filterView.cellIsChecked = self.filterView.cellIsChecked.map {
                 $0.map { _ in false}
@@ -104,7 +103,6 @@ class CocktailRecipeViewController: UIViewController {
         filterView.nowFiltering = true
         filterView.isHidden = false
         mainTableView.reloadData()
-        print("눌림")
     }
     
     @objc func arrangement() {
@@ -125,17 +123,17 @@ extension CocktailRecipeViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "key", for: indexPath) as? CocktailListCell else { return UITableViewCell() }
+        
+        cell.accessoryType = .disclosureIndicator
+        
         if (isFiltering() && filterView.nowFiltering) || isFiltering(){
             cell.configure(data: filteredRecipe[indexPath.row])
-            cell.accessoryType = .disclosureIndicator
             return cell
         } else if filterView.nowFiltering {
             cell.configure(data: originRecipe[indexPath.row])
-            cell.accessoryType = .disclosureIndicator
             return cell
         } else {
             cell.configure(data: unTouchableRecipe[indexPath.row])
-            cell.accessoryType = .disclosureIndicator
             return cell
         }
     }
@@ -146,25 +144,21 @@ extension CocktailRecipeViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (isFiltering() && filterView.nowFiltering) || isFiltering() {
-            let cocktailData = filteredRecipe[indexPath.row]
-            let cocktailDetailViewController = CocktailDetailViewController()
-            cocktailDetailViewController.setData(data: cocktailData)
-            cocktailDetailViewController.cocktailData = cocktailData
-            self.show(cocktailDetailViewController, sender: nil)
+            sendData(recipe: filteredRecipe[indexPath.row])
         } else if filterView.nowFiltering {
-            let cocktailData = originRecipe[indexPath.row]
-            let cocktailDetailViewController = CocktailDetailViewController()
-            cocktailDetailViewController.setData(data: cocktailData)
-            cocktailDetailViewController.cocktailData = cocktailData
-            self.show(cocktailDetailViewController, sender: nil)
+            sendData(recipe: originRecipe[indexPath.row])
         }
         else {
-            let cocktailData = unTouchableRecipe[indexPath.row]
-            let cocktailDetailViewController = CocktailDetailViewController()
-            cocktailDetailViewController.setData(data: cocktailData)
-            cocktailDetailViewController.cocktailData = cocktailData
-            self.show(cocktailDetailViewController, sender: nil)
+            sendData(recipe: unTouchableRecipe[indexPath.row])
         }
+    }
+    
+    func sendData(recipe: Cocktail) {
+        let cocktailData = recipe
+        let cocktailDetailViewController = CocktailDetailViewController()
+        cocktailDetailViewController.setData(data: cocktailData)
+        cocktailDetailViewController.cocktailData = cocktailData
+        self.show(cocktailDetailViewController, sender: nil)
     }
 }
 
@@ -176,11 +170,9 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
     
     func isFiltering() -> Bool {
         return (searchController.isActive && !searchBarIsEmpty())
-        //서치바가 활성화 되어있는지, 그리고 서치바가 비어있지않은지
     }
     
     func searchBarIsEmpty() -> Bool {
-        //서치바가 비어있는지 확인하는것
         return searchController.searchBar.text?.isEmpty ?? true
     }
     

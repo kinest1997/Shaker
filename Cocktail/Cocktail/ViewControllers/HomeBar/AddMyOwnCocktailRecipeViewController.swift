@@ -207,6 +207,53 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let choiceView = ChoiceIngredientsView()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        [nameTextField, recipeTextField, myTipTextField].forEach {
+            $0.delegate = self
+        }
+        alcoholChoiceButton.backgroundColor = .red
+        attribute()
+        layout()
+        registerKeyboardNotification()
+        actions()
+    }
+    
+    func actions() {
+        ingredientsSelectButton.addAction(UIAction(handler: { [weak self]_ in
+            self?.choiceView.isHidden = false
+        }), for: .touchUpInside)
+        
+        choiceView.saveButton.addAction(UIAction(handler: { [weak self]_ in
+            self?.ingredients = self?.choiceView.myIngredients ?? []
+            self?.ingredientsSelectButton.setTitle("\(self?.ingredients.count ?? 0)"+"EA".localized+"Selected".localized, for: .normal)
+            self?.choiceView.isHidden = true
+        }), for: .touchUpInside)
+        
+        choiceView.resetButton.addAction(UIAction(handler: { [weak self]_ in
+            guard let self = self else { return }
+            self.choiceView.cellIsChecked = self.choiceView.cellIsChecked.map {
+                $0.map { _ in false}
+            }
+            self.ingredients = []
+            self.choiceView.myIngredients = []
+            self.choiceView.mainTableview.reloadData()
+            self.ingredientsSelectButton.setTitle("Ingredients".localized, for: .normal)
+            self.choiceView.isHidden = true
+        }), for: .touchUpInside)
+        
+        choiceView.cancelButton.addAction(UIAction(handler: { [weak self]_ in
+            self?.choiceView.isHidden = true
+        }), for: .touchUpInside)
+        
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MyTapMethod))
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.isEnabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        mainScrollView.addGestureRecognizer(singleTapGestureRecognizer)
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveRecipe))
+        navigationItem.rightBarButtonItem = saveButton
+    }
     
     func attribute() {
         alcoholChoiceButton.menu = alcoholSelectMenu
@@ -223,29 +270,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeChoiceButton.showsMenuAsPrimaryAction = true
         
         choiceView.isHidden = true
-        ingredientsSelectButton.addAction(UIAction(handler: { [weak self]_ in
-            self?.choiceView.isHidden = false
-        }), for: .touchUpInside)
-        choiceView.saveButton.addAction(UIAction(handler: { [weak self]_ in
-            self?.ingredients = self?.choiceView.myIngredients ?? []
-            self?.ingredientsSelectButton.setTitle("\(self?.ingredients.count ?? 0)"+"EA".localized+"Selected".localized, for: .normal)
-            self?.choiceView.isHidden = true
-        }), for: .touchUpInside)
-        choiceView.resetButton.addAction(UIAction(handler: { [weak self]_ in
-            guard let self = self else { return }
-            self.choiceView.cellIsChecked = self.choiceView.cellIsChecked.map {
-                $0.map { _ in false}
-            }
-            self.ingredients = []
-            self.choiceView.myIngredients = []
-            self.choiceView.mainTableview.reloadData()
-            self.ingredientsSelectButton.setTitle("Ingredients".localized, for: .normal)
-            self.choiceView.isHidden = true
-            //과연 리셋을 눌렀을때 창이 사라지는게 맞을까 그냥 선택 상태만 초기화 시키는게 맞을까
-        }), for: .touchUpInside)
-        choiceView.cancelButton.addAction(UIAction(handler: { [weak self]_ in
-            self?.choiceView.isHidden = true
-        }), for: .touchUpInside)
         
         cocktailImageView.image = UIImage(named: "Martini")
         groupStackView.axis = .vertical
@@ -267,11 +291,11 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         recipeTextField.placeholder = "Your own recipe".localized
         myTipTextField.placeholder = "Your own tip".localized
     }
-    
+
     func layout() {
         view.addSubview(mainScrollView)
-        mainScrollView.addSubview(mainView)
         view.addSubview(choiceView)
+        mainScrollView.addSubview(mainView)
         
         [groupStackView, cocktailImageView].forEach {
             mainView.addSubview($0)
@@ -377,7 +401,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             switch notification.name {
             case UIResponder.keyboardWillShowNotification:
                 let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-                self.view.frame.origin.y = 50 - keyboardSize.height
+                self.view.frame.origin.y = 0 - keyboardSize.height
             case UIResponder.keyboardWillHideNotification:
                 self.view.frame.origin.y = 0
             default:
@@ -399,36 +423,16 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         craft = data.craft
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        [nameTextField, recipeTextField, myTipTextField].forEach {
-            $0.delegate = self
-        }
-        alcoholChoiceButton.backgroundColor = .red
-        attribute()
-        layout()
-        registerKeyboardNotification()
-        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MyTapMethod))
-        singleTapGestureRecognizer.numberOfTapsRequired = 1
-        singleTapGestureRecognizer.isEnabled = true
-        singleTapGestureRecognizer.cancelsTouchesInView = false
-        mainScrollView.addGestureRecognizer(singleTapGestureRecognizer)
-        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveRecipe))
-        navigationItem.rightBarButtonItem = saveButton
-    }
-    
     @objc func saveRecipe() {
-        print("눌림")
         let myRecipe = Cocktail(name: nameTextField.text ?? "", craft: craft, glass: glass, recipe: recipeTextField.text ?? "", ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTipTextField.text ?? "", drinkType: drinkType, myRecipe: true)
         if nameTextField.text?.isEmpty ?? true  {
-            presentAlert(message: "이름적어!")
+            presentJustAlert(title: "Hold on".localized, message: "Write name".localized)
         } else if recipeTextField.text?.isEmpty ?? true {
-            presentAlert(message: "레시피는 적어야지")
+            presentJustAlert(title: "Hold on".localized, message: "Write recipe".localized)
         } else if myTipTextField.text?.isEmpty ?? true {
-            presentAlert(message: "팁도 좀적어")
+            presentJustAlert(title: "Hold on".localized, message: "Write tips".localized)
         } else {
             myOwnRecipeData?(myRecipe)
-            print("성공")
             navigationController?.popViewController(animated: true)
         } 
     }
@@ -437,8 +441,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    func presentAlert(message: String) {
-        let alert = UIAlertController(title: "Hold on".localized, message: message, preferredStyle: UIAlertController.Style.alert)
+    func presentJustAlert(title:String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "OK".localized, style: .default, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: false, completion: nil)
@@ -454,7 +458,5 @@ extension AddMyOwnCocktailRecipeViewController: UITextFieldDelegate {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
-        //이거 왜 안됨? 개빡치네
-        //일단 다른방법 찾음 스크롤뷰는 스크롤해야해서 한번의 터치는 원래 씹는다네
     }
 }
