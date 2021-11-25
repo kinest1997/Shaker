@@ -163,17 +163,6 @@ class CocktailDetailViewController: UIViewController {
         ingredientsGuideLabel.text = "Ingredients".localized
     }
     
-    func upload(recipe: [Cocktail]) {
-        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-        do {
-            let data = try PropertyListEncoder().encode(recipe)
-            try data.write(to: documentURL)
-            print(data)
-        } catch let error {
-            print("ERROR", error.localizedDescription)
-        }
-    }
-    
     @objc func startEditing() {
         guard let cocktailData = cocktailData else { return }
         addMyOwnCocktailRecipeViewController.editing(data: cocktailData)

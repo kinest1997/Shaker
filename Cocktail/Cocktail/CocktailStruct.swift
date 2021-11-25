@@ -24,6 +24,9 @@ struct ConditionData {
     } 
 }
 
+protocol CocktailCondition {
+    var rawValue: String { get }
+}
 
 struct Cocktail: Codable, Hashable {
     let name: String
@@ -38,7 +41,7 @@ struct Cocktail: Codable, Hashable {
     let drinkType: DrinkType
     var myRecipe: Bool
 
-    enum Base: String, Codable, CaseIterable{
+    enum Base: String, Codable, CaseIterable, CocktailCondition {
         case rum = "럼"
         case vodka = "보드카"
         case tequila = "데킬라"
@@ -101,13 +104,13 @@ struct Cocktail: Codable, Hashable {
         }
     }
     
-    enum DrinkType: String, Codable, CaseIterable {
+    enum DrinkType: String, Codable, CaseIterable, CocktailCondition {
         case longDrink = "롱드링크"
         case shortDrink =  "숏드링크"
         case shooter = "슈터"
     }
     
-    enum Color: String, Codable, CaseIterable {
+    enum Color: String, Codable, CaseIterable, CocktailCondition {
         case red = "빨간색"
         case orange = "주황색"
         case yellow = "노란색"
@@ -120,13 +123,13 @@ struct Cocktail: Codable, Hashable {
         case brown = "갈색"
     }
     
-    enum Alcohol: String, Codable, CaseIterable {
+    enum Alcohol: String, Codable, CaseIterable, CocktailCondition {
         case high
         case mid
         case low
     }
     
-    enum Glass: String, Codable, CaseIterable {
+    enum Glass: String, Codable, CaseIterable, CocktailCondition {
         case highBall = "하이볼"
         case shot = "샷잔"
         case onTheRock = "온더락"
@@ -137,7 +140,7 @@ struct Cocktail: Codable, Hashable {
         case philsner = "필스너"
     }
     
-    enum Craft: String, Codable, CaseIterable {
+    enum Craft: String, Codable, CaseIterable, CocktailCondition {
         case build = "빌드"
         case shaking = "쉐이킹"
         case floating = "플로팅"

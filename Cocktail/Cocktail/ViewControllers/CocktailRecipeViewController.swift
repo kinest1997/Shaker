@@ -70,7 +70,15 @@ class CocktailRecipeViewController: UIViewController {
         //저장 버튼의 액션
         filterView.saveButton.addAction(UIAction(handler: {[unowned self]_ in
             self.filterView.isHidden = true
-            let filteredViewRecipe = filterView.sortingRecipes(origin: unTouchableRecipe, base: filterView.baseCondition, alcohol: filterView.alcoholCondition, drinktype: filterView.drinkTypeCondition, craft: filterView.craftConditon, glass: filterView.glassCondition, color: filterView.colorCondition).sorted { $0.name < $1.name }
+            let filteredViewRecipe = filterView.sortingRecipes(
+                origin: unTouchableRecipe,
+                base: filterView.conditionsOfCocktail[1].condition as! [Cocktail.Base],
+                alcohol: filterView.conditionsOfCocktail[0].condition as! [Cocktail.Alcohol],
+                drinktype: filterView.conditionsOfCocktail[2].condition as! [Cocktail.DrinkType],
+                craft: filterView.conditionsOfCocktail[3].condition as! [Cocktail.Craft],
+                glass: filterView.conditionsOfCocktail[4].condition as! [Cocktail.Glass],
+                color: filterView.conditionsOfCocktail[5].condition as! [Cocktail.Color]
+            ).sorted { $0.name < $1.name }
             self.originRecipe = filteredViewRecipe
             mainTableView.reloadData()
         }), for: .touchUpInside)
@@ -79,12 +87,9 @@ class CocktailRecipeViewController: UIViewController {
             self.filterView.cellIsChecked = self.filterView.cellIsChecked.map {
                 $0.map { _ in false}
             }
-            self.filterView.baseCondition = []
-            self.filterView.alcoholCondition = []
-            self.filterView.drinkTypeCondition = []
-            self.filterView.craftConditon = []
-            self.filterView.glassCondition = []
-            self.filterView.colorCondition = []
+            [1, 0, 2, 3, 4, 5].forEach {
+                self.filterView.conditionsOfCocktail[$0].condition = []
+            }
 
             self.filterView.nowFiltering = false
             self.filterView.isHidden = true
