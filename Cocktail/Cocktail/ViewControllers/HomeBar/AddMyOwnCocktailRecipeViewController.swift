@@ -3,13 +3,13 @@ import SnapKit
 
 class AddMyOwnCocktailRecipeViewController: UIViewController {
     
-    var alcohol: Cocktail.Alcohol = .high
-    var color: Cocktail.Color = .red
-    var baseDrink: Cocktail.Base = .assets
-    var craft: Cocktail.Craft = .blending
-    var glass: Cocktail.Glass = .highBall
-    var ingredients: [Cocktail.Ingredients] = []
-    var drinkType: Cocktail.DrinkType = .longDrink
+    var alcohol: Cocktail.Alcohol?
+    var color: Cocktail.Color?
+    var baseDrink: Cocktail.Base?
+    var craft: Cocktail.Craft?
+    var glass: Cocktail.Glass?
+    var ingredients: [Cocktail.Ingredients]?
+    var drinkType: Cocktail.DrinkType?
     var myOwnRecipeData: ((Cocktail) -> Void)?
     var cocktailImageData: ((UIImage) -> Void)?
     
@@ -233,7 +233,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         choiceView.saveButton.addAction(UIAction(handler: { [weak self]_ in
             self?.ingredients = self?.choiceView.myIngredients ?? []
-            self?.ingredientsSelectButton.setTitle("\(self?.ingredients.count ?? 0)"+"EA".localized+"Selected".localized, for: .normal)
+            self?.ingredientsSelectButton.setTitle("\(self?.ingredients?.count ?? 0)"+"EA".localized+"Selected".localized, for: .normal)
             self?.choiceView.isHidden = true
         }), for: .touchUpInside)
         
@@ -431,6 +431,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     @objc func saveRecipe() {
+        guard let craft = craft, let glass = glass, let baseDrink = baseDrink, let alcohol = alcohol, let color = color, let drinkType = drinkType, let ingredients = ingredients else { return }
         let myRecipe = Cocktail(name: nameTextField.text ?? "", craft: craft, glass: glass, recipe: recipeTextField.text ?? "", ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTipTextField.text ?? "", drinkType: drinkType, myRecipe: true)
         if nameTextField.text?.isEmpty ?? true  {
             presentJustAlert(title: "Hold on".localized, message: "Write name".localized)
@@ -535,10 +536,10 @@ extension AddMyOwnCocktailRecipeViewController: UIPopoverPresentationControllerD
     func enrollAlertEvent() {
             let photoLibraryAlertAction = UIAlertAction(title: "사진 앨범", style: .default) {
                 (action) in
-                self.openAlbum() // 아래에서 설명 예정.
+                self.openAlbum()
             }
             let cameraAlertAction = UIAlertAction(title: "카메라", style: .default) {(action) in
-                self.openCamera() // 아래에서 설명 예정.
+                self.openCamera()
             }
             let cancelAlertAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
             self.alertController.addAction(photoLibraryAlertAction)

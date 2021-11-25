@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import SwiftUI
 
 class MyOwnCocktailRecipeViewController: UIViewController {
     
@@ -97,6 +98,15 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
         if editingStyle == .delete {
             guard let number = originRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
             print(myOwnRecipe.count, "지우기전")
+            
+            let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//            let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name, relativeTo: directoryURL).appendingPathExtension("png")
+            let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name + ".png", relativeTo: directoryURL)
+            do {
+                try FileManager.default.removeItem(at: fileURL)
+            } catch {
+                print(error)
+            }
             originRecipe.remove(at: number)
             upload(recipe: originRecipe)
             myOwnRecipe = originRecipe.filter {
@@ -104,7 +114,6 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
             }
             print(myOwnRecipe.count, "현재 갯수")
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            
         }
     }
 }
