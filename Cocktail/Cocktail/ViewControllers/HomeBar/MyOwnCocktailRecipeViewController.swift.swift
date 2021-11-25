@@ -99,9 +99,9 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
             guard let number = originRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
             print(myOwnRecipe.count, "지우기전")
             
-            let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-//            let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name, relativeTo: directoryURL).appendingPathExtension("png")
-            let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name + ".png", relativeTo: directoryURL)
+            var directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            directoryURL.appendPathComponent("UserImage")
+            let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name, relativeTo: directoryURL).appendingPathExtension("png")
             do {
                 try FileManager.default.removeItem(at: fileURL)
             } catch {

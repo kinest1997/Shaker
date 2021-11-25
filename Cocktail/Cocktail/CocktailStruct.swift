@@ -6,24 +6,6 @@ struct MyDrinks: Codable, Hashable {
     let name: Cocktail.Ingredients
 }
 
-struct ConditionData {
-    var baseCondition: [Cocktail.Base] = []
-    var alcoholCondition: [Cocktail.Alcohol] = []
-    var drinkTypeCondition: [Cocktail.DrinkType] = []
-    var craftConditon: [Cocktail.Craft] = []
-    var glassCondition: [Cocktail.Glass] = []
-    var colorCondition: [Cocktail.Color] = []
-
-    enum name: String {
-        case alcohol
-        case base
-        case drinktype
-        case craft
-        case glass
-        case color
-    } 
-}
-
 protocol CocktailCondition {
     var rawValue: String { get }
 }
@@ -40,6 +22,7 @@ struct Cocktail: Codable, Hashable {
     let mytip: String
     let drinkType: DrinkType
     var myRecipe: Bool
+    var wishList: Bool
 
     enum Base: String, Codable, CaseIterable, CocktailCondition {
         case rum = "럼"

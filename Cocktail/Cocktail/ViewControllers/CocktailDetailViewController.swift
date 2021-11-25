@@ -194,7 +194,13 @@ class CocktailDetailViewController: UIViewController {
         recipeLabel.text = data.recipe.localized
         myTipLabel.text = data.mytip.localized
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
-        setImage(name: data.name, data: data, imageView: cocktailImageView)
+        if let image = UIImage(named: data.name) {
+            print("이미지가있어")
+            cocktailImageView.image = image
+        } else {
+            setImage(name: data.name, data: data, imageView: cocktailImageView)
+            print("커스텀 이미지로 가자")
+        }
     }
     
 

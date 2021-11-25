@@ -431,8 +431,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     @objc func saveRecipe() {
-        guard let craft = craft, let glass = glass, let baseDrink = baseDrink, let alcohol = alcohol, let color = color, let drinkType = drinkType, let ingredients = ingredients else { return }
-        let myRecipe = Cocktail(name: nameTextField.text ?? "", craft: craft, glass: glass, recipe: recipeTextField.text ?? "", ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTipTextField.text ?? "", drinkType: drinkType, myRecipe: true)
+        guard let craft = craft, let glass = glass, let baseDrink = baseDrink, let alcohol = alcohol, let color = color, let drinkType = drinkType, let ingredients = ingredients else { return presentJustAlert(title: "Hold on".localized, message: "선택안한게 있어!")}
+        let myRecipe = Cocktail(name: nameTextField.text ?? "", craft: craft, glass: glass, recipe: recipeTextField.text ?? "", ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTipTextField.text ?? "", drinkType: drinkType, myRecipe: true, wishList: false)
         if nameTextField.text?.isEmpty ?? true  {
             presentJustAlert(title: "Hold on".localized, message: "Write name".localized)
         } else if recipeTextField.text?.isEmpty ?? true {
@@ -443,7 +443,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             let fileManager = FileManager.default
             let url = (getDirectoryPath() as NSURL)
               
-            let imagePath = url.appendingPathComponent((nameTextField.text ?? "NoName") + ".png") // Here Image Saved With This Name ."MyImage.png"
+            let imagePath = url.appendingPathComponent((nameTextField.text ?? "NoName") + ".png")
             let urlString: String = imagePath!.absoluteString
               
             guard let ImgForSave = cocktailImageView.image else { return } // here i Want To Saved This Image In Document Directory
@@ -452,8 +452,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             fileManager.createFile(atPath: urlString as String, contents: imageData(), attributes: nil)
             myOwnRecipeData?(myRecipe)
             cocktailImageData?(cocktailImageView.image!)
-            
-            navigationController?.popViewController(animated: true)
+            navigationController?.popToRootViewController(animated: true)
+//            navigationController?.popViewController(animated: true)
         } 
     }
     
@@ -550,8 +550,6 @@ extension AddMyOwnCocktailRecipeViewController: UIPopoverPresentationControllerD
             else {return}
             prepareForPopoverPresentation(alertControllerPopoverPresentationController)
     }
-    
-   
 }
 
 

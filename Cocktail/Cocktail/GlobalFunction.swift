@@ -29,7 +29,7 @@ func setImage(name: String, data: Cocktail, imageView: UIImageView) {
     if data.myRecipe == true {
         let fileManager = FileManager.default
           
-        let imagePath = (getDirectoryPath() as NSURL).appendingPathComponent(name + ".png")
+        let imagePath = getDirectoryPath().appendingPathComponent(name + ".png")
         let urlString: String = imagePath!.absoluteString
           
         if fileManager.fileExists(atPath: urlString) {
@@ -43,7 +43,7 @@ func setImage(name: String, data: Cocktail, imageView: UIImageView) {
 }
 
 struct ImageConverter{
-
+//이미지 크기 변환 해주는것
     static func resize(image: UIImage)-> UIImage{
         let size = CGSize(width: 300, height: 300)
 
