@@ -463,7 +463,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             navigationController?.popToRootViewController(animated: true)
             show(cocktailDetailViewController, sender: nil)
             //유틸리티 수준의 중요도로 작동
-            DispatchQueue.global(qos: .utility).async {reloadwidgetData()}
+            DispatchQueue.global(qos: .utility).async { reloadwidgetData() }
         }
     }
     
