@@ -202,7 +202,4 @@ class CocktailDetailViewController: UIViewController {
             print("커스텀 이미지로 가자")
         }
     }
-    
-
 }
-
