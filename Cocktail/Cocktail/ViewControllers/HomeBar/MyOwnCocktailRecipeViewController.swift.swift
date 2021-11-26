@@ -51,7 +51,6 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         do {
             let data = try PropertyListEncoder().encode(recipe)
             try data.write(to: documentPlistURL)
-            print(data)
         } catch let error {
             print("ERROR", error.localizedDescription)
         }
@@ -95,7 +94,6 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let number = originRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
-            print(myOwnRecipe.count, "지우기전")
              let directoryURL = getImageDirectoryPath()
             let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name, relativeTo: directoryURL).appendingPathExtension("png")
             do {
@@ -108,7 +106,6 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
             myOwnRecipe = originRecipe.filter {
                 $0.myRecipe == true
             }
-            print(myOwnRecipe.count, "현재 갯수")
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

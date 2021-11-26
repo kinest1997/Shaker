@@ -38,18 +38,16 @@ class CocktailListCell: UITableViewCell {
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
     }
-
+    
     func configure(data: Cocktail) {
         nameLabel.text = data.name
         ingredientCountLabel.text = "Ingredients".localized + " \(data.ingredients.count)" + "EA".localized
         cocktailImage.image = UIImage(named: data.name)
-            
-            let imagePath = getImageDirectoryPath().appendingPathComponent(data.name + ".png")
-            let urlString: String = imagePath.path
-            if FileManager.default.fileExists(atPath: urlString) {
-                let GetImageFromDirectory = UIImage(contentsOfFile: urlString)
-                cocktailImage.image = GetImageFromDirectory
-            }
         
+        let imagePath = getImageDirectoryPath().appendingPathComponent(data.name + ".png").path
+        if FileManager.default.fileExists(atPath: imagePath) {
+            let GetImageFromDirectory = UIImage(contentsOfFile: imagePath)
+            cocktailImage.image = GetImageFromDirectory
+        }
     }
 }

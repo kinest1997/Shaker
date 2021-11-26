@@ -11,8 +11,8 @@ import Intents
 
 struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (CocktailEntry) -> Void) {
-
-        let entry = CocktailEntry(date: Date(), configuration: getWidgetRecipe().randomElement()!)
+        let configuration = Cocktail(name: "Martini".localized, craft: .blending, glass: .cocktail, recipe: "손으로 막휘젓기", ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false)
+        let entry = CocktailEntry(date: Date(), configuration: configuration)
         completion(entry)
     }
     
@@ -21,8 +21,8 @@ struct Provider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<CocktailEntry>) -> Void) {
-
-        let entry = CocktailEntry(date: Date(), configuration: getWidgetRecipe().randomElement()!)
+        guard let configuration = getWidgetRecipe().randomElement() else { return }
+        let entry = CocktailEntry(date: Date(), configuration: configuration)
         let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())
         let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate!))
         completion(timeline)
@@ -74,11 +74,11 @@ struct Cocktail_Widget: Widget {
             Cocktail_WidgetEntryView(entry: entry)
         }
         .supportedFamilies([.systemMedium, .systemSmall, .systemLarge])
-        .configurationDisplayName("Test")
-        .description("babo")
+        .configurationDisplayName("Cocktail")
+        .description("RandomRecipe")
     }
 }
-
+//이것은 그때그때 보려고 남기기로함
 //struct Cocktail_Widget_Previews: PreviewProvider {
 //    static var previews: some View {
 //

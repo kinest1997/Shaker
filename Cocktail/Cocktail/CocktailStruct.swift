@@ -48,7 +48,7 @@ struct Cocktail: Codable, Hashable {
                 self = .tequila
             case "brandy".localized:
                 self = .brandy
-            case "wiskey".localized:
+            case "whiskey".localized:
                 self = .whiskey
             case "gin".localized:
                 self = .gin

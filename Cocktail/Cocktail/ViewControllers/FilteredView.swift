@@ -74,29 +74,14 @@ class FilteredView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reloadNumbers() {
-        
-    }
-    
     //걸러내는 함수
-    func sortingRecipes(origin: [Cocktail], base: [Cocktail.Base], alcohol: [Cocktail.Alcohol], drinktype: [Cocktail.DrinkType], craft: [Cocktail.Craft], glass: [Cocktail.Glass], color: [Cocktail.Color]) -> [Cocktail] {
-        var baseSorted = [Cocktail]()
+    func sortingRecipes(origin: [Cocktail], alcohol: [Cocktail.Alcohol], base: [Cocktail.Base], drinktype: [Cocktail.DrinkType], craft: [Cocktail.Craft], glass: [Cocktail.Glass], color: [Cocktail.Color]) -> [Cocktail] {
         var alcoholSorted = [Cocktail]()
+        var baseSorted = [Cocktail]()
         var drinktypeSorted = [Cocktail]()
         var craftSorted = [Cocktail]()
         var glassSorted = [Cocktail]()
         var colorSorted = [Cocktail]()
-        
-        if base.isEmpty {
-            baseSorted = origin
-        } else {
-            for i in base {
-                let baseSortedRecipe = origin.filter {
-                    $0.base == i
-                }
-                baseSorted.append(contentsOf: baseSortedRecipe)
-            }
-        }
         
         if alcohol.isEmpty {
             alcoholSorted = origin
@@ -106,6 +91,17 @@ class FilteredView: UIView {
                     $0.alcohol == i
                 }
                 alcoholSorted.append(contentsOf: alcoholSortedRecipe)
+            }
+        }
+        
+        if base.isEmpty {
+            baseSorted = origin
+        } else {
+            for i in base {
+                let baseSortedRecipe = origin.filter {
+                    $0.base == i
+                }
+                baseSorted.append(contentsOf: baseSortedRecipe)
             }
         }
         

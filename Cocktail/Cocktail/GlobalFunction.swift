@@ -1,30 +1,26 @@
 import UIKit
 
 func getRecipe(data: inout [Cocktail]) {
-    //    guard let documentURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("Cocktail.plist") else { return }
     let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-    
     guard let cocktailData = FileManager.default.contents(atPath: documentURL.path) else { return }
     
-    do { print(documentURL)
+    do {
         data = try PropertyListDecoder().decode([Cocktail].self, from: cocktailData).sorted {
             $0.name < $1.name
         }
         
     } catch let error{
-        print("머선129",error.localizedDescription)
         print(String(describing: error))
     }
 }
 
 func getWidgetRecipe() -> [Cocktail] {
     guard let documentURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("Cocktail.plist"), let cocktailData = FileManager.default.contents(atPath: documentURL.path) else { return [] }
-    do { print(documentURL)
+    do {
         return try PropertyListDecoder().decode([Cocktail].self, from: cocktailData).sorted {
             $0.name < $1.name
         }
     } catch let error{
-        print("머선129",error.localizedDescription)
         print(String(describing: error))
         return []
     }
@@ -46,14 +42,12 @@ func reloadwidgetData() {
         }
         do {
             try FileManager.default.copyItem(at: documentImageURL, to: widgetImageURL)
-            print("도큐먼트에서 앱그룹으로 복사함")
         } catch let error {
             print("ERROR", error.localizedDescription)
         }
     } else {
         do {
             try FileManager.default.copyItem(at: documentImageURL, to: widgetImageURL)
-            print("도큐먼트에서 앱그룹으로 복사함")
         } catch let error {
             print("ERROR", error.localizedDescription)
         }
@@ -62,36 +56,28 @@ func reloadwidgetData() {
     if FileManager.default.fileExists(atPath: widgetRecipeURL.path) {
         do {
             try FileManager.default.removeItem(atPath: widgetRecipeURL.path)
-            print("지웠음")
         } catch {
             print(error)
         }
         do {
             try FileManager.default.copyItem(at: documentPlistURL, to: widgetRecipeURL)
-            print("도큐먼트에서 앱그룹으로 복사함")
         } catch let error {
             print("ERROR", error.localizedDescription)
         }
     } else {
         do {
             try FileManager.default.copyItem(at: documentPlistURL, to: widgetRecipeURL)
-            print("도큐먼트에서 앱그룹으로 복사함")
         } catch let error {
             print("ERROR", error.localizedDescription)
         }
     }
-    
-    print(widgetRecipeURL)
-    
 }
 
 
 func getImageDirectoryPath() -> URL {
     
     let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    
     let url = directoryURL.appendingPathComponent("UserImage")
-    
     return url
 }
 

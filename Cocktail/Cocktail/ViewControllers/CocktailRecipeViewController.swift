@@ -60,7 +60,6 @@ class CocktailRecipeViewController: UIViewController {
     }
     
     func attribute() {
-        view.backgroundColor = .systemCyan
         view.addSubview(mainTableView)
         navigationController?.view.addSubview(filterView)
         filterView.isHidden = true
@@ -72,8 +71,8 @@ class CocktailRecipeViewController: UIViewController {
             self.filterView.isHidden = true
             let filteredViewRecipe = filterView.sortingRecipes(
                 origin: unTouchableRecipe,
-                base: filterView.conditionsOfCocktail[1].condition as! [Cocktail.Base],
                 alcohol: filterView.conditionsOfCocktail[0].condition as! [Cocktail.Alcohol],
+                base: filterView.conditionsOfCocktail[1].condition as! [Cocktail.Base],
                 drinktype: filterView.conditionsOfCocktail[2].condition as! [Cocktail.DrinkType],
                 craft: filterView.conditionsOfCocktail[3].condition as! [Cocktail.Craft],
                 glass: filterView.conditionsOfCocktail[4].condition as! [Cocktail.Glass],
@@ -87,10 +86,9 @@ class CocktailRecipeViewController: UIViewController {
             self.filterView.cellIsChecked = self.filterView.cellIsChecked.map {
                 $0.map { _ in false}
             }
-            [1, 0, 2, 3, 4, 5].forEach {
+            (0...5).forEach {
                 self.filterView.conditionsOfCocktail[$0].condition = []
             }
-
             self.filterView.nowFiltering = false
             self.filterView.isHidden = true
             self.filterView.mainTableView.reloadData()

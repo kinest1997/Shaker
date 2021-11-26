@@ -152,7 +152,6 @@ class CocktailDetailViewController: UIViewController {
             do {
                 let data = try PropertyListEncoder().encode(recipe)
                 try data.write(to: documentURL)
-                print(data)
             } catch let error {
                 print("ERROR", error.localizedDescription)
             }
@@ -195,14 +194,10 @@ class CocktailDetailViewController: UIViewController {
         myTipLabel.text = data.mytip.localized
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
         if let image = UIImage(named: data.name) {
-            print("이미지가있어")
             cocktailImageView.image = image
         } else {
             setImage(name: data.name, data: data, imageView: cocktailImageView)
-            print("커스텀 이미지로 가자")
         }
     }
-    
-
 }
 

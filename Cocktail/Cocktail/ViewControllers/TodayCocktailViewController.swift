@@ -22,7 +22,6 @@ class TodayCocktailViewController: UIViewController {
     func attribute() {
         let beginner = UIAction { [weak self] _ in
             guard let self = self else { return }
-            print("초보자용")
             let choiceViewController = ChoiceViewController()
             choiceViewController.firstRecipe = self.bigChoice(alcohol: .low)
             choiceViewController.firstRecipe.append(contentsOf: self.bigChoice(alcohol: .mid))
