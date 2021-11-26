@@ -7,7 +7,6 @@
 
 import WidgetKit
 import SwiftUI
-import Intents
 
 struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (CocktailEntry) -> Void) {

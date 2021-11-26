@@ -73,7 +73,6 @@ func reloadwidgetData() {
     }
 }
 
-
 func getImageDirectoryPath() -> URL {
     
     let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]

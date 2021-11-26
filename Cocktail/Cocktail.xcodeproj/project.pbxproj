@@ -11,8 +11,6 @@
 		3D07246D274F551D0061B3F5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D07246C274F551D0061B3F5 /* SwiftUI.framework */; };
 		3D072470274F551D0061B3F5 /* Cocktail_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */; };
 		3D072473274F55220061B3F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D072472274F55220061B3F5 /* Assets.xcassets */; };
-		3D072475274F55220061B3F5 /* Cocktail_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3D072471274F551D0061B3F5 /* Cocktail_Widget.intentdefinition */; };
-		3D072476274F55220061B3F5 /* Cocktail_Widget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3D072471274F551D0061B3F5 /* Cocktail_Widget.intentdefinition */; };
 		3D072479274F55220061B3F5 /* Cocktail WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3D072468274F551D0061B3F5 /* Cocktail WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
@@ -79,7 +77,6 @@
 		3D07246A274F551D0061B3F5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		3D07246C274F551D0061B3F5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail_Widget.swift; sourceTree = "<group>"; };
-		3D072471274F551D0061B3F5 /* Cocktail_Widget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Cocktail_Widget.intentdefinition; sourceTree = "<group>"; };
 		3D072472274F55220061B3F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D072474274F55220061B3F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D0D9B762744D714008C75E7 /* Ingredients.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Ingredients.plist; sourceTree = "<group>"; };
@@ -154,7 +151,6 @@
 			children = (
 				3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */,
 				3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */,
-				3D072471274F551D0061B3F5 /* Cocktail_Widget.intentdefinition */,
 				3D072472274F55220061B3F5 /* Assets.xcassets */,
 				3D072474274F55220061B3F5 /* Info.plist */,
 			);
@@ -354,7 +350,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D072475274F55220061B3F5 /* Cocktail_Widget.intentdefinition in Sources */,
 				3DF3C2FC275071C100462619 /* CocktailStruct.swift in Sources */,
 				3DF3C2FD27507E1A00462619 /* String.swift in Sources */,
 				3DF3C3002750833000462619 /* Cocktail_SmallView.swift in Sources */,
@@ -371,7 +366,6 @@
 				3D6C6D3F27325F3400C70276 /* ChoiceViewController.swift in Sources */,
 				3D7F17C32734D5FF006EDCF9 /* FilteredView.swift in Sources */,
 				3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */,
-				3D072476274F55220061B3F5 /* Cocktail_Widget.intentdefinition in Sources */,
 				3D7481222736566F0092BD74 /* MyBadgeButton.swift in Sources */,
 				3D7481292736BC550092BD74 /* WhatIHaveCollectionViewCell.swift in Sources */,
 				3DA76A4C2730D8B7004091CE /* CocktailRecipeViewController.swift in Sources */,
@@ -433,7 +427,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3GBKG7DTJY;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cocktail Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Cocktail Widget";
@@ -460,7 +454,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3GBKG7DTJY;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cocktail Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Cocktail Widget";
@@ -607,7 +601,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cocktail/Cocktail.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3GBKG7DTJY;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cocktail/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "앱에서 카메라앱에 접근하여 사진을 찍으려고 합니다. 허용하시겠습니까?";
@@ -639,7 +633,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cocktail/Cocktail.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3GBKG7DTJY;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Cocktail/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "앱에서 카메라앱에 접근하여 사진을 찍으려고 합니다. 허용하시겠습니까?";
