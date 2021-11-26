@@ -60,25 +60,25 @@ class MainViewController: UITabBarController {
         guard let bundleURL = Bundle.main.url(forResource: "Cocktail", withExtension: "plist") else {
                     return
                 }
-        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-        if !FileManager.default.fileExists(atPath: documentURL.path) {
+        let documentPlistURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
+
+        if !FileManager.default.fileExists(atPath: documentPlistURL.path) {
                     do {
-                        try FileManager.default.copyItem(at: bundleURL, to: documentURL)
+                        try FileManager.default.copyItem(at: bundleURL, to: documentPlistURL)
                         print("번들에서 도큐멘트로 복사함")
                     } catch let error {
                         print("ERROR", error.localizedDescription)
                     }
                 }
-
-          let fileManager = FileManager.default
-          let PathWithFolderName = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("UserImage")
-          
-          print("Document Directory Folder Path :- ",PathWithFolderName)
-              
-          if !fileManager.fileExists(atPath: PathWithFolderName)
-          {
-              try! fileManager.createDirectory(atPath: PathWithFolderName, withIntermediateDirectories: true, attributes: nil)
-          }
+        
+        let beforeDocumentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let PathWithFolderName = beforeDocumentURL.appendingPathComponent("UserImage").path
+        
+        if !FileManager.default.fileExists(atPath: PathWithFolderName)
+        {
+            try! FileManager.default.createDirectory(atPath: PathWithFolderName, withIntermediateDirectories: true, attributes: nil)
+            print("도큐먼트에 이미지 폴더 생성함")
+        }
 
         
         tabBar.tintColor = .systemBrown

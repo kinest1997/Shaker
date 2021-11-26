@@ -42,6 +42,11 @@
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
 		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
 		3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEADC6D274625F600362D99 /* FilterViewCell.swift */; };
+		3DF3C2FC275071C100462619 /* CocktailStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A442730D244004091CE /* CocktailStruct.swift */; };
+		3DF3C2FD27507E1A00462619 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
+		3DF3C3002750833000462619 /* Cocktail_SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */; };
+		3DF3C3022750889D00462619 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */; };
+		3DF3C30327508C4600462619 /* Cocktail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A462730D574004091CE /* Cocktail.plist */; };
 		7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D0D9B762744D714008C75E7 /* Ingredients.plist */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +115,8 @@
 		3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
 		3DEADC6D274625F600362D99 /* FilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewCell.swift; sourceTree = "<group>"; };
+		3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail_SmallView.swift; sourceTree = "<group>"; };
+		3DF3C3042750C97800462619 /* Cocktail.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cocktail.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */,
+				3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */,
 				3D072471274F551D0061B3F5 /* Cocktail_Widget.intentdefinition */,
 				3D072472274F55220061B3F5 /* Assets.xcassets */,
 				3D072474274F55220061B3F5 /* Info.plist */,
@@ -197,6 +205,7 @@
 		3DA76A2F2730D1CD004091CE /* Cocktail */ = {
 			isa = PBXGroup;
 			children = (
+				3DF3C3042750C97800462619 /* Cocktail.entitlements */,
 				3DA76A3B2730D1D0004091CE /* LaunchScreen.storyboard */,
 				3DA76A322730D1CD004091CE /* SceneDelegate.swift */,
 				3DA76A512730D920004091CE /* MainViewController.swift */,
@@ -321,6 +330,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3DF3C30327508C4600462619 /* Cocktail.plist in Resources */,
 				3D072473274F55220061B3F5 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,6 +355,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D072475274F55220061B3F5 /* Cocktail_Widget.intentdefinition in Sources */,
+				3DF3C2FC275071C100462619 /* CocktailStruct.swift in Sources */,
+				3DF3C2FD27507E1A00462619 /* String.swift in Sources */,
+				3DF3C3002750833000462619 /* Cocktail_SmallView.swift in Sources */,
+				3DF3C3022750889D00462619 /* GlobalFunction.swift in Sources */,
 				3D072470274F551D0061B3F5 /* Cocktail_Widget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,6 +604,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cocktail/Cocktail.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3GBKG7DTJY;
@@ -620,6 +635,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Cocktail/Cocktail.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3GBKG7DTJY;

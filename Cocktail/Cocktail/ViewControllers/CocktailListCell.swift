@@ -43,15 +43,13 @@ class CocktailListCell: UITableViewCell {
         nameLabel.text = data.name
         ingredientCountLabel.text = "Ingredients".localized + " \(data.ingredients.count)" + "EA".localized
         cocktailImage.image = UIImage(named: data.name)
-    
-        let fileManager = FileManager.default
-          
-        let imagePath = (getDirectoryPath() as NSURL).appendingPathComponent(data.name + ".png")
-        let urlString: String = imagePath!.absoluteString
-          
-        if fileManager.fileExists(atPath: urlString) {
-            let GetImageFromDirectory = UIImage(contentsOfFile: urlString)
-            cocktailImage.image = GetImageFromDirectory
-        }
+            
+            let imagePath = getImageDirectoryPath().appendingPathComponent(data.name + ".png")
+            let urlString: String = imagePath.path
+            if FileManager.default.fileExists(atPath: urlString) {
+                let GetImageFromDirectory = UIImage(contentsOfFile: urlString)
+                cocktailImage.image = GetImageFromDirectory
+            }
+        
     }
 }

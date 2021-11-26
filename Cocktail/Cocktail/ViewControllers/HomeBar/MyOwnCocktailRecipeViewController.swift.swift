@@ -34,7 +34,6 @@ class MyOwnCocktailRecipeViewController: UIViewController {
             self.originRecipe.append(data)
             self.upload(recipe: self.originRecipe)
             self.mainTableView.reloadData()
-            print("xxxx")
         }
     }
     
@@ -48,10 +47,10 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     }
     
     func upload(recipe: [Cocktail]) {
-        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
+        let documentPlistURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
         do {
             let data = try PropertyListEncoder().encode(recipe)
-            try data.write(to: documentURL)
+            try data.write(to: documentPlistURL)
             print(data)
         } catch let error {
             print("ERROR", error.localizedDescription)
@@ -82,7 +81,6 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let cocktailData = myOwnRecipe[indexPath.row]
         let cocktailDetailViewController = CocktailDetailViewController()
         cocktailDetailViewController.setData(data: cocktailData)
@@ -98,9 +96,7 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
         if editingStyle == .delete {
             guard let number = originRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
             print(myOwnRecipe.count, "지우기전")
-            
-            var directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            directoryURL.appendPathComponent("UserImage")
+             let directoryURL = getImageDirectoryPath()
             let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name, relativeTo: directoryURL).appendingPathExtension("png")
             do {
                 try FileManager.default.removeItem(at: fileURL)

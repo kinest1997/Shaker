@@ -9,11 +9,11 @@
 	<key>INIntentDefinitionNamespace</key>
 	<string>88xZPY</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>20A294</string>
+	<string>21A559</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
-	<string>12A6144</string>
+	<string>13A1030d</string>
 	<key>INIntentDefinitionToolsVersion</key>
-	<string>12.0</string>
+	<string>13.1</string>
 	<key>INIntents</key>
 	<array>
 		<dict>
@@ -40,6 +40,39 @@
 					<dict>
 						<key>INIntentResponseCodeName</key>
 						<string>failure</string>
+					</dict>
+				</array>
+				<key>INIntentResponseLastParameterTag</key>
+				<integer>4</integer>
+				<key>INIntentResponseParameters</key>
+				<array>
+					<dict>
+						<key>INIntentResponseParameterDisplayName</key>
+						<string>Property</string>
+						<key>INIntentResponseParameterDisplayNameID</key>
+						<string>ZFmY6c</string>
+						<key>INIntentResponseParameterDisplayPriority</key>
+						<integer>1</integer>
+						<key>INIntentResponseParameterName</key>
+						<string>property</string>
+						<key>INIntentResponseParameterTag</key>
+						<integer>1</integer>
+						<key>INIntentResponseParameterType</key>
+						<string>String</string>
+					</dict>
+					<dict>
+						<key>INIntentResponseParameterDisplayName</key>
+						<string>Property 1</string>
+						<key>INIntentResponseParameterDisplayNameID</key>
+						<string>COkiWE</string>
+						<key>INIntentResponseParameterDisplayPriority</key>
+						<integer>2</integer>
+						<key>INIntentResponseParameterName</key>
+						<string>property1</string>
+						<key>INIntentResponseParameterTag</key>
+						<integer>2</integer>
+						<key>INIntentResponseParameterType</key>
+						<string>String</string>
 					</dict>
 				</array>
 			</dict>
