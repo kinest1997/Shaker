@@ -23,7 +23,7 @@
 		3D74812427366C0E0092BD74 /* WhatIHaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74812327366C0D0092BD74 /* WhatIHaveViewController.swift */; };
 		3D7481292736BC550092BD74 /* WhatIHaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7481282736BC550092BD74 /* WhatIHaveCollectionViewCell.swift */; };
 		3D7F17C32734D5FF006EDCF9 /* FilteredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7F17C22734D5FF006EDCF9 /* FilteredView.swift */; };
-		3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83715A274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift.swift */; };
+		3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83715A274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift */; };
 		3D83715D274CD7C300CA6036 /* ChoiceIngredientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83715C274CD7C300CA6036 /* ChoiceIngredientsView.swift */; };
 		3D837160274CD8BE00CA6036 /* MyDrinksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D83715F274CD8BE00CA6036 /* MyDrinksViewController.swift */; };
 		3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A302730D1CD004091CE /* AppDelegate.swift */; };
@@ -94,7 +94,7 @@
 		3D74812527366C5D0092BD74 /* 데이터 확인용.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "데이터 확인용.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3D7481282736BC550092BD74 /* WhatIHaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIHaveCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D7F17C22734D5FF006EDCF9 /* FilteredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredView.swift; sourceTree = "<group>"; };
-		3D83715A274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOwnCocktailRecipeViewController.swift.swift; sourceTree = "<group>"; };
+		3D83715A274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3D83715C274CD7C300CA6036 /* ChoiceIngredientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceIngredientsView.swift; sourceTree = "<group>"; };
 		3D83715F274CD8BE00CA6036 /* MyDrinksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDrinksViewController.swift; sourceTree = "<group>"; };
 		3DA76A2D2730D1CD004091CE /* Cocktail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cocktail.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,7 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				3DE3221C274B98ED00657211 /* AssistantViewController.swift */,
-				3D83715A274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift.swift */,
+				3D83715A274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift */,
 				3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */,
 				3D83715C274CD7C300CA6036 /* ChoiceIngredientsView.swift */,
 				3D83715E274CD7D000CA6036 /* MyDrinks */,
@@ -373,7 +373,7 @@
 				3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */,
 				3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */,
 				3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */,
-				3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift.swift in Sources */,
+				3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift in Sources */,
 				3D83715D274CD7C300CA6036 /* ChoiceIngredientsView.swift in Sources */,
 				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
 				3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */,
