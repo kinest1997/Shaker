@@ -10,6 +10,13 @@ protocol CocktailCondition {
     var rawValue: String { get }
 }
 
+enum SortingStandard {
+    case alcohol
+    case name
+    case ingredientsCount
+    case wishList
+}
+
 struct Cocktail: Codable, Hashable {
     let name: String
     let craft: Craft
@@ -107,9 +114,22 @@ struct Cocktail: Codable, Hashable {
     }
     
     enum Alcohol: String, Codable, CaseIterable, CocktailCondition {
+        case extreme
         case high
         case mid
         case low
+        var rank: Int {
+            switch self {
+            case .extreme:
+                return 4
+            case .high:
+                return 3
+            case .mid:
+                return 2
+            case .low:
+                return 1
+            }
+        }
     }
     
     enum Glass: String, Codable, CaseIterable, CocktailCondition {
