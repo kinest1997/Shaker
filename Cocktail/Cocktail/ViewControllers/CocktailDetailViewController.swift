@@ -210,11 +210,7 @@ class CocktailDetailViewController: UIViewController {
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
         cocktailData = data
         
-        if data.wishList == true {
-            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-        } else {
-            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-        }
+        likeButton.setImage(UIImage(systemName: data.wishList == true ? "heart.fill" : "heart"), for: .normal)
         
         if let image = UIImage(named: data.name) {
             cocktailImageView.image = image
