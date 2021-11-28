@@ -13,6 +13,18 @@ class CocktailRecipeViewController: UIViewController {
 
     let mainTableView = UITableView()
     
+    var filtertMenuItems: [UIAction] {
+        return [
+            UIAction(title: "Name".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in sorting(standard: .name)}),
+            UIAction(title: "Alcohol".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in sorting(standard: .alcohol)}),
+            UIAction(title: "Ingredients Count".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in sorting(standard: .ingredientsCount)})
+        ]
+    }
+    
+    var filterMenu: UIMenu {
+        return UIMenu(title: "", image: nil, identifier: nil, options: .singleSelection, children: filtertMenuItems)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -39,7 +51,7 @@ class CocktailRecipeViewController: UIViewController {
         searchController.searchBar.keyboardType = .default
         let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
         navigationItem.rightBarButtonItem = filterButton
-        let leftarrangeButton = UIBarButtonItem(title: "Sort".localized, style: .plain, target: self, action: #selector(arrangement))
+        let leftarrangeButton = UIBarButtonItem(title: "Sorting".localized, image: nil, primaryAction: nil, menu: filterMenu)
         navigationItem.leftBarButtonItem = leftarrangeButton
     }
     
@@ -94,6 +106,26 @@ class CocktailRecipeViewController: UIViewController {
             self.filterView.mainTableView.reloadData()
             self.mainTableView.reloadData()
         }), for: .touchUpInside)
+    }
+    
+    func sorting(standard: SortingStandard) {
+        switch standard {
+        case .alcohol:
+            unTouchableRecipe = unTouchableRecipe.sorted { $0.alcohol.rank < $1.alcohol.rank}
+            originRecipe = originRecipe.sorted { $0.alcohol.rank < $1.alcohol.rank}
+            filteredRecipe = filteredRecipe.sorted { $0.alcohol.rank < $1.alcohol.rank}
+        case .name:
+            unTouchableRecipe = unTouchableRecipe.sorted { $0.name < $1.name }
+            originRecipe = originRecipe.sorted { $0.name < $1.name }
+            filteredRecipe = filteredRecipe.sorted { $0.name < $1.name }
+        case .ingredientsCount:
+            unTouchableRecipe = unTouchableRecipe.sorted { $0.ingredients.count < $1.ingredients.count}
+            originRecipe = originRecipe.sorted { $0.ingredients.count < $1.ingredients.count}
+            filteredRecipe = filteredRecipe.sorted { $0.ingredients.count < $1.ingredients.count}
+        default:
+            return
+        }
+        mainTableView.reloadData()
     }
     
     @objc func filtering() {

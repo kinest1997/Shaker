@@ -98,7 +98,8 @@
 "Filter" = "필터";
 "Name, Ingredients, Base, Glass, Color..." = "이름, 재료, 기주, 잔, 색깔 등등";
 "Sort" = "정렬";
-
+"Ingredients Count" = "재료갯수";
+"Sorting" = "정렬";
 //Cocktail.Base
 "rum" = "럼";
 "vodka" = "보드카";

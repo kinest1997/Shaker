@@ -77,15 +77,3 @@ struct Cocktail_Widget: Widget {
         .description("RandomRecipe")
     }
 }
-//이것은 그때그때 보려고 남기기로함
-//struct Cocktail_Widget_Previews: PreviewProvider {
-//    static var previews: some View {
-//
-//        Cocktail_WidgetEntryView(entry: CocktailEntry(date: Date(), configuration: Cocktail(name: "바보", craft: .blending, glass: .cocktail, recipe: "갈아", ingredients: [.amaretto], base: .assets, alcohol: .high, color: .black, mytip: "머겅", drinkType: .longDrink, myRecipe: true, wishList: false)))
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
-//
-//
-//        Cocktail_WidgetEntryView(entry: CocktailEntry(date: Date(), configuration: Cocktail(name: "바보", craft: .blending, glass: .cocktail, recipe: "갈아", ingredients: [.amaretto], base: .assets, alcohol: .high, color: .black, mytip: "머겅", drinkType: .longDrink, myRecipe: true, wishList: false)))
-//            .previewContext(WidgetPreviewContext(family: .systemSmall))
-//    }
-//}

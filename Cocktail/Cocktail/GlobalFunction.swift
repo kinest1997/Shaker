@@ -8,7 +8,6 @@ func getRecipe(data: inout [Cocktail]) {
         data = try PropertyListDecoder().decode([Cocktail].self, from: cocktailData).sorted {
             $0.name < $1.name
         }
-        
     } catch let error{
         print(String(describing: error))
     }
@@ -97,8 +96,8 @@ func setImage(name: String, data: Cocktail, imageView: UIImageView) {
     }
 }
 
+///이미지 크기 변환 해주는것
 struct ImageConverter{
-    //이미지 크기 변환 해주는것
     static func resize(image: UIImage)-> UIImage{
         let size = CGSize(width: 300, height: 300)
         let renderer = UIGraphicsImageRenderer(size: size)
