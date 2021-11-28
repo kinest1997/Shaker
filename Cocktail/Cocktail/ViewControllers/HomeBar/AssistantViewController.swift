@@ -24,7 +24,7 @@ class AssistantViewController: UIViewController {
             let homeBarViewController = MyDrinksViewController()
             self?.show(homeBarViewController, sender: nil)
         }), for: .touchUpInside)
-        wishListButton.addAction(UIAction(handler: { [weak self]_ in
+        wishListButton.addAction(UIAction(handler: {[weak self] _ in
             let wishListCocktailListTableView = WishListCocktailListTableView()
             var recipe: [Cocktail] = []
             recipe = getRecipe()
