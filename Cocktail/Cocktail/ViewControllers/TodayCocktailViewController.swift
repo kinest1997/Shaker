@@ -20,7 +20,7 @@ class TodayCocktailViewController: UIViewController {
     }
     
     func attribute() {
-        let beginner = UIAction { [weak self] _ in
+        let beginner = UIAction {[weak self] _ in
             guard let self = self else { return }
             let choiceViewController = ChoiceViewController()
             choiceViewController.firstRecipe = self.bigChoice(alcohol: .low)
@@ -28,7 +28,7 @@ class TodayCocktailViewController: UIViewController {
             self.show(choiceViewController, sender: nil)
         }
         
-        let expert = UIAction { [weak self]_ in
+        let expert = UIAction {[weak self] _ in
             guard let self = self else { return }
             let choiceViewController = ChoiceViewController()
             choiceViewController.firstRecipe = self.bigChoice(alcohol: .high)

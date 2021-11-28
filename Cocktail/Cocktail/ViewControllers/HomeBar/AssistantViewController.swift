@@ -15,12 +15,12 @@ class AssistantViewController: UIViewController {
     }
     
     func attribute() {
-        myRecipeButton.addAction(UIAction(handler: { [weak self]_ in
+        myRecipeButton.addAction(UIAction(handler: {[weak self] _ in
             let myOwnCocktailRecipeViewController = MyOwnCocktailRecipeViewController()
             self?.show(myOwnCocktailRecipeViewController, sender: nil)
         }), for: .touchUpInside)
         
-        myBarButton.addAction(UIAction(handler: { [weak self]_ in
+        myBarButton.addAction(UIAction(handler: {[weak self] _ in
             let homeBarViewController = MyDrinksViewController()
             self?.show(homeBarViewController, sender: nil)
         }), for: .touchUpInside)
@@ -33,10 +33,10 @@ class AssistantViewController: UIViewController {
         }), for: .touchUpInside)
         
         myRecipeButton.backgroundColor = .blue
-        myRecipeButton.setTitle("나의 레시피", for: .normal)
+        myRecipeButton.setTitle("My Recipes".localized, for: .normal)
         myBarButton.backgroundColor = .red
-        myBarButton.setTitle("내 술장", for: .normal)
-        wishListButton.setTitle("즐겨찾기", for: .normal)
+        myBarButton.setTitle("My Drinks".localized, for: .normal)
+        wishListButton.setTitle("Bookmark".localized, for: .normal)
         wishListButton.backgroundColor = .systemPink
     }
     

@@ -30,11 +30,11 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let alcoholStackView = UIStackView()
     var alcoholSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "high".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.alcoholChoiceButton.setTitle("high".localized, for: .normal)
+            UIAction(title: "high".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("high".localized, for: .normal)
                 alcohol = .high }),
-            UIAction(title: "mid".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.alcoholChoiceButton.setTitle("mid".localized, for: .normal)
+            UIAction(title: "mid".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("mid".localized, for: .normal)
                 alcohol = .mid }),
-            UIAction(title: "low".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.alcoholChoiceButton.setTitle("low".localized, for: .normal)
+            UIAction(title: "low".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("low".localized, for: .normal)
                 alcohol = .low })
         ]
     }
@@ -48,25 +48,25 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let colorStackView = UIStackView()
     var colorSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "red".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("red".localized, for: .normal)
+            UIAction(title: "red".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("red".localized, for: .normal)
                 color = .red }),
-            UIAction(title: "orange".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("orange".localized, for: .normal)
+            UIAction(title: "orange".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("orange".localized, for: .normal)
                 color = .orange }),
-            UIAction(title: "yellow".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("yellow".localized, for: .normal)
+            UIAction(title: "yellow".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("yellow".localized, for: .normal)
                 color = .yellow }),
-            UIAction(title: "green".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("green".localized, for: .normal)
+            UIAction(title: "green".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("green".localized, for: .normal)
                 color = .green }),
-            UIAction(title: "blue".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("blue".localized, for: .normal)
+            UIAction(title: "blue".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("blue".localized, for: .normal)
                 color = .blue }),
-            UIAction(title: "violet".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("violet".localized, for: .normal)
+            UIAction(title: "violet".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("violet".localized, for: .normal)
                 color = .violet }),
-            UIAction(title: "clear".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("clear".localized, for: .normal)
+            UIAction(title: "clear".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("clear".localized, for: .normal)
                 color = .clear }),
-            UIAction(title: "white".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("white".localized, for: .normal)
+            UIAction(title: "white".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("white".localized, for: .normal)
                 color = .white }),
-            UIAction(title: "black".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("black".localized, for: .normal)
+            UIAction(title: "black".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("black".localized, for: .normal)
                 color = .black }),
-            UIAction(title: "brown".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in self.colorChoiceButton.setTitle("brown".localized, for: .normal)
+            UIAction(title: "brown".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("brown".localized, for: .normal)
                 color = .brown })
         ]
     }
@@ -80,31 +80,31 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let baseDrinkStackView = UIStackView()
     var baseDrinkSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "rum".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "rum".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("rum".localized, for: .normal)
                 baseDrink = .rum }),
-            UIAction(title: "vodka".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "vodka".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("vodka".localized, for: .normal)
                 baseDrink = .vodka }),
-            UIAction(title: "tequila".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "tequila".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("tequila".localized, for: .normal)
                 baseDrink = .tequila }),
-            UIAction(title: "brandy".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "brandy".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("brandy".localized, for: .normal)
                 baseDrink = .brandy }),
-            UIAction(title: "whiskey".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "whiskey".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("whiskey".localized, for: .normal)
                 baseDrink = .whiskey }),
-            UIAction(title: "gin".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "gin".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("gin".localized, for: .normal)
                 baseDrink = .gin }),
-            UIAction(title: "liqueur".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "liqueur".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("liqueur".localized, for: .normal)
                 baseDrink = .liqueur }),
-            UIAction(title: "assets".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "assets".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("assets".localized, for: .normal)
                 baseDrink = .assets }),
-            UIAction(title: "beverage".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "beverage".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("beverage".localized, for: .normal)
                 baseDrink = .beverage})
         ]
@@ -119,19 +119,19 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let craftStackView = UIStackView()
     var craftSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "build".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "build".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("build".localized, for: .normal)
                 craft = .build }),
-            UIAction(title: "shaking".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "shaking".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("shaking".localized, for: .normal)
                 craft = .shaking }),
-            UIAction(title: "floating".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "floating".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("floating".localized, for: .normal)
                 craft = .floating }),
-            UIAction(title: "stir".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "stir".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("stir".localized, for: .normal)
                 craft = .stir }),
-            UIAction(title: "blending".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "blending".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("blending".localized, for: .normal)
                 craft = .blending })
         ]
@@ -145,28 +145,28 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let glassStackView = UIStackView()
     var glassSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "highBall".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "highBall".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("highBall".localized, for: .normal)
                 glass = .highBall }),
-            UIAction(title: "shot".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "shot".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("shot".localized, for: .normal)
                 glass = .shot }),
-            UIAction(title: "onTheRock".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "onTheRock".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("onTheRock".localized, for: .normal)
                 glass = .onTheRock }),
-            UIAction(title: "cocktail".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "cocktail".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("cocktail".localized, for: .normal)
                 glass = .cocktail }),
-            UIAction(title: "martini".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "martini".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("martini".localized, for: .normal)
                 glass = .martini }),
-            UIAction(title: "collins".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "collins".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("collins".localized, for: .normal)
                 glass = .collins }),
-            UIAction(title: "margarita".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "margarita".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("margarita".localized, for: .normal)
                 glass = .margarita }),
-            UIAction(title: "philsner".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "philsner".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("philsner".localized, for: .normal)
                 glass = .philsner })
         ]
@@ -180,13 +180,13 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let drinkTypeStackView = UIStackView()
     var drinkTypeMenuItems: [UIAction] {
         return [
-            UIAction(title: "longDrink".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "longDrink".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.drinkTypeChoiceButton.setTitle("longDrink".localized, for: .normal)
                 drinkType = .longDrink }),
-            UIAction(title: "shortDrink".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "shortDrink".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.drinkTypeChoiceButton.setTitle("shortDrink".localized, for: .normal)
                 drinkType = .shortDrink }),
-            UIAction(title: "shooter".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in
+            UIAction(title: "shooter".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.drinkTypeChoiceButton.setTitle("shooter".localized, for: .normal)
                 drinkType = .shooter })
         ]
@@ -224,17 +224,17 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     func actions() {
-        ingredientsSelectButton.addAction(UIAction(handler: { [weak self]_ in
+        ingredientsSelectButton.addAction(UIAction(handler: {[weak self] _ in
             self?.choiceView.isHidden = false
         }), for: .touchUpInside)
         
-        choiceView.saveButton.addAction(UIAction(handler: { [weak self]_ in
+        choiceView.saveButton.addAction(UIAction(handler: {[weak self] _ in
             self?.ingredients = self?.choiceView.myIngredients ?? []
             self?.ingredientsSelectButton.setTitle("\(self?.ingredients?.count ?? 0)"+"EA".localized+"Selected".localized, for: .normal)
             self?.choiceView.isHidden = true
         }), for: .touchUpInside)
         
-        choiceView.resetButton.addAction(UIAction(handler: { [weak self]_ in
+        choiceView.resetButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             self.choiceView.cellIsChecked = self.choiceView.cellIsChecked.map {
                 $0.map { _ in false}
@@ -246,7 +246,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             self.choiceView.isHidden = true
         }), for: .touchUpInside)
         
-        choiceView.cancelButton.addAction(UIAction(handler: { [weak self]_ in
+        choiceView.cancelButton.addAction(UIAction(handler: {[weak self] _ in
             self?.choiceView.isHidden = true
         }), for: .touchUpInside)
         

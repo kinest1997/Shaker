@@ -35,7 +35,7 @@ func updateRecipe(originRecipe: Cocktail, modifiedRecipe: Cocktail, origin: [Coc
     var newRecipes = origin
     guard let number = origin.firstIndex(of: originRecipe) else { return }
     newRecipes.remove(at: number)
-    newRecipes.append(modifiedRecipe)
+    newRecipes.insert(modifiedRecipe, at: number)
     upload(recipe: newRecipes)
 }
 
