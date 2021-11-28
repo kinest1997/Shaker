@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import PhotosUI
 
 class AddMyOwnCocktailRecipeViewController: UIViewController {
     
@@ -19,10 +20,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     let cocktailImageView = UIImageView(image: UIImage(named: "Martini"))
-    
-    let imagePickerController = UIImagePickerController()
-    let alertController = UIAlertController(title: "올릴 방식을 선택하세요", message: "사진 찍기 또는 앨범에서 선택", preferredStyle: .actionSheet)
-    
+        
     let nameLabel = UILabel()
     let nameTextField = UITextField()
     let nameStackView = UIStackView()
@@ -221,9 +219,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         layout()
         registerKeyboardNotification()
         actions()
-        self.imagePickerController.delegate = self
-        enrollAlertEvent()
         addGestureRecognizer()
+        
     }
     
     func actions() {
@@ -277,7 +274,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeChoiceButton.showsMenuAsPrimaryAction = true
         
         choiceView.isHidden = true
-            
+        
         groupStackView.axis = .vertical
         groupStackView.backgroundColor = .brown
         groupStackView.distribution = .fillEqually
@@ -430,15 +427,16 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     @objc func saveRecipe() {
-        guard let craft = craft, 
-        let glass = glass, 
-        let baseDrink = baseDrink, 
-        let alcohol = alcohol, 
-        let color = color, 
-        let drinkType = drinkType, 
-        let ingredients = ingredients else { 
-        return presentJustAlert(title: "Hold on".localized, message: "선택안한게 있어!")
-        }
+        guard let craft = craft,
+              let glass = glass,
+              let baseDrink = baseDrink,
+              let alcohol = alcohol,
+              let color = color,
+              let drinkType = drinkType,
+              let ingredients = ingredients,
+              let image = cocktailImageView.image else {
+                  return presentJustAlert(title: "Hold on".localized, message: "선택안한게 있어!")
+              }
         let myRecipe = Cocktail(name: nameTextField.text ?? "", craft: craft, glass: glass, recipe: recipeTextField.text ?? "", ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTipTextField.text ?? "", drinkType: drinkType, myRecipe: true, wishList: false)
         if nameTextField.text?.isEmpty ?? true  {
             presentJustAlert(title: "Hold on".localized, message: "Write name".localized)
@@ -447,13 +445,10 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         } else if myTipTextField.text?.isEmpty ?? true {
             presentJustAlert(title: "Hold on".localized, message: "Write tips".localized)
         } else {
-
             let url = getImageDirectoryPath()
             let imagePath = url.appendingPathComponent((nameTextField.text ?? "NoName") + ".png")
             let urlString: String = imagePath.path
-
-            guard let ImgForSave = cocktailImageView.image else { return }
-            let imageData = UIImage.pngData(ImgForSave)
+            let imageData = UIImage.pngData(image)
             
             FileManager.default.createFile(atPath: urlString, contents: imageData(), attributes: nil)
             myOwnRecipeData?(myRecipe)
@@ -491,74 +486,38 @@ extension AddMyOwnCocktailRecipeViewController: UITextFieldDelegate {
     }
 }
 
-
-extension AddMyOwnCocktailRecipeViewController: UIPopoverPresentationControllerDelegate, UIImagePickerControllerDelegate,
-                                                UINavigationControllerDelegate {
-    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
-        if let popoverPresentationController =
-            self.alertController.popoverPresentationController {
-            popoverPresentationController.sourceView = self.view
-            popoverPresentationController.sourceRect
-            = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
-            popoverPresentationController.permittedArrowDirections = []
-        }
-    }
-    
-    func openAlbum() {
-        self.imagePickerController.sourceType = .photoLibrary
-        present(self.imagePickerController, animated: false, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage]
-            as? UIImage {
-            //이미지를 저장 완료하고난뒤
-            cocktailImageView.image = ImageConverter.resize(image: image)
-        }
-        else {
-            print("error detected in didFinishPickinMediaWithInfo method")
-        }
-        dismiss(animated: true, completion: nil) // 반드시 dismiss 하기.
-    }
-    
-    func openCamera() {
-        if (UIImagePickerController.isSourceTypeAvailable(.camera)) {
-            self.imagePickerController.sourceType = .camera
-            present(self.imagePickerController, animated: false, completion: nil)
-        }
-        else {
-            print ("Camera's not available as for now.")
-        }
-    }
+extension AddMyOwnCocktailRecipeViewController: PHPickerViewControllerDelegate {
     
     func addGestureRecognizer() {
         let tapGestureRecognizer
-        = UITapGestureRecognizer(target: self,
-                                 action: #selector(self.tappedUIImageView(_:)))
+        = UITapGestureRecognizer(target: self, action: #selector(self.tappedUIImageView(_:)))
         self.cocktailImageView.addGestureRecognizer(tapGestureRecognizer)
         self.cocktailImageView.isUserInteractionEnabled = true
     }
-    
+
     @objc func tappedUIImageView(_ gesture: UITapGestureRecognizer) {
-        self.present(alertController, animated: true, completion: nil)
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 1
+        configuration.filter = .images
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
     }
     
-    func enrollAlertEvent() {
-        let photoLibraryAlertAction = UIAlertAction(title: "사진 앨범", style: .default) {
-            (action) in
-            self.openAlbum()
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+        let itemProvider = results.first?.itemProvider
+        
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                DispatchQueue.main.async {
+                    self.cocktailImageView.image = ImageConverter.resize(image: (image as? UIImage)!)
+                }
+            }
         }
-        let cameraAlertAction = UIAlertAction(title: "카메라", style: .default) {(action) in
-            self.openCamera()
-        }
-        let cancelAlertAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        self.alertController.addAction(photoLibraryAlertAction)
-        self.alertController.addAction(cameraAlertAction)
-        self.alertController.addAction(cancelAlertAction)
-        guard let alertControllerPopoverPresentationController
-                = alertController.popoverPresentationController
-        else {return}
-        prepareForPopoverPresentation(alertControllerPopoverPresentationController)
     }
 }
 
