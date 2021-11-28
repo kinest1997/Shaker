@@ -125,7 +125,6 @@ class CocktailDetailViewController: UIViewController {
         
         ingredientsStackView.addArrangedSubview(ingredientsGuideLabel)
         ingredientsStackView.addArrangedSubview(ingredientsLabel)
-        
         mainScrollView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalToSuperview()
