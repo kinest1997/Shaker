@@ -154,8 +154,6 @@ class CocktailDetailViewController: UIViewController {
         }
     }
     
-    
-    
     func attribute() {
         groupStackView.axis = .vertical
         groupStackView.backgroundColor = .brown
