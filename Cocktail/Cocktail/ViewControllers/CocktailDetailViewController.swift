@@ -198,7 +198,6 @@ class CocktailDetailViewController: UIViewController {
         addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
         show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
-    
     func setData(data: Cocktail) {
         nameLabel.text = data.name.localized
         alcoholLabel.text = data.alcohol.rawValue.localized
