@@ -25,6 +25,28 @@ func getWidgetRecipe() -> [Cocktail] {
     }
 }
 
+func updateRecipe(recipe: Cocktail, origin: [Cocktail] ) {
+    var newRecipes = origin
+    
+    guard let number = origin.firstIndex(of: recipe) else { return }
+    newRecipes.remove(at: number)
+    newRecipes.append(recipe)
+    upload(recipe: newRecipes)
+}
+
+///레시피를 도큐먼트에 업데이트 하는것
+func upload(recipe: [Cocktail]) {
+    let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
+    do {
+        let data = try PropertyListEncoder().encode(recipe)
+        try data.write(to: documentURL)
+    } catch let error {
+        print("ERROR", error.localizedDescription)
+    }
+}
+
+
+
 //위젯의 데이터
 func reloadwidgetData() {
     guard let widgetRecipeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("Cocktail.plist"), let widgetImageURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("UserImage") else { return }

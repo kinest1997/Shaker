@@ -15,6 +15,7 @@
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */; };
+		3D647F2D2753327F005EE580 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3D647F2C2753327F005EE580 /* SnapKit */; };
 		3D6C6D3F27325F3400C70276 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */; };
 		3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */; };
 		3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D442732B86100C70276 /* CocktailListCell.swift */; };
@@ -36,7 +37,6 @@
 		3DA76A4C2730D8B7004091CE /* CocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */; };
 		3DA76A502730D8CB004091CE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4F2730D8CB004091CE /* Settings.swift */; };
 		3DA76A522730D920004091CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A512730D920004091CE /* MainViewController.swift */; };
-		3DA76A5527317CAA004091CE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3DA76A5427317CAA004091CE /* SnapKit */; };
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
 		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
 		3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEADC6D274625F600362D99 /* FilterViewCell.swift */; };
@@ -108,7 +108,7 @@
 		3DA76A482730D899004091CE /* TodayCocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktailViewController.swift; sourceTree = "<group>"; };
 		3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DA76A4F2730D8CB004091CE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		3DA76A512730D920004091CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3DA76A512730D920004091CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; usesTabs = 0; wrapsLines = 1; };
 		3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
 		3DEADC6D274625F600362D99 /* FilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewCell.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3DA76A5527317CAA004091CE /* SnapKit in Frameworks */,
+				3D647F2D2753327F005EE580 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +155,13 @@
 				3D072474274F55220061B3F5 /* Info.plist */,
 			);
 			path = "Cocktail Widget";
+			sourceTree = "<group>";
+		};
+		3D647F2A27532A28005EE580 /* FirstLoginView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FirstLoginView;
 			sourceTree = "<group>";
 		};
 		3D74812A2736BC610092BD74 /* HomeBar */ = {
@@ -204,11 +211,11 @@
 				3DF3C3042750C97800462619 /* Cocktail.entitlements */,
 				3DA76A3B2730D1D0004091CE /* LaunchScreen.storyboard */,
 				3DA76A322730D1CD004091CE /* SceneDelegate.swift */,
-				3DA76A512730D920004091CE /* MainViewController.swift */,
 				3DA76A302730D1CD004091CE /* AppDelegate.swift */,
-				3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */,
 				3DA76A442730D244004091CE /* CocktailStruct.swift */,
+				3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */,
 				3D7481212736566E0092BD74 /* MyBadgeButton.swift */,
+				3D647F2A27532A28005EE580 /* FirstLoginView */,
 				3DA76A4A2730D8A2004091CE /* ViewControllers */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
 				3DA76A462730D574004091CE /* Cocktail.plist */,
@@ -224,6 +231,7 @@
 		3DA76A4A2730D8A2004091CE /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3DA76A512730D920004091CE /* MainViewController.swift */,
 				3DA76A482730D899004091CE /* TodayCocktailViewController.swift */,
 				3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */,
 				3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */,
@@ -274,7 +282,7 @@
 			);
 			name = Cocktail;
 			packageProductDependencies = (
-				3DA76A5427317CAA004091CE /* SnapKit */,
+				3D647F2C2753327F005EE580 /* SnapKit */,
 			);
 			productName = Cocktail;
 			productReference = 3DA76A2D2730D1CD004091CE /* Cocktail.app */;
@@ -309,7 +317,7 @@
 			);
 			mainGroup = 3DA76A242730D1CD004091CE;
 			packageReferences = (
-				3DA76A5327317CAA004091CE /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
 			projectDirPath = "";
@@ -607,7 +615,6 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "앱에서 카메라앱에 접근하여 사진을 찍으려고 합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앱에서 사진첩에 접근하여 사진을 선택하려 합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "ㅏ   ";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -639,7 +646,6 @@
 				INFOPLIST_KEY_NSCameraUsageDescription = "앱에서 카메라앱에 접근하여 사진을 찍으려고 합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앱에서 사진첩에 접근하여 사진을 선택하려 합니다. 허용하시겠습니까?";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "ㅏ   ";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -689,7 +695,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3DA76A5327317CAA004091CE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -700,9 +706,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3DA76A5427317CAA004091CE /* SnapKit */ = {
+		3D647F2C2753327F005EE580 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 3DA76A5327317CAA004091CE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = 3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -52,6 +52,8 @@ class CocktailDetailViewController: UIViewController {
     let ingredientsStackView = UIStackView()
     let groupStackView = UIStackView()
     
+    let likeButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -61,7 +63,7 @@ class CocktailDetailViewController: UIViewController {
         getRecipe(data: &originRecipe)
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
             self.originRecipe.append(data)
-            self.upload(recipe: self.originRecipe)
+            upload(recipe: self.originRecipe)
         }
     }
     
@@ -69,7 +71,7 @@ class CocktailDetailViewController: UIViewController {
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainView)
         
-        [groupStackView, cocktailImageView].forEach {
+        [groupStackView, cocktailImageView, likeButton].forEach {
             mainView.addSubview($0)
         }
         [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView].forEach {
@@ -135,6 +137,12 @@ class CocktailDetailViewController: UIViewController {
             $0.bottom.equalTo(groupStackView.snp.bottom)
         }
         
+        likeButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.width.equalTo(50)
+            $0.bottom.equalTo(cocktailImageView.snp.top)
+        }
+        
         cocktailImageView.snp.makeConstraints {
             $0.top.equalTo(mainView).offset(30)
             $0.width.height.equalTo(200)
@@ -147,15 +155,7 @@ class CocktailDetailViewController: UIViewController {
         }
     }
         
-    func upload(recipe: [Cocktail]) {
-            let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-            do {
-                let data = try PropertyListEncoder().encode(recipe)
-                try data.write(to: documentURL)
-            } catch let error {
-                print("ERROR", error.localizedDescription)
-            }
-        }
+
     
     func attribute() {
         groupStackView.axis = .vertical
@@ -171,6 +171,19 @@ class CocktailDetailViewController: UIViewController {
         recipeGuideLabel.text = "Recipe".localized
         myTipGuideLabel.text = "Tip".localized
         ingredientsGuideLabel.text = "Ingredients".localized
+        
+        likeButton.addAction(UIAction(handler: { [weak self]_ in
+            guard let self = self else { return }
+            if self.cocktailData?.myRecipe == true {
+                self.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                self.cocktailData?.myRecipe = false
+                updateRecipe(recipe: self.cocktailData!, origin: self.originRecipe)
+            } else {
+                self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                self.cocktailData?.myRecipe = true
+                updateRecipe(recipe: self.cocktailData!, origin: self.originRecipe)
+            }
+        }), for: .touchUpInside)
     }
     
     @objc func startEditing() {
@@ -193,6 +206,13 @@ class CocktailDetailViewController: UIViewController {
         recipeLabel.text = data.recipe.localized
         myTipLabel.text = data.mytip.localized
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
+        
+        if data.myRecipe == true {
+            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        
         if let image = UIImage(named: data.name) {
             cocktailImageView.image = image
         } else {
