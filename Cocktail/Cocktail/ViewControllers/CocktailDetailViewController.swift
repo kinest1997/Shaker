@@ -60,7 +60,7 @@ class CocktailDetailViewController: UIViewController {
         layout()
         let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
-        getRecipe(data: &originRecipe)
+        originRecipe = getRecipe()
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
             self.originRecipe.append(data)
             upload(recipe: self.originRecipe)
@@ -210,6 +210,7 @@ class CocktailDetailViewController: UIViewController {
         recipeLabel.text = data.recipe.localized
         myTipLabel.text = data.mytip.localized
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
+        cocktailData = data
         
         if data.wishList == true {
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)

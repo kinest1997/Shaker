@@ -13,7 +13,7 @@ class TodayCocktailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getRecipe(data: &originRecipes)
+       originRecipes = getRecipe()
         attribute()
         layout()
         navigationController?.navigationBar.isHidden = true

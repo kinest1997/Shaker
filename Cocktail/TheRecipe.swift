@@ -1,4 +1,4 @@
 import UIKit
 
-//var theRecipe: [Cocktail] = []
+var theRecipe: [Cocktail] = []
 //일단 전역에 두는것 보류

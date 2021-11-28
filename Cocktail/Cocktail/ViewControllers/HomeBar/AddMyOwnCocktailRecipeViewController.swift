@@ -454,7 +454,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             myOwnRecipeData?(myRecipe)
             let cocktailDetailViewController = CocktailDetailViewController()
             cocktailDetailViewController.setData(data: myRecipe)
-            
             navigationController?.popToRootViewController(animated: true)
             show(cocktailDetailViewController, sender: nil)
             //유틸리티 수준의 중요도로 작동

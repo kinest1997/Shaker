@@ -1,18 +1,22 @@
 import UIKit
 
-func getRecipe(data: inout [Cocktail]) {
+///도큐먼트에서 레시피를 불러오는 함수
+func getRecipe() -> [Cocktail] {
     let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-    guard let cocktailData = FileManager.default.contents(atPath: documentURL.path) else { return }
+    guard let cocktailData = FileManager.default.contents(atPath: documentURL.path) else { return [] }
     
     do {
-        data = try PropertyListDecoder().decode([Cocktail].self, from: cocktailData).sorted {
+        let data = try PropertyListDecoder().decode([Cocktail].self, from: cocktailData).sorted {
             $0.name < $1.name
         }
+        return data
     } catch let error{
         print(String(describing: error))
+        return []
     }
 }
 
+///그룹폴더에서 레시피를 불러오는 함수
 func getWidgetRecipe() -> [Cocktail] {
     guard let documentURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("Cocktail.plist"), let cocktailData = FileManager.default.contents(atPath: documentURL.path) else { return [] }
     do {
@@ -25,9 +29,9 @@ func getWidgetRecipe() -> [Cocktail] {
     }
 }
 
+///레시피를 업데이트 하는 함수
 func updateRecipe(originRecipe: Cocktail, modifiedRecipe: Cocktail, origin: [Cocktail] ) {
     var newRecipes = origin
-    
     guard let number = origin.firstIndex(of: originRecipe) else { return }
     newRecipes.remove(at: number)
     newRecipes.append(modifiedRecipe)
@@ -44,8 +48,6 @@ func upload(recipe: [Cocktail]) {
         print("ERROR", error.localizedDescription)
     }
 }
-
-
 
 //위젯의 데이터
 func reloadwidgetData() {
@@ -94,13 +96,14 @@ func reloadwidgetData() {
     }
 }
 
+///이미지 폴더의 위치를 알려주는함수
 func getImageDirectoryPath() -> URL {
-    
     let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     let url = directoryURL.appendingPathComponent("UserImage")
     return url
 }
 
+///이미지를 설정해주는 함수
 func setImage(name: String, data: Cocktail, imageView: UIImageView) {
     if data.myRecipe == true {
         let fileManager = FileManager.default

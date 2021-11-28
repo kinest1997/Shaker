@@ -29,7 +29,7 @@ class MyDrinksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getRecipe(data: &originRecipe)
+        originRecipe = getRecipe()
         attribute()
         layout()
     }

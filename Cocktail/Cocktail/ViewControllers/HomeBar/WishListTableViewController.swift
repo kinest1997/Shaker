@@ -1,8 +1,8 @@
 import UIKit
 
-class CocktailListTableView: UITableViewController {
+class WishListCocktailListTableView: UITableViewController {
     
-    var lastRecipe: [Cocktail] = []
+    var wishListRecipe: [Cocktail] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,19 +12,20 @@ class CocktailListTableView: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        wishListRecipe = getRecipe().filter { $0.wishList == true }
         tableView.reloadData()
     }
 }
 
-extension CocktailListTableView {
+extension WishListCocktailListTableView {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lastRecipe.count
+        return wishListRecipe.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "key", for: indexPath) as? CocktailListCell else { return UITableViewCell()}
-        cell.configure(data: lastRecipe[indexPath.row])
+        cell.configure(data: wishListRecipe[indexPath.row])
         cell.accessoryType = .disclosureIndicator
         return cell
     }
@@ -34,7 +35,7 @@ extension CocktailListTableView {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cocktailData = lastRecipe[indexPath.row]
+        let cocktailData = wishListRecipe[indexPath.row]
         let cocktailDetailViewController = CocktailDetailViewController()
         cocktailDetailViewController.setData(data: cocktailData)
         self.show(cocktailDetailViewController, sender: nil)
