@@ -40,7 +40,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainViewController = MainViewController()
-//        MVC.tabBar.backgroundColor = .systemPink
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
     }

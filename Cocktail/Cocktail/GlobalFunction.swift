@@ -25,12 +25,12 @@ func getWidgetRecipe() -> [Cocktail] {
     }
 }
 
-func updateRecipe(recipe: Cocktail, origin: [Cocktail] ) {
+func updateRecipe(originRecipe: Cocktail, modifiedRecipe: Cocktail, origin: [Cocktail] ) {
     var newRecipes = origin
     
-    guard let number = origin.firstIndex(of: recipe) else { return }
+    guard let number = origin.firstIndex(of: originRecipe) else { return }
     newRecipes.remove(at: number)
-    newRecipes.append(recipe)
+    newRecipes.append(modifiedRecipe)
     upload(recipe: newRecipes)
 }
 
