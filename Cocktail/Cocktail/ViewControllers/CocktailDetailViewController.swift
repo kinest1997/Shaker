@@ -173,17 +173,11 @@ class CocktailDetailViewController: UIViewController {
         
         likeButton.addAction(UIAction(handler: { [weak self]_ in
             guard let self = self, let cocktailData = self.cocktailData else { return }
-            if self.cocktailData?.wishList == true {
-                self.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-                var modifiedRecipe = cocktailData
-                modifiedRecipe.wishList = false
-                updateRecipe(originRecipe: cocktailData, modifiedRecipe: modifiedRecipe, origin: self.originRecipe)
-            } else {
-                self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                var modifiedRecipe = cocktailData
-                modifiedRecipe.wishList = true
-                updateRecipe(originRecipe: cocktailData, modifiedRecipe: modifiedRecipe, origin: self.originRecipe)
-            }
+let hasWishList = self.cocktailData?.wishList == true
+self.likeButton.setImage(UIImage(systemName: hasWishList ? "heart" : "heart.fill"), for: .normal)
+var modifiedRecipe = cocktailData
+modifiedRecipe.wishList = hasWishList ? false : true
+updateRecipe(originRecipe: cocktailData, modifiedRecipe: modifiedRecipe, origin: self.originRecipe)
         }), for: .touchUpInside)
     }
     
