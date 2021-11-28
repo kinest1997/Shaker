@@ -32,7 +32,6 @@ class MyDrinksViewController: UIViewController {
         getRecipe(data: &originRecipe)
         attribute()
         layout()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +45,6 @@ class MyDrinksViewController: UIViewController {
         }
     }
     
-   
     func layout() {
         mainScrollView.snp.makeConstraints {
             $0.leading.trailing.top.equalToSuperview()

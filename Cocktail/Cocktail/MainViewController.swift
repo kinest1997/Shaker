@@ -57,18 +57,8 @@ class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let bundleURL = Bundle.main.url(forResource: "Cocktail", withExtension: "plist") else {
-                    return
-                }
-        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-        if !FileManager.default.fileExists(atPath: documentURL.path) {
-                    do {
-                        try FileManager.default.copyItem(at: bundleURL, to: documentURL)
-                        print("번들에서 도큐멘트로 복사함")
-                    } catch let error {
-                        print("ERROR", error.localizedDescription)
-                    }
-                }
+
+        
         tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default

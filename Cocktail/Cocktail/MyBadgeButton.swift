@@ -9,7 +9,6 @@ class BadgeButton: UIButton {
     
     private var buttonImage = UIImageView()
     
-    //또 작성하기귀찮아서 그냥 함수 바꿈
     override func setImage(_ image: UIImage?, for state: UIControl.State) {
         self.addSubview(buttonImage)
         buttonImage.snp.makeConstraints {

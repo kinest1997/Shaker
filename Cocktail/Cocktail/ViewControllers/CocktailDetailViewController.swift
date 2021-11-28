@@ -8,6 +8,7 @@ class CocktailDetailViewController: UIViewController {
     var originRecipe: [Cocktail] = []
     
     var cocktailData: Cocktail?
+    
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     
@@ -37,6 +38,9 @@ class CocktailDetailViewController: UIViewController {
     let myTipGuideLabel = UILabel()
     let myTipLabel = UILabel()
     
+    let ingredientsGuideLabel = UILabel()
+    let ingredientsLabel = UILabel()
+    
     let nameStackView =  UIStackView()
     let alcoholStackView = UIStackView()
     let colorStackView = UIStackView()
@@ -45,6 +49,7 @@ class CocktailDetailViewController: UIViewController {
     let craftStackView = UIStackView()
     let recipeStackView = UIStackView()
     let mytipStackView = UIStackView()
+    let ingredientsStackView = UIStackView()
     let groupStackView = UIStackView()
     
     override func viewDidLoad() {
@@ -60,26 +65,6 @@ class CocktailDetailViewController: UIViewController {
         }
     }
     
-    func upload(recipe: [Cocktail]) {
-        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-        do {
-            let data = try PropertyListEncoder().encode(recipe)
-            try data.write(to: documentURL)
-            print(data)
-        } catch let error {
-            print("ERROR", error.localizedDescription)
-        }
-    }
-    
-    @objc func startEditing() {
-        guard let cocktailData = cocktailData else { return }
-        addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
-        addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
-        addMyOwnCocktailRecipeViewController.choiceView.myIngredients = cocktailData.ingredients
-        addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
-        show(addMyOwnCocktailRecipeViewController, sender: nil)
-    }
-    
     func layout() {
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainView)
@@ -89,23 +74,23 @@ class CocktailDetailViewController: UIViewController {
         }
         [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView].forEach {
             $0.snp.makeConstraints {
-                $0.height.equalTo(40)
+                $0.height.equalTo(30)
             }
         }
         
-        [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView, recipeStackView, mytipStackView].forEach {
+        [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView, ingredientsStackView, recipeStackView, mytipStackView].forEach {
             groupStackView.addArrangedSubview($0)
             $0.axis = .horizontal
             $0.distribution = .fill
         }
-        [nameGuideLabel, alcoholGuideLabel, colorGuideLabel, baseDrinkGuideLabel, glassGuideLabel, craftGuideLabel, recipeGuideLabel, myTipGuideLabel].forEach {
+        [nameGuideLabel, alcoholGuideLabel, colorGuideLabel, baseDrinkGuideLabel, glassGuideLabel, craftGuideLabel, recipeGuideLabel, myTipGuideLabel, ingredientsGuideLabel].forEach {
             $0.textAlignment = .center
             $0.snp.makeConstraints {
                 $0.width.equalTo(80)
             }
         }
         
-        [nameLabel, alcoholLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, recipeLabel, myTipLabel].forEach {
+        [nameLabel, alcoholLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, recipeLabel, myTipLabel, ingredientsLabel].forEach {
             $0.textAlignment = .left
             $0.setContentHuggingPriority(UILayoutPriority(250), for: .horizontal)
             $0.backgroundColor = .blue
@@ -135,6 +120,9 @@ class CocktailDetailViewController: UIViewController {
         
         mytipStackView.addArrangedSubview(myTipGuideLabel)
         mytipStackView.addArrangedSubview(myTipLabel)
+        
+        ingredientsStackView.addArrangedSubview(ingredientsGuideLabel)
+        ingredientsStackView.addArrangedSubview(ingredientsLabel)
 
         mainScrollView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -158,9 +146,18 @@ class CocktailDetailViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
     }
+        
+    func upload(recipe: [Cocktail]) {
+            let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
+            do {
+                let data = try PropertyListEncoder().encode(recipe)
+                try data.write(to: documentURL)
+            } catch let error {
+                print("ERROR", error.localizedDescription)
+            }
+        }
     
     func attribute() {
-        cocktailImageView.image = UIImage(named: "Martini")
         groupStackView.axis = .vertical
         groupStackView.backgroundColor = .brown
         groupStackView.distribution = .fill
@@ -173,6 +170,17 @@ class CocktailDetailViewController: UIViewController {
         craftGuideLabel.text = "Craft".localized
         recipeGuideLabel.text = "Recipe".localized
         myTipGuideLabel.text = "Tip".localized
+        ingredientsGuideLabel.text = "Ingredients".localized
+    }
+    
+    @objc func startEditing() {
+        guard let cocktailData = cocktailData else { return }
+        addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
+        addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
+        addMyOwnCocktailRecipeViewController.choiceView.myIngredients = cocktailData.ingredients
+        addMyOwnCocktailRecipeViewController.cocktailImageView.image = cocktailImageView.image
+        addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
+        show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
 
     func setData(data: Cocktail) {
@@ -184,5 +192,11 @@ class CocktailDetailViewController: UIViewController {
         craftLabel.text = data.craft.rawValue.localized
         recipeLabel.text = data.recipe.localized
         myTipLabel.text = data.mytip.localized
+        ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
+        if let image = UIImage(named: data.name) {
+            cocktailImageView.image = image
+        } else {
+            setImage(name: data.name, data: data, imageView: cocktailImageView)
+        }
     }
 }

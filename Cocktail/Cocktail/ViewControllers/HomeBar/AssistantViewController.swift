@@ -15,13 +15,11 @@ class AssistantViewController: UIViewController {
     func attribute() {
         myRecipeButton.addAction(UIAction(handler: { [weak self]_ in
             let myOwnCocktailRecipeViewController = MyOwnCocktailRecipeViewController()
-            print("눌림")
             self?.show(myOwnCocktailRecipeViewController, sender: nil)
         }), for: .touchUpInside)
         
         myBarButton.addAction(UIAction(handler: { [weak self]_ in
             let homeBarViewController = MyDrinksViewController()
-            print("눌림")
             self?.show(homeBarViewController, sender: nil)
         }), for: .touchUpInside)
         

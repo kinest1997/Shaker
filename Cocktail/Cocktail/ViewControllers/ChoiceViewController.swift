@@ -86,7 +86,7 @@ class ChoiceViewController: UIViewController {
         }
         return buttonAction
     }
-    //누나가 주석단곳 수정및 간소화 완료, 근데 이제 이부분에 컨텐츠 추가를 고민해야할듯
+    
     func filterSortedRecipe(base: Cocktail.Base) -> [Cocktail] {
         if base == .beverage {
             return firstRecipe

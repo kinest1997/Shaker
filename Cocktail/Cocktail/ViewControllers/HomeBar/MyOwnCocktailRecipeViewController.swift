@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import SwiftUI
 
 class MyOwnCocktailRecipeViewController: UIViewController {
     
@@ -33,7 +34,6 @@ class MyOwnCocktailRecipeViewController: UIViewController {
             self.originRecipe.append(data)
             self.upload(recipe: self.originRecipe)
             self.mainTableView.reloadData()
-            print("xxxx")
         }
     }
     
@@ -47,11 +47,10 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     }
     
     func upload(recipe: [Cocktail]) {
-        let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
+        let documentPlistURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
         do {
             let data = try PropertyListEncoder().encode(recipe)
-            try data.write(to: documentURL)
-            print(data)
+            try data.write(to: documentPlistURL)
         } catch let error {
             print("ERROR", error.localizedDescription)
         }
@@ -77,11 +76,10 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 100
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         let cocktailData = myOwnRecipe[indexPath.row]
         let cocktailDetailViewController = CocktailDetailViewController()
         cocktailDetailViewController.setData(data: cocktailData)
@@ -96,15 +94,19 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let number = originRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
-            print(myOwnRecipe.count, "지우기전")
+             let directoryURL = getImageDirectoryPath()
+            let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name, relativeTo: directoryURL).appendingPathExtension("png")
+            do {
+                try FileManager.default.removeItem(at: fileURL)
+            } catch {
+                print(error)
+            }
             originRecipe.remove(at: number)
             upload(recipe: originRecipe)
             myOwnRecipe = originRecipe.filter {
                 $0.myRecipe == true
             }
-            print(myOwnRecipe.count, "현재 갯수")
             tableView.deleteRows(at: [indexPath], with: .automatic)
-            
         }
     }
 }
