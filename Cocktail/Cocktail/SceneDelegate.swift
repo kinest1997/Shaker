@@ -34,8 +34,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             try! FileManager.default.createDirectory(atPath: PathWithFolderName, withIntermediateDirectories: true, attributes: nil)
         }
         
-        theRecipe = getRecipe()
-        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainViewController = MainViewController()
