@@ -16,11 +16,11 @@ struct Provider: TimelineProvider {
     }
     
     func placeholder(in context: Context) -> CocktailEntry {
-        return CocktailEntry(date: Date(), configuration: getWidgetRecipe().randomElement()!)
+        let configuration = Cocktail(name: "Martini".localized, craft: .blending, glass: .cocktail, recipe: "손으로 막휘젓기", ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false)
+        return CocktailEntry(date: Date(), configuration: configuration)
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<CocktailEntry>) -> Void) {
-//        reloadwidgetData()
         let configuration = getWidgetRecipe().randomElement() ?? Cocktail(name: "Martini".localized, craft: .blending, glass: .cocktail, recipe: "손으로 막휘젓기", ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false)
         print(configuration)
         let entry = CocktailEntry(date: Date(), configuration: configuration)
