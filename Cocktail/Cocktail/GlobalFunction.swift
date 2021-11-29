@@ -18,8 +18,8 @@ func getRecipe() -> [Cocktail] {
 
 ///그룹폴더에서 레시피를 불러오는 함수
 func getWidgetRecipe() -> [Cocktail] {
-    guard let documentURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("Cocktail.plist"), 
-    let cocktailData = FileManager.default.contents(atPath: documentURL.path) else { return [] }
+    guard let documentURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("Cocktail.plist"),
+            let cocktailData = FileManager.default.contents(atPath: documentURL.path) else { return [] }
     do {
         return try PropertyListDecoder().decode([Cocktail].self, from: cocktailData).sorted {
             $0.name < $1.name
@@ -52,7 +52,8 @@ func upload(recipe: [Cocktail]) {
 
 //위젯의 데이터
 func reloadwidgetData() {
-    guard let widgetRecipeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("Cocktail.plist"), let widgetImageURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("UserImage") else { return }
+    guard let widgetRecipeURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("Cocktail.plist"),
+          let widgetImageURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("UserImage") else { return }
     
     let documentPlistURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
     
