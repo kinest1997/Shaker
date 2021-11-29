@@ -170,13 +170,13 @@ class CocktailDetailViewController: UIViewController {
         ingredientsGuideLabel.text = "Ingredients".localized
         
         likeButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self, 
-            let cocktailData = self.cocktailData else { return }
-let hasWishList = self.cocktailData?.wishList == true
-self.likeButton.setImage(UIImage(systemName: hasWishList ? "heart" : "heart.fill"), for: .normal)
-var modifiedRecipe = cocktailData
-modifiedRecipe.wishList = hasWishList ? false : true
-updateRecipe(originRecipe: cocktailData, modifiedRecipe: modifiedRecipe, origin: self.originRecipe)
+            guard let self = self,
+                    let cocktailData = self.cocktailData else { return }
+            let hasWishList = self.cocktailData?.wishList == true
+            self.likeButton.setImage(UIImage(systemName: hasWishList ? "heart" : "heart.fill"), for: .normal)
+            var modifiedRecipe = cocktailData
+            modifiedRecipe.wishList = hasWishList ? false : true
+            updateRecipe(originRecipe: cocktailData, modifiedRecipe: modifiedRecipe, origin: self.originRecipe)
         }), for: .touchUpInside)
     }
     
