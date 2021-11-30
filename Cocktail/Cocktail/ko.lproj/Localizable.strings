@@ -11,6 +11,9 @@
 "Reset" = "리셋";
 "Cancel" = "취소";
 "Save" = "저장";
+"My Drinks" = "내술장";
+"Bookmark" = "즐겨찾기";
+"My Recipes" = "나의 레시피";
 
 //AddMyOwnCocktailRecipeViewController.swift
 "Reset" = "리셋";

@@ -13,34 +13,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let bundleURL = Bundle.main.url(forResource: "Cocktail", withExtension: "plist") else {
-                    return
-                }
-        let documentPlistURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-
-        if !FileManager.default.fileExists(atPath: documentPlistURL.path) {
-                    do {
-                        try FileManager.default.copyItem(at: bundleURL, to: documentPlistURL)
-                    } catch let error {
-                        print("ERROR", error.localizedDescription)
-                    }
-                }
-        
-        let beforeDocumentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let PathWithFolderName = beforeDocumentURL.appendingPathComponent("UserImage").path
-        
-        if !FileManager.default.fileExists(atPath: PathWithFolderName)
-        {
-            try! FileManager.default.createDirectory(atPath: PathWithFolderName, withIntermediateDirectories: true, attributes: nil)
-        }
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let mainViewController = MainViewController()
-//        MVC.tabBar.backgroundColor = .systemPink
         window?.rootViewController = mainViewController
         window?.makeKeyAndVisible()
     }

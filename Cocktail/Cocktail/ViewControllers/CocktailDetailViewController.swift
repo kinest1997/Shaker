@@ -52,16 +52,18 @@ class CocktailDetailViewController: UIViewController {
     let ingredientsStackView = UIStackView()
     let groupStackView = UIStackView()
     
+    let likeButton = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
         let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
-        getRecipe(data: &originRecipe)
+        originRecipe = getRecipe()
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
             self.originRecipe.append(data)
-            self.upload(recipe: self.originRecipe)
+            upload(recipe: self.originRecipe)
         }
     }
     
@@ -69,7 +71,7 @@ class CocktailDetailViewController: UIViewController {
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainView)
         
-        [groupStackView, cocktailImageView].forEach {
+        [groupStackView, cocktailImageView, likeButton].forEach {
             mainView.addSubview($0)
         }
         [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView].forEach {
@@ -123,7 +125,6 @@ class CocktailDetailViewController: UIViewController {
         
         ingredientsStackView.addArrangedSubview(ingredientsGuideLabel)
         ingredientsStackView.addArrangedSubview(ingredientsLabel)
-
         mainScrollView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalToSuperview()
@@ -133,6 +134,12 @@ class CocktailDetailViewController: UIViewController {
             $0.width.equalTo(mainScrollView.frameLayoutGuide)
             $0.edges.equalTo(mainScrollView.contentLayoutGuide)
             $0.bottom.equalTo(groupStackView.snp.bottom)
+        }
+        
+        likeButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.width.equalTo(50)
+            $0.bottom.equalTo(cocktailImageView.snp.top)
         }
         
         cocktailImageView.snp.makeConstraints {
@@ -146,16 +153,6 @@ class CocktailDetailViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
     }
-        
-    func upload(recipe: [Cocktail]) {
-            let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-            do {
-                let data = try PropertyListEncoder().encode(recipe)
-                try data.write(to: documentURL)
-            } catch let error {
-                print("ERROR", error.localizedDescription)
-            }
-        }
     
     func attribute() {
         groupStackView.axis = .vertical
@@ -171,7 +168,19 @@ class CocktailDetailViewController: UIViewController {
         recipeGuideLabel.text = "Recipe".localized
         myTipGuideLabel.text = "Tip".localized
         ingredientsGuideLabel.text = "Ingredients".localized
+        
+        likeButton.addAction(UIAction(handler: {[weak self] _ in
+            guard let self = self,
+                    let cocktailData = self.cocktailData else { return }
+            let hasWishList = self.cocktailData?.wishList == true
+            self.likeButton.setImage(UIImage(systemName: hasWishList ? "heart" : "heart.fill"), for: .normal)
+            var modifiedRecipe = cocktailData
+            modifiedRecipe.wishList = hasWishList ? false : true
+            updateRecipe(originRecipe: cocktailData, modifiedRecipe: modifiedRecipe, origin: self.originRecipe)
+        }), for: .touchUpInside)
     }
+    
+    
     
     @objc func startEditing() {
         guard let cocktailData = cocktailData else { return }
@@ -182,7 +191,6 @@ class CocktailDetailViewController: UIViewController {
         addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
         show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
-
     func setData(data: Cocktail) {
         nameLabel.text = data.name.localized
         alcoholLabel.text = data.alcohol.rawValue.localized
@@ -193,6 +201,10 @@ class CocktailDetailViewController: UIViewController {
         recipeLabel.text = data.recipe.localized
         myTipLabel.text = data.mytip.localized
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
+        cocktailData = data
+        
+        likeButton.setImage(UIImage(systemName: data.wishList == true ? "heart.fill" : "heart"), for: .normal)
+        
         if let image = UIImage(named: data.name) {
             cocktailImageView.image = image
         } else {

@@ -15,9 +15,9 @@ class CocktailRecipeViewController: UIViewController {
     
     var filtertMenuItems: [UIAction] {
         return [
-            UIAction(title: "Name".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in sorting(standard: .name)}),
-            UIAction(title: "Alcohol".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in sorting(standard: .alcohol)}),
-            UIAction(title: "Ingredients Count".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: { [unowned self]_ in sorting(standard: .ingredientsCount)})
+            UIAction(title: "Name".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in sorting(standard: .name)}),
+            UIAction(title: "Alcohol".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in sorting(standard: .alcohol)}),
+            UIAction(title: "Ingredients Count".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in sorting(standard: .ingredientsCount)})
         ]
     }
     
@@ -29,7 +29,7 @@ class CocktailRecipeViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        getRecipe(data: &unTouchableRecipe)
+        unTouchableRecipe = getRecipe()
         originRecipe = unTouchableRecipe
         filteredRecipe = originRecipe
         mainTableView.delegate = self
@@ -57,7 +57,7 @@ class CocktailRecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getRecipe(data: &unTouchableRecipe)
+        unTouchableRecipe = getRecipe()
         mainTableView.reloadData()
     }
     
@@ -79,7 +79,7 @@ class CocktailRecipeViewController: UIViewController {
         filterView.resetButton.setTitle("Reset".localized, for: .normal)
         
         //저장 버튼의 액션
-        filterView.saveButton.addAction(UIAction(handler: {[unowned self]_ in
+        filterView.saveButton.addAction(UIAction(handler: {[unowned self] _ in
             self.filterView.isHidden = true
             let filteredViewRecipe = filterView.sortingRecipes(
                 origin: unTouchableRecipe,
@@ -94,7 +94,7 @@ class CocktailRecipeViewController: UIViewController {
             mainTableView.reloadData()
         }), for: .touchUpInside)
         //리셋 버튼의 액션
-        filterView.resetButton.addAction(UIAction(handler: { [unowned self]_ in
+        filterView.resetButton.addAction(UIAction(handler: {[unowned self] _ in
             self.filterView.cellIsChecked = self.filterView.cellIsChecked.map {
                 $0.map { _ in false}
             }
@@ -186,7 +186,6 @@ extension CocktailRecipeViewController: UITableViewDelegate, UITableViewDataSour
         let cocktailData = recipe
         let cocktailDetailViewController = CocktailDetailViewController()
         cocktailDetailViewController.setData(data: cocktailData)
-        cocktailDetailViewController.cocktailData = cocktailData
         self.show(cocktailDetailViewController, sender: nil)
     }
 }

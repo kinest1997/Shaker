@@ -29,7 +29,7 @@ class MyDrinksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getRecipe(data: &originRecipe)
+        originRecipe = getRecipe()
         attribute()
         layout()
     }
@@ -111,7 +111,7 @@ class MyDrinksViewController: UIViewController {
             setButtonAction(buttonName: $0)
         }
         
-        whatICanMakeButton.addAction(UIAction(handler: { [weak self]_ in
+        whatICanMakeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             let whatICanMakeViewController = CocktailListTableView()
             whatICanMakeViewController.lastRecipe = self.checkWhatICanMake(myIngredients: self.myDrink)
@@ -120,7 +120,7 @@ class MyDrinksViewController: UIViewController {
     }
     
     func setButtonAction(buttonName: BadgeButton) {
-        buttonName.addAction(UIAction(handler: { [weak self]_ in
+        buttonName.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             let whatIHaveViewController = WhatIHaveViewController()
 //            whatIHaveViewController.whatIPicked = buttonName.base

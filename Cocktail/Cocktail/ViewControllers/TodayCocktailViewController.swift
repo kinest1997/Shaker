@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 class TodayCocktailViewController: UIViewController {
-    
+
     var originRecipes: [Cocktail] = []
     
     let mainScrollView = UIScrollView()
@@ -13,14 +13,14 @@ class TodayCocktailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getRecipe(data: &originRecipes)
+       originRecipes = getRecipe()
         attribute()
         layout()
         navigationController?.navigationBar.isHidden = true
     }
     
     func attribute() {
-        let beginner = UIAction { [weak self] _ in
+        let beginner = UIAction {[weak self] _ in
             guard let self = self else { return }
             let choiceViewController = ChoiceViewController()
             choiceViewController.firstRecipe = self.bigChoice(alcohol: .low)
@@ -28,7 +28,7 @@ class TodayCocktailViewController: UIViewController {
             self.show(choiceViewController, sender: nil)
         }
         
-        let expert = UIAction { [weak self]_ in
+        let expert = UIAction {[weak self] _ in
             guard let self = self else { return }
             let choiceViewController = ChoiceViewController()
             choiceViewController.firstRecipe = self.bigChoice(alcohol: .high)

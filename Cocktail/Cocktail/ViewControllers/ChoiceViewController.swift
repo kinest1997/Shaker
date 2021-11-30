@@ -77,7 +77,7 @@ class ChoiceViewController: UIViewController {
     }
     
     func baseDrinkAction(base: Cocktail.Base) -> UIAction {
-        let buttonAction = UIAction { [weak self]_ in
+        let buttonAction = UIAction {[weak self] _ in
             guard let self = self else { return }
             let cocktailListTableView = CocktailListTableView()
             cocktailListTableView.lastRecipe = self.filterSortedRecipe(base: base)
