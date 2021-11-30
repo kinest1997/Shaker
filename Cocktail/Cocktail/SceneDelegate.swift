@@ -16,9 +16,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        let mainViewController = MainViewController()
-        window?.rootViewController = mainViewController
-        window?.makeKeyAndVisible()
+
+        if let authorized = UserDefaults.standard.object(forKey: "Authorized") as? Bool {
+            if authorized == true {
+                window?.rootViewController = MainViewController()
+                window?.makeKeyAndVisible()
+            }
+        } else {
+            window?.rootViewController = LoginViewController()
+            window?.makeKeyAndVisible()
+        }
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

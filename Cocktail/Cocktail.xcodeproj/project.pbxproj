@@ -15,6 +15,12 @@
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */; };
+		3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */; };
+		3D4415CA27564B7D00CBCC40 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4415C927564B7D00CBCC40 /* FirebaseAnalytics */; };
+		3D4415CC27564B7D00CBCC40 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4415CB27564B7D00CBCC40 /* FirebaseAuth */; };
+		3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4415CE27564CF400CBCC40 /* GoogleSignIn */; };
+		3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D027564EA600CBCC40 /* LoginViewController.swift */; };
+		3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */; };
 		3D647F2D2753327F005EE580 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3D647F2C2753327F005EE580 /* SnapKit */; };
 		3D6C6D3F27325F3400C70276 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */; };
 		3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */; };
@@ -87,6 +93,9 @@
 		3D175BA5274285BB00EC142B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3D1EB1152752731600D49F81 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunction.swift; sourceTree = "<group>"; };
+		3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3D4415D027564EA600CBCC40 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceViewController.swift; sourceTree = "<group>"; };
 		3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceViewController.swift; sourceTree = "<group>"; };
 		3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListTableView.swift; sourceTree = "<group>"; };
 		3D6C6D442732B86100C70276 /* CocktailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListCell.swift; sourceTree = "<group>"; };
@@ -132,6 +141,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D4415CA27564B7D00CBCC40 /* FirebaseAnalytics in Frameworks */,
+				3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */,
+				3D4415CC27564B7D00CBCC40 /* FirebaseAuth in Frameworks */,
 				3D647F2D2753327F005EE580 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +169,15 @@
 				3D072474274F55220061B3F5 /* Info.plist */,
 			);
 			path = "Cocktail Widget";
+			sourceTree = "<group>";
+		};
+		3D4415D427565DAA00CBCC40 /* FirstLaunch */ = {
+			isa = PBXGroup;
+			children = (
+				3D4415D027564EA600CBCC40 /* LoginViewController.swift */,
+				3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */,
+			);
+			path = FirstLaunch;
 			sourceTree = "<group>";
 		};
 		3D74812A2736BC610092BD74 /* HomeBar */ = {
@@ -209,9 +230,11 @@
 				3DA76A322730D1CD004091CE /* SceneDelegate.swift */,
 				3DA76A302730D1CD004091CE /* AppDelegate.swift */,
 				3DA76A442730D244004091CE /* CocktailStruct.swift */,
+				3D4415D427565DAA00CBCC40 /* FirstLaunch */,
 				3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */,
 				3D7481212736566E0092BD74 /* MyBadgeButton.swift */,
 				3DA76A4A2730D8A2004091CE /* ViewControllers */,
+				3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
 				3DA76A462730D574004091CE /* Cocktail.plist */,
 				3DA76A3E2730D1D0004091CE /* Info.plist */,
@@ -279,6 +302,9 @@
 			name = Cocktail;
 			packageProductDependencies = (
 				3D647F2C2753327F005EE580 /* SnapKit */,
+				3D4415C927564B7D00CBCC40 /* FirebaseAnalytics */,
+				3D4415CB27564B7D00CBCC40 /* FirebaseAuth */,
+				3D4415CE27564CF400CBCC40 /* GoogleSignIn */,
 			);
 			productName = Cocktail;
 			productReference = 3DA76A2D2730D1CD004091CE /* Cocktail.app */;
@@ -314,6 +340,8 @@
 			mainGroup = 3DA76A242730D1CD004091CE;
 			packageReferences = (
 				3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3D4415C827564B7D00CBCC40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
 			projectDirPath = "";
@@ -344,6 +372,7 @@
 				3DA76A472730D574004091CE /* Cocktail.plist in Resources */,
 				7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */,
 				3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */,
+				3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,6 +408,8 @@
 				3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */,
 				3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift in Sources */,
 				3D83715D274CD7C300CA6036 /* ChoiceIngredientsView.swift in Sources */,
+				3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */,
+				3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */,
 				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
 				3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */,
 				3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */,
@@ -704,6 +735,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3D4415C827564B7D00CBCC40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 		3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -715,6 +762,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3D4415C927564B7D00CBCC40 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D4415C827564B7D00CBCC40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		3D4415CB27564B7D00CBCC40 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D4415C827564B7D00CBCC40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		3D4415CE27564CF400CBCC40 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
 		3D647F2C2753327F005EE580 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */;
