@@ -13,10 +13,30 @@ class TodayCocktailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       originRecipes = getRecipe()
+        FireBase.shared.getRecipe { data in
+            FireBase.shared.recipe = data
+            FireBase.shared.wishList.append(contentsOf: data.filter { $0.wishList == true })
+        }
+        
+        FireBase.shared.getMyRecipe { data in
+            FireBase.shared.myRecipe = data
+            FireBase.shared.wishList.append(contentsOf: data.filter { $0.wishList == true })
+        }
+        
+        originRecipes = FireBase.shared.recipe
         attribute()
         layout()
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if UserFavor.shared.firstLogin == true {
+            UserFavor.shared.firstLogin = false
+            let colorChoiceViewController = ColorChoiceViewController()
+            colorChoiceViewController.modalPresentationStyle = .overFullScreen
+            self.navigationController?.show(colorChoiceViewController, sender: nil)
+        }
     }
     
     func attribute() {

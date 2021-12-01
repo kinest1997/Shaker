@@ -60,10 +60,12 @@ class CocktailDetailViewController: UIViewController {
         layout()
         let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
-        originRecipe = getRecipe()
+        
+        originRecipe = FireBase.shared.recipe
+        
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
-            self.originRecipe.append(data)
-            upload(recipe: self.originRecipe)
+            FireBase.shared.myRecipe.append(data)
+            FireBase.shared.uploadMyRecipe()
         }
     }
     
@@ -176,7 +178,13 @@ class CocktailDetailViewController: UIViewController {
             self.likeButton.setImage(UIImage(systemName: hasWishList ? "heart" : "heart.fill"), for: .normal)
             var modifiedRecipe = cocktailData
             modifiedRecipe.wishList = hasWishList ? false : true
-            updateRecipe(originRecipe: cocktailData, modifiedRecipe: modifiedRecipe, origin: self.originRecipe)
+            if !modifiedRecipe.wishList {
+                guard let number = FireBase.shared.wishList.firstIndex(of: cocktailData) else { return }
+                FireBase.shared.wishList.remove(at: number)
+            } else {
+                FireBase.shared.wishList.append(modifiedRecipe)
+            }
+            FireBase.shared.uploadWishList()
         }), for: .touchUpInside)
     }
     

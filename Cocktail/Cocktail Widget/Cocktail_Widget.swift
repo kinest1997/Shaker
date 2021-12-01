@@ -21,12 +21,12 @@ struct Provider: TimelineProvider {
     }
     
     func getTimeline(in context: Context, completion: @escaping (Timeline<CocktailEntry>) -> Void) {
-        let configuration = getWidgetRecipe().randomElement() ?? Cocktail(name: "Martini".localized, craft: .blending, glass: .cocktail, recipe: "손으로 막휘젓기", ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false)
-        print(configuration)
-        let entry = CocktailEntry(date: Date(), configuration: configuration)
-        let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())
-        let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate!))
-        completion(timeline)
+//        let configuration = getWidgetRecipe().randomElement() ?? Cocktail(name: "Martini".localized, craft: .blending, glass: .cocktail, recipe: "손으로 막휘젓기", ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false)
+//        print(configuration)
+//        let entry = CocktailEntry(date: Date(), configuration: configuration)
+//        let nextUpdateDate = Calendar.current.date(byAdding: .hour, value: 1, to: Date())
+//        let timeline = Timeline(entries: [entry], policy: .after(nextUpdateDate!))
+//        completion(timeline)
     }
 }
 

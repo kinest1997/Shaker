@@ -14,10 +14,9 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        originRecipe = getRecipe()
-        myOwnRecipe = originRecipe.filter {
-            $0.myRecipe == true
-        }
+        
+        originRecipe = FireBase.shared.recipe
+        myOwnRecipe = FireBase.shared.myRecipe
         
         view.addSubview(mainTableView)
         mainTableView.snp.makeConstraints {
@@ -31,31 +30,21 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightAddButton
         
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
-            self.originRecipe.append(data)
-            self.upload(recipe: self.originRecipe)
+            FireBase.shared.myRecipe.append(data)
+            DispatchQueue.main.async {
+                FireBase.shared.uploadMyRecipe()
+            }
             self.mainTableView.reloadData()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        originRecipe = getRecipe()
-        myOwnRecipe = originRecipe.filter {
-            $0.myRecipe == true
-        }
+        myOwnRecipe = FireBase.shared.myRecipe
         mainTableView.reloadData()
     }
     
-    func upload(recipe: [Cocktail]) {
-        let documentPlistURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-        do {
-            let data = try PropertyListEncoder().encode(recipe)
-            try data.write(to: documentPlistURL)
-        } catch let error {
-            print("ERROR", error.localizedDescription)
-        }
-    }
-    
+
     @objc func showAddView() {
         addMyOwnCocktailRecipeViewController.choiceView.havePresetData = false
         show(addMyOwnCocktailRecipeViewController, sender: nil)
@@ -92,18 +81,10 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let number = originRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
-             let directoryURL = getImageDirectoryPath()
-            let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name, relativeTo: directoryURL).appendingPathExtension("png")
-            do {
-                try FileManager.default.removeItem(at: fileURL)
-            } catch {
-                print(error)
-            }
-            originRecipe.remove(at: number)
-            upload(recipe: originRecipe)
-            myOwnRecipe = originRecipe.filter {
-                $0.myRecipe == true
+            guard let number = FireBase.shared.myRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
+            FireBase.shared.myRecipe.remove(at: number)
+            DispatchQueue.main.async {
+                FireBase.shared.uploadMyRecipe()                
             }
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }

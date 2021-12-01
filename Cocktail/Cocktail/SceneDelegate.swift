@@ -10,23 +10,25 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
+        
+//                    window?.rootViewController = UINavigationController(rootViewController: AlcoholChoiceViewController())
+//                    window?.makeKeyAndVisible()
 
-        if let authorized = UserDefaults.standard.object(forKey: "Authorized") as? Bool {
-            if authorized == true {
+
+        if UserFavor.shared.firstLogin == false {
                 window?.rootViewController = MainViewController()
                 window?.makeKeyAndVisible()
-            }
         } else {
-            window?.rootViewController = LoginViewController()
+            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
             window?.makeKeyAndVisible()
         }
-        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

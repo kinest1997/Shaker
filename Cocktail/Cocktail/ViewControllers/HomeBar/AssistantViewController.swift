@@ -26,9 +26,6 @@ class AssistantViewController: UIViewController {
         }), for: .touchUpInside)
         wishListButton.addAction(UIAction(handler: {[weak self] _ in
             let wishListCocktailListTableView = WishListCocktailListTableView()
-            var recipe: [Cocktail] = []
-            recipe = getRecipe()
-            wishListCocktailListTableView.wishListRecipe = recipe.filter { $0.wishList == true }
             self?.show(wishListCocktailListTableView, sender: nil)
         }), for: .touchUpInside)
         

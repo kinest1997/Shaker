@@ -55,13 +55,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print ("Error Apple sign in: %@", error)
                     return
                 }
-                // User is signed in to Firebase with Apple.
-                // ...
                 ///Main 화면으로 보내기
-                UserDefaults.standard.set(true, forKey: "Authorized")
-                let mainViewController = MainViewController()
-                mainViewController.modalPresentationStyle = .fullScreen
-                self.show(mainViewController, sender: nil)
+//                Auth.auth().currentUser  ? 이코드가 뭐였더라.
+                let scenes = UIApplication.shared.connectedScenes
+                let windowScene = scenes.first as? UIWindowScene
+                let window = windowScene?.windows.first
+                window?.rootViewController = MainViewController()
             }
         }
     }
@@ -92,7 +91,6 @@ extension LoginViewController {
         return hashString
     }
     
-    // Adapted from https://auth0.com/docs/api-auth/tutorials/nonce#generate-a-cryptographically-random-nonce
     private func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
         let charset: Array<Character> =

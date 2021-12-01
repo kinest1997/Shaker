@@ -62,8 +62,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
                 color = .violet }),
             UIAction(title: "clear".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("clear".localized, for: .normal)
                 color = .clear }),
-            UIAction(title: "white".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("white".localized, for: .normal)
-                color = .white }),
             UIAction(title: "black".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("black".localized, for: .normal)
                 color = .black }),
             UIAction(title: "brown".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("brown".localized, for: .normal)
@@ -456,8 +454,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             cocktailDetailViewController.setData(data: myRecipe)
             navigationController?.popToRootViewController(animated: true)
             show(cocktailDetailViewController, sender: nil)
-            //유틸리티 수준의 중요도로 작동
-            DispatchQueue.global(qos: .utility).async { reloadwidgetData() }
         }
     }
     

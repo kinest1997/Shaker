@@ -16,8 +16,6 @@
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */; };
 		3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */; };
-		3D4415CA27564B7D00CBCC40 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4415C927564B7D00CBCC40 /* FirebaseAnalytics */; };
-		3D4415CC27564B7D00CBCC40 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4415CB27564B7D00CBCC40 /* FirebaseAuth */; };
 		3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4415CE27564CF400CBCC40 /* GoogleSignIn */; };
 		3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D027564EA600CBCC40 /* LoginViewController.swift */; };
 		3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */; };
@@ -42,15 +40,30 @@
 		3DA76A472730D574004091CE /* Cocktail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A462730D574004091CE /* Cocktail.plist */; };
 		3DA76A492730D899004091CE /* TodayCocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A482730D899004091CE /* TodayCocktailViewController.swift */; };
 		3DA76A4C2730D8B7004091CE /* CocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */; };
-		3DA76A502730D8CB004091CE /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4F2730D8CB004091CE /* Settings.swift */; };
+		3DA76A502730D8CB004091CE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4F2730D8CB004091CE /* SettingsViewController.swift */; };
 		3DA76A522730D920004091CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A512730D920004091CE /* MainViewController.swift */; };
+		3DB910D427566C1C0076CB50 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */; };
+		3DB910D6275683B90076CB50 /* AlcoholChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */; };
+		3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */; };
+		3DB910DB27574D720076CB50 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910DA27574D720076CB50 /* FirebaseAnalytics */; };
+		3DB910DD27574D720076CB50 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910DC27574D720076CB50 /* FirebaseAnalyticsSwift-Beta */; };
+		3DB910DF27574D720076CB50 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910DE27574D720076CB50 /* FirebaseAuth */; };
+		3DB910E127574D720076CB50 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E027574D720076CB50 /* FirebaseCrashlytics */; };
+		3DB910E327574D720076CB50 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E227574D720076CB50 /* FirebaseDatabase */; };
+		3DB910E527574D720076CB50 /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E427574D720076CB50 /* FirebaseDatabaseSwift-Beta */; };
+		3DB910E727574D720076CB50 /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E627574D720076CB50 /* FirebaseInAppMessaging-Beta */; };
+		3DB910E927574D720076CB50 /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E827574D720076CB50 /* FirebaseInAppMessagingSwift-Beta */; };
+		3DB910EB27574D720076CB50 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910EA27574D720076CB50 /* FirebaseMessaging */; };
+		3DB910ED27574D720076CB50 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910EC27574D720076CB50 /* FirebaseRemoteConfig */; };
+		3DB910EF27574D720076CB50 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910EE27574D720076CB50 /* FirebaseStorage */; };
+		3DB910F127574D720076CB50 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */; };
+		3DB910F3275759E90076CB50 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910F2275759E90076CB50 /* Singleton.swift */; };
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
 		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
 		3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEADC6D274625F600362D99 /* FilterViewCell.swift */; };
 		3DF3C2FC275071C100462619 /* CocktailStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A442730D244004091CE /* CocktailStruct.swift */; };
 		3DF3C2FD27507E1A00462619 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3DF3C3002750833000462619 /* Cocktail_SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */; };
-		3DF3C3022750889D00462619 /* GlobalFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */; };
 		3DF3C30327508C4600462619 /* Cocktail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A462730D574004091CE /* Cocktail.plist */; };
 		7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D0D9B762744D714008C75E7 /* Ingredients.plist */; };
 /* End PBXBuildFile section */
@@ -118,8 +131,12 @@
 		3DA76A462730D574004091CE /* Cocktail.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cocktail.plist; sourceTree = "<group>"; };
 		3DA76A482730D899004091CE /* TodayCocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktailViewController.swift; sourceTree = "<group>"; };
 		3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipeViewController.swift; sourceTree = "<group>"; };
-		3DA76A4F2730D8CB004091CE /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		3DA76A4F2730D8CB004091CE /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		3DA76A512730D920004091CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Cocktail/ViewControllers/MainViewController.swift; sourceTree = SOURCE_ROOT; usesTabs = 0; wrapsLines = 1; };
+		3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholChoiceViewController.swift; sourceTree = "<group>"; };
+		3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToLaunchVIewController.swift; sourceTree = "<group>"; };
+		3DB910F2275759E90076CB50 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
 		3DEADC6D274625F600362D99 /* FilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewCell.swift; sourceTree = "<group>"; };
@@ -141,10 +158,20 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D4415CA27564B7D00CBCC40 /* FirebaseAnalytics in Frameworks */,
 				3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */,
-				3D4415CC27564B7D00CBCC40 /* FirebaseAuth in Frameworks */,
+				3DB910DF27574D720076CB50 /* FirebaseAuth in Frameworks */,
+				3DB910E927574D720076CB50 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
+				3DB910ED27574D720076CB50 /* FirebaseRemoteConfig in Frameworks */,
+				3DB910E727574D720076CB50 /* FirebaseInAppMessaging-Beta in Frameworks */,
+				3DB910F127574D720076CB50 /* FirebaseStorageSwift-Beta in Frameworks */,
 				3D647F2D2753327F005EE580 /* SnapKit in Frameworks */,
+				3DB910E127574D720076CB50 /* FirebaseCrashlytics in Frameworks */,
+				3DB910DD27574D720076CB50 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
+				3DB910EF27574D720076CB50 /* FirebaseStorage in Frameworks */,
+				3DB910E327574D720076CB50 /* FirebaseDatabase in Frameworks */,
+				3DB910E527574D720076CB50 /* FirebaseDatabaseSwift-Beta in Frameworks */,
+				3DB910EB27574D720076CB50 /* FirebaseMessaging in Frameworks */,
+				3DB910DB27574D720076CB50 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +203,9 @@
 			children = (
 				3D4415D027564EA600CBCC40 /* LoginViewController.swift */,
 				3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */,
+				3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */,
+				3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */,
+				3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */,
 			);
 			path = FirstLaunch;
 			sourceTree = "<group>";
@@ -230,9 +260,10 @@
 				3DA76A322730D1CD004091CE /* SceneDelegate.swift */,
 				3DA76A302730D1CD004091CE /* AppDelegate.swift */,
 				3DA76A442730D244004091CE /* CocktailStruct.swift */,
-				3D4415D427565DAA00CBCC40 /* FirstLaunch */,
+				3DB910F2275759E90076CB50 /* Singleton.swift */,
 				3D21D4C12733E9C300FE2896 /* GlobalFunction.swift */,
 				3D7481212736566E0092BD74 /* MyBadgeButton.swift */,
+				3D4415D427565DAA00CBCC40 /* FirstLaunch */,
 				3DA76A4A2730D8A2004091CE /* ViewControllers */,
 				3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
@@ -259,7 +290,7 @@
 				3D7F17C22734D5FF006EDCF9 /* FilteredView.swift */,
 				3DEADC6D274625F600362D99 /* FilterViewCell.swift */,
 				3D74812A2736BC610092BD74 /* HomeBar */,
-				3DA76A4F2730D8CB004091CE /* Settings.swift */,
+				3DA76A4F2730D8CB004091CE /* SettingsViewController.swift */,
 			);
 			name = ViewControllers;
 			path = Cocktail/ViewControllers;
@@ -302,9 +333,19 @@
 			name = Cocktail;
 			packageProductDependencies = (
 				3D647F2C2753327F005EE580 /* SnapKit */,
-				3D4415C927564B7D00CBCC40 /* FirebaseAnalytics */,
-				3D4415CB27564B7D00CBCC40 /* FirebaseAuth */,
 				3D4415CE27564CF400CBCC40 /* GoogleSignIn */,
+				3DB910DA27574D720076CB50 /* FirebaseAnalytics */,
+				3DB910DC27574D720076CB50 /* FirebaseAnalyticsSwift-Beta */,
+				3DB910DE27574D720076CB50 /* FirebaseAuth */,
+				3DB910E027574D720076CB50 /* FirebaseCrashlytics */,
+				3DB910E227574D720076CB50 /* FirebaseDatabase */,
+				3DB910E427574D720076CB50 /* FirebaseDatabaseSwift-Beta */,
+				3DB910E627574D720076CB50 /* FirebaseInAppMessaging-Beta */,
+				3DB910E827574D720076CB50 /* FirebaseInAppMessagingSwift-Beta */,
+				3DB910EA27574D720076CB50 /* FirebaseMessaging */,
+				3DB910EC27574D720076CB50 /* FirebaseRemoteConfig */,
+				3DB910EE27574D720076CB50 /* FirebaseStorage */,
+				3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */,
 			);
 			productName = Cocktail;
 			productReference = 3DA76A2D2730D1CD004091CE /* Cocktail.app */;
@@ -340,8 +381,8 @@
 			mainGroup = 3DA76A242730D1CD004091CE;
 			packageReferences = (
 				3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				3D4415C827564B7D00CBCC40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
 			projectDirPath = "";
@@ -386,7 +427,6 @@
 				3DF3C2FC275071C100462619 /* CocktailStruct.swift in Sources */,
 				3DF3C2FD27507E1A00462619 /* String.swift in Sources */,
 				3DF3C3002750833000462619 /* Cocktail_SmallView.swift in Sources */,
-				3DF3C3022750889D00462619 /* GlobalFunction.swift in Sources */,
 				3D072470274F551D0061B3F5 /* Cocktail_Widget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,14 +450,18 @@
 				3D83715D274CD7C300CA6036 /* ChoiceIngredientsView.swift in Sources */,
 				3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */,
 				3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */,
+				3DB910D427566C1C0076CB50 /* ColorCollectionViewCell.swift in Sources */,
 				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
 				3D21D4C22733E9C300FE2896 /* GlobalFunction.swift in Sources */,
+				3DB910F3275759E90076CB50 /* Singleton.swift in Sources */,
 				3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */,
 				3D175BA6274285BB00EC142B /* String.swift in Sources */,
 				3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */,
 				3D7785982753468D008F0151 /* WishListTableViewController.swift in Sources */,
 				3DA76A492730D899004091CE /* TodayCocktailViewController.swift in Sources */,
-				3DA76A502730D8CB004091CE /* Settings.swift in Sources */,
+				3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */,
+				3DA76A502730D8CB004091CE /* SettingsViewController.swift in Sources */,
+				3DB910D6275683B90076CB50 /* AlcoholChoiceViewController.swift in Sources */,
 				3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */,
 				3DA76A332730D1CD004091CE /* SceneDelegate.swift in Sources */,
 				3DA76A522730D920004091CE /* MainViewController.swift in Sources */,
@@ -735,14 +779,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		3D4415C827564B7D00CBCC40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
 		3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -759,19 +795,17 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		3D4415C927564B7D00CBCC40 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D4415C827564B7D00CBCC40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		3D4415CB27564B7D00CBCC40 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D4415C827564B7D00CBCC40 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
 		3D4415CE27564CF400CBCC40 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
@@ -781,6 +815,66 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		3DB910DA27574D720076CB50 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		3DB910DC27574D720076CB50 /* FirebaseAnalyticsSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseAnalyticsSwift-Beta";
+		};
+		3DB910DE27574D720076CB50 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		3DB910E027574D720076CB50 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		3DB910E227574D720076CB50 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		3DB910E427574D720076CB50 /* FirebaseDatabaseSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseDatabaseSwift-Beta";
+		};
+		3DB910E627574D720076CB50 /* FirebaseInAppMessaging-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseInAppMessaging-Beta";
+		};
+		3DB910E827574D720076CB50 /* FirebaseInAppMessagingSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseInAppMessagingSwift-Beta";
+		};
+		3DB910EA27574D720076CB50 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		3DB910EC27574D720076CB50 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		3DB910EE27574D720076CB50 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseStorageSwift-Beta";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
