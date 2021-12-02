@@ -16,10 +16,12 @@ class LoginViewController: UIViewController {
     private var currentNonce: String?
     
     let appleLoginButton = UIButton()
+    let justNextButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(appleLoginButton)
+        view.addSubview(justNextButton)
         appleLoginButton.setTitle("애플 로그인", for: .normal)
         appleLoginButton.addAction(UIAction(handler: {[weak self] _ in
             self?.startSignInWithAppleFlow()
@@ -28,8 +30,21 @@ class LoginViewController: UIViewController {
             $0.center.equalToSuperview()
             $0.width.height.equalTo(100)
         }
+        
+        justNextButton.setTitle("넘어가기", for: .normal)
+        justNextButton.addAction(UIAction(handler: {[weak self] _ in
+            self?.show(ColorChoiceViewController(), sender: nil)
+        }), for: .touchUpInside)
+        justNextButton.snp.makeConstraints {
+            $0.top.equalTo(appleLoginButton.snp.bottom).offset(20)
+            $0.width.height.equalTo(100)
+            $0.centerX.equalToSuperview()
+        }
+        
         view.backgroundColor = .darkGray
         appleLoginButton.backgroundColor = .blue
+        justNextButton.backgroundColor = .green
+        self.tabBarController?.tabBar.isHidden = true
     }
 }
 
@@ -55,12 +70,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print ("Error Apple sign in: %@", error)
                     return
                 }
-                ///Main 화면으로 보내기
-//                Auth.auth().currentUser  ? 이코드가 뭐였더라.
-                let scenes = UIApplication.shared.connectedScenes
-                let windowScene = scenes.first as? UIWindowScene
-                let window = windowScene?.windows.first
-                window?.rootViewController = MainViewController()
+                //선택 화면으로 쭉 넘어가기
+                self.show(ColorChoiceViewController(), sender: nil)
             }
         }
     }

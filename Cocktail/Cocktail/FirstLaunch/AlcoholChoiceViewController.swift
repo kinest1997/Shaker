@@ -10,6 +10,8 @@ import SnapKit
 
 class AlcoholChoiceViewController: UIViewController {
     
+    var alcoholSelected: Cocktail.Alcohol?
+    
     let questionLabel = UILabel()
     let explainLabel = UILabel()
     
@@ -46,20 +48,49 @@ class AlcoholChoiceViewController: UIViewController {
         nextButton.setTitle("다음", for: .normal)
         nextButton.setTitleColor(.systemGray2, for: .normal)
         
-        highButton.setBackgroundImage(UIImage(named: "갈색"), for: .normal)
-        middleButton.setBackgroundImage(UIImage(named: "갈색"), for: .normal)
-        lowButton.setBackgroundImage(UIImage(named: "갈색"), for: .normal)
+        [highButton, middleButton, lowButton].forEach {
+            $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        }
+        
         nextButton.layer.borderWidth = 1
         nextButton.layer.borderColor = UIColor.black.cgColor
         nextButton.layer.cornerRadius = 15
+        
         nextButton.addAction(UIAction(handler: {[weak self] _ in
-            //알콜 추가 버튼을 넣어야함. 3중에 하나로해서 일단 고민중
+            UserFavor.shared.alcoholFavor = self?.alcoholSelected
             self?.navigationController?.popToRootViewController(animated: true)
             self?.tabBarController?.tabBar.isHidden = false
         }), for: .touchUpInside)
         
+        highButton.addAction(UIAction(handler: {[weak self] _ in
+            self?.alcoholSelected = Cocktail.Alcohol.high
+        }), for: .touchUpInside)
+        
+        middleButton.addAction(UIAction(handler: {[weak self] _ in
+            self?.alcoholSelected = Cocktail.Alcohol.mid
+        }), for: .touchUpInside)
+        
+        lowButton.addAction(UIAction(handler: {[weak self] _ in
+            self?.alcoholSelected = Cocktail.Alcohol.low
+        }), for: .touchUpInside)
+        
         topVerticalLine.backgroundColor = .systemGray2
         bottomVerticalLine.backgroundColor = .systemGray2
+    }
+    
+    func unSelect(button: UIButton) {
+        switch alcoholSelected {
+        case .high:
+            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
+        case .mid:
+            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
+        case .low:
+            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
+        case.extreme:
+            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
+        default:
+            break
+        }
     }
     
     func layout() {
@@ -67,7 +98,7 @@ class AlcoholChoiceViewController: UIViewController {
             view.addSubview($0)
         }
         questionLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(160)
+            $0.top.equalToSuperview().offset(50)
             $0.leading.trailing.equalToSuperview().inset(85)
             $0.height.equalTo(55)
         }

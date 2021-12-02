@@ -29,7 +29,7 @@ class CocktailRecipeViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        unTouchableRecipe = FireBase.shared.recipe + FireBase.shared.myRecipe
+        unTouchableRecipe = FirebaseRecipe.shared.recipe + FirebaseRecipe.shared.myRecipe
         originRecipe = unTouchableRecipe
         filteredRecipe = originRecipe
         mainTableView.delegate = self
@@ -57,7 +57,7 @@ class CocktailRecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        unTouchableRecipe = FireBase.shared.recipe
+        unTouchableRecipe = FirebaseRecipe.shared.recipe + FirebaseRecipe.shared.myRecipe
         mainTableView.reloadData()
     }
     

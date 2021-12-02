@@ -3,10 +3,6 @@ import SnapKit
 
 class CocktailDetailViewController: UIViewController {
     
-    lazy var addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
-    
-    var originRecipe: [Cocktail] = []
-    
     var cocktailData: Cocktail?
     
     let mainScrollView = UIScrollView()
@@ -61,12 +57,6 @@ class CocktailDetailViewController: UIViewController {
         let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
         
-        originRecipe = FireBase.shared.recipe
-        
-        addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
-            FireBase.shared.myRecipe.append(data)
-            FireBase.shared.uploadMyRecipe()
-        }
     }
     
     func layout() {
@@ -157,6 +147,7 @@ class CocktailDetailViewController: UIViewController {
     }
     
     func attribute() {
+        self.view.backgroundColor = .white
         groupStackView.axis = .vertical
         groupStackView.backgroundColor = .brown
         groupStackView.distribution = .fill
@@ -173,25 +164,61 @@ class CocktailDetailViewController: UIViewController {
         
         likeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self,
-                    let cocktailData = self.cocktailData else { return }
-            let hasWishList = self.cocktailData?.wishList == true
-            self.likeButton.setImage(UIImage(systemName: hasWishList ? "heart" : "heart.fill"), for: .normal)
-            var modifiedRecipe = cocktailData
-            modifiedRecipe.wishList = hasWishList ? false : true
-            if !modifiedRecipe.wishList {
-                guard let number = FireBase.shared.wishList.firstIndex(of: cocktailData) else { return }
-                FireBase.shared.wishList.remove(at: number)
-            } else {
-                FireBase.shared.wishList.append(modifiedRecipe)
-            }
-            FireBase.shared.uploadWishList()
+                  let bindedCocktailData = self.cocktailData else { return }
+            
+//            if bindedCocktailData.wishList {
+//                self.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+//                if bindedCocktailData.myRecipe {
+//                    guard let wishListNumber = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData),
+//                          let myRecipeNumber = FirebaseRecipe.shared.myRecipe.firstIndex(of: bindedCocktailData) else { return }
+//                    FirebaseRecipe.shared.wishList.remove(at: wishListNumber)
+//                    FirebaseRecipe.shared.myRecipe.remove(at: myRecipeNumber)
+//                    var wishListCocktail = bindedCocktailData
+//                    wishListCocktail.wishList = false
+//                    self.cocktailData = wishListCocktail
+//                } else {
+//                    guard let wishListNumber = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData),
+//                          let recipeNumber = FirebaseRecipe.shared.recipe.firstIndex(of: bindedCocktailData) else { return }
+//                    FirebaseRecipe.shared.wishList.remove(at: wishListNumber)
+//                    FirebaseRecipe.shared.recipe.remove(at: recipeNumber)
+//                    var wishListCocktail = bindedCocktailData
+//                    wishListCocktail.wishList = false
+//                    self.cocktailData = wishListCocktail
+//                }
+//            } else {
+//                self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+//                if bindedCocktailData.myRecipe {
+//                    guard let wishListNumber = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData),
+//                          let myRecipeNumber = FirebaseRecipe.shared.myRecipe.firstIndex(of: bindedCocktailData) else { return }
+//                    FirebaseRecipe.shared.wishList.remove(at: wishListNumber)
+//                    FirebaseRecipe.shared.myRecipe.remove(at: myRecipeNumber)
+//                    var wishListCocktail = bindedCocktailData
+//                    wishListCocktail.wishList = false
+//                    self.cocktailData = wishListCocktail
+//
+//                    FirebaseRecipe.shared.wishList.insert(wishListCocktail, at: wishListNumber)
+//                    FirebaseRecipe.shared.myRecipe.insert(wishListCocktail, at: myRecipeNumber)
+//                } else {
+//                    guard let wishListNumber = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData),
+//                          let recipeNumber = FirebaseRecipe.shared.recipe.firstIndex(of: bindedCocktailData) else { return }
+//                    FirebaseRecipe.shared.wishList.remove(at: wishListNumber)
+//                    FirebaseRecipe.shared.recipe.remove(at: recipeNumber)
+//                    var wishListCocktail = bindedCocktailData
+//                    wishListCocktail.wishList = false
+//                    self.cocktailData = wishListCocktail
+//
+//                    FirebaseRecipe.shared.wishList.insert(wishListCocktail, at: wishListNumber)
+//                    FirebaseRecipe.shared.myRecipe.insert(wishListCocktail, at: recipeNumber)
+//                }
+//            }
+            FirebaseRecipe.shared.uploadMyRecipe()
+            FirebaseRecipe.shared.uploadWishList()
         }), for: .touchUpInside)
     }
     
-    
-    
     @objc func startEditing() {
         guard let cocktailData = cocktailData else { return }
+        let addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
         addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
         addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
         addMyOwnCocktailRecipeViewController.choiceView.myIngredients = cocktailData.ingredients
@@ -199,6 +226,7 @@ class CocktailDetailViewController: UIViewController {
         addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
         show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
+    
     func setData(data: Cocktail) {
         nameLabel.text = data.name.localized
         alcoholLabel.text = data.alcohol.rawValue.localized
@@ -210,13 +238,9 @@ class CocktailDetailViewController: UIViewController {
         myTipLabel.text = data.mytip.localized
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
         cocktailData = data
+
+        likeButton.setImage(UIImage(systemName: FirebaseRecipe.shared.wishList.contains(data) ? "heart.fill" : "heart"), for: .normal)
         
-        likeButton.setImage(UIImage(systemName: data.wishList == true ? "heart.fill" : "heart"), for: .normal)
-        
-        if let image = UIImage(named: data.name) {
-            cocktailImageView.image = image
-        } else {
-            setImage(name: data.name, data: data, imageView: cocktailImageView)
-        }
+        //        cocktailImageView
     }
 }

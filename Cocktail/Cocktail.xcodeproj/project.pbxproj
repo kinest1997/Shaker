@@ -60,6 +60,8 @@
 		3DB910F3275759E90076CB50 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910F2275759E90076CB50 /* Singleton.swift */; };
 		3DB910F527585DFC0076CB50 /* CocktailJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DB910F427585DFB0076CB50 /* CocktailJSON.json */; };
 		3DB910F627585DFC0076CB50 /* CocktailJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DB910F427585DFB0076CB50 /* CocktailJSON.json */; };
+		3DB9110227588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
+		3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
 		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
 		3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEADC6D274625F600362D99 /* FilterViewCell.swift */; };
@@ -100,7 +102,6 @@
 		3D07246C274F551D0061B3F5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail_Widget.swift; sourceTree = "<group>"; };
 		3D072472274F55220061B3F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3D072474274F55220061B3F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D0D9B762744D714008C75E7 /* Ingredients.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Ingredients.plist; sourceTree = "<group>"; };
 		3D175BA12742846B00EC142B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3D175BA3274284CD00EC142B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -128,7 +129,6 @@
 		3DA76A322730D1CD004091CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3DA76A392730D1D0004091CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3DA76A3C2730D1D0004091CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3DA76A3E2730D1D0004091CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DA76A442730D244004091CE /* CocktailStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailStruct.swift; sourceTree = "<group>"; };
 		3DA76A462730D574004091CE /* Cocktail.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cocktail.plist; sourceTree = "<group>"; };
 		3DA76A482730D899004091CE /* TodayCocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktailViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +140,10 @@
 		3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToLaunchVIewController.swift; sourceTree = "<group>"; };
 		3DB910F2275759E90076CB50 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		3DB910F427585DFB0076CB50 /* CocktailJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailJSON.json; sourceTree = "<group>"; };
+		3DB910FC27588CDE0076CB50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DB9110427588D110076CB50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3DB9110627588D1B0076CB50 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3DB9110727588EFC0076CB50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
 		3DEADC6D274625F600362D99 /* FilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewCell.swift; sourceTree = "<group>"; };
@@ -195,8 +199,8 @@
 			children = (
 				3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */,
 				3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */,
+				3DB9110727588EFC0076CB50 /* Info.plist */,
 				3D072472274F55220061B3F5 /* Assets.xcassets */,
-				3D072474274F55220061B3F5 /* Info.plist */,
 			);
 			path = "Cocktail Widget";
 			sourceTree = "<group>";
@@ -271,9 +275,10 @@
 				3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
 				3DA76A462730D574004091CE /* Cocktail.plist */,
-				3DA76A3E2730D1D0004091CE /* Info.plist */,
 				3DB910F427585DFB0076CB50 /* CocktailJSON.json */,
 				3D0D9B762744D714008C75E7 /* Ingredients.plist */,
+				3DB910FC27588CDE0076CB50 /* Info.plist */,
+				3DB9110527588D110076CB50 /* InfoPlist.strings */,
 				3D1EB1152752731600D49F81 /* MyPlayground.playground */,
 				3D175BA22742846B00EC142B /* Localizable.strings */,
 				3D175BA5274285BB00EC142B /* String.swift */,
@@ -406,6 +411,7 @@
 				3DF3C30327508C4600462619 /* Cocktail.plist in Resources */,
 				3D072473274F55220061B3F5 /* Assets.xcassets in Resources */,
 				3DB910F627585DFC0076CB50 /* CocktailJSON.json in Resources */,
+				3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +425,7 @@
 				7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */,
 				3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */,
 				3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */,
+				3DB9110227588D110076CB50 /* InfoPlist.strings in Resources */,
 				3DB910F527585DFC0076CB50 /* CocktailJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +508,15 @@
 				3D175BA3274284CD00EC142B /* ko */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		3DB9110527588D110076CB50 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3DB9110427588D110076CB50 /* en */,
+				3DB9110627588D1B0076CB50 /* ko */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

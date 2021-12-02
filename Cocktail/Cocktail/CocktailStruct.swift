@@ -30,6 +30,7 @@ struct Cocktail: Codable, Hashable {
     let drinkType: DrinkType
     var myRecipe: Bool
     var wishList: Bool
+    var imageURL: String?
 
     enum Base: String, Codable, CaseIterable, CocktailCondition {
         case rum
@@ -194,15 +195,3 @@ struct Cocktail: Codable, Hashable {
         case grenadineSyrup
     }
 }
-
-//realm은 일단 보류
-//class MyDrinks: Object {
-//    @objc dynamic var name: String = ""
-//    override static func primaryKey() -> String? {
-//          return "name"
-//        }
-//}
-
-
-
-

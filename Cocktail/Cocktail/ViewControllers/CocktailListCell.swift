@@ -44,10 +44,9 @@ class CocktailListCell: UITableViewCell {
         ingredientCountLabel.text = "Ingredients".localized + " \(data.ingredients.count)" + "EA".localized
         cocktailImage.image = UIImage(named: data.name)
         
-        let imagePath = getImageDirectoryPath().appendingPathComponent(data.name + ".png").path
-        if FileManager.default.fileExists(atPath: imagePath) {
-            let GetImageFromDirectory = UIImage(contentsOfFile: imagePath)
-            cocktailImage.image = GetImageFromDirectory
-        }
+//        let imagePath = getImageDirectoryPath().appendingPathComponent(data.name + ".png").path
+//        if FileManager.default.fileExists(atPath: imagePath) {
+//            let GetImageFromDirectory = UIImage(contentsOfFile: imagePath)
+//            cocktailImage.image = GetImageFromDirectory
     }
 }

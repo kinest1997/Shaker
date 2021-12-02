@@ -12,7 +12,7 @@ class WishListCocktailListTableView: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        wishListRecipe = FireBase.shared.wishList.sorted { $0.name < $1.name}
+        wishListRecipe = FirebaseRecipe.shared.wishList.sorted { $0.name < $1.name}
         tableView.reloadData()
         }
     }

@@ -6,7 +6,7 @@ class ColorChoiceViewController: UIViewController {
     let questionLabel = UILabel()
     
     let colorArray = Cocktail.Color.allCases
-    var selectedArray: [Cocktail.Color] = []
+    var selectedColor: [Cocktail.Color] = []
     var isCheckedArray: [Bool] = []
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -15,6 +15,7 @@ class ColorChoiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         isCheckedArray = colorArray.map { _ in false}
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
@@ -62,7 +63,7 @@ class ColorChoiceViewController: UIViewController {
             let alcoholChoiceViewController = AlcoholChoiceViewController()
             alcoholChoiceViewController.modalPresentationStyle = .overFullScreen
             self.show(alcoholChoiceViewController, sender: nil)
-            UserFavor.shared.colorFavor = self.selectedArray
+            UserFavor.shared.colorFavor = self.selectedColor
         }), for: .touchUpInside)
     }
 }
@@ -90,12 +91,12 @@ extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewD
         if isCheckedArray[indexPath.row] == false {
             isCheckedArray[indexPath.row] = true
             selectedCell.isChecked = isCheckedArray[indexPath.row]
-            selectedArray.append(colorArray[indexPath.row])
+            selectedColor.append(colorArray[indexPath.row])
         } else {
             isCheckedArray[indexPath.row] = false
             selectedCell.isChecked = isCheckedArray[indexPath.row]
-            guard let number = selectedArray.firstIndex(of: colorArray[indexPath.row]) else { return }
-            selectedArray.remove(at: number)
+            guard let number = selectedColor.firstIndex(of: colorArray[indexPath.row]) else { return }
+            selectedColor.remove(at: number)
         }
     }
 }

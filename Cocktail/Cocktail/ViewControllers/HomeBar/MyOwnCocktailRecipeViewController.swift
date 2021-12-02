@@ -6,8 +6,6 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     
     var myOwnRecipe: [Cocktail] = []
     
-    var originRecipe: [Cocktail] = []
-    
     lazy var addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
     
     let mainTableView = UITableView()
@@ -15,8 +13,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        originRecipe = FireBase.shared.recipe
-        myOwnRecipe = FireBase.shared.myRecipe
+        myOwnRecipe = FirebaseRecipe.shared.myRecipe
         
         view.addSubview(mainTableView)
         mainTableView.snp.makeConstraints {
@@ -30,9 +27,9 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightAddButton
         
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
-            FireBase.shared.myRecipe.append(data)
+            FirebaseRecipe.shared.myRecipe.append(data)
             DispatchQueue.main.async {
-                FireBase.shared.uploadMyRecipe()
+                FirebaseRecipe.shared.uploadMyRecipe()
             }
             self.mainTableView.reloadData()
         }
@@ -40,11 +37,10 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        myOwnRecipe = FireBase.shared.myRecipe
+        myOwnRecipe = FirebaseRecipe.shared.myRecipe
         mainTableView.reloadData()
     }
     
-
     @objc func showAddView() {
         addMyOwnCocktailRecipeViewController.choiceView.havePresetData = false
         show(addMyOwnCocktailRecipeViewController, sender: nil)
@@ -81,11 +77,12 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let number = FireBase.shared.myRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
-            FireBase.shared.myRecipe.remove(at: number)
+            guard let number = FirebaseRecipe.shared.myRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
+            FirebaseRecipe.shared.myRecipe.remove(at: number)
             DispatchQueue.main.async {
-                FireBase.shared.uploadMyRecipe()                
+                FirebaseRecipe.shared.uploadMyRecipe()                
             }
+            myOwnRecipe = FirebaseRecipe.shared.myRecipe
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }

@@ -18,17 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-//                    window?.rootViewController = UINavigationController(rootViewController: AlcoholChoiceViewController())
-//                    window?.makeKeyAndVisible()
-
         window?.rootViewController = MainViewController()
         window?.makeKeyAndVisible()
-
-//        if UserFavor.shared.firstLogin == false {
-//        } else {
-//            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
-//            window?.makeKeyAndVisible()
-//        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

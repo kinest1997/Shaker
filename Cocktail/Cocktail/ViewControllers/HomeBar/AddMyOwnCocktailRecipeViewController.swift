@@ -1,6 +1,9 @@
 import UIKit
 import SnapKit
 import PhotosUI
+import FirebaseStorage
+import FirebaseAuth
+import FirebaseDatabase
 
 class AddMyOwnCocktailRecipeViewController: UIViewController {
     
@@ -20,7 +23,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     let cocktailImageView = UIImageView(image: UIImage(named: "Martini"))
-        
+    
     let nameLabel = UILabel()
     let nameTextField = UITextField()
     let nameStackView = UIStackView()
@@ -273,6 +276,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         choiceView.isHidden = true
         
+        self.view.backgroundColor = .white
         groupStackView.axis = .vertical
         groupStackView.backgroundColor = .brown
         groupStackView.distribution = .fillEqually
@@ -425,17 +429,18 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     @objc func saveRecipe() {
-        guard let craft = craft,
+        guard let uploadCraft = craft,
               let glass = glass,
               let baseDrink = baseDrink,
               let alcohol = alcohol,
               let color = color,
               let drinkType = drinkType,
               let ingredients = ingredients,
-              let image = cocktailImageView.image else {
-                  return presentJustAlert(title: "Hold on".localized, message: "선택안한게 있어!")
-              }
-        let myRecipe = Cocktail(name: nameTextField.text ?? "", craft: craft, glass: glass, recipe: recipeTextField.text ?? "", ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTipTextField.text ?? "", drinkType: drinkType, myRecipe: true, wishList: false)
+              let image = cocktailImageView.image
+        else {
+            return presentJustAlert(title: "Hold on".localized, message: "선택안한게 있어!")
+        }
+
         if nameTextField.text?.isEmpty ?? true  {
             presentJustAlert(title: "Hold on".localized, message: "Write name".localized)
         } else if recipeTextField.text?.isEmpty ?? true {
@@ -443,17 +448,28 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         } else if myTipTextField.text?.isEmpty ?? true {
             presentJustAlert(title: "Hold on".localized, message: "Write tips".localized)
         } else {
-            let url = getImageDirectoryPath()
-            let imagePath = url.appendingPathComponent((nameTextField.text ?? "NoName") + ".png")
-            let urlString: String = imagePath.path
-            let imageData = UIImage.pngData(image)
+
+            guard let convertedImage = image.pngData(),
+                let uid = Auth.auth().currentUser?.uid else { return }
+            let storageRef = Storage.storage().reference().child("CustomCocktails").child(uid).child("Recipes").child(nameTextField.text ?? "NoName"  + ".png")
             
-            FileManager.default.createFile(atPath: urlString, contents: imageData(), attributes: nil)
-            myOwnRecipeData?(myRecipe)
-            let cocktailDetailViewController = CocktailDetailViewController()
-            cocktailDetailViewController.setData(data: myRecipe)
-            navigationController?.popToRootViewController(animated: true)
-            show(cocktailDetailViewController, sender: nil)
+            storageRef.putData(convertedImage, metadata: nil) { metaData, error in
+                guard error == nil,
+                      metaData != nil else { return }
+                storageRef.downloadURL {[weak self] url, error in
+                    guard let self = self else { return }
+                    guard error == nil,
+                        let url = url else { return }
+
+                    let myRecipe = Cocktail(name: self.nameTextField.text ?? "", craft: uploadCraft, glass: glass, recipe: self.recipeTextField.text ?? "", ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: self.myTipTextField.text ?? "", drinkType: drinkType, myRecipe: true, wishList: false, imageURL: url.absoluteString)
+                    FirebaseRecipe.shared.myRecipe.append(myRecipe)
+                    FirebaseRecipe.shared.uploadMyRecipe()
+                    let cocktailDetailViewController = CocktailDetailViewController()
+                    cocktailDetailViewController.setData(data: myRecipe)
+                    self.navigationController?.popToRootViewController(animated: true)
+                    self.show(cocktailDetailViewController, sender: nil)
+                }
+            }
         }
     }
     
@@ -489,7 +505,7 @@ extension AddMyOwnCocktailRecipeViewController: PHPickerViewControllerDelegate {
         self.cocktailImageView.addGestureRecognizer(tapGestureRecognizer)
         self.cocktailImageView.isUserInteractionEnabled = true
     }
-
+    
     @objc func tappedUIImageView(_ gesture: UITapGestureRecognizer) {
         var configuration = PHPickerConfiguration()
         configuration.selectionLimit = 1
@@ -509,7 +525,7 @@ extension AddMyOwnCocktailRecipeViewController: PHPickerViewControllerDelegate {
            itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
                 DispatchQueue.main.async {
-                    self.cocktailImageView.image = ImageConverter.resize(image: (image as? UIImage)!)
+                    self.cocktailImageView.image = (image as! UIImage).resize()
                 }
             }
         }

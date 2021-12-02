@@ -25,7 +25,7 @@ class SettingsViewController: UIViewController {
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
-                UserFavor.shared.firstLogin = true
+                UserDefaults.standard.set(true, forKey: "firstLogin")
                 let loginViewController = LoginViewController()
                 loginViewController.modalPresentationStyle = .overFullScreen
                 self?.tabBarController?.show(loginViewController, sender: nil)
