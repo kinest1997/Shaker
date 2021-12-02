@@ -72,12 +72,14 @@ class MainViewController: UITabBarController {
         ]
         FirebaseRecipe.shared.getRecipe { data in
             FirebaseRecipe.shared.recipe = data
-            FirebaseRecipe.shared.wishList.append(contentsOf: data.filter { $0.wishList == true })
         }
         
         FirebaseRecipe.shared.getMyRecipe { data in
             FirebaseRecipe.shared.myRecipe = data
-            FirebaseRecipe.shared.wishList.append(contentsOf: data.filter { $0.wishList == true })
+        }
+        
+        FirebaseRecipe.shared.getWishList { data in
+            FirebaseRecipe.shared.wishList = data
         }
     }
 }

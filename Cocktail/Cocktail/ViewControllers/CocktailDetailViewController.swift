@@ -56,7 +56,6 @@ class CocktailDetailViewController: UIViewController {
         layout()
         let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
-        
     }
     
     func layout() {
@@ -165,53 +164,18 @@ class CocktailDetailViewController: UIViewController {
         likeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self,
                   let bindedCocktailData = self.cocktailData else { return }
-            
-//            if bindedCocktailData.wishList {
-//                self.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-//                if bindedCocktailData.myRecipe {
-//                    guard let wishListNumber = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData),
-//                          let myRecipeNumber = FirebaseRecipe.shared.myRecipe.firstIndex(of: bindedCocktailData) else { return }
-//                    FirebaseRecipe.shared.wishList.remove(at: wishListNumber)
-//                    FirebaseRecipe.shared.myRecipe.remove(at: myRecipeNumber)
-//                    var wishListCocktail = bindedCocktailData
-//                    wishListCocktail.wishList = false
-//                    self.cocktailData = wishListCocktail
-//                } else {
-//                    guard let wishListNumber = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData),
-//                          let recipeNumber = FirebaseRecipe.shared.recipe.firstIndex(of: bindedCocktailData) else { return }
-//                    FirebaseRecipe.shared.wishList.remove(at: wishListNumber)
-//                    FirebaseRecipe.shared.recipe.remove(at: recipeNumber)
-//                    var wishListCocktail = bindedCocktailData
-//                    wishListCocktail.wishList = false
-//                    self.cocktailData = wishListCocktail
-//                }
-//            } else {
-//                self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-//                if bindedCocktailData.myRecipe {
-//                    guard let wishListNumber = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData),
-//                          let myRecipeNumber = FirebaseRecipe.shared.myRecipe.firstIndex(of: bindedCocktailData) else { return }
-//                    FirebaseRecipe.shared.wishList.remove(at: wishListNumber)
-//                    FirebaseRecipe.shared.myRecipe.remove(at: myRecipeNumber)
-//                    var wishListCocktail = bindedCocktailData
-//                    wishListCocktail.wishList = false
-//                    self.cocktailData = wishListCocktail
-//
-//                    FirebaseRecipe.shared.wishList.insert(wishListCocktail, at: wishListNumber)
-//                    FirebaseRecipe.shared.myRecipe.insert(wishListCocktail, at: myRecipeNumber)
-//                } else {
-//                    guard let wishListNumber = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData),
-//                          let recipeNumber = FirebaseRecipe.shared.recipe.firstIndex(of: bindedCocktailData) else { return }
-//                    FirebaseRecipe.shared.wishList.remove(at: wishListNumber)
-//                    FirebaseRecipe.shared.recipe.remove(at: recipeNumber)
-//                    var wishListCocktail = bindedCocktailData
-//                    wishListCocktail.wishList = false
-//                    self.cocktailData = wishListCocktail
-//
-//                    FirebaseRecipe.shared.wishList.insert(wishListCocktail, at: wishListNumber)
-//                    FirebaseRecipe.shared.myRecipe.insert(wishListCocktail, at: recipeNumber)
-//                }
-//            }
-            FirebaseRecipe.shared.uploadMyRecipe()
+            if FirebaseRecipe.shared.wishList.contains(bindedCocktailData) {
+                self.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                guard let number = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData) else { return }
+                FirebaseRecipe.shared.wishList.remove(at: number)
+                self.cocktailData?.wishList = false
+            } else {
+                    self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                var data = bindedCocktailData
+                data.wishList = true
+                    FirebaseRecipe.shared.wishList.append(data)
+                self.cocktailData?.wishList = true
+            }
             FirebaseRecipe.shared.uploadWishList()
         }), for: .touchUpInside)
     }
@@ -237,10 +201,19 @@ class CocktailDetailViewController: UIViewController {
         recipeLabel.text = data.recipe.localized
         myTipLabel.text = data.mytip.localized
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
-        cocktailData = data
 
-        likeButton.setImage(UIImage(systemName: FirebaseRecipe.shared.wishList.contains(data) ? "heart.fill" : "heart"), for: .normal)
+        var justRecipe = data
+        justRecipe.wishList = true
         
-        //        cocktailImageView
+        var wishListData = FirebaseRecipe.shared.wishList
+        wishListData.indices.forEach { wishListData[$0].wishList = true }
+        
+        if wishListData.contains(justRecipe) {
+            self.cocktailData = justRecipe
+            likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            self.cocktailData = data
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
     }
 }

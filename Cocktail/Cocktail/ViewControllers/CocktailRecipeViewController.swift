@@ -58,6 +58,7 @@ class CocktailRecipeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         unTouchableRecipe = FirebaseRecipe.shared.recipe + FirebaseRecipe.shared.myRecipe
+        unTouchableRecipe.sort { $0.name < $1.name }
         mainTableView.reloadData()
     }
     

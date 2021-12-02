@@ -221,7 +221,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         registerKeyboardNotification()
         actions()
         addGestureRecognizer()
-        
     }
     
     func actions() {

@@ -72,15 +72,24 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-                return .delete
+        return .delete
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let number = FirebaseRecipe.shared.myRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
+            
+            var recipeData = myOwnRecipe[indexPath.row]
+            recipeData.wishList = true
+            if FirebaseRecipe.shared.wishList.contains(recipeData) {
+                guard let wishNumber = FirebaseRecipe.shared.wishList.firstIndex(of: recipeData) else { return }
+                FirebaseRecipe.shared.wishList.remove(at: wishNumber)
+                FirebaseRecipe.shared.uploadWishList()
+            }
+            
             FirebaseRecipe.shared.myRecipe.remove(at: number)
             DispatchQueue.main.async {
-                FirebaseRecipe.shared.uploadMyRecipe()                
+                FirebaseRecipe.shared.uploadMyRecipe()
             }
             myOwnRecipe = FirebaseRecipe.shared.myRecipe
             tableView.deleteRows(at: [indexPath], with: .automatic)
