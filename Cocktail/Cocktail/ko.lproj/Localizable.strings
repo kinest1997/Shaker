@@ -114,8 +114,28 @@
 "assets" = "기타";
 "beverage" = "음료";
 
+//Cocktail.Glass
+"highBall" = "하이볼";
+"shot" = "샷잔";
+"onTheRock" = "온더락";
+"cocktail" = "칵테일";
+"martini" = "마티니";
+"collins" = "콜린스";
+"margarita" = "마가리타";
+"philsner" = "필스너";
+
+//Cocktail.Craft
+"build" = "빌드";
+"shaking" = "쉐이킹";
+"floating" = "플로팅";
+"stir" = "스터";
+"blending" = "블렌딩";
+
+
 //Cocktail.Ingredients
 "scotchWhiskey" = "스카치위스키";
+"bombaySapphire" = "봄베이 사파이어";
+"tanquerayNoTen" = "탱커레이 no.10";
 "bourbonWhiskey" = "버번위스키";
 "ryeWhiskey" = "라이위스키";
 "jackDanielWhiskey" = "잭다니엘";

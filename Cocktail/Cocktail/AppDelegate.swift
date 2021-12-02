@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         
+//        FireBase.shared.uploadMyRecipe()
 
         return true
     }

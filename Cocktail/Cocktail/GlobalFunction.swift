@@ -2,9 +2,6 @@ import UIKit
 import FirebaseDatabase
 import SwiftUI
 
-///도큐먼트에서 레시피를 불러오는 함수
-
-
 ///그룹폴더에서 레시피를 불러오는 함수
 //func getWidgetRecipe() -> [Cocktail] {
 //    guard let documentURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.heesung.cocktail")?.appendingPathComponent("Cocktail.plist"),

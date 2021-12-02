@@ -33,12 +33,19 @@ class FireBase {
     let uid = Auth.auth().currentUser?.uid
     
     func getRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
-        Database.database().reference().child("CocktailList").observeSingleEvent(of: .value) { snapshot in
+        Database.database().reference().child("CocktailList").getData { error, snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
+                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return print("이것이 에러다",error)}
             completion(cocktailList)
         }
+        
+        //        Database.database().reference().child("CocktailList").observeSingleEvent(of: .value) { snapshot in
+        //            guard let value = snapshot.value as? [[String: Any]],
+        //                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+        //                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
+        //            completion(cocktailList)
+        //        }
     }
     
     func getMyRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
@@ -53,29 +60,39 @@ class FireBase {
     
     func uploadWishList() {
         guard let data = try? JSONEncoder().encode(FireBase.shared.wishList),
-        let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
-        let uid = uid else { return }
+              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
+              let uid = uid else { return }
         self.ref.child("users").child(uid).child("WishList").setValue(jsonData)
     }
     
     func uploadMyRecipe() {
         guard let data = try? JSONEncoder().encode(FireBase.shared.recipe),
-        let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
-        let uid = uid else { return }
+              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
+              let uid = uid else { return }
         self.ref.child("users").child(uid).setValue(jsonData)
     }
     
     func uploadWholeRecipe() {
-        guard let bundleURL = Bundle.main.url(forResource: "Cocktail", withExtension: "plist") else { return }
-        let plistData = try! Data(contentsOf: bundleURL)
-        let cocktailList = try! PropertyListDecoder().decode([Cocktail].self, from: plistData).sorted {
-            $0.name < $1.name
-        }
+        let cocktailList = getJSONRecipe()
         guard let data = try? JSONEncoder().encode(cocktailList) else { return }
-
         let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
         Database.database().reference().child("CocktailList").setValue(jsonData)
     }
+    
+    func getJSONRecipe() -> [Cocktail] {
+        guard let bundleURL = Bundle.main.url(forResource: "CocktailJSON", withExtension: "json"),
+              let cocktailData = FileManager.default.contents(atPath: bundleURL.path) else { return [] }
 
+        do {
+            let cocktailList = try JSONDecoder().decode([Cocktail].self, from: cocktailData).sorted {
+                $0.name < $1.name
+            }
+            return cocktailList
+        } catch let error{
+            print(String(describing: error))
+            return []
+        }
+    }
+    
     private init() { }
 }

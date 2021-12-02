@@ -58,6 +58,8 @@
 		3DB910EF27574D720076CB50 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910EE27574D720076CB50 /* FirebaseStorage */; };
 		3DB910F127574D720076CB50 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */; };
 		3DB910F3275759E90076CB50 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910F2275759E90076CB50 /* Singleton.swift */; };
+		3DB910F527585DFC0076CB50 /* CocktailJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DB910F427585DFB0076CB50 /* CocktailJSON.json */; };
+		3DB910F627585DFC0076CB50 /* CocktailJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DB910F427585DFB0076CB50 /* CocktailJSON.json */; };
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
 		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
 		3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEADC6D274625F600362D99 /* FilterViewCell.swift */; };
@@ -137,6 +139,7 @@
 		3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholChoiceViewController.swift; sourceTree = "<group>"; };
 		3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToLaunchVIewController.swift; sourceTree = "<group>"; };
 		3DB910F2275759E90076CB50 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		3DB910F427585DFB0076CB50 /* CocktailJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailJSON.json; sourceTree = "<group>"; };
 		3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
 		3DEADC6D274625F600362D99 /* FilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewCell.swift; sourceTree = "<group>"; };
@@ -269,6 +272,7 @@
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
 				3DA76A462730D574004091CE /* Cocktail.plist */,
 				3DA76A3E2730D1D0004091CE /* Info.plist */,
+				3DB910F427585DFB0076CB50 /* CocktailJSON.json */,
 				3D0D9B762744D714008C75E7 /* Ingredients.plist */,
 				3D1EB1152752731600D49F81 /* MyPlayground.playground */,
 				3D175BA22742846B00EC142B /* Localizable.strings */,
@@ -401,6 +405,7 @@
 			files = (
 				3DF3C30327508C4600462619 /* Cocktail.plist in Resources */,
 				3D072473274F55220061B3F5 /* Assets.xcassets in Resources */,
+				3DB910F627585DFC0076CB50 /* CocktailJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +419,7 @@
 				7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */,
 				3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */,
 				3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */,
+				3DB910F527585DFC0076CB50 /* CocktailJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
