@@ -3,7 +3,6 @@ import FirebaseDatabase
 import SwiftUI
 
 ///이미지 크기 변환 해주는것
-///
 extension UIImage {
     func resize()-> UIImage{
         let size = CGSize(width: 300, height: 300)
