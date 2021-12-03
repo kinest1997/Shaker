@@ -19,15 +19,8 @@ class TodayCocktailViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         if UserDefaults.standard.bool(forKey: "firstLogin") == true {
             UserDefaults.standard.set(false, forKey: "firstLogin")
             let loginViewController = LoginViewController()

@@ -22,21 +22,18 @@ class SettingsViewController: UIViewController {
     func attribute() {
         logOutButton.backgroundColor = .blue
         logOutButton.setTitle("애플 로그아웃 버튼", for: .normal)
-        logOutButton.addAction(UIAction(handler: {[weak self]_ in
+        logOutButton.addAction(UIAction(handler: {[weak self] _ in
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
                 UserDefaults.standard.set(true, forKey: "firstLogin")
-                
-                let loginViewController = LoginViewController()
-                loginViewController.modalPresentationStyle = .overFullScreen
-                self?.navigationController?.popToRootViewController(animated: true)
-                self?.tabBarController?.show(loginViewController, sender: nil)
+                self?.show(TodayCocktailViewController(), sender: nil)
             } catch let error {
                 print(error)
             }
         }), for: .touchUpInside)
     }
+    
     func layout() {
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainView)

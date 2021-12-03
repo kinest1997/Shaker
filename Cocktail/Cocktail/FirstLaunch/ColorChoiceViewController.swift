@@ -15,7 +15,6 @@ class ColorChoiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isHidden = true
         isCheckedArray = colorArray.map { _ in false}
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
@@ -23,6 +22,11 @@ class ColorChoiceViewController: UIViewController {
         layout()
         attribute()
         self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
     }
     
     func layout() {

@@ -60,8 +60,7 @@ class AlcoholChoiceViewController: UIViewController {
         
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             UserFavor.shared.alcoholFavor = self?.alcoholSelected
-            self?.navigationController?.popToRootViewController(animated: true)
-            self?.tabBarController?.tabBar.isHidden = false
+            self?.show(ReadyToLaunchVIewController(), sender: nil)
         }), for: .touchUpInside)
         
         highButton.addAction(UIAction(handler: {[weak self] _ in
@@ -90,21 +89,6 @@ class AlcoholChoiceViewController: UIViewController {
         button.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
         alcoholSelected = alcohol
         nextButton.isEnabled = true
-    }
-    
-    func unSelect(button: UIButton) {
-        switch alcoholSelected {
-        case .high:
-            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        case .mid:
-            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        case .low:
-            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        case.extreme:
-            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        default:
-            break
-        }
     }
     
     func layout() {

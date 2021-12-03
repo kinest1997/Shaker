@@ -30,9 +30,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
             FirebaseRecipe.shared.myRecipe.append(data)
-            DispatchQueue.main.async {
-                FirebaseRecipe.shared.uploadMyRecipe()
-            }
+            FirebaseRecipe.shared.uploadMyRecipe()
             self.mainTableView.reloadData()
         }
     }
@@ -89,7 +87,7 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
                 FirebaseRecipe.shared.wishList.remove(at: wishNumber)
                 FirebaseRecipe.shared.uploadWishList()
             }
-
+            
             //나의 레시피가 가진 주소값을 이용하여 Storage 의 데이터를 삭제하는 코드
             let storage = Storage.storage()
             guard let url = myOwnRecipe[indexPath.row].imageURL else { return }
@@ -100,11 +98,9 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
                     print(error)
                 }
             }
-
+            
             FirebaseRecipe.shared.myRecipe.remove(at: number)
-            DispatchQueue.main.async {
-                FirebaseRecipe.shared.uploadMyRecipe()
-            }
+            FirebaseRecipe.shared.uploadMyRecipe()
             myOwnRecipe = FirebaseRecipe.shared.myRecipe
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }

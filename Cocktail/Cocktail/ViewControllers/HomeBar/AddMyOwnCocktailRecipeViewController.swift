@@ -522,9 +522,7 @@ extension AddMyOwnCocktailRecipeViewController: PHPickerViewControllerDelegate {
         if let itemProvider = itemProvider,
            itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
-                DispatchQueue.main.async {
                     self.cocktailImageView.image = (image as! UIImage).resize()
-                }
             }
         }
     }

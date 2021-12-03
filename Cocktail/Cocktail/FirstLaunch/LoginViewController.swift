@@ -16,12 +16,10 @@ class LoginViewController: UIViewController {
     private var currentNonce: String?
     
     let appleLoginButton = UIButton()
-    let justNextButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(appleLoginButton)
-        view.addSubview(justNextButton)
         appleLoginButton.setTitle("애플 로그인", for: .normal)
         appleLoginButton.addAction(UIAction(handler: {[weak self] _ in
             self?.startSignInWithAppleFlow()
@@ -30,20 +28,8 @@ class LoginViewController: UIViewController {
             $0.center.equalToSuperview()
             $0.width.height.equalTo(100)
         }
-        
-        justNextButton.setTitle("넘어가기", for: .normal)
-        justNextButton.addAction(UIAction(handler: {[weak self] _ in
-            self?.show(ColorChoiceViewController(), sender: nil)
-        }), for: .touchUpInside)
-        justNextButton.snp.makeConstraints {
-            $0.top.equalTo(appleLoginButton.snp.bottom).offset(20)
-            $0.width.height.equalTo(100)
-            $0.centerX.equalToSuperview()
-        }
-        
         view.backgroundColor = .darkGray
         appleLoginButton.backgroundColor = .blue
-        justNextButton.backgroundColor = .green
         self.tabBarController?.tabBar.isHidden = true
     }
 }

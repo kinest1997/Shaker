@@ -7,30 +7,31 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class CocktailListCell: UITableViewCell {
-    let cocktailImage = UIImageView()
+    let cocktailImageView = UIImageView()
     let nameLabel = UILabel()
     let ingredientCountLabel = UILabel()
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        [nameLabel, ingredientCountLabel, cocktailImage].forEach {
+        [nameLabel, ingredientCountLabel, cocktailImageView].forEach {
             contentView.addSubview($0)
         }
-        cocktailImage.contentMode = .scaleAspectFit
+        cocktailImageView.contentMode = .scaleAspectFit
         nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         ingredientCountLabel.font = .systemFont(ofSize: 15, weight: .medium)
         ingredientCountLabel.alpha = 0.7
         
-        cocktailImage.snp.makeConstraints {
+        cocktailImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.top.bottom.equalToSuperview().inset(10)
             $0.width.equalTo(80)
         }
         nameLabel.snp.makeConstraints {
-            $0.leading.equalTo(cocktailImage.snp.trailing).offset(20)
-            $0.bottom.equalTo(cocktailImage.snp.centerY)
+            $0.leading.equalTo(cocktailImageView.snp.trailing).offset(20)
+            $0.bottom.equalTo(cocktailImageView.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
         }
         ingredientCountLabel.snp.makeConstraints {
@@ -42,11 +43,6 @@ class CocktailListCell: UITableViewCell {
     func configure(data: Cocktail) {
         nameLabel.text = data.name
         ingredientCountLabel.text = "Ingredients".localized + " \(data.ingredients.count)" + "EA".localized
-        cocktailImage.image = UIImage(named: data.name)
-        
-//        let imagePath = getImageDirectoryPath().appendingPathComponent(data.name + ".png").path
-//        if FileManager.default.fileExists(atPath: imagePath) {
-//            let GetImageFromDirectory = UIImage(contentsOfFile: imagePath)
-//            cocktailImage.image = GetImageFromDirectory
+        cocktailImageView.kf.setImage(with: URL(string: data.imageURL ?? ""), placeholder: UIImage(systemName: "heart"))
     }
 }
