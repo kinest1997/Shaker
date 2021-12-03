@@ -202,10 +202,9 @@ class CocktailDetailViewController: UIViewController {
         baseDrinkLabel.text = data.base.rawValue.localized
         glassLabel.text = data.glass.rawValue.localized
         craftLabel.text = data.craft.rawValue.localized
-        recipeLabel.text = data.recipe.localized
         myTipLabel.text = data.mytip.localized
-        ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
-        
+        recipeLabel.text = makeRecipeText(recipe: data.recipe)
+        ingredientsLabel.text = makeIngredientsText(ingredients: data.ingredients)
         cocktailImageView.kf.setImage(with: URL(string: data.imageURL ?? ""), placeholder: UIImage(systemName: "heart"))
         
         var justRecipe = data
@@ -221,5 +220,33 @@ class CocktailDetailViewController: UIViewController {
             self.cocktailData = data
             likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
         }
+    }
+    
+    func makeRecipeText(recipe: String) -> String {
+        let separatedStrings = recipe.components(separatedBy: ", ")
+        let spaceStrings = separatedStrings.enumerated().map {
+            """
+            
+            step\($0.offset + 1)
+            \($0.element.localized)
+            
+            """
+        }
+        let fullString = spaceStrings.reduce("") { $0 + $1 }
+        return fullString
+    }
+    
+    func makeIngredientsText(ingredients: [Cocktail.Ingredients]) -> String {
+        let spaceStrings = ingredients.enumerated().map {
+            """
+            
+            \($0.element.rawValue.localized)
+            
+            
+            """
+        }
+        
+        let fullString = spaceStrings.reduce("") { $0 + $1 }
+        return fullString
     }
 }
