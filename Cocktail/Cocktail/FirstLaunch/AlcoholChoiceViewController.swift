@@ -27,6 +27,8 @@ class AlcoholChoiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = false
+        nextButton.isEnabled = false
         attribute()
         layout()
     }
@@ -58,39 +60,35 @@ class AlcoholChoiceViewController: UIViewController {
         
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             UserFavor.shared.alcoholFavor = self?.alcoholSelected
-            self?.navigationController?.popToRootViewController(animated: true)
-            self?.tabBarController?.tabBar.isHidden = false
+            self?.show(ReadyToLaunchVIewController(), sender: nil)
         }), for: .touchUpInside)
         
         highButton.addAction(UIAction(handler: {[weak self] _ in
-            self?.alcoholSelected = Cocktail.Alcohol.high
+            guard let self = self else { return }
+            self.setImageAndData(button: self.highButton, alcohol: .high)
         }), for: .touchUpInside)
         
         middleButton.addAction(UIAction(handler: {[weak self] _ in
-            self?.alcoholSelected = Cocktail.Alcohol.mid
+            guard let self = self else { return }
+            self.setImageAndData(button: self.middleButton, alcohol: .mid)
         }), for: .touchUpInside)
         
         lowButton.addAction(UIAction(handler: {[weak self] _ in
-            self?.alcoholSelected = Cocktail.Alcohol.low
+            guard let self = self else { return }
+            self.setImageAndData(button: self.lowButton, alcohol: .low)
         }), for: .touchUpInside)
         
         topVerticalLine.backgroundColor = .systemGray2
         bottomVerticalLine.backgroundColor = .systemGray2
     }
     
-    func unSelect(button: UIButton) {
-        switch alcoholSelected {
-        case .high:
-            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        case .mid:
-            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        case .low:
-            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        case.extreme:
-            button.setBackgroundImage(UIImage(systemName: "checkmark"), for: .normal)
-        default:
-            break
+    func setImageAndData(button: UIButton, alcohol: Cocktail.Alcohol) {
+        [lowButton, middleButton, highButton].forEach {
+            $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         }
+        button.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        alcoholSelected = alcohol
+        nextButton.isEnabled = true
     }
     
     func layout() {

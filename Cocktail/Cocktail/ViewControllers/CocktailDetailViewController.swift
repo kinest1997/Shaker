@@ -66,6 +66,7 @@ class CocktailDetailViewController: UIViewController {
         [groupStackView, cocktailImageView, likeButton].forEach {
             mainView.addSubview($0)
         }
+        
         [nameStackView, alcoholStackView, colorStackView, baseDrinkStackView, glassStackView, craftStackView].forEach {
             $0.snp.makeConstraints {
                 $0.height.equalTo(30)
@@ -77,6 +78,7 @@ class CocktailDetailViewController: UIViewController {
             $0.axis = .horizontal
             $0.distribution = .fill
         }
+        
         [nameGuideLabel, alcoholGuideLabel, colorGuideLabel, baseDrinkGuideLabel, glassGuideLabel, craftGuideLabel, recipeGuideLabel, myTipGuideLabel, ingredientsGuideLabel].forEach {
             $0.textAlignment = .center
             $0.snp.makeConstraints {
@@ -117,6 +119,7 @@ class CocktailDetailViewController: UIViewController {
         
         ingredientsStackView.addArrangedSubview(ingredientsGuideLabel)
         ingredientsStackView.addArrangedSubview(ingredientsLabel)
+        
         mainScrollView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalToSuperview()
@@ -171,10 +174,10 @@ class CocktailDetailViewController: UIViewController {
                 FirebaseRecipe.shared.wishList.remove(at: number)
                 self.cocktailData?.wishList = false
             } else {
-                    self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                self.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
                 var data = bindedCocktailData
                 data.wishList = true
-                    FirebaseRecipe.shared.wishList.append(data)
+                FirebaseRecipe.shared.wishList.append(data)
                 self.cocktailData?.wishList = true
             }
             FirebaseRecipe.shared.uploadWishList()
@@ -203,13 +206,7 @@ class CocktailDetailViewController: UIViewController {
         myTipLabel.text = data.mytip.localized
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
         
-        if let urlString = data.imageURL {
-            let imageURL = URL(string: urlString)
-            cocktailImageView.kf.setImage(with: imageURL)
-        } else {
-            //일단 네트워크에 저장한 이미지가없으면 보여줄 이미지를 임시로 하트로... 그럴일은 없겠지만 혹시라도 없어지면 보여야하니까
-            cocktailImageView.image = UIImage(systemName: "heart")
-        }
+        cocktailImageView.kf.setImage(with: URL(string: data.imageURL ?? ""), placeholder: UIImage(systemName: "heart"))
         
         var justRecipe = data
         justRecipe.wishList = true

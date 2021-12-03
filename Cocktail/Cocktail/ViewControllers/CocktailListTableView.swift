@@ -40,4 +40,3 @@ extension CocktailListTableView {
         self.show(cocktailDetailViewController, sender: nil)
     }
 }
-
