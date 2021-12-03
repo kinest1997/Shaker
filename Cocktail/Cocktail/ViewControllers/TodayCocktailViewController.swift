@@ -28,7 +28,6 @@ class TodayCocktailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        
         if UserDefaults.standard.bool(forKey: "firstLogin") == true {
             UserDefaults.standard.set(false, forKey: "firstLogin")
             let loginViewController = LoginViewController()

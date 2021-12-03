@@ -27,8 +27,10 @@ class SettingsViewController: UIViewController {
             do {
                 try firebaseAuth.signOut()
                 UserDefaults.standard.set(true, forKey: "firstLogin")
+                
                 let loginViewController = LoginViewController()
                 loginViewController.modalPresentationStyle = .overFullScreen
+                self?.navigationController?.popToRootViewController(animated: true)
                 self?.tabBarController?.show(loginViewController, sender: nil)
             } catch let error {
                 print(error)
