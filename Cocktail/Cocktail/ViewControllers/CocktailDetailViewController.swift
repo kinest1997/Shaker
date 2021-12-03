@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import Kingfisher
 
 class CocktailDetailViewController: UIViewController {
     
@@ -201,7 +202,15 @@ class CocktailDetailViewController: UIViewController {
         recipeLabel.text = data.recipe.localized
         myTipLabel.text = data.mytip.localized
         ingredientsLabel.text = data.ingredients.map {$0.rawValue.localized}.joined(separator: ", ")
-
+        
+        if let urlString = data.imageURL {
+            let imageURL = URL(string: urlString)
+            cocktailImageView.kf.setImage(with: imageURL)
+        } else {
+            //일단 네트워크에 저장한 이미지가없으면 보여줄 이미지를 임시로 하트로... 그럴일은 없겠지만 혹시라도 없어지면 보여야하니까
+            cocktailImageView.image = UIImage(systemName: "heart")
+        }
+        
         var justRecipe = data
         justRecipe.wishList = true
         
