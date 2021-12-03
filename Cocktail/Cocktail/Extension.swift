@@ -13,3 +13,7 @@ extension UIImage {
         return resizedImage
     }
 }
+<<<<<<< HEAD:Cocktail/Cocktail/Extension.swift
+=======
+
+>>>>>>> 2ecc2de406e4581ffbe821fc94b01b06bf1c86ad:Cocktail/Cocktail/GlobalFunction.swift

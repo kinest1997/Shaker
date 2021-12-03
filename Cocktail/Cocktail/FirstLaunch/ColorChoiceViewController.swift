@@ -6,8 +6,8 @@ class ColorChoiceViewController: UIViewController {
     let questionLabel = UILabel()
     
     let colorArray = Cocktail.Color.allCases
-    var selectedColor: [Cocktail.Color] = []
-    var isCheckedArray: [Bool] = []
+    var selectedColor = [Cocktail.Color]()
+    var isCheckedArray = [Bool]()
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
