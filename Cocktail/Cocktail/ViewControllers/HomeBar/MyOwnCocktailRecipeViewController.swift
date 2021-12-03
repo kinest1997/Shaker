@@ -1,6 +1,8 @@
 import UIKit
 import SnapKit
-import SwiftUI
+import FirebaseStorage
+import FirebaseAuth
+import FirebaseDatabase
 
 class MyOwnCocktailRecipeViewController: UIViewController {
     
@@ -79,6 +81,7 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
         if editingStyle == .delete {
             guard let number = FirebaseRecipe.shared.myRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
             
+            //내가 가진 레시피가 wishlist에도 추가되어있다면 myrecipe를 삭제할때도 wishlist에서도 동시에 삭제되도록 해주는코드
             var recipeData = myOwnRecipe[indexPath.row]
             recipeData.wishList = true
             if FirebaseRecipe.shared.wishList.contains(recipeData) {
@@ -86,7 +89,18 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
                 FirebaseRecipe.shared.wishList.remove(at: wishNumber)
                 FirebaseRecipe.shared.uploadWishList()
             }
+
+            //나의 레시피가 가진 주소값을 이용하여 Storage 의 데이터를 삭제하는 코드
+            let storage = Storage.storage()
+            guard let url = myOwnRecipe[indexPath.row].imageURL else { return }
+            let storageRef = storage.reference(forURL: url)
             
+            storageRef.delete { error in
+                if let error = error{
+                    print(error)
+                }
+            }
+
             FirebaseRecipe.shared.myRecipe.remove(at: number)
             DispatchQueue.main.async {
                 FirebaseRecipe.shared.uploadMyRecipe()

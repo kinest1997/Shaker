@@ -21,6 +21,7 @@ class SettingsViewController: UIViewController {
     
     func attribute() {
         logOutButton.backgroundColor = .blue
+        logOutButton.setTitle("애플 로그아웃 버튼", for: .normal)
         logOutButton.addAction(UIAction(handler: {[weak self]_ in
             let firebaseAuth = Auth.auth()
             do {

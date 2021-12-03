@@ -447,7 +447,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         } else if myTipTextField.text?.isEmpty ?? true {
             presentJustAlert(title: "Hold on".localized, message: "Write tips".localized)
         } else {
-
             guard let convertedImage = image.pngData(),
                 let uid = Auth.auth().currentUser?.uid else { return }
             let storageRef = Storage.storage().reference().child("CustomCocktails").child(uid).child("Recipes").child(nameTextField.text ?? "NoName"  + ".png")

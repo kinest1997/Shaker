@@ -19,6 +19,7 @@
 		3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4415CE27564CF400CBCC40 /* GoogleSignIn */; };
 		3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D027564EA600CBCC40 /* LoginViewController.swift */; };
 		3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */; };
+		3D48C2092759A672001B40FC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3D48C2082759A672001B40FC /* Kingfisher */; };
 		3D647F2D2753327F005EE580 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3D647F2C2753327F005EE580 /* SnapKit */; };
 		3D6C6D3F27325F3400C70276 /* ChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */; };
 		3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */; };
@@ -174,6 +175,7 @@
 				3D647F2D2753327F005EE580 /* SnapKit in Frameworks */,
 				3DB910E127574D720076CB50 /* FirebaseCrashlytics in Frameworks */,
 				3DB910DD27574D720076CB50 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
+				3D48C2092759A672001B40FC /* Kingfisher in Frameworks */,
 				3DB910EF27574D720076CB50 /* FirebaseStorage in Frameworks */,
 				3DB910E327574D720076CB50 /* FirebaseDatabase in Frameworks */,
 				3DB910E527574D720076CB50 /* FirebaseDatabaseSwift-Beta in Frameworks */,
@@ -355,6 +357,7 @@
 				3DB910EC27574D720076CB50 /* FirebaseRemoteConfig */,
 				3DB910EE27574D720076CB50 /* FirebaseStorage */,
 				3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */,
+				3D48C2082759A672001B40FC /* Kingfisher */,
 			);
 			productName = Cocktail;
 			productReference = 3DA76A2D2730D1CD004091CE /* Cocktail.app */;
@@ -392,6 +395,7 @@
 				3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
 			projectDirPath = "";
@@ -540,7 +544,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "heesung.Cocktail.Cocktail-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -569,7 +573,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "heesung.Cocktail.Cocktail-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -723,7 +727,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -758,7 +762,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -809,6 +813,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -832,6 +844,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		3D48C2082759A672001B40FC /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 		3D647F2C2753327F005EE580 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
