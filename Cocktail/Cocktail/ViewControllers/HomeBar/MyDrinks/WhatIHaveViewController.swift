@@ -6,7 +6,7 @@ class WhatIHaveViewController: UIViewController {
     var ingredientsWhatIhave: [String] = []
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-
+    
     var allIngredients: [Cocktail.Ingredients] = []
     
     var refreshList: Cocktail.Base = .vodka {
@@ -14,7 +14,7 @@ class WhatIHaveViewController: UIViewController {
             allIngredients = refreshList.list
         }
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if let data = UserDefaults.standard.object(forKey: "whatIHave") as? [String] {
@@ -29,7 +29,7 @@ class WhatIHaveViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UserDefaults.standard.set(ingredientsWhatIhave, forKey: "whatIHave")

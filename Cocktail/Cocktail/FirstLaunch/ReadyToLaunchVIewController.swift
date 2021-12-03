@@ -41,6 +41,4 @@ class ReadyToLaunchVIewController: UIViewController {
             $0.height.equalToSuperview().multipliedBy(0.05)
         }
     }
-    
 }
-

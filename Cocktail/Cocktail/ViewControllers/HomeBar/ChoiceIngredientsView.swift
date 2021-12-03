@@ -12,7 +12,7 @@ class ChoiceIngredientsView: UIView {
     
     var myIngredients: [Cocktail.Ingredients]?
     
-    //새로 만드는 레시피인지, 기존의 레시피를 수정하여 만드는것인지에 따른 차이
+    ///새로 만드는 레시피인지, 기존의 레시피를 수정하여 만드는것인지에 따른 차이
     var havePresetData: Bool? {
         didSet {
             if havePresetData == true {
@@ -137,7 +137,7 @@ extension ChoiceIngredientsView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Ingredients") as? FilterViewCell else { return UITableViewCell()}
-
+        
         cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
         cell.nameLabel.text = ingredientsData[indexPath.section][indexPath.row].rawValue.localized
         return cell

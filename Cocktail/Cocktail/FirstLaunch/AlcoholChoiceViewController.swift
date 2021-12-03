@@ -95,6 +95,7 @@ class AlcoholChoiceViewController: UIViewController {
         [questionLabel, explainLabel, highLabel, highButton, middleButton, lowLabel, lowButton, nextButton, topVerticalLine, bottomVerticalLine].forEach {
             view.addSubview($0)
         }
+        
         questionLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(50)
             $0.leading.trailing.equalToSuperview().inset(85)

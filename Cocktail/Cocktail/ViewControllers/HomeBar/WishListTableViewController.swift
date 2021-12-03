@@ -14,8 +14,8 @@ class WishListCocktailListTableView: UITableViewController {
         super.viewWillAppear(animated)
         wishListRecipe = FirebaseRecipe.shared.wishList.sorted { $0.name < $1.name}
         tableView.reloadData()
-        }
     }
+}
 
 extension WishListCocktailListTableView {
     
@@ -41,4 +41,3 @@ extension WishListCocktailListTableView {
         self.show(cocktailDetailViewController, sender: nil)
     }
 }
-
