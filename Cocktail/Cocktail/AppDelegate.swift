@@ -6,35 +6,16 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        guard let bundleURL = Bundle.main.url(forResource: "Cocktail", withExtension: "plist") else {
-            return false
-        }
-        let documentPlistURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-        
-        if !FileManager.default.fileExists(atPath: documentPlistURL.path) {
-            do {
-                try FileManager.default.copyItem(at: bundleURL, to: documentPlistURL)
-            } catch let error {
-                print("ERROR", error.localizedDescription)
-            }
-        }
-        
-        let beforeDocumentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let PathWithFolderName = beforeDocumentURL.appendingPathComponent("UserImage").path
-        
-        if !FileManager.default.fileExists(atPath: PathWithFolderName)
-        {
-            try! FileManager.default.createDirectory(atPath: PathWithFolderName, withIntermediateDirectories: true, attributes: nil)
-        }
-        
-        reloadwidgetData()
-        
+        FirebaseApp.configure()
+
         return true
     }
     

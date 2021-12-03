@@ -29,7 +29,6 @@ class ChoiceIngredientsView: UIView {
     }
     
     let ingredientsData: [[Cocktail.Ingredients]] = [Cocktail.Base.rum.list, Cocktail.Base.vodka.list, Cocktail.Base.tequila.list, Cocktail.Base.brandy.list, Cocktail.Base.whiskey.list, Cocktail.Base.gin.list, Cocktail.Base.liqueur.list, Cocktail.Base.assets.list, Cocktail.Base.beverage.list]
-    //이것이 누나가말한 데이터 주는법이구만
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -99,7 +98,6 @@ class ChoiceIngredientsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //사랑한다 번뜩이는 나의 전두엽 정말 사랑한다
     func findPlace() -> [(Int, Int)] {
         guard let myIngredients = myIngredients else { return [] }
         let coordinate = myIngredients.map { ingredients -> (Int, Int) in

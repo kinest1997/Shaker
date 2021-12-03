@@ -57,11 +57,9 @@ class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default
-        
         todayCocktailViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
         assistantViewController.tabBarItem = tabBarItems[.home]
@@ -72,5 +70,16 @@ class MainViewController: UITabBarController {
             UINavigationController(rootViewController: assistantViewController),
             UINavigationController(rootViewController: settingsViewController)
         ]
+        FirebaseRecipe.shared.getRecipe { data in
+            FirebaseRecipe.shared.recipe = data
+        }
+        
+        FirebaseRecipe.shared.getMyRecipe { data in
+            FirebaseRecipe.shared.myRecipe = data
+        }
+        
+        FirebaseRecipe.shared.getWishList { data in
+            FirebaseRecipe.shared.wishList = data
+        }
     }
 }

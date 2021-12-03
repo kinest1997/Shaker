@@ -29,7 +29,7 @@ class MyDrinksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        originRecipe = getRecipe()
+        originRecipe = FirebaseRecipe.shared.recipe
         attribute()
         layout()
     }

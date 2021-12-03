@@ -13,10 +13,20 @@ class TodayCocktailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       originRecipes = getRecipe()
+        originRecipes = FirebaseRecipe.shared.recipe
         attribute()
         layout()
         navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if UserDefaults.standard.bool(forKey: "firstLogin") == true {
+            UserDefaults.standard.set(false, forKey: "firstLogin")
+            let loginViewController = LoginViewController()
+            loginViewController.modalPresentationStyle = .overFullScreen
+            self.show(loginViewController, sender: nil)
+        }
     }
     
     func attribute() {

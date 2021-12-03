@@ -1,12 +1,12 @@
 import UIKit
 import SnapKit
-import SwiftUI
+import FirebaseStorage
+import FirebaseAuth
+import FirebaseDatabase
 
 class MyOwnCocktailRecipeViewController: UIViewController {
     
     var myOwnRecipe: [Cocktail] = []
-    
-    var originRecipe: [Cocktail] = []
     
     lazy var addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
     
@@ -14,10 +14,8 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        originRecipe = getRecipe()
-        myOwnRecipe = originRecipe.filter {
-            $0.myRecipe == true
-        }
+        
+        myOwnRecipe = FirebaseRecipe.shared.myRecipe
         
         view.addSubview(mainTableView)
         mainTableView.snp.makeConstraints {
@@ -31,29 +29,16 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightAddButton
         
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
-            self.originRecipe.append(data)
-            self.upload(recipe: self.originRecipe)
+            FirebaseRecipe.shared.myRecipe.append(data)
+            FirebaseRecipe.shared.uploadMyRecipe()
             self.mainTableView.reloadData()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        originRecipe = getRecipe()
-        myOwnRecipe = originRecipe.filter {
-            $0.myRecipe == true
-        }
+        myOwnRecipe = FirebaseRecipe.shared.myRecipe
         mainTableView.reloadData()
-    }
-    
-    func upload(recipe: [Cocktail]) {
-        let documentPlistURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Cocktail.plist")
-        do {
-            let data = try PropertyListEncoder().encode(recipe)
-            try data.write(to: documentPlistURL)
-        } catch let error {
-            print("ERROR", error.localizedDescription)
-        }
     }
     
     @objc func showAddView() {
@@ -87,24 +72,36 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-                return .delete
+        return .delete
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            guard let number = originRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
-             let directoryURL = getImageDirectoryPath()
-            let fileURL = URL(fileURLWithPath: myOwnRecipe[indexPath.row].name, relativeTo: directoryURL).appendingPathExtension("png")
-            do {
-                try FileManager.default.removeItem(at: fileURL)
-            } catch {
-                print(error)
+            guard let number = FirebaseRecipe.shared.myRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
+            
+            //내가 가진 레시피가 wishlist에도 추가되어있다면 myrecipe를 삭제할때도 wishlist에서도 동시에 삭제되도록 해주는코드
+            var recipeData = myOwnRecipe[indexPath.row]
+            recipeData.wishList = true
+            if FirebaseRecipe.shared.wishList.contains(recipeData) {
+                guard let wishNumber = FirebaseRecipe.shared.wishList.firstIndex(of: recipeData) else { return }
+                FirebaseRecipe.shared.wishList.remove(at: wishNumber)
+                FirebaseRecipe.shared.uploadWishList()
             }
-            originRecipe.remove(at: number)
-            upload(recipe: originRecipe)
-            myOwnRecipe = originRecipe.filter {
-                $0.myRecipe == true
+            
+            //나의 레시피가 가진 주소값을 이용하여 Storage 의 데이터를 삭제하는 코드
+            let storage = Storage.storage()
+            guard let url = myOwnRecipe[indexPath.row].imageURL else { return }
+            let storageRef = storage.reference(forURL: url)
+            
+            storageRef.delete { error in
+                if let error = error{
+                    print(error)
+                }
             }
+            
+            FirebaseRecipe.shared.myRecipe.remove(at: number)
+            FirebaseRecipe.shared.uploadMyRecipe()
+            myOwnRecipe = FirebaseRecipe.shared.myRecipe
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
