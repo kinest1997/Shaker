@@ -4,7 +4,6 @@ import FirebaseAuth
 import AuthenticationServices
 
 ///유저의 개인 취향을 저장하는곳, 설정에서 나중에 취향 재설정 가능하게 하자
-
 class UserFavor {
     static let shared = UserFavor()
     
@@ -12,9 +11,7 @@ class UserFavor {
     
     var alcoholFavor: Cocktail.Alcohol?
     
-    var drinkTypeFavor: Cocktail.DrinkType?
-    
-    var baseDrinkFavor: Cocktail.Base?
+    //무슨 취향들을 추가해볼까나 일단 좋아하는 베이스? 일단 고민중
     
     private init() { }
 }
@@ -85,7 +82,7 @@ class FirebaseRecipe {
     }
     
     func getJSONRecipe() -> [Cocktail] {
-        guard let bundleURL = Bundle.main.url(forResource: "CocktailData", withExtension: "json"),
+        guard let bundleURL = Bundle.main.url(forResource: "CocktailJSON", withExtension: "json"),
               let cocktailData = FileManager.default.contents(atPath: bundleURL.path) else { return [] }
         do {
             let cocktailList = try JSONDecoder().decode([Cocktail].self, from: cocktailData).sorted {

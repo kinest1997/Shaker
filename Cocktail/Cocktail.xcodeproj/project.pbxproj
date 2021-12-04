@@ -62,6 +62,8 @@
 		3DB910EF27574D720076CB50 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910EE27574D720076CB50 /* FirebaseStorage */; };
 		3DB910F127574D720076CB50 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */; };
 		3DB910F3275759E90076CB50 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910F2275759E90076CB50 /* Singleton.swift */; };
+		3DB910F527585DFC0076CB50 /* CocktailJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DB910F427585DFB0076CB50 /* CocktailJSON.json */; };
+		3DB910F627585DFC0076CB50 /* CocktailJSON.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DB910F427585DFB0076CB50 /* CocktailJSON.json */; };
 		3DB9110227588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
 		3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
@@ -71,8 +73,6 @@
 		3DF3C2FD27507E1A00462619 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3DF3C3002750833000462619 /* Cocktail_SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */; };
 		3DF3C30327508C4600462619 /* Cocktail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A462730D574004091CE /* Cocktail.plist */; };
-		3DF79349275A6AC8004E9F98 /* AddRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF79348275A6AC8004E9F98 /* AddRecipeCell.swift */; };
-		3DF7934B275A70EA004E9F98 /* CocktailData.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DF7934A275A70EA004E9F98 /* CocktailData.json */; };
 		7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D0D9B762744D714008C75E7 /* Ingredients.plist */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +143,7 @@
 		3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholChoiceViewController.swift; sourceTree = "<group>"; };
 		3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToLaunchVIewController.swift; sourceTree = "<group>"; };
 		3DB910F2275759E90076CB50 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
+		3DB910F427585DFB0076CB50 /* CocktailJSON.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailJSON.json; sourceTree = "<group>"; };
 		3DB910FC27588CDE0076CB50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3DB9110427588D110076CB50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DB9110627588D1B0076CB50 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -152,8 +153,6 @@
 		3DEADC6D274625F600362D99 /* FilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewCell.swift; sourceTree = "<group>"; };
 		3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail_SmallView.swift; sourceTree = "<group>"; };
 		3DF3C3042750C97800462619 /* Cocktail.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cocktail.entitlements; sourceTree = "<group>"; };
-		3DF79348275A6AC8004E9F98 /* AddRecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeCell.swift; sourceTree = "<group>"; };
-		3DF7934A275A70EA004E9F98 /* CocktailData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,7 +231,6 @@
 				3D7785972753468D008F0151 /* WishListTableViewController.swift */,
 				3D83715A274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift */,
 				3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */,
-				3DF79348275A6AC8004E9F98 /* AddRecipeCell.swift */,
 				3D48C211275A13A2001B40FC /* LoadingView.swift */,
 				3D83715C274CD7C300CA6036 /* ChoiceIngredientsView.swift */,
 				3D83715E274CD7D000CA6036 /* MyDrinks */,
@@ -285,7 +283,7 @@
 				3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
 				3DA76A462730D574004091CE /* Cocktail.plist */,
-				3DF7934A275A70EA004E9F98 /* CocktailData.json */,
+				3DB910F427585DFB0076CB50 /* CocktailJSON.json */,
 				3D0D9B762744D714008C75E7 /* Ingredients.plist */,
 				3DB910FC27588CDE0076CB50 /* Info.plist */,
 				3DB9110527588D110076CB50 /* InfoPlist.strings */,
@@ -424,6 +422,7 @@
 			files = (
 				3DF3C30327508C4600462619 /* Cocktail.plist in Resources */,
 				3D072473274F55220061B3F5 /* Assets.xcassets in Resources */,
+				3DB910F627585DFC0076CB50 /* CocktailJSON.json in Resources */,
 				3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,11 +434,11 @@
 				3DA76A3D2730D1D0004091CE /* LaunchScreen.storyboard in Resources */,
 				3D175BA02742846B00EC142B /* Localizable.strings in Resources */,
 				3DA76A472730D574004091CE /* Cocktail.plist in Resources */,
-				3DF7934B275A70EA004E9F98 /* CocktailData.json in Resources */,
 				7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */,
 				3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */,
 				3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */,
 				3DB9110227588D110076CB50 /* InfoPlist.strings in Resources */,
+				3DB910F527585DFC0076CB50 /* CocktailJSON.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,7 +483,6 @@
 				3D175BA6274285BB00EC142B /* String.swift in Sources */,
 				3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */,
 				3D7785982753468D008F0151 /* WishListTableViewController.swift in Sources */,
-				3DF79349275A6AC8004E9F98 /* AddRecipeCell.swift in Sources */,
 				3DA76A492730D899004091CE /* TodayCocktailViewController.swift in Sources */,
 				3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */,
 				3DA76A502730D8CB004091CE /* SettingsViewController.swift in Sources */,
