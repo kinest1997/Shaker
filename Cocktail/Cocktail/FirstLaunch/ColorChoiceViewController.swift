@@ -5,6 +5,8 @@ class ColorChoiceViewController: UIViewController {
     
     let questionLabel = UILabel()
     
+    var myFavor: Bool = true
+    
     let colorArray = Cocktail.Color.allCases
     var selectedColor = [Cocktail.Color]()
     var isCheckedArray = [Bool]()
@@ -67,7 +69,12 @@ class ColorChoiceViewController: UIViewController {
             let alcoholChoiceViewController = AlcoholChoiceViewController()
             alcoholChoiceViewController.modalPresentationStyle = .overFullScreen
             self.show(alcoholChoiceViewController, sender: nil)
-            UserFavor.shared.colorFavor = self.selectedColor
+            if self.myFavor {
+                UserDefaults.standard.set(self.selectedColor.map { $0.rawValue }, forKey: "ColorFavor")
+            } else {
+                UserFavor.shared.colorFavor = self.selectedColor
+            }
+            
         }), for: .touchUpInside)
     }
 }

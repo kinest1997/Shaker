@@ -26,11 +26,11 @@ class SettingsViewController: UIViewController {
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
-                UserDefaults.standard.set(true, forKey: "firstLogin")
-                self?.show(TodayCocktailViewController(), sender: nil)
             } catch let error {
                 print(error)
             }
+            UserDefaults.standard.set(true, forKey: "firstLogin")
+            self?.show(TodayCocktailViewController(), sender: nil)
         }), for: .touchUpInside)
     }
     

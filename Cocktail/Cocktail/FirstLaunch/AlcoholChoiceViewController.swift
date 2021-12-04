@@ -10,6 +10,8 @@ import SnapKit
 
 class AlcoholChoiceViewController: UIViewController {
     
+    var myFavor: Bool = true
+    
     var alcoholSelected: Cocktail.Alcohol?
     
     let questionLabel = UILabel()
@@ -59,8 +61,13 @@ class AlcoholChoiceViewController: UIViewController {
         nextButton.layer.cornerRadius = 15
         
         nextButton.addAction(UIAction(handler: {[weak self] _ in
-            UserFavor.shared.alcoholFavor = self?.alcoholSelected
-            self?.show(ReadyToLaunchVIewController(), sender: nil)
+            guard let self = self else { return }
+            if self.myFavor {
+                UserDefaults.standard.set(self.alcoholSelected?.rawValue, forKey: "AlcoholFavor")
+            } else {
+                UserFavor.shared.alcoholFavor = self.alcoholSelected
+            }
+            self.show(ReadyToLaunchVIewController(), sender: nil)
         }), for: .touchUpInside)
         
         highButton.addAction(UIAction(handler: {[weak self] _ in

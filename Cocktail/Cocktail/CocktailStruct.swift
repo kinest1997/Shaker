@@ -21,7 +21,7 @@ struct Cocktail: Codable, Hashable {
     let name: String
     let craft: Craft
     var glass: Glass
-    let recipe: String
+    let recipe: [String]
     var ingredients: [Ingredients]
     let base: Base
     let alcohol: Alcohol

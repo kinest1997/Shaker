@@ -61,6 +61,7 @@
 "Write name" = "이름적어!";
 "Write recipe" = "레시피적어!";
 "Write tips" = "팁도좀 적어";
+"Input Recipes" = "레시피를 입력하세요";
 
 //MainViewController.swift
 "Recommendation" = "추천";
