@@ -22,7 +22,7 @@ class UserFavor {
 class FirebaseRecipe {
     static let shared = FirebaseRecipe()
     
-    var ref = Database.database().reference()
+    let ref = Database.database().reference()
     
     var recipe: [Cocktail] = []
     

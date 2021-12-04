@@ -10,27 +10,49 @@ import FirebaseAuth
 import AuthenticationServices
 import CryptoKit
 import SnapKit
+import FirebaseDatabase
 
 class LoginViewController: UIViewController {
     
     private var currentNonce: String?
     
     let appleLoginButton = UIButton()
+    let justUseButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(appleLoginButton)
+        view.addSubview(justUseButton)
         appleLoginButton.setTitle("애플 로그인", for: .normal)
+        justUseButton.setTitle("그냥 사용하기", for: .normal)
         appleLoginButton.addAction(UIAction(handler: {[weak self] _ in
             self?.startSignInWithAppleFlow()
         }), for: .touchUpInside)
+        
+        justUseButton.addAction(UIAction(handler: {[weak self] _ in
+            FirebaseRecipe.shared.getRecipe { data in
+                FirebaseRecipe.shared.recipe = data
+                UserDefaults.standard.set(false, forKey: "firstLogin")
+                self?.tabBarController?.tabBar.isHidden = false
+                self?.navigationController?.popToRootViewController(animated: true)
+            }
+        }), for: .touchUpInside)
+        
         appleLoginButton.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.height.equalTo(100)
         }
+        
+        justUseButton.snp.makeConstraints {
+            $0.top.equalTo(appleLoginButton.snp.bottom)
+            $0.width.height.equalTo(appleLoginButton)
+            $0.centerX.equalToSuperview()
+        }
+        
         view.backgroundColor = .darkGray
         appleLoginButton.backgroundColor = .blue
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
     }
 }
 

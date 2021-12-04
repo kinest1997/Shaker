@@ -481,6 +481,12 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         } else if myTip.isEmpty {
             presentJustAlert(title: "Hold on".localized, message: "Write tips".localized)
         } else {
+            if let beforeEditingData = beforeEditingData {
+                if let number = FirebaseRecipe.shared.myRecipe.firstIndex(of: beforeEditingData) {
+                    FirebaseRecipe.shared.myRecipe.remove(at: number)
+                }
+            }
+            
             let loadingView = LoadingView()
             loadingView.modalPresentationStyle = .overCurrentContext
             loadingView.modalTransitionStyle = .crossDissolve

@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 class TodayCocktailViewController: UIViewController {
     
@@ -21,7 +22,12 @@ class TodayCocktailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if UserDefaults.standard.bool(forKey: "firstLogin") == true {
+        
+        if UserDefaults.standard.value(forKey: "firstLogin") == nil {
+            UserDefaults.standard.set(true, forKey: "firstLogin")
+        }
+        
+        if UserDefaults.standard.bool(forKey: "firstLogin") {
             UserDefaults.standard.set(false, forKey: "firstLogin")
             let loginViewController = LoginViewController()
             loginViewController.modalPresentationStyle = .overFullScreen

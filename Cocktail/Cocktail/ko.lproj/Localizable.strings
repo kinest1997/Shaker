@@ -192,3 +192,16 @@
 "rawCream" = "생크림";
 "grenadineSyrup" = "그레나딘시럽";
 "unknown" = "무명의 재료";
+
+//SettingTableViewController
+"LogIn" = "로그인";
+"LogOut" = "로그아웃";
+"Yes" = "네";
+"No" = "아니요";
+"Do you want to log out?" = "로그아웃 하시겠습니까?";
+"DeveloperInfo" = "개발자정보";
+"Account" = "계정";
+"Alarm" = "알람";
+"Service Information" = "서비스 안내";
+"Alarm Setting" = "알람설정";
+
