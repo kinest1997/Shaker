@@ -16,6 +16,7 @@ class LoadingView: UIViewController {
         view.addSubview(explainLabel)
         view.addSubview(activityIndicator)
         explainLabel.textColor = .black
+        explainLabel.textAlignment = .center
         
         activityIndicator.snp.makeConstraints {
             $0.center.equalToSuperview()

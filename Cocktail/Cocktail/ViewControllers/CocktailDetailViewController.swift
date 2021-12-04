@@ -232,6 +232,7 @@ class CocktailDetailViewController: UIViewController {
             
             """
         }
+        
         let fullString = spaceStrings.reduce("") { $0 + $1 }
         return fullString
     }
