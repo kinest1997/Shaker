@@ -14,6 +14,8 @@ import FirebaseDatabase
 
 class LoginViewController: UIViewController {
     
+    let userNotiCenter = UNUserNotificationCenter.current()
+    
     private var currentNonce: String?
     
     let appleLoginButton = UIButton()
@@ -21,6 +23,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        requestAuthNoti()
+        
         view.addSubview(appleLoginButton)
         view.addSubview(justUseButton)
         appleLoginButton.setTitle("애플 로그인", for: .normal)
@@ -53,6 +58,15 @@ class LoginViewController: UIViewController {
         appleLoginButton.backgroundColor = .blue
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    func requestAuthNoti() {
+        let notiAuthOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])
+        userNotiCenter.requestAuthorization(options: notiAuthOptions) { (success, error) in
+            if let error = error {
+                print(#function, error)
+            }
+        }
     }
 }
 

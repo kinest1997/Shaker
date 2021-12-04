@@ -45,7 +45,7 @@ extension SettingTableViewController {
             return ""
         }
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
@@ -110,16 +110,6 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
-        let accessorySwitch = UISwitch()
-        accessorySwitch.setOn(UIApplication.shared.isRegisteredForRemoteNotifications, animated: true)
-        accessorySwitch.addAction(UIAction(handler: { _ in
-            if accessorySwitch.isOn {
-                UIApplication.shared.registerForRemoteNotifications()
-            } else {
-                UIApplication.shared.unregisterForRemoteNotifications()
-            }
-        }), for: .touchUpInside)
-        cell.accessoryView = accessorySwitch
         
         var content = cell.defaultContentConfiguration()
         
@@ -131,6 +121,16 @@ extension SettingTableViewController {
             return cell
         case 1:
             content.text = "Alarm Setting".localized
+            let accessorySwitch = UISwitch()
+            
+            accessorySwitch.addTarget(self, action: #selector(switchAction(sender:)), for: .valueChanged)
+            if UIApplication.shared.isRegisteredForRemoteNotifications {
+                accessorySwitch.isOn = true
+            } else {
+                accessorySwitch.isOn = false
+            }
+            
+            cell.accessoryView = accessorySwitch
             cell.contentConfiguration = content
             cell.accessoryView?.isHidden = false
             return cell
@@ -146,6 +146,14 @@ extension SettingTableViewController {
             return cell
         default:
             return cell
+        }
+    }
+    
+    @objc func switchAction(sender: UISwitch) {
+        if sender.isOn {
+            UIApplication.shared.unregisterForRemoteNotifications()
+        } else {
+            UIApplication.shared.registerForRemoteNotifications()
         }
     }
     
