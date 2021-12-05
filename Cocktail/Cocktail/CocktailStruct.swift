@@ -10,6 +10,21 @@ protocol CocktailCondition {
     var rawValue: String { get }
 }
 
+struct YouTubeVideo: Codable {
+    let videoName: String
+    let videoURL: String?
+    let owner: YouTubeOwner
+}
+
+enum YouTubeOwner: String, Codable {
+    case homeTendingDictionary
+    case drinkLover
+    case drinkLecture
+    case linibini
+    case mansHobby
+    case yancon
+}
+
 enum SortingStandard {
     case alcohol
     case name

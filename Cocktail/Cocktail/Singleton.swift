@@ -19,6 +19,23 @@ class UserFavor {
     private init() { }
 }
 
+class ContentNetwork {
+    static let shared = ContentNetwork()
+    
+    func setlinkAction(appURL: String, webURL: String){
+        let appURL = URL(string: appURL)!
+        let application = UIApplication.shared
+        
+        if application.canOpenURL(appURL) {
+            application.open(appURL)
+        } else {
+            let webURL = URL(string: webURL)!
+            application.open(webURL)
+        }
+    }
+    
+}
+
 class FirebaseRecipe {
     static let shared = FirebaseRecipe()
     

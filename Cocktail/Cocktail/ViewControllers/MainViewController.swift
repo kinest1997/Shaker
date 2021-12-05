@@ -43,7 +43,7 @@ class MainViewController: UITabBarController {
         }
     }
     
-    let todayCocktailViewController = TodayCocktailViewController()
+    let todayCocktailCollectionViewController = TodayCocktailCollectionViewController(collectionViewLayout: UICollectionViewLayout())
     let cocktailRecipeViewController = CocktailRecipeViewController()
     let assistantViewController = AssistantViewController()
     let settingsViewController = SettingTableViewController(style: .insetGrouped)
@@ -67,12 +67,12 @@ class MainViewController: UITabBarController {
         tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default
-        todayCocktailViewController.tabBarItem = tabBarItems[.today]
+        todayCocktailCollectionViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
         assistantViewController.tabBarItem = tabBarItems[.home]
         settingsViewController.tabBarItem = tabBarItems[.preference]
         self.viewControllers = [
-            UINavigationController(rootViewController: todayCocktailViewController),
+            UINavigationController(rootViewController: todayCocktailCollectionViewController),
             UINavigationController(rootViewController: cocktailRecipeViewController),
             UINavigationController(rootViewController: assistantViewController),
             UINavigationController(rootViewController: settingsViewController)

@@ -57,6 +57,7 @@ class CocktailDetailViewController: UIViewController {
         layout()
         let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
+        navigationController?.navigationBar.isHidden = false
     }
     
     func layout() {
