@@ -6,7 +6,7 @@ class MyDrinksViewController: UIViewController {
     var myDrink: Set<String> = []
     
     var originRecipe: [Cocktail] = []
-
+    
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     
@@ -123,7 +123,6 @@ class MyDrinksViewController: UIViewController {
         buttonName.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             let whatIHaveViewController = WhatIHaveViewController()
-//            whatIHaveViewController.whatIPicked = buttonName.base
             whatIHaveViewController.refreshList = buttonName.base
             self.show(whatIHaveViewController, sender: nil)
         }), for: .touchUpInside)
@@ -135,7 +134,7 @@ class MyDrinksViewController: UIViewController {
         let subtracted = origin.subtracting(myDrink)
         let originCount = origin.count - subtracted.count
         button.badge = "\(originCount)"
-        }
+    }
     
     func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
         button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
@@ -154,5 +153,3 @@ class MyDrinksViewController: UIViewController {
         return lastRecipe
     }
 }
-
-

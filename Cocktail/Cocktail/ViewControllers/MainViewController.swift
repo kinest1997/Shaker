@@ -54,7 +54,7 @@ class MainViewController: UITabBarController {
         .home: UITabBarItem(title: Tab.home.name, image: Tab.home.image, selectedImage: Tab.home.selectedImage),
         .preference: UITabBarItem(title: Tab.preference.name, image: Tab.preference.image, selectedImage: Tab.preference.selectedImage)
     ]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = .systemBrown
@@ -70,16 +70,24 @@ class MainViewController: UITabBarController {
             UINavigationController(rootViewController: assistantViewController),
             UINavigationController(rootViewController: settingsViewController)
         ]
+        
+        //이런식으로 중첩해도 되는건가? 가끔 맨처음에 빠르게 누르면 데이터 업데이트가 안되서 다될때까지 기다리는건데
         FirebaseRecipe.shared.getRecipe { data in
+            let loadingView = LoadingView()
+            loadingView.modalPresentationStyle = .overCurrentContext
+            loadingView.modalTransitionStyle = .crossDissolve
+            loadingView.explainLabel.text = "로딩중"
+            self.present(loadingView, animated: true) {
+                loadingView.activityIndicator.startAnimating()
+            }
             FirebaseRecipe.shared.recipe = data
-        }
-        
-        FirebaseRecipe.shared.getMyRecipe { data in
-            FirebaseRecipe.shared.myRecipe = data
-        }
-        
-        FirebaseRecipe.shared.getWishList { data in
-            FirebaseRecipe.shared.wishList = data
+            FirebaseRecipe.shared.getMyRecipe { data in
+                FirebaseRecipe.shared.myRecipe = data
+                FirebaseRecipe.shared.getWishList { data in
+                    FirebaseRecipe.shared.wishList = data
+                }
+            }
+            loadingView.dismiss(animated: true, completion: nil)
         }
     }
 }

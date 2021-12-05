@@ -16,7 +16,6 @@ class UserFavor {
     private init() { }
 }
 
-
 class FirebaseRecipe {
     static let shared = FirebaseRecipe()
     

@@ -125,12 +125,4 @@ class BadgeButton: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    //위처럼만 해도 되는것인가? 아래처럼 굳이 deinit 할때 버튼의 뱃지를 없애주면 다시 화면 들어갔을때 저절로 새값을 받아오려나? 일단 해보고나서 
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        self.addBadgeToButon(badge: nil)
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    //만약 알람 확인같은 용도라면 deinit 시켜서 뱃지를 아예 없애는 이부분을 두는게 맞다.
 }

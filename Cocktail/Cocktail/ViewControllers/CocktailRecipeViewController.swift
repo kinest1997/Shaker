@@ -4,13 +4,13 @@ import SnapKit
 class CocktailRecipeViewController: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
-
+    
     var unTouchableRecipe: [Cocktail] = []
     var originRecipe: [Cocktail] = []
     var filteredRecipe: [Cocktail] = []
-
+    
     lazy var filterView = FilteredView()
-
+    
     let mainTableView = UITableView()
     
     var filtertMenuItems: [UIAction] {

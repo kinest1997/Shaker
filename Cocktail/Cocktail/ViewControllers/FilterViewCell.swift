@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 class FilterViewCell: UITableViewCell {
-
+    
     let nameLabel = UILabel()
     let mainStackView = UIStackView()
     let appliedCheckImgageView = UIImageView()

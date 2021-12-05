@@ -128,6 +128,15 @@
         }
       },
       {
+        "package": "NVActivityIndicatorView",
+        "repositoryURL": "https://github.com/ninjaprox/NVActivityIndicatorView.git",
+        "state": {
+          "branch": "master",
+          "revision": "bcb52371f2259254bac6690f92bb474a61768c47",
+          "version": null
+        }
+      },
+      {
         "package": "Promises",
         "repositoryURL": "https://github.com/google/promises.git",
         "state": {

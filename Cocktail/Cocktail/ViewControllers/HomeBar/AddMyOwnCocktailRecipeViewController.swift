@@ -428,7 +428,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     @objc func saveRecipe() {
-        guard let uploadCraft = craft,
+        guard let craft = craft,
               let glass = glass,
               let baseDrink = baseDrink,
               let alcohol = alcohol,
@@ -439,7 +439,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         else {
             return presentJustAlert(title: "Hold on".localized, message: "선택안한게 있어!")
         }
-
+        
         if nameTextField.text?.isEmpty ?? true  {
             presentJustAlert(title: "Hold on".localized, message: "Write name".localized)
         } else if recipeTextField.text?.isEmpty ?? true {
@@ -447,8 +447,16 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         } else if myTipTextField.text?.isEmpty ?? true {
             presentJustAlert(title: "Hold on".localized, message: "Write tips".localized)
         } else {
+            let loadingView = LoadingView()
+            loadingView.modalPresentationStyle = .overCurrentContext
+            loadingView.modalTransitionStyle = .crossDissolve
+            loadingView.explainLabel.text = "저장중"
+            self.present(loadingView, animated: true) {
+                loadingView.activityIndicator.startAnimating()
+            }
+            
             guard let convertedImage = image.pngData(),
-                let uid = Auth.auth().currentUser?.uid else { return }
+                  let uid = Auth.auth().currentUser?.uid else { return }
             let storageRef = Storage.storage().reference().child("CustomCocktails").child(uid).child("Recipes").child(nameTextField.text ?? "NoName"  + ".png")
             
             storageRef.putData(convertedImage, metadata: nil) { metaData, error in
@@ -457,13 +465,15 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
                 storageRef.downloadURL {[weak self] url, error in
                     guard let self = self else { return }
                     guard error == nil,
-                        let url = url else { return }
-
-                    let myRecipe = Cocktail(name: self.nameTextField.text ?? "", craft: uploadCraft, glass: glass, recipe: self.recipeTextField.text ?? "", ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: self.myTipTextField.text ?? "", drinkType: drinkType, myRecipe: true, wishList: false, imageURL: url.absoluteString)
+                          let url = url else { return }
+                    
+                    let myRecipe = Cocktail(name: self.nameTextField.text ?? "", craft: craft, glass: glass, recipe: self.recipeTextField.text ?? "", ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: self.myTipTextField.text ?? "", drinkType: drinkType, myRecipe: true, wishList: false, imageURL: url.absoluteString)
                     FirebaseRecipe.shared.myRecipe.append(myRecipe)
                     FirebaseRecipe.shared.uploadMyRecipe()
                     let cocktailDetailViewController = CocktailDetailViewController()
                     cocktailDetailViewController.setData(data: myRecipe)
+                    
+                    loadingView.dismiss(animated: true, completion: nil)
                     self.navigationController?.popToRootViewController(animated: true)
                     self.show(cocktailDetailViewController, sender: nil)
                 }
@@ -522,7 +532,9 @@ extension AddMyOwnCocktailRecipeViewController: PHPickerViewControllerDelegate {
         if let itemProvider = itemProvider,
            itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                DispatchQueue.main.async {
                     self.cocktailImageView.image = (image as! UIImage).resize()
+                }
             }
         }
     }

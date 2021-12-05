@@ -13,4 +13,3 @@ extension UIImage {
         return resizedImage
     }
 }
-

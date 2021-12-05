@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 
 class TodayCocktailViewController: UIViewController {
-
+    
     var originRecipes: [Cocktail] = []
     
     let mainScrollView = UIScrollView()
@@ -99,4 +99,3 @@ class TodayCocktailViewController: UIViewController {
         return filtered
     }
 }
-
