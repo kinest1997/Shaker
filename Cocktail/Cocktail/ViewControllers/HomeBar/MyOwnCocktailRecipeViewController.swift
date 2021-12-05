@@ -43,6 +43,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     
     @objc func showAddView() {
         addMyOwnCocktailRecipeViewController.choiceView.havePresetData = false
+        addMyOwnCocktailRecipeViewController.textFieldArray.append(UITextField())
         show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
 }

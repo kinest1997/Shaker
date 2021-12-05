@@ -57,6 +57,13 @@ class MainViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let loadingView = LoadingView()
+        loadingView.modalPresentationStyle = .overCurrentContext
+        loadingView.modalTransitionStyle = .crossDissolve
+        loadingView.explainLabel.text = "로딩중"
+        self.present(loadingView, animated: true) {
+            loadingView.activityIndicator.startAnimating()
+        }
         tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default
@@ -70,15 +77,7 @@ class MainViewController: UITabBarController {
             UINavigationController(rootViewController: assistantViewController),
             UINavigationController(rootViewController: settingsViewController)
         ]
-        
         FirebaseRecipe.shared.getRecipe { data in
-            let loadingView = LoadingView()
-            loadingView.modalPresentationStyle = .overCurrentContext
-            loadingView.modalTransitionStyle = .crossDissolve
-            loadingView.explainLabel.text = "로딩중"
-            self.present(loadingView, animated: true) {
-                loadingView.activityIndicator.startAnimating()
-            }
             FirebaseRecipe.shared.recipe = data
             FirebaseRecipe.shared.getMyRecipe { data in
                 FirebaseRecipe.shared.myRecipe = data

@@ -238,11 +238,11 @@ class CocktailDetailViewController: UIViewController {
     }
     
     func makeIngredientsText(ingredients: [Cocktail.Ingredients]) -> String {
-        //순서가 필요할까 아직 고민중이긴한데 일단 이대로 두겠음 .enumerated 를 사용할지 의견받는중
+
         let spaceStrings = ingredients.enumerated().map {
             """
             
-            \($0.element.rawValue.localized)
+            \($0.offset + 1)  \($0.element.rawValue.localized)
             
             
             """

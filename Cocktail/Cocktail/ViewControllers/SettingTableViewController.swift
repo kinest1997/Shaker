@@ -112,37 +112,40 @@ extension SettingTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
         
         var content = cell.defaultContentConfiguration()
+        let accessorySwitch = UISwitch()
+        cell.accessoryView?.isHidden = true
         
         switch indexPath.section {
         case 0:
             content.text = firstSectionNames[indexPath.row]
             cell.contentConfiguration = content
-            cell.accessoryView?.isHidden = true
+        
             return cell
         case 1:
             content.text = "Alarm Setting".localized
-            let accessorySwitch = UISwitch()
-            
-            accessorySwitch.addTarget(self, action: #selector(switchAction(sender:)), for: .valueChanged)
-            if UIApplication.shared.isRegisteredForRemoteNotifications {
-                accessorySwitch.isOn = true
-            } else {
-                accessorySwitch.isOn = false
+            cell.accessoryView?.isHidden = false
+            UNUserNotificationCenter.current().getNotificationSettings { data in
+                if data.notificationCenterSetting == .enabled {
+                    DispatchQueue.main.async {
+                        accessorySwitch.isOn = true
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        accessorySwitch.isOn = false
+                    }
+                }
             }
-            
+            accessorySwitch.addTarget(self, action: #selector(switchAction(sender:)), for: .valueChanged)
             cell.accessoryView = accessorySwitch
             cell.contentConfiguration = content
-            cell.accessoryView?.isHidden = false
             return cell
         case 2:
             content.text = developerSectionNames[indexPath.row]
             cell.contentConfiguration = content
-            cell.accessoryView?.isHidden = true
             return cell
         case 3:
             content.text = Auth.auth().currentUser == nil ? "LogIn".localized : "LogOut".localized
             cell.contentConfiguration = content
-            cell.accessoryView?.isHidden = true
             return cell
         default:
             return cell
@@ -150,11 +153,7 @@ extension SettingTableViewController {
     }
     
     @objc func switchAction(sender: UISwitch) {
-        if sender.isOn {
-            UIApplication.shared.unregisterForRemoteNotifications()
-        } else {
-            UIApplication.shared.registerForRemoteNotifications()
-        }
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
     }
     
     func setlinkAction(appURL: String, webURL: String){

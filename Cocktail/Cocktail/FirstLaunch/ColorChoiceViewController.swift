@@ -74,7 +74,6 @@ class ColorChoiceViewController: UIViewController {
             } else {
                 UserFavor.shared.colorFavor = self.selectedColor
             }
-            
         }), for: .touchUpInside)
     }
 }

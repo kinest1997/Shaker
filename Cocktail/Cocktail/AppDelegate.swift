@@ -25,12 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
-            if granted {
-                print("알림 등록이 완료되었습니다.")
-            }
         }
         application.registerForRemoteNotifications()
-        
         return true
     }
     

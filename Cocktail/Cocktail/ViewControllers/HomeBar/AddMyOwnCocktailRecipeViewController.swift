@@ -224,15 +224,9 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         alcoholChoiceButton.backgroundColor = .red
         attribute()
         layout()
-        registerKeyboardNotification()
+        registerNotifications()
         actions()
         addGestureRecognizer()
-    }
-    //이걸 여태까지 안해놨었다고?
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(UIResponder.keyboardWillShowNotification)
-        NotificationCenter.default.removeObserver(UIResponder.keyboardWillHideNotification)
     }
     
     func actions() {
@@ -291,9 +285,10 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeChoiceButton.showsMenuAsPrimaryAction = true
         
         choiceView.isHidden = true
-        addButton.backgroundColor = .white
+        addButton.backgroundColor = .brown
         addButton.setTitle("추가", for: .normal)
         addButton.setTitleColor(.cyan, for: .normal)
+        
         
         self.view.backgroundColor = .white
         groupStackView.axis = .vertical
@@ -417,30 +412,23 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         addButton.snp.makeConstraints {
             $0.top.equalTo(addRecipeTableView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(100)
+            $0.height.equalTo(80)
         }
     }
     
-    func registerKeyboardNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotificationHandler(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardNotificationHandler(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc func keyboardNotificationHandler(_ notification: Notification) {
-        //이부분 코드 점검 키보드 노티가 애매해짐. 5 이하일때 올릴필요는 없고 근데 칵테일 레시피가 5단계가 넘을일이..? 일단 보류
-        //아무것도 입력하지않고 엔터눌러서 키보드를 내리면 밑부분이 더 내릴수없는 상태로 살짝 잘리는데 다시 키보드 올렸다가 내리면 원상 복구됨, 이 버그는 어떻게 쳐리해야할지 감이안옴..
-        if textFieldArray.map { $0.isEditing }.contains(true) && (textFieldArray.count > 5) {
-            switch notification.name {
-            case UIResponder.keyboardWillShowNotification:
-                let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-                self.view.frame.origin.y = 0 - keyboardSize.height
-            case UIResponder.keyboardWillHideNotification:
-                self.view.frame.origin.y = 0
-            default:
-                return
-            }
-        }
-    }
+     private func registerNotifications() {
+     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+     }
+     
+     @objc private func keyboardWillShow(notification: NSNotification){
+     guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+     mainScrollView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
+     }
+     
+     @objc private func keyboardWillHide(notification: NSNotification){
+     mainScrollView.contentInset.bottom = 0
+     }
     
     func editing(data: Cocktail) {
         nameTextField.text = data.name
