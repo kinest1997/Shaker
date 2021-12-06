@@ -26,11 +26,6 @@ class ColorChoiceViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
-    }
-    
     func layout() {
         view.addSubview(questionLabel)
         view.addSubview(mainCollectionView)
@@ -51,7 +46,7 @@ class ColorChoiceViewController: UIViewController {
         
         nextButton.snp.makeConstraints {
             $0.top.equalTo(mainCollectionView.snp.bottom).offset(40)
-            $0.leading.trailing.equalToSuperview().inset(150)
+            $0.leading.trailing.equalToSuperview().inset(100)
             $0.height.equalTo(30)
         }
     }
@@ -62,19 +57,32 @@ class ColorChoiceViewController: UIViewController {
         mainCollectionView.backgroundColor = .white
         questionLabel.textAlignment = .center
         questionLabel.textColor = .systemGray2
+        
+        nextButton.layer.borderWidth = 1
+        nextButton.layer.borderColor = UIColor.black.cgColor
+        nextButton.layer.cornerRadius = 15
+        
         nextButton.setTitle("다음", for: .normal)
         nextButton.setTitleColor(.systemGray2, for: .normal)
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
-            let alcoholChoiceViewController = AlcoholChoiceViewController()
-            alcoholChoiceViewController.modalPresentationStyle = .overFullScreen
-            self.show(alcoholChoiceViewController, sender: nil)
             if self.myFavor {
                 UserDefaults.standard.set(self.selectedColor.map { $0.rawValue }, forKey: "ColorFavor")
-            } else {
-                UserFavor.shared.colorFavor = self.selectedColor
             }
+            let alcoholChoiceViewController = AlcoholChoiceViewController()
+            alcoholChoiceViewController.myFavor = self.myFavor
+            alcoholChoiceViewController.filteredRecipe = FirebaseRecipe.shared.recipe.filter {
+                self.selectedColor.contains($0.color)}
+            alcoholChoiceViewController.modalPresentationStyle = .overFullScreen
+            self.show(alcoholChoiceViewController, sender: nil)
         }), for: .touchUpInside)
+    }
+    
+    func buttonLabelCountUpdate(button: UIButton) {
+        let number = FirebaseRecipe.shared.recipe.filter {
+            selectedColor.contains($0.color)
+        }.count
+        button.setTitle("\(number)개의 칵테일 발견", for: .normal)
     }
 }
 
@@ -102,11 +110,13 @@ extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewD
             isCheckedArray[indexPath.row] = true
             selectedCell.isChecked = isCheckedArray[indexPath.row]
             selectedColor.append(colorArray[indexPath.row])
+            buttonLabelCountUpdate(button: nextButton)
         } else {
             isCheckedArray[indexPath.row] = false
             selectedCell.isChecked = isCheckedArray[indexPath.row]
             guard let number = selectedColor.firstIndex(of: colorArray[indexPath.row]) else { return }
             selectedColor.remove(at: number)
+            buttonLabelCountUpdate(button: nextButton)
         }
     }
 }

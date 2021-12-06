@@ -3,7 +3,7 @@ import SnapKit
 
 class ChoiceViewController: UIViewController {
     
-    var firstRecipe: [Cocktail] = []
+    var filteredRecipe: [Cocktail] = []
     
     let mainBigStackView = UIStackView()
     let leftStackView = UIStackView()
@@ -15,6 +15,7 @@ class ChoiceViewController: UIViewController {
     let vodkaButton = UIButton()
     let brandyButton = UIButton()
     let whiskeyButton = UIButton()
+    let liqueorButton = UIButton()
     let anyThingButton = UIButton()
     
     override func viewDidLoad() {
@@ -89,10 +90,10 @@ class ChoiceViewController: UIViewController {
     
     func filterSortedRecipe(base: Cocktail.Base) -> [Cocktail] {
         if base == .beverage {
-            return firstRecipe
+            return filteredRecipe
         }
         
-        let filterdRecipe = firstRecipe.filter {
+        let filterdRecipe = filteredRecipe.filter {
             $0.base == base
         }.sorted { $0.ingredients.count < $1.ingredients.count}
         return filterdRecipe

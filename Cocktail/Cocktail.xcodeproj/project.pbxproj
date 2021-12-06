@@ -43,7 +43,6 @@
 		3DA76A3D2730D1D0004091CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A3B2730D1D0004091CE /* LaunchScreen.storyboard */; };
 		3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A442730D244004091CE /* CocktailStruct.swift */; };
 		3DA76A472730D574004091CE /* Cocktail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A462730D574004091CE /* Cocktail.plist */; };
-		3DA76A492730D899004091CE /* TodayCocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A482730D899004091CE /* TodayCocktailViewController.swift */; };
 		3DA76A4C2730D8B7004091CE /* CocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */; };
 		3DA76A522730D920004091CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A512730D920004091CE /* MainViewController.swift */; };
 		3DB910D427566C1C0076CB50 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */; };
@@ -69,6 +68,8 @@
 		3DE56B2D275CDCA60087D979 /* TodayCocktailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE56B2C275CDCA60087D979 /* TodayCocktailCollectionViewController.swift */; };
 		3DE56B2F275CE5FB0087D979 /* TodayCocktailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE56B2E275CE5FA0087D979 /* TodayCocktailCollectionViewCell.swift */; };
 		3DE56B31275D080A0087D979 /* TodayCocktailCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE56B30275D08090087D979 /* TodayCocktailCollectionViewHeader.swift */; };
+		3DE56B33275DF93F0087D979 /* DrinkTypeChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE56B32275DF93E0087D979 /* DrinkTypeChoiceViewController.swift */; };
+		3DE56B35275E4F750087D979 /* BaseChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE56B34275E4F750087D979 /* BaseChoiceViewController.swift */; };
 		3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEADC6D274625F600362D99 /* FilterViewCell.swift */; };
 		3DF3C2FC275071C100462619 /* CocktailStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A442730D244004091CE /* CocktailStruct.swift */; };
 		3DF3C2FD27507E1A00462619 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
@@ -139,7 +140,6 @@
 		3DA76A3C2730D1D0004091CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3DA76A442730D244004091CE /* CocktailStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailStruct.swift; sourceTree = "<group>"; };
 		3DA76A462730D574004091CE /* Cocktail.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cocktail.plist; sourceTree = "<group>"; };
-		3DA76A482730D899004091CE /* TodayCocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktailViewController.swift; sourceTree = "<group>"; };
 		3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DA76A512730D920004091CE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Cocktail/ViewControllers/MainViewController.swift; sourceTree = SOURCE_ROOT; usesTabs = 0; wrapsLines = 1; };
 		3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -155,6 +155,8 @@
 		3DE56B2C275CDCA60087D979 /* TodayCocktailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktailCollectionViewController.swift; sourceTree = "<group>"; };
 		3DE56B2E275CE5FA0087D979 /* TodayCocktailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktailCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DE56B30275D08090087D979 /* TodayCocktailCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktailCollectionViewHeader.swift; sourceTree = "<group>"; };
+		3DE56B32275DF93E0087D979 /* DrinkTypeChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTypeChoiceViewController.swift; sourceTree = "<group>"; };
+		3DE56B34275E4F750087D979 /* BaseChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChoiceViewController.swift; sourceTree = "<group>"; };
 		3DEADC6D274625F600362D99 /* FilterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewCell.swift; sourceTree = "<group>"; };
 		3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail_SmallView.swift; sourceTree = "<group>"; };
 		3DF3C3042750C97800462619 /* Cocktail.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Cocktail.entitlements; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */,
 				3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */,
 				3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */,
+				3DE56B32275DF93E0087D979 /* DrinkTypeChoiceViewController.swift */,
 			);
 			path = FirstLaunch;
 			sourceTree = "<group>";
@@ -308,8 +311,8 @@
 				3DE56B2C275CDCA60087D979 /* TodayCocktailCollectionViewController.swift */,
 				3DE56B30275D08090087D979 /* TodayCocktailCollectionViewHeader.swift */,
 				3DE56B2E275CE5FA0087D979 /* TodayCocktailCollectionViewCell.swift */,
-				3DA76A482730D899004091CE /* TodayCocktailViewController.swift */,
 				3D6C6D3E27325F3400C70276 /* ChoiceViewController.swift */,
+				3DE56B34275E4F750087D979 /* BaseChoiceViewController.swift */,
 				3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */,
 				3D6C6D442732B86100C70276 /* CocktailListCell.swift */,
 				3D6C6D462732C04400C70276 /* CocktailDetailViewController.swift */,
@@ -484,6 +487,7 @@
 				3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */,
 				3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */,
 				3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift in Sources */,
+				3DE56B33275DF93F0087D979 /* DrinkTypeChoiceViewController.swift in Sources */,
 				3D83715D274CD7C300CA6036 /* ChoiceIngredientsView.swift in Sources */,
 				3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */,
 				3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */,
@@ -497,13 +501,13 @@
 				3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */,
 				3D7785982753468D008F0151 /* WishListTableViewController.swift in Sources */,
 				3DF79349275A6AC8004E9F98 /* AddRecipeCell.swift in Sources */,
-				3DA76A492730D899004091CE /* TodayCocktailViewController.swift in Sources */,
 				3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */,
 				3DB910D6275683B90076CB50 /* AlcoholChoiceViewController.swift in Sources */,
 				3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */,
 				3DE56B2D275CDCA60087D979 /* TodayCocktailCollectionViewController.swift in Sources */,
 				3DA76A332730D1CD004091CE /* SceneDelegate.swift in Sources */,
 				3D48C212275A13A2001B40FC /* LoadingView.swift in Sources */,
+				3DE56B35275E4F750087D979 /* BaseChoiceViewController.swift in Sources */,
 				3DA76A522730D920004091CE /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

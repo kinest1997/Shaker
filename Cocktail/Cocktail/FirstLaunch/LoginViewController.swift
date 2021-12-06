@@ -60,6 +60,11 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
     func requestAuthNoti() {
         let notiAuthOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])
         userNotiCenter.requestAuthorization(options: notiAuthOptions) { (success, error) in
@@ -92,7 +97,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print ("Error Apple sign in: %@", error)
                     return
                 }
-                //선택 화면으로 쭉 넘어가기
+
                 self.show(ColorChoiceViewController(), sender: nil)
             }
         }

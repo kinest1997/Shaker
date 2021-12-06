@@ -47,6 +47,8 @@ class FirebaseRecipe {
     
     var myRecipe: [Cocktail] = []
     
+    var youTubeData: [YouTubeVideo] = []
+    
     let uid = Auth.auth().currentUser?.uid
     
     func getRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
@@ -77,6 +79,15 @@ class FirebaseRecipe {
                   let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
             let myRecipes = cocktailList.filter { $0.wishList == true }
             completion(myRecipes)
+        }
+    }
+    
+    func getYoutubeContents(completion: @escaping ([YouTubeVideo]) -> (Void)) {
+        ref.child("Youtube").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]],
+                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                  let youTubeVideoList = try? JSONDecoder().decode([YouTubeVideo].self, from: data) else { return }
+            completion(youTubeVideoList)
         }
     }
     
@@ -113,6 +124,12 @@ class FirebaseRecipe {
             print(String(describing: error))
             return []
         }
+    }
+    
+    func uploadyoutube() {
+        guard let data = try? JSONEncoder().encode([YouTubeVideo(videoName: "firstName", videoCode: "HzxdVaKaPyA", owner: .drinkLecture)]),
+              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else { return }
+        Database.database().reference().child("Youtube").setValue(jsonData)
     }
     private init() { }
 }

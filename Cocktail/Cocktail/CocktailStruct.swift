@@ -12,7 +12,7 @@ protocol CocktailCondition {
 
 struct YouTubeVideo: Codable {
     let videoName: String
-    let videoURL: String?
+    let videoCode: String
     let owner: YouTubeOwner
 }
 
