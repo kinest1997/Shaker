@@ -16,6 +16,12 @@ class UserFavor {
     
     var baseDrinkFavor: Cocktail.Base?
     
+    func makeAlert(title: String, message: String) -> UIAlertController {
+        let alert = UIAlertController(title: title.localized, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
+        return alert
+    }
+    
     private init() { }
 }
 

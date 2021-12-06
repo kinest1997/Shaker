@@ -23,7 +23,11 @@ class ColorChoiceViewController: UIViewController {
         mainCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: "colorCell")
         layout()
         attribute()
-        self.tabBarController?.tabBar.isHidden = true
+        if myFavor {
+            self.tabBarController?.tabBar.isHidden = true
+        } else {
+            self.tabBarController?.tabBar.isHidden = false
+        }
     }
     
     func layout() {
@@ -69,12 +73,16 @@ class ColorChoiceViewController: UIViewController {
             if self.myFavor {
                 UserDefaults.standard.set(self.selectedColor.map { $0.rawValue }, forKey: "ColorFavor")
             }
-            let alcoholChoiceViewController = AlcoholChoiceViewController()
-            alcoholChoiceViewController.myFavor = self.myFavor
-            alcoholChoiceViewController.filteredRecipe = FirebaseRecipe.shared.recipe.filter {
+            let lastRecipe = FirebaseRecipe.shared.recipe.filter {
                 self.selectedColor.contains($0.color)}
-            alcoholChoiceViewController.modalPresentationStyle = .overFullScreen
-            self.show(alcoholChoiceViewController, sender: nil)
+            if lastRecipe.isEmpty {
+                self.present(UserFavor.shared.makeAlert(title: "하나이상 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
+            } else {
+                let alcoholChoiceViewController = AlcoholChoiceViewController()
+                alcoholChoiceViewController.myFavor = self.myFavor
+                alcoholChoiceViewController.filteredRecipe = lastRecipe
+                self.show(alcoholChoiceViewController, sender: nil)
+            }
         }), for: .touchUpInside)
     }
     

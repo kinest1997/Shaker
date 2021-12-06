@@ -35,6 +35,11 @@ class AlcoholChoiceViewController: UIViewController {
         nextButton.isEnabled = false
         attribute()
         layout()
+        if myFavor {
+            self.tabBarController?.tabBar.isHidden = true
+        } else {
+            self.tabBarController?.tabBar.isHidden = false
+        }
     }
     
     func attribute() {
@@ -69,14 +74,16 @@ class AlcoholChoiceViewController: UIViewController {
                 UserDefaults.standard.set(self.alcoholSelected?.rawValue, forKey: "AlcoholFavor")
                 self.show(ReadyToLaunchVIewController(), sender: nil)
             } else {
-                let drinkTypeChoiceViewController = DrinkTypeChoiceViewController()
-                drinkTypeChoiceViewController.myFavor = self.myFavor
-                drinkTypeChoiceViewController.filteredRecipe = self.filteredRecipe.filter {
-                    $0.alcohol == self.alcoholSelected
+                let lastRecipe = self.filteredRecipe.filter { $0.alcohol == self.alcoholSelected }
+                if lastRecipe.isEmpty {
+                    self.present(UserFavor.shared.makeAlert(title: "다른걸 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
+                } else {
+                    let drinkTypeChoiceViewController = DrinkTypeChoiceViewController()
+                    drinkTypeChoiceViewController.myFavor = self.myFavor
+                    drinkTypeChoiceViewController.filteredRecipe = lastRecipe
+                    self.show(drinkTypeChoiceViewController, sender: nil)
                 }
-                self.show(drinkTypeChoiceViewController, sender: nil)
             }
-
         }), for: .touchUpInside)
         
         highButton.addAction(UIAction(handler: {[weak self] _ in

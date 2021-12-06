@@ -65,6 +65,12 @@ class DrinkTypeChoiceViewController: UIViewController {
             $0.width.equalTo(220)
             $0.centerX.equalToSuperview()
         }
+        
+        [shortDrinkButton, longDrinkButton, shooterButton].forEach {
+            $0.snp.makeConstraints {
+                $0.width.equalTo(250)
+            }
+        }
     }
     
     func attribute() {
@@ -81,12 +87,6 @@ class DrinkTypeChoiceViewController: UIViewController {
             $0.layer.borderColor = UIColor.black.cgColor
             $0.layer.cornerRadius = 15
         }
-        
-        [shortDrinkButton, longDrinkButton, shooterButton].forEach {
-            $0.snp.makeConstraints {
-                $0.width.equalTo(250)
-            }
-        }
 
         questionLabel.textColor = .black
         shooterButton.setTitle("슈터", for: .normal)
@@ -98,9 +98,14 @@ class DrinkTypeChoiceViewController: UIViewController {
         
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
-            let choiceViewController = ChoiceViewController()
-            choiceViewController.filteredRecipe = self.filteredRecipe
-            self.show(choiceViewController, sender: nil)
+            let lastRecipe = self.filteredRecipe.filter {$0.drinkType == self.drinkTypeSelected}
+            if lastRecipe.isEmpty {
+                self.present(UserFavor.shared.makeAlert(title: "다른걸 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
+            } else {
+                let baseChoiceViewController = BaseChoiceViewController()
+                    baseChoiceViewController.filteredRecipe = lastRecipe
+                self.show(baseChoiceViewController, sender: nil)
+            }
         }), for: .touchUpInside)
         
         shooterButton.addAction(UIAction(handler: {[weak self] _ in
