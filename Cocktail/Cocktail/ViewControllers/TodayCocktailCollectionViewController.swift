@@ -23,7 +23,6 @@ class TodayCocktailCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "추천"
-
         collectionView.backgroundColor = .white
         collectionView.register(TodayCocktailCollectionViewCell.self, forCellWithReuseIdentifier: "TodayCocktailCollectionViewCell")
         collectionView.register(TodayCocktailCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TodayCocktailCollectionViewHeader")
@@ -34,9 +33,7 @@ class TodayCocktailCollectionViewController: UICollectionViewController {
         loadingView.modalPresentationStyle = .overCurrentContext
         loadingView.modalTransitionStyle = .crossDissolve
         loadingView.explainLabel.text = "로딩중"
-        self.present(loadingView, animated: true) {
-            loadingView.activityIndicator.startAnimating()
-        }
+        self.present(loadingView, animated: true)
         FirebaseRecipe.shared.getYoutubeContents { data in
             FirebaseRecipe.shared.youTubeData = data
             self.youtubeData = data
@@ -47,19 +44,11 @@ class TodayCocktailCollectionViewController: UICollectionViewController {
                     FirebaseRecipe.shared.getWishList { data in
                         FirebaseRecipe.shared.wishList = data
                         self.wishListData = data
+                        self.collectionView.reloadData()
                     }
                 }
                 loadingView.dismiss(animated: true) {
                     self.collectionView.reloadData()
-                    if UserDefaults.standard.value(forKey: "firstLogin") == nil {
-                        UserDefaults.standard.set(true, forKey: "firstLogin")
-                    }
-                    if UserDefaults.standard.bool(forKey: "firstLogin") {
-                        UserDefaults.standard.set(false, forKey: "firstLogin")
-                        let loginViewController = LoginViewController()
-                        loginViewController.modalPresentationStyle = .overFullScreen
-                        self.show(loginViewController, sender: nil)
-                    }
                 }
             }
         }
@@ -207,9 +196,9 @@ extension TodayCocktailCollectionViewController {
             cell.nameLabel.text = youtubeData[indexPath.row].videoName
             cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
             return cell
-        case 2:
+        case 2: 
             cell.nameLabel.text = wishListData[indexPath.row].name
-            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL ?? ""), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
+            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
             return cell
         default:
             return UICollectionViewCell()

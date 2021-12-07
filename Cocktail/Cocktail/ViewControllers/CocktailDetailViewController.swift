@@ -206,7 +206,7 @@ class CocktailDetailViewController: UIViewController {
         myTipLabel.text = data.mytip.localized
         recipeLabel.text = makeRecipeText(recipe: data.recipe)
         ingredientsLabel.text = makeIngredientsText(ingredients: data.ingredients)
-        cocktailImageView.kf.setImage(with: URL(string: data.imageURL ?? ""), placeholder: UIImage(systemName: "heart"))
+        cocktailImageView.kf.setImage(with: URL(string: data.imageURL), placeholder: UIImage(systemName: "heart"))
         
         var justRecipe = data
         justRecipe.wishList = true

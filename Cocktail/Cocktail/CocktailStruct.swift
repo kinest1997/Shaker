@@ -45,7 +45,7 @@ struct Cocktail: Codable, Hashable {
     let drinkType: DrinkType
     var myRecipe: Bool
     var wishList: Bool
-    var imageURL: String?
+    var imageURL: String
     
     enum Base: String, Codable, CaseIterable, CocktailCondition {
         case rum
@@ -123,7 +123,7 @@ struct Cocktail: Codable, Hashable {
         case highBall
         case shot
         case onTheRock
-        case cocktail
+        case saucer
         case martini
         case collins
         case margarita

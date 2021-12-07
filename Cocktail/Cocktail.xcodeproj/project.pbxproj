@@ -15,6 +15,8 @@
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3D21D4C22733E9C300FE2896 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* Extension.swift */; };
+		3D3452FB275F3A9E00DA3978 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3D3452FA275F3A9E00DA3978 /* Lottie */; };
+		3D3452FD275F3B4400DA3978 /* LoadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3D3452FC275F3B4400DA3978 /* LoadingAnimation.json */; };
 		3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */; };
 		3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4415CE27564CF400CBCC40 /* GoogleSignIn */; };
 		3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D027564EA600CBCC40 /* LoginViewController.swift */; };
@@ -115,6 +117,7 @@
 		3D175BA4274284DD00EC142B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3D175BA5274285BB00EC142B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3D21D4C12733E9C300FE2896 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		3D3452FC275F3B4400DA3978 /* LoadingAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoadingAnimation.json; sourceTree = "<group>"; };
 		3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D4415D027564EA600CBCC40 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +190,7 @@
 				3DB910E127574D720076CB50 /* FirebaseCrashlytics in Frameworks */,
 				3DB910DD27574D720076CB50 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				3D48C2092759A672001B40FC /* Kingfisher in Frameworks */,
+				3D3452FB275F3A9E00DA3978 /* Lottie in Frameworks */,
 				3DB910EF27574D720076CB50 /* FirebaseStorage in Frameworks */,
 				3DB910E327574D720076CB50 /* FirebaseDatabase in Frameworks */,
 				3DB910E527574D720076CB50 /* FirebaseDatabaseSwift-Beta in Frameworks */,
@@ -228,6 +232,7 @@
 				3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */,
 				3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */,
 				3DE56B32275DF93E0087D979 /* DrinkTypeChoiceViewController.swift */,
+				3DE56B34275E4F750087D979 /* BaseChoiceViewController.swift */,
 			);
 			path = FirstLaunch;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
 				3DA76A462730D574004091CE /* Cocktail.plist */,
 				3DF7934A275A70EA004E9F98 /* CocktailData.json */,
+				3D3452FC275F3B4400DA3978 /* LoadingAnimation.json */,
 				3D0D9B762744D714008C75E7 /* Ingredients.plist */,
 				3DB910FC27588CDE0076CB50 /* Info.plist */,
 				3DB9110527588D110076CB50 /* InfoPlist.strings */,
@@ -309,7 +315,6 @@
 				3DE56B2C275CDCA60087D979 /* TodayCocktailCollectionViewController.swift */,
 				3DE56B30275D08090087D979 /* TodayCocktailCollectionViewHeader.swift */,
 				3DE56B2E275CE5FA0087D979 /* TodayCocktailCollectionViewCell.swift */,
-				3DE56B34275E4F750087D979 /* BaseChoiceViewController.swift */,
 				3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */,
 				3D6C6D442732B86100C70276 /* CocktailListCell.swift */,
 				3D6C6D462732C04400C70276 /* CocktailDetailViewController.swift */,
@@ -376,6 +381,7 @@
 				3D48C2082759A672001B40FC /* Kingfisher */,
 				3D48C20D275A0595001B40FC /* NVActivityIndicatorView */,
 				3D48C20F275A0595001B40FC /* NVActivityIndicatorViewExtended */,
+				3D3452FA275F3A9E00DA3978 /* Lottie */,
 			);
 			productName = Cocktail;
 			productReference = 3DA76A2D2730D1CD004091CE /* Cocktail.app */;
@@ -415,6 +421,7 @@
 				3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+				3D3452F9275F3A9D00DA3978 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
 			projectDirPath = "";
@@ -442,6 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DA76A3D2730D1D0004091CE /* LaunchScreen.storyboard in Resources */,
+				3D3452FD275F3B4400DA3978 /* LoadingAnimation.json in Resources */,
 				3D175BA02742846B00EC142B /* Localizable.strings in Resources */,
 				3DA76A472730D574004091CE /* Cocktail.plist in Resources */,
 				3DF7934B275A70EA004E9F98 /* CocktailData.json in Resources */,
@@ -828,6 +836,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		3D3452F9275F3A9D00DA3978 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -871,6 +887,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3D3452FA275F3A9E00DA3978 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3D3452F9275F3A9D00DA3978 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		3D4415CE27564CF400CBCC40 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;

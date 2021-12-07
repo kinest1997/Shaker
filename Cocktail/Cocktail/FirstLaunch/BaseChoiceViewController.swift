@@ -142,7 +142,6 @@ class BaseChoiceViewController: UIViewController {
                 self.show(cocktailListTableView, sender: nil)
             }
         }), for: .touchUpInside)
-        
     }
     
     func buttonLabelCountUpdate(button: UIButton) {

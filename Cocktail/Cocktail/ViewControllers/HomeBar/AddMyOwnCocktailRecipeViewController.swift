@@ -161,9 +161,9 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             UIAction(title: "onTheRock".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("onTheRock".localized, for: .normal)
                 glass = .onTheRock }),
-            UIAction(title: "cocktail".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
-                self.glassChoiceButton.setTitle("cocktail".localized, for: .normal)
-                glass = .cocktail }),
+            UIAction(title: "saucer".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+                self.glassChoiceButton.setTitle("saucer".localized, for: .normal)
+                glass = .saucer }),
             UIAction(title: "martini".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("martini".localized, for: .normal)
                 glass = .martini }),
@@ -479,9 +479,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             loadingView.modalPresentationStyle = .overCurrentContext
             loadingView.modalTransitionStyle = .crossDissolve
             loadingView.explainLabel.text = "저장중"
-            self.present(loadingView, animated: true) {
-                loadingView.activityIndicator.startAnimating()
-            }
+            self.present(loadingView, animated: true)
             
             guard let convertedImage = image.pngData(),
                   let uid = Auth.auth().currentUser?.uid else { return }

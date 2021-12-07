@@ -169,8 +169,10 @@ extension SettingTableViewController {
     }
     
     func logIn() {
-        UserDefaults.standard.set(false, forKey: "firstLogin")
-        self.show(LoginViewController(), sender: nil)
+        UserDefaults.standard.set(true, forKey: "firstLogin")
+        let mainVC = self.tabBarController?.children[0]
+        self.tabBarController?.selectedViewController = mainVC
+        mainVC?.show(LoginViewController(), sender: nil)
     }
     
     func logOut() {

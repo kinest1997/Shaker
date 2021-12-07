@@ -11,6 +11,7 @@ import GoogleSignIn
 import UserNotifications
 import FirebaseMessaging
 import FirebaseAnalytics
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
         }
         application.registerForRemoteNotifications()
+        
+        if Auth.auth().currentUser?.uid == nil {
+            UserDefaults.standard.set(true, forKey: "firstLogin")
+        } else {
+            UserDefaults.standard.set(false, forKey: "firstLogin")
+        }
+        
         return true
     }
     

@@ -58,7 +58,7 @@ class FirebaseRecipe {
     let uid = Auth.auth().currentUser?.uid
     
     func getRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
-        ref.child("CocktailList").observeSingleEvent(of: .value) { snapshot in
+        ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
                   let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
@@ -115,7 +115,7 @@ class FirebaseRecipe {
         let cocktailList = getJSONRecipe()
         guard let data = try? JSONEncoder().encode(cocktailList) else { return }
         let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
-        Database.database().reference().child("CocktailList").setValue(jsonData)
+        Database.database().reference().child("CocktailRecipes").setValue(jsonData)
     }
     
     func getJSONRecipe() -> [Cocktail] {

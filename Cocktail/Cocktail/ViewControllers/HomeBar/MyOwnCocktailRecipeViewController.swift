@@ -91,7 +91,7 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
             
             //나의 레시피가 가진 주소값을 이용하여 Storage 의 데이터를 삭제하는 코드
             let storage = Storage.storage()
-            guard let url = myOwnRecipe[indexPath.row].imageURL else { return }
+            let url = myOwnRecipe[indexPath.row].imageURL
             let storageRef = storage.reference(forURL: url)
             
             storageRef.delete { error in
