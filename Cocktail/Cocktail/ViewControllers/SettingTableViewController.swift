@@ -106,7 +106,7 @@ extension SettingTableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
         
         var content = cell.defaultContentConfiguration()
-        content.text = Settings(rawValue: indexPath.section)?.sectionTitle
+        content.text = Settings(rawValue: indexPath.section)?.rowTitles[indexPath.row]
         cell.contentConfiguration = content
         
         switch indexPath.section {
