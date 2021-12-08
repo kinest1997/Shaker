@@ -43,7 +43,7 @@ class MainViewController: UITabBarController {
         }
     }
     
-    let todayCocktailViewController = TodayCocktailViewController()
+    let todayCocktailCollectionViewController = TodayCocktailCollectionViewController()
     let cocktailRecipeViewController = CocktailRecipeViewController()
     let assistantViewController = AssistantViewController()
     let settingsViewController = SettingTableViewController(style: .insetGrouped)
@@ -57,35 +57,18 @@ class MainViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let loadingView = LoadingView()
-        loadingView.modalPresentationStyle = .overCurrentContext
-        loadingView.modalTransitionStyle = .crossDissolve
-        loadingView.explainLabel.text = "로딩중"
-        self.present(loadingView, animated: true) {
-            loadingView.activityIndicator.startAnimating()
-        }
         tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default
-        todayCocktailViewController.tabBarItem = tabBarItems[.today]
+        todayCocktailCollectionViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
         assistantViewController.tabBarItem = tabBarItems[.home]
         settingsViewController.tabBarItem = tabBarItems[.preference]
         self.viewControllers = [
-            UINavigationController(rootViewController: todayCocktailViewController),
+            UINavigationController(rootViewController: todayCocktailCollectionViewController),
             UINavigationController(rootViewController: cocktailRecipeViewController),
             UINavigationController(rootViewController: assistantViewController),
             UINavigationController(rootViewController: settingsViewController)
         ]
-        FirebaseRecipe.shared.getRecipe { data in
-            FirebaseRecipe.shared.recipe = data
-            FirebaseRecipe.shared.getMyRecipe { data in
-                FirebaseRecipe.shared.myRecipe = data
-                FirebaseRecipe.shared.getWishList { data in
-                    FirebaseRecipe.shared.wishList = data
-                }
-            }
-            loadingView.dismiss(animated: true, completion: nil)
-        }
     }
 }

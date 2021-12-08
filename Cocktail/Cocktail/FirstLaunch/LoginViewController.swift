@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
         justUseButton.addAction(UIAction(handler: {[weak self] _ in
             FirebaseRecipe.shared.getRecipe { data in
                 FirebaseRecipe.shared.recipe = data
-                UserDefaults.standard.set(false, forKey: "firstLogin")
+                UserDefaults.standard.set(false, forKey: "firstLaunch")
                 self?.tabBarController?.tabBar.isHidden = false
                 self?.navigationController?.popToRootViewController(animated: true)
             }
@@ -57,6 +57,11 @@ class LoginViewController: UIViewController {
         view.backgroundColor = .darkGray
         appleLoginButton.backgroundColor = .blue
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -92,7 +97,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print ("Error Apple sign in: %@", error)
                     return
                 }
-                //선택 화면으로 쭉 넘어가기
+                UserDefaults.standard.set(false, forKey: "firstLaunch")
                 self.show(ColorChoiceViewController(), sender: nil)
             }
         }

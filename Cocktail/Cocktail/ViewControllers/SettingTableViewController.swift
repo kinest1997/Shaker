@@ -169,11 +169,13 @@ extension SettingTableViewController {
     }
     
     func logIn() {
-        UserDefaults.standard.set(false, forKey: "firstLogin")
-        self.show(LoginViewController(), sender: nil)
+        let mainVC = self.tabBarController?.children[0]
+        self.tabBarController?.selectedViewController = mainVC
+        mainVC?.show(LoginViewController(), sender: nil)
     }
     
     func logOut() {
+        UserDefaults.standard.set(true, forKey: "firstLaunch")
         let alert = UIAlertController(title: "Do you want to log out?".localized, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: {[weak self] _ in
             let firebaseAuth = Auth.auth()

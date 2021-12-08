@@ -11,6 +11,7 @@ import GoogleSignIn
 import UserNotifications
 import FirebaseMessaging
 import FirebaseAnalytics
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,10 +24,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UNUserNotificationCenter.current().delegate = self
         
+        FirebaseRecipe.shared.getRecipe { data in
+            FirebaseRecipe.shared.recipe = data
+        }
+        
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
         }
         application.registerForRemoteNotifications()
+        
+        if Auth.auth().currentUser?.uid == nil {
+            UserDefaults.standard.set(true, forKey: "firstLaunch")
+        } else {
+            UserDefaults.standard.set(false, forKey: "firstLaunch")
+        }
+        
         return true
     }
     
