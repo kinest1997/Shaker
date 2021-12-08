@@ -39,7 +39,7 @@ class SettingTableViewController: UITableViewController {
             case .serviceInformation:
                 return ["공지사항", "버전정보 \(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"]))", "오픈소스라이브러리", "이용약관", "개인정보 처리방침"]
             case .alarm:
-                return ["Alarm Setting"]
+                return ["Alarm Setting".localized]
             case .support:
                 return ["Review Shaker in the App Store".localized, "Join the Shaker TestFlight".localized]
             case .developerInfo:
@@ -52,7 +52,7 @@ class SettingTableViewController: UITableViewController {
         var actions: [Void] {
             switch self {
             case .serviceInformation:
-                return [print()]
+                return []
             case .alarm:
                 return []
             case .support:
@@ -68,7 +68,6 @@ class SettingTableViewController: UITableViewController {
                 ]
             case .account:
                 return Auth.auth().currentUser == nil ? [logIn()] : [logOut()]
-                
             }
         }
     }
@@ -108,9 +107,10 @@ extension SettingTableViewController {
         var content = cell.defaultContentConfiguration()
         content.text = Settings(rawValue: indexPath.section)?.rowTitles[indexPath.row]
         cell.contentConfiguration = content
-        
+        cell.accessoryView?.isHidden = true
         switch indexPath.section {
         case 1:
+            cell.accessoryView?.isHidden = false
             let accessorySwitch = UISwitch()
             UNUserNotificationCenter.current().getNotificationSettings { data in
                 if data.notificationCenterSetting == .enabled {
@@ -169,6 +169,7 @@ extension SettingTableViewController {
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
+                UIApplication.topMostViewController(self.rootViewController)?.present(alert, animated: true)
             } catch let error {
                 print(error)
             }
@@ -176,6 +177,5 @@ extension SettingTableViewController {
             FirebaseRecipe.shared.wishList = []
         })
         alert.addAction(UIAlertAction(title: "No".localized, style: .cancel, handler: nil))
-        UIApplication.topMostViewController(self.rootViewController)?.present(alert, animated: true)
     }
 }
