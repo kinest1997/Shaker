@@ -947,7 +947,7 @@
   "ingredients" : [ "bourbonWhiskey", "peachTree", "amaretto", "limeSqueeze" ],
   "myRecipe" : false,
 "imageURL" : "",
-  "mytip" : "다크플라워랑 비슷한거같은데 좀더 낫달까? 알다가도 모르겠는 맛.",
+  "mytip" : "다크플라워랑 비슷한거같은데 좀더 낫달까? 알다가도 모르겠는 맛. 와일드 터키 위스키로 하면 더좋아요",
   "name" : "와일드플라워",
   "recipe" : ["버번위스키 1oz, 피치트리 0.5oz, 아마레또 0.5oz, 라임즙 0.5oz, 레몬껍질 가니쉬"],
   "wishList" : false
@@ -1031,7 +1031,7 @@
   "ingredients" : [ "melonLiqueur", "triplesec", "lemonSqueeze" ],
   "myRecipe" : false,
 "imageURL" : "",
-  "mytip" : "일본의 미도리 술을 이용해서 이름이 이런거같은데..맛은잘...달고 시고 그래요.",
+  "mytip" : "일본의 미도리 술을 이용해서 이름이 이런거같은데. 먹어보신분 저한테 후기좀..",
   "name" : "재패니즈슬리퍼",
   "recipe" : ["미도리 1oz, 트리플섹 1oz, 레몬즙 1oz"],
   "wishList" : false
@@ -1195,7 +1195,7 @@
   "color" : "red",
   "craft" : "shaking",
   "drinkType" : "shortDrink",
-  "glass" : "saucer",
+  "glass" : "martini",
   "ingredients" : [ "vodka", "cranBerryJuice", "triplesec", "limeSyrup" ],
   "myRecipe" : false,
 "imageURL" : "",
@@ -1229,7 +1229,7 @@
 "imageURL" : "",
   "mytip" : "엄청달고 달고 단 원샷 칵테일. 메론맛이 독특하게 나요. 전안먹을래요.",
   "name" : "퀵퍽",
-  "recipe" : ["깔루아, 미도리, 베일리스, 순서대로 취향껏 층을내어 따라준다"],
+  "recipe" : ["깔루아, 베일리스, 미도리 순서대로 취향껏 층을내어 따라준다"],
   "wishList" : false
 }, {
   "alcohol" : "mid",
