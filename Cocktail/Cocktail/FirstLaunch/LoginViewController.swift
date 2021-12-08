@@ -24,6 +24,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        FirebaseRecipe.shared.getRecipe { data in
+            FirebaseRecipe.shared.recipe = data
+        }
+        
         requestAuthNoti()
         
         view.addSubview(appleLoginButton)
@@ -37,7 +41,7 @@ class LoginViewController: UIViewController {
         justUseButton.addAction(UIAction(handler: {[weak self] _ in
             FirebaseRecipe.shared.getRecipe { data in
                 FirebaseRecipe.shared.recipe = data
-                UserDefaults.standard.set(false, forKey: "firstLogin")
+                UserDefaults.standard.set(false, forKey: "firstLaunch")
                 self?.tabBarController?.tabBar.isHidden = false
                 self?.navigationController?.popToRootViewController(animated: true)
             }
@@ -97,7 +101,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     print ("Error Apple sign in: %@", error)
                     return
                 }
-
+                UserDefaults.standard.set(false, forKey: "firstLaunch")
                 self.show(ColorChoiceViewController(), sender: nil)
             }
         }

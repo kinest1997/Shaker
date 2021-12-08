@@ -14,28 +14,34 @@ class ReadyToLaunchVIewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let loadingView = LoadingView()
-        loadingView.modalPresentationStyle = .overCurrentContext
-        loadingView.modalTransitionStyle = .crossDissolve
-        loadingView.explainLabel.text = "로딩중"
-        self.present(loadingView, animated: true)
-        FirebaseRecipe.shared.getRecipe { data in
-            FirebaseRecipe.shared.recipe = data
-            FirebaseRecipe.shared.getMyRecipe { data in
-                FirebaseRecipe.shared.myRecipe = data
-                FirebaseRecipe.shared.getWishList { data in
-                    FirebaseRecipe.shared.wishList = data
-                }
-            }
-            loadingView.dismiss(animated: true)
-        }
+//        let loadingView = LoadingView()
+//        loadingView.modalPresentationStyle = .overCurrentContext
+//        loadingView.modalTransitionStyle = .crossDissolve
+//        loadingView.explainLabel.text = "로딩중"
+//        self.present(loadingView, animated: true)
+//        FirebaseRecipe.shared.getRecipe { data in
+//            FirebaseRecipe.shared.recipe = data
+//            FirebaseRecipe.shared.getMyRecipe { data in
+//                FirebaseRecipe.shared.myRecipe = data
+//                FirebaseRecipe.shared.getWishList { data in
+//                    FirebaseRecipe.shared.wishList = data
+//                }
+//            }
+//            loadingView.dismiss(animated: true)
+//        }
     }
     
     func attribute() {
         self.view.backgroundColor = .white
         nextButton.addAction(UIAction(handler: {[weak self] _ in
-            self?.tabBarController?.tabBar.isHidden = false
-            self?.navigationController?.popToRootViewController(animated: true)
+            let scenes = UIApplication.shared.connectedScenes
+            let windowScene = scenes.first as? UIWindowScene
+            let window = windowScene?.windows.first
+            
+            window?.rootViewController = MainViewController()
+            
+//            self?.tabBarController?.tabBar.isHidden = false
+//            self?.navigationController?.popToRootViewController(animated: true)
         }), for: .touchUpInside)
         nextButton.setTitle("시작하기", for: .normal)
         nextButton.backgroundColor = .brown

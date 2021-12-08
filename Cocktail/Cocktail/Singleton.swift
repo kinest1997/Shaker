@@ -61,7 +61,9 @@ class FirebaseRecipe {
         ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
+                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                      completion([Cocktail]())
+                      return }
             completion(cocktailList)
         }
     }
@@ -71,7 +73,9 @@ class FirebaseRecipe {
         ref.child("users").child(uid).child("MyRecipes").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
+                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                      completion([Cocktail]())
+                      return }
             let myRecipes = cocktailList.filter { $0.myRecipe == true }
             completion(myRecipes)
         }
@@ -82,7 +86,9 @@ class FirebaseRecipe {
         ref.child("users").child(uid).child("WishList").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
+                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                      completion([Cocktail]())
+                      return }
             let myRecipes = cocktailList.filter { $0.wishList == true }
             completion(myRecipes)
         }
@@ -92,7 +98,9 @@ class FirebaseRecipe {
         ref.child("Youtube").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let youTubeVideoList = try? JSONDecoder().decode([YouTubeVideo].self, from: data) else { return }
+                  let youTubeVideoList = try? JSONDecoder().decode([YouTubeVideo].self, from: data) else {
+                      completion([YouTubeVideo]())
+                      return }
             completion(youTubeVideoList)
         }
     }

@@ -43,7 +43,7 @@ class MainViewController: UITabBarController {
         }
     }
     
-    let todayCocktailCollectionViewController = TodayCocktailCollectionViewController(collectionViewLayout: UICollectionViewLayout())
+    let todayCocktailCollectionViewController = TodayCocktailCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
     let cocktailRecipeViewController = CocktailRecipeViewController()
     let assistantViewController = AssistantViewController()
     let settingsViewController = SettingTableViewController(style: .insetGrouped)

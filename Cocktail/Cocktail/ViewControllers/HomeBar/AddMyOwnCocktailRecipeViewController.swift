@@ -74,7 +74,9 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             UIAction(title: "black".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("black".localized, for: .normal)
                 color = .black }),
             UIAction(title: "brown".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("brown".localized, for: .normal)
-                color = .brown })
+                color = .brown }),
+            UIAction(title: "various".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("various".localized, for: .normal)
+                color = .various })
         ]
     }
     
@@ -221,6 +223,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         addRecipeTableView.delegate = self
         addRecipeTableView.dataSource = self
         
+        addRecipeTableView.estimatedRowHeight = 50
+//        addRecipeTableView.tableHeaderView = groupStackView
         alcoholChoiceButton.backgroundColor = .red
         attribute()
         layout()
@@ -271,6 +275,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     func attribute() {
+        //사진이미지 비율
+        cocktailImageView.contentMode = .scaleAspectFill
         alcoholChoiceButton.menu = alcoholSelectMenu
         alcoholChoiceButton.showsMenuAsPrimaryAction = true
         colorChoiceButton.menu = colorSelectMenu
@@ -288,7 +294,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         addButton.backgroundColor = .brown
         addButton.setTitle("추가", for: .normal)
         addButton.setTitleColor(.cyan, for: .normal)
-        
         
         self.view.backgroundColor = .white
         groupStackView.axis = .vertical
@@ -558,6 +563,10 @@ extension AddMyOwnCocktailRecipeViewController: PHPickerViewControllerDelegate {
 
 extension AddMyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return textFieldArray.count
     }
@@ -569,10 +578,6 @@ extension AddMyOwnCocktailRecipeViewController: UITableViewDelegate, UITableView
         cell.explainTextField = textFieldArray[indexPath.row]
         cell.explainTextField.delegate = self
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
     }
 }
 

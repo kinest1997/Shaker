@@ -24,15 +24,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UNUserNotificationCenter.current().delegate = self
         
+        FirebaseRecipe.shared.getRecipe { data in
+            FirebaseRecipe.shared.recipe = data
+        }
+        
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
         }
         application.registerForRemoteNotifications()
         
         if Auth.auth().currentUser?.uid == nil {
-            UserDefaults.standard.set(true, forKey: "firstLogin")
+            UserDefaults.standard.set(true, forKey: "firstLaunch")
         } else {
-            UserDefaults.standard.set(false, forKey: "firstLogin")
+            UserDefaults.standard.set(false, forKey: "firstLaunch")
         }
         
         return true

@@ -33,6 +33,7 @@
 "white" = "하양색";
 "black" = "검정색";
 "brown" = "갈색";
+"various" = "복합";
 
 "build" = "빌드";
 "shaking" = "쉐이킹";

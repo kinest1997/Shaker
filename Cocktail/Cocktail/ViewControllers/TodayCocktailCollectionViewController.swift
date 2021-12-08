@@ -12,11 +12,43 @@ import SwiftUI
 
 class TodayCocktailCollectionViewController: UICollectionViewController {
     
-    var youtubeData = [YouTubeVideo]()
+    let loadingView = LoadingView()
     
-    var wishListData: [Cocktail] = []
+    var youtubeData : [YouTubeVideo] = [] {
+        didSet {
+            youtubeData = oldValue
+            dataReciped.append(true)
+            if dataReciped.count == 3 {
+                loadingView.dismiss(animated: true, completion: nil)
+                collectionView.reloadData()
+            }
+        }
+    }
     
-    var todayRecommendation: [Cocktail] = []
+    var myRecipe: [Cocktail] = [] {
+        didSet {
+            myRecipe = oldValue
+            dataReciped.append(true)
+            if dataReciped.count == 3 {
+                loadingView.dismiss(animated: true, completion: nil)
+                collectionView.reloadData()
+            }
+
+        }
+    }
+    
+    var wishListData: [Cocktail] = [] {
+        didSet {
+            wishListData = oldValue
+            dataReciped.append(true)
+            if dataReciped.count == 3 {
+                loadingView.dismiss(animated: true, completion: nil)
+                collectionView.reloadData()
+            }
+        }
+    }
+    
+    var dataReciped: [Bool] = []
     
     let sectionName = ["주문 도와드릴까요?", "초보자 추천 가이드북",  "내 즐겨찾기"]
     
@@ -27,30 +59,28 @@ class TodayCocktailCollectionViewController: UICollectionViewController {
         collectionView.register(TodayCocktailCollectionViewCell.self, forCellWithReuseIdentifier: "TodayCocktailCollectionViewCell")
         collectionView.register(TodayCocktailCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TodayCocktailCollectionViewHeader")
         collectionView.collectionViewLayout = collectionViewLayout()
-        todayRecommendation = Array(FirebaseRecipe.shared.recipe.shuffled().prefix(10))
+//        todayRecommendation = Array(FirebaseRecipe.shared.recipe.shuffled().prefix(10))
         
-        let loadingView = LoadingView()
+        collectionView.delegate = self
+        
         loadingView.modalPresentationStyle = .overCurrentContext
         loadingView.modalTransitionStyle = .crossDissolve
         loadingView.explainLabel.text = "로딩중"
         self.present(loadingView, animated: true)
+        
         FirebaseRecipe.shared.getYoutubeContents { data in
             FirebaseRecipe.shared.youTubeData = data
             self.youtubeData = data
-            FirebaseRecipe.shared.getRecipe { data in
-                FirebaseRecipe.shared.recipe = data
-                FirebaseRecipe.shared.getMyRecipe { data in
-                    FirebaseRecipe.shared.myRecipe = data
-                    FirebaseRecipe.shared.getWishList { data in
-                        FirebaseRecipe.shared.wishList = data
-                        self.wishListData = data
-                        self.collectionView.reloadData()
-                    }
-                }
-                loadingView.dismiss(animated: true) {
-                    self.collectionView.reloadData()
-                }
-            }
+        }
+        
+        FirebaseRecipe.shared.getMyRecipe { data in
+            FirebaseRecipe.shared.myRecipe = data
+            self.myRecipe = data
+        }
+        
+        FirebaseRecipe.shared.getWishList { data in
+            FirebaseRecipe.shared.wishList = data
+            self.wishListData = data
         }
     }
     
@@ -196,7 +226,7 @@ extension TodayCocktailCollectionViewController {
             cell.nameLabel.text = youtubeData[indexPath.row].videoName
             cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
             return cell
-        case 2: 
+        case 2:
             cell.nameLabel.text = wishListData[indexPath.row].name
             cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
             return cell
