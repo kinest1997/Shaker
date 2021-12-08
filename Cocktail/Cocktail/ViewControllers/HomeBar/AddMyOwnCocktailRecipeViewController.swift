@@ -7,6 +7,8 @@ import FirebaseDatabase
 
 class AddMyOwnCocktailRecipeViewController: UIViewController {
     
+    let loadingView = LoadingView()
+    
     var alcohol: Cocktail.Alcohol?
     var color: Cocktail.Color?
     var baseDrink: Cocktail.Base?
@@ -224,7 +226,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         addRecipeTableView.dataSource = self
         
         addRecipeTableView.estimatedRowHeight = 50
-//        addRecipeTableView.tableHeaderView = groupStackView
+        //        addRecipeTableView.tableHeaderView = groupStackView
         alcoholChoiceButton.backgroundColor = .red
         attribute()
         layout()
@@ -312,12 +314,15 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         ingredientsLabel.text = "Ingredients".localized
         nameTextField.placeholder = "Your own name".localized
         myTipTextField.placeholder = "Your own tip".localized
+        
+        loadingView.isHidden = true
     }
     
     func layout() {
         view.addSubview(mainScrollView)
         view.addSubview(choiceView)
         mainScrollView.addSubview(mainView)
+        view.addSubview(loadingView)
         
         [groupStackView, cocktailImageView, addRecipeTableView, addButton].forEach {
             mainView.addSubview($0)
@@ -419,21 +424,25 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(80)
         }
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
-     private func registerNotifications() {
-     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-     NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-     }
-     
-     @objc private func keyboardWillShow(notification: NSNotification){
-     guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-     mainScrollView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
-     }
-     
-     @objc private func keyboardWillHide(notification: NSNotification){
-     mainScrollView.contentInset.bottom = 0
-     }
+    private func registerNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification){
+        guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        mainScrollView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification){
+        mainScrollView.contentInset.bottom = 0
+    }
     
     func editing(data: Cocktail) {
         nameTextField.text = data.name
@@ -479,12 +488,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
                     FirebaseRecipe.shared.myRecipe.remove(at: number)
                 }
             }
-            
-            let loadingView = LoadingView()
-            loadingView.modalPresentationStyle = .overCurrentContext
-            loadingView.modalTransitionStyle = .crossDissolve
             loadingView.explainLabel.text = "저장중"
-            self.present(loadingView, animated: true)
+            loadingView.isHidden = false
             
             guard let convertedImage = image.pngData(),
                   let uid = Auth.auth().currentUser?.uid else { return }
@@ -506,7 +511,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
                     let cocktailDetailViewController = CocktailDetailViewController()
                     cocktailDetailViewController.setData(data: myRecipe)
                     
-                    loadingView.dismiss(animated: true, completion: nil)
+                    self.loadingView.isHidden = true
                     self.navigationController?.popToRootViewController(animated: true)
                     self.show(cocktailDetailViewController, sender: nil)
                 }

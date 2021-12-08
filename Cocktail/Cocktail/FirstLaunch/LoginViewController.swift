@@ -24,10 +24,6 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FirebaseRecipe.shared.getRecipe { data in
-            FirebaseRecipe.shared.recipe = data
-        }
-        
         requestAuthNoti()
         
         view.addSubview(appleLoginButton)

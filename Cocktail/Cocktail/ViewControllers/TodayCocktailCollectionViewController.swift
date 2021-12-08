@@ -10,40 +10,47 @@ import SnapKit
 import Kingfisher
 import SwiftUI
 
-class TodayCocktailCollectionViewController: UICollectionViewController {
+class TodayCocktailCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     let loadingView = LoadingView()
     
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
     var youtubeData : [YouTubeVideo] = [] {
         didSet {
-            youtubeData = oldValue
             dataReciped.append(true)
             if dataReciped.count == 3 {
-                loadingView.dismiss(animated: true, completion: nil)
-                collectionView.reloadData()
+
+                DispatchQueue.main.async { 
+                    self.collectionView.reloadData()
+                    self.loadingView.isHidden = true
+                }
             }
         }
     }
     
     var myRecipe: [Cocktail] = [] {
         didSet {
-            myRecipe = oldValue
             dataReciped.append(true)
             if dataReciped.count == 3 {
-                loadingView.dismiss(animated: true, completion: nil)
-                collectionView.reloadData()
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.loadingView.isHidden = true
+                }
             }
-
         }
     }
     
     var wishListData: [Cocktail] = [] {
         didSet {
-            wishListData = oldValue
             dataReciped.append(true)
             if dataReciped.count == 3 {
-                loadingView.dismiss(animated: true, completion: nil)
-                collectionView.reloadData()
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                    self.loadingView.isHidden = true
+                }
             }
         }
     }
@@ -55,32 +62,39 @@ class TodayCocktailCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "추천"
+        view.addSubview(collectionView)
+        view.addSubview(loadingView)
+        
         collectionView.backgroundColor = .white
         collectionView.register(TodayCocktailCollectionViewCell.self, forCellWithReuseIdentifier: "TodayCocktailCollectionViewCell")
         collectionView.register(TodayCocktailCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TodayCocktailCollectionViewHeader")
         collectionView.collectionViewLayout = collectionViewLayout()
-//        todayRecommendation = Array(FirebaseRecipe.shared.recipe.shuffled().prefix(10))
         
         collectionView.delegate = self
+        collectionView.dataSource = self
         
-        loadingView.modalPresentationStyle = .overCurrentContext
-        loadingView.modalTransitionStyle = .crossDissolve
         loadingView.explainLabel.text = "로딩중"
-        self.present(loadingView, animated: true)
         
-        FirebaseRecipe.shared.getYoutubeContents { data in
+        FirebaseRecipe.shared.getYoutubeContents {[weak self] data in
             FirebaseRecipe.shared.youTubeData = data
-            self.youtubeData = data
+            self?.youtubeData = data
         }
         
-        FirebaseRecipe.shared.getMyRecipe { data in
+        FirebaseRecipe.shared.getMyRecipe {[weak self] data in
             FirebaseRecipe.shared.myRecipe = data
-            self.myRecipe = data
+            self?.myRecipe = data
         }
         
-        FirebaseRecipe.shared.getWishList { data in
+        FirebaseRecipe.shared.getWishList {[weak self] data in
             FirebaseRecipe.shared.wishList = data
-            self.wishListData = data
+            self?.wishListData = data
+        }
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        collectionView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     
@@ -88,8 +102,6 @@ class TodayCocktailCollectionViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
-        wishListData = FirebaseRecipe.shared.wishList
-        collectionView.reloadData()
     }
 }
 
@@ -178,7 +190,7 @@ extension TodayCocktailCollectionViewController {
     }
     
     //섹션 헤더설정
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
             if indexPath.section == 0 {
@@ -194,12 +206,12 @@ extension TodayCocktailCollectionViewController {
     }
     
     //섹션의 갯수
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
     
     //섹션당 보여줄 셀의 개수
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
             return 1
@@ -213,7 +225,7 @@ extension TodayCocktailCollectionViewController {
     }
     
     //셀 설정
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCocktailCollectionViewCell", for: indexPath) as? TodayCocktailCollectionViewCell else { return UICollectionViewCell() }
         cell.nameLabel.isHidden = false
@@ -235,7 +247,7 @@ extension TodayCocktailCollectionViewController {
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             let colorChoiceViewController = ColorChoiceViewController()

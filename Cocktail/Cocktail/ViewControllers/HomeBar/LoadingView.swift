@@ -2,25 +2,25 @@ import UIKit
 import SnapKit
 import Lottie
 
-class LoadingView: UIViewController {
+class LoadingView: UIView {
     
     let explainLabel = UILabel()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.addSubview(explainLabel)
         let animationView = AnimationView(name: "LoadingAnimation")
         animationView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
-        animationView.center = self.view.center
+        animationView.center = self.center
         animationView.contentMode = .scaleAspectFill
         
-        view.addSubview(animationView)
+        self.addSubview(animationView)
         
         animationView.play(fromFrame: 0, toFrame: 120, loopMode: .loop , completion: nil)
         
-        view.backgroundColor = .gray.withAlphaComponent(0.5)
+        self.backgroundColor = .gray.withAlphaComponent(0.5)
         
-        view.addSubview(explainLabel)
+        self.addSubview(explainLabel)
         explainLabel.textColor = .black
         explainLabel.textAlignment = .center
         
@@ -34,5 +34,6 @@ class LoadingView: UIViewController {
             $0.centerX.equalToSuperview()
             $0.height.equalTo(50)
         }
+    
     }
 }
