@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 class AssistantViewController: UIViewController {
     
@@ -16,8 +17,12 @@ class AssistantViewController: UIViewController {
     
     func attribute() {
         myRecipeButton.addAction(UIAction(handler: {[weak self] _ in
-            let myOwnCocktailRecipeViewController = MyOwnCocktailRecipeViewController()
-            self?.show(myOwnCocktailRecipeViewController, sender: nil)
+            if Auth.auth().currentUser?.uid == nil {
+                self?.pleaseLoginAlert()
+            } else {
+                let myOwnCocktailRecipeViewController = MyOwnCocktailRecipeViewController()
+                self?.show(myOwnCocktailRecipeViewController, sender: nil)
+            }
         }), for: .touchUpInside)
         
         myBarButton.addAction(UIAction(handler: {[weak self] _ in
@@ -25,8 +30,13 @@ class AssistantViewController: UIViewController {
             self?.show(homeBarViewController, sender: nil)
         }), for: .touchUpInside)
         wishListButton.addAction(UIAction(handler: {[weak self] _ in
-            let wishListCocktailListTableView = WishListCocktailListTableView()
-            self?.show(wishListCocktailListTableView, sender: nil)
+            if Auth.auth().currentUser?.uid == nil {
+                self?.pleaseLoginAlert()
+            } else {
+                let wishListCocktailListTableView = WishListCocktailListTableView()
+                self?.show(wishListCocktailListTableView, sender: nil)
+            }
+            
         }), for: .touchUpInside)
         
         myRecipeButton.backgroundColor = .blue
@@ -48,5 +58,11 @@ class AssistantViewController: UIViewController {
             $0.center.equalToSuperview()
             $0.width.height.equalTo(300)
         }
+    }
+    
+    func pleaseLoginAlert() {
+        let alert = UIAlertController(title: "로그인시에 사용가능합니다".localized, message: "로그인은 설정에서 할수있습니다.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인".localized, style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }

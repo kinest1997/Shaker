@@ -10,6 +10,21 @@ protocol CocktailCondition {
     var rawValue: String { get }
 }
 
+struct YouTubeVideo: Codable {
+    let videoName: String
+    let videoCode: String
+    let owner: YouTubeOwner
+}
+
+enum YouTubeOwner: String, Codable {
+    case homeTendingDictionary
+    case drinkLover
+    case drinkLecture
+    case linibini
+    case mansHobby
+    case yancon
+}
+
 enum SortingStandard {
     case alcohol
     case name
@@ -21,7 +36,7 @@ struct Cocktail: Codable, Hashable {
     let name: String
     let craft: Craft
     var glass: Glass
-    let recipe: String
+    let recipe: [String]
     var ingredients: [Ingredients]
     let base: Base
     let alcohol: Alcohol
@@ -30,7 +45,7 @@ struct Cocktail: Codable, Hashable {
     let drinkType: DrinkType
     var myRecipe: Bool
     var wishList: Bool
-    var imageURL: String?
+    var imageURL: String
     
     enum Base: String, Codable, CaseIterable, CocktailCondition {
         case rum
@@ -58,7 +73,7 @@ struct Cocktail: Codable, Hashable {
             case .whiskey:
                 return [Cocktail.Ingredients.whiskey, Cocktail.Ingredients.ryeWhiskey, Cocktail.Ingredients.scotchWhiskey, Cocktail.Ingredients.bourbonWhiskey, Cocktail.Ingredients.jackDanielWhiskey]
             case .liqueur:
-                return [Cocktail.Ingredients.baileys, Cocktail.Ingredients.melonLiqueur, Cocktail.Ingredients.whiteCacaoLiqueur, Cocktail.Ingredients.sweetVermouth, Cocktail.Ingredients.dryVermouth, Cocktail.Ingredients.peachTree, Cocktail.Ingredients.grapeFruitLiqueur, Cocktail.Ingredients.cacaoLiqueur, Cocktail.Ingredients.cremeDeCassis, Cocktail.Ingredients.greenMintLiqueur, Cocktail.Ingredients.campari, Cocktail.Ingredients.kahlua, Cocktail.Ingredients.blueCuraso, Cocktail.Ingredients.malibu, Cocktail.Ingredients.bananaliqueur, Cocktail.Ingredients.amaretto, Cocktail.Ingredients.triplesec, Cocktail.Ingredients.butterScotchLiqueur, Cocktail.Ingredients.angosturaBitters]
+                return [Cocktail.Ingredients.baileys, Cocktail.Ingredients.melonLiqueur, Cocktail.Ingredients.whiteCacaoLiqueur, Cocktail.Ingredients.sweetVermouth, Cocktail.Ingredients.dryVermouth, Cocktail.Ingredients.peachTree, Cocktail.Ingredients.grapeFruitLiqueur, Cocktail.Ingredients.cacaoLiqueur, Cocktail.Ingredients.cremeDeCassis, Cocktail.Ingredients.greenMintLiqueur, Cocktail.Ingredients.campari, Cocktail.Ingredients.kahlua, Cocktail.Ingredients.blueCuraso, Cocktail.Ingredients.malibu, Cocktail.Ingredients.bananaliqueur, Cocktail.Ingredients.amaretto, Cocktail.Ingredients.triplesec, Cocktail.Ingredients.butterScotchLiqueur, Cocktail.Ingredients.angosturaBitters, Cocktail.Ingredients.aperol]
             case .beverage:
                 return [Cocktail.Ingredients.coke, Cocktail.Ingredients.tonicWater, Cocktail.Ingredients.milk, Cocktail.Ingredients.orangeJuice, Cocktail.Ingredients.cranBerryJuice, Cocktail.Ingredients.clubSoda, Cocktail.Ingredients.grapeFruitJuice, Cocktail.Ingredients.pineappleJuice, Cocktail.Ingredients.gingerAle, Cocktail.Ingredients.sweetAndSourMix, Cocktail.Ingredients.appleJuice, Cocktail.Ingredients.cider, Cocktail.Ingredients.lemonJuice]
             case .assets:
@@ -83,6 +98,7 @@ struct Cocktail: Codable, Hashable {
         case brown
         case black
         case clear
+        case various
     }
     
     enum Alcohol: String, Codable, CaseIterable, CocktailCondition {
@@ -108,7 +124,7 @@ struct Cocktail: Codable, Hashable {
         case highBall
         case shot
         case onTheRock
-        case cocktail
+        case saucer
         case martini
         case collins
         case margarita
@@ -157,6 +173,7 @@ struct Cocktail: Codable, Hashable {
         case triplesec
         case butterScotchLiqueur
         case angosturaBitters
+        case aperol
         
         case brandy
         

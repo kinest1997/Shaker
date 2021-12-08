@@ -43,10 +43,10 @@ class MainViewController: UITabBarController {
         }
     }
     
-    let todayCocktailViewController = TodayCocktailViewController()
+    let todayCocktailCollectionViewController = TodayCocktailCollectionViewController()
     let cocktailRecipeViewController = CocktailRecipeViewController()
     let assistantViewController = AssistantViewController()
-    let settingsViewController = SettingsViewController()
+    let settingsViewController = SettingTableViewController(style: .insetGrouped)
     
     let tabBarItems: [Tab: UITabBarItem] = [
         .today: UITabBarItem(title: Tab.today.name, image: Tab.today.image, selectedImage: Tab.today.selectedImage),
@@ -60,34 +60,15 @@ class MainViewController: UITabBarController {
         tabBar.tintColor = .systemBrown
         tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default
-        todayCocktailViewController.tabBarItem = tabBarItems[.today]
+        todayCocktailCollectionViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
         assistantViewController.tabBarItem = tabBarItems[.home]
         settingsViewController.tabBarItem = tabBarItems[.preference]
         self.viewControllers = [
-            UINavigationController(rootViewController: todayCocktailViewController),
+            UINavigationController(rootViewController: todayCocktailCollectionViewController),
             UINavigationController(rootViewController: cocktailRecipeViewController),
             UINavigationController(rootViewController: assistantViewController),
             UINavigationController(rootViewController: settingsViewController)
         ]
-        
-        //이런식으로 중첩해도 되는건가? 가끔 맨처음에 빠르게 누르면 데이터 업데이트가 안되서 다될때까지 기다리는건데
-        FirebaseRecipe.shared.getRecipe { data in
-            let loadingView = LoadingView()
-            loadingView.modalPresentationStyle = .overCurrentContext
-            loadingView.modalTransitionStyle = .crossDissolve
-            loadingView.explainLabel.text = "로딩중"
-            self.present(loadingView, animated: true) {
-                loadingView.activityIndicator.startAnimating()
-            }
-            FirebaseRecipe.shared.recipe = data
-            FirebaseRecipe.shared.getMyRecipe { data in
-                FirebaseRecipe.shared.myRecipe = data
-                FirebaseRecipe.shared.getWishList { data in
-                    FirebaseRecipe.shared.wishList = data
-                }
-            }
-            loadingView.dismiss(animated: true, completion: nil)
-        }
     }
 }

@@ -4,6 +4,7 @@ import FirebaseAuth
 import AuthenticationServices
 
 ///유저의 개인 취향을 저장하는곳, 설정에서 나중에 취향 재설정 가능하게 하자
+
 class UserFavor {
     static let shared = UserFavor()
     
@@ -11,15 +12,40 @@ class UserFavor {
     
     var alcoholFavor: Cocktail.Alcohol?
     
-    //무슨 취향들을 추가해볼까나 일단 좋아하는 베이스? 일단 고민중
+    var drinkTypeFavor: Cocktail.DrinkType?
+    
+    var baseDrinkFavor: Cocktail.Base?
+    
+    func makeAlert(title: String, message: String) -> UIAlertController {
+        let alert = UIAlertController(title: title.localized, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
+        return alert
+    }
     
     private init() { }
+}
+
+class ContentNetwork {
+    static let shared = ContentNetwork()
+    
+    func setlinkAction(appURL: String, webURL: String){
+        let appURL = URL(string: appURL)!
+        let application = UIApplication.shared
+        
+        if application.canOpenURL(appURL) {
+            application.open(appURL)
+        } else {
+            let webURL = URL(string: webURL)!
+            application.open(webURL)
+        }
+    }
+    
 }
 
 class FirebaseRecipe {
     static let shared = FirebaseRecipe()
     
-    var ref = Database.database().reference()
+    let ref = Database.database().reference()
     
     var recipe: [Cocktail] = []
     
@@ -27,13 +53,17 @@ class FirebaseRecipe {
     
     var myRecipe: [Cocktail] = []
     
+    var youTubeData: [YouTubeVideo] = []
+    
     let uid = Auth.auth().currentUser?.uid
     
     func getRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
-        ref.child("CocktailList").observeSingleEvent(of: .value) { snapshot in
+        ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
+                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                      completion([Cocktail]())
+                      return }
             completion(cocktailList)
         }
     }
@@ -43,7 +73,9 @@ class FirebaseRecipe {
         ref.child("users").child(uid).child("MyRecipes").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
+                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                      completion([Cocktail]())
+                      return }
             let myRecipes = cocktailList.filter { $0.myRecipe == true }
             completion(myRecipes)
         }
@@ -51,12 +83,25 @@ class FirebaseRecipe {
     
     func getWishList(completion: @escaping ([Cocktail]) -> (Void)) {
         guard let uid = uid else { return }
-        ref.child("users").child(uid).child("WishList").observeSingleEvent(of: .value) { snapshot in
+        ref.child("users").child(uid).child("WishList").observe( .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else { return }
+                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                      completion([Cocktail]())
+                      return }
             let myRecipes = cocktailList.filter { $0.wishList == true }
             completion(myRecipes)
+        }
+    }
+    
+    func getYoutubeContents(completion: @escaping ([YouTubeVideo]) -> (Void)) {
+        ref.child("Youtube").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]],
+                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                  let youTubeVideoList = try? JSONDecoder().decode([YouTubeVideo].self, from: data) else {
+                      completion([YouTubeVideo]())
+                      return }
+            completion(youTubeVideoList)
         }
     }
     
@@ -78,11 +123,11 @@ class FirebaseRecipe {
         let cocktailList = getJSONRecipe()
         guard let data = try? JSONEncoder().encode(cocktailList) else { return }
         let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
-        Database.database().reference().child("CocktailList").setValue(jsonData)
+        Database.database().reference().child("CocktailRecipes").setValue(jsonData)
     }
     
     func getJSONRecipe() -> [Cocktail] {
-        guard let bundleURL = Bundle.main.url(forResource: "CocktailJSON", withExtension: "json"),
+        guard let bundleURL = Bundle.main.url(forResource: "CocktailData", withExtension: "json"),
               let cocktailData = FileManager.default.contents(atPath: bundleURL.path) else { return [] }
         do {
             let cocktailList = try JSONDecoder().decode([Cocktail].self, from: cocktailData).sorted {
@@ -93,6 +138,12 @@ class FirebaseRecipe {
             print(String(describing: error))
             return []
         }
+    }
+    
+    func uploadyoutube() {
+        guard let data = try? JSONEncoder().encode([YouTubeVideo(videoName: "firstName", videoCode: "HzxdVaKaPyA", owner: .drinkLecture)]),
+              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else { return }
+        Database.database().reference().child("Youtube").setValue(jsonData)
     }
     private init() { }
 }

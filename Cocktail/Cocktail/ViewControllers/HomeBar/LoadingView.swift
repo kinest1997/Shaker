@@ -1,32 +1,39 @@
 import UIKit
-import NVActivityIndicatorView
 import SnapKit
+import Lottie
 
-
-class LoadingView: UIViewController {
-    
-    var activityIndicator = NVActivityIndicatorView(frame: CGRect(x: 10, y: 10, width: 10, height: 10), type: NVActivityIndicatorType.ballTrianglePath, color: .black, padding: 0.1)
+class LoadingView: UIView {
     
     let explainLabel = UILabel()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .gray.withAlphaComponent(0.5)
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.addSubview(explainLabel)
+        let animationView = AnimationView(name: "LoadingAnimation")
+        animationView.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+        animationView.center = self.center
+        animationView.contentMode = .scaleAspectFill
         
-        view.addSubview(explainLabel)
-        view.addSubview(activityIndicator)
+        self.addSubview(animationView)
+        
+        animationView.play(fromFrame: 0, toFrame: 120, loopMode: .loop , completion: nil)
+        
+        self.backgroundColor = .gray.withAlphaComponent(0.5)
+        
+        self.addSubview(explainLabel)
         explainLabel.textColor = .black
+        explainLabel.textAlignment = .center
         
-        activityIndicator.snp.makeConstraints {
+        animationView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.height.width.equalTo(60)
         }
         
         explainLabel.snp.makeConstraints {
-            $0.top.equalTo(activityIndicator.snp.bottom).offset(20)
-            $0.width.equalTo(activityIndicator)
+            $0.top.equalTo(animationView.snp.bottom).offset(20)
+            $0.width.equalTo(animationView)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(50)
         }
+    
     }
 }
