@@ -246,6 +246,8 @@ class CocktailDetailViewController: UIViewController {
             $0.spacing = 10
         }
         
+        cocktailImageView.contentMode = .scaleAspectFill
+        
         alcoholStackView.distribution = .fillEqually
         alcoholStackView.alignment = .center
         alcoholStackView.spacing = 20
