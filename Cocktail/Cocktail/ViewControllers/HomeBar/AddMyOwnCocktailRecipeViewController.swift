@@ -32,7 +32,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let nameLabel = UILabel()
     let nameTextField = UITextField()
-    let nameStackView = UIStackView()
     
     let alcoholLabel = UILabel()
     let alcoholChoiceButton = UIButton()
@@ -54,7 +53,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let colorLabel = UILabel()
     let colorChoiceButton = UIButton()
-    let colorStackView = UIStackView()
     var colorSelectMenuItems: [UIAction] {
         return [
             UIAction(title: "red".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("red".localized, for: .normal)
@@ -86,7 +84,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let baseDrinkLabel = UILabel()
     let baseDrinkChoiceButton = UIButton()
-    let baseDrinkStackView = UIStackView()
     var baseDrinkSelectMenuItems: [UIAction] {
         return [
             UIAction(title: "rum".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
@@ -125,7 +122,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let craftLabel = UILabel()
     let craftChoiceButton = UIButton()
-    let craftStackView = UIStackView()
     var craftSelectMenuItems: [UIAction] {
         return [
             UIAction(title: "build".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
@@ -151,7 +147,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let glassLabel = UILabel()
     let glassChoiceButton = UIButton()
-    let glassStackView = UIStackView()
     var glassSelectMenuItems: [UIAction] {
         return [
             UIAction(title: "highBall".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
@@ -186,7 +181,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let drinkTypeLabel = UILabel()
     let drinkTypeChoiceButton = UIButton()
-    let drinkTypeStackView = UIStackView()
     var drinkTypeMenuItems: [UIAction] {
         return [
             UIAction(title: "longDrink".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
@@ -206,7 +200,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let myTipLabel = UILabel()
     let myTipTextField = UITextView()
-    let myTipStackView = UIStackView()
     
     let ingredientsLabel = UILabel()
     let ingredientsSelectButton = UIButton()
@@ -232,14 +225,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         addRecipeTableView.register(AddRecipeCell.self, forCellReuseIdentifier: "addRecipeCell")
         addRecipeTableView.delegate = self
         addRecipeTableView.dataSource = self
-        
-        centerLine.backgroundColor = .black
         addRecipeTableView.tableHeaderView = headerView
-        
-        nameTextField.textAlignment = .center
-        
         addRecipeTableView.rowHeight = 50
-        alcoholChoiceButton.backgroundColor = .red
         attribute()
         layout()
         registerNotifications()
@@ -312,18 +299,21 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 1200)
         addRecipeTableView.backgroundColor = .white
         
+        // 기본 라벨들
         [alcoholLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, drinkTypeLabel, selectedIngredientsLabel, recipeLabel, alcoholLabel].forEach {
             $0.textColor = .black
             $0.font = .systemFont(ofSize: 14, weight: .medium)
         }
-        recipeLabel.sizeToFit()
+        
         nameTextField.textColor = .black
+        addButton.backgroundColor = .brown
         nameTextField.font = .systemFont(ofSize: 24, weight: .heavy)
         
         [colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton, alcoholChoiceButton].forEach {
             rightStackView.addArrangedSubview($0)
             $0.setTitleColor(.black, for: .normal)
             $0.contentHorizontalAlignment = .leading
+            $0.titleLabel?.font = .systemFont(ofSize: 14)
         }
         
         [leftStackView, rightStackView].forEach {
@@ -338,15 +328,28 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         ingredientsSelectButton.setTitleColor(.black, for: .normal)
         
+        addButton.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        addRecipeTableView.tableFooterView = addButton
+        
+        nameTextField.textAlignment = .center
+        recipeLabel.text = "Recipe".localized
+        addButton.setTitle("Add Recipe".localized, for: .normal)
+        addButton.setTitleColor(.black, for: .normal)
+        
+        selectedIngredientsLabel.sizeToFit()
+        selectedIngredientsLabel.numberOfLines = 0
+        
+        recipeLabel.sizeToFit()
         groupStackView.axis = .horizontal
         groupStackView.spacing = 10
         groupStackView.distribution = .fill
         firstSplitLine.backgroundColor = .black
         secondSplitLine.backgroundColor = .black
+        centerLine.backgroundColor = .black
         
         choiceView.isHidden = true
         addButton.backgroundColor = .brown
-        addButton.setTitle("추가", for: .normal)
+        addButton.setTitle("Add".localized, for: .normal)
         addButton.setTitleColor(.cyan, for: .normal)
         
         self.view.backgroundColor = .white
@@ -360,7 +363,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         myTipLabel.text = "Tip".localized
         drinkTypeLabel.text = "DrinkType".localized
         ingredientsLabel.text = "Ingredients".localized
-        
         loadingView.isHidden = true
     }
     
@@ -373,7 +375,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
         
-        [cocktailImageView, nameTextField, alcoholStackView, myTipTextField, groupStackView, firstSplitLine, ingredientsLabel, ingredientsSelectButton, selectedIngredientsLabel, secondSplitLine, addButton, recipeLabel].forEach {
+        [cocktailImageView, nameTextField, alcoholStackView, myTipTextField, groupStackView, firstSplitLine, ingredientsLabel, ingredientsSelectButton, selectedIngredientsLabel, secondSplitLine, recipeLabel].forEach {
             headerView.addSubview($0)
         }
         
@@ -387,6 +389,10 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         [colorLabel, baseDrinkLabel, drinkTypeLabel, glassLabel, craftLabel].forEach {
             leftStackView.addArrangedSubview($0)
+        }
+        
+        [colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton, alcoholChoiceButton].forEach {
+            rightStackView.addArrangedSubview($0)
         }
         
         loadingView.snp.makeConstraints {
@@ -431,12 +437,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.width.equalTo(1)
         }
         
-        ingredientsLabel.snp.makeConstraints {
-            $0.top.equalTo(firstSplitLine.snp.bottom).offset(50)
-            $0.height.equalTo(40)
-            $0.centerX.equalToSuperview()
-        }
-        
         firstSplitLine.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.8)
             $0.height.equalTo(1)
@@ -444,8 +444,14 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.top.equalTo(groupStackView.snp.bottom).offset(50)
         }
         
-        ingredientsSelectButton.snp.makeConstraints {
+        ingredientsLabel.snp.makeConstraints {
             $0.top.equalTo(firstSplitLine.snp.bottom).offset(50)
+            $0.height.equalTo(40)
+            $0.centerX.equalToSuperview()
+        }
+        
+        ingredientsSelectButton.snp.makeConstraints {
+            $0.top.equalTo(ingredientsLabel)
             $0.height.equalTo(40)
             $0.leading.equalTo(ingredientsLabel.snp.trailing).offset(50)
             $0.trailing.equalToSuperview()
@@ -470,26 +476,19 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         }
         
         recipeLabel.snp.makeConstraints {
-            $0.top.equalTo(secondSplitLine.snp.bottom).offset(50)
+            $0.top.equalTo(secondSplitLine.snp.bottom).offset(40)
             $0.height.equalTo(40)
             $0.centerX.equalToSuperview()
         }
         
-        addButton.snp.makeConstraints {
-            $0.top.equalTo(recipeLabel.snp.bottom).offset(10)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            $0.width.equalToSuperview().multipliedBy(0.7)
-        }
-        
-        recipeLabel.text = "레시피"
-        
-        addButton.setTitle("레시피 추가", for: .normal)
-        addButton.setTitleColor(.black, for: .normal)
-        addButton.backgroundColor = .brown
-        
-        selectedIngredientsLabel.sizeToFit()
-        selectedIngredientsLabel.numberOfLines = 0
+        //위에다 둘지 아래에 둘지 아직 고민중
+        //        headerView.addSubview(addButton)
+        //        addButton.snp.makeConstraints {
+        //            $0.top.equalTo(recipeLabel.snp.bottom).offset(10)
+        //            $0.centerX.equalToSuperview()
+        //            $0.bottom.equalToSuperview()
+        //            $0.width.equalToSuperview().multipliedBy(0.7)
+        //        }
         
         if let cocktailData = beforeEditingData {
             alcoholChoiceButton.setTitle(cocktailData.alcohol.rawValue.localized, for: .normal)

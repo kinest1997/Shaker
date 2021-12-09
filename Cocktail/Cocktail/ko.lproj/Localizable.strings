@@ -63,6 +63,8 @@
 "Write recipe" = "레시피적어!";
 "Write tips" = "팁도좀 적어";
 "Input Recipes" = "레시피를 입력하세요";
+"Add Recipe" = "레시피 추가";
+"Add" = "추가";
 
 //MainViewController.swift
 "Recommendation" = "추천";
