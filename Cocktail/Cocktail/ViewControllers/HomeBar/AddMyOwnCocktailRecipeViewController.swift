@@ -309,12 +309,14 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         addButton.backgroundColor = .brown
         nameTextField.font = .systemFont(ofSize: 24, weight: .heavy)
         
-        [colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton, alcoholChoiceButton].forEach {
+        [colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton].forEach {
             rightStackView.addArrangedSubview($0)
             $0.setTitleColor(.black, for: .normal)
             $0.contentHorizontalAlignment = .leading
             $0.titleLabel?.font = .systemFont(ofSize: 14)
         }
+        alcoholChoiceButton.setTitleColor(.black, for: .normal)
+        alcoholChoiceButton.titleLabel?.font = .systemFont(ofSize: 14)
         
         [leftStackView, rightStackView].forEach {
             $0.axis = .vertical
@@ -391,7 +393,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             leftStackView.addArrangedSubview($0)
         }
         
-        [colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton, alcoholChoiceButton].forEach {
+        [colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton].forEach {
             rightStackView.addArrangedSubview($0)
         }
         

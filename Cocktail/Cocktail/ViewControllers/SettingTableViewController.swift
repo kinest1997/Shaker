@@ -49,27 +49,27 @@ class SettingTableViewController: UITableViewController {
             }
         }
         
-        var actions: [Void] {
-            switch self {
-            case .serviceInformation:
-                return []
-            case .alarm:
-                return []
-            case .support:
-                return [
-                    requestAppStoreReview(),
-                    setlinkAction(appURL: "itms-beta://", webURL: "")
-                ]
-            case .developerInfo:
-                return [
-                    setlinkAction(appURL: "github://profile/kinest1997/", webURL: "https://github.com/kinest1997"),
-                    setlinkAction(appURL: "linkedin://profile/heesung-kang-kinest1997", webURL: "https://www.linkedin.com/in/heesung-kang-kinest1997"),
-                    setlinkAction(appURL: "instagram://user?username=kinest1997", webURL: "https://instagram.com/kinest1997")
-                ]
-            case .account:
-                return Auth.auth().currentUser == nil ? [logIn()] : [logOut()]
-            }
-        }
+//        func actions() -> [Void] {
+//            switch self {
+//            case .serviceInformation:
+//                return []
+//            case .alarm:
+//                return []
+//            case .support:
+//                return [requestAppStoreReview(), setlinkAction(appURL: "itms-beta://", webURL: "")]
+//            case .developerInfo:
+//                return [
+//                    print("0"),
+//                    print("1"),
+//                    print("2")
+////                    setlinkAction(appURL: "github://profile/kinest1997/", webURL: "https://github.com/kinest1997"),
+////                    setlinkAction(appURL: "linkedin://profile/heesung-kang-kinest1997", webURL: "https://www.linkedin.com/in/heesung-kang-kinest1997"),
+////                    setlinkAction(appURL: "instagram://user?username=kinest1997", webURL: "https://instagram.com/kinest1997")
+//                ]
+//            case .account:
+//                return Auth.auth().currentUser == nil ? [logIn()] : [logOut()]
+//            }
+//        }
     }
     
     override func viewDidLoad() {
@@ -98,7 +98,21 @@ extension SettingTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Settings(rawValue: indexPath.section)?.actions[indexPath.row]
+         switch indexPath.section {
+         case 3:
+             switch indexPath.row {
+             case 0:
+                 setlinkAction(appURL: "github://profile/kinest1997/", webURL: "https://github.com/kinest1997")
+             case 1:
+                 setlinkAction(appURL: "linkedin://profile/heesung-kang-kinest1997", webURL: "https://www.linkedin.com/in/heesung-kang-kinest1997")
+             case 2:
+                 setlinkAction(appURL: "instagram://user?username=kinest1997", webURL: "https://instagram.com/kinest1997")
+             default:
+                 return
+             }
+         default:
+             return
+         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -138,7 +152,7 @@ extension SettingTableViewController {
 
 ///Actions per indexPath.row
 extension SettingTableViewController {
-    static private func requestAppStoreReview() {
+    private func requestAppStoreReview() {
         guard let appStoreURL = URL(string: "https://apps.apple.com/app/id") else { return }    //TODO: 앱아이디 입력해줄 것 예)id100043049583
         var components = URLComponents(url: appStoreURL, resolvingAgainstBaseURL: false)
         components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
@@ -146,7 +160,7 @@ extension SettingTableViewController {
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
     }
     
-    static private func setlinkAction(appURL: String, webURL: String){
+    private func setlinkAction(appURL: String, webURL: String){
         let appURL = URL(string: appURL)!
         let application = UIApplication.shared
         

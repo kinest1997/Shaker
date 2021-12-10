@@ -548,7 +548,7 @@
 }, {
   "alcohol" : "high",
   "base" : "liqueur",
-  "color" : "blue",
+  "color" : "various",
   "craft" : "floating",
   "drinkType" : "shortDrink",
   "glass" : "shot",
@@ -660,7 +660,7 @@
 }, {
   "alcohol" : "mid",
   "base" : "liqueur",
-  "color" : "brown",
+  "color" : "various",
   "craft" : "floating",
   "drinkType" : "shooter",
   "glass" : "shot",
@@ -744,7 +744,7 @@
 }, {
   "alcohol" : "mid",
   "base" : "liqueur",
-  "color" : "blue",
+  "color" : "various",
   "craft" : "floating",
   "drinkType" : "shooter",
   "glass" : "shot",
@@ -758,7 +758,7 @@
 }, {
   "alcohol" : "high",
   "base" : "liqueur",
-  "color" : "blue",
+  "color" : "various",
   "craft" : "floating",
   "drinkType" : "shooter",
   "glass" : "shot",
@@ -1220,7 +1220,7 @@
 }, {
   "alcohol" : "high",
   "base" : "liqueur",
-  "color" : "green",
+  "color" : "various",
   "craft" : "floating",
   "drinkType" : "shooter",
   "glass" : "shot",
@@ -1234,7 +1234,7 @@
 }, {
   "alcohol" : "mid",
   "base" : "liqueur",
-  "color" : "red",
+  "color" : "various",
   "craft" : "floating",
   "drinkType" : "shooter",
   "glass" : "shot",

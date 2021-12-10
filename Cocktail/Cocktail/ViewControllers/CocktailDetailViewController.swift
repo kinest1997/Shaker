@@ -13,7 +13,6 @@ class CocktailDetailViewController: UIViewController {
     
     let cocktailImageView = UIImageView()
     
-    let englishNameLabel = UILabel()
     let nameLabel = UILabel()
     
     let alcoholGuideLabel = UILabel()
@@ -66,7 +65,7 @@ class CocktailDetailViewController: UIViewController {
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainView)
         
-        [nameLabel, englishNameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel].forEach { mainView.addSubview($0) }
+        [nameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel].forEach { mainView.addSubview($0) }
         
         [groupStackView, cocktailImageView, likeButton].forEach { mainView.addSubview($0) }
         
@@ -99,18 +98,11 @@ class CocktailDetailViewController: UIViewController {
             $0.width.equalToSuperview()
         }
         
-        englishNameLabel.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(40)
-            $0.width.equalToSuperview()
-        }
-        
         alcoholStackView.snp.makeConstraints {
             $0.height.equalTo(nameLabel)
             $0.width.equalToSuperview().multipliedBy(0.3)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(englishNameLabel.snp.bottom).offset(5)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
         
         alcoholGuideLabel.snp.makeConstraints {
@@ -216,7 +208,7 @@ class CocktailDetailViewController: UIViewController {
         }
         
         //제일 두꺼운 칵테일 이름 설정
-        [nameLabel, englishNameLabel].forEach {
+        [nameLabel].forEach {
             $0.textAlignment = .center
             $0.textColor = .black
             $0.font = .systemFont(ofSize: 24, weight: .heavy)
@@ -297,7 +289,6 @@ class CocktailDetailViewController: UIViewController {
     
     func setData(data: Cocktail) {
         nameLabel.text = data.name.localized
-        englishNameLabel.text = data.name
         alcoholLabel.text = data.alcohol.rawValue.localized
         colorLabel.text = data.color.rawValue.localized
         baseDrinkLabel.text = data.base.rawValue.localized
