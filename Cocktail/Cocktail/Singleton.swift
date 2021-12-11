@@ -83,7 +83,7 @@ class FirebaseRecipe {
     
     func getWishList(completion: @escaping ([Cocktail]) -> (Void)) {
         guard let uid = uid else { return }
-        ref.child("users").child(uid).child("WishList").observe( .value) { snapshot in
+        ref.child("users").child(uid).child("WishList").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
                   let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {

@@ -48,28 +48,6 @@ class SettingTableViewController: UITableViewController {
                 return Auth.auth().currentUser == nil ? ["LogIn".localized] : ["LogOut".localized]
             }
         }
-        
-//        func actions() -> [Void] {
-//            switch self {
-//            case .serviceInformation:
-//                return []
-//            case .alarm:
-//                return []
-//            case .support:
-//                return [requestAppStoreReview(), setlinkAction(appURL: "itms-beta://", webURL: "")]
-//            case .developerInfo:
-//                return [
-//                    print("0"),
-//                    print("1"),
-//                    print("2")
-////                    setlinkAction(appURL: "github://profile/kinest1997/", webURL: "https://github.com/kinest1997"),
-////                    setlinkAction(appURL: "linkedin://profile/heesung-kang-kinest1997", webURL: "https://www.linkedin.com/in/heesung-kang-kinest1997"),
-////                    setlinkAction(appURL: "instagram://user?username=kinest1997", webURL: "https://instagram.com/kinest1997")
-//                ]
-//            case .account:
-//                return Auth.auth().currentUser == nil ? [logIn()] : [logOut()]
-//            }
-//        }
     }
     
     override func viewDidLoad() {
@@ -98,41 +76,32 @@ extension SettingTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         switch indexPath.section {
-//         case 1:
-//             switch indexPath.row {
-//             case 0:
-//
-//             case 1:
-//
-//             default:
-//
-//             }
-         case 2:
-             switch indexPath.row {
-             case 0:
-                 requestAppStoreReview()
-             case 1:
-                 setlinkAction(appURL: "itms-beta://", webURL: "")
-             default:
-                 return
-             }
-         case 3:
-             switch indexPath.row {
-             case 0:
-                 setlinkAction(appURL: "github://profile/kinest1997/", webURL: "https://github.com/kinest1997")
-             case 1:
-                 setlinkAction(appURL: "linkedin://profile/heesung-kang-kinest1997", webURL: "https://www.linkedin.com/in/heesung-kang-kinest1997")
-             case 2:
-                 setlinkAction(appURL: "instagram://user?username=kinest1997", webURL: "https://instagram.com/kinest1997")
-             default:
-                 return
-             }
-         case 4:
-             Auth.auth().currentUser == nil ? SettingTableViewController.logIn() : SettingTableViewController.logOut()
-         default:
-             return
-         }
+        switch indexPath.section {
+        case 2:
+            switch indexPath.row {
+            case 0:
+                requestAppStoreReview()
+            case 1:
+                setlinkAction(appURL: "itms-beta://", webURL: "")
+            default:
+                return
+            }
+        case 3:
+            switch indexPath.row {
+            case 0:
+                setlinkAction(appURL: "github://profile/kinest1997/", webURL: "https://github.com/kinest1997")
+            case 1:
+                setlinkAction(appURL: "linkedin://profile/heesung-kang-kinest1997", webURL: "https://www.linkedin.com/in/heesung-kang-kinest1997")
+            case 2:
+                setlinkAction(appURL: "instagram://user?username=kinest1997", webURL: "https://instagram.com/kinest1997")
+            default:
+                return
+            }
+        case 4:
+            Auth.auth().currentUser == nil ? logIn() : logOut()
+        default:
+            return
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -192,24 +161,26 @@ extension SettingTableViewController {
         }
     }
     
-    static private func logIn() {
-         UIApplication.topMostViewController(self.rootViewController)?.show(LoginViewController(), sender: nil)
+    private func logIn() {
+        self.tabBarController?.selectedViewController = tabBarController?.viewControllers?[0]
+        tabBarController?.viewControllers?[0].show(LoginViewController(), sender:  nil)
     }
     
-    static private func logOut() {
-        UserDefaults.standard.set(true, forKey: "firstLaunch")
+    private func logOut() {
         let alert = UIAlertController(title: "Do you want to log out?".localized, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes".localized, style: .default) { _ in
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
-                UIApplication.topMostViewController(self.rootViewController)?.present(alert, animated: true)
+                UserDefaults.standard.set(true, forKey: "firstLaunch")
             } catch let error {
                 print(error)
             }
             FirebaseRecipe.shared.myRecipe = []
             FirebaseRecipe.shared.wishList = []
+            self.tableView.reloadData()
         })
         alert.addAction(UIAlertAction(title: "No".localized, style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }

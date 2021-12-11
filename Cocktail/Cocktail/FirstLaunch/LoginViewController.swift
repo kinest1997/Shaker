@@ -16,6 +16,8 @@ class LoginViewController: UIViewController {
     
     let userNotiCenter = UNUserNotificationCenter.current()
     
+    let mainViewController = MainViewController()
+    
     private var currentNonce: String?
     
     let appleLoginButton = UIButton()
@@ -38,8 +40,14 @@ class LoginViewController: UIViewController {
             FirebaseRecipe.shared.getRecipe { data in
                 FirebaseRecipe.shared.recipe = data
                 UserDefaults.standard.set(false, forKey: "firstLaunch")
+                let scenes = UIApplication.shared.connectedScenes
+                let windowScene = scenes.first as? UIWindowScene
+                let window = windowScene?.windows.first
+                
+                window?.rootViewController = self?.mainViewController
+                
                 self?.tabBarController?.tabBar.isHidden = false
-                self?.navigationController?.popToRootViewController(animated: true)
+//                self?.navigationController?.popToRootViewController(animated: true)
             }
         }), for: .touchUpInside)
         
