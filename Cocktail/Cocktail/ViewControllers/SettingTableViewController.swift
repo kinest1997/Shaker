@@ -99,6 +99,24 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
          switch indexPath.section {
+//         case 1:
+//             switch indexPath.row {
+//             case 0:
+//
+//             case 1:
+//
+//             default:
+//
+//             }
+         case 2:
+             switch indexPath.row {
+             case 0:
+                 requestAppStoreReview()
+             case 1:
+                 setlinkAction(appURL: "itms-beta://", webURL: "")
+             default:
+                 return
+             }
          case 3:
              switch indexPath.row {
              case 0:
@@ -110,6 +128,8 @@ extension SettingTableViewController {
              default:
                  return
              }
+         case 4:
+             Auth.auth().currentUser == nil ? SettingTableViewController.logIn() : SettingTableViewController.logOut()
          default:
              return
          }
@@ -173,7 +193,7 @@ extension SettingTableViewController {
     }
     
     static private func logIn() {
-        UIApplication.topMostViewController(self.rootViewController)?.show(LoginViewController(), sender: nil)
+         UIApplication.topMostViewController(self.rootViewController)?.show(LoginViewController(), sender: nil)
     }
     
     static private func logOut() {
