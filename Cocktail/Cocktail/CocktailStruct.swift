@@ -5,7 +5,7 @@ protocol CocktailCondition {
 }
 
 struct CocktailLikeList: Codable {
-    let cocktail: [CocktailLikeCount]
+    let cocktail: [String: CocktailLikeCount]
 }
 
 struct CocktailLikeCount: Codable {

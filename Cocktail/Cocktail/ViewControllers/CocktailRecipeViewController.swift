@@ -13,7 +13,7 @@ class CocktailRecipeViewController: UIViewController {
     
     lazy var filterView = FilteredView()
     
-    var likeData: [CocktailLikeCount] = []
+    var likeData: [String:[String: Bool]]?
     
     let mainTableView = UITableView()
     
@@ -58,6 +58,12 @@ class CocktailRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterButton
         let leftarrangeButton = UIBarButtonItem(title: "Sorting".localized, image: nil, primaryAction: nil, menu: filterMenu)
         navigationItem.leftBarButtonItem = leftarrangeButton
+        
+        FirebaseRecipe.shared.getCocktailLikeData {[weak self] data in
+            self?.likeData = data
+            self?.loadingView.isHidden = true
+            self?.mainTableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

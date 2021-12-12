@@ -55,7 +55,7 @@ class FirebaseRecipe {
     
     var youTubeData: [YouTubeVideo] = []
     
-    var cocktailLikeData: [CocktailLikeCount] = []
+    var cocktailLikeList: [String:[String: Bool]] = [:]
     
     let uid = Auth.auth().currentUser?.uid
     
@@ -107,22 +107,22 @@ class FirebaseRecipe {
         }
     }
     
-    func getCocktailLikeData(completion: @escaping (CocktailLikeList) -> (Void)) {
+    func getCocktailLikeData(completion: @escaping ([String:[String: Bool]]) -> (Void)) {
         Database.database().reference().child("CocktailLikeData").observe( .value) { snapshot in
-            guard let value = snapshot.value as? [[String: Any]],
-                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let singleData = try? JSONDecoder().decode(CocktailLikeList.self, from: data) else {
-                      completion(CocktailLikeList(cocktail: []))
-                      return
-                  }
-            completion(singleData)
+            guard let value = snapshot.value as? [String:[String: Bool]] else { return }
+            completion(value)
         }
     }
-
-    func filterWhatILike(cocktailList: CocktailLikeList) {
-        cocktailList
-        let data = cocktailList.cocktail.map { $0.people.values }
-        
+    
+    func likeOrDislikeCount(cocktailList: [String:[String: Bool]], choice: Bool, cocktail: Cocktail) -> Int {
+        let data = FirebaseRecipe.shared.cocktailLikeList
+        guard let likeData = data[cocktail.name] else { return 0 }
+        switch choice {
+        case true:
+            return likeData.filter { $0.value == true }.count
+        case false:
+            return likeData.filter { $0.value == false }.count
+        }
     }
     
     func uploadWishList() {
@@ -149,6 +149,10 @@ class FirebaseRecipe {
     func addLike(cocktail: Cocktail) {
         guard let uid = uid else { return }
         Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(true)
+    }
+    
+    func uploadId(cocktail: Cocktail) {
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).child("id").setValue(cocktail.name)
     }
     
     func addDislike(cocktail: Cocktail) {

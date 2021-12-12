@@ -13,16 +13,18 @@ class CocktailListCell: UITableViewCell {
     let cocktailImageView = UIImageView()
     let nameLabel = UILabel()
     let ingredientCountLabel = UILabel()
+    let likeCount = UILabel()
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        [nameLabel, ingredientCountLabel, cocktailImageView].forEach {
+        [nameLabel, ingredientCountLabel, cocktailImageView, likeCount].forEach {
             contentView.addSubview($0)
         }
         cocktailImageView.contentMode = .scaleAspectFit
         nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         ingredientCountLabel.font = .systemFont(ofSize: 15, weight: .medium)
         ingredientCountLabel.alpha = 0.7
+        likeCount.textColor = .white
         
         cocktailImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -37,6 +39,11 @@ class CocktailListCell: UITableViewCell {
         ingredientCountLabel.snp.makeConstraints {
             $0.leading.trailing.equalTo(nameLabel)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
+        }
+        likeCount.snp.makeConstraints {
+            $0.leading.equalTo(ingredientCountLabel.snp.trailing)
+            $0.width.equalTo(50)
+            $0.height.bottom.equalToSuperview()
         }
     }
     

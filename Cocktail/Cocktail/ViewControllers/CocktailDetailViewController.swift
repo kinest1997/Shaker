@@ -8,8 +8,6 @@ class CocktailDetailViewController: UIViewController {
     
     var cocktailData: Cocktail?
     
-    var likeData: CocktailLikeCount?
-    
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     
@@ -59,7 +57,7 @@ class CocktailDetailViewController: UIViewController {
     let likeButton = UIButton()
     let likeCountLabel = UILabel()
     let disLikeButton = UIButton()
-    let disLikeLabel = UILabel()
+    let disLikeCountLabel = UILabel()
     
     let loadingView = LoadingView()
     
@@ -71,13 +69,34 @@ class CocktailDetailViewController: UIViewController {
         let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
         navigationController?.navigationBar.isHidden = false
+        let data = FirebaseRecipe.shared.cocktailLikeList
+        guard let cocktailData = cocktailData else {
+            return
+        }
+
+       let likeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: data, choice: true, cocktail: cocktailData)
+        likeCountLabel.text = String(likeCount)
+        
+        let dislikeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: data, choice: false, cocktail: cocktailData)
+        disLikeCountLabel.text = String(dislikeCount)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let cocktailData = cocktailData {
+            if cocktailData.myRecipe {
+                [likeButton, disLikeButton, disLikeCountLabel, likeCountLabel].forEach {
+                    $0.isHidden = true
+                }
+            }
+        }
     }
     
     func layout() {
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainView)
         
-        [nameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel, likeButton, likeCountLabel, disLikeLabel, disLikeButton].forEach { mainView.addSubview($0) }
+        [nameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel, likeButton, likeCountLabel, disLikeCountLabel, disLikeButton].forEach { mainView.addSubview($0) }
         
         [groupStackView, cocktailImageView, wishListButton].forEach { mainView.addSubview($0) }
         
@@ -101,6 +120,18 @@ class CocktailDetailViewController: UIViewController {
             $0.top.equalTo(wishListButton.snp.bottom).offset(20)
             $0.width.equalToSuperview().multipliedBy(0.5)
             $0.height.equalTo(300)
+        }
+        
+        likeCountLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.3)
+            $0.centerY.height.equalTo(nameLabel)
+        }
+
+        disLikeCountLabel.snp.makeConstraints {
+            $0.trailing.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.3)
+            $0.centerY.height.equalTo(nameLabel)
         }
         
         nameLabel.snp.makeConstraints {
@@ -222,7 +253,7 @@ class CocktailDetailViewController: UIViewController {
         }
         
         //내용 설정하는곳
-        [alcoholLabel, alcoholGuideLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, recipeLabel, drinkTypeLabel].forEach {
+        [alcoholLabel, alcoholGuideLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, recipeLabel, drinkTypeLabel, likeCountLabel, disLikeCountLabel].forEach {
             $0.textColor = .black
             $0.font = .systemFont(ofSize: 14, weight: .medium)
         }
