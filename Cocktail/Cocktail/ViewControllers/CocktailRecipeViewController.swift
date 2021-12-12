@@ -9,7 +9,11 @@ class CocktailRecipeViewController: UIViewController {
     var originRecipe: [Cocktail] = []
     var filteredRecipe: [Cocktail] = []
     
+    let loadingView = LoadingView()
+    
     lazy var filterView = FilteredView()
+    
+    var likeData: [CocktailLikeCount] = []
     
     let mainTableView = UITableView()
     
@@ -27,6 +31,7 @@ class CocktailRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingView.isHidden = false
         attribute()
         layout()
         unTouchableRecipe = FirebaseRecipe.shared.recipe + FirebaseRecipe.shared.myRecipe
@@ -63,9 +68,17 @@ class CocktailRecipeViewController: UIViewController {
     }
     
     func layout() {
+        view.addSubview(mainTableView)
+        navigationController?.view.addSubview(filterView)
+        view.addSubview(loadingView)
         mainTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         filterView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(10)
             $0.top.bottom.equalToSuperview().inset(100)
@@ -73,8 +86,6 @@ class CocktailRecipeViewController: UIViewController {
     }
     
     func attribute() {
-        view.addSubview(mainTableView)
-        navigationController?.view.addSubview(filterView)
         filterView.isHidden = true
         filterView.saveButton.setTitle("Save".localized, for: .normal)
         filterView.resetButton.setTitle("Reset".localized, for: .normal)

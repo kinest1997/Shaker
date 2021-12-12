@@ -55,6 +55,8 @@ class FirebaseRecipe {
     
     var youTubeData: [YouTubeVideo] = []
     
+    var cocktailLikeData: [CocktailLikeCount] = []
+    
     let uid = Auth.auth().currentUser?.uid
     
     func getRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
@@ -105,6 +107,24 @@ class FirebaseRecipe {
         }
     }
     
+    func getCocktailLikeData(completion: @escaping (CocktailLikeList) -> (Void)) {
+        Database.database().reference().child("CocktailLikeData").observe( .value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]],
+                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                  let singleData = try? JSONDecoder().decode(CocktailLikeList.self, from: data) else {
+                      completion(CocktailLikeList(cocktail: []))
+                      return
+                  }
+            completion(singleData)
+        }
+    }
+
+    func filterWhatILike(cocktailList: CocktailLikeList) {
+        cocktailList
+        let data = cocktailList.cocktail.map { $0.people.values }
+        
+    }
+    
     func uploadWishList() {
         guard let data = try? JSONEncoder().encode(FirebaseRecipe.shared.wishList),
               let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
@@ -124,6 +144,21 @@ class FirebaseRecipe {
         guard let data = try? JSONEncoder().encode(cocktailList) else { return }
         let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
         Database.database().reference().child("CocktailRecipes").setValue(jsonData)
+    }
+    
+    func addLike(cocktail: Cocktail) {
+        guard let uid = uid else { return }
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(true)
+    }
+    
+    func addDislike(cocktail: Cocktail) {
+        guard let uid = uid else { return }
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(false)
+    }
+    
+    func deleteLike(cocktail: Cocktail) {
+        guard let uid = uid else { return }
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(nil)
     }
     
     func getJSONRecipe() -> [Cocktail] {

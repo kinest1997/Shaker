@@ -584,7 +584,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
                     
                     let recipe = self.textFieldArray.filter {$0.text != "" }.map { $0.text! }
                     
-                    let myRecipe = Cocktail(name: name, craft: craft, glass: glass, recipe: recipe, ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTip, drinkType: drinkType, myRecipe: true, wishList: false, imageURL: url.absoluteString)
+                    let myRecipe = Cocktail(name: name, craft: craft, glass: glass, recipe: recipe, ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTip, drinkType: drinkType, myRecipe: true, wishList: false, imageURL: url.absoluteString, id: nil)
                     FirebaseRecipe.shared.myRecipe.append(myRecipe)
                     FirebaseRecipe.shared.uploadMyRecipe()
                     let cocktailDetailViewController = CocktailDetailViewController()
