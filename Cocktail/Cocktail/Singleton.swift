@@ -114,14 +114,21 @@ class FirebaseRecipe {
         }
     }
     
-    func likeOrDislikeCount(cocktailList: [String:[String: Bool]], choice: Bool, cocktail: Cocktail) -> Int {
-        let data = FirebaseRecipe.shared.cocktailLikeList
-        guard let likeData = data[cocktail.name] else { return 0 }
+    func getSingleCocktialData(cocktail: Cocktail, completion: @escaping ([String: Bool]) -> (Void)) {
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [String: Bool] else {
+                completion([:])
+                return  }
+            completion(value)
+        }
+    }
+    
+    func likeOrDislikeCount(cocktailList: [String: Bool], choice: Bool) -> Int {
         switch choice {
         case true:
-            return likeData.filter { $0.value == true }.count
+            return cocktailList.filter { $0.value == true }.count
         case false:
-            return likeData.filter { $0.value == false }.count
+            return cocktailList.filter { $0.value == false }.count
         }
     }
     
