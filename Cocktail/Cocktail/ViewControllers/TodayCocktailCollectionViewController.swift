@@ -82,20 +82,29 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         
         loadingView.explainLabel.text = "로딩중"
         
-        getYoutubeContents {[weak self] data in
-            FirebaseRecipe.shared.youTubeData = data
-            self?.youtubeData = data
-        }
-        
-        getMyRecipe {[weak self] data in
-            FirebaseRecipe.shared.myRecipe = data
-            self?.myRecipe = data
-            self?.collectionView.reloadData()
-        }
-        
-        getWishList {[weak self] data in
-            FirebaseRecipe.shared.wishList = data
-            self?.wishListData = data
+        if Auth.auth().currentUser == nil {
+            getYoutubeContents {[weak self] data in
+                FirebaseRecipe.shared.youTubeData = data
+                self?.youtubeData = data
+                self?.collectionView.reloadData()
+                self?.loadingView.isHidden = true
+            }
+        } else {
+            getMyRecipe {[weak self] data in
+                FirebaseRecipe.shared.myRecipe = data
+                self?.myRecipe = data
+            }
+            
+            getWishList {[weak self] data in
+                FirebaseRecipe.shared.wishList = data
+                self?.wishListData = data
+            }
+            
+            getYoutubeContents {[weak self] data in
+                FirebaseRecipe.shared.youTubeData = data
+                self?.youtubeData = data
+                self?.collectionView.reloadData()
+            }
         }
         
         loadingView.snp.makeConstraints {
@@ -110,6 +119,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
+        self.wishListData = FirebaseRecipe.shared.wishList
         self.collectionView.reloadData()
     }
 }

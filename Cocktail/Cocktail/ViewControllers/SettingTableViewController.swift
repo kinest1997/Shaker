@@ -39,36 +39,13 @@ class SettingTableViewController: UITableViewController {
             case .serviceInformation:
                 return ["공지사항", "버전정보 \(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"]))", "오픈소스라이브러리", "이용약관", "개인정보 처리방침"]
             case .alarm:
-                return ["Alarm Setting"]
+                return ["Alarm Setting".localized]
             case .support:
                 return ["Review Shaker in the App Store".localized, "Join the Shaker TestFlight".localized]
             case .developerInfo:
                 return ["GitHub", "LinkedIn", "Instagram"]
             case .account:
                 return Auth.auth().currentUser == nil ? ["LogIn".localized] : ["LogOut".localized]
-            }
-        }
-        
-        var actions: [Void] {
-            switch self {
-            case .serviceInformation:
-                return [print()]
-            case .alarm:
-                return []
-            case .support:
-                return [
-                    requestAppStoreReview(),
-                    setlinkAction(appURL: "itms-beta://", webURL: "")
-                ]
-            case .developerInfo:
-                return [
-                    setlinkAction(appURL: "github://profile/kinest1997/", webURL: "https://github.com/kinest1997"),
-                    setlinkAction(appURL: "linkedin://profile/heesung-kang-kinest1997", webURL: "https://www.linkedin.com/in/heesung-kang-kinest1997"),
-                    setlinkAction(appURL: "instagram://user?username=kinest1997", webURL: "https://instagram.com/kinest1997")
-                ]
-            case .account:
-                return Auth.auth().currentUser == nil ? [logIn()] : [logOut()]
-                
             }
         }
     }
@@ -99,18 +76,44 @@ extension SettingTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Settings(rawValue: indexPath.section)?.actions[indexPath.row]
+        switch indexPath.section {
+        case 2:
+            switch indexPath.row {
+            case 0:
+                requestAppStoreReview()
+            case 1:
+                setlinkAction(appURL: "itms-beta://", webURL: "")
+            default:
+                return
+            }
+        case 3:
+            switch indexPath.row {
+            case 0:
+                setlinkAction(appURL: "github://profile/kinest1997/", webURL: "https://github.com/kinest1997")
+            case 1:
+                setlinkAction(appURL: "linkedin://profile/heesung-kang-kinest1997", webURL: "https://www.linkedin.com/in/heesung-kang-kinest1997")
+            case 2:
+                setlinkAction(appURL: "instagram://user?username=kinest1997", webURL: "https://instagram.com/kinest1997")
+            default:
+                return
+            }
+        case 4:
+            Auth.auth().currentUser == nil ? logIn() : logOut()
+        default:
+            return
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
         
         var content = cell.defaultContentConfiguration()
-        content.text = Settings(rawValue: indexPath.section)?.sectionTitle
+        content.text = Settings(rawValue: indexPath.section)?.rowTitles[indexPath.row]
         cell.contentConfiguration = content
-        
+        cell.accessoryView?.isHidden = true
         switch indexPath.section {
         case 1:
+            cell.accessoryView?.isHidden = false
             let accessorySwitch = UISwitch()
             UNUserNotificationCenter.current().getNotificationSettings { data in
                 if data.notificationCenterSetting == .enabled {
@@ -138,7 +141,7 @@ extension SettingTableViewController {
 
 ///Actions per indexPath.row
 extension SettingTableViewController {
-    static private func requestAppStoreReview() {
+    private func requestAppStoreReview() {
         guard let appStoreURL = URL(string: "https://apps.apple.com/app/id") else { return }    //TODO: 앱아이디 입력해줄 것 예)id100043049583
         var components = URLComponents(url: appStoreURL, resolvingAgainstBaseURL: false)
         components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
@@ -146,7 +149,7 @@ extension SettingTableViewController {
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
     }
     
-    static private func setlinkAction(appURL: String, webURL: String){
+    private func setlinkAction(appURL: String, webURL: String){
         let appURL = URL(string: appURL)!
         let application = UIApplication.shared
         
@@ -158,24 +161,26 @@ extension SettingTableViewController {
         }
     }
     
-    static private func logIn() {
-        UIApplication.topMostViewController(self.rootViewController)?.show(LoginViewController(), sender: nil)
+    private func logIn() {
+        self.tabBarController?.selectedViewController = tabBarController?.viewControllers?[0]
+        tabBarController?.viewControllers?[0].show(LoginViewController(), sender:  nil)
     }
     
-    static private func logOut() {
-        UserDefaults.standard.set(true, forKey: "firstLaunch")
+    private func logOut() {
         let alert = UIAlertController(title: "Do you want to log out?".localized, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes".localized, style: .default) { _ in
             let firebaseAuth = Auth.auth()
             do {
                 try firebaseAuth.signOut()
+                UserDefaults.standard.set(true, forKey: "firstLaunch")
             } catch let error {
                 print(error)
             }
             FirebaseRecipe.shared.myRecipe = []
             FirebaseRecipe.shared.wishList = []
+            self.tableView.reloadData()
         })
         alert.addAction(UIAlertAction(title: "No".localized, style: .cancel, handler: nil))
-        UIApplication.topMostViewController(self.rootViewController)?.present(alert, animated: true)
+        self.present(alert, animated: true, completion: nil)
     }
 }

@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             FirebaseRecipe.shared.recipe = data
         }
         
+        FirebaseRecipe.shared.getCocktailLikeData { data in
+            FirebaseRecipe.shared.cocktailLikeList = data
+        }
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, error in
         }

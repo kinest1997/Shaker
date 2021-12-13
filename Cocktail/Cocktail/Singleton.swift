@@ -55,6 +55,8 @@ class FirebaseRecipe {
     
     var youTubeData: [YouTubeVideo] = []
     
+    var cocktailLikeList: [String:[String: Bool]] = [:]
+    
     let uid = Auth.auth().currentUser?.uid
     
     func getRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
@@ -83,7 +85,7 @@ class FirebaseRecipe {
     
     func getWishList(completion: @escaping ([Cocktail]) -> (Void)) {
         guard let uid = uid else { return }
-        ref.child("users").child(uid).child("WishList").observe( .value) { snapshot in
+        ref.child("users").child(uid).child("WishList").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
                   let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
@@ -102,6 +104,31 @@ class FirebaseRecipe {
                       completion([YouTubeVideo]())
                       return }
             completion(youTubeVideoList)
+        }
+    }
+    
+    func getCocktailLikeData(completion: @escaping ([String:[String: Bool]]) -> (Void)) {
+        Database.database().reference().child("CocktailLikeData").observe( .value) { snapshot in
+            guard let value = snapshot.value as? [String:[String: Bool]] else { return }
+            completion(value)
+        }
+    }
+    
+    func getSingleCocktialData(cocktail: Cocktail, completion: @escaping ([String: Bool]) -> (Void)) {
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [String: Bool] else {
+                completion([:])
+                return  }
+            completion(value)
+        }
+    }
+    
+    func likeOrDislikeCount(cocktailList: [String: Bool], choice: Bool) -> Int {
+        switch choice {
+        case true:
+            return cocktailList.filter { $0.value == true }.count
+        case false:
+            return cocktailList.filter { $0.value == false }.count
         }
     }
     
@@ -124,6 +151,25 @@ class FirebaseRecipe {
         guard let data = try? JSONEncoder().encode(cocktailList) else { return }
         let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
         Database.database().reference().child("CocktailRecipes").setValue(jsonData)
+    }
+    
+    func addLike(cocktail: Cocktail) {
+        guard let uid = uid else { return }
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(true)
+    }
+    
+    func uploadId(cocktail: Cocktail) {
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).child("id").setValue(cocktail.name)
+    }
+    
+    func addDislike(cocktail: Cocktail) {
+        guard let uid = uid else { return }
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(false)
+    }
+    
+    func deleteLike(cocktail: Cocktail) {
+        guard let uid = uid else { return }
+        Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(nil)
     }
     
     func getJSONRecipe() -> [Cocktail] {

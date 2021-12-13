@@ -1,14 +1,17 @@
 import UIKit
 
-struct MyDrinks: Codable, Hashable {
-    var iHave: Bool
-    var base: Cocktail.Base
-    let name: Cocktail.Ingredients
-}
-
 protocol CocktailCondition {
     var rawValue: String { get }
 }
+
+struct CocktailLikeList: Codable {
+    let cocktail: [String: CocktailLikeCount]
+}
+
+struct CocktailLikeCount: Codable {
+    var people: [String: Bool] = [:]
+}
+//칵테일의 id 아래에 좋아요를 누를때마다 그사람의 uid 가 추가되고 좋아요일경우 true, 싫어요일 경우 false
 
 struct YouTubeVideo: Codable {
     let videoName: String
@@ -46,6 +49,7 @@ struct Cocktail: Codable, Hashable {
     var myRecipe: Bool
     var wishList: Bool
     var imageURL: String
+    let id: String?
     
     enum Base: String, Codable, CaseIterable, CocktailCondition {
         case rum

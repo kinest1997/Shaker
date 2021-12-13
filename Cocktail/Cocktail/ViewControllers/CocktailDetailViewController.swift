@@ -1,19 +1,72 @@
 import UIKit
 import SnapKit
 import Kingfisher
+import FirebaseDatabase
+import FirebaseAuth
 
 class CocktailDetailViewController: UIViewController {
     
-    var cocktailData: Cocktail?
+    var cocktailData: Cocktail = Cocktail(name: "", craft: .blending, glass: .collins, recipe: [], ingredients: [], base: .assets, alcohol: .low, color: .various, mytip: "", drinkType: .longDrink, myRecipe: false, wishList: false, imageURL: "", id: "")
+    
+    var likeData: [String: Bool] = [:] {
+        didSet {
+            if likeData.contains(where: { (key: String, value: Bool) in
+                key == Auth.auth().currentUser?.uid
+            }) {
+                switch likeData[Auth.auth().currentUser!.uid] {
+                case true:
+                    iLike = true
+                case false:
+                    iLike = false
+                default:
+                    return
+                }
+            }
+            
+            let likeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: likeData, choice: true)
+            DispatchQueue.main.async { [weak self] in
+                self?.likeCountLabel.text = String(likeCount)
+            }
+            
+            let dislikeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: likeData, choice: false)
+            DispatchQueue.main.async {[weak self] in
+                self?.disLikeCountLabel.text = String(dislikeCount)
+                self?.loadingView.isHidden = true
+            }
+        }
+    }
+    
+    var iLike: Bool? {
+        didSet {
+            switch iLike {
+            case true:
+                DispatchQueue.main.async { [weak self] in
+                    self?.likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
+                    self?.disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
+                }
+            case false:
+                DispatchQueue.main.async { [weak self] in
+                    self?.disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
+                    self?.likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
+                }
+            case nil:
+                DispatchQueue.main.async { [weak self] in
+                    self?.disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
+                    self?.likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
+                }
+            default:
+                return
+            }
+        }
+    }
     
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     
-    let likeButton = UIButton()
+    let wishListButton = UIButton()
     
     let cocktailImageView = UIImageView()
     
-    let englishNameLabel = UILabel()
     let nameLabel = UILabel()
     
     let alcoholGuideLabel = UILabel()
@@ -53,22 +106,43 @@ class CocktailDetailViewController: UIViewController {
     let recipeGuideLabel = UILabel()
     let recipeLabel = UILabel()
     
+    let likeButton = UIButton()
+    let likeCountLabel = UILabel()
+    let disLikeButton = UIButton()
+    let disLikeCountLabel = UILabel()
+    
+    let loadingView = LoadingView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingView.isHidden = false
         attribute()
         layout()
         let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
         navigationController?.navigationBar.isHidden = false
+        
+        FirebaseRecipe.shared.getSingleCocktialData(cocktail: cocktailData) {[weak self] data in
+            self?.likeData = data
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if cocktailData.myRecipe {
+            [likeButton, disLikeButton, disLikeCountLabel, likeCountLabel].forEach {
+                $0.isHidden = true
+            }
+        }
     }
     
     func layout() {
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainView)
         
-        [nameLabel, englishNameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel].forEach { mainView.addSubview($0) }
+        [nameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel, likeButton, likeCountLabel, disLikeCountLabel, disLikeButton].forEach { mainView.addSubview($0) }
         
-        [groupStackView, cocktailImageView, likeButton].forEach { mainView.addSubview($0) }
+        [groupStackView, cocktailImageView, wishListButton].forEach { mainView.addSubview($0) }
         
         [leftStackView, centerLine, rightStackView].forEach{ groupStackView.addArrangedSubview($0) }
         
@@ -79,7 +153,7 @@ class CocktailDetailViewController: UIViewController {
         [lowAlcoholLabel, midAlcoholLabel, highAlcoholLabel].forEach { alcoholStackView.addArrangedSubview($0) }
         
         //위에서부터 아래로 쭉 순서대로 찾으면 됨
-        likeButton.snp.makeConstraints {
+        wishListButton.snp.makeConstraints {
             $0.width.height.equalTo(30)
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(20)
@@ -87,7 +161,7 @@ class CocktailDetailViewController: UIViewController {
         
         cocktailImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(likeButton.snp.bottom).offset(20)
+            $0.top.equalTo(wishListButton.snp.bottom).offset(20)
             $0.width.equalToSuperview().multipliedBy(0.5)
             $0.height.equalTo(300)
         }
@@ -99,18 +173,35 @@ class CocktailDetailViewController: UIViewController {
             $0.width.equalToSuperview()
         }
         
-        englishNameLabel.snp.makeConstraints {
-            $0.top.equalTo(nameLabel.snp.bottom)
-            $0.centerX.equalToSuperview()
-            $0.height.equalTo(40)
-            $0.width.equalToSuperview()
+        likeButton.snp.makeConstraints {
+            $0.leading.equalTo(alcoholStackView.snp.leading)
+            $0.width.height.equalTo(30)
+            $0.bottom.equalTo(alcoholStackView.snp.top).offset(-20)
+        }
+        
+        likeCountLabel.snp.makeConstraints {
+            $0.leading.trailing.equalTo(likeButton)
+            $0.top.equalTo(likeButton.snp.bottom)
+            $0.bottom.equalTo(alcoholStackView.snp.top)
+        }
+        
+        disLikeButton.snp.makeConstraints {
+            $0.trailing.equalTo(alcoholStackView.snp.trailing)
+            $0.width.height.equalTo(30)
+            $0.bottom.equalTo(alcoholStackView.snp.top).offset(-20)
+        }
+        
+        disLikeCountLabel.snp.makeConstraints {
+            $0.leading.trailing.equalTo(disLikeButton)
+            $0.top.equalTo(disLikeButton.snp.bottom)
+            $0.bottom.equalTo(alcoholStackView.snp.top)
         }
         
         alcoholStackView.snp.makeConstraints {
             $0.height.equalTo(nameLabel)
             $0.width.equalToSuperview().multipliedBy(0.3)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(englishNameLabel.snp.bottom).offset(5)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(60)
         }
         
         alcoholGuideLabel.snp.makeConstraints {
@@ -181,7 +272,7 @@ class CocktailDetailViewController: UIViewController {
             $0.height.equalTo(100)
             $0.centerX.equalToSuperview()
         }
- 
+        
         mainScrollView.snp.makeConstraints {
             $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.top.equalToSuperview()
@@ -204,7 +295,7 @@ class CocktailDetailViewController: UIViewController {
         }
         
         //내용 설정하는곳
-        [alcoholLabel, alcoholGuideLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, recipeLabel, drinkTypeLabel].forEach {
+        [alcoholLabel, alcoholGuideLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, recipeLabel, drinkTypeLabel, likeCountLabel, disLikeCountLabel].forEach {
             $0.textColor = .black
             $0.font = .systemFont(ofSize: 14, weight: .medium)
         }
@@ -216,7 +307,7 @@ class CocktailDetailViewController: UIViewController {
         }
         
         //제일 두꺼운 칵테일 이름 설정
-        [nameLabel, englishNameLabel].forEach {
+        [nameLabel].forEach {
             $0.textAlignment = .center
             $0.textColor = .black
             $0.font = .systemFont(ofSize: 24, weight: .heavy)
@@ -246,6 +337,8 @@ class CocktailDetailViewController: UIViewController {
             $0.spacing = 10
         }
         
+        cocktailImageView.contentMode = .scaleAspectFill
+        
         alcoholStackView.distribution = .fillEqually
         alcoholStackView.alignment = .center
         alcoholStackView.spacing = 20
@@ -253,6 +346,9 @@ class CocktailDetailViewController: UIViewController {
         groupStackView.axis = .horizontal
         groupStackView.spacing = 10
         groupStackView.distribution = .fillProportionally
+        
+        likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
+        disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
         
         alcoholGuideLabel.text = "Alcohol".localized
         colorGuideLabel.text = "Color".localized
@@ -263,27 +359,58 @@ class CocktailDetailViewController: UIViewController {
         recipeGuideLabel.text = "Recipe".localized
         ingredientsGuideLabel.text = "Ingredients".localized
         
-        likeButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self,
-                  let bindedCocktailData = self.cocktailData else { return }
-            if FirebaseRecipe.shared.wishList.contains(bindedCocktailData) {
-                self.likeButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-                guard let number = FirebaseRecipe.shared.wishList.firstIndex(of: bindedCocktailData) else { return }
+        wishListButton.addAction(UIAction(handler: {[weak self] _ in
+            guard let self = self else { return }
+            if FirebaseRecipe.shared.wishList.contains(self.cocktailData) {
+                self.wishListButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                guard let number = FirebaseRecipe.shared.wishList.firstIndex(of: self.cocktailData) else { return }
                 FirebaseRecipe.shared.wishList.remove(at: number)
-                self.cocktailData?.wishList = false
+                self.cocktailData.wishList = false
             } else {
-                self.likeButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-                var data = bindedCocktailData
+                self.wishListButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+                var data = self.cocktailData
                 data.wishList = true
                 FirebaseRecipe.shared.wishList.append(data)
-                self.cocktailData?.wishList = true
+                self.cocktailData.wishList = true
             }
             FirebaseRecipe.shared.uploadWishList()
+        }), for: .touchUpInside)
+        
+        likeButton.addAction(UIAction(handler: {[weak self] _ in
+            guard let self = self else { return }
+            if self.iLike == true {
+                FirebaseRecipe.shared.deleteLike(cocktail: self.cocktailData)
+                FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
+                    self.likeData = data
+                }
+                self.iLike = nil
+            } else {
+                FirebaseRecipe.shared.addLike(cocktail: self.cocktailData)
+                FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
+                    self.likeData = data
+                }
+            }
+        }), for: .touchUpInside)
+        
+        disLikeButton.addAction(UIAction(handler: {[weak self] _ in
+            guard let self = self else { return }
+            
+            if self.iLike == false {
+                FirebaseRecipe.shared.deleteLike(cocktail: self.cocktailData)
+                FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
+                    self.likeData = data
+                }
+                self.iLike = nil
+            } else {
+                FirebaseRecipe.shared.addDislike(cocktail: self.cocktailData)
+                FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
+                    self.likeData = data
+                }
+            }
         }), for: .touchUpInside)
     }
     
     @objc func startEditing() {
-        guard let cocktailData = cocktailData else { return }
         let addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
         addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
         addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
@@ -295,7 +422,6 @@ class CocktailDetailViewController: UIViewController {
     
     func setData(data: Cocktail) {
         nameLabel.text = data.name.localized
-        englishNameLabel.text = data.name
         alcoholLabel.text = data.alcohol.rawValue.localized
         colorLabel.text = data.color.rawValue.localized
         baseDrinkLabel.text = data.base.rawValue.localized
@@ -326,10 +452,10 @@ class CocktailDetailViewController: UIViewController {
         
         if wishListData.contains(justRecipe) {
             self.cocktailData = justRecipe
-            likeButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            wishListButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
             self.cocktailData = data
-            likeButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            wishListButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
         }
     }
     

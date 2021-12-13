@@ -63,6 +63,8 @@
 "Write recipe" = "레시피적어!";
 "Write tips" = "팁도좀 적어";
 "Input Recipes" = "레시피를 입력하세요";
+"Add Recipe" = "레시피 추가";
+"Add" = "추가";
 
 //MainViewController.swift
 "Recommendation" = "추천";
@@ -136,7 +138,7 @@
 
 
 //Cocktail.Ingredients
-"barcardi" = "바카디";
+"bacardi" = "바카디";
 "scotchWhiskey" = "스카치위스키";
 "bombaySapphire" = "봄베이 사파이어";
 "tanquerayNoTen" = "탱커레이 no.10";

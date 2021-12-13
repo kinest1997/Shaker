@@ -9,7 +9,11 @@ class CocktailRecipeViewController: UIViewController {
     var originRecipe: [Cocktail] = []
     var filteredRecipe: [Cocktail] = []
     
+    let loadingView = LoadingView()
+    
     lazy var filterView = FilteredView()
+    
+    var likeData: [String:[String: Bool]]?
     
     let mainTableView = UITableView()
     
@@ -27,6 +31,7 @@ class CocktailRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadingView.isHidden = false
         attribute()
         layout()
         unTouchableRecipe = FirebaseRecipe.shared.recipe + FirebaseRecipe.shared.myRecipe
@@ -53,6 +58,12 @@ class CocktailRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterButton
         let leftarrangeButton = UIBarButtonItem(title: "Sorting".localized, image: nil, primaryAction: nil, menu: filterMenu)
         navigationItem.leftBarButtonItem = leftarrangeButton
+        
+        FirebaseRecipe.shared.getCocktailLikeData {[weak self] data in
+            self?.likeData = data
+            self?.loadingView.isHidden = true
+            self?.mainTableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,9 +74,17 @@ class CocktailRecipeViewController: UIViewController {
     }
     
     func layout() {
+        view.addSubview(mainTableView)
+        navigationController?.view.addSubview(filterView)
+        view.addSubview(loadingView)
         mainTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
+        loadingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         filterView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(10)
             $0.top.bottom.equalToSuperview().inset(100)
@@ -73,8 +92,6 @@ class CocktailRecipeViewController: UIViewController {
     }
     
     func attribute() {
-        view.addSubview(mainTableView)
-        navigationController?.view.addSubview(filterView)
         filterView.isHidden = true
         filterView.saveButton.setTitle("Save".localized, for: .normal)
         filterView.resetButton.setTitle("Reset".localized, for: .normal)
