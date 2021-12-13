@@ -36,11 +36,11 @@ struct CocktailEntry: TimelineEntry {
 }
 
 struct Cocktail_WidgetEntryView : View {
-    @Environment(\.widgetFamily) var widgeFamily
+    @Environment(\.widgetFamily) var widgetFamily
     var entry: Provider.Entry
     
     var body: some View {
-        if widgeFamily == .systemSmall {
+        if widgetFamily == .systemSmall {
             VStack  {
                 Image(uiImage: UIImage(named: entry.configuration.name) ?? UIImage(systemName: "circle")!)
                     .resizable()

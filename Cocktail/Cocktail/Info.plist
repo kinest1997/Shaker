@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>itms</string>
-    </array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -16,6 +12,10 @@
 				<string>com.googleusercontent.apps.504857425342-ddbed9lk4vulkdobf5l6mjp45uhhmfe0</string>
 			</array>
 		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>itms</string>
 	</array>
 	<key>NSUserActivityTypes</key>
 	<array>
