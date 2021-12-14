@@ -1,15 +1,28 @@
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import SwiftUI
+
+protocol ColorChoiceViewBindable {
+    var colorArray: Driver<[Cocktail.Color]> { get }
+    var updateItem: Signal<IndexPath> { get }
+    var buttonLabelCount: Signal<Int> { get }
+    var myFavor: Signal<Void> { get }
+    var saveMyFavor: Signal<Void> { get }
+    var presentAlert: Driver<Void> { get }
+    var presentAlcoholChoiceView: Driver<AlcoholChoiceViewModel> { get }
+    
+    var nextButtonTapped: PublishRelay<Void> { get }
+    var itemSelected: PublishRelay<IndexPath> { get }
+}
 
 class ColorChoiceViewController: UIViewController {
-    
+    let disposeBag = DisposeBag()
     let questionLabel = UILabel()
     
-    var myFavor: Bool = true
-    
-    let colorArray = Cocktail.Color.allCases
     var selectedColor = [Cocktail.Color]()
-    var isCheckedArray = [Bool]()
+    var isCheckedArray = Array(repeating: false, count: Cocktail.Color.allCases.count)
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
@@ -17,23 +30,62 @@ class ColorChoiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isCheckedArray = colorArray.map { _ in false}
-        mainCollectionView.delegate = self
-        mainCollectionView.dataSource = self
-        mainCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: "colorCell")
+        
         layout()
         attribute()
-        if myFavor {
-            self.tabBarController?.tabBar.isHidden = true
-        } else {
-            self.tabBarController?.tabBar.isHidden = false
-        }
     }
     
-    func layout() {
-        view.addSubview(questionLabel)
-        view.addSubview(mainCollectionView)
-        view.addSubview(nextButton)
+    func bind(_ viewModel: ColorChoiceViewBindable) {
+        viewModel.colorArray
+            .drive(mainCollectionView.rx.items(cellIdentifier: "colorCell", cellType: ColorCollectionViewCell.self)) { index, color, cell in
+                cell.colorImageView.image = UIImage(named: colorArray[indexPath.row].rawValue)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.updateItem
+            .emit(to: self.rx.updateSelectedItem)
+            .disposed(by: disposeBag)
+        
+        viewModel.buttonLabelCount
+            .map { "\($0)개의 칵테일 발견" }
+            .emit(to: nextButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+        
+        viewModel.myFavor
+            .emit(to: tabBarController?.tabBar.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.saveMyFavor
+            .emit(onNext: {[weak self] _ in
+                UserDefaults.standard.set(self?.selectedColor.map { $0.rawValue }, forKey: "ColorFavor")
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.presentAlert
+            .drive(onNext: {[weak self] _ in
+                self?.present(UserFavor.shared.makeAlert(title: "하나이상 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.presentAlcoholChoiceView
+            .emit(to: self.rx.presentAlcoholChoiceView)
+            .disposed(by: disposeBag)
+        
+        mainCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        mainCollectionView.rx.itemSelected
+            .bind(to: viewModel.itemSelected)
+            .disposed(by: disposeBag)
+        
+        nextButton.rx.tap
+            .bind(to: viewModel.nextButtonTapped)
+            .disposed(by: disposeBag)
+    }
+    
+    private func layout() {
+        [questionLabel, mainCollectionView, nextButton]
+            .forEach { view.addSubview($0) }
         
         questionLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(210)
@@ -56,75 +108,50 @@ class ColorChoiceViewController: UIViewController {
     }
     
     func attribute() {
-        questionLabel.text = "선호하는 색은 무엇인가요?"
         view.backgroundColor = .white
-        mainCollectionView.backgroundColor = .white
+        questionLabel.text = "선호하는 색은 무엇인가요?"
         questionLabel.textAlignment = .center
         questionLabel.textColor = .systemGray2
+        
+        mainCollectionView.backgroundColor = .white
         
         nextButton.layer.borderWidth = 1
         nextButton.layer.borderColor = UIColor.black.cgColor
         nextButton.layer.cornerRadius = 15
-        
         nextButton.setTitle("다음", for: .normal)
         nextButton.setTitleColor(.systemGray2, for: .normal)
-        nextButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            if self.myFavor {
-                UserDefaults.standard.set(self.selectedColor.map { $0.rawValue }, forKey: "ColorFavor")
-            }
-            let lastRecipe = FirebaseRecipe.shared.recipe.filter {
-                self.selectedColor.contains($0.color)}
-            if lastRecipe.isEmpty {
-                self.present(UserFavor.shared.makeAlert(title: "하나이상 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
-            } else {
-                let alcoholChoiceViewController = AlcoholChoiceViewController()
-                alcoholChoiceViewController.myFavor = self.myFavor
-                alcoholChoiceViewController.filteredRecipe = lastRecipe
-                self.show(alcoholChoiceViewController, sender: nil)
-            }
-        }), for: .touchUpInside)
-    }
-    
-    func buttonLabelCountUpdate(button: UIButton) {
-        let number = FirebaseRecipe.shared.recipe.filter {
-            selectedColor.contains($0.color)
-        }.count
-        button.setTitle("\(number)개의 칵테일 발견", for: .normal)
     }
 }
 
-extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Cocktail.Color.allCases.count
-    }
-    
+extension ColorChoiceViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let yourWidth = collectionView.bounds.width/3.5
         let yourHeight = yourWidth
         
         return CGSize(width: yourWidth, height: yourHeight)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colorCell", for: indexPath) as? ColorCollectionViewCell else { return UICollectionViewCell() }
-        cell.colorImageView.image = UIImage(named: colorArray[indexPath.row].rawValue)
-        return cell
+}
+
+extension Reactive where Base: ColorChoiceViewController {
+    var updateSelectedItem: Binder<IndexPath> {[weak self] indexPath in
+        guard let self = self,
+            let selectedCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell else { return }
+        if self.isCheckedArray[indexPath.row] == false {
+            self.isCheckedArray[indexPath.row] = true
+            selectedCell.isChecked = isCheckedArray[indexPath.row]
+            self.selectedColor.append(colorArray[indexPath.row])
+        } else {
+            self.isCheckedArray[indexPath.row] = false
+            selectedCell.isChecked = isCheckedArray[indexPath.row]
+            guard let number = self.selectedColor.firstIndex(of: colorArray[indexPath.row]) else { return }
+            self.selectedColor.remove(at: number)
+        }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let selectedCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell else { return }
-        if isCheckedArray[indexPath.row] == false {
-            isCheckedArray[indexPath.row] = true
-            selectedCell.isChecked = isCheckedArray[indexPath.row]
-            selectedColor.append(colorArray[indexPath.row])
-            buttonLabelCountUpdate(button: nextButton)
-        } else {
-            isCheckedArray[indexPath.row] = false
-            selectedCell.isChecked = isCheckedArray[indexPath.row]
-            guard let number = selectedColor.firstIndex(of: colorArray[indexPath.row]) else { return }
-            selectedColor.remove(at: number)
-            buttonLabelCountUpdate(button: nextButton)
+    var presentAlcoholChoiceView: Binder<AlcoholChoiceViewModel> {[weak self] viewModel in
+            let alcoholChoiceViewController = AlcoholChoiceViewController()
+            alcoholChoiceViewController.bind(viewModel)
+            self.show(alcoholChoiceViewController, sender: nil)
         }
     }
 }

@@ -247,8 +247,13 @@
 			isa = PBXGroup;
 			children = (
 				3D4415D027564EA600CBCC40 /* LoginViewController.swift */,
-				7DA42A732768560F00110512 /* ColorChoiceView+Rx */,
-				7DA42A6F27683F4600110512 /* AlcoholChoiceView+Rx */,
+				3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */,
+				7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */,
+				7DA42A742768563B00110512 /* ColorChoiceModel.swift */,
+				3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */,
+				3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */,
+				7DA42A6D27683F4200110512 /* AlcoholChoiceViewModel.swift */,
+				7DA42A7627685D2600110512 /* AlcoholChoiceModel.swift */,
 				3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */,
 				3DE56B32275DF93E0087D979 /* DrinkTypeChoiceViewController.swift */,
 				3DE56B34275E4F750087D979 /* BaseChoiceViewController.swift */,
@@ -355,27 +360,6 @@
 				7D4AF9072760D5840093C3C2 /* UIViewController.swift */,
 			);
 			path = "Global Components";
-			sourceTree = "<group>";
-		};
-		7DA42A6F27683F4600110512 /* AlcoholChoiceView+Rx */ = {
-			isa = PBXGroup;
-			children = (
-				3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */,
-				7DA42A6D27683F4200110512 /* AlcoholChoiceViewModel.swift */,
-				7DA42A7627685D2600110512 /* AlcoholChoiceModel.swift */,
-			);
-			path = "AlcoholChoiceView+Rx";
-			sourceTree = "<group>";
-		};
-		7DA42A732768560F00110512 /* ColorChoiceView+Rx */ = {
-			isa = PBXGroup;
-			children = (
-				3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */,
-				7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */,
-				7DA42A742768563B00110512 /* ColorChoiceModel.swift */,
-				3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */,
-			);
-			path = "ColorChoiceView+Rx";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
