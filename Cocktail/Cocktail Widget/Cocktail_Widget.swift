@@ -10,13 +10,13 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (CocktailEntry) -> Void) {
-        let configuration = Cocktail(name: "Martini".localized, craft: .blending, glass: .saucer, recipe: ["손으로 막휘젓기"], ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false, imageURL: "", id: nil)
+        let configuration = Cocktail(name: "Martini".localized, craft: .blending, glass: .saucer, recipe: ["손으로 막휘젓기"], ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false, imageURL: "")
         let entry = CocktailEntry(date: Date(), configuration: configuration)
         completion(entry)
     }
     
     func placeholder(in context: Context) -> CocktailEntry {
-        let configuration = Cocktail(name: "Martini".localized, craft: .blending, glass: .saucer, recipe: ["손으로 막휘젓기"], ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false, imageURL: "",id: nil)
+        let configuration = Cocktail(name: "Martini".localized, craft: .blending, glass: .saucer, recipe: ["손으로 막휘젓기"], ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false, imageURL: "")
         return CocktailEntry(date: Date(), configuration: configuration)
     }
     
