@@ -81,6 +81,14 @@
 		7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D0D9B762744D714008C75E7 /* Ingredients.plist */; };
 		7D4AF9062760D57B0093C3C2 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AF9052760D57B0093C3C2 /* UIApplication.swift */; };
 		7D4AF9082760D5840093C3C2 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AF9072760D5840093C3C2 /* UIViewController.swift */; };
+		7DA42A6627683DB300110512 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 7DA42A6527683DB300110512 /* RxBlocking */; };
+		7DA42A6827683DB300110512 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 7DA42A6727683DB300110512 /* RxCocoa */; };
+		7DA42A6A27683DB300110512 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 7DA42A6927683DB300110512 /* RxRelay */; };
+		7DA42A6C27683DB300110512 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7DA42A6B27683DB300110512 /* RxSwift */; };
+		7DA42A6E27683F4200110512 /* AlcoholChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A6D27683F4200110512 /* AlcoholChoiceViewModel.swift */; };
+		7DA42A71276840B500110512 /* ColorChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */; };
+		7DA42A752768563B00110512 /* ColorChoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A742768563B00110512 /* ColorChoiceModel.swift */; };
+		7DA42A7727685D2600110512 /* AlcoholChoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A7627685D2600110512 /* AlcoholChoiceModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +175,10 @@
 		3DF7934A275A70EA004E9F98 /* CocktailData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CocktailData.json; sourceTree = "<group>"; };
 		7D4AF9052760D57B0093C3C2 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		7D4AF9072760D5840093C3C2 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		7DA42A6D27683F4200110512 /* AlcoholChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholChoiceViewModel.swift; sourceTree = "<group>"; };
+		7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceViewModel.swift; sourceTree = "<group>"; };
+		7DA42A742768563B00110512 /* ColorChoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceModel.swift; sourceTree = "<group>"; };
+		7DA42A7627685D2600110512 /* AlcoholChoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholChoiceModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,11 +197,15 @@
 			files = (
 				3D48C20E275A0595001B40FC /* NVActivityIndicatorView in Frameworks */,
 				3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */,
+				7DA42A6827683DB300110512 /* RxCocoa in Frameworks */,
 				3DB910DF27574D720076CB50 /* FirebaseAuth in Frameworks */,
 				3DB910E927574D720076CB50 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
+				7DA42A6627683DB300110512 /* RxBlocking in Frameworks */,
 				3DB910ED27574D720076CB50 /* FirebaseRemoteConfig in Frameworks */,
 				3DB910E727574D720076CB50 /* FirebaseInAppMessaging-Beta in Frameworks */,
 				3DB910F127574D720076CB50 /* FirebaseStorageSwift-Beta in Frameworks */,
+				7DA42A6A27683DB300110512 /* RxRelay in Frameworks */,
+				7DA42A6C27683DB300110512 /* RxSwift in Frameworks */,
 				3D647F2D2753327F005EE580 /* SnapKit in Frameworks */,
 				3DB910E127574D720076CB50 /* FirebaseCrashlytics in Frameworks */,
 				3DB910DD27574D720076CB50 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
@@ -231,9 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				3D4415D027564EA600CBCC40 /* LoginViewController.swift */,
-				3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */,
-				3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */,
-				3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */,
+				7DA42A732768560F00110512 /* ColorChoiceView+Rx */,
+				7DA42A6F27683F4600110512 /* AlcoholChoiceView+Rx */,
 				3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */,
 				3DE56B32275DF93E0087D979 /* DrinkTypeChoiceViewController.swift */,
 				3DE56B34275E4F750087D979 /* BaseChoiceViewController.swift */,
@@ -342,6 +357,27 @@
 			path = "Global Components";
 			sourceTree = "<group>";
 		};
+		7DA42A6F27683F4600110512 /* AlcoholChoiceView+Rx */ = {
+			isa = PBXGroup;
+			children = (
+				3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */,
+				7DA42A6D27683F4200110512 /* AlcoholChoiceViewModel.swift */,
+				7DA42A7627685D2600110512 /* AlcoholChoiceModel.swift */,
+			);
+			path = "AlcoholChoiceView+Rx";
+			sourceTree = "<group>";
+		};
+		7DA42A732768560F00110512 /* ColorChoiceView+Rx */ = {
+			isa = PBXGroup;
+			children = (
+				3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */,
+				7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */,
+				7DA42A742768563B00110512 /* ColorChoiceModel.swift */,
+				3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */,
+			);
+			path = "ColorChoiceView+Rx";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -396,6 +432,10 @@
 				3D48C20D275A0595001B40FC /* NVActivityIndicatorView */,
 				3D48C20F275A0595001B40FC /* NVActivityIndicatorViewExtended */,
 				3D3452FA275F3A9E00DA3978 /* Lottie */,
+				7DA42A6527683DB300110512 /* RxBlocking */,
+				7DA42A6727683DB300110512 /* RxCocoa */,
+				7DA42A6927683DB300110512 /* RxRelay */,
+				7DA42A6B27683DB300110512 /* RxSwift */,
 			);
 			productName = Cocktail;
 			productReference = 3DA76A2D2730D1CD004091CE /* Cocktail.app */;
@@ -436,6 +476,7 @@
 				3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 				3D3452F9275F3A9D00DA3978 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
 			projectDirPath = "";
@@ -508,16 +549,20 @@
 				7D4AF9082760D5840093C3C2 /* UIViewController.swift in Sources */,
 				3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift in Sources */,
 				3DE56B33275DF93F0087D979 /* DrinkTypeChoiceViewController.swift in Sources */,
+				7DA42A6E27683F4200110512 /* AlcoholChoiceViewModel.swift in Sources */,
 				3D83715D274CD7C300CA6036 /* ChoiceIngredientsView.swift in Sources */,
 				3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */,
 				3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */,
+				7DA42A752768563B00110512 /* ColorChoiceModel.swift in Sources */,
 				3DB910D427566C1C0076CB50 /* ColorCollectionViewCell.swift in Sources */,
 				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
 				3D21D4C22733E9C300FE2896 /* UIImage.swift in Sources */,
 				3D69BF75275B7B57008502EE /* SettingTableViewController.swift in Sources */,
 				3DB910F3275759E90076CB50 /* Singleton.swift in Sources */,
+				7DA42A7727685D2600110512 /* AlcoholChoiceModel.swift in Sources */,
 				3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */,
 				3D175BA6274285BB00EC142B /* String.swift in Sources */,
+				7DA42A71276840B500110512 /* ColorChoiceViewModel.swift in Sources */,
 				3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */,
 				3D7785982753468D008F0151 /* WishListTableViewController.swift in Sources */,
 				3DF79349275A6AC8004E9F98 /* AddRecipeCell.swift in Sources */,
@@ -900,6 +945,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -992,6 +1045,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = "FirebaseStorageSwift-Beta";
+		};
+		7DA42A6527683DB300110512 /* RxBlocking */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxBlocking;
+		};
+		7DA42A6727683DB300110512 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		7DA42A6927683DB300110512 /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
+		};
+		7DA42A6B27683DB300110512 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
