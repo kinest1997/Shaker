@@ -219,6 +219,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let recipeLabel = UILabel()
     
+    let footerView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self
@@ -226,6 +228,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         addRecipeTableView.delegate = self
         addRecipeTableView.dataSource = self
         addRecipeTableView.tableHeaderView = headerView
+        addRecipeTableView.tableFooterView = footerView
         addRecipeTableView.rowHeight = 50
         attribute()
         layout()
@@ -330,8 +333,15 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         ingredientsSelectButton.setTitleColor(.black, for: .normal)
         
-        addButton.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
-        addRecipeTableView.tableFooterView = addButton
+        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
+        footerView.addSubview(addButton)
+        
+        addButton.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(40)
+        }
+        
+//        addButton.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
         
         nameTextField.textAlignment = .center
         recipeLabel.text = "Recipe".localized
