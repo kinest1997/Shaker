@@ -38,13 +38,20 @@ class AssistantViewController: UIViewController {
             }
             
         }), for: .touchUpInside)
-        
-        myRecipeButton.backgroundColor = .blue
         myRecipeButton.setTitle("My Recipes".localized, for: .normal)
-        myBarButton.backgroundColor = .red
         myBarButton.setTitle("My Drinks".localized, for: .normal)
         wishListButton.setTitle("Bookmark".localized, for: .normal)
-        wishListButton.backgroundColor = .systemPink
+        view.backgroundColor = .white
+        myRecipeButton.setTitleColor(.black, for: .normal)
+        myBarButton.setTitleColor(.black, for: .normal)
+        wishListButton.setTitleColor(.black, for: .normal)
+        [myRecipeButton, myBarButton, wishListButton].forEach {
+            $0.setTitleColor(.black, for: .normal)
+            $0.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+            $0.backgroundColor = .systemGray
+            $0.layer.cornerRadius = 15
+            $0.clipsToBounds = true
+        }
     }
     
     func layout() {
@@ -54,9 +61,11 @@ class AssistantViewController: UIViewController {
         mainStackView.addArrangedSubview(wishListButton)
         mainStackView.axis = .vertical
         mainStackView.distribution = .fillEqually
+        mainStackView.spacing = 20
         mainStackView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(300)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
+            $0.leading.trailing.equalToSuperview().inset(30)
+            $0.height.equalToSuperview().multipliedBy(0.4)
         }
     }
     

@@ -23,6 +23,7 @@ class ColorChoiceViewController: UIViewController {
         mainCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: "colorCell")
         layout()
         attribute()
+        mainCollectionView.isScrollEnabled = false
         if myFavor {
             self.tabBarController?.tabBar.isHidden = true
         } else {

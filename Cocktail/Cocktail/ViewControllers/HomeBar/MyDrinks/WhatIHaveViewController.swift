@@ -55,7 +55,7 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let yourWidth = collectionView.bounds.width/3
+        let yourWidth = collectionView.bounds.width/3.3
         let yourHeight = yourWidth
         return CGSize(width: yourWidth, height: yourHeight)
     }

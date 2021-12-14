@@ -19,7 +19,7 @@ class TodayCocktailCollectionViewHeader: UICollectionReusableView {
         sectionTextLabel.textColor = .black
         sectionTextLabel.sizeToFit()
         
-        seeTotalButton.setTitle("전체보기안됨", for: .normal)
+        seeTotalButton.setTitle("전체보기", for: .normal)
         seeTotalButton.setTitleColor(.darkGray, for: .normal)
         seeTotalButton.titleLabel?.font = .systemFont(ofSize: 10)
         

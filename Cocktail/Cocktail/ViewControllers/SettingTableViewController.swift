@@ -162,8 +162,7 @@ extension SettingTableViewController {
     }
     
     private func logIn() {
-        self.tabBarController?.selectedViewController = tabBarController?.viewControllers?[0]
-        tabBarController?.viewControllers?[0].show(LoginViewController(), sender:  nil)
+        self.goToViewController(number: 0, viewController: LoginViewController())
     }
     
     private func logOut() {
