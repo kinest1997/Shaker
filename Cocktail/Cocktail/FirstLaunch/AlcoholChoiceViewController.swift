@@ -7,14 +7,26 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+
+protocol AlcoholChoiceViewBindable {
+    typealias DrinkTypeChoiceViewComponents = (favor: Bool, recipe: [Cocktail])
+    
+    var myFavor: Signal<Bool> { get }
+    var isNextButtonEnabled: Signal<Bool> { get }
+    var setButtonImage: Signal<Cocktail.Alcohol> { get }
+    var buttonLabelCount: Signal<Int> { get }
+    var showReadyToLaunchViewController: Driver<Void> { get }
+    var presentAlert: Driver<Void> { get }
+    var showDrinkTypeChoiceView: Driver<DrinkTypeChoiceViewComponents> { get }
+    
+    var alcoholLevelButtonTapped: PublishRelay<Cocktail.Alcohol> { get }
+    var nextButtonTapped: PublishRelay<Void> { get }
+}
 
 class AlcoholChoiceViewController: UIViewController {
-    
-    var myFavor: Bool = true
-    
-    var filteredRecipe: [Cocktail] = []
-    
-    var alcoholSelected: Cocktail.Alcohol?
+    let disposeBag = DisposeBag()
     
     let questionLabel = UILabel()
     let explainLabel = UILabel()
@@ -31,93 +43,124 @@ class AlcoholChoiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = false
-        nextButton.isEnabled = false
         attribute()
         layout()
-        if myFavor {
-            self.tabBarController?.tabBar.isHidden = true
-        } else {
-            self.tabBarController?.tabBar.isHidden = false
-        }
     }
     
-    func attribute() {
+    func bind(_ viewModel: AlcoholChoiceViewBindable) {
+        viewModel.myFavor
+            .emit(to: tabBarController?.tabBar.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.isNextButtonEnabled
+            .emit(to: nextButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.saveMyFavor
+            .emit(onNext: {[weak self] _ in
+                UserDefaults.standard.set(self?.alcoholSelected?.rawValue, forKey: "AlcoholFavor")
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.setButtonImage
+            .emit(to: self.rx.setImage)
+            .disposed(by: disposeBag)
+        
+        viewModel.buttonLabelCount
+            .map { "\($0)개의 칵테일 발견" }
+            .emit(to: nextButton.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+        
+        viewModel.showReadyToLaunchViewController
+            .drive(onNext: {[weak self] _ in
+                self?.show(ReadyToLaunchVIewController(), sender: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.presentAlert
+            .drive(onNext: {[weak self] _ in
+                self?.present(UserFavor.shared.makeAlert(title: "다른걸 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.showDrinkTypeChoiceView
+            .drive(onNext: {[weak self] data in
+                let drinkTypeChoiceViewController = DrinkTypeChoiceViewController()
+                drinkTypeChoiceViewController.myFavor = data.favor
+                drinkTypeChoiceViewController.filteredRecipe = data.recipe
+                self?.show(drinkTypeChoiceViewController, sender: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        highButton.rx.tap
+            .map { Cocktail.Alcohol.high }
+            .do(onNext: {
+                UserDefaults.standard.set($0.rawValue, forKey: "AlcoholFavor")
+            })
+            .bind(to: viewModel.alcoholLevelButtonTapped)
+            .disposed(by: disposeBag)
+        
+        middleButton.rx.tap
+            .map { Cocktail.Alcohol.mid }
+            .do(onNext: {
+                UserDefaults.standard.set($0.rawValue, forKey: "AlcoholFavor")
+            })
+            .bind(to: viewModel.alcoholLevelButtonTapped)
+            .disposed(by: disposeBag)
+        
+        lowButton.rx.tap
+            .map { Cocktail.Alcohol.low }
+            .do(onNext: {
+                UserDefaults.standard.set($0.rawValue, forKey: "AlcoholFavor")
+            })
+            .bind(to: viewModel.alcoholLevelButtonTapped)
+            .disposed(by: disposeBag)
+        
+        nextButton.rx.tap
+            .do(onNext: {
+                topVerticalLine.backgroundColor = .systemGray2
+                bottomVerticalLine.backgroundColor = .systemGray2
+            })
+            .bind(to: viewModel.nextButtonTapped)
+            .disposed(by: disposeBag)
+    }
+    
+    private func attribute() {
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = false
+        
         questionLabel.text = "어떤 맛을 좋아하세요?"
-        explainLabel.font = .systemFont(ofSize: 10)
         questionLabel.textAlignment = .center
         questionLabel.textColor = .systemGray2
+
+        explainLabel.font = .systemFont(ofSize: 10)
         explainLabel.text = "*기준: 도수"
         explainLabel.textAlignment = .center
         explainLabel.textColor = .systemGray2
+
         highLabel.text = "높음"
         highLabel.textColor = .systemGray2
         highLabel.textAlignment = .center
+
         lowLabel.text = "낮음"
         lowLabel.textColor = .systemGray2
         lowLabel.textAlignment = .center
+
         nextButton.setTitle("다음", for: .normal)
         nextButton.setTitleColor(.systemGray2, for: .normal)
-        
-        [highButton, middleButton, lowButton].forEach {
-            $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        }
-        
         nextButton.layer.borderWidth = 1
         nextButton.layer.borderColor = UIColor.black.cgColor
         nextButton.layer.cornerRadius = 15
         
-        nextButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            if self.myFavor {
-                UserDefaults.standard.set(self.alcoholSelected?.rawValue, forKey: "AlcoholFavor")
-                self.show(ReadyToLaunchVIewController(), sender: nil)
-            } else {
-                let lastRecipe = self.filteredRecipe.filter { $0.alcohol == self.alcoholSelected }
-                if lastRecipe.isEmpty {
-                    self.present(UserFavor.shared.makeAlert(title: "다른걸 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
-                } else {
-                    let drinkTypeChoiceViewController = DrinkTypeChoiceViewController()
-                    drinkTypeChoiceViewController.myFavor = self.myFavor
-                    drinkTypeChoiceViewController.filteredRecipe = lastRecipe
-                    self.show(drinkTypeChoiceViewController, sender: nil)
-                }
-            }
-        }), for: .touchUpInside)
-        
-        highButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            self.setImageAndData(button: self.highButton, alcohol: .high)
-            self.buttonLabelCountUpdate(button: self.nextButton)
-        }), for: .touchUpInside)
-        
-        middleButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            self.setImageAndData(button: self.middleButton, alcohol: .mid)
-            self.buttonLabelCountUpdate(button: self.nextButton)
-        }), for: .touchUpInside)
-        
-        lowButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            self.setImageAndData(button: self.lowButton, alcohol: .low)
-            self.buttonLabelCountUpdate(button: self.nextButton)
-        }), for: .touchUpInside)
-        
+        [highButton, middleButton, lowButton].forEach {
+            $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+        }
+                
         topVerticalLine.backgroundColor = .systemGray2
         bottomVerticalLine.backgroundColor = .systemGray2
     }
     
-    func setImageAndData(button: UIButton, alcohol: Cocktail.Alcohol) {
-        [lowButton, middleButton, highButton].forEach {
-            $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-        }
-        button.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-        alcoholSelected = alcohol
-        nextButton.isEnabled = true
-    }
-    
-    func layout() {
+    private func layout() {
         [questionLabel, explainLabel, highLabel, highButton, middleButton, lowLabel, lowButton, nextButton, topVerticalLine, bottomVerticalLine].forEach {
             view.addSubview($0)
         }
@@ -186,11 +229,19 @@ class AlcoholChoiceViewController: UIViewController {
             $0.centerX.equalToSuperview()
         }
     }
-    
-    func buttonLabelCountUpdate(button: UIButton) {
-        let number = filteredRecipe.filter {
-            $0.alcohol == alcoholSelected
-        }.count
-        button.setTitle("\(number)개의 칵테일 발견", for: .normal)
+}
+
+extension Reactive where Base: AlcoholChoiceViewController {
+    var setImage: Binder<Cocktail.Alcohol> {[weak self] alcohol in
+        switch alcohol {
+        case .high:
+            self?.highButton.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        case .mid:
+            self?.middleButton.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        case .low:
+            self?.lowButton.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+        default:
+            return
+        }
     }
 }
