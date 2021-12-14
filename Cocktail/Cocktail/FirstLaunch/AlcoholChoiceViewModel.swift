@@ -27,7 +27,7 @@ struct AlcoholChoiceViewModel: AlcoholChoiceViewBindable {
     let updateMyFavor = PublishSubject<Bool>()
     let updateFilteredRecipe = PublishSubject<[Cocktail]>()
     
-    init(model: AlcoholChoiceModel = AlcoholChoiceModel()) {
+    init() {
         self.myFavor = updateMyFavor
             .startWith(true)
             .asSignal(onErrorSignalWith: .empty())
@@ -36,9 +36,6 @@ struct AlcoholChoiceViewModel: AlcoholChoiceViewBindable {
             .map { _ in true }
             .startWith(false)
             .asSignal(onErrorJustReturn: false)
-        
-        self.saveMyFavor = alcoholLevelButtonTapped
-            .asSignal(onErrorSignalWith: .empty())
         
         self.setButtonImage = alcoholLevelButtonTapped
             .asSignal(onErrorSignalWith: .empty())
@@ -52,21 +49,21 @@ struct AlcoholChoiceViewModel: AlcoholChoiceViewBindable {
             .withLatestFrom(myFavor)
             .filter { $0 }
             .map { _ in Void() }
-            .asSignal(onErrorSignalWith: .empty())
+            .asDriver(onErrorDriveWith: .empty())
         
         let lastRecipe = nextButtonTapped
             .withLatestFrom(myFavor)
             .filter { !$0 }
             .withLatestFrom(updateFilteredRecipe)
-            .map {
-                $0.filter { $0.alcohol == self.alcoholSelected }
-            }
+//            .map {
+//                $0.filter { $0.alcohol == self.alcoholSelected }
+//            }
             .share()
         
         self.presentAlert = lastRecipe
             .filter { $0.isEmpty }
             .map { _ in Void() }
-            .asSignal(onErrorSignalWith: .empty())
+            .asDriver(onErrorDriveWith: .empty())
         
         let drinkTypeChoiceViewComponents = Observable
             .combineLatest(
@@ -79,6 +76,6 @@ struct AlcoholChoiceViewModel: AlcoholChoiceViewBindable {
             .flatMap { _ in
                 return drinkTypeChoiceViewComponents
             }
-            .asSignal(onErrorSignalWith: .empty())
+            .asDriver(onErrorDriveWith: .empty())
     }
 }

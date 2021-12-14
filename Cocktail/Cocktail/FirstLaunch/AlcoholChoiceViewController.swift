@@ -49,17 +49,11 @@ class AlcoholChoiceViewController: UIViewController {
     
     func bind(_ viewModel: AlcoholChoiceViewBindable) {
         viewModel.myFavor
-            .emit(to: tabBarController?.tabBar.rx.isHidden)
+            .emit(to: tabBarController!.tabBar.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.isNextButtonEnabled
             .emit(to: nextButton.rx.isEnabled)
-            .disposed(by: disposeBag)
-        
-        viewModel.saveMyFavor
-            .emit(onNext: {[weak self] _ in
-                UserDefaults.standard.set(self?.alcoholSelected?.rawValue, forKey: "AlcoholFavor")
-            })
             .disposed(by: disposeBag)
         
         viewModel.setButtonImage
@@ -117,9 +111,9 @@ class AlcoholChoiceViewController: UIViewController {
             .disposed(by: disposeBag)
         
         nextButton.rx.tap
-            .do(onNext: {
-                topVerticalLine.backgroundColor = .systemGray2
-                bottomVerticalLine.backgroundColor = .systemGray2
+            .do(onNext: {[weak self] _ in
+                self?.topVerticalLine.backgroundColor = .systemGray2
+                self?.bottomVerticalLine.backgroundColor = .systemGray2
             })
             .bind(to: viewModel.nextButtonTapped)
             .disposed(by: disposeBag)
@@ -232,16 +226,18 @@ class AlcoholChoiceViewController: UIViewController {
 }
 
 extension Reactive where Base: AlcoholChoiceViewController {
-    var setImage: Binder<Cocktail.Alcohol> {[weak self] alcohol in
-        switch alcohol {
-        case .high:
-            self?.highButton.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-        case .mid:
-            self?.middleButton.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-        case .low:
-            self?.lowButton.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-        default:
-            return
+    var setImage: Binder<Cocktail.Alcohol> {
+        return Binder(base) { base, alcohol in
+            switch alcohol {
+            case .high:
+                base.highButton.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            case .mid:
+                base.middleButton.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            case .low:
+                base.lowButton.setBackgroundImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            default:
+                return
+            }
         }
     }
 }

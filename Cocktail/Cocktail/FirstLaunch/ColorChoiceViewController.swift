@@ -5,13 +5,15 @@ import RxCocoa
 import SwiftUI
 
 protocol ColorChoiceViewBindable {
+    var alcoholChoiceViewModel: AlcoholChoiceViewModel { get }
+    
     var colorArray: Driver<[Cocktail.Color]> { get }
-    var updateItem: Signal<IndexPath> { get }
+    var updateItem: Signal<(indexPath: IndexPath, selected: [Bool])> { get }
     var buttonLabelCount: Signal<Int> { get }
-    var myFavor: Signal<Void> { get }
-    var saveMyFavor: Signal<Void> { get }
+    var myFavor: Signal<Bool> { get }
+    var saveMyFavor: Signal<[Cocktail.Color]> { get }
     var presentAlert: Driver<Void> { get }
-    var presentAlcoholChoiceView: Driver<AlcoholChoiceViewModel> { get }
+    var presentAlcoholChoiceView: Driver<Void> { get }
     
     var nextButtonTapped: PublishRelay<Void> { get }
     var itemSelected: PublishRelay<IndexPath> { get }
@@ -19,10 +21,9 @@ protocol ColorChoiceViewBindable {
 
 class ColorChoiceViewController: UIViewController {
     let disposeBag = DisposeBag()
-    let questionLabel = UILabel()
+    let alcoholChoiceViewController = AlcoholChoiceViewController()
     
-    var selectedColor = [Cocktail.Color]()
-    var isCheckedArray = Array(repeating: false, count: Cocktail.Color.allCases.count)
+    let questionLabel = UILabel()
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
@@ -36,9 +37,11 @@ class ColorChoiceViewController: UIViewController {
     }
     
     func bind(_ viewModel: ColorChoiceViewBindable) {
+        alcoholChoiceViewController.bind(viewModel.alcoholChoiceViewModel)
+        
         viewModel.colorArray
             .drive(mainCollectionView.rx.items(cellIdentifier: "colorCell", cellType: ColorCollectionViewCell.self)) { index, color, cell in
-                cell.colorImageView.image = UIImage(named: colorArray[indexPath.row].rawValue)
+                cell.colorImageView.image = UIImage(named: color.rawValue)
             }
             .disposed(by: disposeBag)
         
@@ -52,12 +55,12 @@ class ColorChoiceViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.myFavor
-            .emit(to: tabBarController?.tabBar.rx.isHidden)
+            .emit(to: tabBarController!.tabBar.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.saveMyFavor
-            .emit(onNext: {[weak self] _ in
-                UserDefaults.standard.set(self?.selectedColor.map { $0.rawValue }, forKey: "ColorFavor")
+            .emit(onNext: { colors in
+                UserDefaults.standard.set(colors.map { $0.rawValue }, forKey: "ColorFavor")
             })
             .disposed(by: disposeBag)
         
@@ -68,7 +71,7 @@ class ColorChoiceViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.presentAlcoholChoiceView
-            .emit(to: self.rx.presentAlcoholChoiceView)
+            .drive(self.rx.presentAlcoholChoiceView)
             .disposed(by: disposeBag)
         
         mainCollectionView.rx.setDelegate(self)
@@ -133,25 +136,16 @@ extension ColorChoiceViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension Reactive where Base: ColorChoiceViewController {
-    var updateSelectedItem: Binder<IndexPath> {[weak self] indexPath in
-        guard let self = self,
-            let selectedCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell else { return }
-        if self.isCheckedArray[indexPath.row] == false {
-            self.isCheckedArray[indexPath.row] = true
-            selectedCell.isChecked = isCheckedArray[indexPath.row]
-            self.selectedColor.append(colorArray[indexPath.row])
-        } else {
-            self.isCheckedArray[indexPath.row] = false
-            selectedCell.isChecked = isCheckedArray[indexPath.row]
-            guard let number = self.selectedColor.firstIndex(of: colorArray[indexPath.row]) else { return }
-            self.selectedColor.remove(at: number)
+    var updateSelectedItem: Binder<(indexPath: IndexPath, selected: [Bool])> {
+        return Binder(base) { base, data in
+            guard let selectedCell = base.mainCollectionView.cellForItem(at: data.indexPath) as? ColorCollectionViewCell else { return }
+            selectedCell.isChecked = data.selected[data.indexPath.row]
         }
     }
     
-    var presentAlcoholChoiceView: Binder<AlcoholChoiceViewModel> {[weak self] viewModel in
-            let alcoholChoiceViewController = AlcoholChoiceViewController()
-            alcoholChoiceViewController.bind(viewModel)
-            self.show(alcoholChoiceViewController, sender: nil)
+    var presentAlcoholChoiceView: Binder<Void> {
+        return Binder(base) { base, _ in
+            base.show(base.alcoholChoiceViewController, sender: nil)
         }
     }
 }

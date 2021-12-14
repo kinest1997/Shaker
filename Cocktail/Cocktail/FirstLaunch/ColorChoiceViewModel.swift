@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxCocoa
+import FirebaseStorage
 
 struct ColorChoiceViewModel: ColorChoiceViewBindable {
     let disposeBag = DisposeBag()
@@ -14,12 +15,12 @@ struct ColorChoiceViewModel: ColorChoiceViewBindable {
     
     //viewModel -> view
     let colorArray: Driver<[Cocktail.Color]>
-    let updateItem: Signal<IndexPath>
-    let buttonLabelCount: Signal<Int>
+    let updateItem: Signal<(indexPath: IndexPath, selected: [Bool])>
     let myFavor: Signal<Bool>
-    let saveMyFavor: Signal<Void>
+    let buttonLabelCount: Signal<Int>
+    let saveMyFavor: Signal<[Cocktail.Color]>
     let presentAlert: Driver<Void>
-    let presentAlcoholChoiceView: Driver<AlcoholChoiceViewModel>
+    let presentAlcoholChoiceView: Driver<Void>
 
     //view -> viewModel
     let nextButtonTapped = PublishRelay<Void>()
@@ -31,32 +32,52 @@ struct ColorChoiceViewModel: ColorChoiceViewBindable {
     init(model: ColorChoiceModel = ColorChoiceModel()) {
         self.colorArray = Driver.just(Cocktail.Color.allCases)
         
-        self.updateItem = itemSelected.asSignal(onErrorSignalWith: .empty())
+        let selectStatus = itemSelected
+            .scan(into: Array(repeating: false, count: Cocktail.Color.allCases.count)) {
+                $0[$1.row].toggle()
+            }
         
-        self.buttonLabelCount = itemSelected
-            .map { _ in Void() }
-            .map(model.getLastRecipe)
-            .map { $0.count }
-            .asSignal(onErrorJustReturn: 0)
+        self.updateItem = Observable
+            .combineLatest(
+                itemSelected.asObservable(),
+                selectStatus
+            ) { (indexPath: $0, selected: $1) }
+            .asSignal(onErrorSignalWith: .empty())
+        
         
         self.myFavor = updateMyFavor
             .startWith(true)
             .asSignal(onErrorSignalWith: .empty())
         
+        let selectedColor = itemSelected
+            .withLatestFrom(colorArray) { $1[$0.row] }
+            .scan(into: [Cocktail.Color]()) {
+                if $0.contains($1) {
+                    guard let number = $0.firstIndex(of: $1) else { return }
+                    $0.remove(at: number)
+                } else {
+                    $0.append($1)
+                }
+            }
+        
+        self.buttonLabelCount = selectedColor
+            .map(model.getLastReceipe)
+            .map { $0.count }
+            .asSignal(onErrorJustReturn: 0)
+        
         self.saveMyFavor = nextButtonTapped
-            .withLatestFrom(myFavor)
-            .filter { $0 == true }
-            .map { _ in Void() }
+            .flatMapLatest { selectedColor }
             .asSignal(onErrorSignalWith: .empty())
         
         let lastRecipe = nextButtonTapped
-            .map(model.getLastRecipe)
+            .withLatestFrom(selectedColor)
+            .map(model.getLastReceipe)
             .share()
         
         self.presentAlert = lastRecipe
             .filter { $0.isEmpty }
             .map { _ in Void() }
-            .asSignal(onErrorSignalWith: .empty())
+            .asDriver(onErrorDriveWith: .empty())
         
         myFavor
             .asObservable()
@@ -70,9 +91,7 @@ struct ColorChoiceViewModel: ColorChoiceViewBindable {
     
         self.presentAlcoholChoiceView = lastRecipe
             .filter { !$0.isEmpty }
-            .map { _ -> AlcoholChoiceViewModel in
-                return alcoholChoiceViewModel
-            }
+            .map { _ in Void() }
             .asDriver(onErrorDriveWith: .empty())
     }
 }

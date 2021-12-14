@@ -8,7 +8,7 @@
 import Foundation
 
 struct ColorChoiceModel {
-    func getLastRecipe() -> [Cocktail] {
-        return FirebaseRecipe.shared.recipe.filter { selectedColor.contains($0.color) }
+    func getLastReceipe(_ colors: [Cocktail.Color]) -> [Cocktail] {
+        return FirebaseRecipe.shared.recipe.filter { colors.contains($0.color) }
     }
 }
