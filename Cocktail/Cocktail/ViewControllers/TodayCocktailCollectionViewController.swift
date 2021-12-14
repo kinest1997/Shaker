@@ -270,7 +270,9 @@ extension TodayCocktailCollectionViewController {
         switch indexPath.section {
         case 0:
             let colorChoiceViewController = ColorChoiceViewController()
-            colorChoiceViewController.myFavor = false
+            let colorChoiceViewModel = ColorChoiceViewModel()
+            colorChoiceViewModel.updateMyFavor.onNext(false)
+            colorChoiceViewController.bind(colorChoiceViewModel)
             self.navigationController?.show(colorChoiceViewController, sender: nil)
             self.navigationController?.navigationBar.isHidden = false
         case 1:

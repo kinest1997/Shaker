@@ -106,7 +106,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     return
                 }
                 UserDefaults.standard.set(false, forKey: "firstLaunch")
-                self.show(ColorChoiceViewController(), sender: nil)
+                let viewController = ColorChoiceViewController()
+                let viewModel = ColorChoiceViewModel()
+                viewController.bind(viewModel)
+                self.show(viewController, sender: nil)
             }
         }
     }
