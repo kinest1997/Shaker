@@ -10,12 +10,14 @@ class AddRecipeCell: UITableViewCell {
         super.layoutSubviews()
         contentView.addSubview(numberLabel)
         contentView.addSubview(explainTextField)
-        
         explainTextField.placeholder = "Input Recipes".localized
         numberLabel.snp.makeConstraints {
             $0.leading.bottom.top.equalToSuperview()
             $0.width.equalTo(30)
         }
+        contentView.backgroundColor = .white
+        numberLabel.textColor = .black
+        explainTextField.textColor = .black
         
         explainTextField.snp.makeConstraints {
             $0.top.bottom.trailing.equalToSuperview()
