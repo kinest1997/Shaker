@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E25BA52B4027958F5585B30 /* Pods_Cocktail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C8AC4AA39665ECBB2602E1 /* Pods_Cocktail.framework */; };
 		3D07246B274F551D0061B3F5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D07246A274F551D0061B3F5 /* WidgetKit.framework */; };
 		3D07246D274F551D0061B3F5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D07246C274F551D0061B3F5 /* SwiftUI.framework */; };
 		3D072470274F551D0061B3F5 /* Cocktail_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */; };
@@ -15,17 +16,11 @@
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3D21D4C22733E9C300FE2896 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* UIImage.swift */; };
-		3D3452FB275F3A9E00DA3978 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 3D3452FA275F3A9E00DA3978 /* Lottie */; };
 		3D3452FD275F3B4400DA3978 /* LoadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3D3452FC275F3B4400DA3978 /* LoadingAnimation.json */; };
 		3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */; };
-		3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 3D4415CE27564CF400CBCC40 /* GoogleSignIn */; };
 		3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D027564EA600CBCC40 /* LoginViewController.swift */; };
 		3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */; };
-		3D48C2092759A672001B40FC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3D48C2082759A672001B40FC /* Kingfisher */; };
-		3D48C20E275A0595001B40FC /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 3D48C20D275A0595001B40FC /* NVActivityIndicatorView */; };
-		3D48C210275A0595001B40FC /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 3D48C20F275A0595001B40FC /* NVActivityIndicatorViewExtended */; };
 		3D48C212275A13A2001B40FC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48C211275A13A2001B40FC /* LoadingView.swift */; };
-		3D647F2D2753327F005EE580 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3D647F2C2753327F005EE580 /* SnapKit */; };
 		3D69BF75275B7B57008502EE /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D69BF74275B7B57008502EE /* SettingTableViewController.swift */; };
 		3D6C6D412732AB5200C70276 /* CocktailListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D402732AB5200C70276 /* CocktailListTableView.swift */; };
 		3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D442732B86100C70276 /* CocktailListCell.swift */; };
@@ -49,18 +44,6 @@
 		3DB910D427566C1C0076CB50 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */; };
 		3DB910D6275683B90076CB50 /* AlcoholChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */; };
 		3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */; };
-		3DB910DB27574D720076CB50 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910DA27574D720076CB50 /* FirebaseAnalytics */; };
-		3DB910DD27574D720076CB50 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910DC27574D720076CB50 /* FirebaseAnalyticsSwift-Beta */; };
-		3DB910DF27574D720076CB50 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910DE27574D720076CB50 /* FirebaseAuth */; };
-		3DB910E127574D720076CB50 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E027574D720076CB50 /* FirebaseCrashlytics */; };
-		3DB910E327574D720076CB50 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E227574D720076CB50 /* FirebaseDatabase */; };
-		3DB910E527574D720076CB50 /* FirebaseDatabaseSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E427574D720076CB50 /* FirebaseDatabaseSwift-Beta */; };
-		3DB910E727574D720076CB50 /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E627574D720076CB50 /* FirebaseInAppMessaging-Beta */; };
-		3DB910E927574D720076CB50 /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910E827574D720076CB50 /* FirebaseInAppMessagingSwift-Beta */; };
-		3DB910EB27574D720076CB50 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910EA27574D720076CB50 /* FirebaseMessaging */; };
-		3DB910ED27574D720076CB50 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910EC27574D720076CB50 /* FirebaseRemoteConfig */; };
-		3DB910EF27574D720076CB50 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910EE27574D720076CB50 /* FirebaseStorage */; };
-		3DB910F127574D720076CB50 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */; };
 		3DB910F3275759E90076CB50 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910F2275759E90076CB50 /* Singleton.swift */; };
 		3DB9110227588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
 		3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
@@ -81,14 +64,11 @@
 		7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D0D9B762744D714008C75E7 /* Ingredients.plist */; };
 		7D4AF9062760D57B0093C3C2 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AF9052760D57B0093C3C2 /* UIApplication.swift */; };
 		7D4AF9082760D5840093C3C2 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AF9072760D5840093C3C2 /* UIViewController.swift */; };
-		7DA42A6627683DB300110512 /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 7DA42A6527683DB300110512 /* RxBlocking */; };
-		7DA42A6827683DB300110512 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 7DA42A6727683DB300110512 /* RxCocoa */; };
-		7DA42A6A27683DB300110512 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 7DA42A6927683DB300110512 /* RxRelay */; };
-		7DA42A6C27683DB300110512 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7DA42A6B27683DB300110512 /* RxSwift */; };
 		7DA42A6E27683F4200110512 /* AlcoholChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A6D27683F4200110512 /* AlcoholChoiceViewModel.swift */; };
 		7DA42A71276840B500110512 /* ColorChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */; };
 		7DA42A752768563B00110512 /* ColorChoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A742768563B00110512 /* ColorChoiceModel.swift */; };
 		7DA42A7727685D2600110512 /* AlcoholChoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A7627685D2600110512 /* AlcoholChoiceModel.swift */; };
+		FE09B3A71857A08BA673ABA5 /* Pods_Cocktail_WidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F39F05151ED4DC0EFE4A4D2 /* Pods_Cocktail_WidgetExtension.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +96,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		13C8AC4AA39665ECBB2602E1 /* Pods_Cocktail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cocktail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E67FEFF0580DF7FBB3C0DB1 /* Pods-Cocktail WidgetExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cocktail WidgetExtension.release.xcconfig"; path = "Target Support Files/Pods-Cocktail WidgetExtension/Pods-Cocktail WidgetExtension.release.xcconfig"; sourceTree = "<group>"; };
 		3D072468274F551D0061B3F5 /* Cocktail WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Cocktail WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D07246A274F551D0061B3F5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		3D07246C274F551D0061B3F5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -179,6 +161,10 @@
 		7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceViewModel.swift; sourceTree = "<group>"; };
 		7DA42A742768563B00110512 /* ColorChoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceModel.swift; sourceTree = "<group>"; };
 		7DA42A7627685D2600110512 /* AlcoholChoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholChoiceModel.swift; sourceTree = "<group>"; };
+		7EF94C6A9E8E79044F512CFC /* Pods-Cocktail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cocktail.release.xcconfig"; path = "Target Support Files/Pods-Cocktail/Pods-Cocktail.release.xcconfig"; sourceTree = "<group>"; };
+		7F3ADD64465D5E9E2FDD8587 /* Pods-Cocktail WidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cocktail WidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-Cocktail WidgetExtension/Pods-Cocktail WidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		83B140B610B82D71C8E91F66 /* Pods-Cocktail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cocktail.debug.xcconfig"; path = "Target Support Files/Pods-Cocktail/Pods-Cocktail.debug.xcconfig"; sourceTree = "<group>"; };
+		8F39F05151ED4DC0EFE4A4D2 /* Pods_Cocktail_WidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cocktail_WidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +174,7 @@
 			files = (
 				3D07246D274F551D0061B3F5 /* SwiftUI.framework in Frameworks */,
 				3D07246B274F551D0061B3F5 /* WidgetKit.framework in Frameworks */,
+				FE09B3A71857A08BA673ABA5 /* Pods_Cocktail_WidgetExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,39 +182,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D48C20E275A0595001B40FC /* NVActivityIndicatorView in Frameworks */,
-				3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */,
-				7DA42A6827683DB300110512 /* RxCocoa in Frameworks */,
-				3DB910DF27574D720076CB50 /* FirebaseAuth in Frameworks */,
-				3DB910E927574D720076CB50 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
-				7DA42A6627683DB300110512 /* RxBlocking in Frameworks */,
-				3DB910ED27574D720076CB50 /* FirebaseRemoteConfig in Frameworks */,
-				3DB910E727574D720076CB50 /* FirebaseInAppMessaging-Beta in Frameworks */,
-				3DB910F127574D720076CB50 /* FirebaseStorageSwift-Beta in Frameworks */,
-				7DA42A6A27683DB300110512 /* RxRelay in Frameworks */,
-				7DA42A6C27683DB300110512 /* RxSwift in Frameworks */,
-				3D647F2D2753327F005EE580 /* SnapKit in Frameworks */,
-				3DB910E127574D720076CB50 /* FirebaseCrashlytics in Frameworks */,
-				3DB910DD27574D720076CB50 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
-				3D48C2092759A672001B40FC /* Kingfisher in Frameworks */,
-				3D3452FB275F3A9E00DA3978 /* Lottie in Frameworks */,
-				3DB910EF27574D720076CB50 /* FirebaseStorage in Frameworks */,
-				3DB910E327574D720076CB50 /* FirebaseDatabase in Frameworks */,
-				3DB910E527574D720076CB50 /* FirebaseDatabaseSwift-Beta in Frameworks */,
-				3DB910EB27574D720076CB50 /* FirebaseMessaging in Frameworks */,
-				3DB910DB27574D720076CB50 /* FirebaseAnalytics in Frameworks */,
-				3D48C210275A0595001B40FC /* NVActivityIndicatorViewExtended in Frameworks */,
+				2E25BA52B4027958F5585B30 /* Pods_Cocktail.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2787D9F0FBC72135A241D533 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				83B140B610B82D71C8E91F66 /* Pods-Cocktail.debug.xcconfig */,
+				7EF94C6A9E8E79044F512CFC /* Pods-Cocktail.release.xcconfig */,
+				7F3ADD64465D5E9E2FDD8587 /* Pods-Cocktail WidgetExtension.debug.xcconfig */,
+				1E67FEFF0580DF7FBB3C0DB1 /* Pods-Cocktail WidgetExtension.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		3D072469274F551D0061B3F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				3D07246A274F551D0061B3F5 /* WidgetKit.framework */,
 				3D07246C274F551D0061B3F5 /* SwiftUI.framework */,
+				13C8AC4AA39665ECBB2602E1 /* Pods_Cocktail.framework */,
+				8F39F05151ED4DC0EFE4A4D2 /* Pods_Cocktail_WidgetExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -293,6 +273,7 @@
 				3D07246E274F551D0061B3F5 /* Cocktail Widget */,
 				3D072469274F551D0061B3F5 /* Frameworks */,
 				3DA76A2E2730D1CD004091CE /* Products */,
+				2787D9F0FBC72135A241D533 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -369,6 +350,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3D07247D274F55220061B3F5 /* Build configuration list for PBXNativeTarget "Cocktail WidgetExtension" */;
 			buildPhases = (
+				7E0A675FFD5CC779C36C0196 /* [CP] Check Pods Manifest.lock */,
 				3D072464274F551D0061B3F5 /* Sources */,
 				3D072465274F551D0061B3F5 /* Frameworks */,
 				3D072466274F551D0061B3F5 /* Resources */,
@@ -386,10 +368,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DA76A412730D1D0004091CE /* Build configuration list for PBXNativeTarget "Cocktail" */;
 			buildPhases = (
+				5A389758780447B823CBBB30 /* [CP] Check Pods Manifest.lock */,
 				3DA76A292730D1CD004091CE /* Sources */,
 				3DA76A2A2730D1CD004091CE /* Frameworks */,
 				3DA76A2B2730D1CD004091CE /* Resources */,
 				3D07247A274F55220061B3F5 /* Embed App Extensions */,
+				FC480CC3DC9CC8D081B2114A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -397,30 +381,6 @@
 				3D072478274F55220061B3F5 /* PBXTargetDependency */,
 			);
 			name = Cocktail;
-			packageProductDependencies = (
-				3D647F2C2753327F005EE580 /* SnapKit */,
-				3D4415CE27564CF400CBCC40 /* GoogleSignIn */,
-				3DB910DA27574D720076CB50 /* FirebaseAnalytics */,
-				3DB910DC27574D720076CB50 /* FirebaseAnalyticsSwift-Beta */,
-				3DB910DE27574D720076CB50 /* FirebaseAuth */,
-				3DB910E027574D720076CB50 /* FirebaseCrashlytics */,
-				3DB910E227574D720076CB50 /* FirebaseDatabase */,
-				3DB910E427574D720076CB50 /* FirebaseDatabaseSwift-Beta */,
-				3DB910E627574D720076CB50 /* FirebaseInAppMessaging-Beta */,
-				3DB910E827574D720076CB50 /* FirebaseInAppMessagingSwift-Beta */,
-				3DB910EA27574D720076CB50 /* FirebaseMessaging */,
-				3DB910EC27574D720076CB50 /* FirebaseRemoteConfig */,
-				3DB910EE27574D720076CB50 /* FirebaseStorage */,
-				3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */,
-				3D48C2082759A672001B40FC /* Kingfisher */,
-				3D48C20D275A0595001B40FC /* NVActivityIndicatorView */,
-				3D48C20F275A0595001B40FC /* NVActivityIndicatorViewExtended */,
-				3D3452FA275F3A9E00DA3978 /* Lottie */,
-				7DA42A6527683DB300110512 /* RxBlocking */,
-				7DA42A6727683DB300110512 /* RxCocoa */,
-				7DA42A6927683DB300110512 /* RxRelay */,
-				7DA42A6B27683DB300110512 /* RxSwift */,
-			);
 			productName = Cocktail;
 			productReference = 3DA76A2D2730D1CD004091CE /* Cocktail.app */;
 			productType = "com.apple.product-type.application";
@@ -453,15 +413,6 @@
 				ko,
 			);
 			mainGroup = 3DA76A242730D1CD004091CE;
-			packageReferences = (
-				3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
-				3D3452F9275F3A9D00DA3978 /* XCRemoteSwiftPackageReference "lottie-ios" */,
-				7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */,
-			);
 			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -500,6 +451,70 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5A389758780447B823CBBB30 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cocktail-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7E0A675FFD5CC779C36C0196 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Cocktail WidgetExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC480CC3DC9CC8D081B2114A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cocktail/Pods-Cocktail-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Cocktail/Pods-Cocktail-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cocktail/Pods-Cocktail-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3D072464274F551D0061B3F5 /* Sources */ = {
@@ -604,13 +619,14 @@
 /* Begin XCBuildConfiguration section */
 		3D07247B274F55220061B3F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F3ADD64465D5E9E2FDD8587 /* Pods-Cocktail WidgetExtension.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3GBKG7DTJY;
+				DEVELOPMENT_TEAM = V6G44Y3JGM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cocktail Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Cocktail Widget";
@@ -633,13 +649,14 @@
 		};
 		3D07247C274F55220061B3F5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E67FEFF0580DF7FBB3C0DB1 /* Pods-Cocktail WidgetExtension.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3GBKG7DTJY;
+				DEVELOPMENT_TEAM = V6G44Y3JGM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Cocktail Widget/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Cocktail Widget";
@@ -780,6 +797,7 @@
 		};
 		3DA76A422730D1D0004091CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 83B140B610B82D71C8E91F66 /* Pods-Cocktail.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -815,6 +833,7 @@
 		};
 		3DA76A432730D1D0004091CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7EF94C6A9E8E79044F512CFC /* Pods-Cocktail.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -879,178 +898,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		3D3452F9275F3A9D00DA3978 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
-		3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
-		3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
-		3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-		3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
-			};
-		};
-		7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		3D3452FA275F3A9E00DA3978 /* Lottie */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D3452F9275F3A9D00DA3978 /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = Lottie;
-		};
-		3D4415CE27564CF400CBCC40 /* GoogleSignIn */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
-			productName = GoogleSignIn;
-		};
-		3D48C2082759A672001B40FC /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-		3D48C20D275A0595001B40FC /* NVActivityIndicatorView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
-			productName = NVActivityIndicatorView;
-		};
-		3D48C20F275A0595001B40FC /* NVActivityIndicatorViewExtended */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
-			productName = NVActivityIndicatorViewExtended;
-		};
-		3D647F2C2753327F005EE580 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-		3DB910DA27574D720076CB50 /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		3DB910DC27574D720076CB50 /* FirebaseAnalyticsSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseAnalyticsSwift-Beta";
-		};
-		3DB910DE27574D720076CB50 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
-		};
-		3DB910E027574D720076CB50 /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
-		};
-		3DB910E227574D720076CB50 /* FirebaseDatabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseDatabase;
-		};
-		3DB910E427574D720076CB50 /* FirebaseDatabaseSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseDatabaseSwift-Beta";
-		};
-		3DB910E627574D720076CB50 /* FirebaseInAppMessaging-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseInAppMessaging-Beta";
-		};
-		3DB910E827574D720076CB50 /* FirebaseInAppMessagingSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseInAppMessagingSwift-Beta";
-		};
-		3DB910EA27574D720076CB50 /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
-		};
-		3DB910EC27574D720076CB50 /* FirebaseRemoteConfig */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseRemoteConfig;
-		};
-		3DB910EE27574D720076CB50 /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseStorage;
-		};
-		3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseStorageSwift-Beta";
-		};
-		7DA42A6527683DB300110512 /* RxBlocking */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxBlocking;
-		};
-		7DA42A6727683DB300110512 /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		7DA42A6927683DB300110512 /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		7DA42A6B27683DB300110512 /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7DA42A6427683DB300110512 /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3DA76A252730D1CD004091CE /* Project object */;
 }
