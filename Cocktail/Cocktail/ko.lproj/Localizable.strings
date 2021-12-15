@@ -86,6 +86,7 @@
 
 //HomeBarViewController.swift
 "What I Can Make" = "만들 수 있는 것";
+"making" = "만들기";
 
 //CocktailDetailViewController.swift
 "Name" = "이름";

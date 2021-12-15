@@ -53,9 +53,9 @@ class MyDrinksViewController: UIViewController {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(130)
         }
         whatICanMakeButton.snp.makeConstraints {
-            $0.top.equalTo(groupStackView.snp.bottom).offset(40)
+            $0.top.equalTo(groupStackView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(60)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
     }
     
@@ -85,7 +85,6 @@ class MyDrinksViewController: UIViewController {
         groupStackView.axis = .horizontal
         groupStackView.distribution = .fillEqually
         groupStackView.spacing = 10
-        whatICanMakeButton.setTitle("What I Can Make".localized, for: .normal)
         vodkaButton.base = .vodka
         whiskeyButton.base = .whiskey
         tequilaButton.base = .tequila
@@ -98,8 +97,11 @@ class MyDrinksViewController: UIViewController {
         [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
             setButtonAction(buttonName: $0)
         }
+        whatICanMakeButton.layer.cornerRadius = 15
+        whatICanMakeButton.clipsToBounds = true
+        whatICanMakeButton.backgroundColor = .brown
+        whatICanMakeButton.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
         whatICanMakeButton.setTitleColor(.black, for: .normal)
-        
         whatICanMakeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             let whatICanMakeViewController = CocktailListTableView()
@@ -126,7 +128,7 @@ class MyDrinksViewController: UIViewController {
     }
     
     func updateWhatICanMakeButton(data: Set<String>, button: UIButton) {
-        button.setTitle("\(checkWhatICanMake(myIngredients: data).count)", for: .normal)
+        button.setTitle("\(checkWhatICanMake(myIngredients: data).count)" + " " + "EA".localized + " " + "making".localized, for: .normal)
     }
     
     func checkWhatICanMake(myIngredients: Set<String>) -> [Cocktail] {
