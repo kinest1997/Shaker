@@ -41,25 +41,6 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         }
     }
     
-    func canIDismissLoading() {
-        dataReciped.append(true)
-        if dataReciped.count == 3 {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-                self.loadingView.isHidden = true
-            }
-            if UserDefaults.standard.object(forKey: "whatIHave") == nil {
-                let alert = UIAlertController(title: "이런", message: "내술장에 술이 하나도없네요 \n 추가하러 가시겠어요?", preferredStyle: .alert)
-                
-                alert.addAction(UIAlertAction(title: "네", style: .default, handler: {[weak self] _ in
-                    self?.goToViewController(number: 2, viewController: MyDrinksViewController())
-                }))
-                alert.addAction(UIAlertAction(title: "다음에", style: .cancel, handler: nil))
-                present(alert, animated: true, completion: nil)
-            }
-        }
-    }
-    
     var dataReciped: [Bool] = []
     
     let sectionName = ["주문 도와드릴까요?", "초보자 추천 가이드북",  "내 즐겨찾기"]
@@ -118,6 +99,25 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         self.tabBarController?.tabBar.isHidden = false
         self.wishListData = FirebaseRecipe.shared.wishList
         self.collectionView.reloadData()
+    }
+    
+    func canIDismissLoading() {
+        dataReciped.append(true)
+        if dataReciped.count == 3 {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.loadingView.isHidden = true
+            }
+            if UserDefaults.standard.object(forKey: "whatIHave") == nil {
+                let alert = UIAlertController(title: "이런", message: "내술장에 술이 하나도없네요 \n 추가하러 가시겠어요?", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "네", style: .default, handler: {[weak self] _ in
+                    self?.goToViewController(number: 2, viewController: MyDrinksViewController())
+                }))
+                alert.addAction(UIAlertAction(title: "다음에", style: .cancel, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+        }
     }
 }
 

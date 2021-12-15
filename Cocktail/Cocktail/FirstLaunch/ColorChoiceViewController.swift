@@ -32,7 +32,7 @@ class ColorChoiceViewController: UIViewController {
     }
     
     func layout() {
-        view.addSubview(questionLabel)
+        view.addSubview(questionLabel) 
         view.addSubview(mainCollectionView)
         view.addSubview(nextButton)
         

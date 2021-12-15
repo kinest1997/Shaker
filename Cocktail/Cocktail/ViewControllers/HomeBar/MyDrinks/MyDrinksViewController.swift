@@ -25,7 +25,7 @@ class MyDrinksViewController: UIViewController {
     let beverageButton = BadgeButton()
     let assetsButton = BadgeButton()
     
-    let whatICanMakeButton = BadgeButton()
+    let whatICanMakeButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,37 +46,28 @@ class MyDrinksViewController: UIViewController {
     }
     
     func layout() {
-        mainScrollView.snp.makeConstraints {
-            $0.leading.trailing.top.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(170)
-        }
-        mainView.snp.makeConstraints {
-            $0.edges.equalTo(mainScrollView.contentLayoutGuide)
-            $0.width.equalTo(mainScrollView.frameLayoutGuide)
-            $0.height.equalToSuperview()
-        }
         groupStackView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(40)
+            $0.centerX.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(0.5)
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(130)
         }
         whatICanMakeButton.snp.makeConstraints {
-            $0.top.equalTo(mainScrollView.snp.bottom).offset(10)
+            $0.top.equalTo(groupStackView.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview().inset(60)
             $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
     }
     
     func attribute() {
-        view.addSubview(mainScrollView)
-        mainScrollView.addSubview(mainView)
-        mainView.addSubview(groupStackView)
+        view.backgroundColor = .white
+        view.addSubview(groupStackView)
         view.addSubview(whatICanMakeButton)
         [leftStackView, midStackView, rightStackView].forEach {
             groupStackView.addArrangedSubview($0)
             $0.axis = .vertical
             $0.spacing = 10
             $0.distribution = .fillEqually
-            $0.backgroundColor = .green
         }
         
         [vodkaButton, ginButton, liqueurButton].forEach {
@@ -94,10 +85,7 @@ class MyDrinksViewController: UIViewController {
         groupStackView.axis = .horizontal
         groupStackView.distribution = .fillEqually
         groupStackView.spacing = 10
-        groupStackView.backgroundColor = .systemCyan
-        whatICanMakeButton.backgroundColor = .systemBlue
         whatICanMakeButton.setTitle("What I Can Make".localized, for: .normal)
-        whatICanMakeButton.badgeBackgroundColor = .systemBlue
         vodkaButton.base = .vodka
         whiskeyButton.base = .whiskey
         tequilaButton.base = .tequila
@@ -110,6 +98,7 @@ class MyDrinksViewController: UIViewController {
         [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
             setButtonAction(buttonName: $0)
         }
+        whatICanMakeButton.setTitleColor(.black, for: .normal)
         
         whatICanMakeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
@@ -136,8 +125,8 @@ class MyDrinksViewController: UIViewController {
         button.badge = "\(originCount)"
     }
     
-    func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
-        button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
+    func updateWhatICanMakeButton(data: Set<String>, button: UIButton) {
+        button.setTitle("\(checkWhatICanMake(myIngredients: data).count)", for: .normal)
     }
     
     func checkWhatICanMake(myIngredients: Set<String>) -> [Cocktail] {
