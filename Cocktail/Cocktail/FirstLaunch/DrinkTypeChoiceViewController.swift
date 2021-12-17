@@ -7,31 +7,91 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+
+protocol DrinkTypeChoiceViewBindable {
+    //viewModel -> view
+    var setImageAndData: Signal<Cocktail.DrinkType> { get }
+    var buttonLabelCount: Signal<Int> { get }
+    var presentAlert: Signal<Void> { get }
+    var presentBaseChoiceViewController: Signal<[Cocktail]> { get }
+    
+    //view -> viewModel
+    var cocktailTypeButtonTapped: PublishRelay<Cocktail.DrinkType> { get }
+    var nextButtonTapped: PublishRelay<Void> { get }
+    var informationButtonTapped: PublishRelay<Void> { get }
+}
+
 
 class DrinkTypeChoiceViewController: UIViewController {
-    
-    var drinkTypeSelected: Cocktail.DrinkType?
-    
-    var filteredRecipe = [Cocktail]()
+    let disposeBag = DisposeBag()
     
     let questionLabel = UILabel()
-    
     let mainStackView = UIStackView()
     let shooterButton = UIButton()
     let shortDrinkButton = UIButton()
     let longDrinkButton = UIButton()
     let nextButton = UIButton()
-    
     let informationButton = UIButton()
     
-    var myFavor: Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         attribute()
     }
     
-    func layout() {
+    func bind(_ viewModel: DrinkTypeChoiceViewBindable) {
+        viewModel.setImageAndData
+            .emit(to: self.rx.setImageAndData)
+            .disposed(by: disposeBag)
+        
+        viewModel.buttonLabelCount
+            .map { number in
+                "\(number)개의 칵테일 발견"
+            }
+            .emit(to: nextButton.rx.title())
+            .disposed(by: disposeBag)
+        
+        viewModel.presentAlert
+            .emit(onNext: {[weak self] _ in
+                self?.present(UserFavor.shared.makeAlert(title: "다른걸 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.presentBaseChoiceViewController
+            .emit(onNext: {[weak self] lastRecipe in
+                let baseChoiceViewController = BaseChoiceViewController()
+                    baseChoiceViewController.filteredRecipe = lastRecipe
+                self?.show(baseChoiceViewController, sender: nil)
+            })
+            .disposed(by: disposeBag)
+        
+        shooterButton.rx.tap
+            .map { _ in Cocktail.DrinkType.shooter}
+            .bind(to: viewModel.cocktailTypeButtonTapped)
+            .disposed(by: disposeBag)
+        
+        shortDrinkButton.rx.tap
+            .map { _ in Cocktail.DrinkType.shortDrink}
+            .bind(to: viewModel.cocktailTypeButtonTapped)
+            .disposed(by: disposeBag)
+        
+        longDrinkButton.rx.tap
+            .map { _ in Cocktail.DrinkType.longDrink}
+            .bind(to: viewModel.cocktailTypeButtonTapped)
+            .disposed(by: disposeBag)
+        
+        nextButton.rx.tap
+            .bind(to: viewModel.nextButtonTapped)
+            .disposed(by: disposeBag)
+        
+        informationButton.rx.tap        //TODO: 현재 받는 쪽 없지만 생성만 해놈
+            .bind(to: viewModel.informationButtonTapped)
+            .disposed(by: disposeBag)
+    }
+    
+    private func layout() {
         view.addSubview(questionLabel)
         view.addSubview(mainStackView)
         view.addSubview(nextButton)
@@ -73,7 +133,7 @@ class DrinkTypeChoiceViewController: UIViewController {
         }
     }
     
-    func attribute() {
+    private func attribute() {
         view.backgroundColor = .white
         questionLabel.text = "선호하는 칵테일 용량"
         mainStackView.axis = .vertical
@@ -96,51 +156,28 @@ class DrinkTypeChoiceViewController: UIViewController {
         nextButton.isEnabled = false
         nextButton.backgroundColor = .white
         
-        nextButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            let lastRecipe = self.filteredRecipe.filter {$0.drinkType == self.drinkTypeSelected}
-            if lastRecipe.isEmpty {
-                self.present(UserFavor.shared.makeAlert(title: "다른걸 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
-            } else {
-                let baseChoiceViewController = BaseChoiceViewController()
-                    baseChoiceViewController.filteredRecipe = lastRecipe
-                self.show(baseChoiceViewController, sender: nil)
-            }
-        }), for: .touchUpInside)
-        
-        shooterButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            self.setImageAndData(button: self.shooterButton, drinkType: .shooter)
-            self.buttonLabelCountUpdate(button: self.nextButton)
-        }), for: .touchUpInside)
-        shortDrinkButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            self.setImageAndData(button: self.shortDrinkButton, drinkType: .shortDrink)
-            self.buttonLabelCountUpdate(button: self.nextButton)
-        }), for: .touchUpInside)
-        longDrinkButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            self.setImageAndData(button: self.longDrinkButton, drinkType: .longDrink)
-            self.buttonLabelCountUpdate(button: self.nextButton)
-        }), for: .touchUpInside)
-        
         informationButton.setImage(UIImage(systemName: "questionmark.circle"), for: .normal)
     }
-    
-    func setImageAndData(button: UIButton, drinkType: Cocktail.DrinkType) {
-        [shooterButton, shortDrinkButton, longDrinkButton].forEach {
-            $0.backgroundColor = .white
+}
+
+extension Reactive where Base: DrinkTypeChoiceViewController {
+    var setImageAndData: Binder<Cocktail.DrinkType> {
+        return Binder(base) { base, drinkType in
+            [base.shooterButton, base.shortDrinkButton, base.longDrinkButton].forEach {
+                $0.backgroundColor = .white
+            }
+            
+            switch drinkType {
+            case .shooter:
+                base.shooterButton.backgroundColor = .brown
+            case .shortDrink:
+                base.shortDrinkButton.backgroundColor = .brown
+            case .longDrink:
+                base.longDrinkButton.backgroundColor = .brown
+            }
+            
+            base.nextButton.isEnabled = true
+            base.nextButton.backgroundColor = .brown
         }
-        button.backgroundColor = .brown
-        drinkTypeSelected = drinkType
-        nextButton.isEnabled = true
-        nextButton.backgroundColor = .brown
-    }
-    
-    func buttonLabelCountUpdate(button: UIButton) {
-        let number = filteredRecipe.filter {
-            $0.drinkType == drinkTypeSelected
-        }.count
-        button.setTitle("\(number)개의 칵테일 발견", for: .normal)
     }
 }

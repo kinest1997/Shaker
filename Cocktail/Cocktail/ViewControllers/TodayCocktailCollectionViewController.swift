@@ -12,6 +12,8 @@ import SwiftUI
 import FirebaseDatabase
 import FirebaseAuth
 import AuthenticationServices
+import RxSwift
+import RxCocoa
 
 class TodayCocktailCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -68,6 +70,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.title = "추천"
         view.addSubview(collectionView)
         view.addSubview(loadingView)

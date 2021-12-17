@@ -12,6 +12,7 @@ import RxCocoa
 
 protocol AlcoholChoiceViewBindable {
     typealias DrinkTypeChoiceViewComponents = (favor: Bool, recipe: [Cocktail])
+    var drinkTypeChoiceViewModel: DrinkTypeChoiceViewModel { get }
     
     var myFavor: Signal<Bool> { get }
     var isNextButtonEnabled: Signal<Bool> { get }
@@ -19,7 +20,7 @@ protocol AlcoholChoiceViewBindable {
     var buttonLabelCount: Signal<Int> { get }
     var showReadyToLaunchViewController: Driver<Void> { get }
     var presentAlert: Driver<Void> { get }
-    var showDrinkTypeChoiceView: Driver<DrinkTypeChoiceViewComponents> { get }
+    var showDrinkTypeChoiceView: Driver<Void> { get }
     
     var alcoholLevelButtonTapped: PublishRelay<Cocktail.Alcohol> { get }
     var nextButtonTapped: PublishRelay<Void> { get }
@@ -27,6 +28,8 @@ protocol AlcoholChoiceViewBindable {
 
 class AlcoholChoiceViewController: UIViewController {
     let disposeBag = DisposeBag()
+    
+    let drinkTypeChoiceViewController = DrinkTypeChoiceViewController()
     
     let questionLabel = UILabel()
     let explainLabel = UILabel()
@@ -48,6 +51,8 @@ class AlcoholChoiceViewController: UIViewController {
     }
     
     func bind(_ viewModel: AlcoholChoiceViewBindable) {
+        drinkTypeChoiceViewController.bind(viewModel.drinkTypeChoiceViewModel)
+        
         viewModel.myFavor
             .emit(to: tabBarController!.tabBar.rx.isHidden)
             .disposed(by: disposeBag)
@@ -67,7 +72,7 @@ class AlcoholChoiceViewController: UIViewController {
         
         viewModel.showReadyToLaunchViewController
             .drive(onNext: {[weak self] _ in
-                self?.show(ReadyToLaunchVIewController(), sender: nil)
+                self?.show(ReadyToLaunchViewController(), sender: nil)
             })
             .disposed(by: disposeBag)
         
@@ -78,11 +83,9 @@ class AlcoholChoiceViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.showDrinkTypeChoiceView
-            .drive(onNext: {[weak self] data in
-                let drinkTypeChoiceViewController = DrinkTypeChoiceViewController()
-                drinkTypeChoiceViewController.myFavor = data.favor
-                drinkTypeChoiceViewController.filteredRecipe = data.recipe
-                self?.show(drinkTypeChoiceViewController, sender: nil)
+            .drive(onNext: {[weak self] _ in
+                guard let self = self else { return }
+                self.show(self.drinkTypeChoiceViewController, sender: nil)
             })
             .disposed(by: disposeBag)
         

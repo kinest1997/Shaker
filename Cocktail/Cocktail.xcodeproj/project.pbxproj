@@ -67,6 +67,8 @@
 		7DA42A6E27683F4200110512 /* AlcoholChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A6D27683F4200110512 /* AlcoholChoiceViewModel.swift */; };
 		7DA42A71276840B500110512 /* ColorChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */; };
 		7DA42A792768E41700110512 /* ColorChoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA42A782768E41700110512 /* ColorChoiceModel.swift */; };
+		7DF366A8276C533B00378E1A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF366A7276C533B00378E1A /* LoginViewModel.swift */; };
+		7DF366AC276C5C7B00378E1A /* DrinkTypeChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF366AB276C5C7B00378E1A /* DrinkTypeChoiceViewModel.swift */; };
 		FE09B3A71857A08BA673ABA5 /* Pods_Cocktail_WidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F39F05151ED4DC0EFE4A4D2 /* Pods_Cocktail_WidgetExtension.framework */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +161,8 @@
 		7DA42A6D27683F4200110512 /* AlcoholChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholChoiceViewModel.swift; sourceTree = "<group>"; };
 		7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceViewModel.swift; sourceTree = "<group>"; };
 		7DA42A782768E41700110512 /* ColorChoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceModel.swift; sourceTree = "<group>"; };
+		7DF366A7276C533B00378E1A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		7DF366AB276C5C7B00378E1A /* DrinkTypeChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTypeChoiceViewModel.swift; sourceTree = "<group>"; };
 		7EF94C6A9E8E79044F512CFC /* Pods-Cocktail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cocktail.release.xcconfig"; path = "Target Support Files/Pods-Cocktail/Pods-Cocktail.release.xcconfig"; sourceTree = "<group>"; };
 		7F3ADD64465D5E9E2FDD8587 /* Pods-Cocktail WidgetExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cocktail WidgetExtension.debug.xcconfig"; path = "Target Support Files/Pods-Cocktail WidgetExtension/Pods-Cocktail WidgetExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		83B140B610B82D71C8E91F66 /* Pods-Cocktail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cocktail.debug.xcconfig"; path = "Target Support Files/Pods-Cocktail/Pods-Cocktail.debug.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				3D4415D027564EA600CBCC40 /* LoginViewController.swift */,
+				7DF366A7276C533B00378E1A /* LoginViewModel.swift */,
 				3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */,
 				7DA42A70276840B500110512 /* ColorChoiceViewModel.swift */,
 				7DA42A782768E41700110512 /* ColorChoiceModel.swift */,
@@ -232,6 +237,7 @@
 				7DA42A6D27683F4200110512 /* AlcoholChoiceViewModel.swift */,
 				3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */,
 				3DE56B32275DF93E0087D979 /* DrinkTypeChoiceViewController.swift */,
+				7DF366AB276C5C7B00378E1A /* DrinkTypeChoiceViewModel.swift */,
 				3DE56B34275E4F750087D979 /* BaseChoiceViewController.swift */,
 			);
 			path = FirstLaunch;
@@ -530,9 +536,11 @@
 			files = (
 				7D4AF9062760D57B0093C3C2 /* UIApplication.swift in Sources */,
 				3D74812427366C0E0092BD74 /* WhatIHaveViewController.swift in Sources */,
+				7DF366AC276C5C7B00378E1A /* DrinkTypeChoiceViewModel.swift in Sources */,
 				3D7F17C32734D5FF006EDCF9 /* FilteredView.swift in Sources */,
 				3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */,
 				3D7481222736566F0092BD74 /* MyBadgeButton.swift in Sources */,
+				7DF366A8276C533B00378E1A /* LoginViewModel.swift in Sources */,
 				3DE56B31275D080A0087D979 /* TodayCocktailCollectionViewHeader.swift in Sources */,
 				3D7481292736BC550092BD74 /* WhatIHaveCollectionViewCell.swift in Sources */,
 				3DE56B2F275CE5FB0087D979 /* TodayCocktailCollectionViewCell.swift in Sources */,

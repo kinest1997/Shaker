@@ -69,10 +69,15 @@ struct ColorChoiceViewModel: ColorChoiceViewBindable {
             .flatMapLatest { selectedColor }
             .asSignal(onErrorSignalWith: .empty())
         
-        let lastRecipe = nextButtonTapped
-            .withLatestFrom(selectedColor)
-            .map(model.getLastReceipe)
-            .share()
+        let lastRecipe = Observable
+            .combineLatest(
+                nextButtonTapped.withLatestFrom(selectedColor),
+                model.getReciepe().asObservable()
+            ) { colors, cocktails in
+                cocktails.filter {
+                    colors.contains($0.color)
+                }
+            }
         
         self.presentAlert = lastRecipe
             .filter { $0.isEmpty }

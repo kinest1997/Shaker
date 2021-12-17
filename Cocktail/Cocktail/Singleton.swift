@@ -1,7 +1,8 @@
-import UIKit
+import Foundation
 import FirebaseDatabase
 import FirebaseAuth
 import AuthenticationServices
+import RxSwift
 
 ///유저의 개인 취향을 저장하는곳, 설정에서 나중에 취향 재설정 가능하게 하자
 
@@ -59,6 +60,7 @@ class FirebaseRecipe {
     
     let uid = Auth.auth().currentUser?.uid
     
+    //Before Rx
     func getRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
         ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
@@ -70,6 +72,33 @@ class FirebaseRecipe {
         }
     }
     
+    /*
+     좀더 정확하고 명시적인 에러처리를 위해선 커스텀 에러를 만든 후에 Observable을 구독하는 쪽에서 filtering 하는 것이 적절
+     enum FirebaseError: Error {
+        case parsingError
+        case invalidRequest
+        case serverError
+        case defaultError
+        case unknown
+     }
+     */
+    
+    //After Rx
+    func getRecipe() -> Single<[Cocktail]> {
+        return Single.create {[weak self] observer in
+            self?.ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
+                guard let value = snapshot.value as? [[String: Any]],
+                      let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                      let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                          observer(.success([Cocktail]()))
+                          return }
+                observer(.success(cocktailList))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    //Before Rx
     func getMyRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
         guard let uid = uid else { return }
         ref.child("users").child(uid).child("MyRecipes").observeSingleEvent(of: .value) { snapshot in
@@ -77,9 +106,30 @@ class FirebaseRecipe {
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
                   let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
                       completion([Cocktail]())
-                      return }
+                      return
+                  }
             let myRecipes = cocktailList.filter { $0.myRecipe == true }
             completion(myRecipes)
+        }
+    }
+    
+    //After Rx
+    func getMyRecipe() -> Single<[Cocktail]> {
+        return Single.create {[weak self] observer in
+            guard let uid = self?.uid else {
+                observer(.failure(URLError(.userAuthenticationRequired)))
+                return Disposables.create()
+            }
+            self?.ref.child("users").child(uid).child("MyRecipes").observeSingleEvent(of: .value) { snapshot in
+                guard let value = snapshot.value as? [[String: Any]],
+                      let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                      let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                          observer(.success([Cocktail]()))
+                          return }
+                let myRecipes = cocktailList.filter { $0.myRecipe == true }
+                observer(.success(myRecipes))
+            }
+            return Disposables.create()
         }
     }
     

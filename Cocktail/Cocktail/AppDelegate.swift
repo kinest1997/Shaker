@@ -12,6 +12,7 @@ import UserNotifications
 import FirebaseMessaging
 import FirebaseAnalytics
 import FirebaseAuth
+import RxCocoa
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

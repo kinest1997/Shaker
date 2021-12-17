@@ -11,15 +11,27 @@ import AuthenticationServices
 import CryptoKit
 import SnapKit
 import FirebaseDatabase
+import RxSwift
+import RxCocoa
+
+protocol LoginViewBindable {
+    //viewModel -> view
+    var startAppleSignInFlow: Signal<Void> { get }
+    var updateFirstLaunchStatus: Signal<Bool> { get }
+    var updateRootViewController: Signal<Void> { get }
+    var tabBarHidden: Signal<Bool> { get }
+    
+    //view -> viewModel
+    var appleLoginButtonTapped: PublishRelay<Void> { get }
+    var justUseButtonTapped: PublishRelay<Void> { get }
+}
 
 class LoginViewController: UIViewController {
+    let disposeBag = DisposeBag()
     
     let userNotiCenter = UNUserNotificationCenter.current()
-    
     let mainViewController = MainViewController()
-    
     private var currentNonce: String?
-    
     let appleLoginButton = UIButton()
     let justUseButton = UIButton()
     
@@ -32,24 +44,6 @@ class LoginViewController: UIViewController {
         view.addSubview(justUseButton)
         appleLoginButton.setTitle("애플 로그인", for: .normal)
         justUseButton.setTitle("그냥 사용하기", for: .normal)
-        appleLoginButton.addAction(UIAction(handler: {[weak self] _ in
-            self?.startSignInWithAppleFlow()
-        }), for: .touchUpInside)
-        
-        justUseButton.addAction(UIAction(handler: {[weak self] _ in
-            FirebaseRecipe.shared.getRecipe { data in
-                FirebaseRecipe.shared.recipe = data
-                UserDefaults.standard.set(false, forKey: "firstLaunch")
-                let scenes = UIApplication.shared.connectedScenes
-                let windowScene = scenes.first as? UIWindowScene
-                let window = windowScene?.windows.first
-                
-                window?.rootViewController = self?.mainViewController
-                
-                self?.tabBarController?.tabBar.isHidden = false
-//                self?.navigationController?.popToRootViewController(animated: true)
-            }
-        }), for: .touchUpInside)
         
         appleLoginButton.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -71,6 +65,39 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    func bind(_ viewModel: LoginViewBindable) {
+        viewModel.startAppleSignInFlow
+            .emit(to: self.rx.startSignInWithApple)
+            .disposed(by: disposeBag)
+        
+        viewModel.updateFirstLaunchStatus
+            .emit(onNext: { no in
+                UserDefaults.standard.set(no, forKey: "firstLaunch")
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.updateRootViewController
+            .emit(onNext: {[weak self] _ in
+                let scenes = UIApplication.shared.connectedScenes   //2nd action
+                let windowScene = scenes.first as? UIWindowScene
+                let window = windowScene?.windows.first
+                window?.rootViewController = self?.mainViewController
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.tabBarHidden
+            .emit(to: tabBarController!.tabBar.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        appleLoginButton.rx.tap
+            .bind(to: viewModel.appleLoginButtonTapped)
+            .disposed(by: disposeBag)
+        
+        justUseButton.rx.tap
+            .bind(to: viewModel.justUseButtonTapped)
+            .disposed(by: disposeBag)
     }
     
     func requestAuthNoti() {
@@ -175,5 +202,13 @@ extension LoginViewController {
 extension LoginViewController : ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
+    }
+}
+
+extension Reactive where Base: LoginViewController {
+    var startSignInWithApple: Binder<Void> {
+        return Binder(base) { base, _ in
+            base.startSignInWithAppleFlow()
+        }
     }
 }

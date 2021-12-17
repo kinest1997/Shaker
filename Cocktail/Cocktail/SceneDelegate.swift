@@ -10,16 +10,17 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let rootViewModel = LoginViewModel()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        
-        
         if UserDefaults.standard.bool(forKey: "firstLaunch"){
-            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+            let rootViewController = LoginViewController()
+            rootViewController.bind(rootViewModel)
+            window?.rootViewController = UINavigationController(rootViewController: rootViewController)
             window?.makeKeyAndVisible()
         } else {
             window?.rootViewController = MainViewController()

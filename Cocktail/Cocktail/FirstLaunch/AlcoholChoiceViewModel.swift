@@ -10,6 +10,9 @@ import RxCocoa
 import UIKit
 
 struct AlcoholChoiceViewModel: AlcoholChoiceViewBindable {
+    let disposeBag = DisposeBag()
+    let drinkTypeChoiceViewModel = DrinkTypeChoiceViewModel()
+    
     //viewModel -> view
     let myFavor: Signal<Bool>
     let isNextButtonEnabled: Signal<Bool>
@@ -17,7 +20,7 @@ struct AlcoholChoiceViewModel: AlcoholChoiceViewBindable {
     let buttonLabelCount: Signal<Int>
     let showReadyToLaunchViewController: Driver<Void>
     let presentAlert: Driver<Void>
-    let showDrinkTypeChoiceView: Driver<DrinkTypeChoiceViewComponents>
+    let showDrinkTypeChoiceView: Driver<Void>
     
     //view -> viewModel
     let alcoholLevelButtonTapped = PublishRelay<Cocktail.Alcohol>()
@@ -65,17 +68,14 @@ struct AlcoholChoiceViewModel: AlcoholChoiceViewBindable {
             .map { _ in Void() }
             .asDriver(onErrorDriveWith: .empty())
         
-        let drinkTypeChoiceViewComponents = Observable
-            .combineLatest(
-                myFavor.asObservable(),
-                updateFilteredRecipe.asObservable()
-            ) { (favor: $0, recipe: $1) }
+        
+        updateFilteredRecipe
+            .bind(to: drinkTypeChoiceViewModel.filteredRecipe)
+            .disposed(by: disposeBag)
         
         self.showDrinkTypeChoiceView = lastRecipe
             .filter { !$0.isEmpty }
-            .flatMap { _ in
-                return drinkTypeChoiceViewComponents
-            }
+            .map { _ in Void() }
             .asDriver(onErrorDriveWith: .empty())
     }
 }

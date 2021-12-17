@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 
 class BaseChoiceViewController: UIViewController {
-    
     var filteredRecipe: [Cocktail] = []
     
     var selectedBase: Cocktail.Base?

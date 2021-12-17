@@ -1,8 +1,7 @@
 import UIKit
 import SnapKit
 
-class ReadyToLaunchVIewController: UIViewController {
-    
+class ReadyToLaunchViewController: UIViewController {
     let mainViewController = MainViewController()
     
     let startTextLabel = UILabel()

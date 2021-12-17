@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 protocol CocktailCondition {
     var rawValue: String { get }

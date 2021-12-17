@@ -6,7 +6,7 @@ import SwiftUI
 
 protocol ColorChoiceViewBindable {
     var alcoholChoiceViewModel: AlcoholChoiceViewModel { get }
-    
+    //ViewModel -> View
     var colorArray: Driver<[Cocktail.Color]> { get }
     var updateItem: Signal<(indexPath: IndexPath, selected: [Bool])> { get }
     var buttonLabelCount: Signal<Int> { get }
@@ -15,18 +15,17 @@ protocol ColorChoiceViewBindable {
     var presentAlert: Driver<Void> { get }
     var presentAlcoholChoiceView: Driver<Void> { get }
     
+    //View -> ViewModel
     var nextButtonTapped: PublishRelay<Void> { get }
     var itemSelected: PublishRelay<IndexPath> { get }
 }
 
 class ColorChoiceViewController: UIViewController {
     let disposeBag = DisposeBag()
+    
     let alcoholChoiceViewController = AlcoholChoiceViewController()
-    
     let questionLabel = UILabel()
-    
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    
     let nextButton = UIButton()
     
     override func viewDidLoad() {
