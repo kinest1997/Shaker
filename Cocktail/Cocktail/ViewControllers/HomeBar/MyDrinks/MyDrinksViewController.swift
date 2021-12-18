@@ -14,6 +14,8 @@ class MyDrinksViewController: UIViewController {
     let midStackView = UIStackView()
     let rightStackView = UIStackView()
     let groupStackView = UIStackView()
+    let topNameLabel = UILabel()
+    let topExplainLabel = UILabel()
     
     let ginButton = BadgeButton()
     let vodkaButton = BadgeButton()
@@ -46,16 +48,28 @@ class MyDrinksViewController: UIViewController {
     }
     
     func layout() {
+        topNameLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(50)
+            $0.height.equalTo(30)
+            $0.leading.equalToSuperview().offset(30)
+        }
+        
+        topExplainLabel.snp.makeConstraints {
+            $0.top.equalTo(topNameLabel.snp.bottom).offset(10)
+            $0.leading.equalTo(topNameLabel)
+            $0.height.equalTo(20)
+        }
         groupStackView.snp.makeConstraints {
+            $0.top.equalTo(topExplainLabel.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.5)
             $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(130)
+            $0.height.equalTo(groupStackView.snp.width)
         }
         whatICanMakeButton.snp.makeConstraints {
-            $0.top.equalTo(groupStackView.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(60)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
+            $0.top.equalTo(groupStackView.snp.bottom).offset(40)
+            $0.width.equalToSuperview().multipliedBy(0.7)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(70)
         }
     }
     
@@ -63,6 +77,11 @@ class MyDrinksViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(groupStackView)
         view.addSubview(whatICanMakeButton)
+        view.addSubview(topNameLabel)
+        view.addSubview(topExplainLabel)
+        
+//        topExplainLabel.sizeToFit()
+//        topNameLabel.sizeToFit()
         [leftStackView, midStackView, rightStackView].forEach {
             groupStackView.addArrangedSubview($0)
             $0.axis = .vertical
@@ -82,6 +101,13 @@ class MyDrinksViewController: UIViewController {
             rightStackView.addArrangedSubview($0)
             $0.setImage(UIImage(named: "Martini"), for: .normal)
         }
+        
+        topNameLabel.textColor = .black
+        topExplainLabel.textColor = .black
+        topNameLabel.text = "내 술장"
+        topNameLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        topExplainLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        topExplainLabel.text = "내가 가지고 있는 재료로 만들 수 있는 레시피를 알아봐요!"
         groupStackView.axis = .horizontal
         groupStackView.distribution = .fillEqually
         groupStackView.spacing = 10

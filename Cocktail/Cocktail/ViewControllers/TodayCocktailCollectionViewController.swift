@@ -210,22 +210,7 @@ extension TodayCocktailCollectionViewController {
         if kind == UICollectionView.elementKindSectionHeader {
             guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
             headerview.sectionTextLabel.text = sectionName[indexPath.section]
-            switch indexPath.section {
-            case 0:
-                headerview.seeTotalButton.isHidden = true
-                return headerview
-            case 1:
-                headerview.seeTotalButton.isHidden = false
-                return headerview
-            case 2:
-                headerview.seeTotalButton.isHidden = false
-                headerview.seeTotalButton.addAction(UIAction(handler: {[weak self] _ in
-                    self?.show(WishListCocktailListTableView(), sender: nil)
-                }), for: .touchUpInside)
-                return headerview
-            default:
-                return UICollectionReusableView()
-            }
+            return headerview
         } else {
             return UICollectionReusableView()
         }
