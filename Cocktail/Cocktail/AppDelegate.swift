@@ -7,7 +7,6 @@
 
 import UIKit
 import Firebase
-import GoogleSignIn
 import UserNotifications
 import FirebaseMessaging
 import FirebaseAnalytics
