@@ -33,6 +33,7 @@ class TodayCocktailCollectionViewCell: UICollectionViewCell {
         mainImageView.layer.borderWidth = 0
         mainImageView.layer.cornerRadius = 15
         mainImageView.clipsToBounds = true
+        mainImageView.contentMode = .scaleAspectFit
         
         nameLabel.snp.makeConstraints {
             $0.bottom.leading.trailing.equalToSuperview()

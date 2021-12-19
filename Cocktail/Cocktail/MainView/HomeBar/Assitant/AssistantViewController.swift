@@ -33,7 +33,7 @@ class AssistantViewController: UIViewController {
             if Auth.auth().currentUser?.uid == nil {
                 self?.pleaseLoginAlert()
             } else {
-                let wishListCocktailListTableView = WishListCocktailListTableView()
+                let wishListCocktailListTableView = WishListCocktailListViewController()
                 self?.show(wishListCocktailListTableView, sender: nil)
             }
             

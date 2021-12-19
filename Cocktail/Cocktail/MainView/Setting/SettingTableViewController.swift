@@ -106,7 +106,7 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
-        
+        cell.selectionStyle = .none
         var content = cell.defaultContentConfiguration()
         content.text = Settings(rawValue: indexPath.section)?.rowTitles[indexPath.row]
         cell.contentConfiguration = content

@@ -137,9 +137,9 @@ class BaseChoiceViewController: UIViewController {
             if lastRecipe.isEmpty {
                 self.present(UserFavor.shared.makeAlert(title: "다른걸 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
             } else {
-                let cocktailListTableView = CocktailListTableView()
-                cocktailListTableView.lastRecipe = lastRecipe
-                self.show(cocktailListTableView, sender: nil)
+                let cocktailListViewController = CocktailListViewController()
+                cocktailListViewController.lastRecipe = lastRecipe
+                self.show(cocktailListViewController, sender: nil)
             }
         }), for: .touchUpInside)
     }

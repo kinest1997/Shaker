@@ -130,7 +130,7 @@ class MyDrinksViewController: UIViewController {
         whatICanMakeButton.setTitleColor(.black, for: .normal)
         whatICanMakeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
-            let whatICanMakeViewController = CocktailListTableView()
+            let whatICanMakeViewController = CocktailListViewController()
             whatICanMakeViewController.lastRecipe = self.checkWhatICanMake(myIngredients: self.myDrink)
             self.show(whatICanMakeViewController, sender: nil)
         }), for: .touchUpInside)

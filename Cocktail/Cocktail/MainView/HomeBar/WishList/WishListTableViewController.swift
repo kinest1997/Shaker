@@ -1,6 +1,6 @@
 import UIKit
 
-class WishListCocktailListTableView: UITableViewController {
+class WishListCocktailListViewController: UITableViewController {
     
     var wishListRecipe: [Cocktail] = []
     
@@ -17,7 +17,7 @@ class WishListCocktailListTableView: UITableViewController {
     }
 }
 
-extension WishListCocktailListTableView {
+extension WishListCocktailListViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return wishListRecipe.count
