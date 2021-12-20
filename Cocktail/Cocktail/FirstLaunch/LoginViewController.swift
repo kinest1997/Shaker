@@ -11,8 +11,25 @@ import AuthenticationServices
 import CryptoKit
 import SnapKit
 import FirebaseDatabase
+import RxCocoa
+import RxSwift
+
+protocol LoginViewBiandable {
+    // view -> viewModel
+    var appleLoginButtonTapped: PublishRelay<Void> { get }
+    var justUseButtonTapped: PublishRelay<Void> { get }
+    
+    // viewModel -> view
+    var startSignInWithAppleFlow: Signal<Void> { get }
+    var updateFirstLogin: Signal<Bool> { get }
+    var changeLoginView: Signal<Void> { get }
+    var tabBarIsHidden: Signal<Bool> { get }
+    
+}
 
 class LoginViewController: UIViewController {
+    
+    let disposeBag = DisposeBag()
     
     let userNotiCenter = UNUserNotificationCenter.current()
     
@@ -22,6 +39,41 @@ class LoginViewController: UIViewController {
     
     let appleLoginButton = UIButton()
     let justUseButton = UIButton()
+    
+    func bind(_ viewModel: LoginViewBiandable) {
+        //view -> viewModel
+        appleLoginButton.rx.tap
+            .bind(to: viewModel.appleLoginButtonTapped)
+            .disposed(by: disposeBag)
+        
+        justUseButton.rx.tap
+            .bind(to: viewModel.justUseButtonTapped)
+            .disposed(by: disposeBag)
+        //viewModel -> view
+        
+        viewModel.updateFirstLogin
+            .emit { bool in
+                UserDefaults.standard.set(bool, forKey: "firstLaunch")}
+            .disposed(by: disposeBag)
+        
+        viewModel.tabBarIsHidden
+            .emit(to:
+                    tabBarController!.tabBar.rx.isHidden)
+            .disposed(by: disposeBag)
+        
+        viewModel.changeLoginView
+            .emit(onNext: {[weak self] _ in
+                let scenes = UIApplication.shared.connectedScenes
+                let windowScene = scenes.first as? UIWindowScene
+                let window = windowScene?.windows.first
+                window?.rootViewController = self?.mainViewController
+            })
+            .disposed(by: disposeBag)
+        
+        viewModel.startSignInWithAppleFlow
+            .emit(to: self.rx.startSignWithAppleLogin)
+            .disposed(by: disposeBag)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +99,7 @@ class LoginViewController: UIViewController {
                 window?.rootViewController = self?.mainViewController
                 
                 self?.tabBarController?.tabBar.isHidden = false
-//                self?.navigationController?.popToRootViewController(animated: true)
+                //                self?.navigationController?.popToRootViewController(animated: true)
             }
         }), for: .touchUpInside)
         
@@ -172,5 +224,13 @@ extension LoginViewController {
 extension LoginViewController : ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!
+    }
+}
+
+extension Reactive where Base: LoginViewController {
+    var startSignWithAppleLogin: Binder<Void> {
+        return Binder(base) { base, _ in
+            base.startSignInWithAppleFlow()
+        }
     }
 }
