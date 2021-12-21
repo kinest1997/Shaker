@@ -33,7 +33,7 @@ struct LoginViewModel: LoginViewBiandable {
             .asSignal()
         
         tabBarIsHidden = justUseButtonTapped
-            .map { true }
+            .map { false }
             .asSignal(onErrorJustReturn: false)
     }
     

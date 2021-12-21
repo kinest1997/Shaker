@@ -39,7 +39,6 @@ class ContentNetwork {
             application.open(webURL)
         }
     }
-    
 }
 
 class FirebaseRecipe {

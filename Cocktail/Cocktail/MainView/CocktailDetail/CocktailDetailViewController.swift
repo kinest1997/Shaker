@@ -298,6 +298,7 @@ class CocktailDetailViewController: UIViewController {
         [alcoholLabel, alcoholGuideLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, recipeLabel, drinkTypeLabel, likeCountLabel, disLikeCountLabel].forEach {
             $0.textColor = .black
             $0.font = .systemFont(ofSize: 14, weight: .medium)
+            $0.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         }
         
         //제목 설정하는곳
