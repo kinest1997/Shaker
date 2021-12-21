@@ -23,6 +23,7 @@ class ColorChoiceViewController: UIViewController {
         mainCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: "colorCell")
         layout()
         attribute()
+        mainCollectionView.isScrollEnabled = false
         if myFavor {
             self.tabBarController?.tabBar.isHidden = true
         } else {
@@ -31,7 +32,7 @@ class ColorChoiceViewController: UIViewController {
     }
     
     func layout() {
-        view.addSubview(questionLabel)
+        view.addSubview(questionLabel) 
         view.addSubview(mainCollectionView)
         view.addSubview(nextButton)
         

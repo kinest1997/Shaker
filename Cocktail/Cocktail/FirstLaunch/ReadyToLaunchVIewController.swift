@@ -20,9 +20,7 @@ class ReadyToLaunchVIewController: UIViewController {
             let scenes = UIApplication.shared.connectedScenes
             let windowScene = scenes.first as? UIWindowScene
             let window = windowScene?.windows.first
-            
             window?.rootViewController = self?.mainViewController
-            
         }), for: .touchUpInside)
         nextButton.setTitle("시작하기", for: .normal)
         nextButton.backgroundColor = .brown

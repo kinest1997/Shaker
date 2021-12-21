@@ -25,40 +25,19 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     var youtubeData: [YouTubeVideo] = [] {
         didSet {
-            dataReciped.append(true)
-            if dataReciped.count == 3 {
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                    self.loadingView.isHidden = true
-                }
-            }
+            canIDismissLoading()
         }
     }
     
     var myRecipe: [Cocktail] = [] {
         didSet {
-            dataReciped.append(true)
-            if dataReciped.count == 3 {
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                    self.loadingView.isHidden = true
-                }
-            }
+            canIDismissLoading()
         }
     }
     
     var wishListData: [Cocktail] = [] {
         didSet {
-            dataReciped.append(true)
-            if dataReciped.count == 3 {
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                    self.loadingView.isHidden = true
-                }
-            }
+            canIDismissLoading()
         }
     }
     
@@ -79,7 +58,6 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         loadingView.explainLabel.text = "로딩중"
         
         if Auth.auth().currentUser == nil {
@@ -121,6 +99,25 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         self.tabBarController?.tabBar.isHidden = false
         self.wishListData = FirebaseRecipe.shared.wishList
         self.collectionView.reloadData()
+    }
+    
+    func canIDismissLoading() {
+        dataReciped.append(true)
+        if dataReciped.count == 3 {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.loadingView.isHidden = true
+            }
+            if UserDefaults.standard.object(forKey: "whatIHave") == nil {
+                let alert = UIAlertController(title: "이런", message: "내술장에 술이 하나도없네요 \n 추가하러 가시겠어요?", preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "네", style: .default, handler: {[weak self] _ in
+                    self?.goToViewController(number: 2, viewController: MyDrinksViewController())
+                }))
+                alert.addAction(UIAlertAction(title: "다음에", style: .cancel, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+        }
     }
 }
 
@@ -212,11 +209,6 @@ extension TodayCocktailCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
-            if indexPath.section == 0 {
-                headerview.seeTotalButton.isHidden = true
-            } else {
-                headerview.seeTotalButton.isHidden = false
-            }
             headerview.sectionTextLabel.text = sectionName[indexPath.section]
             return headerview
         } else {

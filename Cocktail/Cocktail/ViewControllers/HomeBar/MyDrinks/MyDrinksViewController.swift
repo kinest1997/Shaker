@@ -14,6 +14,8 @@ class MyDrinksViewController: UIViewController {
     let midStackView = UIStackView()
     let rightStackView = UIStackView()
     let groupStackView = UIStackView()
+    let topNameLabel = UILabel()
+    let topExplainLabel = UILabel()
     
     let ginButton = BadgeButton()
     let vodkaButton = BadgeButton()
@@ -25,7 +27,7 @@ class MyDrinksViewController: UIViewController {
     let beverageButton = BadgeButton()
     let assetsButton = BadgeButton()
     
-    let whatICanMakeButton = BadgeButton()
+    let whatICanMakeButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,37 +48,45 @@ class MyDrinksViewController: UIViewController {
     }
     
     func layout() {
-        mainScrollView.snp.makeConstraints {
-            $0.leading.trailing.top.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(170)
+        topNameLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(50)
+            $0.height.equalTo(30)
+            $0.leading.equalToSuperview().offset(30)
         }
-        mainView.snp.makeConstraints {
-            $0.edges.equalTo(mainScrollView.contentLayoutGuide)
-            $0.width.equalTo(mainScrollView.frameLayoutGuide)
-            $0.height.equalToSuperview()
+        
+        topExplainLabel.snp.makeConstraints {
+            $0.top.equalTo(topNameLabel.snp.bottom).offset(10)
+            $0.leading.equalTo(topNameLabel)
+            $0.height.equalTo(20)
         }
         groupStackView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(40)
+            $0.top.equalTo(topExplainLabel.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.height.equalTo(groupStackView.snp.width)
         }
         whatICanMakeButton.snp.makeConstraints {
-            $0.top.equalTo(mainScrollView.snp.bottom).offset(10)
-            $0.leading.trailing.equalToSuperview().inset(60)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
+            $0.top.equalTo(groupStackView.snp.bottom).offset(40)
+            $0.width.equalToSuperview().multipliedBy(0.7)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(70)
         }
     }
     
     func attribute() {
-        view.addSubview(mainScrollView)
-        mainScrollView.addSubview(mainView)
-        mainView.addSubview(groupStackView)
+        view.backgroundColor = .white
+        view.addSubview(groupStackView)
         view.addSubview(whatICanMakeButton)
+        view.addSubview(topNameLabel)
+        view.addSubview(topExplainLabel)
+        
+//        topExplainLabel.sizeToFit()
+//        topNameLabel.sizeToFit()
         [leftStackView, midStackView, rightStackView].forEach {
             groupStackView.addArrangedSubview($0)
             $0.axis = .vertical
             $0.spacing = 10
             $0.distribution = .fillEqually
-            $0.backgroundColor = .green
         }
         
         [vodkaButton, ginButton, liqueurButton].forEach {
@@ -91,13 +101,16 @@ class MyDrinksViewController: UIViewController {
             rightStackView.addArrangedSubview($0)
             $0.setImage(UIImage(named: "Martini"), for: .normal)
         }
+        
+        topNameLabel.textColor = .black
+        topExplainLabel.textColor = .black
+        topNameLabel.text = "내 술장"
+        topNameLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        topExplainLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        topExplainLabel.text = "내가 가지고 있는 재료로 만들 수 있는 레시피를 알아봐요!"
         groupStackView.axis = .horizontal
         groupStackView.distribution = .fillEqually
         groupStackView.spacing = 10
-        groupStackView.backgroundColor = .systemCyan
-        whatICanMakeButton.backgroundColor = .systemBlue
-        whatICanMakeButton.setTitle("What I Can Make".localized, for: .normal)
-        whatICanMakeButton.badgeBackgroundColor = .systemBlue
         vodkaButton.base = .vodka
         whiskeyButton.base = .whiskey
         tequilaButton.base = .tequila
@@ -110,7 +123,11 @@ class MyDrinksViewController: UIViewController {
         [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
             setButtonAction(buttonName: $0)
         }
-        
+        whatICanMakeButton.layer.cornerRadius = 15
+        whatICanMakeButton.clipsToBounds = true
+        whatICanMakeButton.backgroundColor = .brown
+        whatICanMakeButton.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
+        whatICanMakeButton.setTitleColor(.black, for: .normal)
         whatICanMakeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             let whatICanMakeViewController = CocktailListTableView()
@@ -136,8 +153,8 @@ class MyDrinksViewController: UIViewController {
         button.badge = "\(originCount)"
     }
     
-    func updateWhatICanMakeButton(data: Set<String>, button: BadgeButton) {
-        button.badge = "\(checkWhatICanMake(myIngredients: data).count)"
+    func updateWhatICanMakeButton(data: Set<String>, button: UIButton) {
+        button.setTitle("\(checkWhatICanMake(myIngredients: data).count)" + " " + "EA".localized + " " + "making".localized, for: .normal)
     }
     
     func checkWhatICanMake(myIngredients: Set<String>) -> [Cocktail] {

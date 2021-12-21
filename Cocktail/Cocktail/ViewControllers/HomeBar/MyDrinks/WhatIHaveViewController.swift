@@ -55,7 +55,9 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 110, height: 110)
+        let yourWidth = collectionView.bounds.width/3.3
+        let yourHeight = yourWidth
+        return CGSize(width: yourWidth, height: yourHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -63,13 +65,10 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
         if ingredientsWhatIhave.contains(allIngredients[indexPath.row].rawValue) {
             guard let index = ingredientsWhatIhave.firstIndex(of: allIngredients[indexPath.row].rawValue) else { return }
             ingredientsWhatIhave.remove(at: index)
-            cell.nameLabel.text = allIngredients[indexPath.row].rawValue
-            cell.backgroundColor = .red
             cell.checkBoxImage.image = UIImage(systemName: "checkmark.circle")
         } else {
             ingredientsWhatIhave.append(allIngredients[indexPath.row].rawValue)
             cell.checkBoxImage.image = UIImage(systemName: "checkmark.circle.fill")
-            cell.backgroundColor = .systemBlue
         }
     }
 }

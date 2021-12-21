@@ -100,6 +100,9 @@ class BadgeButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addBadgeToButon(badge: nil)
+        self.layer.cornerRadius = 15
+        self.clipsToBounds = true
+        self.layer.borderWidth = 2
     }
     
     func addBadgeToButon(badge: String?) {
@@ -111,13 +114,14 @@ class BadgeButton: UIButton {
         badgeLabel.textAlignment = .center
         
         badgeLabel.layer.cornerRadius = 10
+        badgeLabel.layer.borderWidth = 1
         badgeLabel.layer.masksToBounds = true
         badgeLabel.isHidden = badge != nil ? false : true
         self.addSubview(badgeLabel)
         
         badgeLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.top.equalToSuperview().offset(5)
+            $0.trailing.equalToSuperview().offset(-5)
             $0.width.height.equalTo(20)
         }
     }

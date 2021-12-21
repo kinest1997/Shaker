@@ -46,7 +46,6 @@
 | 나만의 칵테일의 이미지 추가 기능 추가 | UIImagePickerController 사용|
 | NSURL관련 코드 URL로 전부 변경 | absoluteString 과 path 는 다르다..|
 | 이미지 파일크기 축소하여 저장 | UIGraphicsImageRenderer 사용|
-| 저장 과정 우선순위 낮춤 | DispatchQueue 사용하여 utility 수준으로 작동|
 | 즐겨찾기 기능의 필요성을 느껴 객체 수정 | 노가다..|
 
 ### 5주차
@@ -58,3 +57,35 @@
 | 위젯 추가 예정 | SwiftUI 찍먹 |
 | 간단히 칵테일 보여주는 위젯 추가 | AppGroup folder 사용 |
 | 전체 레시피를 불러오는 시점 변경 | ApplifeCycle 이해 | 
+| 앱아이콘 변경 | .png 파일이 아니면 보이지않는다..|
+| 전체적인 앱 UI,UX 다듬을 멤버 3명 구함 | 포토샵장인, 일러스트레이터, 칵테일 장인|
+| UI 개편 시작| UI관련 property 숙달|
+| 앱내 데이터로 관리하던 칵테일 레시피 데이터베이스로 이전| Firebase realtimeDataBase, Storage 사용|
+| 네트워크 통신으로 앱 업데이트없이 콘솔로 칵테일 컨텐츠 업데이트 가능| escaping 클로저 지옥 |
+| 앱내부에서 이미지를 가지는게 아닌 네트워크에서 받아오는걸로 변경 | kingFisher 사용, 캐시메모리관리해주는 혜자 |
+| 사용자 데이터 수집을 위한 애플로그인 추가| 애플 개발자 계정 등록...|
+| 기존 개별 버튼 생성으로 만든 뷰를 collectionView로 개편| collectionView 숙달중|
+| 메인화면 CollectionView로 개편 | collectionView compositional Layout 연습 |
+| 네트워크 통신시에 생기는 딜레이를 위한 로딩뷰 생성 | lottie 사용, 너무귀엽다.|
+| 전역에 존재하던 함수들 singleton 내부로 이사 | singleton 객체 사용 |
+
+### 6주차
+
+| 변경내역 | 비고 | 
+| :--- | :--- |
+
+| 칵테일 객체 수정, 레시피 단계별로 분리하여 저장가능 및 수정 가능.| 
+| 앱 설정창 생성| deeplink통한 인스타, 링크드인, 깃허브 연결 버튼 생성|
+| 알림설정창 생성| 알람 설정 확인하는 property, 설정으로 이어지는 deeplink|
+| Firebase 를 통한 원격 notification 전달 추가 | 새롭게 레시피 업데이트 될때마다 알람 보내기 가능|
+| 로그인, 로그아웃, 로그인 하지않고 사용 추가| 비로그인시에 즐겨찾기, 나의 레시피 접근 불가.|
+| 메인화면에서 유튜브 앱으로 이어지는 링크 생성| youtube deeplink 사용|
+| 커뮤니티처럼 개별 칵테일 마다 좋아요, 싫어요 기능 추가| 사용자들을 칵테일의 좋아요 싫어요 갯수를 보고 개별적 판단 가능 |
+| extension으로 뷰마다 중복작성하던 함수 간소화| class에 method 추가|
+| 앱 UI 개편작업| 디자이너와 개발자의 싸움 |
+| rxswift, mvvm 공부 시작|
+
+
+
+
+

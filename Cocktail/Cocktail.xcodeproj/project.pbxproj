@@ -22,8 +22,6 @@
 		3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D027564EA600CBCC40 /* LoginViewController.swift */; };
 		3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */; };
 		3D48C2092759A672001B40FC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 3D48C2082759A672001B40FC /* Kingfisher */; };
-		3D48C20E275A0595001B40FC /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = 3D48C20D275A0595001B40FC /* NVActivityIndicatorView */; };
-		3D48C210275A0595001B40FC /* NVActivityIndicatorViewExtended in Frameworks */ = {isa = PBXBuildFile; productRef = 3D48C20F275A0595001B40FC /* NVActivityIndicatorViewExtended */; };
 		3D48C212275A13A2001B40FC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48C211275A13A2001B40FC /* LoadingView.swift */; };
 		3D647F2D2753327F005EE580 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3D647F2C2753327F005EE580 /* SnapKit */; };
 		3D69BF75275B7B57008502EE /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D69BF74275B7B57008502EE /* SettingTableViewController.swift */; };
@@ -64,6 +62,7 @@
 		3DB910F3275759E90076CB50 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910F2275759E90076CB50 /* Singleton.swift */; };
 		3DB9110227588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
 		3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
+		3DC6AC502768D68C004E4565 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6AC4F2768D68C004E4565 /* TabBarController.swift */; };
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
 		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
 		3DE56B2D275CDCA60087D979 /* TodayCocktailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE56B2C275CDCA60087D979 /* TodayCocktailCollectionViewController.swift */; };
@@ -153,6 +152,7 @@
 		3DB9110427588D110076CB50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DB9110627588D1B0076CB50 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DB9110727588EFC0076CB50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DC6AC4F2768D68C004E4565 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
 		3DE56B2C275CDCA60087D979 /* TodayCocktailCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCocktailCollectionViewController.swift; sourceTree = "<group>"; };
@@ -183,7 +183,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D48C20E275A0595001B40FC /* NVActivityIndicatorView in Frameworks */,
 				3D4415CF27564CF400CBCC40 /* GoogleSignIn in Frameworks */,
 				3DB910DF27574D720076CB50 /* FirebaseAuth in Frameworks */,
 				3DB910E927574D720076CB50 /* FirebaseInAppMessagingSwift-Beta in Frameworks */,
@@ -200,7 +199,6 @@
 				3DB910E527574D720076CB50 /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				3DB910EB27574D720076CB50 /* FirebaseMessaging in Frameworks */,
 				3DB910DB27574D720076CB50 /* FirebaseAnalytics in Frameworks */,
-				3D48C210275A0595001B40FC /* NVActivityIndicatorViewExtended in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +336,7 @@
 				3D21D4C12733E9C300FE2896 /* UIImage.swift */,
 				7D4AF9052760D57B0093C3C2 /* UIApplication.swift */,
 				7D4AF9072760D5840093C3C2 /* UIViewController.swift */,
+				3DC6AC4F2768D68C004E4565 /* TabBarController.swift */,
 			);
 			path = "Global Components";
 			sourceTree = "<group>";
@@ -393,8 +392,6 @@
 				3DB910EE27574D720076CB50 /* FirebaseStorage */,
 				3DB910F027574D720076CB50 /* FirebaseStorageSwift-Beta */,
 				3D48C2082759A672001B40FC /* Kingfisher */,
-				3D48C20D275A0595001B40FC /* NVActivityIndicatorView */,
-				3D48C20F275A0595001B40FC /* NVActivityIndicatorViewExtended */,
 				3D3452FA275F3A9E00DA3978 /* Lottie */,
 			);
 			productName = Cocktail;
@@ -434,7 +431,6 @@
 				3D4415CD27564CF400CBCC40 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				3DB910D927574D720076CB50 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */,
-				3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
 				3D3452F9275F3A9D00DA3978 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 3DA76A2E2730D1CD004091CE /* Products */;
@@ -521,6 +517,7 @@
 				3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */,
 				3D7785982753468D008F0151 /* WishListTableViewController.swift in Sources */,
 				3DF79349275A6AC8004E9F98 /* AddRecipeCell.swift in Sources */,
+				3DC6AC502768D68C004E4565 /* TabBarController.swift in Sources */,
 				3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */,
 				3DB910D6275683B90076CB50 /* AlcoholChoiceViewController.swift in Sources */,
 				3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */,
@@ -591,7 +588,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "heesung.Cocktail.Cocktail-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -620,7 +617,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "heesung.Cocktail.Cocktail-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -774,7 +771,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -809,7 +806,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.3.0;
+				MARKETING_VERSION = 0.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -876,14 +873,6 @@
 				minimumVersion = 7.0.0;
 			};
 		};
-		3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ninjaprox/NVActivityIndicatorView.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		3D647F2B2753327F005EE580 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -917,16 +906,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 3D48C2072759A671001B40FC /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
-		};
-		3D48C20D275A0595001B40FC /* NVActivityIndicatorView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
-			productName = NVActivityIndicatorView;
-		};
-		3D48C20F275A0595001B40FC /* NVActivityIndicatorViewExtended */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 3D48C20C275A0595001B40FC /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
-			productName = NVActivityIndicatorViewExtended;
 		};
 		3D647F2C2753327F005EE580 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

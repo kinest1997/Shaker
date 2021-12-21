@@ -95,7 +95,6 @@ class CocktailRecipeViewController: UIViewController {
         filterView.isHidden = true
         filterView.saveButton.setTitle("Save".localized, for: .normal)
         filterView.resetButton.setTitle("Reset".localized, for: .normal)
-        
         //저장 버튼의 액션
         filterView.saveButton.addAction(UIAction(handler: {[unowned self] _ in
             self.filterView.isHidden = true

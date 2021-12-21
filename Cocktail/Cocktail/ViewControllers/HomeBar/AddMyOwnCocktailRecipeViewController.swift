@@ -25,7 +25,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     var beforeEditingData: Cocktail?
     
-    let addRecipeTableView = UITableView(frame: .zero, style: .insetGrouped)
+    let addRecipeTableView = UITableView(frame: .zero, style: .plain)
     
     let groupStackView = UIStackView()
     let cocktailImageView = UIImageView(image: UIImage(named: "Martini"))
@@ -219,6 +219,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let recipeLabel = UILabel()
     
+    let footerView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self
@@ -226,6 +228,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         addRecipeTableView.delegate = self
         addRecipeTableView.dataSource = self
         addRecipeTableView.tableHeaderView = headerView
+        addRecipeTableView.tableFooterView = footerView
         addRecipeTableView.rowHeight = 50
         attribute()
         layout()
@@ -297,7 +300,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeChoiceButton.showsMenuAsPrimaryAction = true
         
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 1200)
-        addRecipeTableView.backgroundColor = .white
+        addRecipeTableView.backgroundColor = .clear
         
         // 기본 라벨들
         [alcoholLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, drinkTypeLabel, selectedIngredientsLabel, recipeLabel, alcoholLabel].forEach {
@@ -306,11 +309,9 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         }
         
         nameTextField.textColor = .black
-        addButton.backgroundColor = .brown
         nameTextField.font = .systemFont(ofSize: 24, weight: .heavy)
         
-        [colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton].forEach {
-            rightStackView.addArrangedSubview($0)
+        [alcoholChoiceButton ,colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton].forEach {
             $0.setTitleColor(.black, for: .normal)
             $0.contentHorizontalAlignment = .leading
             $0.titleLabel?.font = .systemFont(ofSize: 14)
@@ -324,18 +325,22 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.spacing = 10
         }
         
-        [colorLabel, baseDrinkLabel, glassLabel, craftLabel, drinkTypeLabel].forEach {
+        [alcoholLabel ,colorLabel, baseDrinkLabel, glassLabel, craftLabel, drinkTypeLabel].forEach {
             $0.textAlignment = .right
         }
         
         ingredientsSelectButton.setTitleColor(.black, for: .normal)
         
-        addButton.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
-        addRecipeTableView.tableFooterView = addButton
+        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
+        footerView.addSubview(addButton)
+        
+        addButton.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(40)
+        }
         
         nameTextField.textAlignment = .center
         recipeLabel.text = "Recipe".localized
-        addButton.setTitle("Add Recipe".localized, for: .normal)
         addButton.setTitleColor(.black, for: .normal)
         
         selectedIngredientsLabel.sizeToFit()
@@ -350,9 +355,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         centerLine.backgroundColor = .black
         
         choiceView.isHidden = true
-        addButton.backgroundColor = .brown
-        addButton.setTitle("Add".localized, for: .normal)
-        addButton.setTitleColor(.cyan, for: .normal)
+        addButton.setTitle("+" + "Add".localized, for: .normal)
         
         self.view.backgroundColor = .white
         
@@ -366,6 +369,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeLabel.text = "DrinkType".localized
         ingredientsLabel.text = "Ingredients".localized
         loadingView.isHidden = true
+        
+        addRecipeTableView.backgroundView?.backgroundColor = .white
     }
     
     func layout() {
@@ -381,19 +386,15 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             headerView.addSubview($0)
         }
         
-        [alcoholLabel, alcoholChoiceButton].forEach {
-            alcoholStackView.addArrangedSubview($0)
-        }
-        
         [leftStackView, centerLine, rightStackView].forEach {
             groupStackView.addArrangedSubview($0)
         }
         
-        [colorLabel, baseDrinkLabel, drinkTypeLabel, glassLabel, craftLabel].forEach {
+        [alcoholLabel ,colorLabel, baseDrinkLabel, drinkTypeLabel, glassLabel, craftLabel].forEach {
             leftStackView.addArrangedSubview($0)
         }
         
-        [colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton].forEach {
+        [alcoholChoiceButton, colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton].forEach {
             rightStackView.addArrangedSubview($0)
         }
         
@@ -455,7 +456,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         ingredientsSelectButton.snp.makeConstraints {
             $0.top.equalTo(ingredientsLabel)
             $0.height.equalTo(40)
-            $0.leading.equalTo(ingredientsLabel.snp.trailing).offset(50)
+            $0.leading.equalTo(ingredientsLabel.snp.trailing)
             $0.trailing.equalToSuperview()
         }
         
@@ -584,7 +585,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
                     
                     let recipe = self.textFieldArray.filter {$0.text != "" }.map { $0.text! }
                     
-                    let myRecipe = Cocktail(name: name, craft: craft, glass: glass, recipe: recipe, ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTip, drinkType: drinkType, myRecipe: true, wishList: false, imageURL: url.absoluteString, id: nil)
+                    let myRecipe = Cocktail(name: name, craft: craft, glass: glass, recipe: recipe, ingredients: ingredients, base: baseDrink, alcohol: alcohol, color: color, mytip: myTip, drinkType: drinkType, myRecipe: true, wishList: false, imageURL: url.absoluteString)
                     FirebaseRecipe.shared.myRecipe.append(myRecipe)
                     FirebaseRecipe.shared.uploadMyRecipe()
                     let cocktailDetailViewController = CocktailDetailViewController()
@@ -646,6 +647,7 @@ extension AddMyOwnCocktailRecipeViewController: PHPickerViewControllerDelegate {
 }
 
 extension AddMyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDataSource {
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return textFieldArray.count
