@@ -16,10 +16,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        
-        
         if UserDefaults.standard.bool(forKey: "firstLaunch"){
-            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+            let loginViewController = LoginViewController()
+            let loginViewModel = LoginViewModel()
+            loginViewController.bind(loginViewModel)
+            window?.rootViewController = UINavigationController(rootViewController: loginViewController)
             window?.makeKeyAndVisible()
         } else {
             window?.rootViewController = MainViewController()

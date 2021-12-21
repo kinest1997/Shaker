@@ -23,8 +23,6 @@ protocol LoginViewBiandable {
     var startSignInWithAppleFlow: Signal<Void> { get }
     var updateFirstLogin: Signal<Bool> { get }
     var changeLoginView: Signal<Void> { get }
-    var tabBarIsHidden: Signal<Bool> { get }
-    
 }
 
 class LoginViewController: UIViewController {
@@ -49,16 +47,11 @@ class LoginViewController: UIViewController {
         justUseButton.rx.tap
             .bind(to: viewModel.justUseButtonTapped)
             .disposed(by: disposeBag)
-        //viewModel -> view
         
+        //viewModel -> view
         viewModel.updateFirstLogin
             .emit { bool in
                 UserDefaults.standard.set(bool, forKey: "firstLaunch")}
-            .disposed(by: disposeBag)
-        
-        viewModel.tabBarIsHidden
-            .emit(to:
-                    tabBarController!.tabBar.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.changeLoginView
@@ -77,32 +70,13 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         requestAuthNoti()
-        
         view.addSubview(appleLoginButton)
         view.addSubview(justUseButton)
+        
         appleLoginButton.setTitle("애플 로그인", for: .normal)
         justUseButton.setTitle("그냥 사용하기", for: .normal)
-        appleLoginButton.addAction(UIAction(handler: {[weak self] _ in
-            self?.startSignInWithAppleFlow()
-        }), for: .touchUpInside)
-        
-        justUseButton.addAction(UIAction(handler: {[weak self] _ in
-            FirebaseRecipe.shared.getRecipe { data in
-                FirebaseRecipe.shared.recipe = data
-                UserDefaults.standard.set(false, forKey: "firstLaunch")
-                let scenes = UIApplication.shared.connectedScenes
-                let windowScene = scenes.first as? UIWindowScene
-                let window = windowScene?.windows.first
-                
-                window?.rootViewController = self?.mainViewController
-                
-                self?.tabBarController?.tabBar.isHidden = false
-                //                self?.navigationController?.popToRootViewController(animated: true)
-            }
-        }), for: .touchUpInside)
-        
+
         appleLoginButton.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.width.height.equalTo(100)
@@ -113,11 +87,7 @@ class LoginViewController: UIViewController {
             $0.width.height.equalTo(appleLoginButton)
             $0.centerX.equalToSuperview()
         }
-        
-        view.backgroundColor = .darkGray
         appleLoginButton.backgroundColor = .blue
-        self.tabBarController?.tabBar.isHidden = true
-        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

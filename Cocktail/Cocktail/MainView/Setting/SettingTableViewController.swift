@@ -162,7 +162,13 @@ extension SettingTableViewController {
     }
     
     private func logIn() {
-        self.goToViewController(number: 0, viewController: LoginViewController())
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        let window = windowScene?.windows.first
+        let loginViewController = LoginViewController()
+        let loginViewModel = LoginViewModel()
+        loginViewController.bind(loginViewModel)
+        window?.rootViewController = UINavigationController(rootViewController: loginViewController)
     }
     
     private func logOut() {

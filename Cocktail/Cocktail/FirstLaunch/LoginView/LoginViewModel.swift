@@ -11,12 +11,8 @@ import RxCocoa
 
 struct LoginViewModel: LoginViewBiandable {
     let startSignInWithAppleFlow: Signal<Void>
-    
     let updateFirstLogin: Signal<Bool>
-    
     let changeLoginView: Signal<Void>
-    
-    let tabBarIsHidden: Signal<Bool>
     
     let appleLoginButtonTapped = PublishRelay<Void>()
     let justUseButtonTapped = PublishRelay<Void>()
@@ -31,10 +27,5 @@ struct LoginViewModel: LoginViewBiandable {
         
         changeLoginView = justUseButtonTapped
             .asSignal()
-        
-        tabBarIsHidden = justUseButtonTapped
-            .map { false }
-            .asSignal(onErrorJustReturn: false)
     }
-    
 }

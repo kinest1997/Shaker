@@ -209,11 +209,19 @@
 			path = "Cocktail Widget";
 			sourceTree = "<group>";
 		};
-		3D4415D427565DAA00CBCC40 /* FirstLaunch */ = {
+		3D297A952772167E001B8BD4 /* LoginView */ = {
 			isa = PBXGroup;
 			children = (
 				3D4415D027564EA600CBCC40 /* LoginViewController.swift */,
 				3D6E0EB3276F623000A7B855 /* LoginViewModel.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		3D4415D427565DAA00CBCC40 /* FirstLaunch */ = {
+			isa = PBXGroup;
+			children = (
+				3D297A952772167E001B8BD4 /* LoginView */,
 				3D6E0EA1276EDE6200A7B855 /* ReadyToLaunch */,
 				3D6E0E9F276EDE3000A7B855 /* AlcoholChoice */,
 				3D6E0E9E276EDE1D00A7B855 /* ColorChoice */,
