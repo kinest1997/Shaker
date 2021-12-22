@@ -162,7 +162,7 @@ class CocktailDetailViewController: UIViewController {
         cocktailImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(wishListButton.snp.bottom).offset(20)
-            $0.width.equalToSuperview().multipliedBy(0.5)
+            $0.width.equalTo(cocktailImageView.snp.height)
             $0.height.equalTo(300)
         }
         
@@ -338,7 +338,7 @@ class CocktailDetailViewController: UIViewController {
             $0.spacing = 10
         }
         
-        cocktailImageView.contentMode = .scaleAspectFill
+        cocktailImageView.contentMode = .scaleAspectFit
         
         alcoholStackView.distribution = .fillEqually
         alcoholStackView.alignment = .center

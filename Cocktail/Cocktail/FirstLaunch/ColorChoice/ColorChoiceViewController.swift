@@ -1,5 +1,14 @@
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+
+protocol ColorChoiceBindable {
+    var cellTapped: PublishRelay<IndexPath> { get }
+    var nextButtontapped: PublishRelay<[Cocktail.Color]> { get }
+    
+    var cellIsChecked: Driver<Cocktail> { get }
+}
 
 class ColorChoiceViewController: UIViewController {
     

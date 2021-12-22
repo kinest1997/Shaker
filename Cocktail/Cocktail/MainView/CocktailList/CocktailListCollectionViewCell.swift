@@ -22,10 +22,10 @@ class CocktailListCollectionViewCell: UICollectionViewCell {
         contentView.clipsToBounds = true
         nameTextLabel.textColor = .black
         nameTextLabel.textAlignment = .center
-        nameTextLabel.font = .systemFont(ofSize: 24, weight: .bold)
-        mainImageView.contentMode = .scaleAspectFit
+        nameTextLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        mainImageView.contentMode = .scaleAspectFill
         mainImageView.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview().inset(10)
+            $0.leading.top.trailing.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.8)
         }
         

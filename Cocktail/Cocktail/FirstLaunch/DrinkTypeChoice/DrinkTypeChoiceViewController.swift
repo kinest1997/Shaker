@@ -22,8 +22,6 @@ class DrinkTypeChoiceViewController: UIViewController {
     let longDrinkButton = UIButton()
     let nextButton = UIButton()
     
-    let informationButton = UIButton()
-    
     var myFavor: Bool = true
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +33,6 @@ class DrinkTypeChoiceViewController: UIViewController {
         view.addSubview(questionLabel)
         view.addSubview(mainStackView)
         view.addSubview(nextButton)
-        view.addSubview(informationButton)
         
         mainStackView.addArrangedSubview(shooterButton)
         mainStackView.addArrangedSubview(shortDrinkButton)
@@ -45,12 +42,6 @@ class DrinkTypeChoiceViewController: UIViewController {
             $0.top.equalToSuperview().offset(150)
             $0.leading.trailing.equalToSuperview().inset(70)
             $0.height.equalTo(50)
-        }
-        
-        informationButton.snp.makeConstraints {
-            $0.leading.equalTo(questionLabel.snp.trailing)
-            $0.width.height.equalTo(20)
-            $0.centerY.equalTo(questionLabel)
         }
         
         mainStackView.snp.makeConstraints {
@@ -86,15 +77,16 @@ class DrinkTypeChoiceViewController: UIViewController {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.black.cgColor
             $0.layer.cornerRadius = 15
+            $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+            $0.titleLabel?.numberOfLines = 0
         }
 
         questionLabel.textColor = .black
-        shooterButton.setTitle("슈터", for: .normal)
-        shortDrinkButton.setTitle("숏드링크", for: .normal)
-        longDrinkButton.setTitle("롱드링크", for: .normal)
-        nextButton.setTitle("다음", for: .normal)
+        shooterButton.setTitle("슈터\n30ml ~ 90ml", for: .normal)
+        shortDrinkButton.setTitle("숏드링크\n90ml ~ 150ml", for: .normal)
+        longDrinkButton.setTitle("롱드링크\n150ml ~ ", for: .normal)
+        nextButton.setTitle("0개의 칵테일 발견", for: .normal)
         nextButton.isEnabled = false
-        nextButton.backgroundColor = .white
         
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
@@ -123,8 +115,6 @@ class DrinkTypeChoiceViewController: UIViewController {
             self.setImageAndData(button: self.longDrinkButton, drinkType: .longDrink)
             self.buttonLabelCountUpdate(button: self.nextButton)
         }), for: .touchUpInside)
-        
-        informationButton.setImage(UIImage(systemName: "questionmark.circle"), for: .normal)
     }
     
     func setImageAndData(button: UIButton, drinkType: Cocktail.DrinkType) {

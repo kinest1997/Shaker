@@ -58,7 +58,6 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CocktailListCell") as? CocktailListCell else { return UITableViewCell() }
         cell.configure(data: myOwnRecipe[indexPath.row])
-        cell.accessoryType = .disclosureIndicator
         return cell
     }
     

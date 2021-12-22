@@ -45,4 +45,10 @@ extension CocktailListViewController: UICollectionViewDelegate, UICollectionView
         let yourHeight = collectionView.bounds.height/4
         return CGSize(width: yourWidth, height: yourHeight)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cocktailDetailViewController = CocktailDetailViewController()
+        cocktailDetailViewController.setData(data: lastRecipe[indexPath.row])
+        show(cocktailDetailViewController, sender: nil)
+    }
 }

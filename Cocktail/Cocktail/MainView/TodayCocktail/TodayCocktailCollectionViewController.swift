@@ -47,7 +47,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "추천"
+        self.title = "Shaker"
         view.addSubview(collectionView)
         view.addSubview(loadingView)
         

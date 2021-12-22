@@ -37,13 +37,13 @@ class SettingTableViewController: UITableViewController {
         var rowTitles: [String] {
             switch self {
             case .serviceInformation:
-                return ["공지사항", "버전정보 \(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"]))", "오픈소스라이브러리", "이용약관", "개인정보 처리방침"]
+                return ["공지사항", "버전정보 \(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? ""))", "오픈소스라이브러리", "이용약관", "개인정보 처리방침"]
             case .alarm:
                 return ["Alarm Setting".localized]
             case .support:
                 return ["Review Shaker in the App Store".localized, "Join the Shaker TestFlight".localized]
             case .developerInfo:
-                return ["GitHub", "LinkedIn", "Instagram"]
+                return ["개발자들"]
             case .account:
                 return Auth.auth().currentUser == nil ? ["LogIn".localized] : ["LogOut".localized]
             }
@@ -87,16 +87,8 @@ extension SettingTableViewController {
                 return
             }
         case 3:
-            switch indexPath.row {
-            case 0:
-                setlinkAction(appURL: "github://profile/kinest1997/", webURL: "https://github.com/kinest1997")
-            case 1:
-                setlinkAction(appURL: "linkedin://profile/heesung-kang-kinest1997", webURL: "https://www.linkedin.com/in/heesung-kang-kinest1997")
-            case 2:
-                setlinkAction(appURL: "instagram://user?username=kinest1997", webURL: "https://instagram.com/kinest1997")
-            default:
-                return
-            }
+            let settingDetailViewController = SettingDetailViewController()
+            show(settingDetailViewController, sender: nil)
         case 4:
             Auth.auth().currentUser == nil ? logIn() : logOut()
         default:

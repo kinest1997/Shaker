@@ -14,10 +14,16 @@ class CocktailListCell: UITableViewCell {
     let nameLabel = UILabel()
     let ingredientCountLabel = UILabel()
     let likeCount = UILabel()
+    let disclosureMark = UIImageView(image: UIImage(systemName: "chevron.right"))
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        [nameLabel, ingredientCountLabel, cocktailImageView, likeCount].forEach {
+        contentView.backgroundColor = .white
+        nameLabel.textColor = .black
+        ingredientCountLabel.textColor = .gray
+        
+        
+        [nameLabel, ingredientCountLabel, cocktailImageView, likeCount, disclosureMark].forEach {
             contentView.addSubview($0)
         }
         cocktailImageView.contentMode = .scaleAspectFit
@@ -28,22 +34,26 @@ class CocktailListCell: UITableViewCell {
         
         cocktailImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.top.bottom.equalToSuperview().inset(10)
-            $0.width.equalTo(80)
+            $0.leading.top.bottom.equalToSuperview().inset(5)
+            $0.width.equalTo(cocktailImageView.snp.height)
         }
         nameLabel.snp.makeConstraints {
             $0.leading.equalTo(cocktailImageView.snp.trailing).offset(20)
             $0.bottom.equalTo(cocktailImageView.snp.centerY)
-            $0.trailing.equalToSuperview().inset(20)
         }
         ingredientCountLabel.snp.makeConstraints {
-            $0.leading.trailing.equalTo(nameLabel)
+            $0.leading.equalTo(nameLabel)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
         }
         likeCount.snp.makeConstraints {
             $0.leading.equalTo(ingredientCountLabel.snp.trailing)
             $0.width.equalTo(50)
             $0.height.bottom.equalToSuperview()
+        }
+        disclosureMark.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+            $0.trailing.equalToSuperview().offset(-10)
+            $0.centerY.equalToSuperview()
         }
     }
     

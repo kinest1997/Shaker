@@ -15,6 +15,9 @@
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3D21D4C22733E9C300FE2896 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* UIImage.swift */; };
+		3D297A972772F901001B8BD4 /* ColorChoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D297A962772F901001B8BD4 /* ColorChoiceViewModel.swift */; };
+		3D297A992772F90C001B8BD4 /* ColorChoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D297A982772F90C001B8BD4 /* ColorChoiceModel.swift */; };
+		3D297A9B277329B8001B8BD4 /* SettingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D297A9A277329B8001B8BD4 /* SettingDetailView.swift */; };
 		3D3452FD275F3B4400DA3978 /* LoadingAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 3D3452FC275F3B4400DA3978 /* LoadingAnimation.json */; };
 		3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */; };
 		3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D027564EA600CBCC40 /* LoginViewController.swift */; };
@@ -106,6 +109,9 @@
 		3D175BA4274284DD00EC142B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3D175BA5274285BB00EC142B /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3D21D4C12733E9C300FE2896 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		3D297A962772F901001B8BD4 /* ColorChoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceViewModel.swift; sourceTree = "<group>"; };
+		3D297A982772F90C001B8BD4 /* ColorChoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceModel.swift; sourceTree = "<group>"; };
+		3D297A9A277329B8001B8BD4 /* SettingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingDetailView.swift; sourceTree = "<group>"; };
 		3D3452FC275F3B4400DA3978 /* LoadingAnimation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = LoadingAnimation.json; sourceTree = "<group>"; };
 		3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3D4415D027564EA600CBCC40 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -222,9 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				3D297A952772167E001B8BD4 /* LoginView */,
-				3D6E0EA1276EDE6200A7B855 /* ReadyToLaunch */,
-				3D6E0E9F276EDE3000A7B855 /* AlcoholChoice */,
 				3D6E0E9E276EDE1D00A7B855 /* ColorChoice */,
+				3D6E0E9F276EDE3000A7B855 /* AlcoholChoice */,
 				3D6E0E9D276EDE0900A7B855 /* DrinkTypeChoice */,
 				3D6E0EA0276EDE4C00A7B855 /* BaseChoice */,
 			);
@@ -243,6 +248,8 @@
 			isa = PBXGroup;
 			children = (
 				3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */,
+				3D297A962772F901001B8BD4 /* ColorChoiceViewModel.swift */,
+				3D297A982772F90C001B8BD4 /* ColorChoiceModel.swift */,
 				3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */,
 			);
 			path = ColorChoice;
@@ -322,6 +329,7 @@
 			isa = PBXGroup;
 			children = (
 				3D69BF74275B7B57008502EE /* SettingTableViewController.swift */,
+				3D297A9A277329B8001B8BD4 /* SettingDetailView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -421,6 +429,7 @@
 				3DB910F2275759E90076CB50 /* Singleton.swift */,
 				7D4AF9042760D5610093C3C2 /* Global Components */,
 				3D4415D427565DAA00CBCC40 /* FirstLaunch */,
+				3D6E0EA1276EDE6200A7B855 /* ReadyToLaunch */,
 				3DA76A4A2730D8A2004091CE /* MainView */,
 				3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
@@ -665,6 +674,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D4AF9062760D57B0093C3C2 /* UIApplication.swift in Sources */,
+				3D297A972772F901001B8BD4 /* ColorChoiceViewModel.swift in Sources */,
 				3D74812427366C0E0092BD74 /* WhatIHaveViewController.swift in Sources */,
 				3D7F17C32734D5FF006EDCF9 /* FilteredView.swift in Sources */,
 				3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */,
@@ -683,6 +693,7 @@
 				3D83715D274CD7C300CA6036 /* ChoiceIngredientsView.swift in Sources */,
 				3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */,
 				3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */,
+				3D297A992772F90C001B8BD4 /* ColorChoiceModel.swift in Sources */,
 				3DB910D427566C1C0076CB50 /* ColorCollectionViewCell.swift in Sources */,
 				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
 				3D21D4C22733E9C300FE2896 /* UIImage.swift in Sources */,
@@ -703,6 +714,7 @@
 				3DE56B2D275CDCA60087D979 /* TodayCocktailCollectionViewController.swift in Sources */,
 				3DA76A332730D1CD004091CE /* SceneDelegate.swift in Sources */,
 				3D48C212275A13A2001B40FC /* LoadingView.swift in Sources */,
+				3D297A9B277329B8001B8BD4 /* SettingDetailView.swift in Sources */,
 				3DE56B35275E4F750087D979 /* BaseChoiceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -947,6 +959,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -983,6 +996,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -58,7 +58,6 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = .systemBrown
-        tabBar.backgroundColor = .darkGray
         self.tabBar.barStyle = .default
         todayCocktailCollectionViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
