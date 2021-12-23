@@ -6,7 +6,7 @@ class ReadyToLaunchVIewController: UIViewController {
     let mainViewController = MainViewController()
     
     let startTextLabel = UILabel()
-    let nextButton = UIButton()
+    let nextButton = MainButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +39,8 @@ class ReadyToLaunchVIewController: UIViewController {
             $0.height.equalToSuperview().multipliedBy(0.3)
         }
         nextButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-180)
-            $0.width.equalToSuperview().multipliedBy(0.2)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
             $0.centerX.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.05)
         }
     }
 }

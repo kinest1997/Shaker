@@ -42,16 +42,16 @@ class CocktailDetailViewController: UIViewController {
             case true:
                 DispatchQueue.main.async { [weak self] in
                     self?.likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
-                    self?.disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
+                    self?.disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
                 }
             case false:
                 DispatchQueue.main.async { [weak self] in
-                    self?.disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
+                    self?.disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsdown.fill"), for: .normal)
                     self?.likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
                 }
             case nil:
                 DispatchQueue.main.async { [weak self] in
-                    self?.disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
+                    self?.disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
                     self?.likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
                 }
             default:
@@ -349,7 +349,9 @@ class CocktailDetailViewController: UIViewController {
         groupStackView.distribution = .fillProportionally
         
         likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
-        disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
+        likeButton.tintColor = .systemGray
+        disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
+        disLikeButton.tintColor = .systemGray
         
         alcoholGuideLabel.text = "Alcohol".localized
         colorGuideLabel.text = "Color".localized
@@ -359,6 +361,7 @@ class CocktailDetailViewController: UIViewController {
         craftGuideLabel.text = "Craft".localized
         recipeGuideLabel.text = "Recipe".localized
         ingredientsGuideLabel.text = "Ingredients".localized
+        wishListButton.tintColor = .systemPink
         
         wishListButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }

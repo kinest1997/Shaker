@@ -29,9 +29,13 @@ class LoginViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
+    let topHalfView = UIView()
+    
     let userNotiCenter = UNUserNotificationCenter.current()
     
     let mainViewController = MainViewController()
+    let shakerLabel = UILabel()
+    let loginlabel = UILabel()
     
     private var currentNonce: String?
     
@@ -39,7 +43,7 @@ class LoginViewController: UIViewController {
     let justUseButton = UIButton()
     
     func bind(_ viewModel: LoginViewBiandable) {
-        //view -> viewModel
+//        view -> viewModel
         appleLoginButton.rx.tap
             .bind(to: viewModel.appleLoginButtonTapped)
             .disposed(by: disposeBag)
@@ -73,21 +77,53 @@ class LoginViewController: UIViewController {
         requestAuthNoti()
         view.addSubview(appleLoginButton)
         view.addSubview(justUseButton)
+        view.backgroundColor = .white
+        view.addSubview(topHalfView)
+        topHalfView.addSubview(shakerLabel)
+        view.addSubview(loginlabel)
+        topHalfView.backgroundColor = UIColor(named: "mainPink")
+        justUseButton.setTitle("로그인없이 시작하기", for: .normal)
+        justUseButton.setTitleColor(.gray, for: .normal)
         
-        appleLoginButton.setTitle("애플 로그인", for: .normal)
-        justUseButton.setTitle("그냥 사용하기", for: .normal)
-
-        appleLoginButton.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalTo(100)
+        shakerLabel.font = .systemFont(ofSize: 30, weight: .bold)
+        shakerLabel.textColor = .gray
+        loginlabel.font = .systemFont(ofSize: 30, weight: .light)
+        loginlabel.textColor = .gray
+        
+        shakerLabel.text = "SHAKER"
+        loginlabel.text = "LOGIN"
+        shakerLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(50)
         }
         
+        loginlabel.snp.makeConstraints {
+            $0.top.equalTo(shakerLabel.snp.bottom)
+            $0.leading.height.equalTo(shakerLabel)
+        }
+        
+        topHalfView.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(0.5)
+        }
+        
+        appleLoginButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().offset(-250)
+            $0.width.equalTo(250)
+            $0.height.equalTo(50)
+            $0.centerX.equalToSuperview()
+        }
+        
+        appleLoginButton.layer.cornerRadius = 15
+        appleLoginButton.clipsToBounds = true
         justUseButton.snp.makeConstraints {
-            $0.top.equalTo(appleLoginButton.snp.bottom)
+            $0.top.equalTo(appleLoginButton.snp.bottom).offset(20)
             $0.width.height.equalTo(appleLoginButton)
             $0.centerX.equalToSuperview()
         }
-        appleLoginButton.backgroundColor = .blue
+        appleLoginButton.contentMode = .scaleAspectFill
+        appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button"), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

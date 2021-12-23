@@ -14,6 +14,7 @@
 "My Drinks" = "내술장";
 "Bookmark" = "즐겨찾기";
 "My Recipes" = "나의 레시피";
+"Sign in with Apple" = "Apple로 로그인";
 
 //AddMyOwnCocktailRecipeViewController.swift
 "Reset" = "리셋";

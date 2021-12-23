@@ -8,6 +8,7 @@ class AssistantViewController: UIViewController {
     let myBarButton = UIButton()
     let wishListButton = UIButton()
     let mainStackView = UIStackView()
+    let mainImageView = UIImageView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,10 +53,13 @@ class AssistantViewController: UIViewController {
             $0.layer.cornerRadius = 15
             $0.clipsToBounds = true
         }
+        
+        mainImageView.image = UIImage(named: "mybar")
     }
     
     func layout() {
         view.addSubview(mainStackView)
+        view.addSubview(mainImageView)
         mainStackView.addArrangedSubview(myRecipeButton)
         mainStackView.addArrangedSubview(myBarButton)
         mainStackView.addArrangedSubview(wishListButton)
@@ -65,7 +69,12 @@ class AssistantViewController: UIViewController {
         mainStackView.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
             $0.leading.trailing.equalToSuperview().inset(30)
-            $0.height.equalToSuperview().multipliedBy(0.4)
+            $0.top.equalTo(mainImageView.snp.bottom)
+        }
+        mainImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview().inset(30)
+            $0.height.equalTo(250)
         }
     }
     

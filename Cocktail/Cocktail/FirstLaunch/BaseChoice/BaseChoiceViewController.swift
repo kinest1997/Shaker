@@ -29,7 +29,7 @@ class BaseChoiceViewController: UIViewController {
     let liqueorButton = UIButton()
     let anyThingButton = UIButton()
     
-    let nextButton = UIButton()
+    let nextButton = MainButton()
     
     let questionLabel = UILabel()
     
@@ -72,9 +72,7 @@ class BaseChoiceViewController: UIViewController {
         }
         
         nextButton.snp.makeConstraints {
-            $0.top.equalTo(mainBigStackView.snp.bottom).offset(60)
-            $0.height.equalTo(50)
-            $0.width.equalTo(220)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
             $0.centerX.equalToSuperview()
         }
         

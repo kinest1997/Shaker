@@ -24,7 +24,7 @@ class AlcoholChoiceViewController: UIViewController {
     let middleButton = UIButton()
     let lowButton = UIButton()
     let lowLabel = UILabel()
-    let nextButton = UIButton()
+    let nextButton = MainButton()
     
     let topVerticalLine = UIView()
     let bottomVerticalLine = UIView()
@@ -166,10 +166,8 @@ class AlcoholChoiceViewController: UIViewController {
         }
         
         nextButton.snp.makeConstraints {
-            $0.top.equalTo(lowLabel.snp.bottom).offset(30)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(150)
-            $0.height.equalTo(30)
         }
         
         topVerticalLine.snp.makeConstraints {

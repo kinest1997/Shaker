@@ -21,6 +21,8 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     let loadingView = LoadingView()
     
+    let topTitleView = UIView()
+    
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     var youtubeData: [YouTubeVideo] = [] {

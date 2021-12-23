@@ -22,7 +22,7 @@ class ColorChoiceViewController: UIViewController {
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    let nextButton = UIButton()
+    let nextButton = MainButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,9 +59,8 @@ class ColorChoiceViewController: UIViewController {
         }
         
         nextButton.snp.makeConstraints {
-            $0.top.equalTo(mainCollectionView.snp.bottom).offset(40)
-            $0.leading.trailing.equalToSuperview().inset(100)
-            $0.height.equalTo(30)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
+            $0.centerX.equalToSuperview()
         }
     }
     

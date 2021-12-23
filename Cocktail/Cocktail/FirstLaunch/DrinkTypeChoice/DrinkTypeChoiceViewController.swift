@@ -20,7 +20,7 @@ class DrinkTypeChoiceViewController: UIViewController {
     let shooterButton = UIButton()
     let shortDrinkButton = UIButton()
     let longDrinkButton = UIButton()
-    let nextButton = UIButton()
+    let nextButton = MainButton()
     
     var myFavor: Bool = true
     override func viewDidLoad() {
@@ -51,9 +51,7 @@ class DrinkTypeChoiceViewController: UIViewController {
         }
         
         nextButton.snp.makeConstraints {
-            $0.top.equalTo(mainStackView.snp.bottom).offset(120)
-            $0.height.equalTo(50)
-            $0.width.equalTo(220)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
             $0.centerX.equalToSuperview()
         }
         
