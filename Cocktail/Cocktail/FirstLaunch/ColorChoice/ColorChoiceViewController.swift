@@ -71,10 +71,6 @@ class ColorChoiceViewController: UIViewController {
         questionLabel.textAlignment = .center
         questionLabel.textColor = .systemGray2
         
-        nextButton.layer.borderWidth = 1
-        nextButton.layer.borderColor = UIColor.black.cgColor
-        nextButton.layer.cornerRadius = 15
-        
         nextButton.setTitle("다음", for: .normal)
         nextButton.setTitleColor(.systemGray2, for: .normal)
         nextButton.addAction(UIAction(handler: {[weak self] _ in

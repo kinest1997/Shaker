@@ -70,7 +70,7 @@ class DrinkTypeChoiceViewController: UIViewController {
         mainStackView.alignment = .center
         mainStackView.spacing = 20
         
-        [shooterButton, shortDrinkButton, longDrinkButton, nextButton].forEach {
+        [shooterButton, shortDrinkButton, longDrinkButton].forEach {
             $0.setTitleColor(.black, for: .normal)
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.black.cgColor

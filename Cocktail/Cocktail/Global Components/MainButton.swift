@@ -13,8 +13,9 @@ class MainButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.layer.cornerRadius = 15
-        self.layer.borderWidth = 3
         self.clipsToBounds = true
+        self.setTitleColor(.black, for: .normal)
+        self.layer.borderWidth = 1
         self.snp.makeConstraints {
             $0.width.equalTo(250)
             $0.height.equalTo(50)

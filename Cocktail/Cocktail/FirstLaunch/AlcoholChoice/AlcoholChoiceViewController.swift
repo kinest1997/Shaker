@@ -64,10 +64,6 @@ class AlcoholChoiceViewController: UIViewController {
             $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         }
         
-        nextButton.layer.borderWidth = 1
-        nextButton.layer.borderColor = UIColor.black.cgColor
-        nextButton.layer.cornerRadius = 15
-        
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             if self.myFavor {
