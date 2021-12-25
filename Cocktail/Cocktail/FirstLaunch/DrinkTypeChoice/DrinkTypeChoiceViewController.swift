@@ -80,9 +80,9 @@ class DrinkTypeChoiceViewController: UIViewController {
         }
 
         questionLabel.textColor = .black
-        shooterButton.setTitle("슈터\n30ml ~ 90ml", for: .normal)
-        shortDrinkButton.setTitle("숏드링크\n90ml ~ 150ml", for: .normal)
-        longDrinkButton.setTitle("롱드링크\n150ml ~ ", for: .normal)
+        shooterButton.setTitle("    슈터\n30ml ~ 90ml", for: .normal)
+        shortDrinkButton.setTitle("    숏드링크\n90ml ~ 150ml", for: .normal)
+        longDrinkButton.setTitle("    롱드링크\n150ml ~ ", for: .normal)
         nextButton.setTitle("0개의 칵테일 발견", for: .normal)
         nextButton.isEnabled = false
         

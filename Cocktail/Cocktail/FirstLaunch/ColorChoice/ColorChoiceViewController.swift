@@ -4,10 +4,15 @@ import RxSwift
 import RxCocoa
 
 protocol ColorChoiceBindable {
+//    view -> viewModel
     var cellTapped: PublishRelay<IndexPath> { get }
     var nextButtontapped: PublishRelay<[Cocktail.Color]> { get }
     
+//    viewModel -> View
     var cellIsChecked: Driver<Cocktail> { get }
+    var buttonLabelCountUpdate: Driver<Int> { get }
+    var showNextPage: Signal<Void> { get }
+    var presentAlert: Signal<Void> { get }
 }
 
 class ColorChoiceViewController: UIViewController {
