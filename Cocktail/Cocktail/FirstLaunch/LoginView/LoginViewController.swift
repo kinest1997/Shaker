@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
-    let topHalfView = UIView()
+    let mainImageView = UIImageView()
     
     let userNotiCenter = UNUserNotificationCenter.current()
     
@@ -78,50 +78,61 @@ class LoginViewController: UIViewController {
         view.addSubview(appleLoginButton)
         view.addSubview(justUseButton)
         view.backgroundColor = .white
-        view.addSubview(topHalfView)
-        topHalfView.addSubview(shakerLabel)
         view.addSubview(loginlabel)
-        topHalfView.backgroundColor = UIColor(named: "mainPink")
+        view.addSubview(mainImageView)
+        view.addSubview(shakerLabel)
+        
+        mainImageView.image = UIImage(named: "logoImage")
+
+        
         justUseButton.setTitle("로그인없이 시작하기", for: .normal)
         justUseButton.setTitleColor(.gray, for: .normal)
         
-        shakerLabel.font = .systemFont(ofSize: 30, weight: .bold)
-        shakerLabel.textColor = .gray
-        loginlabel.font = .systemFont(ofSize: 30, weight: .light)
-        loginlabel.textColor = .gray
-        
+        shakerLabel.font = .systemFont(ofSize: 45, weight: .bold)
+        shakerLabel.textColor = UIColor(named: "shaker")
+        loginlabel.font = .systemFont(ofSize: 45, weight: .light)
+        loginlabel.textColor = UIColor(named: "login")
+        shakerLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         shakerLabel.text = "SHAKER"
         loginlabel.text = "LOGIN"
+        shakerLabel.sizeToFit()
+        loginlabel.sizeToFit()
+        mainImageView.contentMode = .bottomLeft
+        
+        mainImageView.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-5)
+            $0.height.equalTo(470)
+            $0.leading.equalTo(shakerLabel.snp.trailing)
+            $0.bottom.equalTo(appleLoginButton.snp.top).offset(-50)
+        }
+        
         shakerLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(20)
-            $0.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().offset(35)
             $0.height.equalTo(50)
+            $0.bottom.equalTo(loginlabel.snp.top)
         }
         
         loginlabel.snp.makeConstraints {
+            $0.leading.equalTo(shakerLabel)
             $0.top.equalTo(shakerLabel.snp.bottom)
-            $0.leading.height.equalTo(shakerLabel)
-        }
-        
-        topHalfView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.5)
+            $0.height.equalTo(shakerLabel)
+            $0.bottom.equalTo(mainImageView)
         }
         
         appleLoginButton.snp.makeConstraints {
-            $0.bottom.equalToSuperview().offset(-250)
+            $0.bottom.equalToSuperview().offset(-150)
             $0.width.equalTo(250)
             $0.height.equalTo(50)
             $0.centerX.equalToSuperview()
         }
         
-        appleLoginButton.layer.cornerRadius = 15
-        appleLoginButton.clipsToBounds = true
         justUseButton.snp.makeConstraints {
             $0.top.equalTo(appleLoginButton.snp.bottom).offset(20)
             $0.width.height.equalTo(appleLoginButton)
             $0.centerX.equalToSuperview()
         }
+        appleLoginButton.layer.cornerRadius = 15
+        appleLoginButton.clipsToBounds = true
         appleLoginButton.contentMode = .scaleAspectFill
         appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button"), for: .normal)
     }
