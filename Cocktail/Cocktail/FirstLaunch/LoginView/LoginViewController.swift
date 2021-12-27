@@ -75,19 +75,15 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         requestAuthNoti()
-        view.addSubview(appleLoginButton)
-        view.addSubview(justUseButton)
+        layout()
+        attribute()
+    }
+    
+    func attribute() {
         view.backgroundColor = .white
-        view.addSubview(loginlabel)
-        view.addSubview(mainImageView)
-        view.addSubview(shakerLabel)
-        
         mainImageView.image = UIImage(named: "logoImage")
-
-        
         justUseButton.setTitle("로그인없이 시작하기", for: .normal)
         justUseButton.setTitleColor(.gray, for: .normal)
-        
         shakerLabel.font = .systemFont(ofSize: 45, weight: .bold)
         shakerLabel.textColor = UIColor(named: "shaker")
         loginlabel.font = .systemFont(ofSize: 45, weight: .light)
@@ -98,7 +94,18 @@ class LoginViewController: UIViewController {
         shakerLabel.sizeToFit()
         loginlabel.sizeToFit()
         mainImageView.contentMode = .bottomLeft
-        
+
+        appleLoginButton.layer.cornerRadius = 15
+        appleLoginButton.clipsToBounds = true
+        appleLoginButton.contentMode = .scaleAspectFill
+        appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button"), for: .normal)
+    }
+    
+    func layout() {
+        [appleLoginButton, justUseButton, loginlabel, mainImageView, shakerLabel].forEach {
+            view.addSubview($0)
+        }
+
         mainImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-5)
             $0.height.equalTo(470)
@@ -131,10 +138,6 @@ class LoginViewController: UIViewController {
             $0.width.height.equalTo(appleLoginButton)
             $0.centerX.equalToSuperview()
         }
-        appleLoginButton.layer.cornerRadius = 15
-        appleLoginButton.clipsToBounds = true
-        appleLoginButton.contentMode = .scaleAspectFill
-        appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button"), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -30,14 +30,14 @@ class DrinkTypeChoiceViewController: UIViewController {
     }
     
     func layout() {
-        view.addSubview(questionLabel)
-        view.addSubview(mainStackView)
-        view.addSubview(nextButton)
+        [questionLabel, mainStackView, nextButton].forEach {
+            view.addSubview($0)
+        }
         
-        mainStackView.addArrangedSubview(shooterButton)
-        mainStackView.addArrangedSubview(shortDrinkButton)
-        mainStackView.addArrangedSubview(longDrinkButton)
-        
+        [shooterButton, shortDrinkButton, longDrinkButton].forEach {
+            mainStackView.addArrangedSubview($0)
+        }
+
         questionLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(150)
             $0.leading.trailing.equalToSuperview().inset(70)

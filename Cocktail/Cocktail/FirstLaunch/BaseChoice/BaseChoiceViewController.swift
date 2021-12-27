@@ -39,10 +39,10 @@ class BaseChoiceViewController: UIViewController {
         layout()
     }
     
-    func layout() {
-        view.addSubview(mainBigStackView)
-        view.addSubview(nextButton)
-        view.addSubview(questionLabel)
+    func layout() {        
+        [mainBigStackView, nextButton, questionLabel].forEach {
+            view.addSubview($0)
+        }
         mainBigStackView.axis = .vertical
         mainBigStackView.distribution = .fillEqually
         mainBigStackView.spacing = 20
