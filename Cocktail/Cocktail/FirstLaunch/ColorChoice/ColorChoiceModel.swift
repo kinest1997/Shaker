@@ -12,5 +12,6 @@ import RxSwift
 class ColorChoiceModel {
     let colorArray = Cocktail.Color.allCases
     var selectedColor = [Cocktail.Color]()
-    var isCheckedArray = [Bool]()
+    var myFavor: Bool = true
+    
 }

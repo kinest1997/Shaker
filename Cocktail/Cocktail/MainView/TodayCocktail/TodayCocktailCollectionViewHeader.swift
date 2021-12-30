@@ -16,6 +16,7 @@ class TodayCocktailCollectionViewHeader: UICollectionReusableView {
         super.layoutSubviews()
         sectionTextLabel.textColor = .black
         sectionTextLabel.sizeToFit()
+        sectionTextLabel.font = .systemFont(ofSize: 30, weight: .bold)
         
         addSubview(sectionTextLabel)
         sectionTextLabel.snp.makeConstraints {

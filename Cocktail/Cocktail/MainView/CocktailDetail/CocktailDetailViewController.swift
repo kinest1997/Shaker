@@ -269,7 +269,7 @@ class CocktailDetailViewController: UIViewController {
         recipeLabel.snp.makeConstraints {
             $0.top.equalTo(recipeGuideLabel.snp.bottom).offset(30)
             $0.width.equalTo(secondSplitLine)
-            $0.height.equalTo(100)
+//            $0.height.equalTo(100)
             $0.centerX.equalToSuperview()
         }
         

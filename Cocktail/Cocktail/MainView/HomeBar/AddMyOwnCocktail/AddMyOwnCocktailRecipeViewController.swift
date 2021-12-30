@@ -313,8 +313,11 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         [alcoholChoiceButton ,colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton].forEach {
             $0.setTitleColor(.black, for: .normal)
-            $0.contentHorizontalAlignment = .leading
+            $0.contentHorizontalAlignment = .fill
             $0.titleLabel?.font = .systemFont(ofSize: 14)
+            $0.backgroundColor = .systemGray
+            $0.layer.cornerRadius = 15
+            $0.clipsToBounds = true
         }
         alcoholChoiceButton.setTitleColor(.black, for: .normal)
         alcoholChoiceButton.titleLabel?.font = .systemFont(ofSize: 14)
@@ -483,15 +486,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.height.equalTo(40)
             $0.centerX.equalToSuperview()
         }
-        
-        //위에다 둘지 아래에 둘지 아직 고민중
-        //        headerView.addSubview(addButton)
-        //        addButton.snp.makeConstraints {
-        //            $0.top.equalTo(recipeLabel.snp.bottom).offset(10)
-        //            $0.centerX.equalToSuperview()
-        //            $0.bottom.equalToSuperview()
-        //            $0.width.equalToSuperview().multipliedBy(0.7)
-        //        }
         
         if let cocktailData = beforeEditingData {
             alcoholChoiceButton.setTitle(cocktailData.alcohol.rawValue.localized, for: .normal)

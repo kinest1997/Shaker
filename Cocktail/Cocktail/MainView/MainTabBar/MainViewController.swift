@@ -26,8 +26,8 @@ class MainViewController: UITabBarController {
         
         var image: UIImage? {
             switch self {
-            case .today: return UIImage(systemName: "eyeglasses")
-            case .recipe: return UIImage(systemName: "book.closed.fill")
+            case .today: return UIImage(systemName: "eyes")
+            case .recipe: return UIImage(systemName: "book.closed")
             case .home: return UIImage(systemName: "mustache")
             case .preference: return UIImage(systemName: "gearshape")
             }
@@ -36,7 +36,7 @@ class MainViewController: UITabBarController {
         var selectedImage: UIImage? {
             switch self {
             case .today: return UIImage(systemName: "eyes.inverse")
-            case .recipe: return UIImage(systemName: "list.bullet")
+            case .recipe: return UIImage(systemName: "book.closed.fill")
             case .home: return UIImage(systemName: "mustache.fill")
             case .preference: return UIImage(systemName: "gearshape.fill")
             }
@@ -57,7 +57,7 @@ class MainViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.tintColor = .systemBrown
+        tabBar.tintColor = UIColor(named: "shaker")
         self.tabBar.barStyle = .default
         todayCocktailCollectionViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]

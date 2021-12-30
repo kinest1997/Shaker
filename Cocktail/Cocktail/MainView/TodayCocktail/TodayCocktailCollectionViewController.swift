@@ -45,19 +45,17 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     var dataReciped: [Bool] = []
     
-    let sectionName = ["주문 도와드릴까요?", "초보자 추천 가이드북",  "내 즐겨찾기"]
+    let sectionName = ["초보자 추천 가이드북", "주문 도와드릴까요?",  "내 즐겨찾기"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Shaker"
+        self.title = "SHAKER"
         view.addSubview(collectionView)
         view.addSubview(loadingView)
-        
         collectionView.backgroundColor = .white
         collectionView.register(TodayCocktailCollectionViewCell.self, forCellWithReuseIdentifier: "TodayCocktailCollectionViewCell")
         collectionView.register(TodayCocktailCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TodayCocktailCollectionViewHeader")
         collectionView.collectionViewLayout = collectionViewLayout()
-        
         collectionView.delegate = self
         collectionView.dataSource = self
         loadingView.explainLabel.text = "로딩중"
@@ -131,9 +129,9 @@ extension TodayCocktailCollectionViewController {
             
             switch sectionNumber {
             case 0:
-                return self.createOrderAssistSection()
-            case 1:
                 return self.createYoutubeSection()
+            case 1:
+                return self.createOrderAssistSection()
             case 2:
                 return self.createWishListSection()
             default:
@@ -202,7 +200,7 @@ extension TodayCocktailCollectionViewController {
     }
     
     func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let layoutSectionHeadSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(40))
+        let layoutSectionHeadSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeadSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         return sectionHeader
     }
@@ -227,9 +225,9 @@ extension TodayCocktailCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
-        case 1:
             return youtubeData.count
+        case 1:
+            return 1
         case 2:
             return wishListData.count
         default:
@@ -244,12 +242,12 @@ extension TodayCocktailCollectionViewController {
         cell.nameLabel.isHidden = false
         switch indexPath.section {
         case 0:
-            cell.nameLabel.isHidden = true
-            cell.mainImageView.image = UIImage(systemName: "signature")
-            return cell
-        case 1:
             cell.nameLabel.text = youtubeData[indexPath.row].videoName
             cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
+            return cell
+        case 1:
+            cell.nameLabel.isHidden = true
+            cell.mainImageView.image = UIImage(systemName: "signature")
             return cell
         case 2:
             cell.nameLabel.text = wishListData[indexPath.row].name
@@ -263,12 +261,12 @@ extension TodayCocktailCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
+            goToYoutube(videoCode: youtubeData[indexPath.row].videoCode)
+        case 1:
             let colorChoiceViewController = ColorChoiceViewController()
             colorChoiceViewController.myFavor = false
             self.navigationController?.show(colorChoiceViewController, sender: nil)
             self.navigationController?.navigationBar.isHidden = false
-        case 1:
-            goToYoutube(videoCode: youtubeData[indexPath.row].videoCode)
         case 2:
             let cocktailDetailViewController = CocktailDetailViewController()
             cocktailDetailViewController.setData(data: wishListData[indexPath.row])

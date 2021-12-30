@@ -4,18 +4,22 @@ import RxSwift
 import RxCocoa
 
 protocol ColorChoiceBindable {
-//    view -> viewModel
+    //    view -> viewModel
     var cellTapped: PublishRelay<IndexPath> { get }
     var nextButtontapped: PublishRelay<[Cocktail.Color]> { get }
     
-//    viewModel -> View
-    var cellIsChecked: Driver<Cocktail> { get }
+    //    viewModel -> View
+    var changeCellImage: Signal<IndexPath> { get }
+    var addSelectedColor: Signal<Cocktail.Color> { get }
     var buttonLabelCountUpdate: Driver<Int> { get }
-    var showNextPage: Signal<Void> { get }
+    var showNextPage: Signal<[Cocktail]> { get }
     var presentAlert: Signal<Void> { get }
+    var colorArray: Driver<[Cocktail.Color]> { get }
 }
 
 class ColorChoiceViewController: UIViewController {
+    
+    let disposeBag = DisposeBag()
     
     let questionLabel = UILabel()
     
@@ -23,7 +27,6 @@ class ColorChoiceViewController: UIViewController {
     
     let colorArray = Cocktail.Color.allCases
     var selectedColor = [Cocktail.Color]()
-    var isCheckedArray = [Bool]()
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
@@ -31,7 +34,6 @@ class ColorChoiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isCheckedArray = colorArray.map { _ in false}
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
         mainCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: "colorCell")
@@ -45,8 +47,34 @@ class ColorChoiceViewController: UIViewController {
         }
     }
     
+    func bind(_ viewModel: ColorChoiceBindable) {
+        
+        mainCollectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        mainCollectionView.rx.itemSelected
+            .bind(to: viewModel.cellTapped)
+            .disposed(by: disposeBag)
+        
+        
+        nextButton.rx.tap
+            .bind(to: viewModel.nextButtontapped)
+            .disposed(by: disposeBag)
+        
+        
+        
+        viewModel.colorArray
+            .drive(mainCollectionView.rx.items(cellIdentifier: "colorCell", cellType: ColorCollectionViewCell.self)) { index, color, cell in
+                cell.colorImageView.image = UIImage(named: color.rawValue)
+            }
+            .disposed(by: disposeBag)
+        
+
+        
+    }
+    
     func layout() {
-        view.addSubview(questionLabel) 
+        view.addSubview(questionLabel)
         view.addSubview(mainCollectionView)
         view.addSubview(nextButton)
         
@@ -124,17 +152,25 @@ extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell else { return }
-        if isCheckedArray[indexPath.row] == false {
-            isCheckedArray[indexPath.row] = true
-            selectedCell.isChecked = isCheckedArray[indexPath.row]
-            selectedColor.append(colorArray[indexPath.row])
-            buttonLabelCountUpdate(button: nextButton)
-        } else {
-            isCheckedArray[indexPath.row] = false
-            selectedCell.isChecked = isCheckedArray[indexPath.row]
+        
+        if selectedColor.contains(colorArray[indexPath.row]) {
             guard let number = selectedColor.firstIndex(of: colorArray[indexPath.row]) else { return }
+            selectedCell.isChecked = false
             selectedColor.remove(at: number)
             buttonLabelCountUpdate(button: nextButton)
+        } else {
+            selectedCell.isChecked = true
+            selectedColor.append(colorArray[indexPath.row])
+            buttonLabelCountUpdate(button: nextButton)
+        }
+    }
+}
+
+extension Reactive where Base: ColorChoiceViewController {
+    var setCheckImage: Binder<(IndexPath, Bool)> {
+        return Binder(base) { base, data in
+            guard let cell = base.mainCollectionView.cellForItem(at: data.0) as? ColorCollectionViewCell else { return }
+            cell.isChecked = data.1
         }
     }
 }
