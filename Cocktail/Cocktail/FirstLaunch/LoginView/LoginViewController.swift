@@ -27,6 +27,8 @@ protocol LoginViewBiandable {
 
 class LoginViewController: UIViewController {
     
+    let colorChoiceViewController = ColorChoiceViewController()
+    
     let disposeBag = DisposeBag()
     
     let mainImageView = UIImageView()
@@ -172,13 +174,16 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
             
-            Auth.auth().signIn(with: credential) { authResult, error in
+            Auth.auth().signIn(with: credential) {[weak self] authResult, error in
                 if let error = error {
                     print ("Error Apple sign in: %@", error)
                     return
                 }
+                guard let self = self else { return }
                 UserDefaults.standard.set(false, forKey: "firstLaunch")
-                self.show(ColorChoiceViewController(), sender: nil)
+//                let colorBind = ColorChoiceViewModel()
+//                self.colorChoiceViewController.bind(colorBind)
+                self.show(self.colorChoiceViewController, sender: nil)
             }
         }
     }

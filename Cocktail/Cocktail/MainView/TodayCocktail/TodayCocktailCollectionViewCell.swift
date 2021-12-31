@@ -11,33 +11,24 @@ import SnapKit
 class TodayCocktailCollectionViewCell: UICollectionViewCell {
     
     let mainImageView = UIImageView()
-    let nameLabel = UILabel()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.addSubview(mainImageView)
-        contentView.addSubview(nameLabel)
         contentView.backgroundColor = .white
-        contentView.layer.cornerRadius = 5
+        contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
-        nameLabel.textColor = .black
-        
-        nameLabel.textAlignment = .center
         mainImageView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(nameLabel.snp.top).offset(-5)
+            $0.edges.equalToSuperview()
         }
-        nameLabel.layer.borderWidth = 1
-        nameLabel.layer.borderColor = UIColor.black.cgColor
-        nameLabel.layer.cornerRadius = 15
         mainImageView.layer.borderWidth = 0
         mainImageView.layer.cornerRadius = 15
         mainImageView.clipsToBounds = true
         mainImageView.contentMode = .scaleAspectFit
-        
-        nameLabel.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.2)
-        }
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.masksToBounds = false
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowRadius = 5
+        self.layer.shadowOpacity = 0.4
     }
 }

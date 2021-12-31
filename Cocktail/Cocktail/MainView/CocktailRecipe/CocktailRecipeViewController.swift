@@ -40,7 +40,7 @@ class CocktailRecipeViewController: UIViewController {
         mainTableView.delegate = self
         mainTableView.dataSource = self
         title = "Recipe".localized
-        
+        navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
         
         navigationItem.hidesSearchBarWhenScrolling = false

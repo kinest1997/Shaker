@@ -66,14 +66,15 @@ class CocktailDetailViewController: UIViewController {
     let wishListButton = UIButton()
     
     let cocktailImageView = UIImageView()
-    
+    let imageSplitLine = UILabel()
     let nameLabel = UILabel()
+    let alcoholSplitLine = UILabel()
     
     let alcoholGuideLabel = UILabel()
     let alcoholStackView = UIStackView()
-    let lowAlcoholLabel = UIImageView(image: UIImage(systemName: "heart"))
-    let midAlcoholLabel = UIImageView(image: UIImage(systemName: "heart"))
-    let highAlcoholLabel = UIImageView(image: UIImage(systemName: "heart"))
+    let lowAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
+    let midAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
+    let highAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
     let alcoholLabel = UILabel()
     
     let leftStackView = UIStackView()
@@ -121,7 +122,6 @@ class CocktailDetailViewController: UIViewController {
         let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
         navigationController?.navigationBar.isHidden = false
-        
         FirebaseRecipe.shared.getSingleCocktialData(cocktail: cocktailData) {[weak self] data in
             self?.likeData = data
         }
@@ -140,7 +140,7 @@ class CocktailDetailViewController: UIViewController {
         view.addSubview(mainScrollView)
         mainScrollView.addSubview(mainView)
         
-        [nameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel, likeButton, likeCountLabel, disLikeCountLabel, disLikeButton].forEach { mainView.addSubview($0) }
+        [nameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel, likeButton, likeCountLabel, disLikeCountLabel, disLikeButton, imageSplitLine, alcoholSplitLine].forEach { mainView.addSubview($0) }
         
         [groupStackView, cocktailImageView, wishListButton].forEach { mainView.addSubview($0) }
         
@@ -150,7 +150,14 @@ class CocktailDetailViewController: UIViewController {
         
         [colorLabel, baseDrinkLabel, drinkTypeLabel, glassLabel, craftLabel].forEach { rightStackView.addArrangedSubview($0) }
         
-        [lowAlcoholLabel, midAlcoholLabel, highAlcoholLabel].forEach { alcoholStackView.addArrangedSubview($0) }
+        [lowAlcoholLabel, midAlcoholLabel, highAlcoholLabel].forEach {
+            alcoholStackView.addArrangedSubview($0)
+            $0.snp.makeConstraints {
+                $0.width.equalTo(20)
+                $0.height.equalTo(lowAlcoholLabel.snp.width)
+            }
+            
+        }
         
         //위에서부터 아래로 쭉 순서대로 찾으면 됨
         wishListButton.snp.makeConstraints {
@@ -166,8 +173,14 @@ class CocktailDetailViewController: UIViewController {
             $0.height.equalTo(300)
         }
         
-        nameLabel.snp.makeConstraints {
+        imageSplitLine.snp.makeConstraints {
             $0.top.equalTo(cocktailImageView.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(20)
+        }
+        
+        nameLabel.snp.makeConstraints {
+            $0.top.equalTo(imageSplitLine.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(40)
             $0.width.equalToSuperview()
@@ -176,32 +189,38 @@ class CocktailDetailViewController: UIViewController {
         likeButton.snp.makeConstraints {
             $0.leading.equalTo(alcoholStackView.snp.leading)
             $0.width.height.equalTo(30)
-            $0.bottom.equalTo(alcoholStackView.snp.top).offset(-20)
+            $0.top.equalTo(nameLabel.snp.bottom).offset(20)
         }
         
         likeCountLabel.snp.makeConstraints {
             $0.leading.trailing.equalTo(likeButton)
             $0.top.equalTo(likeButton.snp.bottom)
-            $0.bottom.equalTo(alcoholStackView.snp.top)
+            
         }
         
         disLikeButton.snp.makeConstraints {
             $0.trailing.equalTo(alcoholStackView.snp.trailing)
             $0.width.height.equalTo(30)
-            $0.bottom.equalTo(alcoholStackView.snp.top).offset(-20)
+            $0.top.equalTo(likeButton)
         }
         
         disLikeCountLabel.snp.makeConstraints {
             $0.leading.trailing.equalTo(disLikeButton)
             $0.top.equalTo(disLikeButton.snp.bottom)
-            $0.bottom.equalTo(alcoholStackView.snp.top)
+            
+        }
+        
+        alcoholSplitLine.snp.makeConstraints {
+            $0.top.equalTo(disLikeCountLabel.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(20)
         }
         
         alcoholStackView.snp.makeConstraints {
-            $0.height.equalTo(nameLabel)
+
             $0.width.equalToSuperview().multipliedBy(0.3)
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(nameLabel.snp.bottom).offset(60)
+            $0.top.equalTo(alcoholSplitLine.snp.bottom).offset(20)
         }
         
         alcoholGuideLabel.snp.makeConstraints {
@@ -231,12 +250,12 @@ class CocktailDetailViewController: UIViewController {
         }
         
         centerLine.snp.makeConstraints {
-            $0.width.equalTo(1)
+            $0.width.equalTo(2)
         }
         
         firstSplitLine.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.8)
-            $0.height.equalTo(1)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(20)
             $0.centerX.equalToSuperview()
             $0.top.equalTo(groupStackView.snp.bottom).offset(50)
         }
@@ -249,14 +268,14 @@ class CocktailDetailViewController: UIViewController {
         
         ingredientsLabel.snp.makeConstraints {
             $0.top.equalTo(ingredientsGuideLabel.snp.bottom).offset(50)
-            $0.width.equalTo(firstSplitLine)
+            $0.leading.trailing.equalToSuperview().inset(40)
             $0.centerX.equalToSuperview()
         }
         
         secondSplitLine.snp.makeConstraints {
             $0.top.equalTo(ingredientsLabel.snp.bottom).offset(50)
             $0.width.equalTo(firstSplitLine)
-            $0.height.equalTo(1)
+            $0.height.equalTo(20)
             $0.centerX.equalToSuperview()
         }
         
@@ -268,8 +287,7 @@ class CocktailDetailViewController: UIViewController {
         
         recipeLabel.snp.makeConstraints {
             $0.top.equalTo(recipeGuideLabel.snp.bottom).offset(30)
-            $0.width.equalTo(secondSplitLine)
-//            $0.height.equalTo(100)
+            $0.width.equalTo(ingredientsLabel)
             $0.centerX.equalToSuperview()
         }
         
@@ -289,28 +307,30 @@ class CocktailDetailViewController: UIViewController {
         view.backgroundColor = .white
         mainView.backgroundColor = .white
         
+        
+        
         //구분선의 색상 설정
-        [centerLine, firstSplitLine, secondSplitLine].forEach {
-            $0.backgroundColor = .black
+        [centerLine, firstSplitLine, secondSplitLine, imageSplitLine, alcoholSplitLine].forEach {
+            $0.backgroundColor = UIColor(named: "splitLineGray")
         }
         
         //내용 설정하는곳
         [alcoholLabel, alcoholGuideLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, recipeLabel, drinkTypeLabel, likeCountLabel, disLikeCountLabel].forEach {
-            $0.textColor = .black
+            $0.textColor = UIColor(named: "miniButtonGray")
             $0.font = .systemFont(ofSize: 14, weight: .medium)
             $0.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         }
         
         //제목 설정하는곳
         [colorGuideLabel, baseDrinkGuideLabel, glassGuideLabel, craftGuideLabel, drinkTypeGuideLabel, ingredientsGuideLabel, recipeGuideLabel].forEach {
-            $0.textColor = .black
+            $0.textColor = UIColor(named: "miniButtonGray")
             $0.font = .systemFont(ofSize: 16, weight: .bold)
         }
         
         //제일 두꺼운 칵테일 이름 설정
         [nameLabel].forEach {
             $0.textAlignment = .center
-            $0.textColor = .black
+            $0.textColor = UIColor(named: "miniButtonGray")
             $0.font = .systemFont(ofSize: 24, weight: .heavy)
         }
         
@@ -330,6 +350,7 @@ class CocktailDetailViewController: UIViewController {
         [myTipLabel, recipeLabel, ingredientsLabel].forEach {
             $0.sizeToFit()
             $0.numberOfLines = 0
+            $0.textColor = UIColor(named: "miniButtonGray")
         }
         
         [leftStackView, rightStackView].forEach {
@@ -338,8 +359,12 @@ class CocktailDetailViewController: UIViewController {
             $0.spacing = 10
         }
         
-        cocktailImageView.contentMode = .scaleAspectFit
+        [likeButton, disLikeButton, likeCountLabel, disLikeCountLabel, wishListButton].forEach {
+            $0.tintColor = UIColor(named: "miniButtonGray")
+        }
         
+        cocktailImageView.contentMode = .scaleAspectFit
+
         alcoholStackView.distribution = .fillEqually
         alcoholStackView.alignment = .center
         alcoholStackView.spacing = 20
@@ -349,9 +374,9 @@ class CocktailDetailViewController: UIViewController {
         groupStackView.distribution = .fillProportionally
         
         likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
-        likeButton.tintColor = .systemGray
+
         disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
-        disLikeButton.tintColor = .systemGray
+
         
         alcoholGuideLabel.text = "Alcohol".localized
         colorGuideLabel.text = "Color".localized
@@ -361,7 +386,7 @@ class CocktailDetailViewController: UIViewController {
         craftGuideLabel.text = "Craft".localized
         recipeGuideLabel.text = "Recipe".localized
         ingredientsGuideLabel.text = "Ingredients".localized
-        wishListButton.tintColor = .systemPink
+        
         
         wishListButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
@@ -436,14 +461,16 @@ class CocktailDetailViewController: UIViewController {
         recipeLabel.text = makeRecipeText(recipe: data.recipe)
         ingredientsLabel.text = makeIngredientsText(ingredients: data.ingredients)
         cocktailImageView.kf.setImage(with: URL(string: data.imageURL), placeholder: UIImage(systemName: "heart"))
-        
+        [lowAlcoholLabel, highAlcoholLabel, midAlcoholLabel].forEach {
+            $0.tintColor = UIColor(named: "nonSelectedAlcoholColor")
+        }
         switch data.alcohol {
         case .high:
-            highAlcoholLabel.image = UIImage(systemName: "heart.fill")
+            highAlcoholLabel.tintColor = UIColor(named: "shaker")
         case .mid:
-            midAlcoholLabel.image = UIImage(systemName: "heart.fill")
+            midAlcoholLabel.tintColor = UIColor(named: "shaker")
         case .low:
-            lowAlcoholLabel.image = UIImage(systemName: "heart.fill")
+            lowAlcoholLabel.tintColor = UIColor(named: "shaker")
         case .extreme:
             break
         }
@@ -483,7 +510,7 @@ class CocktailDetailViewController: UIViewController {
         let spaceStrings = ingredients.enumerated().map {
             """
             
-            \($0.offset + 1)  \($0.element.rawValue.localized)
+            \($0.offset + 1).  \($0.element.rawValue.localized)
             
             
             """

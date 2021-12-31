@@ -52,9 +52,11 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         self.title = "SHAKER"
         view.addSubview(collectionView)
         view.addSubview(loadingView)
+        navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
         collectionView.backgroundColor = .white
         collectionView.register(TodayCocktailCollectionViewCell.self, forCellWithReuseIdentifier: "TodayCocktailCollectionViewCell")
         collectionView.register(TodayCocktailCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TodayCocktailCollectionViewHeader")
+        collectionView.register(TitleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TitleHeaderView")
         collectionView.collectionViewLayout = collectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -145,7 +147,7 @@ extension TodayCocktailCollectionViewController {
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 10, leading: 5, bottom: 10, trailing: 5)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95), heightDimension: .fractionalHeight(0.3))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95), heightDimension: .fractionalHeight(0.2))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
@@ -165,7 +167,7 @@ extension TodayCocktailCollectionViewController {
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 10, leading: 5, bottom: 10, trailing: 5)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.25))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.15))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
         
@@ -194,7 +196,7 @@ extension TodayCocktailCollectionViewController {
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
         
-        let sectionHeader = createSectionHeader()
+        let sectionHeader = createfirstSectionHeader()
         section.boundarySupplementaryItems = [sectionHeader]
         return section
     }
@@ -205,12 +207,24 @@ extension TodayCocktailCollectionViewController {
         return sectionHeader
     }
     
+    func createfirstSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
+        let layoutSectionHeadSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(140))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeadSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        return sectionHeader
+    }
+    
     //섹션 헤더설정
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
-            headerview.sectionTextLabel.text = sectionName[indexPath.section]
-            return headerview
+            if indexPath.section != 0 {
+                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
+                headerview.sectionTextLabel.text = sectionName[indexPath.section]
+                return headerview
+            } else {
+                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TitleHeaderView", for: indexPath) as? TitleHeaderView else { return UICollectionReusableView() }
+                headerview.sectionTextLabel.text = sectionName[indexPath.section]
+                return headerview
+            }
         } else {
             return UICollectionReusableView()
         }
@@ -239,18 +253,15 @@ extension TodayCocktailCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCocktailCollectionViewCell", for: indexPath) as? TodayCocktailCollectionViewCell else { return UICollectionViewCell() }
-        cell.nameLabel.isHidden = false
+
         switch indexPath.section {
         case 0:
-            cell.nameLabel.text = youtubeData[indexPath.row].videoName
             cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
             return cell
         case 1:
-            cell.nameLabel.isHidden = true
-            cell.mainImageView.image = UIImage(systemName: "signature")
+            cell.mainImageView.image = UIImage(named: "orderImage")
             return cell
         case 2:
-            cell.nameLabel.text = wishListData[indexPath.row].name
             cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
             return cell
         default:

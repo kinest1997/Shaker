@@ -9,29 +9,36 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-struct ColorChoiceViewModel: ColorChoiceBindable {
-    var colorModel: ColorChoiceModel
-    
-    var cellTapped: PublishRelay<IndexPath>
-    
-    var nextButtontapped: PublishRelay<[Cocktail.Color]>
-    
-    var changeCellImage: Signal<IndexPath>
-    
-    var addSelectedColor: Signal<Cocktail.Color>
-    
-    var showNextPage: Signal<[Cocktail]>
-    
-    var buttonLabelCountUpdate: Driver<Int>
-    
-    var presentAlert: Signal<Void>
-    
-    var colorArray: Driver<[Cocktail.Color]>
-    
-//    init() {
-//        colorModel = ColorChoiceModel()
+//struct ColorChoiceViewModel: ColorChoiceBindable {
+//    var cellTapped: PublishRelay<IndexPath>
+//    
+//    var nextButtontapped: PublishRelay<Void>
+//    
+//    var colorModel: BehaviorRelay<ColorChoiceModel>
+//    
+//    var selectedColor: Driver<[Cocktail.Color]>
+//    
+//    var updateCell: Signal<(indexPath: IndexPath, bool: Bool)>
+//    
+//    var buttonLabelCountUpdate: Signal<Int>
+//    
+//    var showNextPage: Driver<Void>
+//    
+//    var presentAlert: Driver<Void>
+//    
+//    var colorArray: Driver<[Cocktail.Color]>
+//    
+//    var myFavor: Signal<Bool> = Signal.just(true)
+//    
+//    var saveMyFavor: Signal<[Cocktail.Color]>
+//    
 //
-//        changeCellImage = self.cellTapped
-//            .asSignal()
+//    
+//    init() {
+//        self.colorArray = Driver.just(Cocktail.Color.allCases)
+//
+//        
+//
+//    
 //    }
-}
+//}

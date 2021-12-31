@@ -45,9 +45,11 @@ class AlcoholChoiceViewController: UIViewController {
     func attribute() {
         view.backgroundColor = .white
         questionLabel.text = "어떤 맛을 좋아하세요?"
-        explainLabel.font = .systemFont(ofSize: 10)
+        questionLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        questionLabel.textColor = UIColor(named: "miniButtonGray")
+        
         questionLabel.textAlignment = .center
-        questionLabel.textColor = .systemGray2
+        
         explainLabel.text = "*기준: 도수"
         explainLabel.textAlignment = .center
         explainLabel.textColor = .systemGray2
@@ -58,10 +60,10 @@ class AlcoholChoiceViewController: UIViewController {
         lowLabel.textColor = .systemGray2
         lowLabel.textAlignment = .center
         nextButton.setTitle("다음", for: .normal)
-        nextButton.setTitleColor(.systemGray2, for: .normal)
         
         [highButton, middleButton, lowButton].forEach {
             $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            $0.tintColor = UIColor(named: "mainOrangeColor")
         }
         
         nextButton.addAction(UIAction(handler: {[weak self] _ in
@@ -119,15 +121,14 @@ class AlcoholChoiceViewController: UIViewController {
         }
         
         questionLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(50)
-            $0.leading.trailing.equalToSuperview().inset(85)
+            $0.top.equalToSuperview().inset(100)
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(55)
         }
         
         explainLabel.snp.makeConstraints {
             $0.top.equalTo(questionLabel.snp.bottom)
             $0.trailing.equalTo(questionLabel)
-            $0.width.equalTo(70)
             $0.height.equalTo(20)
         }
         
@@ -139,19 +140,19 @@ class AlcoholChoiceViewController: UIViewController {
         
         highButton.snp.makeConstraints {
             $0.top.equalTo(highLabel.snp.bottom)
-            $0.width.height.equalTo(30)
+            $0.width.height.equalTo(35)
             $0.centerX.equalToSuperview()
         }
         
         middleButton.snp.makeConstraints {
             $0.top.equalTo(highButton.snp.bottom).offset(110)
-            $0.width.height.equalTo(30)
+            $0.width.height.equalTo(highButton)
             $0.centerX.equalToSuperview()
         }
         
         lowButton.snp.makeConstraints {
             $0.top.equalTo(middleButton.snp.bottom).offset(110)
-            $0.width.height.equalTo(30)
+            $0.width.height.equalTo(highButton)
             $0.centerX.equalToSuperview()
         }
         
@@ -185,6 +186,11 @@ class AlcoholChoiceViewController: UIViewController {
         let number = filteredRecipe.filter {
             $0.alcohol == alcoholSelected
         }.count
+        if number == 0 {
+            button.backgroundColor = .white
+        } else {
+            button.backgroundColor = UIColor(named: "mainOrangeColor")
+        }
         button.setTitle("\(number)개의 칵테일 발견", for: .normal)
     }
 }

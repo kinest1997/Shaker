@@ -52,6 +52,7 @@ class SettingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
     }
     

@@ -12,6 +12,7 @@ class AssistantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
         attribute()
         layout()
     }
