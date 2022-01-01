@@ -4,21 +4,24 @@ import SnapKit
 class FilterViewCell: UITableViewCell {
     
     let nameLabel = UILabel()
-    let mainStackView = UIStackView()
     let appliedCheckImgageView = UIImageView()
     var isChecked: Bool = false
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.addSubview(mainStackView)
-        mainStackView.addArrangedSubview(nameLabel)
-        mainStackView.addArrangedSubview(appliedCheckImgageView)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(appliedCheckImgageView)
+        
+        appliedCheckImgageView.tintColor = .black
         nameLabel.textAlignment = .left
         appliedCheckImgageView.image = isChecked ? UIImage(systemName: "checkmark.circle") : UIImage(systemName: "circle")
-        mainStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        nameLabel.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
         }
         appliedCheckImgageView.snp.makeConstraints {
-            $0.width.height.equalTo(50)
+            $0.height.bottom.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.width.equalTo(appliedCheckImgageView.snp.height)
         }
     }
     func imageApply() {

@@ -40,6 +40,7 @@ class AssistantViewController: UIViewController {
             }
             
         }), for: .touchUpInside)
+        
         myRecipeButton.setTitle("My Recipes".localized, for: .normal)
         myBarButton.setTitle("My Drinks".localized, for: .normal)
         wishListButton.setTitle("Bookmark".localized, for: .normal)
@@ -47,14 +48,6 @@ class AssistantViewController: UIViewController {
         myRecipeButton.setTitleColor(.black, for: .normal)
         myBarButton.setTitleColor(.black, for: .normal)
         wishListButton.setTitleColor(.black, for: .normal)
-        [myRecipeButton, myBarButton, wishListButton].forEach {
-            $0.setTitleColor(.black, for: .normal)
-            $0.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
-            $0.backgroundColor = .systemGray
-            $0.layer.cornerRadius = 15
-            $0.clipsToBounds = true
-        }
-        
         mainImageView.image = UIImage(named: "mybar")
     }
     

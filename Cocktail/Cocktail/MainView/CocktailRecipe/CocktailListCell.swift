@@ -21,6 +21,7 @@ class CocktailListCell: UITableViewCell {
         contentView.backgroundColor = .white
         nameLabel.textColor = .black
         ingredientCountLabel.textColor = .gray
+        disclosureMark.tintColor = .black
         
         
         [nameLabel, ingredientCountLabel, cocktailImageView, likeCount, disclosureMark].forEach {
@@ -60,6 +61,6 @@ class CocktailListCell: UITableViewCell {
     func configure(data: Cocktail) {
         nameLabel.text = data.name
         ingredientCountLabel.text = "Ingredients".localized + " \(data.ingredients.count)" + "EA".localized
-        cocktailImageView.kf.setImage(with: URL(string: data.imageURL), placeholder: UIImage(systemName: "heart"))
+        cocktailImageView.kf.setImage(with: URL(string: data.imageURL))
     }
 }

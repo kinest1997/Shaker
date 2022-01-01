@@ -14,21 +14,29 @@ class TodayCocktailCollectionViewHeader: UICollectionReusableView {
     
     let topSplitLine = UILabel()
     let titleLabel = UILabel()
+    let explainLabel = UILabel()
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
-            sectionTextLabel.textColor = .black
-            sectionTextLabel.sizeToFit()
-            sectionTextLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-            
-            addSubview(sectionTextLabel)
-            sectionTextLabel.snp.makeConstraints {
-                $0.top.bottom.equalToSuperview().inset(5)
-                $0.leading.equalToSuperview().offset(20)
-            }
-        
         addSubview(topSplitLine)
+        addSubview(sectionTextLabel)
+        addSubview(explainLabel)
+        
+        sectionTextLabel.textColor = .black
+        sectionTextLabel.sizeToFit()
+        sectionTextLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        explainLabel.textColor = UIColor(named: "miniButtonGray")
+        explainLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        
+        sectionTextLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(5)
+            $0.leading.equalToSuperview().offset(20)
+        }
+        
+        explainLabel.snp.makeConstraints {
+            $0.top.equalTo(sectionTextLabel.snp.bottom)
+            $0.leading.equalTo(sectionTextLabel)
+        }
         
         topSplitLine.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()

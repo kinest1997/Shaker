@@ -25,6 +25,7 @@ class ReadyToLaunchVIewController: UIViewController {
         nextButton.setTitle("시작하기", for: .normal)
         
         startTextLabel.text = "쉐이커를 시작할 준비가 다 되었습니다"
+        startTextLabel.font = .systemFont(ofSize: 36, weight: .semibold)
         startTextLabel.textAlignment = .center
         startTextLabel.numberOfLines = 0
         startTextLabel.textColor = .black

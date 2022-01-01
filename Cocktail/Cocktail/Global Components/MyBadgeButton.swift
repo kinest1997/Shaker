@@ -35,7 +35,7 @@ class BadgeButton: UIButton {
         nameLabel.isHidden = title != nil ? false : true
         nameLabel.backgroundColor = buttonBackgroundColor
         nameLabel.font = buttonFont
-        nameLabel.textColor = UIColor.systemMint
+        nameLabel.textColor = .black
     }
     
     override func setTitleColor(_ color: UIColor?, for state: UIControl.State) {
@@ -100,9 +100,11 @@ class BadgeButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addBadgeToButon(badge: nil)
+        buttonImage.contentMode = .scaleAspectFit
         self.layer.cornerRadius = 15
         self.clipsToBounds = true
-        self.layer.borderWidth = 2
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.gray.cgColor
     }
     
     func addBadgeToButon(badge: String?) {

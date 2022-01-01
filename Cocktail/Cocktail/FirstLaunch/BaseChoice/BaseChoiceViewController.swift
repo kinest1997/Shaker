@@ -13,8 +13,6 @@ class BaseChoiceViewController: UIViewController {
     
     var filteredRecipe: [Cocktail] = []
     
-    var selectedBase: Cocktail.Base?
-    
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     var selectedBaseArray = [Cocktail.Base]()
@@ -128,7 +126,11 @@ extension BaseChoiceViewController: UICollectionViewDelegate, UICollectionViewDa
             selectedBaseArray.remove(at: number)
             buttonLabelCountUpdate(button: nextButton)
         }
-        if !selectedBaseArray.isEmpty {
+        let number = filteredRecipe.filter {
+            selectedBaseArray.contains($0.base)
+        }.count
+        
+        if number != 0 {
             nextButton.backgroundColor = UIColor(named: "mainOrangeColor")
         } else {
             nextButton.backgroundColor = .white

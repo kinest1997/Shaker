@@ -15,6 +15,23 @@ import AuthenticationServices
 
 class TodayCocktailCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    enum Today: Int, CaseIterable {
+        case firstSection
+        case secondSection
+        case thirdSection
+        
+        var titleText: String {
+            switch self {
+            case .firstSection:
+                return "초보자 추천 가이드북"
+            case .secondSection:
+                return "주문 도와드릴까요?"
+            case .thirdSection:
+                return "내 즐겨찾기"
+            }
+        }
+    }
+    
     let uid = Auth.auth().currentUser?.uid
     
     let ref = Database.database().reference()
@@ -45,11 +62,12 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     var dataReciped: [Bool] = []
     
-    let sectionName = ["초보자 추천 가이드북", "주문 도와드릴까요?",  "내 즐겨찾기"]
+    let sectionName = ["초보자 추천 가이드북",  "내 즐겨찾기", "주문 도와드릴까요?"]
+    let explainText = ["" , "시작하기 어려우신가요? 제가 레시피를 추천해드릴게요", "찜한 칵테일, 잊지 말고 다시 보아요" ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "SHAKER"
+        self.title = "SHAKER".localized
         view.addSubview(collectionView)
         view.addSubview(loadingView)
         navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
@@ -133,9 +151,9 @@ extension TodayCocktailCollectionViewController {
             case 0:
                 return self.createYoutubeSection()
             case 1:
-                return self.createOrderAssistSection()
-            case 2:
                 return self.createWishListSection()
+            case 2:
+                return self.createOrderAssistSection()
             default:
                 return nil
             }
@@ -218,6 +236,7 @@ extension TodayCocktailCollectionViewController {
         if kind == UICollectionView.elementKindSectionHeader {
             if indexPath.section != 0 {
                 guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
+                headerview.explainLabel.text = explainText[indexPath.section]
                 headerview.sectionTextLabel.text = sectionName[indexPath.section]
                 return headerview
             } else {
@@ -241,9 +260,9 @@ extension TodayCocktailCollectionViewController {
         case 0:
             return youtubeData.count
         case 1:
-            return 1
-        case 2:
             return wishListData.count
+        case 2:
+            return 1
         default:
             return 0
         }
@@ -253,16 +272,16 @@ extension TodayCocktailCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCocktailCollectionViewCell", for: indexPath) as? TodayCocktailCollectionViewCell else { return UICollectionViewCell() }
-
+        
         switch indexPath.section {
         case 0:
             cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
             return cell
         case 1:
-            cell.mainImageView.image = UIImage(named: "orderImage")
+            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
             return cell
         case 2:
-            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
+            cell.mainImageView.image = UIImage(named: "orderImage")
             return cell
         default:
             return UICollectionViewCell()
@@ -274,14 +293,14 @@ extension TodayCocktailCollectionViewController {
         case 0:
             goToYoutube(videoCode: youtubeData[indexPath.row].videoCode)
         case 1:
-            let colorChoiceViewController = ColorChoiceViewController()
-            colorChoiceViewController.myFavor = false
-            self.navigationController?.show(colorChoiceViewController, sender: nil)
             self.navigationController?.navigationBar.isHidden = false
-        case 2:
             let cocktailDetailViewController = CocktailDetailViewController()
             cocktailDetailViewController.setData(data: wishListData[indexPath.row])
             self.navigationController?.show(cocktailDetailViewController, sender: nil)
+        case 2:
+            let colorChoiceViewController = ColorChoiceViewController()
+            colorChoiceViewController.myFavor = false
+            self.navigationController?.show(colorChoiceViewController, sender: nil)
         default:
             return
         }

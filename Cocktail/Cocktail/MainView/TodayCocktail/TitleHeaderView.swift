@@ -33,7 +33,7 @@ class TitleHeaderView: UICollectionReusableView {
             $0.height.equalTo(45)
         }
         titleLabel.text = "SHAKER"
-        titleLabel.font = .systemFont(ofSize: 40, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: 40, weight: .semibold)
         titleLabel.textColor = .black
         
         sectionTextLabel.font = .systemFont(ofSize: 20, weight: .semibold)

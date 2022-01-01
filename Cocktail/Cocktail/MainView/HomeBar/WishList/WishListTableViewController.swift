@@ -6,7 +6,7 @@ class WishListCocktailListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .white
         tableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
     }
     

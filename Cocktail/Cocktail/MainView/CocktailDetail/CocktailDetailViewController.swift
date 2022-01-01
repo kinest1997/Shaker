@@ -153,10 +153,8 @@ class CocktailDetailViewController: UIViewController {
         [lowAlcoholLabel, midAlcoholLabel, highAlcoholLabel].forEach {
             alcoholStackView.addArrangedSubview($0)
             $0.snp.makeConstraints {
-                $0.width.equalTo(20)
                 $0.height.equalTo(lowAlcoholLabel.snp.width)
             }
-            
         }
         
         //위에서부터 아래로 쭉 순서대로 찾으면 됨
@@ -168,9 +166,9 @@ class CocktailDetailViewController: UIViewController {
         
         cocktailImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalTo(wishListButton.snp.bottom).offset(20)
-            $0.width.equalTo(cocktailImageView.snp.height)
-            $0.height.equalTo(300)
+            $0.top.equalTo(wishListButton.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(cocktailImageView.snp.width)
         }
         
         imageSplitLine.snp.makeConstraints {
@@ -195,7 +193,6 @@ class CocktailDetailViewController: UIViewController {
         likeCountLabel.snp.makeConstraints {
             $0.leading.trailing.equalTo(likeButton)
             $0.top.equalTo(likeButton.snp.bottom)
-            
         }
         
         disLikeButton.snp.makeConstraints {
@@ -207,7 +204,6 @@ class CocktailDetailViewController: UIViewController {
         disLikeCountLabel.snp.makeConstraints {
             $0.leading.trailing.equalTo(disLikeButton)
             $0.top.equalTo(disLikeButton.snp.bottom)
-            
         }
         
         alcoholSplitLine.snp.makeConstraints {
@@ -217,7 +213,6 @@ class CocktailDetailViewController: UIViewController {
         }
         
         alcoholStackView.snp.makeConstraints {
-
             $0.width.equalToSuperview().multipliedBy(0.3)
             $0.centerX.equalToSuperview()
             $0.top.equalTo(alcoholSplitLine.snp.bottom).offset(20)
@@ -292,8 +287,7 @@ class CocktailDetailViewController: UIViewController {
         }
         
         mainScrollView.snp.makeConstraints {
-            $0.bottom.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.top.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
         
         mainView.snp.makeConstraints {
@@ -306,8 +300,6 @@ class CocktailDetailViewController: UIViewController {
     func attribute() {
         view.backgroundColor = .white
         mainView.backgroundColor = .white
-        
-        
         
         //구분선의 색상 설정
         [centerLine, firstSplitLine, secondSplitLine, imageSplitLine, alcoholSplitLine].forEach {
@@ -471,8 +463,6 @@ class CocktailDetailViewController: UIViewController {
             midAlcoholLabel.tintColor = UIColor(named: "shaker")
         case .low:
             lowAlcoholLabel.tintColor = UIColor(named: "shaker")
-        case .extreme:
-            break
         }
         
         var justRecipe = data

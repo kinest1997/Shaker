@@ -7,9 +7,8 @@ class FilteredView: UIView {
     
     let mainView = UIView()
     let mainTableView = UITableView()
-    let topStackView = UIStackView()
     let resetButton = UIButton()
-    let clearAllButton = UIButton()
+    let cancleButton = UIButton()
     let centerLabel = UILabel()
     let saveButton = UIButton()
     
@@ -24,7 +23,9 @@ class FilteredView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        saveButton.setTitle("Save".localized, for: .normal)
+        resetButton.setTitle("Reset".localized, for: .normal)
+        self.backgroundColor = .gray.withAlphaComponent(0.5)
         self.conditionsOfCocktail = [
             (condition: [Cocktail.Alcohol](), section: Cocktail.Alcohol.allCases),
             (condition: [Cocktail.Base](), section: Cocktail.Base.allCases),
@@ -38,18 +39,30 @@ class FilteredView: UIView {
             $0.map { _ in false }
         }
         self.addSubview(mainView)
-        self.addSubview(topStackView)
-        mainView.addSubview(mainTableView)
-        mainView.addSubview(topStackView)
-        mainView.addSubview(saveButton)
-        topStackView.addArrangedSubview(resetButton)
-        topStackView.addArrangedSubview(centerLabel)
-        topStackView.addArrangedSubview(clearAllButton)
-        topStackView.backgroundColor = .red
-        mainView.backgroundColor = .blue
+        [mainTableView, saveButton, cancleButton, resetButton].forEach {
+            mainView.addSubview($0)
+        }
+        mainView.backgroundColor = .white
+        mainView.cornerRadius = 10
+        mainView.clipsToBounds = true
+        
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.register(FilterViewCell.self, forCellReuseIdentifier: "filterCell")
+        
+        cancleButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        cancleButton.tintColor = .black
+        
+        [resetButton, saveButton].forEach {
+            $0.setTitleColor(.black, for: .normal)
+            $0.titleLabel!.font = .systemFont(ofSize: 18, weight: .semibold)
+            $0.setTitleColor(UIColor(named: "miniButtonGray"), for: .normal)
+        }
+        
+        saveButton.backgroundColor = UIColor(named: "mainOrangeColor")
+        saveButton.cornerRadius = 15
+        saveButton.clipsToBounds = true
+        
         self.mainTableView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(50)
             $0.bottom.equalToSuperview().inset(100)
@@ -57,16 +70,30 @@ class FilteredView: UIView {
         }
         self.mainView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.equalTo(300)
-            $0.height.equalTo(600)
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.height.equalToSuperview().multipliedBy(0.7)
         }
         self.saveButton.snp.makeConstraints {
-            $0.top.equalTo(mainTableView.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.height.equalTo(50)
+            $0.width.equalToSuperview().multipliedBy(0.3)
         }
-        self.topStackView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+        
+        self.resetButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.height.equalTo(50)
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.width.equalToSuperview().multipliedBy(0.3)
+        }
+        
+        saveButton.setTitle("저장", for: .normal)
+        resetButton.setTitle("리셋", for: .normal)
+        
+        cancleButton.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
             $0.bottom.equalTo(mainTableView.snp.top)
+            $0.width.equalTo(cancleButton.snp.height)
         }
     }
     

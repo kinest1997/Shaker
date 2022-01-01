@@ -27,7 +27,7 @@ class MyDrinksViewController: UIViewController {
     let beverageButton = BadgeButton()
     let assetsButton = BadgeButton()
     
-    let whatICanMakeButton = UIButton()
+    let whatICanMakeButton = MainButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,10 +66,9 @@ class MyDrinksViewController: UIViewController {
             $0.height.equalTo(groupStackView.snp.width)
         }
         whatICanMakeButton.snp.makeConstraints {
-            $0.top.equalTo(groupStackView.snp.bottom).offset(40)
-            $0.width.equalToSuperview().multipliedBy(0.7)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(70)
+            
         }
     }
     
@@ -80,8 +79,8 @@ class MyDrinksViewController: UIViewController {
         view.addSubview(topNameLabel)
         view.addSubview(topExplainLabel)
         
-//        topExplainLabel.sizeToFit()
-//        topNameLabel.sizeToFit()
+        //        topExplainLabel.sizeToFit()
+        //        topNameLabel.sizeToFit()
         [leftStackView, midStackView, rightStackView].forEach {
             groupStackView.addArrangedSubview($0)
             $0.axis = .vertical
@@ -91,22 +90,30 @@ class MyDrinksViewController: UIViewController {
         
         [vodkaButton, ginButton, liqueurButton].forEach {
             leftStackView.addArrangedSubview($0)
-            $0.setImage(UIImage(named: "Martini"), for: .normal)
         }
         [tequilaButton, whiskeyButton, beverageButton].forEach {
             midStackView.addArrangedSubview($0)
-            $0.setImage(UIImage(named: "Martini"), for: .normal)
         }
         [brandyButton, rumButton, assetsButton].forEach {
             rightStackView.addArrangedSubview($0)
-            $0.setImage(UIImage(named: "Martini"), for: .normal)
         }
+        
+        vodkaButton.setImage(UIImage(named: "vodka"), for: .normal)
+        ginButton.setImage(UIImage(named: "gin"), for: .normal)
+        liqueurButton.setImage(UIImage(named: "liqueur"), for: .normal)
+        tequilaButton.setImage(UIImage(named: "tequila"), for: .normal)
+        whiskeyButton.setImage(UIImage(named: "whiskey"), for: .normal)
+        
+        beverageButton.setImage(UIImage(named: "coke"), for: .normal)
+        brandyButton.setImage(UIImage(named: "brandy"), for: .normal)
+        rumButton.setImage(UIImage(named: "rum"), for: .normal)
+        assetsButton.setImage(UIImage(named: "sugarSyrup"), for: .normal)
         
         topNameLabel.textColor = .black
         topExplainLabel.textColor = .black
         topNameLabel.text = "내 술장"
-        topNameLabel.font = .systemFont(ofSize: 24, weight: .bold)
-        topExplainLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        topNameLabel.font = .systemFont(ofSize: 30, weight: .bold)
+        topExplainLabel.font = .systemFont(ofSize: 15, weight: .semibold)
         topExplainLabel.text = "내가 가지고 있는 재료로 만들 수 있는 레시피를 알아봐요!"
         groupStackView.axis = .horizontal
         groupStackView.distribution = .fillEqually
@@ -123,11 +130,6 @@ class MyDrinksViewController: UIViewController {
         [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
             setButtonAction(buttonName: $0)
         }
-        whatICanMakeButton.layer.cornerRadius = 15
-        whatICanMakeButton.clipsToBounds = true
-        whatICanMakeButton.backgroundColor = .brown
-        whatICanMakeButton.titleLabel?.font = .systemFont(ofSize: 24, weight: .bold)
-        whatICanMakeButton.setTitleColor(.black, for: .normal)
         whatICanMakeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             let whatICanMakeViewController = CocktailListViewController()
@@ -154,7 +156,15 @@ class MyDrinksViewController: UIViewController {
     }
     
     func updateWhatICanMakeButton(data: Set<String>, button: UIButton) {
-        button.setTitle("\(checkWhatICanMake(myIngredients: data).count)" + " " + "EA".localized + " " + "making".localized, for: .normal)
+        let sortedData = checkWhatICanMake(myIngredients: data)
+
+        if sortedData.count != 0 {
+             button.backgroundColor = UIColor(named: "mainOrangeColor")
+            button.setTitle("\(sortedData.count)" + " " + "EA".localized + " " + "making".localized, for: .normal)
+        } else {
+            button.backgroundColor = .white
+            button.setTitle("재료를 더 선택해주세요!", for: .normal)
+        }
     }
     
     func checkWhatICanMake(myIngredients: Set<String>) -> [Cocktail] {

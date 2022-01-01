@@ -12,6 +12,8 @@ import SnapKit
 class BaseChoiceCollectionViewCell: UICollectionViewCell {
     
     let mainImageView = UIImageView()
+    
+    let mainView = UIView()
     let mainLabel = UILabel()
     
     var isChecked = false
@@ -19,7 +21,8 @@ class BaseChoiceCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.addSubview(mainImageView)
-        contentView.addSubview(mainLabel)
+        contentView.addSubview(mainView)
+        mainView.addSubview(mainLabel)
         
         [mainLabel, contentView].forEach {
             $0.backgroundColor = isChecked ? UIColor(named: "mainOrangeColor") : .white
@@ -32,34 +35,25 @@ class BaseChoiceCollectionViewCell: UICollectionViewCell {
             $0.edges.equalToSuperview()
         }
         
-        mainLabel.snp.makeConstraints {
+        mainView.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(10)
             $0.bottom.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.4)
         }
+        mainLabel.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        mainLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        mainLabel.textAlignment = .center
+        mainLabel.textColor = .black
         
-        mainLabel.layer.cornerRadius = 20
+        mainView.layer.shadowColor = UIColor.black.cgColor
+        mainView.layer.shadowRadius = 5
+        mainView.layer.shadowOpacity = 0.4
+        mainView.layer.shadowOffset = CGSize(width: 0, height: 1)
         
-        mainLabel.layer.borderWidth = 2
-        mainLabel.layer.borderColor = UIColor.red.cgColor
-        mainLabel.layer.shadowOpacity = 1
-        mainLabel.layer.shadowColor = UIColor.black.cgColor
-        mainLabel.layer.shadowOffset = CGSize(width: 0, height: 0)
-        mainLabel.layer.shadowRadius = 10
-
-        mainLabel.layer.masksToBounds = false
-        
-//        mainLabel.layer.cornerRadius = 15
-//        mainLabel.backgroundColor = .white
+        mainLabel.layer.cornerRadius = 15
         mainLabel.clipsToBounds = true
-////        mainLabel.setTitleColor(.black, for: .normal)
-//        mainLabel.font = .systemFont(ofSize: 18, weight: .bold)
-//        mainLabel.layer.shadowColor = UIColor.black.cgColor
-//        mainLabel.layer.masksToBounds = false
-//        mainLabel.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        mainLabel.layer.shadowRadius = 5
-//        mainLabel.layer.shadowOpacity = 0.4
-        
     }
     
     func setData(text: String, image: UIImage) {

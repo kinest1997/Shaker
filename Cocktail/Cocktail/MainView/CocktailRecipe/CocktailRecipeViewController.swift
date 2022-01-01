@@ -11,7 +11,7 @@ class CocktailRecipeViewController: UIViewController {
     
     let loadingView = LoadingView()
     
-    lazy var filterView = FilteredView()
+    let filterView = FilteredView()
     
     var likeData: [String:[String: Bool]]?
     
@@ -86,17 +86,18 @@ class CocktailRecipeViewController: UIViewController {
         }
         
         filterView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(10)
-            $0.top.bottom.equalToSuperview().inset(100)
+            $0.edges.equalToSuperview()
         }
     }
     
     func attribute() {
         filterView.isHidden = true
-        filterView.saveButton.setTitle("Save".localized, for: .normal)
-        filterView.resetButton.setTitle("Reset".localized, for: .normal)
         mainTableView.backgroundColor = .white
         //저장 버튼의 액션
+        filterView.cancleButton.addAction(UIAction(handler: {[weak self] _ in
+            self?.filterView.isHidden = true
+        }), for: .touchUpInside)
+        
         filterView.saveButton.addAction(UIAction(handler: {[unowned self] _ in
             self.filterView.isHidden = true
             let filteredViewRecipe = filterView.sortingRecipes(

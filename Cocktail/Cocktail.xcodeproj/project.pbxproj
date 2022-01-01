@@ -43,6 +43,10 @@
 		3DA0552A277F0F9100966C90 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA05529277F0F9100966C90 /* UIFont.swift */; };
 		3DA0552C277F347600966C90 /* BaseChoiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA0552B277F347600966C90 /* BaseChoiceCollectionViewCell.swift */; };
 		3DA05530277F5FAD00966C90 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA0552F277F5FAD00966C90 /* UIView.swift */; };
+		3DA05532278080C100966C90 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA05531278080C000966C90 /* UIColor.swift */; };
+		3DA055342780A31500966C90 /* AssistantCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA055332780A31400966C90 /* AssistantCollectionView.swift */; };
+		3DA055362780A32B00966C90 /* AssitantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA055352780A32B00966C90 /* AssitantCollectionViewCell.swift */; };
+		3DA055382780A35C00966C90 /* AssistantCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA055372780A35C00966C90 /* AssistantCollectionViewHeader.swift */; };
 		3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A302730D1CD004091CE /* AppDelegate.swift */; };
 		3DA76A332730D1CD004091CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A322730D1CD004091CE /* SceneDelegate.swift */; };
 		3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A392730D1D0004091CE /* Assets.xcassets */; };
@@ -142,6 +146,10 @@
 		3DA05529277F0F9100966C90 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		3DA0552B277F347600966C90 /* BaseChoiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChoiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DA0552F277F5FAD00966C90 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		3DA05531278080C000966C90 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		3DA055332780A31400966C90 /* AssistantCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantCollectionView.swift; sourceTree = "<group>"; };
+		3DA055352780A32B00966C90 /* AssitantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssitantCollectionViewCell.swift; sourceTree = "<group>"; };
+		3DA055372780A35C00966C90 /* AssistantCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3DA76A2D2730D1CD004091CE /* Cocktail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cocktail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DA76A302730D1CD004091CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DA76A322730D1CD004091CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -360,6 +368,9 @@
 			isa = PBXGroup;
 			children = (
 				3DE3221C274B98ED00657211 /* AssistantViewController.swift */,
+				3DA055332780A31400966C90 /* AssistantCollectionView.swift */,
+				3DA055352780A32B00966C90 /* AssitantCollectionViewCell.swift */,
+				3DA055372780A35C00966C90 /* AssistantCollectionViewHeader.swift */,
 			);
 			path = Assitant;
 			sourceTree = "<group>";
@@ -484,6 +495,7 @@
 				3D7DE4812774D5A6008FF202 /* MainButton.swift */,
 				3DA0552F277F5FAD00966C90 /* UIView.swift */,
 				3DA05529277F0F9100966C90 /* UIFont.swift */,
+				3DA05531278080C000966C90 /* UIColor.swift */,
 			);
 			path = "Global Components";
 			sourceTree = "<group>";
@@ -703,6 +715,8 @@
 				3D6C6D412732AB5200C70276 /* CocktailListViewController.swift in Sources */,
 				3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */,
 				3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */,
+				3DA05532278080C100966C90 /* UIColor.swift in Sources */,
+				3DA055382780A35C00966C90 /* AssistantCollectionViewHeader.swift in Sources */,
 				7D4AF9082760D5840093C3C2 /* UIViewController.swift in Sources */,
 				3DA05530277F5FAD00966C90 /* UIView.swift in Sources */,
 				3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift in Sources */,
@@ -720,10 +734,12 @@
 				3D69BF75275B7B57008502EE /* SettingTableViewController.swift in Sources */,
 				3DB910F3275759E90076CB50 /* Singleton.swift in Sources */,
 				3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */,
+				3DA055362780A32B00966C90 /* AssitantCollectionViewCell.swift in Sources */,
 				3D175BA6274285BB00EC142B /* String.swift in Sources */,
 				3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */,
 				3D6E0EB1276F472200A7B855 /* CocktailListCollectionViewCell.swift in Sources */,
 				3D6E0EB4276F623000A7B855 /* LoginViewModel.swift in Sources */,
+				3DA055342780A31500966C90 /* AssistantCollectionView.swift in Sources */,
 				3D6E0EA7276EDF5B00A7B855 /* MainViewController.swift in Sources */,
 				3D7785982753468D008F0151 /* WishListTableViewController.swift in Sources */,
 				3DF79349275A6AC8004E9F98 /* AddRecipeCell.swift in Sources */,

@@ -105,14 +105,11 @@ struct Cocktail: Codable, Hashable {
     }
     
     enum Alcohol: String, Codable, CaseIterable, CocktailCondition {
-        case extreme
         case high
         case mid
         case low
         var rank: Int {
             switch self {
-            case .extreme:
-                return 4
             case .high:
                 return 3
             case .mid:
