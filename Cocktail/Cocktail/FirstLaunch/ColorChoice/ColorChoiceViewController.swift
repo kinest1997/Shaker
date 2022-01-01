@@ -26,9 +26,9 @@ class ColorChoiceViewController: UIViewController {
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
         mainCollectionView.register(ColorCollectionViewCell.self, forCellWithReuseIdentifier: "colorCell")
+        mainCollectionView.isScrollEnabled = false
         layout()
         attribute()
-        mainCollectionView.isScrollEnabled = false
         if myFavor {
             self.tabBarController?.tabBar.isHidden = true
         } else {
@@ -48,7 +48,7 @@ class ColorChoiceViewController: UIViewController {
         }
         
         mainCollectionView.snp.makeConstraints {
-            $0.top.equalTo(questionLabel.snp.bottom).offset(20)
+            $0.top.equalTo(questionLabel.snp.bottom).offset(80)
             $0.leading.trailing.equalToSuperview().inset(30)
             $0.height.equalTo(400)
         }

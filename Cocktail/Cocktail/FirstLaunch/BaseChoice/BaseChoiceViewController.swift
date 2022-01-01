@@ -15,19 +15,11 @@ class BaseChoiceViewController: UIViewController {
     
     var selectedBase: Cocktail.Base?
     
-    let mainBigStackView = UIStackView()
-    let leftStackView = UIStackView()
-    let middleStackView = UIStackView()
-    let rightStackView = UIStackView()
+    var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    let ginButton = UIButton()
-    let tequilaButton = UIButton()
-    let rumButton = UIButton()
-    let vodkaButton = UIButton()
-    let brandyButton = UIButton()
-    let whiskeyButton = UIButton()
-    let liqueorButton = UIButton()
-    let anyThingButton = UIButton()
+    var selectedBaseArray = [Cocktail.Base]()
+    var isCheckedArray = [Bool]()
+    let baseArray: [Cocktail.Base] = [.rum, .vodka, .tequila, .brandy, .whiskey, .gin, .liqueur]
     
     let nextButton = MainButton()
     
@@ -35,101 +27,54 @@ class BaseChoiceViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isCheckedArray = baseArray.map { _ in false}
+        mainCollectionView.delegate = self
+        mainCollectionView.dataSource = self
+        mainCollectionView.register(BaseChoiceCollectionViewCell.self, forCellWithReuseIdentifier: "BaseChoiceCollectionViewCell")
+        mainCollectionView.isScrollEnabled = false
+        
         attribute()
         layout()
     }
     
-    func layout() {        
-        [mainBigStackView, nextButton, questionLabel].forEach {
-            view.addSubview($0)
-        }
-        mainBigStackView.axis = .vertical
-        mainBigStackView.distribution = .fillEqually
-        mainBigStackView.spacing = 20
-        [leftStackView, middleStackView, rightStackView].forEach {
-            mainBigStackView.addArrangedSubview($0)
-            $0.distribution = .fillEqually
-            $0.spacing = 20
-            $0.axis = .horizontal
+    func layout() {
+        view.addSubview(questionLabel)
+        view.addSubview(mainCollectionView)
+        view.addSubview(nextButton)
+        
+        questionLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(100)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(55)
         }
         
-        [ginButton, tequilaButton, whiskeyButton].forEach {
-            leftStackView.addArrangedSubview($0)
-        }
-        
-        [rumButton, vodkaButton, brandyButton].forEach {
-            middleStackView.addArrangedSubview($0)
-        }
-        
-        [liqueorButton, anyThingButton].forEach {
-            rightStackView.addArrangedSubview($0)
-        }
-        
-        mainBigStackView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.height.equalToSuperview().multipliedBy(0.3)
-            $0.width.equalToSuperview().multipliedBy(0.8)
+        mainCollectionView.snp.makeConstraints {
+            $0.top.equalTo(questionLabel.snp.bottom).offset(80)
+            $0.leading.trailing.equalToSuperview().inset(30)
+            $0.height.equalTo(400)
         }
         
         nextButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
             $0.centerX.equalToSuperview()
         }
-        
-        questionLabel.snp.makeConstraints {
-            $0.width.height.equalTo(nextButton)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalTo(mainBigStackView.snp.top).offset(-50)
-        }
     }
     
     func attribute() {
-        [ginButton, tequilaButton, rumButton, vodkaButton, brandyButton, whiskeyButton, liqueorButton, anyThingButton].forEach {
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.black.cgColor
-            $0.layer.cornerRadius = 15
-            $0.setTitleColor(.black, for: .normal)
-        }
+        questionLabel.text = "선호하는 색은 무엇인가요?"
         view.backgroundColor = .white
-        nextButton.setTitle("다음", for: .normal)
-        ginButton.setTitle("gin".localized, for: .normal)
-        tequilaButton.setTitle("tequila".localized, for: .normal)
-        rumButton.setTitle("rum".localized, for: .normal)
-        vodkaButton.setTitle("vodka".localized, for: .normal)
-        brandyButton.setTitle("brandy".localized, for: .normal)
-        whiskeyButton.setTitle("whiskey".localized, for: .normal)
-        liqueorButton.setTitle("liqueur".localized, for: .normal)
-        anyThingButton.setTitle("다볼래", for: .normal)
-        questionLabel.text = "기주를 선택하세요"
-        questionLabel.layer.borderWidth = 1
-        questionLabel.layer.borderColor = UIColor.black.cgColor
-        questionLabel.layer.cornerRadius = 15
-        questionLabel.textColor = .black
+        mainCollectionView.backgroundColor = .white
         questionLabel.textAlignment = .center
+        questionLabel.textColor = UIColor(named: "miniButtonGray")
+        questionLabel.font = .systemFont(ofSize: 20, weight: .bold)
         
-        ginButton.addAction(setAction(base: .gin, button: ginButton), for: .touchUpInside)
-        tequilaButton.addAction(setAction(base: .tequila, button: tequilaButton), for: .touchUpInside)
-        rumButton.addAction(setAction(base: .rum, button: rumButton), for: .touchUpInside)
-        vodkaButton.addAction(setAction(base: .vodka, button: vodkaButton), for: .touchUpInside)
-        brandyButton.addAction(setAction(base: .brandy, button: brandyButton), for: .touchUpInside)
-        whiskeyButton.addAction(setAction(base: .whiskey, button: whiskeyButton), for: .touchUpInside)
-        liqueorButton.addAction(setAction(base: .liqueur, button: liqueorButton), for: .touchUpInside)
-        anyThingButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            let number = self.filteredRecipe.count
-            self.selectedBase = .assets
-            self.nextButton.setTitle("\(number)개의 칵테일 발견", for: .normal)
-            self.setImage(button: self.anyThingButton)
-        }), for: .touchUpInside)
+        nextButton.setTitle("다음", for: .normal)
         
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             var lastRecipe: [Cocktail] {
-                if self.selectedBase == .assets {
-                    return self.filteredRecipe
-                } else {
-                    return self.filteredRecipe.filter { $0.base == self.selectedBase }
-                }
+                return self.filteredRecipe.filter {
+                    self.selectedBaseArray.contains($0.base)}
             }
             
             if lastRecipe.isEmpty {
@@ -140,29 +85,53 @@ class BaseChoiceViewController: UIViewController {
                 self.show(cocktailListViewController, sender: nil)
             }
         }), for: .touchUpInside)
+        
     }
     
     func buttonLabelCountUpdate(button: UIButton) {
-        let number = filteredRecipe.filter { $0.base == selectedBase }.count
+        let number = filteredRecipe.filter {
+            selectedBaseArray.contains($0.base)
+        }.count
         button.setTitle("\(number)개의 칵테일 발견", for: .normal)
     }
-    
-    func setAction(base: Cocktail.Base, button: UIButton) -> UIAction {
-        let action = UIAction{[weak self] _ in
-            guard let self = self else { return }
-            self.selectedBase = base
-            self.buttonLabelCountUpdate(button: self.nextButton)
-            self.setImage(button: button)
-        }
-        return action
+}
+
+extension BaseChoiceViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        baseArray.count
     }
     
-    func setImage(button: UIButton) {
-        [ginButton, tequilaButton, rumButton, vodkaButton, brandyButton, whiskeyButton, liqueorButton, anyThingButton].forEach {
-            $0.backgroundColor = .white
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let yourWidth = collectionView.bounds.width/3.5
+        let yourHeight = yourWidth
+        
+        return CGSize(width: yourWidth, height: yourHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BaseChoiceCollectionViewCell", for: indexPath) as? BaseChoiceCollectionViewCell else { return UICollectionViewCell() }
+        cell.setData(text: baseArray[indexPath.row].rawValue.localized, image: UIImage(named: "\(baseArray[indexPath.row].rawValue)") ?? UIImage())
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? BaseChoiceCollectionViewCell else { return }
+        if isCheckedArray[indexPath.row] == false {
+            isCheckedArray[indexPath.row] = true
+            cell.isChecked = isCheckedArray[indexPath.row]
+            selectedBaseArray.append(baseArray[indexPath.row])
+            buttonLabelCountUpdate(button: nextButton)
+        } else {
+            isCheckedArray[indexPath.row] = false
+            cell.isChecked = isCheckedArray[indexPath.row]
+            guard let number = selectedBaseArray.firstIndex(of: baseArray[indexPath.row]) else { return }
+            selectedBaseArray.remove(at: number)
+            buttonLabelCountUpdate(button: nextButton)
         }
-        button.backgroundColor = .brown
-        nextButton.isEnabled = true
-        nextButton.backgroundColor = .brown
+        if !selectedBaseArray.isEmpty {
+            nextButton.backgroundColor = UIColor(named: "mainOrangeColor")
+        } else {
+            nextButton.backgroundColor = .white
+        }
     }
 }
