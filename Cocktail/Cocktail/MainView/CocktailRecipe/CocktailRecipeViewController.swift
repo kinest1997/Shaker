@@ -19,9 +19,9 @@ class CocktailRecipeViewController: UIViewController {
     
     var filtertMenuItems: [UIAction] {
         return [
-            UIAction(title: "Name".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in sorting(standard: .name)}),
-            UIAction(title: "Alcohol".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in sorting(standard: .alcohol)}),
-            UIAction(title: "Ingredients Count".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in sorting(standard: .ingredientsCount)})
+            UIAction(title: "Name".localized, state: .off, handler: {[unowned self] _ in sorting(standard: .name)}),
+            UIAction(title: "Alcohol".localized, state: .off, handler: {[unowned self] _ in sorting(standard: .alcohol)}),
+            UIAction(title: "Ingredients Count".localized, state: .off, handler: {[unowned self] _ in sorting(standard: .ingredientsCount)})
         ]
     }
     

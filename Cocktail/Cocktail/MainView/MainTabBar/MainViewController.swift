@@ -19,7 +19,7 @@ class MainViewController: UITabBarController {
             switch self {
             case .today: return "Recommendation".localized
             case .recipe: return "Recipe".localized
-            case .home: return "My Drinks".localized
+            case .home: return "MyPage".localized
             case .preference: return "Preferneces".localized
             }
         }

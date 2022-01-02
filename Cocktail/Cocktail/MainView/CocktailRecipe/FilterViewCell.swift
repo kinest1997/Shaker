@@ -11,24 +11,28 @@ class FilterViewCell: UITableViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(appliedCheckImgageView)
         
-        appliedCheckImgageView.tintColor = .black
+        appliedCheckImgageView.tintColor = isChecked ? UIColor(named: "shaker") : UIColor(named: "miniButtonGray")
         nameLabel.textAlignment = .left
-        appliedCheckImgageView.image = isChecked ? UIImage(systemName: "checkmark.circle") : UIImage(systemName: "circle")
+        appliedCheckImgageView.image = isChecked ? UIImage(systemName: "chevron.down.square.fill") : UIImage(systemName: "square")
+        
+        
+        nameLabel.font = .systemFont(ofSize: 15)
         nameLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
         }
         appliedCheckImgageView.snp.makeConstraints {
-            $0.height.bottom.equalToSuperview()
+            $0.height.equalToSuperview().multipliedBy(0.6)
+            $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().offset(-20)
             $0.width.equalTo(appliedCheckImgageView.snp.height)
         }
     }
     func imageApply() {
         if isChecked {
-            appliedCheckImgageView.image = UIImage(systemName: "checkmark.circle")
+            appliedCheckImgageView.image = UIImage(systemName: "chevron.down.square.fill")
         } else {
-            appliedCheckImgageView.image = UIImage(systemName: "circle")
+            appliedCheckImgageView.image = UIImage(systemName: "square")
         }
     }
 }

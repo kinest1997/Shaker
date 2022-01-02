@@ -43,7 +43,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     
     @objc func showAddView() {
         addMyOwnCocktailRecipeViewController.choiceView.havePresetData = false
-        addMyOwnCocktailRecipeViewController.myTipTextField.text = "Your own recipe".localized
+        addMyOwnCocktailRecipeViewController.myTipTextView.text = "Your own tip".localized
         addMyOwnCocktailRecipeViewController.textFieldArray.append(UITextField())
         show(addMyOwnCocktailRecipeViewController, sender: nil)
     }

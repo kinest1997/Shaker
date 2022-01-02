@@ -21,13 +21,13 @@ class CocktailListCell: UITableViewCell {
         contentView.backgroundColor = .white
         nameLabel.textColor = .black
         ingredientCountLabel.textColor = .gray
-        disclosureMark.tintColor = .black
+        disclosureMark.tintColor = UIColor(named: "miniButtonGray")
         
         
         [nameLabel, ingredientCountLabel, cocktailImageView, likeCount, disclosureMark].forEach {
             contentView.addSubview($0)
         }
-        cocktailImageView.contentMode = .scaleAspectFit
+        cocktailImageView.contentMode = .scaleAspectFill
         nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
         ingredientCountLabel.font = .systemFont(ofSize: 15, weight: .medium)
         ingredientCountLabel.alpha = 0.7

@@ -62,8 +62,8 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     var dataReciped: [Bool] = []
     
-    let sectionName = ["초보자 추천 가이드북",  "내 즐겨찾기", "주문 도와드릴까요?"]
-    let explainText = ["" , "시작하기 어려우신가요? 제가 레시피를 추천해드릴게요", "찜한 칵테일, 잊지 말고 다시 보아요" ]
+    let sectionName = ["홈텐딩 초보자를 위한 가이드북", "내가 찜한 레시피", "주문 도와드릴까요?"]
+    let explainText = ["" , "찜한 칵테일, 잊지 말고 다시 보아요", "시작하기 어려우신가요? 제가 레시피를 추천해드릴게요"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +72,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         view.addSubview(loadingView)
         navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
         collectionView.backgroundColor = .white
+        collectionView.register(NoneShadowCell.self, forCellWithReuseIdentifier: "NoneShadowCell")
         collectionView.register(TodayCocktailCollectionViewCell.self, forCellWithReuseIdentifier: "TodayCocktailCollectionViewCell")
         collectionView.register(TodayCocktailCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TodayCocktailCollectionViewHeader")
         collectionView.register(TitleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TitleHeaderView")
@@ -205,7 +206,7 @@ extension TodayCocktailCollectionViewController {
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 10, leading: 5, bottom: 10, trailing: 5)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.3))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .fractionalHeight(0.2))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
@@ -271,18 +272,20 @@ extension TodayCocktailCollectionViewController {
     //셀 설정
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCocktailCollectionViewCell", for: indexPath) as? TodayCocktailCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCocktailCollectionViewCell", for: indexPath) as? TodayCocktailCollectionViewCell,
+              let noneShadowCell = collectionView.dequeueReusableCell(withReuseIdentifier: "NoneShadowCell", for: indexPath) as? NoneShadowCell
+        else { return UICollectionViewCell() }
         
         switch indexPath.section {
         case 0:
             cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
             return cell
         case 1:
-            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
+            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), options: nil, completionHandler: nil)
             return cell
         case 2:
-            cell.mainImageView.image = UIImage(named: "orderImage")
-            return cell
+            noneShadowCell.mainImageView.image = UIImage(named: "orderImage")
+            return noneShadowCell
         default:
             return UICollectionViewCell()
         }

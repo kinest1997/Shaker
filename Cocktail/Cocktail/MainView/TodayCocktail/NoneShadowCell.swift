@@ -1,14 +1,14 @@
 //
-//  TodayCocktailCollectionViewCell.swift
+//  NoneShadowCell.swift
 //  Cocktail
 //
-//  Created by 강희성 on 2021/12/05.
+//  Created by 강희성 on 2022/01/02.
 //
 
 import UIKit
 import SnapKit
 
-class TodayCocktailCollectionViewCell: UICollectionViewCell {
+class NoneShadowCell: UICollectionViewCell {
     
     let mainImageView = UIImageView()
     
@@ -25,17 +25,8 @@ class TodayCocktailCollectionViewCell: UICollectionViewCell {
         mainImageView.layer.borderWidth = 0
         mainImageView.layer.cornerRadius = 15
         mainImageView.clipsToBounds = true
-        mainImageView.contentMode = .scaleAspectFill
+        mainImageView.contentMode = .scaleAspectFit
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
-        setShadow()
-    }
-    
-    func setShadow() {
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.masksToBounds = false
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowRadius = 5
-        self.layer.shadowOpacity = 0.4
     }
 }

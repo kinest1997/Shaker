@@ -44,6 +44,11 @@ class MyDrinksViewController: UIViewController {
         updateWhatICanMakeButton(data: myDrink, button: whatICanMakeButton)
         [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
             updateIngredientsBadge(button: $0)
+            $0.layer.cornerRadius = 15
+            $0.backgroundColor = .white
+            $0.clipsToBounds = true
+            $0.layer.borderWidth = 1
+            $0.layer.borderColor = UIColor(named: "splitLineGray")?.cgColor
         }
     }
     
@@ -109,8 +114,8 @@ class MyDrinksViewController: UIViewController {
         rumButton.setImage(UIImage(named: "rum"), for: .normal)
         assetsButton.setImage(UIImage(named: "sugarSyrup"), for: .normal)
         
-        topNameLabel.textColor = .black
-        topExplainLabel.textColor = .black
+        topNameLabel.textColor = UIColor(named: "miniButtonGray")
+        topExplainLabel.textColor = UIColor(named: "miniButtonGray")
         topNameLabel.text = "내 술장"
         topNameLabel.font = .systemFont(ofSize: 30, weight: .bold)
         topExplainLabel.font = .systemFont(ofSize: 15, weight: .semibold)

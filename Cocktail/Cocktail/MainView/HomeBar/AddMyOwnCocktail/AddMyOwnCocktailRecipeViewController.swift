@@ -25,10 +25,10 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     var beforeEditingData: Cocktail?
     
-    let addRecipeTableView = UITableView(frame: .zero, style: .plain)
+    let addRecipeTableView = UITableView(frame: .zero, style: .plain )
     
     let groupStackView = UIStackView()
-    let cocktailImageView = UIImageView(image: UIImage(named: "Martini"))
+    let cocktailImageView = UIImageView()
     
     let nameLabel = UILabel()
     let nameTextField = UITextField()
@@ -38,11 +38,11 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let alcoholStackView = UIStackView()
     var alcoholSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "high".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("high".localized, for: .normal)
+            UIAction(title: "high".localized, state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("high".localized, for: .normal)
                 alcohol = .high }),
-            UIAction(title: "mid".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("mid".localized, for: .normal)
+            UIAction(title: "mid".localized, state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("mid".localized, for: .normal)
                 alcohol = .mid }),
-            UIAction(title: "low".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("low".localized, for: .normal)
+            UIAction(title: "low".localized, state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("low".localized, for: .normal)
                 alcohol = .low })
         ]
     }
@@ -55,25 +55,25 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let colorChoiceButton = UIButton()
     var colorSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "red".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("red".localized, for: .normal)
+            UIAction(title: "red".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("red".localized, for: .normal)
                 color = .red }),
-            UIAction(title: "orange".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("orange".localized, for: .normal)
+            UIAction(title: "orange".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("orange".localized, for: .normal)
                 color = .orange }),
-            UIAction(title: "yellow".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("yellow".localized, for: .normal)
+            UIAction(title: "yellow".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("yellow".localized, for: .normal)
                 color = .yellow }),
-            UIAction(title: "green".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("green".localized, for: .normal)
+            UIAction(title: "green".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("green".localized, for: .normal)
                 color = .green }),
-            UIAction(title: "blue".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("blue".localized, for: .normal)
+            UIAction(title: "blue".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("blue".localized, for: .normal)
                 color = .blue }),
-            UIAction(title: "violet".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("violet".localized, for: .normal)
+            UIAction(title: "violet".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("violet".localized, for: .normal)
                 color = .violet }),
-            UIAction(title: "clear".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("clear".localized, for: .normal)
+            UIAction(title: "clear".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("clear".localized, for: .normal)
                 color = .clear }),
-            UIAction(title: "black".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("black".localized, for: .normal)
+            UIAction(title: "black".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("black".localized, for: .normal)
                 color = .black }),
-            UIAction(title: "brown".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("brown".localized, for: .normal)
+            UIAction(title: "brown".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("brown".localized, for: .normal)
                 color = .brown }),
-            UIAction(title: "various".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("various".localized, for: .normal)
+            UIAction(title: "various".localized, state: .off, handler: {[unowned self] _ in self.colorChoiceButton.setTitle("various".localized, for: .normal)
                 color = .various })
         ]
     }
@@ -86,31 +86,31 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let baseDrinkChoiceButton = UIButton()
     var baseDrinkSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "rum".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "rum".localized, state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("rum".localized, for: .normal)
                 baseDrink = .rum }),
-            UIAction(title: "vodka".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "vodka".localized, state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("vodka".localized, for: .normal)
                 baseDrink = .vodka }),
-            UIAction(title: "tequila".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "tequila".localized, state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("tequila".localized, for: .normal)
                 baseDrink = .tequila }),
-            UIAction(title: "brandy".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "brandy".localized, state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("brandy".localized, for: .normal)
                 baseDrink = .brandy }),
-            UIAction(title: "whiskey".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "whiskey".localized, state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("whiskey".localized, for: .normal)
                 baseDrink = .whiskey }),
-            UIAction(title: "gin".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "gin".localized, state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("gin".localized, for: .normal)
                 baseDrink = .gin }),
-            UIAction(title: "liqueur".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "liqueur".localized, state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("liqueur".localized, for: .normal)
                 baseDrink = .liqueur }),
-            UIAction(title: "assets".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "assets".localized, state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("assets".localized, for: .normal)
                 baseDrink = .assets }),
-            UIAction(title: "beverage".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "beverage".localized, state: .off, handler: {[unowned self] _ in
                 self.baseDrinkChoiceButton.setTitle("beverage".localized, for: .normal)
                 baseDrink = .beverage})
         ]
@@ -124,19 +124,19 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let craftChoiceButton = UIButton()
     var craftSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "build".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "build".localized, state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("build".localized, for: .normal)
                 craft = .build }),
-            UIAction(title: "shaking".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "shaking".localized, state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("shaking".localized, for: .normal)
                 craft = .shaking }),
-            UIAction(title: "floating".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "floating".localized, state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("floating".localized, for: .normal)
                 craft = .floating }),
-            UIAction(title: "stir".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "stir".localized, state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("stir".localized, for: .normal)
                 craft = .stir }),
-            UIAction(title: "blending".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "blending".localized, state: .off, handler: {[unowned self] _ in
                 self.craftChoiceButton.setTitle("blending".localized, for: .normal)
                 craft = .blending })
         ]
@@ -149,28 +149,28 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let glassChoiceButton = UIButton()
     var glassSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "highBall".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "highBall".localized, state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("highBall".localized, for: .normal)
                 glass = .highBall }),
-            UIAction(title: "shot".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "shot".localized, state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("shot".localized, for: .normal)
                 glass = .shot }),
-            UIAction(title: "onTheRock".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "onTheRock".localized, state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("onTheRock".localized, for: .normal)
                 glass = .onTheRock }),
-            UIAction(title: "saucer".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "saucer".localized, state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("saucer".localized, for: .normal)
                 glass = .saucer }),
-            UIAction(title: "martini".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "martini".localized, state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("martini".localized, for: .normal)
                 glass = .martini }),
-            UIAction(title: "collins".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "collins".localized, state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("collins".localized, for: .normal)
                 glass = .collins }),
-            UIAction(title: "margarita".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "margarita".localized, state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("margarita".localized, for: .normal)
                 glass = .margarita }),
-            UIAction(title: "philsner".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "philsner".localized, state: .off, handler: {[unowned self] _ in
                 self.glassChoiceButton.setTitle("philsner".localized, for: .normal)
                 glass = .philsner })
         ]
@@ -183,13 +183,13 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let drinkTypeChoiceButton = UIButton()
     var drinkTypeMenuItems: [UIAction] {
         return [
-            UIAction(title: "longDrink".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "longDrink".localized, state: .off, handler: {[unowned self] _ in
                 self.drinkTypeChoiceButton.setTitle("longDrink".localized, for: .normal)
                 drinkType = .longDrink }),
-            UIAction(title: "shortDrink".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "shortDrink".localized, state: .off, handler: {[unowned self] _ in
                 self.drinkTypeChoiceButton.setTitle("shortDrink".localized, for: .normal)
                 drinkType = .shortDrink }),
-            UIAction(title: "shooter".localized, image: UIImage(systemName: "bolt.fill"),state: .off, handler: {[unowned self] _ in
+            UIAction(title: "shooter".localized, state: .off, handler: {[unowned self] _ in
                 self.drinkTypeChoiceButton.setTitle("shooter".localized, for: .normal)
                 drinkType = .shooter })
         ]
@@ -199,7 +199,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     let myTipLabel = UILabel()
-    let myTipTextField = UITextView()
+    let myTipTextView = UITextView()
     
     let ingredientsLabel = UILabel()
     let ingredientsSelectButton = UIButton()
@@ -208,23 +208,20 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let centerLine = UIView()
     let rightStackView = UIStackView()
     
-    let firstSplitLine = UILabel()
-    let selectedIngredientsLabel = UILabel()
-    
-    let secondSplitLine = UILabel()
-    
     let choiceView = ChoiceIngredientsView()
     
     let headerView = UIView()
     
-    let recipeLabel = UILabel()
-    
     let footerView = UIView()
+    
+    let cameraImage = UIImageView(image: UIImage(systemName: "camera.circle"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTextField.delegate = self
         addRecipeTableView.register(AddRecipeCell.self, forCellReuseIdentifier: "addRecipeCell")
+        addRecipeTableView.register(IngredientsCell.self, forCellReuseIdentifier: "ingredientsCell")
+        addRecipeTableView.register(AddTableViewHeaderView.self, forHeaderFooterViewReuseIdentifier: "AddTableViewHeaderView")
         addRecipeTableView.delegate = self
         addRecipeTableView.dataSource = self
         addRecipeTableView.tableHeaderView = headerView
@@ -243,17 +240,10 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             self?.addRecipeTableView.reloadData()
         }), for: .touchUpInside)
         
-        ingredientsSelectButton.addAction(UIAction(handler: {[weak self] _ in
-            self?.choiceView.isHidden = false
-        }), for: .touchUpInside)
-        
         choiceView.saveButton.addAction(UIAction(handler: {[weak self] _ in
             self?.ingredients = self?.choiceView.myIngredients ?? []
-            self?.ingredientsSelectButton.setTitle("\(self?.ingredients?.count ?? 0)"+"EA".localized+"Selected".localized, for: .normal)
-            if let ingredients = self?.ingredients {
-                self?.selectedIngredientsLabel.text = ingredients.map { $0.rawValue.localized }.joined(separator: ", ")
-            }
             self?.choiceView.isHidden = true
+            self?.addRecipeTableView.reloadData()
         }), for: .touchUpInside)
         
         choiceView.resetButton.addAction(UIAction(handler: {[weak self] _ in
@@ -261,15 +251,14 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             self.choiceView.cellIsChecked = self.choiceView.cellIsChecked.map {
                 $0.map { _ in false}
             }
-            self.selectedIngredientsLabel.text = ""
             self.ingredients = []
             self.choiceView.myIngredients = []
-            self.choiceView.mainTableview.reloadData()
-            self.ingredientsSelectButton.setTitle("Ingredients".localized, for: .normal)
             self.choiceView.isHidden = true
+            self.addRecipeTableView.reloadData()
+            self.choiceView.mainTableView.reloadData()
         }), for: .touchUpInside)
         
-        choiceView.cancelButton.addAction(UIAction(handler: {[weak self] _ in
+        choiceView.cancleButton.addAction(UIAction(handler: {[weak self] _ in
             self?.choiceView.isHidden = true
         }), for: .touchUpInside)
         
@@ -283,8 +272,14 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     func attribute() {
+        nameTextField.backgroundColor = UIColor(named: "splitLineGray")
+        myTipTextView.backgroundColor = UIColor(named: "splitLineGray")
+        myTipTextView.font = .systemFont(ofSize: 14)
+        
+        addRecipeTableView.separatorStyle = .none
         //사진이미지 비율
         cocktailImageView.contentMode = .scaleAspectFill
+        cocktailImageView.cornerRadius = 15
         cocktailImageView.clipsToBounds = true
         alcoholChoiceButton.menu = alcoholSelectMenu
         alcoholChoiceButton.showsMenuAsPrimaryAction = true
@@ -299,28 +294,32 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeChoiceButton.menu = drinkTypeMenu
         drinkTypeChoiceButton.showsMenuAsPrimaryAction = true
         
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 1200)
+
         addRecipeTableView.backgroundColor = .clear
         
         // 기본 라벨들
-        [alcoholLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, drinkTypeLabel, selectedIngredientsLabel, recipeLabel, alcoholLabel].forEach {
-            $0.textColor = .black
-            $0.font = .systemFont(ofSize: 14, weight: .medium)
+        [alcoholLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, drinkTypeLabel, alcoholLabel].forEach {
+            $0.textColor = UIColor(named: "miniButtonGray")
+            $0.font = .systemFont(ofSize: 14, weight: .bold)
+        }
+        
+        [nameTextField, myTipTextView].forEach {
+            $0.cornerRadius = 15
+            $0.clipsToBounds = true
         }
         
         nameTextField.textColor = .black
         nameTextField.font = .systemFont(ofSize: 24, weight: .heavy)
         
-        [alcoholChoiceButton ,colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton].forEach {
-            $0.setTitleColor(.black, for: .normal)
+        [alcoholChoiceButton ,colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton, addButton].forEach {
+            $0.setTitleColor(UIColor(named: "miniButtonGray"), for: .normal)
             $0.contentHorizontalAlignment = .fill
+            $0.titleLabel?.textAlignment = .center
             $0.titleLabel?.font = .systemFont(ofSize: 14)
-            $0.backgroundColor = .systemGray
+            $0.backgroundColor = UIColor(named: "splitLineGray")
             $0.layer.cornerRadius = 15
             $0.clipsToBounds = true
         }
-        alcoholChoiceButton.setTitleColor(.black, for: .normal)
-        alcoholChoiceButton.titleLabel?.font = .systemFont(ofSize: 14)
         
         [leftStackView, rightStackView].forEach {
             $0.axis = .vertical
@@ -332,29 +331,11 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.textAlignment = .right
         }
         
-        ingredientsSelectButton.setTitleColor(.black, for: .normal)
-        
-        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 300)
-        footerView.addSubview(addButton)
-        
-        addButton.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(40)
-        }
-        
         nameTextField.textAlignment = .center
-        recipeLabel.text = "Recipe".localized
-        addButton.setTitleColor(.black, for: .normal)
         
-        selectedIngredientsLabel.sizeToFit()
-        selectedIngredientsLabel.numberOfLines = 0
-        
-        recipeLabel.sizeToFit()
         groupStackView.axis = .horizontal
         groupStackView.spacing = 10
         groupStackView.distribution = .fill
-        firstSplitLine.backgroundColor = .black
-        secondSplitLine.backgroundColor = .black
         centerLine.backgroundColor = .black
         
         choiceView.isHidden = true
@@ -372,7 +353,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeLabel.text = "DrinkType".localized
         ingredientsLabel.text = "Ingredients".localized
         loadingView.isHidden = true
-        
+        cameraImage.tintColor = .black
+        centerLine.backgroundColor = UIColor(named: "splitLineGray")
         addRecipeTableView.backgroundView?.backgroundColor = .white
     }
     
@@ -380,17 +362,16 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         [addRecipeTableView, choiceView, loadingView].forEach {
             view.addSubview($0)
         }
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 850)
+        footerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 200)
+        footerView.addSubview(addButton)
         
         addRecipeTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
-        [cocktailImageView, nameTextField, alcoholStackView, myTipTextField, groupStackView, firstSplitLine, ingredientsLabel, ingredientsSelectButton, selectedIngredientsLabel, secondSplitLine, recipeLabel].forEach {
+        [cocktailImageView, nameTextField, alcoholStackView, myTipTextView, ingredientsLabel, ingredientsSelectButton, cameraImage, centerLine, leftStackView, rightStackView].forEach {
             headerView.addSubview($0)
-        }
-        
-        [leftStackView, centerLine, rightStackView].forEach {
-            groupStackView.addArrangedSubview($0)
         }
         
         [alcoholLabel ,colorLabel, baseDrinkLabel, drinkTypeLabel, glassLabel, craftLabel].forEach {
@@ -404,14 +385,19 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         loadingView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+
         cocktailImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(headerView.snp.width).multipliedBy(0.5)
             $0.height.equalTo(300)
         }
-        
+
+        cameraImage.snp.makeConstraints {
+            $0.trailing.bottom.equalTo(cocktailImageView)
+            $0.width.height.equalTo(30)
+        }
+
         nameTextField.snp.makeConstraints {
             $0.top.equalTo(cocktailImageView.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
@@ -426,66 +412,36 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.height.equalTo(nameTextField)
         }
         
-        myTipTextField.snp.makeConstraints {
+        myTipTextView.snp.makeConstraints {
             $0.top.equalTo(alcoholStackView.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
-            $0.width.equalToSuperview().multipliedBy(0.8)
+            $0.leading.trailing.equalTo(view).inset(30)
             $0.height.equalTo(100)
         }
-        
-        groupStackView.snp.makeConstraints {
-            $0.top.equalTo(myTipTextField.snp.bottom).offset(30)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(view).multipliedBy(0.4)
+
+        leftStackView.snp.makeConstraints {
+            $0.width.equalTo(60)
+            $0.height.equalTo(250)
+            $0.leading.equalToSuperview().offset(50)
+            $0.top.equalTo(myTipTextView.snp.bottom).offset(30)
         }
-        
-        centerLine.snp.makeConstraints {
-            $0.width.equalTo(1)
+
+        rightStackView.snp.makeConstraints {
+            $0.leading.equalTo(leftStackView.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().offset(-30)
+            $0.top.bottom.equalTo(leftStackView)
         }
-        
-        firstSplitLine.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.8)
-            $0.height.equalTo(1)
-            $0.centerX.equalToSuperview()
-            $0.top.equalTo(groupStackView.snp.bottom).offset(50)
-        }
-        
-        ingredientsLabel.snp.makeConstraints {
-            $0.top.equalTo(firstSplitLine.snp.bottom).offset(50)
-            $0.height.equalTo(40)
-            $0.centerX.equalToSuperview()
-        }
-        
-        ingredientsSelectButton.snp.makeConstraints {
-            $0.top.equalTo(ingredientsLabel)
-            $0.height.equalTo(40)
-            $0.leading.equalTo(ingredientsLabel.snp.trailing)
-            $0.trailing.equalToSuperview()
-        }
-        
+
         choiceView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(30)
-            $0.top.bottom.equalToSuperview().inset(100)
+            $0.edges.equalToSuperview()
         }
         
-        selectedIngredientsLabel.snp.makeConstraints {
-            $0.top.equalTo(ingredientsLabel.snp.bottom).offset(50)
-            $0.width.equalTo(firstSplitLine)
+        addButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(5)
             $0.centerX.equalToSuperview()
-        }
-        
-        secondSplitLine.snp.makeConstraints {
-            $0.top.equalTo(selectedIngredientsLabel.snp.bottom).offset(50)
-            $0.width.equalTo(firstSplitLine)
-            $0.height.equalTo(1)
-            $0.centerX.equalToSuperview()
-        }
-        
-        recipeLabel.snp.makeConstraints {
-            $0.top.equalTo(secondSplitLine.snp.bottom).offset(40)
+            $0.width.equalTo(80)
             $0.height.equalTo(40)
-            $0.centerX.equalToSuperview()
         }
+        
         
         if let cocktailData = beforeEditingData {
             alcoholChoiceButton.setTitle(cocktailData.alcohol.rawValue.localized, for: .normal)
@@ -494,10 +450,9 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             glassChoiceButton.setTitle(cocktailData.glass.rawValue.localized, for: .normal)
             craftChoiceButton.setTitle(cocktailData.craft.rawValue.localized, for: .normal)
             drinkTypeChoiceButton.setTitle(cocktailData.drinkType.rawValue.localized, for: .normal)
-            ingredientsSelectButton.setTitle("\(cocktailData.ingredients.count)"+"EA".localized+"Selected".localized, for: .normal)
             self.choiceView.myIngredients = cocktailData.ingredients
         } else {
-            [alcoholChoiceButton, colorChoiceButton, baseDrinkChoiceButton, glassChoiceButton, craftChoiceButton, drinkTypeChoiceButton, ingredientsSelectButton].forEach {
+            [alcoholChoiceButton, colorChoiceButton, baseDrinkChoiceButton, glassChoiceButton, craftChoiceButton, drinkTypeChoiceButton].forEach {
                 $0.setTitle("Choice".localized, for: .normal)
             }
         }
@@ -520,14 +475,14 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     func editing(data: Cocktail) {
         nameTextField.text = data.name
         ingredients = data.ingredients
-        myTipTextField.text = data.mytip
+        myTipTextView.text = data.mytip
         drinkType = data.drinkType
         baseDrink = data.base
         alcohol = data.alcohol
         glass = data.glass
         color = data.color
         craft = data.craft
-        selectedIngredientsLabel.text = data.ingredients.map { $0.rawValue.localized }.joined(separator: ", ")
+        
         for order in data.recipe {
             let textfield = UITextField()
             textfield.text = order
@@ -544,7 +499,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
               let drinkType = drinkType,
               let ingredients = ingredients,
               let image = cocktailImageView.image,
-              let myTip = myTipTextField.text,
+              let myTip = myTipTextView.text,
               let name = nameTextField.text
         else {
             return presentJustAlert(title: "Hold on".localized, message: "선택안한게 있어!")
@@ -642,18 +597,72 @@ extension AddMyOwnCocktailRecipeViewController: PHPickerViewControllerDelegate {
 
 extension AddMyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 70
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "AddTableViewHeaderView") as! AddTableViewHeaderView
+        switch section {
+        case 0:
+            header.isIngredients = true
+            header.titleLabel.text = "필요한 재료"
+            header.showButton.addAction(UIAction(handler: {[weak self] _ in
+                self?.choiceView.isHidden = false
+            }), for: .touchUpInside)
+            return header
+        case 1:
+            header.titleLabel.text = "레시피"
+            header.isIngredients = false
+            return header
+        default:
+            return UIView()
+        }
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return textFieldArray.count
+        switch section {
+        case 0:
+            return ingredients?.count ?? 0
+        case 1:
+            return textFieldArray.count
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? AddRecipeCell else { return UITableViewCell()}
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "addRecipeCell", for: indexPath) as? AddRecipeCell,
+              let normalCell = tableView.dequeueReusableCell(withIdentifier: "ingredientsCell", for: indexPath) as? IngredientsCell else { return UITableViewCell()}
         
-        cell.numberLabel.text = String(indexPath.row + 1)
-        cell.explainTextField = textFieldArray[indexPath.row]
-        cell.explainTextField.delegate = self
-        return cell
+        cell.selectionStyle = .none
+        normalCell.selectionStyle = .none
+        
+        switch indexPath.section {
+        case 0:
+            normalCell.mainLabel.text = ingredients?[indexPath.row].rawValue.localized
+            
+            return normalCell
+        case 1:
+            cell.numberLabel.text = String(indexPath.row + 1)
+            cell.explainTextField = textFieldArray[indexPath.row]
+            cell.explainTextField.delegate = self
+            
+            return cell
+        default:
+            return UITableViewCell()
+        }
+        
+        
     }
 }
 

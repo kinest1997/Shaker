@@ -45,7 +45,7 @@ class BaseChoiceCollectionViewCell: UICollectionViewCell {
         }
         mainLabel.font = .systemFont(ofSize: 18, weight: .bold)
         mainLabel.textAlignment = .center
-        mainLabel.textColor = .black
+        mainLabel.textColor = UIColor(named: "miniButtonGray")
         
         mainView.layer.shadowColor = UIColor.black.cgColor
         mainView.layer.shadowRadius = 5

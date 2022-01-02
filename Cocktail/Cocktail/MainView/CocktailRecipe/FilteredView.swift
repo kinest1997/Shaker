@@ -87,8 +87,8 @@ class FilteredView: UIView {
             $0.width.equalToSuperview().multipliedBy(0.3)
         }
         
-        saveButton.setTitle("저장", for: .normal)
-        resetButton.setTitle("리셋", for: .normal)
+        saveButton.setTitle("Save".localized, for: .normal)
+        resetButton.setTitle("Reset".localized, for: .normal)
         
         cancleButton.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
@@ -196,7 +196,7 @@ extension FilteredView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 45
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

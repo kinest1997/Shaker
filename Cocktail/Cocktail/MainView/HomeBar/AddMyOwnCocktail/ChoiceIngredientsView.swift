@@ -3,9 +3,11 @@ import SnapKit
 
 class ChoiceIngredientsView: UIView {
     
-    let mainTableview = UITableView()
+    let mainView = UIView()
+    
+    let mainTableView = UITableView()
     let saveButton = UIButton()
-    let cancelButton = UIButton()
+    let cancleButton = UIButton()
     let resetButton = UIButton()
     
     var cellIsChecked: [[Bool]] = []
@@ -56,42 +58,64 @@ class ChoiceIngredientsView: UIView {
                 return []
             }
         }
-        self.addSubview(mainTableview)
-        self.addSubview(saveButton)
-        self.addSubview(cancelButton)
-        self.addSubview(resetButton)
-        mainTableview.register(FilterViewCell.self, forCellReuseIdentifier: "Ingredients")
-        mainTableview.delegate = self
-        mainTableview.dataSource = self
-        mainTableview.snp.makeConstraints {
+        
+        self.addSubview(mainView)
+        [mainTableView, saveButton, cancleButton, resetButton].forEach {
+            mainView.addSubview($0)
+        }
+        self.backgroundColor = .gray.withAlphaComponent(0.5)
+        mainTableView.register(FilterViewCell.self, forCellReuseIdentifier: "Ingredients")
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
+        self.mainTableView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(50)
+            $0.bottom.equalToSuperview().inset(100)
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(cancelButton.snp.bottom)
-            $0.bottom.equalTo(saveButton.snp.top)
+        }
+        self.mainView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.height.equalToSuperview().multipliedBy(0.7)
         }
         
-        saveButton.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(30)
+        self.saveButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-20)
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.height.equalTo(50)
+            $0.width.equalToSuperview().multipliedBy(0.3)
         }
         
-        cancelButton.snp.makeConstraints {
-            $0.leading.top.equalToSuperview()
-            $0.height.equalTo(30)
-            $0.width.equalToSuperview().multipliedBy(0.5)
+        cancleButton.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+            $0.bottom.equalTo(mainTableView.snp.top)
+            $0.width.equalTo(cancleButton.snp.height)
         }
         
-        resetButton.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview()
-            $0.height.equalTo(30)
-            $0.width.equalToSuperview().multipliedBy(0.5)
+        self.resetButton.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.height.equalTo(50)
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.width.equalToSuperview().multipliedBy(0.3)
         }
         
-        cancelButton.setTitle("Cancel".localized, for: .normal)
-        cancelButton.backgroundColor = .cyan
+        mainView.backgroundColor = .white
+        mainView.cornerRadius = 10
+        mainView.clipsToBounds = true
+        cancleButton.setImage(UIImage(systemName: "xmark"), for: .normal)
+        cancleButton.tintColor = .black
+        
+        [resetButton, saveButton].forEach {
+            $0.titleLabel!.font = .systemFont(ofSize: 18, weight: .semibold)
+            $0.setTitleColor(UIColor(named: "miniButtonGray"), for: .normal)
+        }
+        
+        saveButton.backgroundColor = UIColor(named: "mainOrangeColor")
+        saveButton.cornerRadius = 15
+        saveButton.clipsToBounds = true
+        
         saveButton.setTitle("Save".localized, for: .normal)
-        saveButton.backgroundColor = .darkGray
+        
         resetButton.setTitle("Reset".localized, for: .normal)
-        resetButton.backgroundColor = .green
     }
     
     required init?(coder: NSCoder) {
@@ -124,7 +148,7 @@ extension ChoiceIngredientsView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 45
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

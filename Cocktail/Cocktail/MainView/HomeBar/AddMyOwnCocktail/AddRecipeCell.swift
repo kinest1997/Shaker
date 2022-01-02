@@ -16,10 +16,17 @@ class AddRecipeCell: UITableViewCell {
             $0.bottom.top.equalToSuperview()
             $0.width.equalTo(30)
         }
-        contentView.backgroundColor = .white
-        numberLabel.textColor = .black
+        contentView.backgroundColor = UIColor(named: "splitLineGray")
+        numberLabel.textColor = UIColor(named: "miniButtonGray")
         numberLabel.textAlignment = .center
-        explainTextField.textColor = .black
+        explainTextField.textColor = UIColor(named: "miniButtonGray")
+        explainTextField.font = .systemFont(ofSize: 14, weight: .medium)
+        
+        
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30))
+        contentView.cornerRadius = 15
+        contentView.clipsToBounds = true
+        
         
         explainTextField.snp.makeConstraints {
             $0.top.bottom.trailing.equalToSuperview()

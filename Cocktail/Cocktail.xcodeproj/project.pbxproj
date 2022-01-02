@@ -44,9 +44,6 @@
 		3DA0552C277F347600966C90 /* BaseChoiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA0552B277F347600966C90 /* BaseChoiceCollectionViewCell.swift */; };
 		3DA05530277F5FAD00966C90 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA0552F277F5FAD00966C90 /* UIView.swift */; };
 		3DA05532278080C100966C90 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA05531278080C000966C90 /* UIColor.swift */; };
-		3DA055342780A31500966C90 /* AssistantCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA055332780A31400966C90 /* AssistantCollectionView.swift */; };
-		3DA055362780A32B00966C90 /* AssitantCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA055352780A32B00966C90 /* AssitantCollectionViewCell.swift */; };
-		3DA055382780A35C00966C90 /* AssistantCollectionViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA055372780A35C00966C90 /* AssistantCollectionViewHeader.swift */; };
 		3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A302730D1CD004091CE /* AppDelegate.swift */; };
 		3DA76A332730D1CD004091CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A322730D1CD004091CE /* SceneDelegate.swift */; };
 		3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A392730D1D0004091CE /* Assets.xcassets */; };
@@ -60,6 +57,10 @@
 		3DB910F3275759E90076CB50 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910F2275759E90076CB50 /* Singleton.swift */; };
 		3DB9110227588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
 		3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
+		3DBD0F4A2781504F001FA460 /* NoneShadowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F492781504F001FA460 /* NoneShadowCell.swift */; };
+		3DBD0F4C27815610001FA460 /* AddTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F4B27815610001FA460 /* AddTableViewHeaderView.swift */; };
+		3DBD0F4E27817219001FA460 /* IngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F4D27817219001FA460 /* IngredientsCell.swift */; };
+		3DBD0F5027818228001FA460 /* AssistantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F4F27818228001FA460 /* AssistantCell.swift */; };
 		3DC6AC502768D68C004E4565 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6AC4F2768D68C004E4565 /* TabBarController.swift */; };
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
 		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
@@ -147,9 +148,6 @@
 		3DA0552B277F347600966C90 /* BaseChoiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChoiceCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DA0552F277F5FAD00966C90 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		3DA05531278080C000966C90 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		3DA055332780A31400966C90 /* AssistantCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantCollectionView.swift; sourceTree = "<group>"; };
-		3DA055352780A32B00966C90 /* AssitantCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssitantCollectionViewCell.swift; sourceTree = "<group>"; };
-		3DA055372780A35C00966C90 /* AssistantCollectionViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantCollectionViewHeader.swift; sourceTree = "<group>"; };
 		3DA76A2D2730D1CD004091CE /* Cocktail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cocktail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DA76A302730D1CD004091CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3DA76A322730D1CD004091CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +164,10 @@
 		3DB9110427588D110076CB50 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DB9110627588D1B0076CB50 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3DB9110727588EFC0076CB50 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3DBD0F492781504F001FA460 /* NoneShadowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoneShadowCell.swift; sourceTree = "<group>"; };
+		3DBD0F4B27815610001FA460 /* AddTableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewHeaderView.swift; sourceTree = "<group>"; };
+		3DBD0F4D27817219001FA460 /* IngredientsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsCell.swift; sourceTree = "<group>"; };
+		3DBD0F4F27818228001FA460 /* AssistantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantCell.swift; sourceTree = "<group>"; };
 		3DC6AC4F2768D68C004E4565 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 				3DE56B30275D08090087D979 /* TodayCocktailCollectionViewHeader.swift */,
 				3DA05521277EF69300966C90 /* TitleHeaderView.swift */,
 				3DE56B2E275CE5FA0087D979 /* TodayCocktailCollectionViewCell.swift */,
+				3DBD0F492781504F001FA460 /* NoneShadowCell.swift */,
 			);
 			path = TodayCocktail;
 			sourceTree = "<group>";
@@ -358,7 +361,9 @@
 			isa = PBXGroup;
 			children = (
 				3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */,
+				3DBD0F4B27815610001FA460 /* AddTableViewHeaderView.swift */,
 				3DF79348275A6AC8004E9F98 /* AddRecipeCell.swift */,
+				3DBD0F4D27817219001FA460 /* IngredientsCell.swift */,
 				3D83715C274CD7C300CA6036 /* ChoiceIngredientsView.swift */,
 			);
 			path = AddMyOwnCocktail;
@@ -368,9 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				3DE3221C274B98ED00657211 /* AssistantViewController.swift */,
-				3DA055332780A31400966C90 /* AssistantCollectionView.swift */,
-				3DA055352780A32B00966C90 /* AssitantCollectionViewCell.swift */,
-				3DA055372780A35C00966C90 /* AssistantCollectionViewHeader.swift */,
+				3DBD0F4F27818228001FA460 /* AssistantCell.swift */,
 			);
 			path = Assitant;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				7D4AF9062760D57B0093C3C2 /* UIApplication.swift in Sources */,
 				3D297A972772F901001B8BD4 /* ColorChoiceViewModel.swift in Sources */,
 				3DA0552A277F0F9100966C90 /* UIFont.swift in Sources */,
+				3DBD0F4C27815610001FA460 /* AddTableViewHeaderView.swift in Sources */,
 				3D74812427366C0E0092BD74 /* WhatIHaveViewController.swift in Sources */,
 				3D7F17C32734D5FF006EDCF9 /* FilteredView.swift in Sources */,
 				3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */,
@@ -716,7 +720,6 @@
 				3DA76A312730D1CD004091CE /* AppDelegate.swift in Sources */,
 				3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */,
 				3DA05532278080C100966C90 /* UIColor.swift in Sources */,
-				3DA055382780A35C00966C90 /* AssistantCollectionViewHeader.swift in Sources */,
 				7D4AF9082760D5840093C3C2 /* UIViewController.swift in Sources */,
 				3DA05530277F5FAD00966C90 /* UIView.swift in Sources */,
 				3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift in Sources */,
@@ -734,16 +737,17 @@
 				3D69BF75275B7B57008502EE /* SettingTableViewController.swift in Sources */,
 				3DB910F3275759E90076CB50 /* Singleton.swift in Sources */,
 				3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */,
-				3DA055362780A32B00966C90 /* AssitantCollectionViewCell.swift in Sources */,
 				3D175BA6274285BB00EC142B /* String.swift in Sources */,
 				3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */,
 				3D6E0EB1276F472200A7B855 /* CocktailListCollectionViewCell.swift in Sources */,
 				3D6E0EB4276F623000A7B855 /* LoginViewModel.swift in Sources */,
-				3DA055342780A31500966C90 /* AssistantCollectionView.swift in Sources */,
+				3DBD0F4A2781504F001FA460 /* NoneShadowCell.swift in Sources */,
+				3DBD0F4E27817219001FA460 /* IngredientsCell.swift in Sources */,
 				3D6E0EA7276EDF5B00A7B855 /* MainViewController.swift in Sources */,
 				3D7785982753468D008F0151 /* WishListTableViewController.swift in Sources */,
 				3DF79349275A6AC8004E9F98 /* AddRecipeCell.swift in Sources */,
 				3DC6AC502768D68C004E4565 /* TabBarController.swift in Sources */,
+				3DBD0F5027818228001FA460 /* AssistantCell.swift in Sources */,
 				3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */,
 				3DB910D6275683B90076CB50 /* AlcoholChoiceViewController.swift in Sources */,
 				3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */,
@@ -815,7 +819,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "heesung.Cocktail.Cocktail-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -845,7 +849,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "heesung.Cocktail.Cocktail-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1001,7 +1005,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1038,7 +1042,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

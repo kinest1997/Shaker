@@ -24,9 +24,8 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
             $0.bottom.equalToSuperview().offset(-40)
         }
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(mainImageView.snp.bottom)
-            $0.leading.bottom.equalToSuperview()
-            $0.trailing.equalToSuperview().inset(30)
+            $0.top.equalTo(mainImageView.snp.bottom).offset(5)
+            $0.centerX.equalTo(mainImageView)
         }
         checkBoxImage.snp.makeConstraints {
             $0.top.trailing.equalToSuperview()

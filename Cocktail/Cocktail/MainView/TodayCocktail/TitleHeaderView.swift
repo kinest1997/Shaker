@@ -34,12 +34,11 @@ class TitleHeaderView: UICollectionReusableView {
         }
         titleLabel.text = "SHAKER"
         titleLabel.font = .systemFont(ofSize: 40, weight: .semibold)
-        titleLabel.textColor = .black
+        titleLabel.textColor = UIColor(named: "miniButtonGray")
         
         sectionTextLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-        
+        sectionTextLabel.textColor = UIColor(named: "miniButtonGray")
         sectionTextLabel.snp.makeConstraints {
-            //                $0.top.equalTo(titleLabel.snp.bottom)
             $0.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
         }

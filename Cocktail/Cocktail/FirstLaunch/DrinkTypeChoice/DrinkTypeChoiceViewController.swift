@@ -123,7 +123,7 @@ class DrinkTypeChoiceViewController: UIViewController {
             $0.layer.cornerRadius = 15
             $0.backgroundColor = .white
             $0.clipsToBounds = true
-            $0.setTitleColor(.black, for: .normal)
+            $0.setTitleColor(UIColor(named: "miniButtonGray"), for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 18, weight: .bold)
             $0.layer.shadowColor = UIColor.black.cgColor
             $0.layer.masksToBounds = false
@@ -147,7 +147,7 @@ class DrinkTypeChoiceViewController: UIViewController {
         questionButton.setBackgroundImage(UIImage(systemName: "questionmark.circle"), for: .normal)
         questionButton.tintColor = .red
         exitbutton.setBackgroundImage(UIImage(systemName: "xmark"), for: .normal)
-        exitbutton.tintColor = .black
+        exitbutton.tintColor = UIColor(named: "miniButtonGray")
         
         exitbutton.addAction(UIAction(handler: {[weak self] _ in
             self?.explainView.isHidden = true

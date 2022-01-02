@@ -28,7 +28,7 @@ class ReadyToLaunchVIewController: UIViewController {
         startTextLabel.font = .systemFont(ofSize: 36, weight: .semibold)
         startTextLabel.textAlignment = .center
         startTextLabel.numberOfLines = 0
-        startTextLabel.textColor = .black
+        startTextLabel.textColor = UIColor(named: "miniButtonGray")
     }
     
     func layout() {

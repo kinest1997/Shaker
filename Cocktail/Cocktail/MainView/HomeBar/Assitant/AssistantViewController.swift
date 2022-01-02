@@ -4,71 +4,67 @@ import FirebaseAuth
 
 class AssistantViewController: UIViewController {
     
-    let myRecipeButton = UIButton()
-    let myBarButton = UIButton()
-    let wishListButton = UIButton()
-    let mainStackView = UIStackView()
-    let mainImageView = UIImageView()
+    enum Assist: Int, CaseIterable {
+        case myDrink
+        case myOwnCocktail
+        case wishList
+        
+        var title: String {
+            switch self {
+            case .myDrink:
+                return "내술장"
+            case .myOwnCocktail:
+                return "나의 레시피"
+            case .wishList:
+                return "내 술장"
+            }
+        }
+        
+        var explain: String {
+            switch self {
+            case .myDrink:
+                return "내가 가지고 있는 재료로 만들수 있는 레시피를 알아봐요"
+            case .myOwnCocktail:
+                return "내가 만든 레시피를 보러가요"
+            case .wishList:
+                return "내가 즐겨찾기에 추가한 레시피를 보러가요"
+            }
+        }
+    }
+    
+    let mainTableView = UITableView()
+    let titleLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
+        mainTableView.register(AssistantCell.self, forCellReuseIdentifier: "AssistantCell")
+        mainTableView.isScrollEnabled = false
+        mainTableView.delegate = self
+        mainTableView.dataSource = self
         attribute()
         layout()
     }
     
     func attribute() {
-        myRecipeButton.addAction(UIAction(handler: {[weak self] _ in
-            if Auth.auth().currentUser?.uid == nil {
-                self?.pleaseLoginAlert()
-            } else {
-                let myOwnCocktailRecipeViewController = MyOwnCocktailRecipeViewController()
-                self?.show(myOwnCocktailRecipeViewController, sender: nil)
-            }
-        }), for: .touchUpInside)
+        mainTableView.separatorStyle = .none
+        titleLabel.text = "마이페이지"
+        titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
         
-        myBarButton.addAction(UIAction(handler: {[weak self] _ in
-            let homeBarViewController = MyDrinksViewController()
-            self?.show(homeBarViewController, sender: nil)
-        }), for: .touchUpInside)
-        wishListButton.addAction(UIAction(handler: {[weak self] _ in
-            if Auth.auth().currentUser?.uid == nil {
-                self?.pleaseLoginAlert()
-            } else {
-                let wishListCocktailListTableView = WishListCocktailListViewController()
-                self?.show(wishListCocktailListTableView, sender: nil)
-            }
-            
-        }), for: .touchUpInside)
-        
-        myRecipeButton.setTitle("My Recipes".localized, for: .normal)
-        myBarButton.setTitle("My Drinks".localized, for: .normal)
-        wishListButton.setTitle("Bookmark".localized, for: .normal)
         view.backgroundColor = .white
-        myRecipeButton.setTitleColor(.black, for: .normal)
-        myBarButton.setTitleColor(.black, for: .normal)
-        wishListButton.setTitleColor(.black, for: .normal)
-        mainImageView.image = UIImage(named: "mybar")
     }
     
     func layout() {
-        view.addSubview(mainStackView)
-        view.addSubview(mainImageView)
-        mainStackView.addArrangedSubview(myRecipeButton)
-        mainStackView.addArrangedSubview(myBarButton)
-        mainStackView.addArrangedSubview(wishListButton)
-        mainStackView.axis = .vertical
-        mainStackView.distribution = .fillEqually
-        mainStackView.spacing = 20
-        mainStackView.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
-            $0.leading.trailing.equalToSuperview().inset(30)
-            $0.top.equalTo(mainImageView.snp.bottom)
+        view.addSubview(mainTableView)
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview().inset(50)
+            $0.height.equalTo(100)
         }
-        mainImageView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview().inset(30)
-            $0.height.equalTo(250)
+        
+        mainTableView.snp.makeConstraints {
+            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
@@ -76,5 +72,49 @@ class AssistantViewController: UIViewController {
         let alert = UIAlertController(title: "로그인시에 사용가능합니다".localized, message: "로그인은 설정에서 할수있습니다.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인".localized, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension AssistantViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return Assist.allCases.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        guard let cell = tableView.cellForRow(at: indexPath) as? AssistantCell else { return }
+        
+        switch indexPath.row {
+        case 0:
+            let homeBarViewController = MyDrinksViewController()
+            self.show(homeBarViewController, sender: nil)
+        case 1:
+            if Auth.auth().currentUser?.uid == nil {
+                self.pleaseLoginAlert()
+            } else {
+                let myOwnCocktailRecipeViewController = MyOwnCocktailRecipeViewController()
+                self.show(myOwnCocktailRecipeViewController, sender: nil)
+            }
+        case 2:
+            if Auth.auth().currentUser?.uid == nil {
+                self.pleaseLoginAlert()
+            } else {
+                let wishListCocktailListTableView = WishListCocktailListViewController()
+                self.show(wishListCocktailListTableView, sender: nil)
+            }
+        default:
+            break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AssistantCell", for: indexPath) as? AssistantCell else { return UITableViewCell()}
+        cell.selectionStyle = .none
+        cell.titleLabel.text = Assist(rawValue: indexPath.row)?.title
+        cell.explainLabel.text = Assist(rawValue: indexPath.row)?.explain
+        return cell
     }
 }
