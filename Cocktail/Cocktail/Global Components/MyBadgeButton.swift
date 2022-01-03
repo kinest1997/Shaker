@@ -35,7 +35,7 @@ class BadgeButton: UIButton {
         nameLabel.isHidden = title != nil ? false : true
         nameLabel.backgroundColor = buttonBackgroundColor
         nameLabel.font = buttonFont
-        nameLabel.textColor = UIColor(named: "miniButtonGray")
+        nameLabel.textColor = .mainGray
     }
     
     override func setTitleColor(_ color: UIColor?, for state: UIControl.State) {
@@ -62,7 +62,7 @@ class BadgeButton: UIButton {
                 addBadgeToButon(badge: badge)
             } else {
                 addBadgeToButon(badge: badge)
-                badgeBackgroundColor = .systemBlue
+                badgeBackgroundColor = .mainOrange
             }
         }
     }

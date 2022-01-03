@@ -23,21 +23,19 @@ class TitleHeaderView: UICollectionReusableView {
         topSplitLine.snp.makeConstraints {
             $0.top.equalTo(sectionTextLabel).offset(-10)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(2)
+            $0.height.equalTo(0)
             
         }
-        topSplitLine.backgroundColor = UIColor(named: "selectedGray")
+        topSplitLine.backgroundColor = .borderGray
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(45)
         }
         titleLabel.text = "SHAKER"
-        titleLabel.font = .systemFont(ofSize: 40, weight: .semibold)
-        titleLabel.textColor = UIColor(named: "miniButtonGray")
-        
-        sectionTextLabel.font = .systemFont(ofSize: 20, weight: .semibold)
-        sectionTextLabel.textColor = UIColor(named: "miniButtonGray")
+        titleLabel.font = .nexonFont(ofSize: 40, weight: .bold)
+        titleLabel.textColor = .mainGray
+
         sectionTextLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)

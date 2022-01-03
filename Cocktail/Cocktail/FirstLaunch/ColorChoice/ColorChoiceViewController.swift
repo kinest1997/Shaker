@@ -34,6 +34,7 @@ class ColorChoiceViewController: UIViewController {
         } else {
             self.tabBarController?.tabBar.isHidden = false
         }
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     func layout() {
@@ -48,7 +49,7 @@ class ColorChoiceViewController: UIViewController {
         }
         
         mainCollectionView.snp.makeConstraints {
-            $0.top.equalTo(questionLabel.snp.bottom).offset(80)
+            $0.top.equalTo(questionLabel.snp.bottom).offset(30)
             $0.leading.trailing.equalToSuperview().inset(30)
             $0.height.equalTo(400)
         }
@@ -60,13 +61,27 @@ class ColorChoiceViewController: UIViewController {
     }
     
     func attribute() {
-        questionLabel.text = "선호하는 색은 무엇인가요?"
+        let questionText = NSMutableAttributedString(string: "선호하는 색은 무엇인가요?")
+        let firstRange = NSRange(location: 0, length: 5)
+        let secondReange = NSRange(location: 6, length: 8)
+        let smallFont = UIFont.nexonFont(ofSize: 20, weight: .bold)
+        let bigfont = UIFont.nexonFont(ofSize: 24, weight: .bold)
+        let mainColor = UIColor.mainGray
+        
+        questionText.addAttribute(.font, value: smallFont, range: firstRange)
+        questionText.addAttribute(.font, value: smallFont, range: secondReange)
+        
+        questionText.addAttribute(.foregroundColor, value: mainColor, range: firstRange)
+        questionText.addAttribute(.foregroundColor, value: mainColor, range: secondReange)
+        
+        questionText.addAttribute(.font, value: bigfont, range: NSRange(location: 5, length: 1))
+        questionText.addAttribute(.foregroundColor, value: UIColor.mainOrange, range: NSRange(location: 5, length: 1))
+        
+        questionLabel.attributedText = questionText
         view.backgroundColor = .white
         mainCollectionView.backgroundColor = .white
         questionLabel.textAlignment = .center
-        questionLabel.textColor = UIColor(named: "miniButtonGray")
-        questionLabel.font = .systemFont(ofSize: 20, weight: .bold)
-        
+
         nextButton.setTitle("다음", for: .normal)
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
@@ -108,8 +123,10 @@ extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colorCell", for: indexPath) as? ColorCollectionViewCell else { return UICollectionViewCell() }
-        cell.colorView.backgroundColor = UIColor(named: colorArray[indexPath.row].rawValue)
-        return cell
+        cell.colorView.image = UIImage(named: colorArray[indexPath.row].rawValue)
+            return cell
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -127,7 +144,7 @@ extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewD
             buttonLabelCountUpdate(button: nextButton)
         }
         if !selectedColor.isEmpty {
-            nextButton.backgroundColor = UIColor(named: "mainOrangeColor")
+            nextButton.backgroundColor = .tappedOrange
         } else {
             nextButton.backgroundColor = .white
         }

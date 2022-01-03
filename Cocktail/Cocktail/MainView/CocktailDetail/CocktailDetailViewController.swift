@@ -293,14 +293,14 @@ class CocktailDetailViewController: UIViewController {
         mainView.snp.makeConstraints {
             $0.width.equalTo(mainScrollView.frameLayoutGuide)
             $0.edges.equalTo(mainScrollView.contentLayoutGuide)
-            $0.bottom.equalTo(recipeLabel.snp.bottom)
+            $0.bottom.equalTo(recipeLabel.snp.bottom).offset(100)
         }
     }
     
     func attribute() {
         view.backgroundColor = .white
         mainView.backgroundColor = .white
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
         //구분선의 색상 설정
         [centerLine, firstSplitLine, secondSplitLine, imageSplitLine, alcoholSplitLine].forEach {
             $0.backgroundColor = UIColor(named: "splitLineGray")
@@ -308,22 +308,22 @@ class CocktailDetailViewController: UIViewController {
         
         //내용 설정하는곳
         [alcoholLabel, alcoholGuideLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, recipeLabel, drinkTypeLabel, likeCountLabel, disLikeCountLabel].forEach {
-            $0.textColor = UIColor(named: "miniButtonGray")
-            $0.font = .systemFont(ofSize: 14, weight: .medium)
+            $0.textColor = .mainGray
+            $0.font = .nexonFont(ofSize: 14, weight: .medium)
             $0.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         }
         
         //제목 설정하는곳
         [colorGuideLabel, baseDrinkGuideLabel, glassGuideLabel, craftGuideLabel, drinkTypeGuideLabel, ingredientsGuideLabel, recipeGuideLabel].forEach {
-            $0.textColor = UIColor(named: "miniButtonGray")
-            $0.font = .systemFont(ofSize: 16, weight: .bold)
+            $0.textColor = .mainGray
+            $0.font = .nexonFont(ofSize: 16, weight: .bold)
         }
         
         //제일 두꺼운 칵테일 이름 설정
         [nameLabel].forEach {
             $0.textAlignment = .center
-            $0.textColor = UIColor(named: "miniButtonGray")
-            $0.font = .systemFont(ofSize: 24, weight: .heavy)
+            $0.textColor = .mainGray
+            $0.font = .nexonFont(ofSize: 24, weight: .heavy)
         }
         
         [alcoholLabel, alcoholGuideLabel, myTipLabel].forEach {
@@ -342,7 +342,7 @@ class CocktailDetailViewController: UIViewController {
         [myTipLabel, recipeLabel, ingredientsLabel].forEach {
             $0.sizeToFit()
             $0.numberOfLines = 0
-            $0.textColor = UIColor(named: "miniButtonGray")
+            $0.textColor = .mainGray
         }
         
         [leftStackView, rightStackView].forEach {
@@ -351,10 +351,11 @@ class CocktailDetailViewController: UIViewController {
             $0.spacing = 10
         }
         
-        [likeButton, disLikeButton, likeCountLabel, disLikeCountLabel, wishListButton].forEach {
-            $0.tintColor = UIColor(named: "miniButtonGray")
+        [likeButton, disLikeButton, likeCountLabel, disLikeCountLabel].forEach {
+            $0.tintColor = .mainGray
         }
         
+        wishListButton.tintColor = .mainOrange
         cocktailImageView.contentMode = .scaleAspectFit
 
         alcoholStackView.distribution = .fillEqually
@@ -452,17 +453,17 @@ class CocktailDetailViewController: UIViewController {
         myTipLabel.text = data.mytip.localized
         recipeLabel.text = makeRecipeText(recipe: data.recipe)
         ingredientsLabel.text = makeIngredientsText(ingredients: data.ingredients)
-        cocktailImageView.kf.setImage(with: URL(string: data.imageURL), placeholder: UIImage(systemName: "heart"))
+        cocktailImageView.kf.setImage(with: URL(string: data.imageURL))
         [lowAlcoholLabel, highAlcoholLabel, midAlcoholLabel].forEach {
             $0.tintColor = UIColor(named: "nonSelectedAlcoholColor")
         }
         switch data.alcohol {
         case .high:
-            highAlcoholLabel.tintColor = UIColor(named: "shaker")
+            highAlcoholLabel.tintColor = .mainOrange
         case .mid:
-            midAlcoholLabel.tintColor = UIColor(named: "shaker")
+            midAlcoholLabel.tintColor = .mainOrange
         case .low:
-            lowAlcoholLabel.tintColor = UIColor(named: "shaker")
+            lowAlcoholLabel.tintColor = .mainOrange
         }
         
         var justRecipe = data
@@ -485,8 +486,8 @@ class CocktailDetailViewController: UIViewController {
         let spaceStrings = recipe.enumerated().map {
             """
             
-            step\($0.offset + 1)
-            \($0.element.localized)
+            \($0.offset + 1).  \($0.element.localized)
+            
             
             """
         }

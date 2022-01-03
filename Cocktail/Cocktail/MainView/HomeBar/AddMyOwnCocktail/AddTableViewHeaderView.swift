@@ -21,16 +21,17 @@ class AddTableViewHeaderView: UITableViewHeaderFooterView {
         [titleLabel, topSplitLine, showButton].forEach {
             contentView.addSubview($0)
         }
-        titleLabel.font = .systemFont(ofSize: 14, weight: .bold)
-        titleLabel.textColor = UIColor(named: "miniButtonGray")
+        titleLabel.font = .nexonFont(ofSize: 14, weight: .bold)
+        titleLabel.textColor = .mainGray
+        titleLabel.textAlignment = .right
         
         [showButton].forEach {
             $0.isHidden = !isIngredients
         }
         showButton.setTitleColor(.black, for: .normal)
         showButton.setImage(UIImage(systemName: "increase.indent"), for: .normal)
-        showButton.tintColor = UIColor(named: "miniButtonGray")
-        topSplitLine.backgroundColor = UIColor(named: "mainOrangeColor")
+        showButton.tintColor = .mainGray
+        topSplitLine.backgroundColor = .tappedOrange
         
         topSplitLine.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -39,7 +40,7 @@ class AddTableViewHeaderView: UITableViewHeaderFooterView {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(50)
+            $0.leading.equalToSuperview().offset(30)
             $0.centerY.equalToSuperview()
         }
         

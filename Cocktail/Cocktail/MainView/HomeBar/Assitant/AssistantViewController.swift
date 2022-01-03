@@ -12,11 +12,11 @@ class AssistantViewController: UIViewController {
         var title: String {
             switch self {
             case .myDrink:
-                return "내술장"
+                return "내 술장"
             case .myOwnCocktail:
                 return "나의 레시피"
             case .wishList:
-                return "내 술장"
+                return "즐겨찾기"
             }
         }
         
@@ -37,7 +37,7 @@ class AssistantViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
+        self.navigationController?.navigationBar.tintColor = .mainGray
         mainTableView.register(AssistantCell.self, forCellReuseIdentifier: "AssistantCell")
         mainTableView.isScrollEnabled = false
         mainTableView.delegate = self
@@ -49,7 +49,7 @@ class AssistantViewController: UIViewController {
     func attribute() {
         mainTableView.separatorStyle = .none
         titleLabel.text = "마이페이지"
-        titleLabel.font = .systemFont(ofSize: 24, weight: .bold)
+        titleLabel.font = .nexonFont(ofSize: 24, weight: .bold)
         
         view.backgroundColor = .white
     }

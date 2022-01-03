@@ -11,12 +11,12 @@ class FilterViewCell: UITableViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(appliedCheckImgageView)
         
-        appliedCheckImgageView.tintColor = isChecked ? UIColor(named: "shaker") : UIColor(named: "miniButtonGray")
+        appliedCheckImgageView.tintColor = isChecked ? .mainOrange : .mainGray
         nameLabel.textAlignment = .left
         appliedCheckImgageView.image = isChecked ? UIImage(systemName: "chevron.down.square.fill") : UIImage(systemName: "square")
         
         
-        nameLabel.font = .systemFont(ofSize: 15)
+        nameLabel.font = .nexonFont(ofSize: 14, weight: .semibold)
         nameLabel.snp.makeConstraints {
             $0.top.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)

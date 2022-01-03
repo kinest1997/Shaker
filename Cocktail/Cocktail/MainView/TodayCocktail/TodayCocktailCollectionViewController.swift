@@ -20,14 +20,31 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         case secondSection
         case thirdSection
         
-        var titleText: String {
+        var titleText: NSMutableAttributedString {
             switch self {
             case .firstSection:
-                return "초보자 추천 가이드북"
+                let text = NSMutableAttributedString.addOrangeText(text: "바텐딩 초보자를 위한 가이드북", firstRange: NSRange(location: 7, length: 9), secondRange: NSRange(location: 8, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 7))
+                return text
             case .secondSection:
-                return "주문 도와드릴까요?"
+                let text = NSMutableAttributedString.addOrangeText(text: "내가 찜! 한 레시피", firstRange: NSRange(location: 0, length: 3), secondRange: NSRange(location: 5, length: 6), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 2))
+                return text
             case .thirdSection:
-                return "내 즐겨찾기"
+                let text = NSMutableAttributedString.addOrangeText(text: "주문 도와드릴까요?", firstRange: NSRange(location: 2, length: 8), secondRange: NSRange(location: 3, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 2))
+                return text
+            }
+        }
+        
+        var explainText: NSMutableAttributedString {
+            switch self {
+            case .firstSection:
+                let text = NSMutableAttributedString(string: "")
+                return text
+            case .secondSection:
+                let text = NSMutableAttributedString.addOrangeText(text: "찜한 칵테일, 잊지 말고 다시 보아요", firstRange: NSRange(location: 1, length: 19), secondRange: NSRange(location: 10, length: 0), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 0, length: 1))
+                return text
+            case .thirdSection:
+                let text = NSMutableAttributedString.addOrangeText(text: "시작하기 어려우신가요? 쉐이커가 레시피를 추천해드릴게요", firstRange: NSRange(location: 0, length: 13), secondRange: NSRange(location: 0, length: 0), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 13, length: 17))
+                return text
             }
         }
     }
@@ -62,17 +79,14 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     var dataReciped: [Bool] = []
     
-    let sectionName = ["홈텐딩 초보자를 위한 가이드북", "내가 찜한 레시피", "주문 도와드릴까요?"]
-    let explainText = ["" , "찜한 칵테일, 잊지 말고 다시 보아요", "시작하기 어려우신가요? 제가 레시피를 추천해드릴게요"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "SHAKER".localized
         view.addSubview(collectionView)
         view.addSubview(loadingView)
-        navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
+        navigationController?.navigationBar.tintColor = .mainGray
         collectionView.backgroundColor = .white
-        collectionView.register(NoneShadowCell.self, forCellWithReuseIdentifier: "NoneShadowCell")
+        collectionView.register(HelpOrderCell.self, forCellWithReuseIdentifier: "HelpOrderCell")
         collectionView.register(TodayCocktailCollectionViewCell.self, forCellWithReuseIdentifier: "TodayCocktailCollectionViewCell")
         collectionView.register(TodayCocktailCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TodayCocktailCollectionViewHeader")
         collectionView.register(TitleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TitleHeaderView")
@@ -145,9 +159,9 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
 extension TodayCocktailCollectionViewController {
     
     func collectionViewLayout() -> UICollectionViewLayout {
+        
         return UICollectionViewCompositionalLayout {[weak self] sectionNumber, environment -> NSCollectionLayoutSection? in
             guard let self = self else { return nil }
-            
             switch sectionNumber {
             case 0:
                 return self.createYoutubeSection()
@@ -169,14 +183,11 @@ extension TodayCocktailCollectionViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95), heightDimension: .fractionalHeight(0.2))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
-        
         let section = NSCollectionLayoutSection(group: group)
         
         section.orthogonalScrollingBehavior = .groupPaging
         
-        section.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
-        
-        let sectionHeader = createSectionHeader()
+        let sectionHeader = createSectionHeader(height: 30)
         section.boundarySupplementaryItems = [sectionHeader]
         return section
     }
@@ -189,14 +200,11 @@ extension TodayCocktailCollectionViewController {
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.15))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
-        
         let section = NSCollectionLayoutSection(group: group)
         
-        section.orthogonalScrollingBehavior = .groupPaging
+        section.orthogonalScrollingBehavior = .continuous
         
-        section.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
-        
-        let sectionHeader = createSectionHeader()
+        let sectionHeader = createSectionHeader(height: 70)
         section.boundarySupplementaryItems = [sectionHeader]
         return section
     }
@@ -213,21 +221,14 @@ extension TodayCocktailCollectionViewController {
         let section = NSCollectionLayoutSection(group: group)
         
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
         
-        let sectionHeader = createfirstSectionHeader()
+        let sectionHeader = createSectionHeader(height: 140)
         section.boundarySupplementaryItems = [sectionHeader]
         return section
     }
     
-    func createSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let layoutSectionHeadSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(60))
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeadSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        return sectionHeader
-    }
-    
-    func createfirstSectionHeader() -> NSCollectionLayoutBoundarySupplementaryItem {
-        let layoutSectionHeadSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(140))
+    func createSectionHeader(height: CGFloat) -> NSCollectionLayoutBoundarySupplementaryItem {
+        let layoutSectionHeadSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeadSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         return sectionHeader
     }
@@ -235,14 +236,17 @@ extension TodayCocktailCollectionViewController {
     //섹션 헤더설정
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            if indexPath.section != 0 {
+            if indexPath.section == 1 {
                 guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
-                headerview.explainLabel.text = explainText[indexPath.section]
-                headerview.sectionTextLabel.text = sectionName[indexPath.section]
+                headerview.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
+                headerview.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
+                return headerview
+            } else if indexPath.section == 0 {
+                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TitleHeaderView", for: indexPath) as? TitleHeaderView else { return UICollectionReusableView() }
+                headerview.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
                 return headerview
             } else {
-                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TitleHeaderView", for: indexPath) as? TitleHeaderView else { return UICollectionReusableView() }
-                headerview.sectionTextLabel.text = sectionName[indexPath.section]
+                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
                 return headerview
             }
         } else {
@@ -273,19 +277,20 @@ extension TodayCocktailCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCocktailCollectionViewCell", for: indexPath) as? TodayCocktailCollectionViewCell,
-              let noneShadowCell = collectionView.dequeueReusableCell(withReuseIdentifier: "NoneShadowCell", for: indexPath) as? NoneShadowCell
+              let helpOrderCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HelpOrderCell", for: indexPath) as? HelpOrderCell
         else { return UICollectionViewCell() }
         
         switch indexPath.section {
         case 0:
-            cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), placeholder: UIImage(systemName: "heart"), options: nil, completionHandler: nil)
+            cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), options: nil, completionHandler: nil)
             return cell
         case 1:
             cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), options: nil, completionHandler: nil)
             return cell
         case 2:
-            noneShadowCell.mainImageView.image = UIImage(named: "orderImage")
-            return noneShadowCell
+            helpOrderCell.questionLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
+            helpOrderCell.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
+            return helpOrderCell
         default:
             return UICollectionViewCell()
         }

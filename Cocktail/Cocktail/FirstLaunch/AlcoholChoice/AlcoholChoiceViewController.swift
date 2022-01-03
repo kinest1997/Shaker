@@ -43,27 +43,44 @@ class AlcoholChoiceViewController: UIViewController {
     }
     
     func attribute() {
+        
+        let questionText = NSMutableAttributedString(string: "어떤 맛을 좋아하세요?")
+        let firstRange = NSRange(location: 0, length: 3)
+        let secondReange = NSRange(location: 4, length: 8)
+        let tintRange = NSRange(location: 3, length: 1)
+        let smallFont = UIFont.nexonFont(ofSize: 20, weight: .bold)
+        let bigfont = UIFont.nexonFont(ofSize: 24, weight: .bold)
+        let mainColor = UIColor.mainGray
+        
+        questionText.addAttribute(.font, value: smallFont, range: firstRange)
+        questionText.addAttribute(.font, value: smallFont, range: secondReange)
+        
+        questionText.addAttribute(.foregroundColor, value: mainColor, range: firstRange)
+        questionText.addAttribute(.foregroundColor, value: mainColor, range: secondReange)
+        
+        questionText.addAttribute(.font, value: bigfont, range: tintRange)
+        questionText.addAttribute(.foregroundColor, value: UIColor.mainOrange, range: tintRange)
+        
+        questionLabel.attributedText = questionText
+        
         view.backgroundColor = .white
-        questionLabel.text = "어떤 맛을 좋아하세요?"
-        questionLabel.font = .systemFont(ofSize: 20, weight: .bold)
-        questionLabel.textColor = UIColor(named: "miniButtonGray")
         
         questionLabel.textAlignment = .center
         
         explainLabel.text = "*기준: 도수"
         explainLabel.textAlignment = .center
-        explainLabel.textColor = .systemGray2
+        explainLabel.textColor = .mainGray
         highLabel.text = "높음"
-        highLabel.textColor = .systemGray2
+        highLabel.textColor = .mainGray
         highLabel.textAlignment = .center
         lowLabel.text = "낮음"
-        lowLabel.textColor = .systemGray2
+        lowLabel.textColor = .mainGray
         lowLabel.textAlignment = .center
         nextButton.setTitle("다음", for: .normal)
         
         [highButton, middleButton, lowButton].forEach {
             $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-            $0.tintColor = UIColor(named: "mainOrangeColor")
+            $0.tintColor = .tappedOrange
         }
         
         nextButton.addAction(UIAction(handler: {[weak self] _ in
@@ -189,7 +206,7 @@ class AlcoholChoiceViewController: UIViewController {
         if number == 0 {
             button.backgroundColor = .white
         } else {
-            button.backgroundColor = UIColor(named: "mainOrangeColor")
+            button.backgroundColor = .tappedOrange
         }
         button.setTitle("\(number)개의 칵테일 발견", for: .normal)
     }

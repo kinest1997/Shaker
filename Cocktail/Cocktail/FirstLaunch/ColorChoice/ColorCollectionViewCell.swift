@@ -11,7 +11,7 @@ import SnapKit
 class ColorCollectionViewCell: UICollectionViewCell {
     
     let checkMark = UIImageView()
-    let colorView = UIView()
+    let colorView = UIImageView()
     var isChecked: Bool = false
     
     override func layoutSubviews() {
@@ -20,10 +20,10 @@ class ColorCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(checkMark)
         
         contentView.layer.borderWidth = isChecked ? 4 : 0
-        contentView.layer.borderColor = UIColor(named: "selectedGray")?.cgColor
+        contentView.layer.borderColor = UIColor.borderGray.cgColor
         contentView.layer.cornerRadius = 45
         contentView.clipsToBounds = true
-        colorView.contentMode = .scaleAspectFit
+        colorView.contentMode = .scaleAspectFill
         colorView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

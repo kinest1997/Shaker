@@ -25,10 +25,10 @@ class BaseChoiceCollectionViewCell: UICollectionViewCell {
         mainView.addSubview(mainLabel)
         
         [mainLabel, contentView].forEach {
-            $0.backgroundColor = isChecked ? UIColor(named: "mainOrangeColor") : .white
+            $0.backgroundColor = isChecked ? .tappedOrange : .white
         }
         
-        mainLabel.backgroundColor = isChecked ? UIColor(named: "mainOrangeColor") : .white
+        mainLabel.backgroundColor = isChecked ? .tappedOrange : .white
         
         
         mainImageView.snp.makeConstraints {
@@ -43,17 +43,14 @@ class BaseChoiceCollectionViewCell: UICollectionViewCell {
         mainLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        mainLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        mainLabel.font = .nexonFont(ofSize: 18, weight: .bold)
         mainLabel.textAlignment = .center
-        mainLabel.textColor = UIColor(named: "miniButtonGray")
-        
-        mainView.layer.shadowColor = UIColor.black.cgColor
-        mainView.layer.shadowRadius = 5
-        mainView.layer.shadowOpacity = 0.4
-        mainView.layer.shadowOffset = CGSize(width: 0, height: 1)
+        mainLabel.textColor = .mainGray
         
         mainLabel.layer.cornerRadius = 15
         mainLabel.clipsToBounds = true
+        mainLabel.layer.borderColor = UIColor.borderGray.cgColor
+        mainLabel.layer.borderWidth = 1
     }
     
     func setData(text: String, image: UIImage) {

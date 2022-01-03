@@ -48,7 +48,7 @@ class MyDrinksViewController: UIViewController {
             $0.backgroundColor = .white
             $0.clipsToBounds = true
             $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor(named: "splitLineGray")?.cgColor
+            $0.layer.borderColor = UIColor.splitLineGray.cgColor
         }
     }
     
@@ -62,7 +62,7 @@ class MyDrinksViewController: UIViewController {
         topExplainLabel.snp.makeConstraints {
             $0.top.equalTo(topNameLabel.snp.bottom).offset(10)
             $0.leading.equalTo(topNameLabel)
-            $0.height.equalTo(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         groupStackView.snp.makeConstraints {
             $0.top.equalTo(topExplainLabel.snp.bottom).offset(30)
@@ -83,9 +83,7 @@ class MyDrinksViewController: UIViewController {
         view.addSubview(whatICanMakeButton)
         view.addSubview(topNameLabel)
         view.addSubview(topExplainLabel)
-        
-        //        topExplainLabel.sizeToFit()
-        //        topNameLabel.sizeToFit()
+
         [leftStackView, midStackView, rightStackView].forEach {
             groupStackView.addArrangedSubview($0)
             $0.axis = .vertical
@@ -114,12 +112,13 @@ class MyDrinksViewController: UIViewController {
         rumButton.setImage(UIImage(named: "rum"), for: .normal)
         assetsButton.setImage(UIImage(named: "sugarSyrup"), for: .normal)
         
-        topNameLabel.textColor = UIColor(named: "miniButtonGray")
-        topExplainLabel.textColor = UIColor(named: "miniButtonGray")
+        topNameLabel.textColor = .mainGray
+        topExplainLabel.textColor = .mainGray
         topNameLabel.text = "내 술장"
-        topNameLabel.font = .systemFont(ofSize: 30, weight: .bold)
-        topExplainLabel.font = .systemFont(ofSize: 15, weight: .semibold)
+        topNameLabel.font = .nexonFont(ofSize: 30, weight: .bold)
+        topExplainLabel.font = .nexonFont(ofSize: 15, weight: .semibold)
         topExplainLabel.text = "내가 가지고 있는 재료로 만들 수 있는 레시피를 알아봐요!"
+        topExplainLabel.numberOfLines = 0
         groupStackView.axis = .horizontal
         groupStackView.distribution = .fillEqually
         groupStackView.spacing = 10
@@ -164,7 +163,7 @@ class MyDrinksViewController: UIViewController {
         let sortedData = checkWhatICanMake(myIngredients: data)
 
         if sortedData.count != 0 {
-             button.backgroundColor = UIColor(named: "mainOrangeColor")
+             button.backgroundColor = .tappedOrange
             button.setTitle("\(sortedData.count)" + " " + "EA".localized + " " + "making".localized, for: .normal)
         } else {
             button.backgroundColor = .white

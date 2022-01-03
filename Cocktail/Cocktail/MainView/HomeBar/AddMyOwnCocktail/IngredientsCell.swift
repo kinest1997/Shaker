@@ -18,8 +18,8 @@ class IngredientsCell: UITableViewCell {
         
         contentView.addSubview(mainLabel)
         contentView.backgroundColor = UIColor(named: "splitLineGray")
-        mainLabel.textColor = UIColor(named: "miniButtonGray")
-        mainLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        mainLabel.textColor = .mainGray
+        mainLabel.font = .nexonFont(ofSize: 14, weight: .medium)
         mainLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(10)
             $0.top.bottom.equalToSuperview()

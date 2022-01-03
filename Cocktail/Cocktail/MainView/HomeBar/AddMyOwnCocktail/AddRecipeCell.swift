@@ -17,10 +17,10 @@ class AddRecipeCell: UITableViewCell {
             $0.width.equalTo(30)
         }
         contentView.backgroundColor = UIColor(named: "splitLineGray")
-        numberLabel.textColor = UIColor(named: "miniButtonGray")
+        numberLabel.textColor = .mainGray
         numberLabel.textAlignment = .center
-        explainTextField.textColor = UIColor(named: "miniButtonGray")
-        explainTextField.font = .systemFont(ofSize: 14, weight: .medium)
+        explainTextField.textColor = .mainGray
+        explainTextField.font = .nexonFont(ofSize: 14, weight: .medium)
         
         
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30))

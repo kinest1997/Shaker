@@ -86,9 +86,9 @@ class LoginViewController: UIViewController {
         mainImageView.image = UIImage(named: "logoImage")
         justUseButton.setTitle("로그인없이 시작하기", for: .normal)
         justUseButton.setTitleColor(.gray, for: .normal)
-        shakerLabel.font = .systemFont(ofSize: 45, weight: .bold)
-        shakerLabel.textColor = UIColor(named: "shaker")
-        loginlabel.font = .systemFont(ofSize: 45, weight: .light)
+        shakerLabel.font = .nexonFont(ofSize: 45, weight: .bold)
+        shakerLabel.textColor = .mainOrange
+        loginlabel.font = .nexonFont(ofSize: 45, weight: .light)
         loginlabel.textColor = UIColor(named: "login")
         shakerLabel.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         shakerLabel.text = "SHAKER"
@@ -96,7 +96,7 @@ class LoginViewController: UIViewController {
         shakerLabel.sizeToFit()
         loginlabel.sizeToFit()
         mainImageView.contentMode = .bottomLeft
-        navigationController?.navigationBar.tintColor = UIColor(named: "miniButtonGray")
+        navigationController?.navigationBar.tintColor = .mainGray
         appleLoginButton.layer.cornerRadius = 15
         appleLoginButton.clipsToBounds = true
         appleLoginButton.contentMode = .scaleAspectFill
@@ -145,6 +145,7 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
     }
     
     func requestAuthNoti() {

@@ -16,7 +16,7 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
         contentView.addSubview(mainImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(checkBoxImage)
-        nameLabel.font = .systemFont(ofSize: 15, weight: .bold)
+        nameLabel.font = .nexonFont(ofSize: 15, weight: .semibold)
         nameLabel.textAlignment = .center
         
         mainImageView.snp.makeConstraints {
@@ -31,6 +31,6 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
             $0.top.trailing.equalToSuperview()
             $0.height.width.equalTo(30)
         }
-        checkBoxImage.tintColor = .red
+        checkBoxImage.tintColor = .mainOrange
     }
 }

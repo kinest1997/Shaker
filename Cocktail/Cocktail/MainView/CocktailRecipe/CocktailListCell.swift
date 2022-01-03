@@ -19,17 +19,17 @@ class CocktailListCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.backgroundColor = .white
-        nameLabel.textColor = .black
+        nameLabel.textColor = .mainGray
         ingredientCountLabel.textColor = .gray
-        disclosureMark.tintColor = UIColor(named: "miniButtonGray")
+        disclosureMark.tintColor = .mainGray
         
         
         [nameLabel, ingredientCountLabel, cocktailImageView, likeCount, disclosureMark].forEach {
             contentView.addSubview($0)
         }
         cocktailImageView.contentMode = .scaleAspectFill
-        nameLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        ingredientCountLabel.font = .systemFont(ofSize: 15, weight: .medium)
+        nameLabel.font = .nexonFont(ofSize: 18, weight: .bold)
+        ingredientCountLabel.font = .nexonFont(ofSize: 15, weight: .medium)
         ingredientCountLabel.alpha = 0.7
         likeCount.textColor = .white
         

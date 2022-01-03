@@ -23,6 +23,8 @@ class AssistantCell: UITableViewCell {
         contentView.backgroundColor = UIColor(named: "splitLineGray")
         contentView.cornerRadius = 15
         contentView.clipsToBounds = true
+//        contentView.layer.borderColor = UIColor.splitLineGray.cgColor
+//        contentView.layer.borderWidth = 1
         
         mainImageView.contentMode = .scaleAspectFill
         mainImageView.snp.makeConstraints {
@@ -43,11 +45,11 @@ class AssistantCell: UITableViewCell {
             $0.width.equalTo(200)
         }
         
-        titleLabel.textColor = UIColor(named: "miniButtonGray")
-        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textColor = .mainGray
+        titleLabel.font = .nexonFont(ofSize: 20, weight: .bold)
         
-        explainLabel.textColor = UIColor(named: "miniButtonGray")
-        explainLabel.font = .systemFont(ofSize: 12, weight: .semibold)
+        explainLabel.textColor = .mainGray
+        explainLabel.font = .nexonFont(ofSize: 12, weight: .semibold)
         explainLabel.numberOfLines = 0
     }
 }

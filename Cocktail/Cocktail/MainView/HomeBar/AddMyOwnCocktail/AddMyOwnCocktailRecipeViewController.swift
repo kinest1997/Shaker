@@ -274,7 +274,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     func attribute() {
         nameTextField.backgroundColor = UIColor(named: "splitLineGray")
         myTipTextView.backgroundColor = UIColor(named: "splitLineGray")
-        myTipTextView.font = .systemFont(ofSize: 14)
+        myTipTextView.font = .nexonFont(ofSize: 14, weight: .semibold)
         
         addRecipeTableView.separatorStyle = .none
         //사진이미지 비율
@@ -299,8 +299,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         // 기본 라벨들
         [alcoholLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, drinkTypeLabel, alcoholLabel].forEach {
-            $0.textColor = UIColor(named: "miniButtonGray")
-            $0.font = .systemFont(ofSize: 14, weight: .bold)
+            $0.textColor = .mainGray
+            $0.font = .nexonFont(ofSize: 14, weight: .bold)
         }
         
         [nameTextField, myTipTextView].forEach {
@@ -309,13 +309,13 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         }
         
         nameTextField.textColor = .black
-        nameTextField.font = .systemFont(ofSize: 24, weight: .heavy)
+        nameTextField.font = .nexonFont(ofSize: 24, weight: .heavy)
         
         [alcoholChoiceButton ,colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton, addButton].forEach {
-            $0.setTitleColor(UIColor(named: "miniButtonGray"), for: .normal)
+            $0.setTitleColor(.mainGray, for: .normal)
             $0.contentHorizontalAlignment = .fill
             $0.titleLabel?.textAlignment = .center
-            $0.titleLabel?.font = .systemFont(ofSize: 14)
+            $0.titleLabel?.font = .nexonFont(ofSize: 14, weight: .semibold)
             $0.backgroundColor = UIColor(named: "splitLineGray")
             $0.layer.cornerRadius = 15
             $0.clipsToBounds = true
@@ -324,7 +324,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         [leftStackView, rightStackView].forEach {
             $0.axis = .vertical
             $0.distribution = .fillEqually
-            $0.spacing = 10
+            $0.spacing = 15
         }
         
         [alcoholLabel ,colorLabel, baseDrinkLabel, glassLabel, craftLabel, drinkTypeLabel].forEach {
@@ -420,14 +420,13 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
 
         leftStackView.snp.makeConstraints {
             $0.width.equalTo(60)
-            $0.height.equalTo(250)
-            $0.leading.equalToSuperview().offset(50)
+            $0.leading.equalTo(myTipTextView)
             $0.top.equalTo(myTipTextView.snp.bottom).offset(30)
         }
 
         rightStackView.snp.makeConstraints {
             $0.leading.equalTo(leftStackView.snp.trailing).offset(10)
-            $0.trailing.equalToSuperview().offset(-30)
+            $0.trailing.equalTo(myTipTextView)
             $0.top.bottom.equalTo(leftStackView)
         }
 

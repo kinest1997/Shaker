@@ -55,11 +55,11 @@ class FilteredView: UIView {
         
         [resetButton, saveButton].forEach {
             $0.setTitleColor(.black, for: .normal)
-            $0.titleLabel!.font = .systemFont(ofSize: 18, weight: .semibold)
-            $0.setTitleColor(UIColor(named: "miniButtonGray"), for: .normal)
+            $0.titleLabel!.font = .nexonFont(ofSize: 18, weight: .semibold)
+            $0.setTitleColor(.mainGray, for: .normal)
         }
         
-        saveButton.backgroundColor = UIColor(named: "mainOrangeColor")
+        saveButton.backgroundColor = .tappedOrange
         saveButton.cornerRadius = 15
         saveButton.clipsToBounds = true
         

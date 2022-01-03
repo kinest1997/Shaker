@@ -11,8 +11,6 @@ import SnapKit
 class TodayCocktailCollectionViewCell: UICollectionViewCell {
     
     let mainImageView = UIImageView()
-    
-    var shadows: Bool = false
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -28,14 +26,7 @@ class TodayCocktailCollectionViewCell: UICollectionViewCell {
         mainImageView.contentMode = .scaleAspectFill
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
-        setShadow()
-    }
-    
-    func setShadow() {
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.masksToBounds = false
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowRadius = 5
-        self.layer.shadowOpacity = 0.4
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.splitLineGray.cgColor
     }
 }
