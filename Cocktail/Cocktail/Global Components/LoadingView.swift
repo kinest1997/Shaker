@@ -22,7 +22,7 @@ class LoadingView: UIView {
         
         self.addSubview(explainLabel)
         explainLabel.textColor = .black
-        explainLabel.font = .nexonFont(ofSize: 24, weight: .bold)
+        explainLabel.font = .nexonFont(ofSize: 20, weight: .bold)
         explainLabel.textAlignment = .center
         
         animationView.snp.makeConstraints {
@@ -31,10 +31,7 @@ class LoadingView: UIView {
         
         explainLabel.snp.makeConstraints {
             $0.top.equalTo(animationView.snp.bottom).offset(20)
-            $0.width.equalTo(animationView)
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(50)
         }
-    
     }
 }

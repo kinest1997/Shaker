@@ -31,7 +31,6 @@ class MyDrinkCell: UICollectionViewCell {
         nameTextLabel.snp.makeConstraints {
             $0.top.equalTo(mainImage.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
-
         }
         
         badgecount.snp.makeConstraints {

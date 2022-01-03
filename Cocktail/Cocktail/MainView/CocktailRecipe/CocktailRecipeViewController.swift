@@ -49,7 +49,10 @@ class CocktailRecipeViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         // 표시된 뷰를 흐리게 해주는것
         searchController.searchBar.placeholder = "Name, Ingredients, Base, Glass, Color...".localized
+        
         navigationItem.searchController = searchController
+        
+        searchController.searchBar.searchTextField.font = .nexonFont(ofSize: 14, weight: .semibold)
         //네비게이션바에 서치바 추가하는것
         definesPresentationContext = true
         //화면 이동시에 서치바가 안남아있게 해줌

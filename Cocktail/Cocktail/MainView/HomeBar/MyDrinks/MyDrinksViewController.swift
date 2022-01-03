@@ -54,7 +54,6 @@ class MyDrinksViewController: UIViewController {
         whatICanMakeButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
             $0.centerX.equalToSuperview()
-            
         }
     }
     
