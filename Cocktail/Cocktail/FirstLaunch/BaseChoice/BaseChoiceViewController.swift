@@ -30,7 +30,6 @@ class BaseChoiceViewController: UIViewController {
         mainCollectionView.dataSource = self
         mainCollectionView.register(BaseChoiceCollectionViewCell.self, forCellWithReuseIdentifier: "BaseChoiceCollectionViewCell")
         mainCollectionView.isScrollEnabled = false
-        
         attribute()
         layout()
     }

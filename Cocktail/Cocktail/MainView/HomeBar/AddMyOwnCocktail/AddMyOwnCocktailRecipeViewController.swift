@@ -278,9 +278,11 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         addRecipeTableView.separatorStyle = .none
         //사진이미지 비율
-        cocktailImageView.contentMode = .scaleAspectFill
+        cocktailImageView.contentMode = .scaleAspectFit
         cocktailImageView.cornerRadius = 15
         cocktailImageView.clipsToBounds = true
+        cocktailImageView.layer.borderWidth = 1
+        cocktailImageView.layer.borderColor = UIColor.borderGray.cgColor
         alcoholChoiceButton.menu = alcoholSelectMenu
         alcoholChoiceButton.showsMenuAsPrimaryAction = true
         colorChoiceButton.menu = colorSelectMenu
@@ -307,7 +309,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.cornerRadius = 15
             $0.clipsToBounds = true
         }
-        
+        nameTextField.placeholder = "칵테일 이름"
         nameTextField.textColor = .black
         nameTextField.font = .nexonFont(ofSize: 24, weight: .heavy)
         
@@ -389,8 +391,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         cocktailImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(headerView.snp.width).multipliedBy(0.5)
-            $0.height.equalTo(300)
+            $0.width.height.equalTo(view.snp.width).multipliedBy(0.7)
         }
 
         cameraImage.snp.makeConstraints {
@@ -501,7 +502,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
               let myTip = myTipTextView.text,
               let name = nameTextField.text
         else {
-            return presentJustAlert(title: "Hold on".localized, message: "선택안한게 있어!")
+            return presentJustAlert(title: "Hold on".localized, message: "선택하지 않은게 있어요")
         }
         
         if name.isEmpty {
@@ -516,8 +517,8 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
                     FirebaseRecipe.shared.myRecipe.remove(at: number)
                 }
             }
-            loadingView.explainLabel.text = "저장중"
-            loadingView.isHidden = false
+            self.loadingView.explainLabel.text = "나의 레시피에 저장중"
+            self.loadingView.isHidden = false
             
             guard let convertedImage = image.pngData(),
                   let uid = Auth.auth().currentUser?.uid else { return }

@@ -43,7 +43,7 @@ class BaseChoiceCollectionViewCell: UICollectionViewCell {
         mainLabel.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        mainLabel.font = .nexonFont(ofSize: 18, weight: .bold)
+        mainLabel.font = .nexonFont(ofSize: 18, weight: .semibold)
         mainLabel.textAlignment = .center
         mainLabel.textColor = .mainGray
         

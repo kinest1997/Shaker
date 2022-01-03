@@ -10,7 +10,6 @@ import SnapKit
 class TitleHeaderView: UICollectionReusableView {
     
     let sectionTextLabel = UILabel()
-    let topSplitLine = UILabel()
     
     let titleLabel = UILabel()
     
@@ -18,15 +17,7 @@ class TitleHeaderView: UICollectionReusableView {
         super.layoutSubviews()
         addSubview(sectionTextLabel)
         addSubview(titleLabel)
-        addSubview(topSplitLine)
-        
-        topSplitLine.snp.makeConstraints {
-            $0.top.equalTo(sectionTextLabel).offset(-10)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(0)
-            
-        }
-        topSplitLine.backgroundColor = .borderGray
+        self.backgroundColor = .white
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
             $0.centerX.equalToSuperview()
@@ -34,7 +25,7 @@ class TitleHeaderView: UICollectionReusableView {
         }
         titleLabel.text = "SHAKER"
         titleLabel.font = .nexonFont(ofSize: 40, weight: .bold)
-        titleLabel.textColor = .mainGray
+        titleLabel.textColor = .black
 
         sectionTextLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview()

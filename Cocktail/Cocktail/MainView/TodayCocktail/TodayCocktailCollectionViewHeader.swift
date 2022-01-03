@@ -21,11 +21,8 @@ class TodayCocktailCollectionViewHeader: UICollectionReusableView {
         addSubview(sectionTextLabel)
         addSubview(explainLabel)
         
-        sectionTextLabel.textColor = .mainGray
-        sectionTextLabel.sizeToFit()
-        
         sectionTextLabel.snp.makeConstraints {
-            $0.bottom.equalTo(explainLabel.snp.top).offset(-5)
+            $0.top.equalTo(topSplitLine.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
         }
         

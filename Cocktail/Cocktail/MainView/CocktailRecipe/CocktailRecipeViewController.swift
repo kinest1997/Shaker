@@ -54,7 +54,9 @@ class CocktailRecipeViewController: UIViewController {
         definesPresentationContext = true
         //화면 이동시에 서치바가 안남아있게 해줌
         searchController.searchBar.keyboardType = .default
+                
         let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
+
         navigationItem.rightBarButtonItem = filterButton
         let leftarrangeButton = UIBarButtonItem(title: "Sorting".localized, image: nil, primaryAction: nil, menu: filterMenu)
         navigationItem.leftBarButtonItem = leftarrangeButton

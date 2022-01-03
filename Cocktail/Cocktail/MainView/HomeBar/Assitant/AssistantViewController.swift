@@ -50,6 +50,7 @@ class AssistantViewController: UIViewController {
         mainTableView.separatorStyle = .none
         titleLabel.text = "마이페이지"
         titleLabel.font = .nexonFont(ofSize: 24, weight: .bold)
+        titleLabel.textAlignment = .center
         
         view.backgroundColor = .white
     }

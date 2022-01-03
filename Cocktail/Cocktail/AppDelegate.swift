@@ -41,6 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.set(false, forKey: "firstLaunch")
         }
         
+        let naviBarTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 16, weight: .semibold)]
+        UIBarButtonItem.appearance().setTitleTextAttributes(naviBarTextAttributes, for: UIControl.State.normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes(naviBarTextAttributes, for: .highlighted)
+        UIBarButtonItem.appearance().setTitleTextAttributes(naviBarTextAttributes, for: .focused)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
+        
         return true
     }
     

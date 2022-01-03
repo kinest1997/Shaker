@@ -23,8 +23,6 @@ class AssistantCell: UITableViewCell {
         contentView.backgroundColor = UIColor(named: "splitLineGray")
         contentView.cornerRadius = 15
         contentView.clipsToBounds = true
-//        contentView.layer.borderColor = UIColor.splitLineGray.cgColor
-//        contentView.layer.borderWidth = 1
         
         mainImageView.contentMode = .scaleAspectFill
         mainImageView.snp.makeConstraints {

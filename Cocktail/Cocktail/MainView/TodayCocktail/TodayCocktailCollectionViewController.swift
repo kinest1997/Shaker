@@ -19,6 +19,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         case firstSection
         case secondSection
         case thirdSection
+        case fourthSection
         
         var titleText: NSMutableAttributedString {
             switch self {
@@ -30,6 +31,9 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
                 return text
             case .thirdSection:
                 let text = NSMutableAttributedString.addOrangeText(text: "주문 도와드릴까요?", firstRange: NSRange(location: 2, length: 8), secondRange: NSRange(location: 3, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 2))
+                return text
+            case .fourthSection:
+                let text = NSMutableAttributedString.addOrangeText(text: "오늘의 한잔은?", firstRange: NSRange(location: 6, length: 2), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 6))
                 return text
             }
         }
@@ -44,6 +48,9 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
                 return text
             case .thirdSection:
                 let text = NSMutableAttributedString.addOrangeText(text: "시작하기 어려우신가요? 쉐이커가 레시피를 추천해드릴게요", firstRange: NSRange(location: 0, length: 13), secondRange: NSRange(location: 0, length: 0), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 13, length: 17))
+                return text
+            case .fourthSection:
+                let text = NSMutableAttributedString(string: "")
                 return text
             }
         }
@@ -77,6 +84,12 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         }
     }
     
+    var recommendationData: [Recommendation] = [] {
+        didSet {
+            canIDismissLoading()
+        }
+    }
+    
     var dataReciped: [Bool] = []
     
     override func viewDidLoad() {
@@ -86,10 +99,12 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         view.addSubview(loadingView)
         navigationController?.navigationBar.tintColor = .mainGray
         collectionView.backgroundColor = .white
+        collectionView.register(HashTagCell.self, forCellWithReuseIdentifier: "HashTagCell")
         collectionView.register(HelpOrderCell.self, forCellWithReuseIdentifier: "HelpOrderCell")
         collectionView.register(TodayCocktailCollectionViewCell.self, forCellWithReuseIdentifier: "TodayCocktailCollectionViewCell")
         collectionView.register(TodayCocktailCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TodayCocktailCollectionViewHeader")
         collectionView.register(TitleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TitleHeaderView")
+        collectionView.register(NoTitleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "NoTitleHeader")
         collectionView.collectionViewLayout = collectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -101,6 +116,11 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
                 self?.youtubeData = data
                 self?.collectionView.reloadData()
                 self?.loadingView.isHidden = true
+            }
+            
+            getRecommendations {[weak self] data in
+                self?.recommendationData = data
+                self?.collectionView.reloadData()
             }
         } else {
             getMyRecipe {[weak self] data in
@@ -116,6 +136,11 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
             getYoutubeContents {[weak self] data in
                 FirebaseRecipe.shared.youTubeData = data
                 self?.youtubeData = data
+                self?.collectionView.reloadData()
+            }
+            
+            getRecommendations {[weak self] data in
+                self?.recommendationData = data
                 self?.collectionView.reloadData()
             }
         }
@@ -138,18 +163,18 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     func canIDismissLoading() {
         dataReciped.append(true)
-        if dataReciped.count == 3 {
+        if dataReciped.count == 4 {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.loadingView.isHidden = true
             }
             if UserDefaults.standard.object(forKey: "whatIHave") == nil {
-                let alert = UIAlertController(title: "이런", message: "내술장에 술이 하나도없네요 \n 추가하러 가시겠어요?", preferredStyle: .alert)
+                let alert = UIAlertController(title: "반가워요", message: "내술장에 술이 하나도없네요 \n 추가하러 가시겠어요?", preferredStyle: .alert)
                 
                 alert.addAction(UIAlertAction(title: "네", style: .default, handler: {[weak self] _ in
                     self?.goToViewController(number: 2, viewController: MyDrinksViewController())
                 }))
-                alert.addAction(UIAlertAction(title: "다음에", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
             }
         }
@@ -169,10 +194,30 @@ extension TodayCocktailCollectionViewController {
                 return self.createWishListSection()
             case 2:
                 return self.createOrderAssistSection()
+            case 3:
+                return self.createRecommendationSection()
             default:
                 return nil
             }
         }
+    }
+    
+    func createRecommendationSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = .init(top: 10, leading: 5, bottom: 10, trailing: 5)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .estimated(130))
+        
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 2)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 0, leading: 0, bottom: 20, trailing: 0)
+        section.orthogonalScrollingBehavior = .groupPaging
+        
+        let sectionHeader = createSectionHeader(height: 70)
+        section.boundarySupplementaryItems = [sectionHeader]
+        return section
     }
     
     func createOrderAssistSection() -> NSCollectionLayoutSection {
@@ -219,7 +264,7 @@ extension TodayCocktailCollectionViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
-        
+
         section.orthogonalScrollingBehavior = .continuous
         
         let sectionHeader = createSectionHeader(height: 140)
@@ -236,27 +281,34 @@ extension TodayCocktailCollectionViewController {
     //섹션 헤더설정
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
-            if indexPath.section == 1 {
-                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
-                headerview.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
-                headerview.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
+            guard let basicHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
+            switch indexPath.section {
+                //도대체 무슨버근진 모르겠지만 이렇게 안하면 중복되고 이상하게 그려짐 개빡치게
+            case 0:
+                guard let titleHeaderview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TitleHeaderView", for: indexPath) as? TitleHeaderView else { return UICollectionReusableView() }
+                titleHeaderview.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
+                return titleHeaderview
+            case 1:
+                basicHeader.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
+                basicHeader.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
+                return basicHeader
+            case 2:
+                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "NoTitleHeader", for: indexPath) as? NoTitleHeader else { return UICollectionReusableView()}
                 return headerview
-            } else if indexPath.section == 0 {
-                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TitleHeaderView", for: indexPath) as? TitleHeaderView else { return UICollectionReusableView() }
-                headerview.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
-                return headerview
-            } else {
-                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
-                return headerview
+            case 3:
+                basicHeader.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
+                basicHeader.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
+                return basicHeader
+            default:
+                return UICollectionReusableView()
             }
-        } else {
-            return UICollectionReusableView()
         }
+        return UICollectionReusableView()
     }
     
     //섹션의 갯수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return Today.allCases.count
     }
     
     //섹션당 보여줄 셀의 개수
@@ -268,6 +320,8 @@ extension TodayCocktailCollectionViewController {
             return wishListData.count
         case 2:
             return 1
+        case 3:
+            return recommendationData.count
         default:
             return 0
         }
@@ -277,7 +331,8 @@ extension TodayCocktailCollectionViewController {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCocktailCollectionViewCell", for: indexPath) as? TodayCocktailCollectionViewCell,
-              let helpOrderCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HelpOrderCell", for: indexPath) as? HelpOrderCell
+              let helpOrderCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HelpOrderCell", for: indexPath) as? HelpOrderCell,
+              let hashTagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HashTagCell", for: indexPath) as? HashTagCell
         else { return UICollectionViewCell() }
         
         switch indexPath.section {
@@ -291,6 +346,9 @@ extension TodayCocktailCollectionViewController {
             helpOrderCell.questionLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
             helpOrderCell.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
             return helpOrderCell
+        case 3:
+            hashTagCell.textLabel.text = "#\(recommendationData[indexPath.row].hashTagName)"
+            return hashTagCell
         default:
             return UICollectionViewCell()
         }
@@ -309,6 +367,10 @@ extension TodayCocktailCollectionViewController {
             let colorChoiceViewController = ColorChoiceViewController()
             colorChoiceViewController.myFavor = false
             self.navigationController?.show(colorChoiceViewController, sender: nil)
+        case 3:
+            let cocktailListViewController = CocktailListViewController()
+            cocktailListViewController.lastRecipe = recommendationData[indexPath.row].list
+            self.navigationController?.show(cocktailListViewController, sender: nil)
         default:
             return
         }
@@ -357,6 +419,17 @@ extension TodayCocktailCollectionViewController {
                       completion([YouTubeVideo]())
                       return }
             completion(youTubeVideoList)
+        }
+    }
+    
+    func getRecommendations(completion: @escaping ([Recommendation]) -> (Void)) {
+        ref.child("CocktailRecommendation").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]],
+                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                  let cocktailList = try? JSONDecoder().decode([Recommendation].self, from: data) else {
+                      completion([Recommendation]())
+                      return }
+            completion(cocktailList)
         }
     }
 }

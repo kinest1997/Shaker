@@ -14,7 +14,8 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
+        title = "나의 레시피"
         myOwnRecipe = FirebaseRecipe.shared.myRecipe
         
         view.addSubview(mainTableView)

@@ -1,4 +1,7 @@
 import UIKit
+import FirebaseStorage
+import FirebaseAuth
+import FirebaseDatabase
 
 class WishListCocktailListViewController: UITableViewController {
     
@@ -6,6 +9,7 @@ class WishListCocktailListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "즐겨찾기"
         view.backgroundColor = .white
         tableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
     }
@@ -38,5 +42,21 @@ extension WishListCocktailListViewController {
         let cocktailDetailViewController = CocktailDetailViewController()
         cocktailDetailViewController.setData(data: cocktailData)
         self.show(cocktailDetailViewController, sender: nil)
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            guard let number = FirebaseRecipe.shared.wishList.firstIndex(of: wishListRecipe[indexPath.row]) else { return }
+            FirebaseRecipe.shared.wishList.remove(at: number)
+            
+            FirebaseRecipe.shared.uploadWishList()
+            wishListRecipe = FirebaseRecipe.shared.wishList
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }

@@ -11,6 +11,7 @@ class CocktailListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(mainCollectionView)
+        self.navigationController?.navigationBar.isHidden = false
         mainCollectionView.delegate = self
         mainCollectionView.dataSource = self
         mainCollectionView.register(CocktailListCollectionViewCell.self, forCellWithReuseIdentifier: "CocktailListCollectionViewCell")

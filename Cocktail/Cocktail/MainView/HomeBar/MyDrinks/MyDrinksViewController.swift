@@ -7,31 +7,19 @@ class MyDrinksViewController: UIViewController {
     
     var originRecipe: [Cocktail] = []
     
-    let mainScrollView = UIScrollView()
-    let mainView = UIView()
-    
-    let leftStackView = UIStackView()
-    let midStackView = UIStackView()
-    let rightStackView = UIStackView()
-    let groupStackView = UIStackView()
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let topNameLabel = UILabel()
     let topExplainLabel = UILabel()
-    
-    let ginButton = BadgeButton()
-    let vodkaButton = BadgeButton()
-    let rumButton = BadgeButton()
-    let tequilaButton = BadgeButton()
-    let whiskeyButton = BadgeButton()
-    let liqueurButton = BadgeButton()
-    let brandyButton = BadgeButton()
-    let beverageButton = BadgeButton()
-    let assetsButton = BadgeButton()
     
     let whatICanMakeButton = MainButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         originRecipe = FirebaseRecipe.shared.recipe
+        collectionView.register(MyDrinkCell.self, forCellWithReuseIdentifier: "MyDrinkCell")
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.isScrollEnabled = false
         attribute()
         layout()
     }
@@ -41,15 +29,8 @@ class MyDrinksViewController: UIViewController {
         if let data = UserDefaults.standard.object(forKey: "whatIHave") as? [String] {
             myDrink = Set(data)
         }
+        collectionView.reloadData()
         updateWhatICanMakeButton(data: myDrink, button: whatICanMakeButton)
-        [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
-            updateIngredientsBadge(button: $0)
-            $0.layer.cornerRadius = 15
-            $0.backgroundColor = .white
-            $0.clipsToBounds = true
-            $0.layer.borderWidth = 1
-            $0.layer.borderColor = UIColor.splitLineGray.cgColor
-        }
     }
     
     func layout() {
@@ -64,11 +45,11 @@ class MyDrinksViewController: UIViewController {
             $0.leading.equalTo(topNameLabel)
             $0.trailing.equalToSuperview().offset(-20)
         }
-        groupStackView.snp.makeConstraints {
+        collectionView.snp.makeConstraints {
             $0.top.equalTo(topExplainLabel.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().multipliedBy(0.9)
-            $0.height.equalTo(groupStackView.snp.width)
+            $0.height.equalTo(collectionView.snp.width)
         }
         whatICanMakeButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
@@ -79,61 +60,19 @@ class MyDrinksViewController: UIViewController {
     
     func attribute() {
         view.backgroundColor = .white
-        view.addSubview(groupStackView)
+        view.addSubview(collectionView)
         view.addSubview(whatICanMakeButton)
         view.addSubview(topNameLabel)
         view.addSubview(topExplainLabel)
-
-        [leftStackView, midStackView, rightStackView].forEach {
-            groupStackView.addArrangedSubview($0)
-            $0.axis = .vertical
-            $0.spacing = 10
-            $0.distribution = .fillEqually
-        }
         
-        [vodkaButton, ginButton, liqueurButton].forEach {
-            leftStackView.addArrangedSubview($0)
-        }
-        [tequilaButton, whiskeyButton, beverageButton].forEach {
-            midStackView.addArrangedSubview($0)
-        }
-        [brandyButton, rumButton, assetsButton].forEach {
-            rightStackView.addArrangedSubview($0)
-        }
-        
-        vodkaButton.setImage(UIImage(named: "vodka"), for: .normal)
-        ginButton.setImage(UIImage(named: "gin"), for: .normal)
-        liqueurButton.setImage(UIImage(named: "liqueur"), for: .normal)
-        tequilaButton.setImage(UIImage(named: "tequila"), for: .normal)
-        whiskeyButton.setImage(UIImage(named: "whiskey"), for: .normal)
-        
-        beverageButton.setImage(UIImage(named: "coke"), for: .normal)
-        brandyButton.setImage(UIImage(named: "brandy"), for: .normal)
-        rumButton.setImage(UIImage(named: "rum"), for: .normal)
-        assetsButton.setImage(UIImage(named: "sugarSyrup"), for: .normal)
-        
-        topNameLabel.textColor = .mainGray
+        topNameLabel.textColor = .black
         topExplainLabel.textColor = .mainGray
         topNameLabel.text = "내 술장"
         topNameLabel.font = .nexonFont(ofSize: 30, weight: .bold)
         topExplainLabel.font = .nexonFont(ofSize: 15, weight: .semibold)
         topExplainLabel.text = "내가 가지고 있는 재료로 만들 수 있는 레시피를 알아봐요!"
         topExplainLabel.numberOfLines = 0
-        groupStackView.axis = .horizontal
-        groupStackView.distribution = .fillEqually
-        groupStackView.spacing = 10
-        vodkaButton.base = .vodka
-        whiskeyButton.base = .whiskey
-        tequilaButton.base = .tequila
-        ginButton.base = .gin
-        liqueurButton.base = .liqueur
-        brandyButton.base = .brandy
-        beverageButton.base = .beverage
-        rumButton.base = .rum
-        assetsButton.base = .assets
-        [vodkaButton, ginButton, whiskeyButton, tequilaButton, liqueurButton, brandyButton, beverageButton, rumButton, assetsButton].forEach {
-            setButtonAction(buttonName: $0)
-        }
+        
         whatICanMakeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             let whatICanMakeViewController = CocktailListViewController()
@@ -142,26 +81,16 @@ class MyDrinksViewController: UIViewController {
         }), for: .touchUpInside)
     }
     
-    func setButtonAction(buttonName: BadgeButton) {
-        buttonName.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            let whatIHaveViewController = WhatIHaveViewController()
-            whatIHaveViewController.refreshList = buttonName.base
-            self.show(whatIHaveViewController, sender: nil)
-        }), for: .touchUpInside)
-    }
-    
-    func updateIngredientsBadge(button: BadgeButton) {
-        let origin = Set(button.base.list.map {
+    func updateIngredientsBadge(base: Cocktail.Base) -> Int {
+        let origin = Set(base.list.map {
             $0.rawValue })
         let subtracted = origin.subtracting(myDrink)
         let originCount = origin.count - subtracted.count
-        button.badge = "\(originCount)"
+        return originCount
     }
     
     func updateWhatICanMakeButton(data: Set<String>, button: UIButton) {
         let sortedData = checkWhatICanMake(myIngredients: data)
-
         if sortedData.count != 0 {
              button.backgroundColor = .tappedOrange
             button.setTitle("\(sortedData.count)" + " " + "EA".localized + " " + "making".localized, for: .normal)
@@ -182,5 +111,33 @@ class MyDrinksViewController: UIViewController {
             }
         }
         return lastRecipe
+    }
+}
+
+extension MyDrinksViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let whatIHaveViewController = WhatIHaveViewController()
+        whatIHaveViewController.refreshList = Cocktail.Base.allCases[indexPath.row]
+        self.show(whatIHaveViewController, sender: nil)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        Cocktail.Base.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let yourWidth = collectionView.bounds.width/3.5
+        let yourHeight = yourWidth
+        
+        return CGSize(width: yourWidth, height: yourHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyDrinkCell", for: indexPath) as? MyDrinkCell else { return UICollectionViewCell() }
+        cell.nameTextLabel.text = Cocktail.Base.allCases[indexPath.row].rawValue.localized
+        cell.mainImage.image = UIImage(named: Cocktail.Base.allCases[indexPath.row].rawValue)
+        cell.badgecount.text = String(updateIngredientsBadge(base: Cocktail.Base.allCases[indexPath.row]))
+        
+        return cell
     }
 }

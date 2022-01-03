@@ -167,7 +167,7 @@ class CocktailDetailViewController: UIViewController {
         cocktailImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(wishListButton.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(50)
             $0.height.equalTo(cocktailImageView.snp.width)
         }
         
@@ -184,33 +184,42 @@ class CocktailDetailViewController: UIViewController {
             $0.width.equalToSuperview()
         }
         
-        likeButton.snp.makeConstraints {
-            $0.leading.equalTo(alcoholStackView.snp.leading)
-            $0.width.height.equalTo(30)
-            $0.top.equalTo(nameLabel.snp.bottom).offset(20)
+        if cocktailData.myRecipe {
+            alcoholSplitLine.snp.makeConstraints {
+                $0.top.equalTo(nameLabel.snp.bottom).offset(20)
+                $0.leading.trailing.equalToSuperview()
+                $0.height.equalTo(20)
+            }
+        } else {
+            likeButton.snp.makeConstraints {
+                $0.leading.equalTo(alcoholStackView.snp.leading)
+                $0.width.height.equalTo(30)
+                $0.top.equalTo(nameLabel.snp.bottom).offset(20)
+            }
+            
+            likeCountLabel.snp.makeConstraints {
+                $0.leading.trailing.equalTo(likeButton)
+                $0.top.equalTo(likeButton.snp.bottom)
+            }
+            
+            disLikeButton.snp.makeConstraints {
+                $0.trailing.equalTo(alcoholStackView.snp.trailing)
+                $0.width.height.equalTo(30)
+                $0.top.equalTo(likeButton)
+            }
+            
+            disLikeCountLabel.snp.makeConstraints {
+                $0.leading.trailing.equalTo(disLikeButton)
+                $0.top.equalTo(disLikeButton.snp.bottom)
+            }
+            
+            alcoholSplitLine.snp.makeConstraints {
+                $0.top.equalTo(disLikeCountLabel.snp.bottom).offset(20)
+                $0.leading.trailing.equalToSuperview()
+                $0.height.equalTo(20)
+            }
         }
         
-        likeCountLabel.snp.makeConstraints {
-            $0.leading.trailing.equalTo(likeButton)
-            $0.top.equalTo(likeButton.snp.bottom)
-        }
-        
-        disLikeButton.snp.makeConstraints {
-            $0.trailing.equalTo(alcoholStackView.snp.trailing)
-            $0.width.height.equalTo(30)
-            $0.top.equalTo(likeButton)
-        }
-        
-        disLikeCountLabel.snp.makeConstraints {
-            $0.leading.trailing.equalTo(disLikeButton)
-            $0.top.equalTo(disLikeButton.snp.bottom)
-        }
-        
-        alcoholSplitLine.snp.makeConstraints {
-            $0.top.equalTo(disLikeCountLabel.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(20)
-        }
         
         alcoholStackView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.3)

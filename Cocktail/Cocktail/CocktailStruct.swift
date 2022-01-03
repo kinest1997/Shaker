@@ -4,15 +4,16 @@ protocol CocktailCondition {
     var rawValue: String { get }
 }
 
+// 칵테일 좋아요 정보 관련 객체
 struct CocktailLikeList: Codable {
     let cocktail: [String: CocktailLikeCount]
 }
-
+//칵테일의 이름 경로 아래에 좋아요를 누를때마다 그사람의 uid 가 추가되고 좋아요일경우 true, 싫어요일 경우 false
 struct CocktailLikeCount: Codable {
     var people: [String: Bool] = [:]
 }
-//칵테일의 id 아래에 좋아요를 누를때마다 그사람의 uid 가 추가되고 좋아요일경우 true, 싫어요일 경우 false
 
+//유튜브 관련 컨텐츠 받아오는 객체
 struct YouTubeVideo: Codable {
     let videoName: String
     let videoCode: String
@@ -28,6 +29,11 @@ enum YouTubeOwner: String, Codable {
     case yancon
 }
 
+struct Recommendation: Codable {
+    var hashTagName: String
+    var list: [Cocktail]
+}
+
 enum SortingStandard {
     case alcohol
     case name
@@ -39,7 +45,7 @@ struct Cocktail: Codable, Hashable {
     let name: String
     let craft: Craft
     var glass: Glass
-    let recipe: [String]
+    var recipe: [String]
     var ingredients: [Ingredients]
     let base: Base
     let alcohol: Alcohol

@@ -53,7 +53,7 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.tintColor = .mainGray
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "normalCell")
+        tableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -64,12 +64,21 @@ class SettingTableViewController: UITableViewController {
 
 ///UITableView DataSource & Delegate
 extension SettingTableViewController {
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return Settings.allCases.count
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let myLabel = UILabel()
+        myLabel.frame = CGRect(x: 10, y: -10, width: 320, height: 30)
+        myLabel.textColor = .mainGray
+        myLabel.font = .nexonFont(ofSize: 12, weight: .semibold)
+        myLabel.text = Settings(rawValue: section)?.sectionTitle
+        let headerView = UIView()
+        headerView.addSubview(myLabel)
+
+        return headerView
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Settings(rawValue: section)?.sectionTitle
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return Settings.allCases.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,12 +107,11 @@ extension SettingTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "normalCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as? SettingCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        var content = cell.defaultContentConfiguration()
-        content.text = Settings(rawValue: indexPath.section)?.rowTitles[indexPath.row]
-        cell.contentConfiguration = content
+        cell.mainLabel.text = Settings(rawValue: indexPath.section)?.rowTitles[indexPath.row]
         cell.accessoryView?.isHidden = true
+
         switch indexPath.section {
         case 1:
             cell.accessoryView?.isHidden = false

@@ -50,7 +50,7 @@ class SettingDetailViewController: UIViewController {
         view.addSubview(mainTableView)
         mainTableView.delegate = self
         mainTableView.dataSource = self
-        mainTableView.register(UITableViewCell.self, forCellReuseIdentifier: "default")
+        mainTableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")
         mainTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -79,22 +79,29 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
         return 4
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let myLabel = UILabel()
+        myLabel.frame = CGRect(x: 10, y: -10, width: 320, height: 30)
+        myLabel.textColor = .mainGray
+        myLabel.font = .nexonFont(ofSize: 12, weight: .semibold)
+        myLabel.text = Developers(rawValue: section)?.sectionTitle
+        let headerView = UIView()
+        headerView.addSubview(myLabel)
+
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Developers(rawValue: section)?.rowTitle.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as? SettingCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        var content = cell.defaultContentConfiguration()
-        content.text = Developers(rawValue: indexPath.section)?.rowTitle[indexPath.row]
-        cell.contentConfiguration = content
+        cell.mainLabel.text = Developers(rawValue: indexPath.section)?.rowTitle[indexPath.row]
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Developers(rawValue: section)?.sectionTitle
-    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         

@@ -138,7 +138,7 @@ class DrinkTypeChoiceViewController: UIViewController {
             $0.backgroundColor = .white
             $0.clipsToBounds = true
             $0.setTitleColor(.mainGray, for: .normal)
-            $0.titleLabel?.font = .nexonFont(ofSize: 18, weight: .bold)
+            $0.titleLabel?.font = .nexonFont(ofSize: 18, weight: .semibold)
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.borderGray.cgColor
         }

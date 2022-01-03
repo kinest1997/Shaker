@@ -52,11 +52,24 @@ class FirebaseRecipe {
     
     var myRecipe: [Cocktail] = []
     
+    var recommendations: [Recommendation] = []
+    
     var youTubeData: [YouTubeVideo] = []
     
     var cocktailLikeList: [String:[String: Bool]] = [:]
     
     let uid = Auth.auth().currentUser?.uid
+    
+    func getRecommendations(completion: @escaping ([Recommendation]) -> (Void)) {
+        ref.child("CocktailRecommendation").observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [[String: Any]],
+                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                  let cocktailList = try? JSONDecoder().decode([Recommendation].self, from: data) else {
+                      completion([Recommendation]())
+                      return }
+            completion(cocktailList)
+        }
+    }
     
     func getRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
         ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in

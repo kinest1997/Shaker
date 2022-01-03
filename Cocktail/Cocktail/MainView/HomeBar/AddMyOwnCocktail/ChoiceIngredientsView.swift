@@ -152,7 +152,7 @@ extension ChoiceIngredientsView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Cocktail.Base.allCases[section].rawValue
+        return Cocktail.Base.allCases[section].rawValue.localized
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

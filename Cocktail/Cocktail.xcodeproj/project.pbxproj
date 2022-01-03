@@ -30,7 +30,6 @@
 		3D6E0EA7276EDF5B00A7B855 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6E0EA6276EDF5B00A7B855 /* MainViewController.swift */; };
 		3D6E0EB1276F472200A7B855 /* CocktailListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6E0EB0276F472200A7B855 /* CocktailListCollectionViewCell.swift */; };
 		3D6E0EB4276F623000A7B855 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6E0EB3276F623000A7B855 /* LoginViewModel.swift */; };
-		3D7481222736566F0092BD74 /* MyBadgeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7481212736566E0092BD74 /* MyBadgeButton.swift */; };
 		3D74812427366C0E0092BD74 /* WhatIHaveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D74812327366C0D0092BD74 /* WhatIHaveViewController.swift */; };
 		3D7481292736BC550092BD74 /* WhatIHaveCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7481282736BC550092BD74 /* WhatIHaveCollectionViewCell.swift */; };
 		3D7785982753468D008F0151 /* WishListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7785972753468D008F0151 /* WishListTableViewController.swift */; };
@@ -70,6 +69,13 @@
 		3DBD0F5A2782C7C3001FA460 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3DBD0F5B2782EE33001FA460 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA05529277F0F9100966C90 /* UIFont.swift */; };
 		3DBD0F5C2782EE46001FA460 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA05531278080C000966C90 /* UIColor.swift */; };
+		3DBD0F5E27833BE6001FA460 /* HashTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F5D27833BE5001FA460 /* HashTagCell.swift */; };
+		3DBD0F612783463A001FA460 /* NoTitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F602783463A001FA460 /* NoTitleHeader.swift */; };
+		3DBD0F6427834D42001FA460 /* UINavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F6327834D42001FA460 /* UINavigation.swift */; };
+		3DBD0F6527834D42001FA460 /* UINavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F6327834D42001FA460 /* UINavigation.swift */; };
+		3DBD0F67278355A5001FA460 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F66278355A5001FA460 /* SettingCell.swift */; };
+		3DBD0F6A278357B4001FA460 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F69278357B4001FA460 /* SettingHeaderView.swift */; };
+		3DBD0F6D278360F5001FA460 /* MyDrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F6C278360F4001FA460 /* MyDrinkCell.swift */; };
 		3DC6AC502768D68C004E4565 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6AC4F2768D68C004E4565 /* TabBarController.swift */; };
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
 		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
@@ -142,7 +148,6 @@
 		3D6E0EA6276EDF5B00A7B855 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3D6E0EB0276F472200A7B855 /* CocktailListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D6E0EB3276F623000A7B855 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		3D7481212736566E0092BD74 /* MyBadgeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBadgeButton.swift; sourceTree = "<group>"; };
 		3D74812327366C0D0092BD74 /* WhatIHaveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIHaveViewController.swift; sourceTree = "<group>"; };
 		3D7481282736BC550092BD74 /* WhatIHaveCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIHaveCollectionViewCell.swift; sourceTree = "<group>"; };
 		3D7785972753468D008F0151 /* WishListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListTableViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +184,12 @@
 		3DBD0F5127820BBA001FA460 /* NEXON Lv1 Gothic OTF.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF.woff"; sourceTree = "<group>"; };
 		3DBD0F5227820BBB001FA460 /* NEXON Lv1 Gothic OTF Bold.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF Bold.woff"; sourceTree = "<group>"; };
 		3DBD0F5327820BBB001FA460 /* NEXON Lv1 Gothic OTF Light.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF Light.woff"; sourceTree = "<group>"; };
+		3DBD0F5D27833BE5001FA460 /* HashTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashTagCell.swift; sourceTree = "<group>"; };
+		3DBD0F602783463A001FA460 /* NoTitleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTitleHeader.swift; sourceTree = "<group>"; };
+		3DBD0F6327834D42001FA460 /* UINavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigation.swift; sourceTree = "<group>"; };
+		3DBD0F66278355A5001FA460 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		3DBD0F69278357B4001FA460 /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
+		3DBD0F6C278360F4001FA460 /* MyDrinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrinkCell.swift; sourceTree = "<group>"; };
 		3DC6AC4F2768D68C004E4565 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
@@ -324,9 +335,11 @@
 			children = (
 				3DE56B2C275CDCA60087D979 /* TodayCocktailCollectionViewController.swift */,
 				3DE56B30275D08090087D979 /* TodayCocktailCollectionViewHeader.swift */,
+				3DBD0F602783463A001FA460 /* NoTitleHeader.swift */,
 				3DA05521277EF69300966C90 /* TitleHeaderView.swift */,
 				3DE56B2E275CE5FA0087D979 /* TodayCocktailCollectionViewCell.swift */,
 				3DBD0F492781504F001FA460 /* HelpOrderCell.swift */,
+				3DBD0F5D27833BE5001FA460 /* HashTagCell.swift */,
 			);
 			path = TodayCocktail;
 			sourceTree = "<group>";
@@ -363,7 +376,9 @@
 			isa = PBXGroup;
 			children = (
 				3D69BF74275B7B57008502EE /* SettingTableViewController.swift */,
+				3DBD0F66278355A5001FA460 /* SettingCell.swift */,
 				3D297A9A277329B8001B8BD4 /* SettingDetailView.swift */,
+				3DBD0F69278357B4001FA460 /* SettingHeaderView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -430,6 +445,7 @@
 			isa = PBXGroup;
 			children = (
 				3D83715F274CD8BE00CA6036 /* MyDrinksViewController.swift */,
+				3DBD0F6C278360F4001FA460 /* MyDrinkCell.swift */,
 				3D6E0EA8276EDF8700A7B855 /* WhatIHave */,
 			);
 			path = MyDrinks;
@@ -506,13 +522,13 @@
 				7D4AF9052760D57B0093C3C2 /* UIApplication.swift */,
 				7D4AF9072760D5840093C3C2 /* UIViewController.swift */,
 				3DC6AC4F2768D68C004E4565 /* TabBarController.swift */,
-				3D7481212736566E0092BD74 /* MyBadgeButton.swift */,
 				3D48C211275A13A2001B40FC /* LoadingView.swift */,
 				3D7DE4812774D5A6008FF202 /* MainButton.swift */,
 				3DA0552F277F5FAD00966C90 /* UIView.swift */,
 				3DA05529277F0F9100966C90 /* UIFont.swift */,
 				3DA05531278080C000966C90 /* UIColor.swift */,
 				3D175BA5274285BB00EC142B /* String.swift */,
+				3DBD0F6327834D42001FA460 /* UINavigation.swift */,
 			);
 			path = "Global Components";
 			sourceTree = "<group>";
@@ -716,6 +732,7 @@
 				3DBD0F5C2782EE46001FA460 /* UIColor.swift in Sources */,
 				3DF3C3002750833000462619 /* Cocktail_SmallView.swift in Sources */,
 				3DBD0F5A2782C7C3001FA460 /* String.swift in Sources */,
+				3DBD0F6527834D42001FA460 /* UINavigation.swift in Sources */,
 				3DBD0F5B2782EE33001FA460 /* UIFont.swift in Sources */,
 				3D072470274F551D0061B3F5 /* Cocktail_Widget.swift in Sources */,
 			);
@@ -727,13 +744,16 @@
 			files = (
 				7D4AF9062760D57B0093C3C2 /* UIApplication.swift in Sources */,
 				3D297A972772F901001B8BD4 /* ColorChoiceViewModel.swift in Sources */,
+				3DBD0F6A278357B4001FA460 /* SettingHeaderView.swift in Sources */,
 				3DA0552A277F0F9100966C90 /* UIFont.swift in Sources */,
+				3DBD0F612783463A001FA460 /* NoTitleHeader.swift in Sources */,
 				3DBD0F4C27815610001FA460 /* AddTableViewHeaderView.swift in Sources */,
 				3D74812427366C0E0092BD74 /* WhatIHaveViewController.swift in Sources */,
 				3D7F17C32734D5FF006EDCF9 /* FilteredView.swift in Sources */,
+				3DBD0F5E27833BE6001FA460 /* HashTagCell.swift in Sources */,
 				3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */,
-				3D7481222736566F0092BD74 /* MyBadgeButton.swift in Sources */,
 				3DE56B31275D080A0087D979 /* TodayCocktailCollectionViewHeader.swift in Sources */,
+				3DBD0F6427834D42001FA460 /* UINavigation.swift in Sources */,
 				3D7481292736BC550092BD74 /* WhatIHaveCollectionViewCell.swift in Sources */,
 				3DE56B2F275CE5FB0087D979 /* TodayCocktailCollectionViewCell.swift in Sources */,
 				3DA76A4C2730D8B7004091CE /* CocktailRecipeViewController.swift in Sources */,
@@ -756,6 +776,7 @@
 				3D21D4C22733E9C300FE2896 /* UIImage.swift in Sources */,
 				3D7DE4822774D5A6008FF202 /* MainButton.swift in Sources */,
 				3DA05522277EF69300966C90 /* TitleHeaderView.swift in Sources */,
+				3DBD0F6D278360F5001FA460 /* MyDrinkCell.swift in Sources */,
 				3D69BF75275B7B57008502EE /* SettingTableViewController.swift in Sources */,
 				3DB910F3275759E90076CB50 /* Singleton.swift in Sources */,
 				3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */,
@@ -769,6 +790,7 @@
 				3D7785982753468D008F0151 /* WishListTableViewController.swift in Sources */,
 				3DF79349275A6AC8004E9F98 /* AddRecipeCell.swift in Sources */,
 				3DC6AC502768D68C004E4565 /* TabBarController.swift in Sources */,
+				3DBD0F67278355A5001FA460 /* SettingCell.swift in Sources */,
 				3DBD0F5027818228001FA460 /* AssistantCell.swift in Sources */,
 				3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */,
 				3DB910D6275683B90076CB50 /* AlcoholChoiceViewController.swift in Sources */,
