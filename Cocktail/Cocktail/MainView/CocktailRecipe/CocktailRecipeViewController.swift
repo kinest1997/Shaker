@@ -219,7 +219,7 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
     }
     
     func isFiltering() -> Bool {
-        return (searchController.isActive && !searchBarIsEmpty())
+        return (searchController.isActive || !searchBarIsEmpty())
     }
     
     func searchBarIsEmpty() -> Bool {
@@ -229,10 +229,11 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         let filterRecipe = originRecipe
         filteredRecipe = filterRecipe.filter({
-            return $0.name.contains(searchText) || $0.mytip.contains(searchText) || $0.ingredients.map({ baby in
-                baby.rawValue
-            })[0...].contains(searchText) || $0.glass.rawValue.contains(searchText) || $0.color.rawValue.contains(searchText) || $0.recipe.contains(searchText)
+            return $0.name.localized.lowercased().contains(searchText) || $0.ingredients.map({ baby in
+                baby.rawValue.localized.lowercased()
+            })[0...].contains(searchText) || $0.glass.rawValue.localized.lowercased().contains(searchText) || $0.color.rawValue.localized.lowercased().contains(searchText) || $0.recipe.contains(searchText)
         })
         mainTableView.reloadData()
     }
 }
+

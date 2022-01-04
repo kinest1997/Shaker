@@ -13,7 +13,7 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
         contentView.addSubview(mainImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(checkBoxImage)
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5))
         nameLabel.font = .nexonFont(ofSize: 15, weight: .semibold)
         nameLabel.textAlignment = .center
         contentView.layer.cornerRadius = 15

@@ -25,15 +25,15 @@
 "OK" = "확인";
 
 //AddMyOwnCocktailRecipeViewController.swift
-"red" = "빨강색";
+"red" = "빨간색";
 "orange" = "주황색";
-"yellow" = "노랑색";
+"yellow" = "노란색";
 "green" = "초록색";
-"blue" = "파랑색";
+"blue" = "파란색";
 "violet" = "보라색";
 "clear" = "투명색";
-"white" = "하양색";
-"black" = "검정색";
+"white" = "하얀색";
+"black" = "검은색";
 "brown" = "갈색";
 "various" = "복합";
 
@@ -198,6 +198,8 @@
 "rawCream" = "생크림";
 "grenadineSyrup" = "그레나딘시럽";
 "aperol" = "아페롤";
+"cremeDeViolet" = "크렘드바이올렛";
+"maraschino" = "마라스키노";
 "unknown" = "무명의 재료";
 
 //SettingTableViewController
