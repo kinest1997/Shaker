@@ -8,17 +8,18 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.layer.cornerRadius = 5
-        contentView.clipsToBounds = true
-        
         mainImageView.contentMode = .scaleAspectFit
         nameLabel.numberOfLines = 0
         contentView.addSubview(mainImageView)
         contentView.addSubview(nameLabel)
         contentView.addSubview(checkBoxImage)
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5))
         nameLabel.font = .nexonFont(ofSize: 15, weight: .semibold)
         nameLabel.textAlignment = .center
-        
+        contentView.layer.cornerRadius = 15
+        contentView.clipsToBounds = true
+        contentView.layer.borderWidth = 1
+        contentView.layer.borderColor = UIColor.splitLineGray.cgColor
         mainImageView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-40)
@@ -28,7 +29,7 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
             $0.centerX.equalTo(mainImageView)
         }
         checkBoxImage.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview()
+            $0.top.trailing.equalToSuperview().inset(5)
             $0.height.width.equalTo(30)
         }
         checkBoxImage.tintColor = .mainOrange

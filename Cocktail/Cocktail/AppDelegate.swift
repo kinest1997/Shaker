@@ -46,6 +46,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIBarButtonItem.appearance().setTitleTextAttributes(naviBarTextAttributes, for: .highlighted)
         UIBarButtonItem.appearance().setTitleTextAttributes(naviBarTextAttributes, for: .focused)
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
+        
+        let attributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 12, weight: .semibold)]
+        UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
         return true
     }
     

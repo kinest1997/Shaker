@@ -23,6 +23,11 @@
 		3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D027564EA600CBCC40 /* LoginViewController.swift */; };
 		3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */; };
 		3D48C212275A13A2001B40FC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48C211275A13A2001B40FC /* LoadingView.swift */; };
+		3D5E8C922784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D5E8C8F2784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf */; };
+		3D5E8C932784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D5E8C902784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf */; };
+		3D5E8C942784067A0005478B /* NEXON Lv1 Gothic OTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D5E8C912784067A0005478B /* NEXON Lv1 Gothic OTF.otf */; };
+		3D5E8C9627843C370005478B /* OpenSourceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5E8C9527843C370005478B /* OpenSourceView.swift */; };
+		3D5E8C982784421F0005478B /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5E8C972784421F0005478B /* WebKit.framework */; };
 		3D69BF75275B7B57008502EE /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D69BF74275B7B57008502EE /* SettingTableViewController.swift */; };
 		3D6C6D412732AB5200C70276 /* CocktailListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D402732AB5200C70276 /* CocktailListViewController.swift */; };
 		3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D6C6D442732B86100C70276 /* CocktailListCell.swift */; };
@@ -60,12 +65,6 @@
 		3DBD0F4C27815610001FA460 /* AddTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F4B27815610001FA460 /* AddTableViewHeaderView.swift */; };
 		3DBD0F4E27817219001FA460 /* IngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F4D27817219001FA460 /* IngredientsCell.swift */; };
 		3DBD0F5027818228001FA460 /* AssistantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F4F27818228001FA460 /* AssistantCell.swift */; };
-		3DBD0F5427820BBB001FA460 /* NEXON Lv1 Gothic OTF.woff in Resources */ = {isa = PBXBuildFile; fileRef = 3DBD0F5127820BBA001FA460 /* NEXON Lv1 Gothic OTF.woff */; };
-		3DBD0F5527820BBC001FA460 /* NEXON Lv1 Gothic OTF.woff in Resources */ = {isa = PBXBuildFile; fileRef = 3DBD0F5127820BBA001FA460 /* NEXON Lv1 Gothic OTF.woff */; };
-		3DBD0F5627820BBC001FA460 /* NEXON Lv1 Gothic OTF Bold.woff in Resources */ = {isa = PBXBuildFile; fileRef = 3DBD0F5227820BBB001FA460 /* NEXON Lv1 Gothic OTF Bold.woff */; };
-		3DBD0F5727820BBC001FA460 /* NEXON Lv1 Gothic OTF Bold.woff in Resources */ = {isa = PBXBuildFile; fileRef = 3DBD0F5227820BBB001FA460 /* NEXON Lv1 Gothic OTF Bold.woff */; };
-		3DBD0F5827820BBC001FA460 /* NEXON Lv1 Gothic OTF Light.woff in Resources */ = {isa = PBXBuildFile; fileRef = 3DBD0F5327820BBB001FA460 /* NEXON Lv1 Gothic OTF Light.woff */; };
-		3DBD0F5927820BBC001FA460 /* NEXON Lv1 Gothic OTF Light.woff in Resources */ = {isa = PBXBuildFile; fileRef = 3DBD0F5327820BBB001FA460 /* NEXON Lv1 Gothic OTF Light.woff */; };
 		3DBD0F5A2782C7C3001FA460 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3DBD0F5B2782EE33001FA460 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA05529277F0F9100966C90 /* UIFont.swift */; };
 		3DBD0F5C2782EE46001FA460 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA05531278080C000966C90 /* UIColor.swift */; };
@@ -141,6 +140,11 @@
 		3D4415D027564EA600CBCC40 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceViewController.swift; sourceTree = "<group>"; };
 		3D48C211275A13A2001B40FC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		3D5E8C8F2784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF Bold.otf"; sourceTree = "<group>"; };
+		3D5E8C902784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF Light.otf"; sourceTree = "<group>"; };
+		3D5E8C912784067A0005478B /* NEXON Lv1 Gothic OTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF.otf"; sourceTree = "<group>"; };
+		3D5E8C9527843C370005478B /* OpenSourceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenSourceView.swift; sourceTree = "<group>"; };
+		3D5E8C972784421F0005478B /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3D69BF74275B7B57008502EE /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
 		3D6C6D402732AB5200C70276 /* CocktailListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListViewController.swift; sourceTree = "<group>"; };
 		3D6C6D442732B86100C70276 /* CocktailListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailListCell.swift; sourceTree = "<group>"; };
@@ -181,9 +185,6 @@
 		3DBD0F4B27815610001FA460 /* AddTableViewHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTableViewHeaderView.swift; sourceTree = "<group>"; };
 		3DBD0F4D27817219001FA460 /* IngredientsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsCell.swift; sourceTree = "<group>"; };
 		3DBD0F4F27818228001FA460 /* AssistantCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantCell.swift; sourceTree = "<group>"; };
-		3DBD0F5127820BBA001FA460 /* NEXON Lv1 Gothic OTF.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF.woff"; sourceTree = "<group>"; };
-		3DBD0F5227820BBB001FA460 /* NEXON Lv1 Gothic OTF Bold.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF Bold.woff"; sourceTree = "<group>"; };
-		3DBD0F5327820BBB001FA460 /* NEXON Lv1 Gothic OTF Light.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF Light.woff"; sourceTree = "<group>"; };
 		3DBD0F5D27833BE5001FA460 /* HashTagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashTagCell.swift; sourceTree = "<group>"; };
 		3DBD0F602783463A001FA460 /* NoTitleHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTitleHeader.swift; sourceTree = "<group>"; };
 		3DBD0F6327834D42001FA460 /* UINavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigation.swift; sourceTree = "<group>"; };
@@ -228,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D5E8C982784421F0005478B /* WebKit.framework in Frameworks */,
 				EA19792B0E90586999B8186F /* Pods_Cocktail.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +240,7 @@
 		3D072469274F551D0061B3F5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3D5E8C972784421F0005478B /* WebKit.framework */,
 				3D07246A274F551D0061B3F5 /* WidgetKit.framework */,
 				3D07246C274F551D0061B3F5 /* SwiftUI.framework */,
 				BB80C3BCB494EAFF50034B87 /* Pods_Cocktail.framework */,
@@ -376,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				3D69BF74275B7B57008502EE /* SettingTableViewController.swift */,
+				3D5E8C9527843C370005478B /* OpenSourceView.swift */,
 				3DBD0F66278355A5001FA460 /* SettingCell.swift */,
 				3D297A9A277329B8001B8BD4 /* SettingDetailView.swift */,
 				3DBD0F69278357B4001FA460 /* SettingHeaderView.swift */,
@@ -486,12 +490,12 @@
 				3DA76A4A2730D8A2004091CE /* MainView */,
 				3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
-				3DBD0F5227820BBB001FA460 /* NEXON Lv1 Gothic OTF Bold.woff */,
-				3DBD0F5327820BBB001FA460 /* NEXON Lv1 Gothic OTF Light.woff */,
-				3DBD0F5127820BBA001FA460 /* NEXON Lv1 Gothic OTF.woff */,
-				3DA76A462730D574004091CE /* Cocktail.plist */,
+				3D5E8C8F2784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf */,
+				3D5E8C902784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf */,
+				3D5E8C912784067A0005478B /* NEXON Lv1 Gothic OTF.otf */,
 				3DF7934A275A70EA004E9F98 /* CocktailData.json */,
 				3D3452FC275F3B4400DA3978 /* LoadingAnimation.json */,
+				3DA76A462730D574004091CE /* Cocktail.plist */,
 				3D0D9B762744D714008C75E7 /* Ingredients.plist */,
 				3DB910FC27588CDE0076CB50 /* Info.plist */,
 				3DB9110527588D110076CB50 /* InfoPlist.strings */,
@@ -632,9 +636,6 @@
 				3DF3C30327508C4600462619 /* Cocktail.plist in Resources */,
 				3D072473274F55220061B3F5 /* Assets.xcassets in Resources */,
 				3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */,
-				3DBD0F5927820BBC001FA460 /* NEXON Lv1 Gothic OTF Light.woff in Resources */,
-				3DBD0F5727820BBC001FA460 /* NEXON Lv1 Gothic OTF Bold.woff in Resources */,
-				3DBD0F5527820BBC001FA460 /* NEXON Lv1 Gothic OTF.woff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,15 +644,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				3DA76A3D2730D1D0004091CE /* LaunchScreen.storyboard in Resources */,
-				3DBD0F5427820BBB001FA460 /* NEXON Lv1 Gothic OTF.woff in Resources */,
+				3D5E8C942784067A0005478B /* NEXON Lv1 Gothic OTF.otf in Resources */,
 				3D3452FD275F3B4400DA3978 /* LoadingAnimation.json in Resources */,
 				3D175BA02742846B00EC142B /* Localizable.strings in Resources */,
 				3DA76A472730D574004091CE /* Cocktail.plist in Resources */,
 				3DF7934B275A70EA004E9F98 /* CocktailData.json in Resources */,
 				7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */,
-				3DBD0F5627820BBC001FA460 /* NEXON Lv1 Gothic OTF Bold.woff in Resources */,
+				3D5E8C932784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf in Resources */,
+				3D5E8C922784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf in Resources */,
 				3DA76A3A2730D1D0004091CE /* Assets.xcassets in Resources */,
-				3DBD0F5827820BBC001FA460 /* NEXON Lv1 Gothic OTF Light.woff in Resources */,
 				3D4415C727564B4E00CBCC40 /* GoogleService-Info.plist in Resources */,
 				3DB9110227588D110076CB50 /* InfoPlist.strings in Resources */,
 			);
@@ -800,6 +801,7 @@
 				3D48C212275A13A2001B40FC /* LoadingView.swift in Sources */,
 				3D297A9B277329B8001B8BD4 /* SettingDetailView.swift in Sources */,
 				3DE56B35275E4F750087D979 /* BaseChoiceViewController.swift in Sources */,
+				3D5E8C9627843C370005478B /* OpenSourceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

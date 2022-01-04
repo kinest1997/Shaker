@@ -20,15 +20,18 @@ class AssistantCell: UITableViewCell {
             contentView.addSubview($0)
         }
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20))
-        contentView.backgroundColor = UIColor(named: "splitLineGray")
+        contentView.backgroundColor = .splitLineGray
         contentView.cornerRadius = 15
         contentView.clipsToBounds = true
         
         mainImageView.contentMode = .scaleAspectFill
+        mainImageView.backgroundColor = .clear
+        mainImageView.cornerRadius = 15
+        mainImageView.clipsToBounds = true
         mainImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(60)
-            $0.leading.equalToSuperview().offset(20)
+            $0.width.height.equalTo(80)
+            $0.leading.equalToSuperview().offset(10)
         }
         
         titleLabel.snp.makeConstraints {
@@ -44,8 +47,10 @@ class AssistantCell: UITableViewCell {
         }
         
         titleLabel.textColor = .mainGray
+        titleLabel.backgroundColor = .clear
         titleLabel.font = .nexonFont(ofSize: 20, weight: .bold)
         
+        explainLabel.backgroundColor = .clear
         explainLabel.textColor = .mainGray
         explainLabel.font = .nexonFont(ofSize: 12, weight: .semibold)
         explainLabel.numberOfLines = 0

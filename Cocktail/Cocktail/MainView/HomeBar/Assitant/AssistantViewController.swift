@@ -116,6 +116,7 @@ extension AssistantViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         cell.titleLabel.text = Assist(rawValue: indexPath.row)?.title
         cell.explainLabel.text = Assist(rawValue: indexPath.row)?.explain
+        cell.mainImageView.image = UIImage(named: Assist(rawValue: indexPath.row)?.title ?? "")?.resize()
         return cell
     }
 }

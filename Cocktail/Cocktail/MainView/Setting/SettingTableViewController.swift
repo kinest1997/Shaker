@@ -65,7 +65,7 @@ class SettingTableViewController: UITableViewController {
 ///UITableView DataSource & Delegate
 extension SettingTableViewController {
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_  tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let myLabel = UILabel()
         myLabel.frame = CGRect(x: 10, y: -10, width: 320, height: 30)
         myLabel.textColor = .mainGray
@@ -87,6 +87,13 @@ extension SettingTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 2:
+                show(OpenSourceView(), sender: nil)
+            default:
+                return
+            }
         case 2:
             switch indexPath.row {
             case 0:

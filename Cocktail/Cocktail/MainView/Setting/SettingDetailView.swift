@@ -10,6 +10,7 @@ import SnapKit
 import MessageUI
 
 class SettingDetailViewController: UIViewController {
+    
     enum Developers: Int, CaseIterable {
         case developer
         case illustrator

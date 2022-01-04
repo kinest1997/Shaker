@@ -23,7 +23,6 @@ class CocktailListCell: UITableViewCell {
         ingredientCountLabel.textColor = .gray
         disclosureMark.tintColor = .mainGray
         
-        
         [nameLabel, ingredientCountLabel, cocktailImageView, likeCount, disclosureMark].forEach {
             contentView.addSubview($0)
         }
@@ -64,3 +63,4 @@ class CocktailListCell: UITableViewCell {
         cocktailImageView.kf.setImage(with: URL(string: data.imageURL))
     }
 }
+
