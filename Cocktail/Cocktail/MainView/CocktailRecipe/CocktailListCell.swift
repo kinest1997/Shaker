@@ -60,7 +60,7 @@ class CocktailListCell: UITableViewCell {
     func configure(data: Cocktail) {
         nameLabel.text = data.name
         ingredientCountLabel.text = "Ingredients".localized + " \(data.ingredients.count)" + "EA".localized
-        cocktailImageView.kf.setImage(with: URL(string: data.imageURL))
+        cocktailImageView.kf.setImage(with: URL(string: data.imageURL),placeholder: UIImage(named: "\(data.glass.rawValue)" + "Empty"))
     }
 }
 

@@ -37,7 +37,7 @@ class SettingTableViewController: UITableViewController {
         var rowTitles: [String] {
             switch self {
             case .serviceInformation:
-                return ["공지사항", "버전정보 \(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? ""))", "오픈소스라이브러리", "이용약관", "개인정보 처리방침"]
+                return ["버전정보 \(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? ""))", "오픈소스라이브러리", "개인정보 처리방침"]
             case .alarm:
                 return ["Alarm Setting".localized]
             case .support:
@@ -52,6 +52,7 @@ class SettingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "설정"
         navigationController?.navigationBar.tintColor = .mainGray
         tableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")
     }
@@ -89,7 +90,7 @@ extension SettingTableViewController {
         switch indexPath.section {
         case 0:
             switch indexPath.row {
-            case 2:
+            case 1:
                 show(OpenSourceView(), sender: nil)
             default:
                 return
@@ -150,7 +151,7 @@ extension SettingTableViewController {
 ///Actions per indexPath.row
 extension SettingTableViewController {
     private func requestAppStoreReview() {
-        guard let appStoreURL = URL(string: "https://apps.apple.com/app/id") else { return }    //TODO: 앱아이디 입력해줄 것 예)id100043049583
+        guard let appStoreURL = URL(string: "https://apps.apple.com/app/id1597875622") else { return }    //TODO: 앱아이디 입력해줄 것 예)id100043049583
         var components = URLComponents(url: appStoreURL, resolvingAgainstBaseURL: false)
         components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
         guard let writeReviewURL = components?.url else { return }

@@ -121,7 +121,7 @@ class ChoiceIngredientsView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //가지고있는 재료가 있다면 그 재료의 indexpath를 알려주는것
     func findPlace() -> [(Int, Int)] {
         guard let myIngredients = myIngredients else { return [] }
         let coordinate = myIngredients.map { ingredients -> (Int, Int) in

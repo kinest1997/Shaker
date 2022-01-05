@@ -283,7 +283,6 @@ extension TodayCocktailCollectionViewController {
         if kind == UICollectionView.elementKindSectionHeader {
             guard let basicHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
             switch indexPath.section {
-                //도대체 무슨버근진 모르겠지만 이렇게 안하면 중복되고 이상하게 그려짐 개빡치게
             case 0:
                 guard let titleHeaderview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TitleHeaderView", for: indexPath) as? TitleHeaderView else { return UICollectionReusableView() }
                 titleHeaderview.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
@@ -340,7 +339,7 @@ extension TodayCocktailCollectionViewController {
             cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), options: nil, completionHandler: nil)
             return cell
         case 1:
-            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), options: nil, completionHandler: nil)
+            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(named: "\(wishListData[indexPath.row].glass.rawValue)" + "Empty"))
             return cell
         case 2:
             helpOrderCell.questionLabel.attributedText = Today(rawValue: indexPath.section)?.titleText

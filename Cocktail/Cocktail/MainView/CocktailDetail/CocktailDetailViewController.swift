@@ -62,6 +62,7 @@ class CocktailDetailViewController: UIViewController {
     
     let mainScrollView = UIScrollView()
     let mainView = UIView()
+    let popUpView = PopUpView()
     
     let wishListButton = UIButton()
     
@@ -119,7 +120,7 @@ class CocktailDetailViewController: UIViewController {
         loadingView.isHidden = false
         attribute()
         layout()
-        let editingButton = UIBarButtonItem(title: "editing".localized, style: .done, target: self, action: #selector(startEditing))
+        let editingButton = UIBarButtonItem(title: "Add".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
         navigationController?.navigationBar.isHidden = false
         FirebaseRecipe.shared.getSingleCocktialData(cocktail: cocktailData) {[weak self] data in
@@ -138,6 +139,7 @@ class CocktailDetailViewController: UIViewController {
     
     func layout() {
         view.addSubview(mainScrollView)
+        view.addSubview(popUpView)
         mainScrollView.addSubview(mainView)
         
         [nameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel, likeButton, likeCountLabel, disLikeCountLabel, disLikeButton, imageSplitLine, alcoholSplitLine].forEach { mainView.addSubview($0) }
@@ -364,6 +366,7 @@ class CocktailDetailViewController: UIViewController {
             $0.tintColor = .mainGray
         }
         
+        
         wishListButton.tintColor = .mainOrange
         cocktailImageView.contentMode = .scaleAspectFit
 
@@ -388,16 +391,20 @@ class CocktailDetailViewController: UIViewController {
         craftGuideLabel.text = "Craft".localized
         recipeGuideLabel.text = "Recipe".localized
         ingredientsGuideLabel.text = "Ingredients".localized
-        
+
+        popUpView.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
+        popUpView.isHidden = true
         
         wishListButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             if FirebaseRecipe.shared.wishList.contains(self.cocktailData) {
+                self.popUpView.animating(text: "즐겨찾기에서 \n제거되었습니다")
                 self.wishListButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
                 guard let number = FirebaseRecipe.shared.wishList.firstIndex(of: self.cocktailData) else { return }
                 FirebaseRecipe.shared.wishList.remove(at: number)
                 self.cocktailData.wishList = false
             } else {
+                self.popUpView.animating(text: "즐겨찾기에 \n추가되었습니다")
                 self.wishListButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
                 var data = self.cocktailData
                 data.wishList = true
@@ -416,6 +423,7 @@ class CocktailDetailViewController: UIViewController {
                 }
                 self.iLike = nil
             } else {
+                self.popUpView.animating(text: "좋아요!")
                 FirebaseRecipe.shared.addLike(cocktail: self.cocktailData)
                 FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
                     self.likeData = data
@@ -433,6 +441,7 @@ class CocktailDetailViewController: UIViewController {
                 }
                 self.iLike = nil
             } else {
+                self.popUpView.animating(text: "싫어요...")
                 FirebaseRecipe.shared.addDislike(cocktail: self.cocktailData)
                 FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
                     self.likeData = data
@@ -462,7 +471,7 @@ class CocktailDetailViewController: UIViewController {
         myTipLabel.text = data.mytip.localized
         recipeLabel.text = makeRecipeText(recipe: data.recipe)
         ingredientsLabel.text = makeIngredientsText(ingredients: data.ingredients)
-        cocktailImageView.kf.setImage(with: URL(string: data.imageURL))
+        cocktailImageView.kf.setImage(with: URL(string: data.imageURL), placeholder: UIImage(named: "\(data.glass.rawValue)" + "Empty"))
         [lowAlcoholLabel, highAlcoholLabel, midAlcoholLabel].forEach {
             $0.tintColor = UIColor(named: "nonSelectedAlcoholColor")
         }

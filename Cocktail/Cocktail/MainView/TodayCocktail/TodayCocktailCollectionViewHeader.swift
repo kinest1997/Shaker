@@ -17,10 +17,9 @@ class TodayCocktailCollectionViewHeader: UICollectionReusableView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        addSubview(topSplitLine)
-        addSubview(sectionTextLabel)
-        addSubview(explainLabel)
-        
+        [topSplitLine, sectionTextLabel, explainLabel].forEach {
+            addSubview($0)
+        }
         sectionTextLabel.snp.makeConstraints {
             $0.top.equalTo(topSplitLine.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
@@ -30,7 +29,6 @@ class TodayCocktailCollectionViewHeader: UICollectionReusableView {
             $0.bottom.equalToSuperview()
             $0.leading.equalTo(sectionTextLabel)
         }
-        
         topSplitLine.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(10)

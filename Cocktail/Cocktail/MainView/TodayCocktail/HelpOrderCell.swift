@@ -53,7 +53,7 @@ class HelpOrderCell: UICollectionViewCell {
         }
         
         disclosureImageView.snp.makeConstraints {
-            $0.centerY.equalTo(orderLabel)
+            $0.top.bottom.equalTo(orderLabel)
             $0.leading.equalTo(orderLabel.snp.trailing)
             $0.height.width.equalTo(15)
         }

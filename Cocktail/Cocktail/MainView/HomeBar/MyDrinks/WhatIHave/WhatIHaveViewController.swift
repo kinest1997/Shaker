@@ -43,6 +43,7 @@ extension WhatIHaveViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "key", for: indexPath) as? WhatIHaveCollectionViewCell else { return UICollectionViewCell() }
+        
         if ingredientsWhatIhave.contains(allIngredients[indexPath.row].rawValue) {
             cell.nameLabel.text = allIngredients[indexPath.row].rawValue.localized
             cell.mainImageView.image = UIImage(named: allIngredients[indexPath.row].rawValue)

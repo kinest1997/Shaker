@@ -40,7 +40,7 @@ class CocktailListCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(data: Cocktail) {
-        mainImageView.kf.setImage(with: URL(string: data.imageURL))
+        mainImageView.kf.setImage(with: URL(string: data.imageURL), placeholder: UIImage(named: "\(data.glass.rawValue)" + "Empty") )
         nameTextLabel.text = data.name
     }
 }
