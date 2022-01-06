@@ -120,9 +120,7 @@ class CocktailDetailViewController: UIViewController {
         loadingView.isHidden = false
         attribute()
         layout()
-        let editingButton = UIBarButtonItem(title: "Add".localized, style: .done, target: self, action: #selector(startEditing))
-        navigationItem.rightBarButtonItem = editingButton
-        navigationController?.navigationBar.isHidden = false
+        addBarButton()
         FirebaseRecipe.shared.getSingleCocktialData(cocktail: cocktailData) {[weak self] data in
             self?.likeData = data
         }
@@ -222,7 +220,6 @@ class CocktailDetailViewController: UIViewController {
             }
         }
         
-        
         alcoholStackView.snp.makeConstraints {
             $0.width.equalToSuperview().multipliedBy(0.3)
             $0.centerX.equalToSuperview()
@@ -314,7 +311,7 @@ class CocktailDetailViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
         //구분선의 색상 설정
         [centerLine, firstSplitLine, secondSplitLine, imageSplitLine, alcoholSplitLine].forEach {
-            $0.backgroundColor = UIColor(named: "splitLineGray")
+            $0.backgroundColor = .splitLineGray
         }
         
         //내용 설정하는곳
@@ -365,7 +362,6 @@ class CocktailDetailViewController: UIViewController {
         [likeButton, disLikeButton, likeCountLabel, disLikeCountLabel].forEach {
             $0.tintColor = .mainGray
         }
-        
         
         wishListButton.tintColor = .mainOrange
         cocktailImageView.contentMode = .scaleAspectFit
@@ -450,6 +446,12 @@ class CocktailDetailViewController: UIViewController {
         }), for: .touchUpInside)
     }
     
+    func addBarButton() {
+        let editingButton = UIBarButtonItem(title: "Add".localized, style: .done, target: self, action: #selector(startEditing))
+        navigationItem.rightBarButtonItem = editingButton
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     @objc func startEditing() {
         let addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
         addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
@@ -469,8 +471,8 @@ class CocktailDetailViewController: UIViewController {
         glassLabel.text = data.glass.rawValue.localized
         craftLabel.text = data.craft.rawValue.localized
         myTipLabel.text = data.mytip.localized
-        recipeLabel.text = makeRecipeText(recipe: data.recipe)
-        ingredientsLabel.text = makeIngredientsText(ingredients: data.ingredients)
+        recipeLabel.text = String.makeRecipeText(recipe: data.recipe)
+        ingredientsLabel.text = String.makeIngredientsText(ingredients: data.ingredients)
         cocktailImageView.kf.setImage(with: URL(string: data.imageURL), placeholder: UIImage(named: "\(data.glass.rawValue)" + "Empty"))
         [lowAlcoholLabel, highAlcoholLabel, midAlcoholLabel].forEach {
             $0.tintColor = UIColor(named: "nonSelectedAlcoholColor")
@@ -497,35 +499,5 @@ class CocktailDetailViewController: UIViewController {
             self.cocktailData = data
             wishListButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
         }
-    }
-    
-    func makeRecipeText(recipe: [String]) -> String {
-        
-        let spaceStrings = recipe.enumerated().map {
-            """
-            
-            \($0.offset + 1).  \($0.element.localized)
-            
-            
-            """
-        }
-        
-        let fullString = spaceStrings.reduce("") { $0 + $1 }
-        return fullString
-    }
-    
-    func makeIngredientsText(ingredients: [Cocktail.Ingredients]) -> String {
-        
-        let spaceStrings = ingredients.enumerated().map {
-            """
-            
-            \($0.offset + 1).  \($0.element.rawValue.localized)
-            
-            
-            """
-        }
-        
-        let fullString = spaceStrings.reduce("") { $0 + $1 }
-        return fullString
     }
 }

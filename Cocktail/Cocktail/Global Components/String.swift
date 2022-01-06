@@ -12,6 +12,34 @@ extension String {
     var localized: String {
         return NSLocalizedString(self, tableName: "Localizable", value: self, comment: "")
     }
+    
+    static func makeRecipeText(recipe: [String]) -> String {
+        let spaceStrings = recipe.enumerated().map {
+            """
+            
+            \($0.offset + 1).  \($0.element.localized)
+            
+            
+            """
+        }
+        let fullString = spaceStrings.reduce("") { $0 + $1 }
+        return fullString
+    }
+    
+    static func makeIngredientsText(ingredients: [Cocktail.Ingredients]) -> String {
+        
+        let spaceStrings = ingredients.enumerated().map {
+            """
+            
+            \($0.offset + 1).  \($0.element.rawValue.localized)
+            
+            
+            """
+        }
+        
+        let fullString = spaceStrings.reduce("") { $0 + $1 }
+        return fullString
+    }
 }
 
 extension NSMutableAttributedString {

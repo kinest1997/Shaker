@@ -20,6 +20,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         case secondSection
         case thirdSection
         case fourthSection
+        case fifthSection
         
         var titleText: NSMutableAttributedString {
             switch self {
@@ -27,14 +28,18 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
                 let text = NSMutableAttributedString.addOrangeText(text: "바텐딩 초보자를 위한 가이드북", firstRange: NSRange(location: 7, length: 9), secondRange: NSRange(location: 8, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 7))
                 return text
             case .secondSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "내가 찜! 한 레시피", firstRange: NSRange(location: 0, length: 3), secondRange: NSRange(location: 5, length: 6), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 2))
+                let text = NSMutableAttributedString.addOrangeText(text: "나만의 레시피북을 만들어볼까요?", firstRange: NSRange(location: 0, length: 4), secondRange: NSRange(location: 8, length: 9), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 4, length: 4))
                 return text
             case .thirdSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "주문 도와드릴까요?", firstRange: NSRange(location: 2, length: 8), secondRange: NSRange(location: 3, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 2))
+                let text = NSMutableAttributedString.addOrangeText(text: "내가 찜! 한 레시피", firstRange: NSRange(location: 0, length: 3), secondRange: NSRange(location: 5, length: 6), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 2))
                 return text
             case .fourthSection:
+                let text = NSMutableAttributedString.addOrangeText(text: "주문 도와드릴까요?", firstRange: NSRange(location: 2, length: 8), secondRange: NSRange(location: 3, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 2))
+                return text
+            case .fifthSection:
                 let text = NSMutableAttributedString.addOrangeText(text: "오늘의 한잔은?", firstRange: NSRange(location: 6, length: 2), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 6))
                 return text
+                
             }
         }
         
@@ -44,14 +49,18 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
                 let text = NSMutableAttributedString(string: "")
                 return text
             case .secondSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "찜한 칵테일, 잊지 말고 다시 보아요", firstRange: NSRange(location: 1, length: 19), secondRange: NSRange(location: 10, length: 0), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 0, length: 1))
+                let text = NSMutableAttributedString.addOrangeText(text: "내가 직접 개발한 레시피!", firstRange: NSRange(location: 0, length: 10), secondRange: NSRange(location: 13, length: 1), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 10, length: 3))
                 return text
             case .thirdSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "시작하기 어려우신가요? 쉐이커가 레시피를 추천해드릴게요", firstRange: NSRange(location: 0, length: 13), secondRange: NSRange(location: 0, length: 0), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 13, length: 17))
+                let text = NSMutableAttributedString.addOrangeText(text: "찜한 칵테일, 잊지 말고 다시 보아요", firstRange: NSRange(location: 1, length: 19), secondRange: NSRange(location: 10, length: 0), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 0, length: 1))
                 return text
             case .fourthSection:
+                let text = NSMutableAttributedString.addOrangeText(text: "시작하기 어려우신가요? 쉐이커가 레시피를 추천해드릴게요", firstRange: NSRange(location: 0, length: 13), secondRange: NSRange(location: 0, length: 0), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 13, length: 17))
+                return text
+            case .fifthSection:
                 let text = NSMutableAttributedString(string: "")
                 return text
+                
             }
         }
     }
@@ -105,6 +114,8 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         collectionView.register(TodayCocktailCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TodayCocktailCollectionViewHeader")
         collectionView.register(TitleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TitleHeaderView")
         collectionView.register(NoTitleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "NoTitleHeader")
+        collectionView.register(ButtonFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "ButtonFooterView")
+        
         collectionView.collectionViewLayout = collectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -193,9 +204,12 @@ extension TodayCocktailCollectionViewController {
             case 1:
                 return self.createWishListSection()
             case 2:
-                return self.createOrderAssistSection()
+                return self.createWishListSection()
             case 3:
+                return self.createOrderAssistSection()
+            case 4:
                 return self.createRecommendationSection()
+                
             default:
                 return nil
             }
@@ -250,7 +264,8 @@ extension TodayCocktailCollectionViewController {
         section.orthogonalScrollingBehavior = .continuous
         
         let sectionHeader = createSectionHeader(height: 70)
-        section.boundarySupplementaryItems = [sectionHeader]
+        let sectionFooter = createSectionFooter(height: 50)
+        section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
         return section
     }
     
@@ -264,7 +279,7 @@ extension TodayCocktailCollectionViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         
         let section = NSCollectionLayoutSection(group: group)
-
+        
         section.orthogonalScrollingBehavior = .continuous
         
         let sectionHeader = createSectionHeader(height: 140)
@@ -278,8 +293,15 @@ extension TodayCocktailCollectionViewController {
         return sectionHeader
     }
     
+    func createSectionFooter(height: CGFloat) -> NSCollectionLayoutBoundarySupplementaryItem {
+        let layoutSectionHeadSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(height))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: layoutSectionHeadSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+        return sectionHeader
+    }
+    
     //섹션 헤더설정
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
         if kind == UICollectionView.elementKindSectionHeader {
             guard let basicHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TodayCocktailCollectionViewHeader", for: indexPath) as? TodayCocktailCollectionViewHeader else { return UICollectionReusableView()}
             switch indexPath.section {
@@ -292,12 +314,33 @@ extension TodayCocktailCollectionViewController {
                 basicHeader.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
                 return basicHeader
             case 2:
-                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "NoTitleHeader", for: indexPath) as? NoTitleHeader else { return UICollectionReusableView()}
-                return headerview
-            case 3:
                 basicHeader.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
                 basicHeader.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
                 return basicHeader
+            case 3:
+                guard let headerview = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "NoTitleHeader", for: indexPath) as? NoTitleHeader else { return UICollectionReusableView()}
+                return headerview
+            case 4:
+                basicHeader.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
+                basicHeader.sectionTextLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
+                return basicHeader
+                
+            default:
+                return UICollectionReusableView()
+            }
+        } else if kind == UICollectionView.elementKindSectionFooter {
+
+            guard let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "ButtonFooterView", for: indexPath) as? ButtonFooterView
+            else { return UICollectionReusableView()}
+            switch indexPath.section {
+            case 1:
+                footerView.bottomButton.removeTarget(self, action: #selector(showWishList), for: .touchUpInside)
+                footerView.bottomButton.addTarget(self, action: #selector(showMyList), for: .touchUpInside)
+                return footerView
+            case 2:
+                footerView.bottomButton.removeTarget(self, action: #selector(showMyList), for: .touchUpInside)
+                footerView.bottomButton.addTarget(self, action: #selector(showWishList), for: .touchUpInside)
+                return footerView
             default:
                 return UICollectionReusableView()
             }
@@ -310,16 +353,28 @@ extension TodayCocktailCollectionViewController {
         return Today.allCases.count
     }
     
+    @objc func showWishList() {
+        self.show(WishListCocktailListViewController(), sender: nil)
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    @objc func showMyList() {
+        self.show(MyOwnCocktailRecipeViewController(), sender: nil)
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
     //섹션당 보여줄 셀의 개수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0:
             return youtubeData.count
         case 1:
-            return wishListData.count
+            return myRecipe.count
         case 2:
-            return 1
+            return wishListData.count
         case 3:
+            return 1
+        case 4:
             return recommendationData.count
         default:
             return 0
@@ -339,15 +394,19 @@ extension TodayCocktailCollectionViewController {
             cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), options: nil, completionHandler: nil)
             return cell
         case 1:
-            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(named: "\(wishListData[indexPath.row].glass.rawValue)" + "Empty"))
+            cell.mainImageView.kf.setImage(with: URL(string: myRecipe[indexPath.row].imageURL), placeholder: UIImage(named: "\(myRecipe[indexPath.row].glass.rawValue)" + "Empty"))
             return cell
         case 2:
+            cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(named: "\(wishListData[indexPath.row].glass.rawValue)" + "Empty"))
+            return cell
+        case 3:
             helpOrderCell.questionLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
             helpOrderCell.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
             return helpOrderCell
-        case 3:
+        case 4:
             hashTagCell.textLabel.text = "#\(recommendationData[indexPath.row].hashTagName)"
             return hashTagCell
+            
         default:
             return UICollectionViewCell()
         }
@@ -360,16 +419,22 @@ extension TodayCocktailCollectionViewController {
         case 1:
             self.navigationController?.navigationBar.isHidden = false
             let cocktailDetailViewController = CocktailDetailViewController()
-            cocktailDetailViewController.setData(data: wishListData[indexPath.row])
+            cocktailDetailViewController.setData(data: myRecipe[indexPath.row])
             self.navigationController?.show(cocktailDetailViewController, sender: nil)
         case 2:
+            self.navigationController?.navigationBar.isHidden = false
+            let cocktailDetailViewController = CocktailDetailViewController()
+            cocktailDetailViewController.setData(data: wishListData[indexPath.row])
+            self.navigationController?.show(cocktailDetailViewController, sender: nil)
+        case 3:
             let colorChoiceViewController = ColorChoiceViewController()
             colorChoiceViewController.myFavor = false
             self.navigationController?.show(colorChoiceViewController, sender: nil)
-        case 3:
+        case 4:
             let cocktailListViewController = CocktailListViewController()
             cocktailListViewController.lastRecipe = recommendationData[indexPath.row].list
             self.navigationController?.show(cocktailListViewController, sender: nil)
+            
         default:
             return
         }

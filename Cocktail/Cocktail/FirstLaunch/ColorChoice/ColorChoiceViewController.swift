@@ -61,7 +61,7 @@ class ColorChoiceViewController: UIViewController {
     }
     
     func attribute() {
-        let questionText = NSMutableAttributedString(string: "선호하는 색은 무엇인가요?")
+        let questionText = NSMutableAttributedString(string: "What's your favorite color?".localized)
         let firstRange = NSRange(location: 0, length: 5)
         let secondReange = NSRange(location: 6, length: 8)
         let smallFont = UIFont.nexonFont(ofSize: 20, weight: .bold)
@@ -82,7 +82,7 @@ class ColorChoiceViewController: UIViewController {
         mainCollectionView.backgroundColor = .white
         questionLabel.textAlignment = .center
 
-        nextButton.setTitle("다음", for: .normal)
+        nextButton.setTitle("Next".localized, for: .normal)
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
             if self.myFavor {
@@ -91,7 +91,7 @@ class ColorChoiceViewController: UIViewController {
             let lastRecipe = FirebaseRecipe.shared.recipe.filter {
                 self.selectedColor.contains($0.color)}
             if lastRecipe.isEmpty {
-                self.present(UserFavor.shared.makeAlert(title: "하나이상 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
+                self.present(UserFavor.shared.makeAlert(title: "Please choose one or more", message: "I don't have any drinks to recommend"), animated: true, completion: nil)
             } else {
                 let alcoholChoiceViewController = AlcoholChoiceViewController()
                 alcoholChoiceViewController.myFavor = self.myFavor
@@ -105,7 +105,7 @@ class ColorChoiceViewController: UIViewController {
         let number = FirebaseRecipe.shared.recipe.filter {
             selectedColor.contains($0.color)
         }.count
-        button.setTitle("\(number)개의 칵테일 발견", for: .normal)
+        button.setTitle("\(number)" + "cocktails have searched".localized, for: .normal)
     }
 }
 

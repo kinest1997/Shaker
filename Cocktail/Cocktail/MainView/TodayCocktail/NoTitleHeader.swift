@@ -12,7 +12,6 @@ class NoTitleHeader: UICollectionReusableView {
     
     let topSplitLine = UILabel()
 
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         addSubview(topSplitLine)

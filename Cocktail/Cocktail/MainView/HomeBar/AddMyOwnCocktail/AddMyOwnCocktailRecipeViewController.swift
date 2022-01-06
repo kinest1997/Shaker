@@ -272,14 +272,14 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     }
     
     func attribute() {
-        nameTextField.backgroundColor = UIColor(named: "splitLineGray")
-        myTipTextView.backgroundColor = UIColor(named: "splitLineGray")
+        nameTextField.backgroundColor = .splitLineGray
+        myTipTextView.backgroundColor = .splitLineGray
         myTipTextView.font = .nexonFont(ofSize: 14, weight: .semibold)
         
         addRecipeTableView.separatorStyle = .none
         //사진이미지 비율
         cocktailImageView.contentMode = .scaleAspectFit
-        cocktailImageView.cornerRadius = 15
+        cocktailImageView.layer.cornerRadius = 15
         cocktailImageView.clipsToBounds = true
         cocktailImageView.layer.borderWidth = 1
         cocktailImageView.layer.borderColor = UIColor.borderGray.cgColor
@@ -306,7 +306,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         }
         
         [nameTextField, myTipTextView].forEach {
-            $0.cornerRadius = 15
+            $0.layer.cornerRadius = 15
             $0.clipsToBounds = true
         }
         nameTextField.placeholder = "칵테일 이름"
@@ -318,7 +318,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.contentHorizontalAlignment = .fill
             $0.titleLabel?.textAlignment = .center
             $0.titleLabel?.font = .nexonFont(ofSize: 14, weight: .semibold)
-            $0.backgroundColor = UIColor(named: "splitLineGray")
+            $0.backgroundColor = .splitLineGray
             $0.layer.cornerRadius = 15
             $0.clipsToBounds = true
         }
@@ -356,7 +356,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         ingredientsLabel.text = "Ingredients".localized
         loadingView.isHidden = true
         cameraImage.tintColor = .black
-        centerLine.backgroundColor = UIColor(named: "splitLineGray")
+        centerLine.backgroundColor = .splitLineGray
         addRecipeTableView.backgroundView?.backgroundColor = .white
     }
     

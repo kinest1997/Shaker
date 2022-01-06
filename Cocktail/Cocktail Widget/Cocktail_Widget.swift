@@ -36,11 +36,9 @@ struct CocktailEntry: TimelineEntry {
 }
 
 struct Cocktail_WidgetEntryView : View {
-    @Environment(\.widgetFamily) var widgetFamily
     var entry: Provider.Entry
     
     var body: some View {
-        if widgetFamily == .systemSmall {
             VStack  {
                 Image(uiImage: UIImage(named: entry.configuration.name) ?? UIImage(systemName: "circle")!)
                     .resizable()
@@ -51,18 +49,6 @@ struct Cocktail_WidgetEntryView : View {
                 Text(entry.configuration.alcohol.rawValue)
                     .foregroundColor(.gray)
             }
-        } else {
-            HStack {
-                Image(uiImage: UIImage(named: entry.configuration.name) ?? UIImage(systemName: "circle")!)
-                    .resizable()
-                    .frame(width: 100, height: 100, alignment: .center)
-                Spacer()
-                VStack {
-                    Text(entry.configuration.name)
-                    Text(entry.configuration.alcohol.rawValue)
-                }
-            }
-        }
     }
 }
 
@@ -74,7 +60,7 @@ struct Cocktail_Widget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Cocktail_WidgetEntryView(entry: entry)
         }
-        .supportedFamilies([.systemMedium, .systemSmall, .systemLarge])
+        .supportedFamilies([.systemSmall])
         .configurationDisplayName("Cocktail")
         .description("RandomRecipe")
     }

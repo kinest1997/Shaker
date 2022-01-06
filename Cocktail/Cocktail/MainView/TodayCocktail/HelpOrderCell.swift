@@ -17,12 +17,10 @@ class HelpOrderCell: UICollectionViewCell {
     let explainLabel = UILabel()
     
     let orderLabel = UILabel()
-    
-    let disclosureImageView = UIImageView()
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        [mainImageView, questionLabel, explainLabel, orderLabel, disclosureImageView].forEach {
+        [mainImageView, questionLabel, explainLabel, orderLabel].forEach {
             contentView.addSubview($0)
         }
         contentView.backgroundColor = .white
@@ -51,17 +49,9 @@ class HelpOrderCell: UICollectionViewCell {
             $0.top.equalTo(explainLabel.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
         }
-        
-        disclosureImageView.snp.makeConstraints {
-            $0.top.bottom.equalTo(orderLabel)
-            $0.leading.equalTo(orderLabel.snp.trailing)
-            $0.height.width.equalTo(15)
-        }
-        
-        disclosureImageView.image = UIImage(systemName: "chevron.right")
-        disclosureImageView.tintColor = .mainGray
+
         orderLabel.textColor = .mainGray
-        orderLabel.text = "주문하러 가기"
+        orderLabel.text = "주문하러 가기 >"
         orderLabel.font = .nexonFont(ofSize: 12, weight: .bold)
         
         contentView.layer.cornerRadius = 15

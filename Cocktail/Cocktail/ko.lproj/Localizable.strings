@@ -11,11 +11,20 @@
 "Reset" = "리셋";
 "Cancel" = "취소";
 "Save" = "저장";
+"Next" = "다음";
 "My Drinks" = "내술장";
 "Bookmark" = "즐겨찾기";
 "My Recipes" = "나의 레시피";
 "Sign in with Apple" = "Apple로 로그인";
 "MyPage" = "마이페이지";
+
+//LoginViewController.swift
+"Start without logging in" = "로그인없이 시작하기";
+
+//ColorChoiceViewController.swift
+"What's your favorite color?" = "선호하는 색은 무엇인가요?";
+"Please choose one or more" = "하나이상 선택해주세요";
+"I don't have any drinks to recommend" = "추천할술이 없어요";
 
 //AddMyOwnCocktailRecipeViewController.swift
 "Reset" = "리셋";
@@ -23,6 +32,7 @@
 "Choice" = "선택";
 "Hold on" = "잠깐";
 "OK" = "확인";
+"cocktails have searched" = "개의 칵테일 발견";
 
 //AddMyOwnCocktailRecipeViewController.swift
 "red" = "빨간색";

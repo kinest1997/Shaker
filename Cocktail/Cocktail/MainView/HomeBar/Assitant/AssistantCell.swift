@@ -21,12 +21,12 @@ class AssistantCell: UITableViewCell {
         }
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20))
         contentView.backgroundColor = .splitLineGray
-        contentView.cornerRadius = 15
+        contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
         
         mainImageView.contentMode = .scaleAspectFill
         mainImageView.backgroundColor = .clear
-        mainImageView.cornerRadius = 15
+        mainImageView.layer.cornerRadius = 15
         mainImageView.clipsToBounds = true
         mainImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()

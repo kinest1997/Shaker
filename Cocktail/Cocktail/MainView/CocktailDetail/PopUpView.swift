@@ -21,8 +21,7 @@ class PopUpView: UIView {
         textLabel.font = .nexonFont(ofSize: 16, weight: .semibold)
         textLabel.textAlignment = .center
         textLabel.numberOfLines = 0
-        
-        self.cornerRadius = 15
+        self.layer.cornerRadius = 15
         self.clipsToBounds = true
         self.frame = CGRect(x: .zero, y: .zero, width: 180, height: 70)
         self.textLabel.textColor = .white

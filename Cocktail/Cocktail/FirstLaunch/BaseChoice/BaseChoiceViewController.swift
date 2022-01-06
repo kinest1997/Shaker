@@ -59,22 +59,7 @@ class BaseChoiceViewController: UIViewController {
     
     func attribute() {
         
-        let questionText = NSMutableAttributedString(string: "어떤 술을 선호하시나요?")
-        let firstRange = NSRange(location: 0, length: 3)
-        let secondReange = NSRange(location: 4, length: 9)
-        let tintRange = NSRange(location: 3, length: 1)
-        let smallFont = UIFont.nexonFont(ofSize: 20, weight: .bold)
-        let bigfont = UIFont.nexonFont(ofSize: 24, weight: .bold)
-        let mainColor = UIColor.mainGray
-        
-        questionText.addAttribute(.font, value: smallFont, range: firstRange)
-        questionText.addAttribute(.font, value: smallFont, range: secondReange)
-        
-        questionText.addAttribute(.foregroundColor, value: mainColor, range: firstRange)
-        questionText.addAttribute(.foregroundColor, value: mainColor, range: secondReange)
-        
-        questionText.addAttribute(.font, value: bigfont, range: tintRange)
-        questionText.addAttribute(.foregroundColor, value: UIColor.mainOrange, range: tintRange)
+        let questionText = NSMutableAttributedString.addBigOrangeText(text: "어떤 술을 선호하시나요?", firstRange: NSRange(location: 0, length: 3), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 4, length: 9), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 1))
         
         questionLabel.attributedText = questionText
         

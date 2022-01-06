@@ -99,7 +99,7 @@ class ChoiceIngredientsView: UIView {
         }
         
         mainView.backgroundColor = .white
-        mainView.cornerRadius = 10
+        mainView.layer.cornerRadius = 10
         mainView.clipsToBounds = true
         cancleButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         cancleButton.tintColor = .black
@@ -110,7 +110,7 @@ class ChoiceIngredientsView: UIView {
         }
         
         saveButton.backgroundColor = .tappedOrange
-        saveButton.cornerRadius = 15
+        saveButton.layer.cornerRadius = 15
         saveButton.clipsToBounds = true
         
         saveButton.setTitle("Save".localized, for: .normal)

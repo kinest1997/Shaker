@@ -146,20 +146,25 @@ struct Cocktail: Codable, Hashable {
     }
     
     enum Ingredients: String, Codable, CaseIterable {
+        ///진
         case gin
         case bombaySapphire
         case tanquerayNoTen
         
+        ///보드카
         case vodka
         
+        ///위스키
         case whiskey
         case scotchWhiskey
         case bourbonWhiskey
         case ryeWhiskey
         case jackDanielWhiskey
         
+        ///데킬라
         case tequila
         
+        ///베일리스
         case baileys
         case melonLiqueur
         case whiteCacaoLiqueur

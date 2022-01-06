@@ -17,7 +17,7 @@ class IngredientsCell: UITableViewCell {
         super.layoutSubviews()
         
         contentView.addSubview(mainLabel)
-        contentView.backgroundColor = UIColor(named: "splitLineGray")
+        contentView.backgroundColor = .splitLineGray
         mainLabel.textColor = .mainGray
         mainLabel.font = .nexonFont(ofSize: 14, weight: .medium)
         mainLabel.snp.makeConstraints {
@@ -26,7 +26,7 @@ class IngredientsCell: UITableViewCell {
         }
         
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30))
-        contentView.cornerRadius = 15
+        contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
     }
 }

@@ -43,7 +43,7 @@ class FilteredView: UIView {
             mainView.addSubview($0)
         }
         mainView.backgroundColor = .white
-        mainView.cornerRadius = 10
+        mainView.layer.cornerRadius = 10
         mainView.clipsToBounds = true
         
         mainTableView.delegate = self
@@ -60,7 +60,7 @@ class FilteredView: UIView {
         }
         
         saveButton.backgroundColor = .tappedOrange
-        saveButton.cornerRadius = 15
+        saveButton.layer.cornerRadius = 15
         saveButton.clipsToBounds = true
         
         self.mainTableView.snp.makeConstraints {

@@ -84,7 +84,7 @@ class LoginViewController: UIViewController {
     func attribute() {
         view.backgroundColor = .white
         mainImageView.image = UIImage(named: "logoImage")
-        justUseButton.setTitle("로그인없이 시작하기", for: .normal)
+        justUseButton.setTitle("Start without logging in".localized, for: .normal)
         justUseButton.setTitleColor(.gray, for: .normal)
         shakerLabel.font = .nexonFont(ofSize: 45, weight: .bold)
         shakerLabel.textColor = .mainOrange
@@ -145,7 +145,6 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
     }
     
     func requestAuthNoti() {

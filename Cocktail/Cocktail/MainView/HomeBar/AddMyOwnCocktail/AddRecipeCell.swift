@@ -16,7 +16,7 @@ class AddRecipeCell: UITableViewCell {
             $0.bottom.top.equalToSuperview()
             $0.width.equalTo(30)
         }
-        contentView.backgroundColor = UIColor(named: "splitLineGray")
+        contentView.backgroundColor = .splitLineGray
         numberLabel.textColor = .mainGray
         numberLabel.textAlignment = .center
         explainTextField.textColor = .mainGray
@@ -24,7 +24,7 @@ class AddRecipeCell: UITableViewCell {
         
         
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30))
-        contentView.cornerRadius = 15
+        contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
         
         
