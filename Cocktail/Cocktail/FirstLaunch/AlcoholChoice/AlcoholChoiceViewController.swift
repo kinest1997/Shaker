@@ -26,8 +26,8 @@ class AlcoholChoiceViewController: UIViewController {
     let lowLabel = UILabel()
     let nextButton = MainButton()
     
-    let topVerticalLine = UIView()
-    let bottomVerticalLine = UIView()
+    let topVerticalLine = UILabel()
+    let bottomVerticalLine = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,7 +138,7 @@ class AlcoholChoiceViewController: UIViewController {
         }
         
         questionLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(100)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(55)
         }
@@ -151,7 +151,7 @@ class AlcoholChoiceViewController: UIViewController {
         
         highLabel.snp.makeConstraints {
             $0.top.equalTo(explainLabel.snp.bottom).offset(30)
-            $0.leading.trailing.equalToSuperview().inset(170)
+            $0.centerX.equalToSuperview()
             $0.height.equalTo(25)
         }
         
@@ -162,19 +162,19 @@ class AlcoholChoiceViewController: UIViewController {
         }
         
         middleButton.snp.makeConstraints {
-            $0.top.equalTo(highButton.snp.bottom).offset(110)
+            $0.top.equalTo(highButton.snp.bottom).offset(80)
             $0.width.height.equalTo(highButton)
             $0.centerX.equalToSuperview()
         }
         
         lowButton.snp.makeConstraints {
-            $0.top.equalTo(middleButton.snp.bottom).offset(110)
+            $0.top.equalTo(middleButton.snp.bottom).offset(80)
             $0.width.height.equalTo(highButton)
             $0.centerX.equalToSuperview()
         }
         
         lowLabel.snp.makeConstraints {
-            $0.top.equalTo(lowButton.snp.bottom).offset(15)
+            $0.top.equalTo(lowButton.snp.bottom)
             $0.centerX.equalToSuperview()
             $0.width.height.equalTo(highLabel)
         }

@@ -35,7 +35,7 @@ class MyDrinksViewController: UIViewController {
     
     func layout() {
         topNameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(50)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             $0.height.equalTo(30)
             $0.leading.equalToSuperview().offset(30)
         }
@@ -52,7 +52,7 @@ class MyDrinksViewController: UIViewController {
             $0.height.equalTo(collectionView.snp.width)
         }
         whatICanMakeButton.snp.makeConstraints {
-            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
             $0.centerX.equalToSuperview()
         }
     }

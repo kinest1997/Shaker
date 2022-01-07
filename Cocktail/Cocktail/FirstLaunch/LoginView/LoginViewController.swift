@@ -95,11 +95,11 @@ class LoginViewController: UIViewController {
         loginlabel.text = "LOGIN"
         shakerLabel.sizeToFit()
         loginlabel.sizeToFit()
-        mainImageView.contentMode = .bottomLeft
+        mainImageView.contentMode = .scaleAspectFit
         
         appleLoginButton.layer.cornerRadius = 15
         appleLoginButton.clipsToBounds = true
-        appleLoginButton.contentMode = .scaleAspectFill
+        appleLoginButton.contentMode = .scaleAspectFit
         appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button"), for: .normal)
     }
     

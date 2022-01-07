@@ -11,7 +11,7 @@ class TitleHeaderView: UICollectionReusableView {
     
     let sectionTextLabel = UILabel()
     
-    let titleLabel = UILabel()
+    let titleLabel = UIImageView()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -19,19 +19,18 @@ class TitleHeaderView: UICollectionReusableView {
         addSubview(titleLabel)
         self.backgroundColor = .white
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
+            $0.top.equalToSuperview()
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(45)
+            $0.width.equalToSuperview().multipliedBy(0.5)
+            $0.bottom.equalTo(sectionTextLabel.snp.top)
         }
-        titleLabel.text = "SHAKER"
-        titleLabel.font = .nexonFont(ofSize: 40, weight: .bold)
-        titleLabel.textColor = .black
-
+        titleLabel.image = UIImage(named: "TitleImage")
+        titleLabel.contentMode = .scaleAspectFit
         sectionTextLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
+            $0.height.equalTo(25)
         }
-        titleLabel.sizeToFit()
         sectionTextLabel.sizeToFit()
     }
 }

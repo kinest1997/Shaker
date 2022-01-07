@@ -24,7 +24,7 @@ class AssistantCell: UITableViewCell {
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
         
-        mainImageView.contentMode = .scaleAspectFill
+        mainImageView.contentMode = .scaleAspectFit
         mainImageView.backgroundColor = .clear
         mainImageView.layer.cornerRadius = 15
         mainImageView.clipsToBounds = true

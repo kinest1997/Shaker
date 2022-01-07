@@ -43,15 +43,15 @@ class ColorChoiceViewController: UIViewController {
         view.addSubview(nextButton)
         
         questionLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(100)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(55)
         }
         
         mainCollectionView.snp.makeConstraints {
-            $0.top.equalTo(questionLabel.snp.bottom).offset(30)
+            $0.top.equalTo(questionLabel.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview().inset(30)
-            $0.height.equalTo(mainCollectionView.snp.width).multipliedBy(1.3)
+            $0.bottom.equalTo(nextButton.snp.top)
         }
         
         nextButton.snp.makeConstraints {
@@ -115,7 +115,7 @@ extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let yourWidth = collectionView.bounds.width/3.5
+        let yourWidth = collectionView.bounds.width/3.9
         let yourHeight = yourWidth
         return CGSize(width: yourWidth, height: yourHeight)
     }

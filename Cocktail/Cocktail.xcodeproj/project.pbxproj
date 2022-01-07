@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3D07246B274F551D0061B3F5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D07246A274F551D0061B3F5 /* WidgetKit.framework */; };
-		3D07246D274F551D0061B3F5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D07246C274F551D0061B3F5 /* SwiftUI.framework */; };
-		3D072470274F551D0061B3F5 /* Cocktail_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */; };
-		3D072473274F55220061B3F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D072472274F55220061B3F5 /* Assets.xcassets */; };
-		3D072479274F55220061B3F5 /* Cocktail WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 3D072468274F551D0061B3F5 /* Cocktail WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3D21D4C22733E9C300FE2896 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* UIImage.swift */; };
@@ -61,18 +56,13 @@
 		3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */; };
 		3DB910F3275759E90076CB50 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910F2275759E90076CB50 /* Singleton.swift */; };
 		3DB9110227588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
-		3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3DB9110527588D110076CB50 /* InfoPlist.strings */; };
 		3DBD0F4A2781504F001FA460 /* HelpOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F492781504F001FA460 /* HelpOrderCell.swift */; };
 		3DBD0F4C27815610001FA460 /* AddTableViewHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F4B27815610001FA460 /* AddTableViewHeaderView.swift */; };
 		3DBD0F4E27817219001FA460 /* IngredientsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F4D27817219001FA460 /* IngredientsCell.swift */; };
 		3DBD0F5027818228001FA460 /* AssistantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F4F27818228001FA460 /* AssistantCell.swift */; };
-		3DBD0F5A2782C7C3001FA460 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
-		3DBD0F5B2782EE33001FA460 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA05529277F0F9100966C90 /* UIFont.swift */; };
-		3DBD0F5C2782EE46001FA460 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA05531278080C000966C90 /* UIColor.swift */; };
 		3DBD0F5E27833BE6001FA460 /* HashTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F5D27833BE5001FA460 /* HashTagCell.swift */; };
 		3DBD0F612783463A001FA460 /* NoTitleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F602783463A001FA460 /* NoTitleHeader.swift */; };
 		3DBD0F6427834D42001FA460 /* UINavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F6327834D42001FA460 /* UINavigation.swift */; };
-		3DBD0F6527834D42001FA460 /* UINavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F6327834D42001FA460 /* UINavigation.swift */; };
 		3DBD0F67278355A5001FA460 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F66278355A5001FA460 /* SettingCell.swift */; };
 		3DBD0F6A278357B4001FA460 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F69278357B4001FA460 /* SettingHeaderView.swift */; };
 		3DBD0F6D278360F5001FA460 /* MyDrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F6C278360F4001FA460 /* MyDrinkCell.swift */; };
@@ -85,27 +75,13 @@
 		3DE56B33275DF93F0087D979 /* DrinkTypeChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE56B32275DF93E0087D979 /* DrinkTypeChoiceViewController.swift */; };
 		3DE56B35275E4F750087D979 /* BaseChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE56B34275E4F750087D979 /* BaseChoiceViewController.swift */; };
 		3DEADC6E274625F600362D99 /* FilterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DEADC6D274625F600362D99 /* FilterViewCell.swift */; };
-		3DF3C2FC275071C100462619 /* CocktailStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A442730D244004091CE /* CocktailStruct.swift */; };
-		3DF3C3002750833000462619 /* Cocktail_SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF3C2FE275081CD00462619 /* Cocktail_SmallView.swift */; };
-		3DF3C30327508C4600462619 /* Cocktail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A462730D574004091CE /* Cocktail.plist */; };
 		3DF79349275A6AC8004E9F98 /* AddRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DF79348275A6AC8004E9F98 /* AddRecipeCell.swift */; };
 		3DF7934B275A70EA004E9F98 /* CocktailData.json in Resources */ = {isa = PBXBuildFile; fileRef = 3DF7934A275A70EA004E9F98 /* CocktailData.json */; };
 		7D1CD225274B56AD00C1C821 /* Ingredients.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3D0D9B762744D714008C75E7 /* Ingredients.plist */; };
 		7D4AF9062760D57B0093C3C2 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AF9052760D57B0093C3C2 /* UIApplication.swift */; };
 		7D4AF9082760D5840093C3C2 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4AF9072760D5840093C3C2 /* UIViewController.swift */; };
-		E5E20B4CF65539B2BDF6D965 /* Pods_Cocktail_WidgetExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E448B11EFDAEC42A51B3C08 /* Pods_Cocktail_WidgetExtension.framework */; };
 		EA19792B0E90586999B8186F /* Pods_Cocktail.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB80C3BCB494EAFF50034B87 /* Pods_Cocktail.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		3D072477274F55220061B3F5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3DA76A252730D1CD004091CE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3D072467274F551D0061B3F5;
-			remoteInfo = "Cocktail WidgetExtension";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3D07247A274F55220061B3F5 /* Embed App Extensions */ = {
@@ -114,7 +90,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				3D072479274F55220061B3F5 /* Cocktail WidgetExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,7 +97,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3D072468274F551D0061B3F5 /* Cocktail WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Cocktail WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D07246A274F551D0061B3F5 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		3D07246C274F551D0061B3F5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail_Widget.swift; sourceTree = "<group>"; };
@@ -217,16 +191,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3D072465274F551D0061B3F5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3D07246D274F551D0061B3F5 /* SwiftUI.framework in Frameworks */,
-				3D07246B274F551D0061B3F5 /* WidgetKit.framework in Frameworks */,
-				E5E20B4CF65539B2BDF6D965 /* Pods_Cocktail_WidgetExtension.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3DA76A2A2730D1CD004091CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -474,7 +438,6 @@
 			isa = PBXGroup;
 			children = (
 				3DA76A2D2730D1CD004091CE /* Cocktail.app */,
-				3D072468274F551D0061B3F5 /* Cocktail WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -554,24 +517,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3D072467274F551D0061B3F5 /* Cocktail WidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3D07247D274F55220061B3F5 /* Build configuration list for PBXNativeTarget "Cocktail WidgetExtension" */;
-			buildPhases = (
-				65700BEB4881732309A3D707 /* [CP] Check Pods Manifest.lock */,
-				3D072464274F551D0061B3F5 /* Sources */,
-				3D072465274F551D0061B3F5 /* Frameworks */,
-				3D072466274F551D0061B3F5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Cocktail WidgetExtension";
-			productName = "Cocktail WidgetExtension";
-			productReference = 3D072468274F551D0061B3F5 /* Cocktail WidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		3DA76A2C2730D1CD004091CE /* Cocktail */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3DA76A412730D1D0004091CE /* Build configuration list for PBXNativeTarget "Cocktail" */;
@@ -586,7 +531,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				3D072478274F55220061B3F5 /* PBXTargetDependency */,
 			);
 			name = Cocktail;
 			productName = Cocktail;
@@ -603,9 +547,6 @@
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
-					3D072467274F551D0061B3F5 = {
-						CreatedOnToolsVersion = 13.1;
-					};
 					3DA76A2C2730D1CD004091CE = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -626,22 +567,11 @@
 			projectRoot = "";
 			targets = (
 				3DA76A2C2730D1CD004091CE /* Cocktail */,
-				3D072467274F551D0061B3F5 /* Cocktail WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3D072466274F551D0061B3F5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3DF3C30327508C4600462619 /* Cocktail.plist in Resources */,
-				3D072473274F55220061B3F5 /* Assets.xcassets in Resources */,
-				3DB9110327588D110076CB50 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3DA76A2B2730D1CD004091CE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -664,28 +594,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		65700BEB4881732309A3D707 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Cocktail WidgetExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DF6E969EA13D7B6ACF1FD1FA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -728,20 +636,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3D072464274F551D0061B3F5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3DF3C2FC275071C100462619 /* CocktailStruct.swift in Sources */,
-				3DBD0F5C2782EE46001FA460 /* UIColor.swift in Sources */,
-				3DF3C3002750833000462619 /* Cocktail_SmallView.swift in Sources */,
-				3DBD0F5A2782C7C3001FA460 /* String.swift in Sources */,
-				3DBD0F6527834D42001FA460 /* UINavigation.swift in Sources */,
-				3DBD0F5B2782EE33001FA460 /* UIFont.swift in Sources */,
-				3D072470274F551D0061B3F5 /* Cocktail_Widget.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3DA76A292730D1CD004091CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -811,14 +705,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		3D072478274F55220061B3F5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3D072467274F551D0061B3F5 /* Cocktail WidgetExtension */;
-			targetProxy = 3D072477274F55220061B3F5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		3D175BA22742846B00EC142B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -850,66 +736,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3D07247B274F55220061B3F5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4974DC8ED10DFBD68173FC1 /* Pods-Cocktail WidgetExtension.debug.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3GBKG7DTJY;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Cocktail Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Cocktail Widget";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 0.7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "heesung.Cocktail.Cocktail-Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		3D07247C274F55220061B3F5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = A99C0D1498E4EC1EC115A9CA /* Pods-Cocktail WidgetExtension.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3GBKG7DTJY;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Cocktail Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Cocktail Widget";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 0.7.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "heesung.Cocktail.Cocktail-Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
 		3DA76A3F2730D1D0004091CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1055,7 +881,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.7.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1092,7 +918,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.7.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = heesung.Cocktail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1105,15 +931,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3D07247D274F55220061B3F5 /* Build configuration list for PBXNativeTarget "Cocktail WidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3D07247B274F55220061B3F5 /* Debug */,
-				3D07247C274F55220061B3F5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3DA76A282730D1CD004091CE /* Build configuration list for PBXProject "Cocktail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

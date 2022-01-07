@@ -21,7 +21,7 @@ class ColorCollectionViewCell: UICollectionViewCell {
         
         contentView.layer.borderWidth = isChecked ? 4 : 0
         contentView.layer.borderColor = UIColor.borderGray.cgColor
-        contentView.layer.cornerRadius = 45
+        contentView.layer.cornerRadius = 30
         contentView.clipsToBounds = true
         colorView.contentMode = .scaleAspectFill
         colorView.snp.makeConstraints {

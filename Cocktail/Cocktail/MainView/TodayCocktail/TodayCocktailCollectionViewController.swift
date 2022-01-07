@@ -25,7 +25,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         var titleText: NSMutableAttributedString {
             switch self {
             case .firstSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "바텐딩 초보자를 위한 가이드북", firstRange: NSRange(location: 7, length: 9), secondRange: NSRange(location: 8, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 7))
+                let text = NSMutableAttributedString.addOrangeText(text: "홈텐딩 입문자를 위한 추천영상", firstRange: NSRange(location: 7, length: 9), secondRange: NSRange(location: 8, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 7))
                 return text
             case .secondSection:
                 let text = NSMutableAttributedString.addOrangeText(text: "나만의 레시피북을 만들어볼까요?", firstRange: NSRange(location: 0, length: 4), secondRange: NSRange(location: 8, length: 9), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 4, length: 4))
@@ -121,38 +121,28 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         collectionView.dataSource = self
         loadingView.explainLabel.text = "로딩중"
         
-        if Auth.auth().currentUser == nil {
-            getYoutubeContents {[weak self] data in
-                FirebaseRecipe.shared.youTubeData = data
-                self?.youtubeData = data
-                self?.collectionView.reloadData()
-                self?.loadingView.isHidden = true
-            }
-            
-            getRecommendations {[weak self] data in
-                self?.recommendationData = data
-                self?.collectionView.reloadData()
-            }
-        } else {
+        
+        getYoutubeContents {[weak self] data in
+            FirebaseRecipe.shared.youTubeData = data.shuffled()
+            self?.youtubeData = data.shuffled()
+            self?.collectionView.reloadData()
+            self?.loadingView.isHidden = true
+        }
+        
+        getRecommendations {[weak self] data in
+            self?.recommendationData = data
+            self?.collectionView.reloadData()
+        }
+        
+        if let _ = Auth.auth().currentUser {
             getMyRecipe {[weak self] data in
-                FirebaseRecipe.shared.myRecipe = data
+                FirebaseRecipe.shared.myRecipe = data.shuffled()
                 self?.myRecipe = data
             }
             
             getWishList {[weak self] data in
                 FirebaseRecipe.shared.wishList = data
                 self?.wishListData = data
-            }
-            
-            getYoutubeContents {[weak self] data in
-                FirebaseRecipe.shared.youTubeData = data
-                self?.youtubeData = data
-                self?.collectionView.reloadData()
-            }
-            
-            getRecommendations {[weak self] data in
-                self?.recommendationData = data
-                self?.collectionView.reloadData()
             }
         }
         
@@ -240,7 +230,7 @@ extension TodayCocktailCollectionViewController {
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 10, leading: 5, bottom: 10, trailing: 5)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95), heightDimension: .fractionalHeight(0.2))
-        
+            
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
         
@@ -274,7 +264,7 @@ extension TodayCocktailCollectionViewController {
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 10, leading: 5, bottom: 10, trailing: 5)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .fractionalHeight(0.2))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .fractionalWidth(0.4))
         
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
         

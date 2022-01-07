@@ -84,7 +84,7 @@ class DrinkTypeChoiceViewController: UIViewController {
         }
 
         questionLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(100)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(55)
         }

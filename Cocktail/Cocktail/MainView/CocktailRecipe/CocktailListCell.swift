@@ -26,7 +26,7 @@ class CocktailListCell: UITableViewCell {
         [nameLabel, ingredientCountLabel, cocktailImageView, likeCount, disclosureMark].forEach {
             contentView.addSubview($0)
         }
-        cocktailImageView.contentMode = .scaleAspectFill
+        cocktailImageView.contentMode = .scaleAspectFit
         nameLabel.font = .nexonFont(ofSize: 18, weight: .bold)
         ingredientCountLabel.font = .nexonFont(ofSize: 15, weight: .medium)
         ingredientCountLabel.alpha = 0.7

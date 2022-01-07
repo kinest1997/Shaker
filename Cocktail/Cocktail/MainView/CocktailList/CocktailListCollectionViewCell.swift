@@ -21,7 +21,7 @@ class CocktailListCollectionViewCell: UICollectionViewCell {
         nameTextLabel.textColor = .black
         nameTextLabel.textAlignment = .center
         nameTextLabel.font = .nexonFont(ofSize: 16, weight: .semibold)
-        mainImageView.contentMode = .scaleAspectFill
+        mainImageView.contentMode = .scaleAspectFit
         mainImageView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.8)
