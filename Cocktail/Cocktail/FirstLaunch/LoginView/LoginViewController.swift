@@ -96,7 +96,7 @@ class LoginViewController: UIViewController {
         shakerLabel.sizeToFit()
         loginlabel.sizeToFit()
         mainImageView.contentMode = .bottomLeft
-        navigationController?.navigationBar.tintColor = .mainGray
+        
         appleLoginButton.layer.cornerRadius = 15
         appleLoginButton.clipsToBounds = true
         appleLoginButton.contentMode = .scaleAspectFill

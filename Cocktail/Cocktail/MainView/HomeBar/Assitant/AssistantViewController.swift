@@ -33,11 +33,11 @@ class AssistantViewController: UIViewController {
     }
     
     let mainTableView = UITableView()
-    let titleLabel = UILabel()
+    let topTitleLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.tintColor = .mainGray
+        
         mainTableView.register(AssistantCell.self, forCellReuseIdentifier: "AssistantCell")
         mainTableView.isScrollEnabled = false
         mainTableView.delegate = self
@@ -48,31 +48,24 @@ class AssistantViewController: UIViewController {
     
     func attribute() {
         mainTableView.separatorStyle = .none
-        titleLabel.text = "마이페이지"
-        titleLabel.font = .nexonFont(ofSize: 24, weight: .bold)
-        titleLabel.textAlignment = .center
-        
+        topTitleLabel.text = "마이페이지".localized
+        topTitleLabel.font = .nexonFont(ofSize: 24, weight: .bold)
+        topTitleLabel.textAlignment = .center
         view.backgroundColor = .white
     }
     
     func layout() {
         view.addSubview(mainTableView)
-        view.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints {
+        view.addSubview(topTitleLabel)
+        topTitleLabel.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview().inset(50)
             $0.height.equalTo(100)
         }
         
         mainTableView.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom)
+            $0.top.equalTo(topTitleLabel.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-    }
-    
-    func pleaseLoginAlert() {
-        let alert = UIAlertController(title: "로그인시에 사용가능합니다".localized, message: "로그인은 설정에서 할수있습니다.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인".localized, style: .default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -86,7 +79,6 @@ extension AssistantViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard let cell = tableView.cellForRow(at: indexPath) as? AssistantCell else { return }
         
         switch indexPath.row {
         case 0:

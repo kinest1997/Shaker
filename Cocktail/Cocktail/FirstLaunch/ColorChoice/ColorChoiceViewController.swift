@@ -51,12 +51,12 @@ class ColorChoiceViewController: UIViewController {
         mainCollectionView.snp.makeConstraints {
             $0.top.equalTo(questionLabel.snp.bottom).offset(30)
             $0.leading.trailing.equalToSuperview().inset(30)
-            $0.height.equalTo(400)
+            $0.height.equalTo(mainCollectionView.snp.width).multipliedBy(1.3)
         }
         
         nextButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
-            $0.centerX.equalToSuperview() 
+            $0.centerX.equalToSuperview()
         }
     }
     
@@ -117,7 +117,6 @@ extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let yourWidth = collectionView.bounds.width/3.5
         let yourHeight = yourWidth
-        
         return CGSize(width: yourWidth, height: yourHeight)
     }
     
@@ -125,8 +124,6 @@ extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colorCell", for: indexPath) as? ColorCollectionViewCell else { return UICollectionViewCell() }
         cell.colorView.image = UIImage(named: colorArray[indexPath.row].rawValue)
             return cell
-        
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -243,8 +240,6 @@ class ColorChoiceViewController: UIViewController {
                 UserDefaults.standard.set(colors.map { $0.rawValue }, forKey: "ColorFavor")
             }
             .disposed(by: disposeBag)
-
-
     }
 
     func layout() {

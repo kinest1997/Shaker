@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Cocktail
 
@@ -89,6 +89,7 @@
 "Beginner" = "초보 추천";
 "High Proof" = "고도수 추천";
 "My Own" = "내 추천";
+"Home" = "홈";
 
 //ChoiceViewController.swift
 "Anything!" = "다 좋아!";

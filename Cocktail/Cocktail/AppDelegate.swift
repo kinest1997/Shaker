@@ -40,13 +40,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             UserDefaults.standard.set(false, forKey: "firstLaunch")
         }
+        ///네비게이션바 글자 색깔 바꾸기
+        UINavigationBar.appearance().tintColor = .mainGray
         
+        ///네비게이션바  폰트 정해주기
         let naviBarTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 16, weight: .semibold)]
         UIBarButtonItem.appearance().setTitleTextAttributes(naviBarTextAttributes, for: UIControl.State.normal)
         UIBarButtonItem.appearance().setTitleTextAttributes(naviBarTextAttributes, for: .highlighted)
         UIBarButtonItem.appearance().setTitleTextAttributes(naviBarTextAttributes, for: .focused)
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
         
+        ///탭바 폰트
         let attributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 12, weight: .semibold)]
         UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
         return true

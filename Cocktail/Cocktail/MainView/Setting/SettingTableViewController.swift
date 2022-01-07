@@ -37,7 +37,7 @@ class SettingTableViewController: UITableViewController {
         var rowTitles: [String] {
             switch self {
             case .serviceInformation:
-                return ["버전정보 \(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? ""))", "오픈소스라이브러리", "개인정보 처리방침"]
+                return ["버전정보 \(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? ""))", "오픈소스라이브러리"]
             case .alarm:
                 return ["Alarm Setting".localized]
             case .support:
@@ -53,7 +53,6 @@ class SettingTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "설정"
-        navigationController?.navigationBar.tintColor = .mainGray
         tableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")
     }
     

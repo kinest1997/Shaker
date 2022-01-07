@@ -103,10 +103,10 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "SHAKER".localized
+        self.title = "Home".localized
         view.addSubview(collectionView)
         view.addSubview(loadingView)
-        navigationController?.navigationBar.tintColor = .mainGray
+        
         collectionView.backgroundColor = .white
         collectionView.register(HashTagCell.self, forCellWithReuseIdentifier: "HashTagCell")
         collectionView.register(HelpOrderCell.self, forCellWithReuseIdentifier: "HelpOrderCell")
@@ -169,6 +169,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
         self.wishListData = FirebaseRecipe.shared.wishList
+        self.myRecipe = FirebaseRecipe.shared.myRecipe
         self.collectionView.reloadData()
     }
     
@@ -180,8 +181,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
                 self.loadingView.isHidden = true
             }
             if UserDefaults.standard.object(forKey: "whatIHave") == nil {
-                let alert = UIAlertController(title: "반가워요", message: "내술장에 술이 하나도없네요 \n 추가하러 가시겠어요?", preferredStyle: .alert)
-                
+                let alert = UIAlertController(title: "반가워요", message: "내술장에 술이 하나도없네요\n추가하러 가시겠어요?", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "네", style: .default, handler: {[weak self] _ in
                     self?.goToViewController(number: 2, viewController: MyDrinksViewController())
                 }))
@@ -348,19 +348,27 @@ extension TodayCocktailCollectionViewController {
         return UICollectionReusableView()
     }
     
-    //섹션의 갯수
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Today.allCases.count
-    }
-    
     @objc func showWishList() {
-        self.show(WishListCocktailListViewController(), sender: nil)
-        self.navigationController?.navigationBar.isHidden = false
+        if Auth.auth().currentUser?.uid == nil {
+            self.pleaseLoginAlert()
+        } else {
+            self.show(WishListCocktailListViewController(), sender: nil)
+            self.navigationController?.navigationBar.isHidden = false
+        }
     }
     
     @objc func showMyList() {
-        self.show(MyOwnCocktailRecipeViewController(), sender: nil)
-        self.navigationController?.navigationBar.isHidden = false
+        if Auth.auth().currentUser?.uid == nil {
+            self.pleaseLoginAlert()
+        } else {
+            self.show(MyOwnCocktailRecipeViewController(), sender: nil)
+            self.navigationController?.navigationBar.isHidden = false
+        }
+    }
+    
+    //섹션의 갯수
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return Today.allCases.count
     }
     
     //섹션당 보여줄 셀의 개수
@@ -432,7 +440,8 @@ extension TodayCocktailCollectionViewController {
             self.navigationController?.show(colorChoiceViewController, sender: nil)
         case 4:
             let cocktailListViewController = CocktailListViewController()
-            cocktailListViewController.lastRecipe = recommendationData[indexPath.row].list
+            cocktailListViewController.lastRecipe = recommendationData[indexPath.row].spitRecipe(data: FirebaseRecipe.shared.recipe)
+            cocktailListViewController.title = recommendationData[indexPath.row].hashTagName
             self.navigationController?.show(cocktailListViewController, sender: nil)
             
         default:

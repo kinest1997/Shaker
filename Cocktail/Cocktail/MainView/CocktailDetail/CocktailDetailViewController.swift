@@ -392,26 +392,32 @@ class CocktailDetailViewController: UIViewController {
         popUpView.isHidden = true
         
         wishListButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            if FirebaseRecipe.shared.wishList.contains(self.cocktailData) {
-                self.popUpView.animating(text: "즐겨찾기에서 \n제거되었습니다")
-                self.wishListButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-                guard let number = FirebaseRecipe.shared.wishList.firstIndex(of: self.cocktailData) else { return }
-                FirebaseRecipe.shared.wishList.remove(at: number)
-                self.cocktailData.wishList = false
-            } else {
-                self.popUpView.animating(text: "즐겨찾기에 \n추가되었습니다")
-                self.wishListButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
-                var data = self.cocktailData
-                data.wishList = true
-                FirebaseRecipe.shared.wishList.append(data)
-                self.cocktailData.wishList = true
-            }
-            FirebaseRecipe.shared.uploadWishList()
+            guard let self = self,
+                  let _ = Auth.auth().currentUser?.uid else {
+                      self?.pleaseLoginAlert()
+                      return }
+                if FirebaseRecipe.shared.wishList.contains(self.cocktailData) {
+                    self.popUpView.animating(text: "즐겨찾기에서 \n제거되었습니다")
+                    self.wishListButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+                    guard let number = FirebaseRecipe.shared.wishList.firstIndex(of: self.cocktailData) else { return }
+                    FirebaseRecipe.shared.wishList.remove(at: number)
+                    self.cocktailData.wishList = false
+                } else {
+                    self.popUpView.animating(text: "즐겨찾기에 \n추가되었습니다")
+                    self.wishListButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+                    var data = self.cocktailData
+                    data.wishList = true
+                    FirebaseRecipe.shared.wishList.append(data)
+                    self.cocktailData.wishList = true
+                }
+                FirebaseRecipe.shared.uploadWishList()
         }), for: .touchUpInside)
         
         likeButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
+            guard let self = self,
+                  let _ = Auth.auth().currentUser?.uid else {
+                      self?.pleaseLoginAlert()
+                      return }
             if self.iLike == true {
                 FirebaseRecipe.shared.deleteLike(cocktail: self.cocktailData)
                 FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
@@ -428,8 +434,10 @@ class CocktailDetailViewController: UIViewController {
         }), for: .touchUpInside)
         
         disLikeButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            
+            guard let self = self,
+                  let _ = Auth.auth().currentUser?.uid else {
+                      self?.pleaseLoginAlert()
+                      return }
             if self.iLike == false {
                 FirebaseRecipe.shared.deleteLike(cocktail: self.cocktailData)
                 FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
@@ -453,6 +461,10 @@ class CocktailDetailViewController: UIViewController {
     }
     
     @objc func startEditing() {
+        guard let _ = Auth.auth().currentUser?.uid else {
+                  self.pleaseLoginAlert()
+                  return }
+        
         let addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
         addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
         addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
