@@ -13,6 +13,10 @@ import FirebaseDatabase
 import FirebaseAuth
 import AuthenticationServices
 
+protocol TodayCocktailCollectionViewBindable {
+    
+}
+
 class TodayCocktailCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     enum Today: Int, CaseIterable {

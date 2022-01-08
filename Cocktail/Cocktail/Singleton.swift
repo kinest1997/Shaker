@@ -2,6 +2,8 @@ import UIKit
 import FirebaseDatabase
 import FirebaseAuth
 import AuthenticationServices
+import RxCocoa
+import RxSwift
 
 ///유저의 개인 취향을 저장하는곳, 설정에서 나중에 취향 재설정 가능하게 하자
 
@@ -68,6 +70,20 @@ class FirebaseRecipe {
                       completion([Recommendation]())
                       return }
             completion(cocktailList)
+        }
+    }
+    
+    func getRecommendationsRx() -> Single<[Recommendation]> {
+        return Single.create {[weak self] observer in
+            self?.ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
+                guard let value = snapshot.value as? [[String: Any]],
+                      let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                      let cocktailList = try? JSONDecoder().decode([Recommendation].self, from: data) else {
+                          observer(.success([Recommendation]()))
+                          return }
+                observer(.success(cocktailList))
+            }
+            return Disposables.create()
         }
     }
     
