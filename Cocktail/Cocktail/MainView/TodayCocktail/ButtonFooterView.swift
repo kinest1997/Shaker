@@ -21,7 +21,7 @@ class ButtonFooterView: UICollectionReusableView {
             $0.width.equalToSuperview().multipliedBy(0.3)
         }
         bottomButton.titleLabel?.font = .nexonFont(ofSize: 14, weight: .semibold)
-        bottomButton.setTitle("전체보기 >", for: .normal)
+        bottomButton.setTitle("SeeAll".localized + " >", for: .normal)
         bottomButton.setTitleColor(.mainGray, for: .normal)
     }
 }

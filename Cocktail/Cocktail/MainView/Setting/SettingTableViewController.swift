@@ -37,7 +37,7 @@ class SettingTableViewController: UITableViewController {
         var rowTitles: [String] {
             switch self {
             case .serviceInformation:
-                return ["Version".localized + "\(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? ""))", "오픈소스라이브러리"]
+                return ["Version".localized + "\(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? ""))", "Open Source Library".localized]
             case .alarm:
                 return ["Alarm Setting".localized]
             case .support:
@@ -52,7 +52,7 @@ class SettingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Settings"
+        title = "Settings".localized
         tableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")
     }
     

@@ -95,7 +95,7 @@ class MyDrinksViewController: UIViewController {
             button.setTitle("\(sortedData.count)" + " " + "EA".localized + " " + "making".localized, for: .normal)
         } else {
             button.backgroundColor = .white
-            button.setTitle("Please choose more ingredients!".localized, for: .normal)
+            button.setTitle("Choose more ingredients!".localized, for: .normal)
         }
     }
     

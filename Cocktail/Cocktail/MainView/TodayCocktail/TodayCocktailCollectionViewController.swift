@@ -29,21 +29,58 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         var titleText: NSMutableAttributedString {
             switch self {
             case .firstSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "홈텐딩 입문자를 위한 추천영상", firstRange: NSRange(location: 7, length: 9), secondRange: NSRange(location: 8, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 7))
-                return text
-            case .secondSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "나만의 레시피북을 만들어볼까요?", firstRange: NSRange(location: 0, length: 4), secondRange: NSRange(location: 8, length: 9), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 4, length: 4))
-                return text
-            case .thirdSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "내가 찜! 한 레시피", firstRange: NSRange(location: 0, length: 3), secondRange: NSRange(location: 5, length: 6), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 2))
-                return text
-            case .fourthSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "주문 도와드릴까요?", firstRange: NSRange(location: 2, length: 8), secondRange: NSRange(location: 3, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 2))
-                return text
-            case .fifthSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "오늘의 한잔은?", firstRange: NSRange(location: 6, length: 2), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 6))
-                return text
                 
+                let originText = "Recommendation Video".localized
+                if NSLocale.current.languageCode == "ko" {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 7, length: 9), secondRange: NSRange(location: 8, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 7))
+                    return text
+                } else {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 15), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 15, length: 5))
+                    return text
+                }
+                
+            case .secondSection:
+                
+                let originText = "Let's make my own Recipes".localized
+                if NSLocale.current.languageCode == "ko" {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 4), secondRange: NSRange(location: 8, length: 9), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 4, length: 4))
+                    return text
+                } else {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 18), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 18, length: 7))
+                    return text
+                }
+            case .thirdSection:
+                
+                let originText = "My WishList".localized
+                if NSLocale.current.languageCode == "ko" {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 3), secondRange: NSRange(location: 5, length: 6), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 2))
+                    return text
+                } else {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 3), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 8))
+                    return text
+                }
+
+            case .fourthSection:
+                
+                let originText = "May I help your Order?".localized
+                if NSLocale.current.languageCode == "ko" {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 2, length: 8), secondRange: NSRange(location: 3, length: 0), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 2))
+                    return text
+                } else {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 16), secondRange: NSRange(location: 20, length: 1), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 16, length: 5))
+                    return text
+                }
+                
+            case .fifthSection:
+                
+                let originText = "Todays drink?".localized
+                if NSLocale.current.languageCode == "ko" {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 6, length: 2), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 6))
+                    return text
+                } else {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 12, length: 1), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 0, length: 12))
+                    return text
+                }
             }
         }
         
@@ -53,18 +90,39 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
                 let text = NSMutableAttributedString(string: "")
                 return text
             case .secondSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "내가 직접 개발한 레시피!", firstRange: NSRange(location: 0, length: 10), secondRange: NSRange(location: 13, length: 1), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 10, length: 3))
-                return text
+                
+                let originText = "The Recipe that I made myself".localized
+                if NSLocale.current.languageCode == "ko" {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 10), secondRange: NSRange(location: 13, length: 1), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 10, length: 3))
+                    return text
+                } else {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 4), secondRange: NSRange(location: 10, length: 19), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 4, length: 6))
+                    return text
+                }
+                
             case .thirdSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "찜한 칵테일, 잊지 말고 다시 보아요", firstRange: NSRange(location: 1, length: 19), secondRange: NSRange(location: 10, length: 0), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 0, length: 1))
-                return text
+                let originText = "Dibs. Don't forget to watch it again".localized
+                if NSLocale.current.languageCode == "ko" {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 1, length: 19), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 0, length: 1))
+                    return text
+                } else {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 4, length: 32), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 0, length: 4))
+                    return text
+                }
+                
             case .fourthSection:
-                let text = NSMutableAttributedString.addOrangeText(text: "시작하기 어려우신가요? 쉐이커가 레시피를 추천해드릴게요", firstRange: NSRange(location: 0, length: 13), secondRange: NSRange(location: 0, length: 0), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 13, length: 17))
-                return text
+                let originText = "Hard to order? I can help you".localized
+                if NSLocale.current.languageCode == "ko" {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 13), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 13, length: 17))
+                    return text
+                } else {
+                    let text = NSMutableAttributedString.addOrangeText(text: originText, firstRange: NSRange(location: 0, length: 15), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 12, weight: .semibold), orangeRange: NSRange(location: 15, length: 14))
+                    return text
+                }
+                
             case .fifthSection:
                 let text = NSMutableAttributedString(string: "")
                 return text
-                
             }
         }
     }
@@ -123,7 +181,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         collectionView.collectionViewLayout = collectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
-        loadingView.explainLabel.text = "로딩중"
+        loadingView.explainLabel.text = "Loading".localized
         
         
         getYoutubeContents {[weak self] data in
@@ -176,11 +234,11 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
                 self.loadingView.isHidden = true
             }
             if UserDefaults.standard.object(forKey: "whatIHave") == nil {
-                let alert = UIAlertController(title: "반가워요", message: "내술장에 술이 하나도없네요\n추가하러 가시겠어요?", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "네", style: .default, handler: {[weak self] _ in
+                let alert = UIAlertController(title: "Hello".localized, message: "I don't have any alcohol in MyDrinks\nDo you want to go add it?".localized, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: {[weak self] _ in
                     self?.goToViewController(number: 2, viewController: MyDrinksViewController())
                 }))
-                alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
+                alert.addAction(UIAlertAction(title: "No".localized, style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
             }
         }
@@ -445,11 +503,11 @@ extension TodayCocktailCollectionViewController {
     }
     
     func goToYoutube(videoCode: String) {
-        let alert = UIAlertController(title: "유튜브 앱으로 연결됩니다".localized, message: "이동하시겠습니까?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "예", style: .default, handler: {_ in
+        let alert = UIAlertController(title: "It's connected through YouTube".localized, message: "Will you continue?".localized, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: {_ in
             ContentNetwork.shared.setlinkAction(appURL: "https://www.youtube.com/watch?v=\(videoCode)", webURL: "https://www.youtube.com/watch?v=\(videoCode)")
         }))
-        alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "No".localized, style: .cancel, handler: nil))
         self.present(alert, animated: true)
     }
     

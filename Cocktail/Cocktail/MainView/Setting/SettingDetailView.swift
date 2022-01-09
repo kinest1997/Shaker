@@ -20,13 +20,13 @@ class SettingDetailViewController: UIViewController {
         var sectionTitle: String {
             switch self {
             case .developer:
-                return "개발자"
+                return "Developer".localized
             case .illustrator:
-                return "일러스트레이터"
+                return "Illustrator".localized
             case .mainDesigner:
-                return "메인디자이너"
+                return "MainDesigner".localized
             case .subDesigner:
-                return "서브디자이너"
+                return "SubDesigner".localized
             }
         }
         

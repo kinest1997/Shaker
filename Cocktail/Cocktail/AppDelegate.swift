@@ -11,6 +11,7 @@ import UserNotifications
 import FirebaseMessaging
 import FirebaseAnalytics
 import FirebaseAuth
+import Siren
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -53,6 +54,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ///탭바 폰트
         let attributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 12, weight: .semibold)]
         UITabBarItem.appearance().setTitleTextAttributes(attributes, for: .normal)
+        
+        
+        let siren = Siren.shared
+        siren.apiManager = APIManager(country: .korea) //기준 위치 대한민국 앱스토어로 변경
+        siren.presentationManager = PresentationManager(forceLanguageLocalization: .korean) //알림 메시지 한국어로
+        //일단 업뎃시켜버려~
+        siren.rulesManager = RulesManager(majorUpdateRules: .critical,
+                                          minorUpdateRules: .critical,
+                                          patchUpdateRules: .critical,
+                                          revisionUpdateRules: .critical)
+        
+        siren.wail()
+        
         return true
     }
     

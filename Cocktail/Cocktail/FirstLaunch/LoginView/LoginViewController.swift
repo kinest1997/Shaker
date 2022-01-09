@@ -100,7 +100,11 @@ class LoginViewController: UIViewController {
         appleLoginButton.layer.cornerRadius = 15
         appleLoginButton.clipsToBounds = true
         appleLoginButton.contentMode = .scaleAspectFit
-        appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button"), for: .normal)
+        if NSLocale.current.languageCode == "ko" {
+            appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button"), for: .normal)
+        } else {
+            appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button_eng"), for: .normal)
+        }
     }
     
     func layout() {
