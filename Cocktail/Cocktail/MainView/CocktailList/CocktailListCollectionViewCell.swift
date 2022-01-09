@@ -44,5 +44,3 @@ class CocktailListCollectionViewCell: UICollectionViewCell {
         nameTextLabel.text = data.name
     }
 }
-
-

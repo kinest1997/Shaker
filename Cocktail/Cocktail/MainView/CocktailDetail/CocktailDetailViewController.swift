@@ -229,14 +229,13 @@ class CocktailDetailViewController: UIViewController {
         alcoholGuideLabel.snp.makeConstraints {
             $0.centerY.equalTo(alcoholStackView)
             $0.height.equalTo(alcoholStackView)
-            $0.width.equalTo(50)
             $0.trailing.equalTo(alcoholStackView.snp.leading).offset(5)
         }
         
         alcoholLabel.snp.makeConstraints {
             $0.centerY.equalTo(alcoholStackView)
             $0.height.equalTo(alcoholStackView)
-            $0.width.equalTo(50)
+            
             $0.leading.equalTo(alcoholStackView.snp.trailing)
         }
         

@@ -4,50 +4,6 @@ protocol CocktailCondition {
     var rawValue: String { get }
 }
 
-// 칵테일 좋아요 정보 관련 객체
-struct CocktailLikeList: Codable {
-    let cocktail: [String: CocktailLikeCount]
-}
-//칵테일의 이름 경로 아래에 좋아요를 누를때마다 그사람의 uid 가 추가되고 좋아요일경우 true, 싫어요일 경우 false
-struct CocktailLikeCount: Codable {
-    var people: [String: Bool] = [:]
-}
-
-//유튜브 관련 컨텐츠 받아오는 객체
-struct YouTubeVideo: Codable {
-    let videoName: String
-    let videoCode: String
-    let owner: YouTubeOwner
-}
-
-enum YouTubeOwner: String, Codable {
-    case homeTendingDictionary
-    case drinkLover
-    case drinkLecture
-    case linibini
-    case mansHobby
-    case yancon
-}
-
-struct Recommendation: Codable {
-    var hashTagName: String
-    var list: [String]
-    
-    ///이름배열을 받아오면 그것의 이름을 가진 칵테일을 반환해주는것
-    func spitRecipe(data: [Cocktail]) -> [Cocktail] {
-        
-        let enumArray = data.enumerated()
-        
-        let recipe = enumArray.filter({ data in
-            list.contains(data.element.name)
-        }).map {$0.element}
-        
-        return recipe.sorted {
-            $0.glass.rawValue > $1.glass.rawValue
-        }
-    }
-}
-
 enum SortingStandard {
     case alcohol
     case name
@@ -201,8 +157,10 @@ struct Cocktail: Codable, Hashable {
         case aperol
         case cremeDeViolet
         
+        ///브랜디
         case brandy
         
+        ///음료
         case coke
         case tonicWater
         case milk
@@ -217,11 +175,13 @@ struct Cocktail: Codable, Hashable {
         case cider
         case lemonJuice
         
+        ///럼
         case whiteRum
         case darkRum
         case overProofRum
         case bacardi
         
+        ///라임
         case lime
         case limeSqueeze
         case limeSyrup

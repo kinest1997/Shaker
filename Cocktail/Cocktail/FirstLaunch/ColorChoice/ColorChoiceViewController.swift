@@ -61,23 +61,16 @@ class ColorChoiceViewController: UIViewController {
     }
     
     func attribute() {
-        let questionText = NSMutableAttributedString(string: "What's your favorite color?".localized)
-        let firstRange = NSRange(location: 0, length: 5)
-        let secondReange = NSRange(location: 6, length: 8)
-        let smallFont = UIFont.nexonFont(ofSize: 20, weight: .bold)
-        let bigfont = UIFont.nexonFont(ofSize: 24, weight: .bold)
-        let mainColor = UIColor.mainGray
-        
-        questionText.addAttribute(.font, value: smallFont, range: firstRange)
-        questionText.addAttribute(.font, value: smallFont, range: secondReange)
-        
-        questionText.addAttribute(.foregroundColor, value: mainColor, range: firstRange)
-        questionText.addAttribute(.foregroundColor, value: mainColor, range: secondReange)
-        
-        questionText.addAttribute(.font, value: bigfont, range: NSRange(location: 5, length: 1))
-        questionText.addAttribute(.foregroundColor, value: UIColor.mainOrange, range: NSRange(location: 5, length: 1))
-        
-        questionLabel.attributedText = questionText
+        let originText = "What's your favorite Color?".localized
+
+        if NSLocale.current.languageCode == "ko" {
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 5), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 6, length: 8), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 5, length: 1))
+            questionLabel.attributedText = questionText
+        } else {
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 21), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 26, length: 1), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 21, length: 5))
+            questionLabel.attributedText = questionText
+        }
+
         view.backgroundColor = .white
         mainCollectionView.backgroundColor = .white
         questionLabel.textAlignment = .center
@@ -91,7 +84,7 @@ class ColorChoiceViewController: UIViewController {
             let lastRecipe = FirebaseRecipe.shared.recipe.filter {
                 self.selectedColor.contains($0.color)}
             if lastRecipe.isEmpty {
-                self.present(UserFavor.shared.makeAlert(title: "Please choose one or more", message: "I don't have any drinks to recommend"), animated: true, completion: nil)
+                self.present(UserFavor.shared.makeAlert(title: "Please choose one or more".localized, message: "I don't have any drinks to recommend".localized), animated: true, completion: nil)
             } else {
                 let alcoholChoiceViewController = AlcoholChoiceViewController()
                 alcoholChoiceViewController.myFavor = self.myFavor

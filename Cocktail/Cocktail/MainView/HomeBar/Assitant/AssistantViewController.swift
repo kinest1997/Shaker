@@ -23,11 +23,11 @@ class AssistantViewController: UIViewController {
         var explain: String {
             switch self {
             case .myDrink:
-                return "내가 가지고 있는 재료로 만들수 있는 레시피를 알아봐요"
+                return "Find out the recipes that you can make with the ingredients you have!".localized
             case .myOwnCocktail:
-                return "내가 만든 레시피를 보러가요"
+                return "Let's go see the recipe I made".localized
             case .wishList:
-                return "내가 즐겨찾기에 추가한 레시피를 보러가요"
+                return "Let's go see the recipe that I added to my favorites".localized
             }
         }
     }
@@ -106,7 +106,7 @@ extension AssistantViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "AssistantCell", for: indexPath) as? AssistantCell else { return UITableViewCell()}
         cell.selectionStyle = .none
-        cell.titleLabel.text = Assist(rawValue: indexPath.row)?.title
+        cell.titleLabel.text = Assist(rawValue: indexPath.row)?.title.localized
         cell.explainLabel.text = Assist(rawValue: indexPath.row)?.explain
         cell.mainImageView.image = UIImage(named: Assist(rawValue: indexPath.row)?.title ?? "")?.resize()
         return cell

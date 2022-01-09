@@ -75,11 +75,25 @@ class FirebaseRecipe {
     
     func getRecommendationsRx() -> Single<[Recommendation]> {
         return Single.create {[weak self] observer in
-            self?.ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
+            self?.ref.child("CocktailRecommendation").observeSingleEvent(of: .value) { snapshot in
                 guard let value = snapshot.value as? [[String: Any]],
                       let data = try? JSONSerialization.data(withJSONObject: value, options: []),
                       let cocktailList = try? JSONDecoder().decode([Recommendation].self, from: data) else {
                           observer(.success([Recommendation]()))
+                          return }
+                observer(.success(cocktailList))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func getRecipeRx() -> Single<[Cocktail]> {
+        return Single.create {[weak self] observer in
+            self?.ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
+                guard let value = snapshot.value as? [[String: Any]],
+                      let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                      let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                          observer(.success([Cocktail]()))
                           return }
                 observer(.success(cocktailList))
             }
@@ -108,6 +122,22 @@ class FirebaseRecipe {
                       return }
             let myRecipes = cocktailList.filter { $0.myRecipe == true }
             completion(myRecipes)
+        }
+    }
+    
+    func getMyRecipeRx() -> Single<[Cocktail]> {
+        return Single.create {[weak self] observer in
+            guard let uid = self?.uid else { return Disposables.create() }
+            self?.ref.child("users").child(uid).child("MyRecipes").observeSingleEvent(of: .value) { snapshot in
+                guard let value = snapshot.value as? [[String: Any]],
+                      let data = try? JSONSerialization.data(withJSONObject: value, options: []),
+                      let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
+                          observer(.success([Cocktail]()))
+                          return }
+                let myRecipes = cocktailList.filter { $0.myRecipe == true }
+                return observer(.success(myRecipes))
+            }
+            return Disposables.create()
         }
     }
     

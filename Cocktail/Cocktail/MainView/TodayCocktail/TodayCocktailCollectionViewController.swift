@@ -164,6 +164,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         self.tabBarController?.tabBar.isHidden = false
         self.wishListData = FirebaseRecipe.shared.wishList
         self.myRecipe = FirebaseRecipe.shared.myRecipe
+
         self.collectionView.reloadData()
     }
     
