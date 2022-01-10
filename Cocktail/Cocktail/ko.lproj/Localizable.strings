@@ -1,0 +1,230 @@
+/*
+  Localizable.strings
+  Cocktail
+
+  Created by 강희성 on 2021/11/15.
+  
+*/
+
+//Global
+"Save" = "저장";
+"Reset" = "리셋";
+"Cancel" = "취소";
+"Save" = "저장";
+"Next" = "다음";
+"My Drinks" = "내술장";
+"Bookmark" = "즐겨찾기";
+"My Recipes" = "나의 레시피";
+"Sign in with Apple" = "Apple로 로그인";
+"MyPage" = "마이페이지";
+
+//LoginViewController.swift
+"Start without logging in" = "로그인없이 시작하기";
+
+//ColorChoiceViewController.swift
+"What's your favorite color?" = "선호하는 색은 무엇인가요?";
+"Please choose one or more" = "하나이상 선택해주세요";
+"I don't have any drinks to recommend" = "추천할술이 없어요";
+
+//AddMyOwnCocktailRecipeViewController.swift
+"Reset" = "리셋";
+"Selected" = "선택됨";
+"Choice" = "선택";
+"Hold on" = "잠깐";
+"OK" = "확인";
+"cocktails have searched" = "개의 칵테일 발견";
+
+//AddMyOwnCocktailRecipeViewController.swift
+"red" = "빨간색";
+"orange" = "주황색";
+"yellow" = "노란색";
+"green" = "초록색";
+"blue" = "파란색";
+"violet" = "보라색";
+"clear" = "투명색";
+"white" = "하얀색";
+"black" = "검은색";
+"brown" = "갈색";
+"various" = "복합";
+
+"build" = "빌드";
+"shaking" = "쉐이킹";
+"floating" = "플로팅";
+"stir" = "스터";
+"blending" = "블렌딩";
+
+"highBall" = "하이볼";
+"shot" = "샷";
+"onTheRock" = "온더락";
+"saucer" = "소서";
+"martini" = "마티니";
+"collins" = "콜린스";
+"margarita" = "마가리타";
+"philsner" = "필스너";
+
+"longDrink" = "롱드링크";
+"shortDrink" = "숏드링크";
+"shooter" = "슈터";
+
+"Your own name" = "당신만의 이름";
+"Your own recipe" = "당신만의 레시피";
+"Your own tip" = "당신만의 팁";
+
+"Hold on" = "잠깐만요";
+"Write name" = "이름적어!";
+"Write recipe" = "레시피적어!";
+"Write tips" = "팁도좀 적어";
+"Input Recipes" = "레시피를 입력하세요";
+"Add Recipe" = "레시피 추가";
+"Add" = "추가";
+
+
+//MainViewController.swift
+"Recommendation" = "추천";
+"Recipe" = "레시피";
+"My Drinks" = "내 술장";
+"Preferneces" = "설정";
+
+//TodayCocktailViewController.swift
+"Beginner" = "초보 추천";
+"High Proof" = "고도수 추천";
+"My Own" = "내 추천";
+"Home" = "홈";
+
+//ChoiceViewController.swift
+"Anything!" = "다 좋아!";
+
+//CocktailListCell.swift
+"Ingredients" = "필요한 재료";
+"EA" = "개";
+
+//HomeBarViewController.swift
+"What I Can Make" = "만들 수 있는 것";
+"making" = "만들기";
+
+//CocktailDetailViewController.swift
+"Name" = "이름";
+"Alcohol" = "도수";
+"Color" = "색";
+"Base" = "기주";
+"Glass" = "잔";
+"Craft" = "조주방법";
+"Tip" = "팁";
+"high" = "높음";
+"mid" = "중간";
+"low" = "낮음";
+"DrinkType" = "용량";
+"editing" = "편집";
+
+//CocktailRecipeViewController.swift
+"Filter" = "필터";
+"Name, Ingredients, Base, Glass, Color..." = "이름, 재료, 기주, 잔, 색깔 등등";
+"Sort" = "정렬";
+"Ingredients Count" = "재료갯수";
+"Sorting" = "정렬";
+
+//Cocktail.Base
+"rum" = "럼";
+"vodka" = "보드카";
+"tequila" = "데킬라";
+"brandy" = "브랜디";
+"whiskey" = "위스키";
+"gin" = "진";
+"liqueur" = "리큐르";
+"assets" = "기타";
+"beverage" = "음료";
+
+//Cocktail.Glass
+"highBall" = "하이볼";
+"shot" = "샷잔";
+"onTheRock" = "온더락";
+"cocktail" = "칵테일";
+"martini" = "마티니";
+"collins" = "콜린스";
+"margarita" = "마가리타";
+"philsner" = "필스너";
+
+//Cocktail.Craft
+"build" = "빌드";
+"shaking" = "쉐이킹";
+"floating" = "플로팅";
+"stir" = "스터";
+"blending" = "블렌딩";
+
+
+//Cocktail.Ingredients
+"bacardi" = "바카디";
+"scotchWhiskey" = "스카치위스키";
+"bombaySapphire" = "봄베이 사파이어";
+"tanquerayNoTen" = "탱커레이 no.10";
+"bourbonWhiskey" = "버번위스키";
+"ryeWhiskey" = "라이위스키";
+"jackDanielWhiskey" = "잭다니엘";
+"baileys" = "베일리스";
+"melonLiqueur" = "멜론리큐르";
+"whiteCacaoLiqueur" = "화이트카카오리큐르";
+"sweetVermouth" = "스위트베르무트";
+"dryVermouth" = "드라이베르무트";
+"peachTree" = "피치트리";
+"grapeFruitLiqueur" = "자몽리큐르";
+"cacaoLiqueur" = "카카오리큐르";
+"cremeDeCassis" = "크렘드카시스";
+"greenMintLiqueur" = "그린민트리큐르";
+"campari" = "캄파리";
+"kahlua" = "깔루아";
+"blueCuraso" = "블루큐라소";
+"malibu" = "말리부";
+"bananaliqueur" = "바나나리큐르";
+"amaretto" = "아마레또";
+"triplesec" = "트리플섹";
+"butterScotchLiqueur" = "버터스카치리큐르";
+"angosturaBitters" = "앙고스투라비터스";
+"coke" = "콜라";
+"tonicWater" = "토닉워터";
+"milk" = "우유";
+"orangeJuice" = "오렌지주스";
+"cranBerryJuice" = "크렌베리주스";
+"clubSoda" = "탄산수";
+"grapeFruitJuice" = "자몽주스";
+"pineappleJuice" = "파인애플주스";
+"gingerAle" = "진저에일";
+"sweetAndSourMix" = "스윗앤사워믹스";
+"appleJuice" = "사과주스";
+"cider" = "사이다";
+"lemonJuice" = "레몬주스";
+"whiteRum" = "화이트럼";
+"darkRum" = "다크럼";
+"overProofRum" = "오버프루프럼";
+"lime" = "라임";
+"limeSqueeze" = "라임즙";
+"limeSyrup" = "라임시럽";
+"lemon" = "레몬";
+"lemonSqueeze" = "레몬즙";
+"appleMint" = "애플민트";
+"whippingCream" = "휘핑크림";
+"honey" = "꿀";
+"olive" = "올리브";
+"oliveJuice" = "올리브주스";
+"sugar" = "설탕";
+"sugarSyrup" = "설탕시럽";
+"rawCream" = "생크림";
+"grenadineSyrup" = "그레나딘시럽";
+"aperol" = "아페롤";
+"cremeDeViolet" = "크렘드바이올렛";
+"maraschino" = "마라스키노";
+"unknown" = "무명의 재료";
+
+//SettingTableViewController
+"LogIn" = "로그인";
+"LogOut" = "로그아웃";
+"Yes" = "네";
+"No" = "아니요";
+"Do you want to log out?" = "로그아웃 하시겠습니까?";
+"DeveloperInfo" = "개발자정보";
+"Account" = "계정";
+"Alarm" = "알람";
+"Service Information" = "서비스 안내";
+"Alarm Setting" = "알람설정";
+"Support" = "지원";
+"Review Shaker in the App Store" = "앱스토어에 쉐이커 리뷰 남기기";
+"Join the Shaker TestFlight" = "쉐이커 TestFlight 참가";

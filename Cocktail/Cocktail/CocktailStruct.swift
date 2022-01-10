@@ -1,65 +1,240 @@
 import UIKit
 
-struct Cocktail: Codable {
-    let name: String
-    let craft: Craft
-    let glass: Glass
-    let recipe: String
-    let ingredients: [String]
-    let base: Base
-    let alcohol: Alcohol
-    let color: Color
-    let mytip: String?
+protocol CocktailCondition {
+    var rawValue: String { get }
+}
+
+// 칵테일 좋아요 정보 관련 객체
+struct CocktailLikeList: Codable {
+    let cocktail: [String: CocktailLikeCount]
+}
+//칵테일의 이름 경로 아래에 좋아요를 누를때마다 그사람의 uid 가 추가되고 좋아요일경우 true, 싫어요일 경우 false
+struct CocktailLikeCount: Codable {
+    var people: [String: Bool] = [:]
+}
+
+//유튜브 관련 컨텐츠 받아오는 객체
+struct YouTubeVideo: Codable {
+    let videoName: String
+    let videoCode: String
+    let owner: YouTubeOwner
+}
+
+enum YouTubeOwner: String, Codable {
+    case homeTendingDictionary
+    case drinkLover
+    case drinkLecture
+    case linibini
+    case mansHobby
+    case yancon
+}
+
+struct Recommendation: Codable {
+    var hashTagName: String
+    var list: [String]
     
-    enum Base: String, Codable {
-        case 럼
-        case 보드카
-        case 데킬라
-        case 브랜디
-        case 위스키
-        case 진
-        case 리큐르
-    }
-    
-    enum Color: String, Codable {
-        case 빨간색
-        case 주황색
-        case 노란색
-        case 초록색
-        case 파란색
-        case 보라색
-        case 투명색
-        case 하얀색
-        case 검은색
-        case 갈색
-    }
-    
-    enum Alcohol: String, Codable {
-        case high
-        case mid
-        case low
-    }
-    
-    enum Glass: String, Codable {
-        case 하이볼
-        case 샷잔
-        case 온더락
-        case 칵테일
-        case 마티니
-        case 콜린스
-        case 마가리타
-        case 필스너
-    }
-    
-    enum Craft: String, Codable {
-        case 빌드
-        case 쉐이킹
-        case 플로팅
-        case 스터
-        case 블렌딩
+    ///이름배열을 받아오면 그것의 이름을 가진 칵테일을 반환해주는것
+    func spitRecipe(data: [Cocktail]) -> [Cocktail] {
+        
+        let enumArray = data.enumerated()
+        
+        let recipe = enumArray.filter({ data in
+            list.contains(data.element.name)
+        }).map {$0.element}
+        
+        return recipe.sorted {
+            $0.glass.rawValue > $1.glass.rawValue
+        }
     }
 }
 
+enum SortingStandard {
+    case alcohol
+    case name
+    case ingredientsCount
+    case wishList
+}
 
-
-
+struct Cocktail: Codable, Hashable {
+    let name: String
+    let craft: Craft
+    var glass: Glass
+    var recipe: [String]
+    var ingredients: [Ingredients]
+    let base: Base
+    let alcohol: Alcohol
+    let color: Color
+    let mytip: String
+    let drinkType: DrinkType
+    var myRecipe: Bool
+    var wishList: Bool
+    var imageURL: String
+    
+    enum Base: String, Codable, CaseIterable, CocktailCondition {
+        case rum
+        case vodka
+        case tequila
+        case brandy
+        case whiskey
+        case gin
+        case liqueur
+        case assets
+        case beverage
+        
+        var list: [Ingredients] {
+            switch self {
+            case .gin:
+                return [Cocktail.Ingredients.gin, Cocktail.Ingredients.bombaySapphire,Cocktail.Ingredients.tanquerayNoTen]
+            case .rum:
+                return [Cocktail.Ingredients.darkRum, Cocktail.Ingredients.whiteRum, Cocktail.Ingredients.overProofRum, Cocktail.Ingredients.bacardi]
+            case .vodka:
+                return [Cocktail.Ingredients.vodka]
+            case .tequila:
+                return [Cocktail.Ingredients.tequila]
+            case .brandy:
+                return [Cocktail.Ingredients.brandy]
+            case .whiskey:
+                return [Cocktail.Ingredients.whiskey, Cocktail.Ingredients.ryeWhiskey, Cocktail.Ingredients.scotchWhiskey, Cocktail.Ingredients.bourbonWhiskey, Cocktail.Ingredients.jackDanielWhiskey]
+            case .liqueur:
+                return [Cocktail.Ingredients.baileys, Cocktail.Ingredients.melonLiqueur, Cocktail.Ingredients.whiteCacaoLiqueur, Cocktail.Ingredients.sweetVermouth, Cocktail.Ingredients.dryVermouth, Cocktail.Ingredients.peachTree, Cocktail.Ingredients.grapeFruitLiqueur, Cocktail.Ingredients.cacaoLiqueur, Cocktail.Ingredients.cremeDeCassis, Cocktail.Ingredients.greenMintLiqueur, Cocktail.Ingredients.campari, Cocktail.Ingredients.kahlua, Cocktail.Ingredients.blueCuraso, Cocktail.Ingredients.malibu, Cocktail.Ingredients.bananaliqueur, Cocktail.Ingredients.amaretto, Cocktail.Ingredients.triplesec, Cocktail.Ingredients.butterScotchLiqueur, Cocktail.Ingredients.angosturaBitters, Cocktail.Ingredients.aperol, Cocktail.Ingredients.cremeDeViolet]
+            case .beverage:
+                return [Cocktail.Ingredients.coke, Cocktail.Ingredients.tonicWater, Cocktail.Ingredients.milk, Cocktail.Ingredients.orangeJuice, Cocktail.Ingredients.cranBerryJuice, Cocktail.Ingredients.clubSoda, Cocktail.Ingredients.grapeFruitJuice, Cocktail.Ingredients.pineappleJuice, Cocktail.Ingredients.gingerAle, Cocktail.Ingredients.sweetAndSourMix, Cocktail.Ingredients.appleJuice, Cocktail.Ingredients.cider, Cocktail.Ingredients.lemonJuice]
+            case .assets:
+                return [Cocktail.Ingredients.lime, Cocktail.Ingredients.limeSqueeze, Cocktail.Ingredients.limeSyrup, Cocktail.Ingredients.lemon, Cocktail.Ingredients.lemonSqueeze, Cocktail.Ingredients.appleMint, Cocktail.Ingredients.whippingCream, Cocktail.Ingredients.honey, Cocktail.Ingredients.olive, Cocktail.Ingredients.oliveJuice, Cocktail.Ingredients.sugar, Cocktail.Ingredients.sugarSyrup, Cocktail.Ingredients.rawCream, Cocktail.Ingredients.grenadineSyrup]
+            }
+        }
+    }
+    
+    enum DrinkType: String, Codable, CaseIterable, CocktailCondition {
+        case longDrink
+        case shortDrink
+        case shooter
+    }
+    
+    enum Color: String, Codable, CaseIterable, CocktailCondition {
+        case red
+        case orange
+        case yellow
+        case green
+        case blue
+        case violet
+        case brown
+        case black
+        case clear
+        case various
+    }
+    
+    enum Alcohol: String, Codable, CaseIterable, CocktailCondition {
+        case high
+        case mid
+        case low
+        var rank: Int {
+            switch self {
+            case .high:
+                return 3
+            case .mid:
+                return 2
+            case .low:
+                return 1
+            }
+        }
+    }
+    
+    enum Glass: String, Codable, CaseIterable, CocktailCondition {
+        case highBall
+        case shot
+        case onTheRock
+        case saucer
+        case martini
+        case collins
+        case margarita
+        case philsner
+    }
+    
+    enum Craft: String, Codable, CaseIterable, CocktailCondition {
+        case build
+        case shaking
+        case floating
+        case stir
+        case blending
+    }
+    
+    enum Ingredients: String, Codable, CaseIterable {
+        ///진
+        case gin
+        case bombaySapphire
+        case tanquerayNoTen
+        
+        ///보드카
+        case vodka
+        
+        ///위스키
+        case whiskey
+        case scotchWhiskey
+        case bourbonWhiskey
+        case ryeWhiskey
+        case jackDanielWhiskey
+        
+        ///데킬라
+        case tequila
+        
+        ///베일리스
+        case baileys
+        case melonLiqueur
+        case whiteCacaoLiqueur
+        case sweetVermouth
+        case dryVermouth
+        case peachTree
+        case grapeFruitLiqueur
+        case cacaoLiqueur
+        case cremeDeCassis
+        case greenMintLiqueur
+        case campari
+        case kahlua
+        case blueCuraso
+        case malibu
+        case bananaliqueur
+        case amaretto
+        case triplesec
+        case butterScotchLiqueur
+        case angosturaBitters
+        case aperol
+        case cremeDeViolet
+        
+        case brandy
+        
+        case coke
+        case tonicWater
+        case milk
+        case orangeJuice
+        case cranBerryJuice
+        case clubSoda
+        case grapeFruitJuice
+        case pineappleJuice
+        case gingerAle
+        case sweetAndSourMix
+        case appleJuice
+        case cider
+        case lemonJuice
+        
+        case whiteRum
+        case darkRum
+        case overProofRum
+        case bacardi
+        
+        case lime
+        case limeSqueeze
+        case limeSyrup
+        case lemon
+        case lemonSqueeze
+        case appleMint
+        case whippingCream
+        case honey
+        case olive
+        case oliveJuice
+        case sugar
+        case sugarSyrup
+        case rawCream
+        case grenadineSyrup
+    }
+}
