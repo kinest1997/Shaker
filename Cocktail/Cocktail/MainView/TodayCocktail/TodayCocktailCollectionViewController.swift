@@ -183,7 +183,6 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         collectionView.dataSource = self
         loadingView.explainLabel.text = "Loading".localized
         
-        
         getYoutubeContents {[weak self] data in
             FirebaseRecipe.shared.youTubeData = data.shuffled()
             self?.youtubeData = data.shuffled()

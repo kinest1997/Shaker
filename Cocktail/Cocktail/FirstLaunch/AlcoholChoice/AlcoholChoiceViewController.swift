@@ -79,7 +79,12 @@ class AlcoholChoiceViewController: UIViewController {
             guard let self = self else { return }
             if self.myFavor {
                 UserDefaults.standard.set(self.alcoholSelected?.rawValue, forKey: "AlcoholFavor")
-                self.show(ReadyToLaunchVIewController(), sender: nil)
+                let readyToLaunchViewController = ReadyToLaunchViewController()
+                readyToLaunchViewController.bind(ReadyToLaunchViewModel())
+                
+                self.show(readyToLaunchViewController, sender: nil)
+                
+                
             } else {
                 let lastRecipe = self.filteredRecipe.filter { $0.alcohol == self.alcoholSelected }
                 if lastRecipe.isEmpty {

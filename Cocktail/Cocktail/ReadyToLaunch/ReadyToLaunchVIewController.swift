@@ -1,8 +1,19 @@
 import UIKit
 import SnapKit
+import RxCocoa
+import RxSwift
 
-class ReadyToLaunchVIewController: UIViewController {
+protocol ReadyToLaunchViewBindable {
+    //View -> ViewModel
+    var readytoLaunchButtonTapped: PublishRelay<Void> { get }
     
+    //ViewModel -> View
+    var showNextPage: Signal<Void> { get}
+}
+
+class ReadyToLaunchViewController: UIViewController {
+    
+    let disposeBag = DisposeBag()
     let mainViewController = MainViewController()
     
     let startTextLabel = UILabel()
@@ -14,14 +25,23 @@ class ReadyToLaunchVIewController: UIViewController {
         layout()
     }
     
+    func bind(_ viewModel: ReadyToLaunchViewBindable) {
+        nextButton.rx.tap
+            .bind(to: viewModel.readytoLaunchButtonTapped)
+            .disposed(by: disposeBag)
+        
+        viewModel.showNextPage
+            .emit { [weak self] _ in
+                let scenes = UIApplication.shared.connectedScenes
+                let windowScene = scenes.first as? UIWindowScene
+                let window = windowScene?.windows.first
+                window?.rootViewController = self?.mainViewController
+            }
+            .disposed(by: disposeBag)
+    }
+    
     func attribute() {
         self.view.backgroundColor = .white
-        nextButton.addAction(UIAction(handler: {[weak self] _ in
-            let scenes = UIApplication.shared.connectedScenes
-            let windowScene = scenes.first as? UIWindowScene
-            let window = windowScene?.windows.first
-            window?.rootViewController = self?.mainViewController
-        }), for: .touchUpInside)
         nextButton.setTitle("Start".localized, for: .normal)
         nextButton.backgroundColor = .tappedOrange
         
@@ -44,7 +64,6 @@ class ReadyToLaunchVIewController: UIViewController {
         startTextLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(30)
-//            $0.height.equalToSuperview().multipliedBy(0.3)
         }
         nextButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)

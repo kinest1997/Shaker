@@ -21,6 +21,7 @@
 		3D5685D4278AFDB400B9F5CD /* YouTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685D3278AFDB400B9F5CD /* YouTube.swift */; };
 		3D5685D7278B042300B9F5CD /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685D6278B042300B9F5CD /* Recommendation.swift */; };
 		3D5685D9278B048100B9F5CD /* CocktailLikeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685D8278B048100B9F5CD /* CocktailLikeList.swift */; };
+		3D5685DB278BDB3900B9F5CD /* ReadyToLaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685DA278BDB3900B9F5CD /* ReadyToLaunchViewModel.swift */; };
 		3D5E8C922784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D5E8C8F2784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf */; };
 		3D5E8C932784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D5E8C902784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf */; };
 		3D5E8C942784067A0005478B /* NEXON Lv1 Gothic OTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3D5E8C912784067A0005478B /* NEXON Lv1 Gothic OTF.otf */; };
@@ -122,6 +123,7 @@
 		3D5685D3278AFDB400B9F5CD /* YouTube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTube.swift; sourceTree = "<group>"; };
 		3D5685D6278B042300B9F5CD /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		3D5685D8278B048100B9F5CD /* CocktailLikeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailLikeList.swift; sourceTree = "<group>"; };
+		3D5685DA278BDB3900B9F5CD /* ReadyToLaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToLaunchViewModel.swift; sourceTree = "<group>"; };
 		3D5E8C8F2784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF Bold.otf"; sourceTree = "<group>"; };
 		3D5E8C902784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF Light.otf"; sourceTree = "<group>"; };
 		3D5E8C912784067A0005478B /* NEXON Lv1 Gothic OTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NEXON Lv1 Gothic OTF.otf"; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */,
+				3D5685DA278BDB3900B9F5CD /* ReadyToLaunchViewModel.swift */,
 			);
 			path = ReadyToLaunch;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				7D4AF9062760D57B0093C3C2 /* UIApplication.swift in Sources */,
 				3D297A972772F901001B8BD4 /* ColorChoiceViewModel.swift in Sources */,
 				3DBD0F6A278357B4001FA460 /* SettingHeaderView.swift in Sources */,
+				3D5685DB278BDB3900B9F5CD /* ReadyToLaunchViewModel.swift in Sources */,
 				3DA0552A277F0F9100966C90 /* UIFont.swift in Sources */,
 				3DBD0F612783463A001FA460 /* NoTitleHeader.swift in Sources */,
 				3DBD0F4C27815610001FA460 /* AddTableViewHeaderView.swift in Sources */,

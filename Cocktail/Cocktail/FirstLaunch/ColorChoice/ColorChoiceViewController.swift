@@ -6,7 +6,23 @@ import RxCocoa
 import UIKit
 import SnapKit
 
+protocol ColorChoiceViewBindable {
+    // view -> viewModel
+    var cellTapped: PublishRelay<IndexPath> { get }
+    var nextButtonTapped: PublishRelay<Void> { get }
+    
+    //viewModel -> view
+    var updateCell: Signal<(indexPath :IndexPath, bool: Bool)> { get }
+    var buttonLabelCountUpdate: Signal<Int> { get }
+    var showNextPage: Driver<Void> { get }
+    var presentAlert: Driver<Void> { get }
+    var colorArray: Driver<[Cocktail.Color]> { get }
+    var myFavor: Signal<Bool> { get }
+    var saveMyFavor: Signal<[Cocktail.Color]> { get }
+}
+
 class ColorChoiceViewController: UIViewController {
+    let alcoholChoiceViewController = AlcoholChoiceViewController()
     
     let questionLabel = UILabel()
     
@@ -311,6 +327,8 @@ extension ColorChoiceViewController: UICollectionViewDelegateFlowLayout {
     //    }
 }
 
+ */
+
 extension Reactive where Base: ColorChoiceViewController {
     var cellTapped: Binder<(indexPath :IndexPath, bool: Bool)> {
         return Binder(base) {base, data in
@@ -326,4 +344,3 @@ extension Reactive where Base: ColorChoiceViewController {
     }
 }
 
-*/

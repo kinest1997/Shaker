@@ -45,12 +45,14 @@ class MyDrinksViewController: UIViewController {
             $0.leading.equalTo(topNameLabel)
             $0.trailing.equalToSuperview().offset(-20)
         }
+        
         collectionView.snp.makeConstraints {
             $0.top.equalTo(topExplainLabel.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalTo(collectionView.snp.width)
         }
+        
         whatICanMakeButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
             $0.centerX.equalToSuperview()
