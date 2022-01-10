@@ -15,7 +15,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
-        title = "나의 레시피"
+        title = "My Recipes".localized
         myOwnRecipe = FirebaseRecipe.shared.myRecipe
         
         view.addSubview(mainTableView)
@@ -26,7 +26,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "CocktailListCell")
         mainTableView.dataSource = self
         mainTableView.delegate = self
-        let rightAddButton = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(showAddView))
+        let rightAddButton = UIBarButtonItem(title: "Add".localized, style: .plain, target: self, action: #selector(showAddView))
         navigationItem.rightBarButtonItem = rightAddButton
         
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in

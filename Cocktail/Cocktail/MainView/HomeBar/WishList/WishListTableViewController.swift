@@ -9,7 +9,7 @@ class WishListCocktailListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "즐겨찾기"
+        title = "Bookmark".localized
         view.backgroundColor = .white
         tableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
     }

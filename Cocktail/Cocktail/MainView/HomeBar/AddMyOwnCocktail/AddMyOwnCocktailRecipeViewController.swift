@@ -30,7 +30,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let groupStackView = UIStackView()
     let cocktailImageView = UIImageView()
     
-    let nameLabel = UILabel()
     let nameTextField = UITextField()
     
     let alcoholLabel = UILabel()
@@ -296,7 +295,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeChoiceButton.menu = drinkTypeMenu
         drinkTypeChoiceButton.showsMenuAsPrimaryAction = true
         
-
         addRecipeTableView.backgroundColor = .clear
         
         // 기본 라벨들
@@ -309,7 +307,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.layer.cornerRadius = 15
             $0.clipsToBounds = true
         }
-        nameTextField.placeholder = "Name of cocktail".localized
+        nameTextField.placeholder = "Name".localized
         nameTextField.textColor = .black
         nameTextField.font = .nexonFont(ofSize: 24, weight: .heavy)
         
@@ -345,7 +343,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         self.view.backgroundColor = .white
         
-        nameLabel.text = "Name".localized
         alcoholLabel.text = "Alcohol".localized
         colorLabel.text = "Color".localized
         baseDrinkLabel.text = "Base".localized
@@ -420,7 +417,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         }
 
         leftStackView.snp.makeConstraints {
-            $0.width.equalTo(60)
+            $0.width.equalTo(70)
             $0.leading.equalTo(myTipTextView)
             $0.top.equalTo(myTipTextView.snp.bottom).offset(30)
         }

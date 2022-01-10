@@ -108,12 +108,10 @@ class DrinkTypeChoiceViewController: UIViewController {
     }
     
     func attribute() {
-        
         let originText = "Favorite cocktail Size".localized
 
         if NSLocale.current.languageCode == "ko" {
-            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 8), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 9, length: 2))
-
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 8), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 8, length: 3))
             questionLabel.attributedText = questionText
         } else {
             let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 18), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 18, length: 4))
