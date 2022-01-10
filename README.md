@@ -1,5 +1,17 @@
 # Cocktail App
 
+## UI변천사
+
+| 화면 |초반 |중반 | 마무리 |
+| :--- | :--- | :--- | :--- |
+| 홈화면| <img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%92%E1%85%A9%E1%86%B7%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/3213.png?raw=true" height="400px" width="400px">| <img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%92%E1%85%A9%E1%86%B7%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/C789B468-4D8F-4524-8B1D-FC6575CDE3EA_1_105_c.jpeg?raw=true" height="400px" width="400px">| <img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%92%E1%85%A9%E1%86%B7%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/76A200A0-7AD2-438D-BC39-A589BAA5689E_1_102_o.jpeg?raw=true" height="400px" width="400px">
+|칵테일 레시피|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%85%E1%85%A6%E1%84%89%E1%85%B5%E1%84%91%E1%85%B5/2A4B69AF-0215-4B9E-AA79-453BFB347608_1_105_c.jpeg?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%85%E1%85%A6%E1%84%89%E1%85%B5%E1%84%91%E1%85%B5/8C587FB1-3A2E-4CD0-9E3B-3190CB7640CB_1_105_c.jpeg?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%85%E1%85%A6%E1%84%89%E1%85%B5%E1%84%91%E1%85%B5/7A17706B-65C0-4B4E-9378-58742DB20841_1_102_o.jpeg?raw=true" height="400px" width="400px">|
+|칵테일 추천|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8E%E1%85%A9%E1%84%80%E1%85%B5%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/07E87C35-64C6-442C-80FC-9B34D763CB49_1_105_c.jpeg?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%82%E1%85%A2%E1%84%89%E1%85%AE%E1%86%AF%E1%84%8C%E1%85%A1%E1%86%BC%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/%E1%84%80%E1%85%A1%E1%84%8B%E1%85%B5%E1%86%B8%E1%84%8C%E1%85%A1%20%E1%84%8E%E1%85%B1%E1%84%92%E1%85%A3%E1%86%BC_1.png?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8E%E1%85%A9%E1%84%80%E1%85%B5%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/2D1409DD-7FDB-4BC0-BAB2-138CB4EE79CC_1_105_c.jpeg?raw=true" height="400px" width="400px">|
+|칵테일 정보|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/%E1%84%8B%E1%85%AA%E1%84%8B%E1%85%B5%E1%84%8B%E1%85%A5%E1%84%91%E1%85%B3%E1%84%85%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%B7.png?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/8FD0F1C8-B07A-48AE-A88C-9CD6E07D69A6_1_105_c.jpeg?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%8C%E1%85%A5%E1%86%BC%E1%84%87%E1%85%A9%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/3CC18443-3D87-4E3F-A0E6-FDCD9319AF5D_1_105_c.jpeg?raw=true" height="400px" width="400px">|
+|편집화면|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%91%E1%85%A7%E1%86%AB%E1%84%8C%E1%85%B5%E1%86%B8%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/850CE315-8F0D-40A5-AEDE-4AE5158EBEAD_1_105_c.jpeg?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%91%E1%85%A7%E1%86%AB%E1%84%8C%E1%85%B5%E1%86%B8%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/5D494D1B-47CF-41FF-8B7A-79C0772A34F6_1_105_c.jpeg?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%8F%E1%85%A1%E1%86%A8%E1%84%90%E1%85%A6%E1%84%8B%E1%85%B5%E1%86%AF%20%E1%84%91%E1%85%A7%E1%86%AB%E1%84%8C%E1%85%B5%E1%86%B8%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/9A23C0E9-08D3-404E-8CE3-CC2BBBE50A4B_1_102_o.jpeg?raw=true" height="400px" width="400px">|
+|마이페이지|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%82%E1%85%A2%E1%84%89%E1%85%AE%E1%86%AF%E1%84%8C%E1%85%A1%E1%86%BC%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/97C85384-7DCD-4C6B-A42F-B1B14E36D9D4_1_105_c.jpeg?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%82%E1%85%A2%E1%84%89%E1%85%AE%E1%86%AF%E1%84%8C%E1%85%A1%E1%86%BC%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/%E1%84%86%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%91%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%8C%E1%85%B5_1.png?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%82%E1%85%A2%E1%84%89%E1%85%AE%E1%86%AF%E1%84%8C%E1%85%A1%E1%86%BC%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/85B84A4E-AA22-4946-8856-8B55EDC015CD_1_105_c.jpeg?raw=true" height="400px" width="400px">|
+|내술장|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%82%E1%85%A2%E1%84%89%E1%85%AE%E1%86%AF%E1%84%8C%E1%85%A1%E1%86%BC%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/FDCA50FB-94BF-492F-AEEF-42DA8A72C1C7_1_105_c.jpeg?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%82%E1%85%A2%E1%84%89%E1%85%AE%E1%86%AF%E1%84%8C%E1%85%A1%E1%86%BC%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/1269357D-EFF6-4692-9DC8-1B19ECF0B80D_1_105_c.jpeg?raw=true" height="400px" width="400px">|<img src="https://github.com/kinest1997/MyAssets/blob/main/%E1%84%82%E1%85%A2%E1%84%89%E1%85%AE%E1%86%AF%E1%84%8C%E1%85%A1%E1%86%BC%20%E1%84%92%E1%85%AA%E1%84%86%E1%85%A7%E1%86%AB/F83DD533-95E0-432E-AC2E-92C63DFA8AA4_1_105_c.jpeg?raw=true" height="400px" width="400px">|
+
 ## 개발일지
 
 ### 1주차
@@ -72,9 +84,8 @@
 ### 6주차
 
 | 변경내역 | 비고 | 
-| :--- | :--- |
-
-| 칵테일 객체 수정, 레시피 단계별로 분리하여 저장가능 및 수정 가능.| 
+| :--- | :--- | 
+| 칵테일 객체 수정, 레시피 단계별로 분리하여 저장가능 및 수정 가능. | [string: [string]] 기괴한모양|
 | 앱 설정창 생성| deeplink통한 인스타, 링크드인, 깃허브 연결 버튼 생성|
 | 알림설정창 생성| 알람 설정 확인하는 property, 설정으로 이어지는 deeplink|
 | Firebase 를 통한 원격 notification 전달 추가 | 새롭게 레시피 업데이트 될때마다 알람 보내기 가능|
@@ -82,10 +93,16 @@
 | 메인화면에서 유튜브 앱으로 이어지는 링크 생성| youtube deeplink 사용|
 | 커뮤니티처럼 개별 칵테일 마다 좋아요, 싫어요 기능 추가| 사용자들을 칵테일의 좋아요 싫어요 갯수를 보고 개별적 판단 가능 |
 | extension으로 뷰마다 중복작성하던 함수 간소화| class에 method 추가|
-| 앱 UI 개편작업| 디자이너와 개발자의 싸움 |
-| rxswift, mvvm 공부 시작|
+| 앱 UI 개편작업| 앱 런칭 초기화면부터 시작 |
+| rxswift, mvvm 공부 시작| 모르겠음|
+| 리팩토링 | 기존의 버튼 9개로 만든 뷰들 전부 컬렉션뷰로 변경 |
 
-
-
-
-
+### 7주차 ~ 8주차
+| 변경내역 | 비고 | 
+| :--- | :--- | 
+| font 적용 및 앱전역 폰트 설정 | .appearance() 갓갓|
+| 홈화면 무한 show 오류 수정 | removeTarget..|
+|홈화면 컨텐츠 다양화| compositionalLayout 숙달중..|
+| 오픈소스 라이브러리 고지 페이지 완성| SFSafariViewController 사용|
+|좋아요 싫어요 즐겨찾기 팝업 추가| 애니메이션 적용 실패...|
+| 코드정리 및 기타 수정사항 변경. 거의 완성단계| 

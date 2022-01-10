@@ -1,6 +1,4 @@
 import UIKit
-import FirebaseDatabase
-import SwiftUI
 
 ///이미지 크기 변환 해주는것
 extension UIImage {

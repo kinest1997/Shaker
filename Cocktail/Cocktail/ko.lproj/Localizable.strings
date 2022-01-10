@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Cocktail
 
@@ -11,9 +11,20 @@
 "Reset" = "리셋";
 "Cancel" = "취소";
 "Save" = "저장";
+"Next" = "다음";
 "My Drinks" = "내술장";
 "Bookmark" = "즐겨찾기";
 "My Recipes" = "나의 레시피";
+"Sign in with Apple" = "Apple로 로그인";
+"MyPage" = "마이페이지";
+
+//LoginViewController.swift
+"Start without logging in" = "로그인없이 시작하기";
+
+//ColorChoiceViewController.swift
+"What's your favorite color?" = "선호하는 색은 무엇인가요?";
+"Please choose one or more" = "하나이상 선택해주세요";
+"I don't have any drinks to recommend" = "추천할술이 없어요";
 
 //AddMyOwnCocktailRecipeViewController.swift
 "Reset" = "리셋";
@@ -21,17 +32,18 @@
 "Choice" = "선택";
 "Hold on" = "잠깐";
 "OK" = "확인";
+"cocktails have searched" = "개의 칵테일 발견";
 
 //AddMyOwnCocktailRecipeViewController.swift
-"red" = "빨강색";
+"red" = "빨간색";
 "orange" = "주황색";
-"yellow" = "노랑색";
+"yellow" = "노란색";
 "green" = "초록색";
-"blue" = "파랑색";
+"blue" = "파란색";
 "violet" = "보라색";
 "clear" = "투명색";
-"white" = "하양색";
-"black" = "검정색";
+"white" = "하얀색";
+"black" = "검은색";
 "brown" = "갈색";
 "various" = "복합";
 
@@ -66,6 +78,7 @@
 "Add Recipe" = "레시피 추가";
 "Add" = "추가";
 
+
 //MainViewController.swift
 "Recommendation" = "추천";
 "Recipe" = "레시피";
@@ -76,6 +89,7 @@
 "Beginner" = "초보 추천";
 "High Proof" = "고도수 추천";
 "My Own" = "내 추천";
+"Home" = "홈";
 
 //ChoiceViewController.swift
 "Anything!" = "다 좋아!";
@@ -195,6 +209,9 @@
 "sugarSyrup" = "설탕시럽";
 "rawCream" = "생크림";
 "grenadineSyrup" = "그레나딘시럽";
+"aperol" = "아페롤";
+"cremeDeViolet" = "크렘드바이올렛";
+"maraschino" = "마라스키노";
 "unknown" = "무명의 재료";
 
 //SettingTableViewController
