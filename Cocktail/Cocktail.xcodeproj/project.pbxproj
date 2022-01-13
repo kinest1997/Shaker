@@ -74,6 +74,8 @@
 		3DBD0F67278355A5001FA460 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F66278355A5001FA460 /* SettingCell.swift */; };
 		3DBD0F6A278357B4001FA460 /* SettingHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F69278357B4001FA460 /* SettingHeaderView.swift */; };
 		3DBD0F6D278360F5001FA460 /* MyDrinkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD0F6C278360F4001FA460 /* MyDrinkCell.swift */; };
+		3DBF7A13278F1B6C00E0334C /* WishListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBF7A12278F1B6C00E0334C /* WishListViewModel.swift */; };
+		3DBF7A15278F1B7500E0334C /* WishListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBF7A14278F1B7500E0334C /* WishListModel.swift */; };
 		3DC6AC502768D68C004E4565 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DC6AC4F2768D68C004E4565 /* TabBarController.swift */; };
 		3DE3221B274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */; };
 		3DE3221D274B98ED00657211 /* AssistantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DE3221C274B98ED00657211 /* AssistantViewController.swift */; };
@@ -183,6 +185,8 @@
 		3DBD0F66278355A5001FA460 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		3DBD0F69278357B4001FA460 /* SettingHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderView.swift; sourceTree = "<group>"; };
 		3DBD0F6C278360F4001FA460 /* MyDrinkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrinkCell.swift; sourceTree = "<group>"; };
+		3DBF7A12278F1B6C00E0334C /* WishListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListViewModel.swift; sourceTree = "<group>"; };
+		3DBF7A14278F1B7500E0334C /* WishListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListModel.swift; sourceTree = "<group>"; };
 		3DC6AC4F2768D68C004E4565 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3DE3221A274B73D700657211 /* AddMyOwnCocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMyOwnCocktailRecipeViewController.swift; sourceTree = "<group>"; };
 		3DE3221C274B98ED00657211 /* AssistantViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantViewController.swift; sourceTree = "<group>"; };
@@ -422,6 +426,8 @@
 			isa = PBXGroup;
 			children = (
 				3D7785972753468D008F0151 /* WishListTableViewController.swift */,
+				3DBF7A12278F1B6C00E0334C /* WishListViewModel.swift */,
+				3DBF7A14278F1B7500E0334C /* WishListModel.swift */,
 			);
 			path = WishList;
 			sourceTree = "<group>";
@@ -712,6 +718,7 @@
 				3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */,
 				3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */,
 				3D297A992772F90C001B8BD4 /* ColorChoiceModel.swift in Sources */,
+				3DBF7A15278F1B7500E0334C /* WishListModel.swift in Sources */,
 				3DB910D427566C1C0076CB50 /* ColorCollectionViewCell.swift in Sources */,
 				3D6C6D472732C04400C70276 /* CocktailDetailViewController.swift in Sources */,
 				3D21D4C22733E9C300FE2896 /* UIImage.swift in Sources */,
@@ -728,6 +735,7 @@
 				3D6E0EB1276F472200A7B855 /* CocktailListCollectionViewCell.swift in Sources */,
 				3D6E0EB4276F623000A7B855 /* LoginViewModel.swift in Sources */,
 				3DBD0F4A2781504F001FA460 /* HelpOrderCell.swift in Sources */,
+				3DBF7A13278F1B6C00E0334C /* WishListViewModel.swift in Sources */,
 				3DBD0F4E27817219001FA460 /* IngredientsCell.swift in Sources */,
 				3D6E0EA7276EDF5B00A7B855 /* MainViewController.swift in Sources */,
 				3D5E8C9C278580BB0005478B /* PopUpView.swift in Sources */,

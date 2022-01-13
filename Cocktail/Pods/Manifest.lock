@@ -123,6 +123,9 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
+  - RxAppState (1.7.1):
+    - RxCocoa (~> 6.2)
+    - RxSwift (~> 6.2)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
@@ -140,6 +143,7 @@ DEPENDENCIES:
   - Firebase/Storage
   - Kingfisher (~> 7.0)
   - lottie-ios
+  - RxAppState
   - RxCocoa (= 6.2.0)
   - RxSwift (= 6.2.0)
   - Siren
@@ -165,6 +169,7 @@ SPEC REPOS:
     - lottie-ios
     - nanopb
     - PromisesObjC
+    - RxAppState
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -190,12 +195,13 @@ SPEC CHECKSUMS:
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  RxAppState: 9c34f951d4ff8b9034f84016fe766202365bceb2
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   Siren: 1f58945ba6e86a753eeaeddf0afa531cf05cdabf
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: d07358c9b7a7a6a0daef12738345872531ab2540
+PODFILE CHECKSUM: 1bbd93dcfda2c2c05ec17666b4d2c5131984ed61
 
 COCOAPODS: 1.11.2
