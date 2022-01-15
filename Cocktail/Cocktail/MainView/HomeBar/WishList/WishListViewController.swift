@@ -12,13 +12,15 @@ protocol WishListViewBindable {
     var cellTapped: PublishRelay<IndexPath> { get }
     var cellDeleted: PublishRelay<IndexPath> { get }
     var viewWillappear: PublishSubject<Void> { get }
-    //viewModel -> view
     
+    //viewModel -> view
     var updateCellData: Driver<[Cocktail]> { get }
     var showDetailView: Signal<Cocktail> { get }
 }
 
 class WishListCocktailListViewController: UIViewController {
+    
+    let wishlistViewModel = WishListCocktailViewModel()
     
     var wishListRecipe: [Cocktail] = []
     
@@ -36,10 +38,9 @@ class WishListCocktailListViewController: UIViewController {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        bind()
     }
     
-    func bind(_ viewModel: WishListViewBindable = WishListCocktailViewModel()) {
+    func bind(_ viewModel: WishListViewBindable) {
         self.rx.viewWillAppear
             .map { _ in Void() }
             .bind(to: viewModel.viewWillappear)
@@ -60,9 +61,8 @@ class WishListCocktailListViewController: UIViewController {
             .disposed(by: disposeBag)
         
         viewModel.showDetailView
-            .emit(to: self.rx.showWishList)
+            .emit(to: self.rx.showDetailView)
             .disposed(by: disposeBag)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,43 +70,14 @@ class WishListCocktailListViewController: UIViewController {
         wishListRecipe = FirebaseRecipe.shared.wishList.sorted { $0.name < $1.name}
         tableView.reloadData()
     }
-    
-
 }
-//
-//extension WishListCocktailListViewController: UITableViewDelegate, UITableViewDataSource {
-//    
-//     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return wishListRecipe.count
-//    }
-//    
-//     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: "key", for: indexPath) as? CocktailListCell else { return UITableViewCell()}
-//        cell.configure(data: wishListRecipe[indexPath.row])
-//        return cell
-//    }
-//    
-//     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
-//    
-//     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//         let cocktailData = wishListRecipe[indexPath.row]
-//         let cocktailDetailViewController = CocktailDetailViewController()
-//         cocktailDetailViewController.setData(data: cocktailData)
-//         self.show(cocktailDetailViewController, sender: nil)
-//    }
-//    
-
-//}
 
 extension Reactive where Base: UIViewController {
-    var showWishList: Binder<Cocktail> {
+    var showDetailView: Binder<Cocktail> {
         return Binder(base) { base, cocktail  in
             let cocktailDetailViewController = CocktailDetailViewController()
             cocktailDetailViewController.setData(data: cocktail)
             base.show(cocktailDetailViewController, sender: nil)
         }
     }
-    
 }

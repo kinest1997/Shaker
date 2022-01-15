@@ -134,6 +134,7 @@ PODS:
   - RxSwift (6.2.0)
   - Siren (6.0.0)
   - SnapKit (5.0.1)
+  - Then (2.7.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -148,6 +149,7 @@ DEPENDENCIES:
   - RxSwift (= 6.2.0)
   - Siren
   - SnapKit (~> 5.0.0)
+  - Then
 
 SPEC REPOS:
   trunk:
@@ -175,6 +177,7 @@ SPEC REPOS:
     - RxSwift
     - Siren
     - SnapKit
+    - Then
 
 SPEC CHECKSUMS:
   Firebase: 629510f1a9ddb235f3a7c5c8ceb23ba887f0f814
@@ -201,7 +204,8 @@ SPEC CHECKSUMS:
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   Siren: 1f58945ba6e86a753eeaeddf0afa531cf05cdabf
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 1bbd93dcfda2c2c05ec17666b4d2c5131984ed61
+PODFILE CHECKSUM: e7ab42a92f666f9b2fb7538076ff204b2e16447f
 
 COCOAPODS: 1.11.2

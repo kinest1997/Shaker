@@ -11,6 +11,7 @@ pod 'SnapKit', '~> 5.0.0'
 pod 'Kingfisher', '~> 7.0'
 pod 'lottie-ios'
 pod 'Siren'
+pod 'Then'
 
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'

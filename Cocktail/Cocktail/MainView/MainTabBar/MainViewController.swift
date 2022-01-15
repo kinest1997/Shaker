@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Then
 
 class MainViewController: UITabBarController {
     enum Tab: Int {
@@ -48,6 +49,9 @@ class MainViewController: UITabBarController {
     let assistantViewController = AssistantViewController()
     let settingsViewController = SettingTableViewController(style: .insetGrouped)
     
+    let assistantViewModel = AssistantViewModel()
+    
+    
     let tabBarItems: [Tab: UITabBarItem] = [
         .today: UITabBarItem(title: Tab.today.name, image: Tab.today.image, selectedImage: Tab.today.selectedImage),
         .recipe: UITabBarItem(title: Tab.recipe.name, image: Tab.recipe.image, selectedImage: Tab.recipe.selectedImage),
@@ -63,6 +67,8 @@ class MainViewController: UITabBarController {
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
         assistantViewController.tabBarItem = tabBarItems[.home]
         settingsViewController.tabBarItem = tabBarItems[.preference]
+        assistantViewController.bind(viewmodel: assistantViewModel)
+        
         self.viewControllers = [
             UINavigationController(rootViewController: todayCocktailCollectionViewController),
             UINavigationController(rootViewController: cocktailRecipeViewController),
