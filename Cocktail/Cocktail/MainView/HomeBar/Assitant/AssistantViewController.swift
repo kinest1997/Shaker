@@ -17,6 +17,7 @@ protocol AssistantViewBindable {
     
     var wishListViewModel: WishListCocktailViewModel { get }
     var myOwnRecipeViewModel: MyOwnCocktailViewModel { get }
+    var myDrinkViewModel: MyDrinksViewModel { get }
 }
 
 class AssistantViewController: UIViewController {
@@ -44,6 +45,7 @@ class AssistantViewController: UIViewController {
         
         self.wishListViewController.bind(viewmodel.wishListViewModel)
         self.myOwnCocktailRecipeViewController.bind(viewmodel.myOwnRecipeViewModel)
+        self.homeBarViewController.bind(viewmodel.myDrinkViewModel)
         
         self.mainTableView.rx.itemSelected
             .bind(to: viewmodel.cellTapped)

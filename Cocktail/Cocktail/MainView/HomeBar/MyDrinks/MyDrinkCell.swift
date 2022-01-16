@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 
 class MyDrinkCell: UICollectionViewCell {
+    typealias CellData = (name: String, count: Int)
     
     let mainImage = UIImageView()
     
@@ -59,5 +60,11 @@ class MyDrinkCell: UICollectionViewCell {
         } else {
             badgecount.backgroundColor = .mainOrange
         }
+    }
+    
+    func configure(data: CellData) {
+        nameTextLabel.text = data.name.localized
+        mainImage.image = UIImage(named: data.name)
+        badgecount.text = String(data.count)
     }
 }
