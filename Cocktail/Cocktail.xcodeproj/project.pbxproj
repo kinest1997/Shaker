@@ -515,18 +515,8 @@
 				3D4415D427565DAA00CBCC40 /* FirstLaunch */,
 				3D6E0EA1276EDE6200A7B855 /* ReadyToLaunch */,
 				3DA76A4A2730D8A2004091CE /* MainView */,
-				3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */,
-				3DA76A392730D1D0004091CE /* Assets.xcassets */,
-				3D5E8C8F2784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf */,
-				3D5E8C902784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf */,
-				3D5E8C912784067A0005478B /* NEXON Lv1 Gothic OTF.otf */,
-				3DF7934A275A70EA004E9F98 /* CocktailData.json */,
+				3DCE2A2F279437B900CFC4E8 /* Assets */,
 				3D3452FC275F3B4400DA3978 /* LoadingAnimation.json */,
-				3DA76A462730D574004091CE /* Cocktail.plist */,
-				3D0D9B762744D714008C75E7 /* Ingredients.plist */,
-				3DB910FC27588CDE0076CB50 /* Info.plist */,
-				3DB9110527588D110076CB50 /* InfoPlist.strings */,
-				3D175BA22742846B00EC142B /* Localizable.strings */,
 			);
 			path = Cocktail;
 			sourceTree = "<group>";
@@ -545,6 +535,32 @@
 			name = MainView;
 			path = Cocktail/MainView;
 			sourceTree = SOURCE_ROOT;
+		};
+		3DCE2A2E2794379600CFC4E8 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3D5E8C8F2784067A0005478B /* NEXON Lv1 Gothic OTF Bold.otf */,
+				3D5E8C902784067A0005478B /* NEXON Lv1 Gothic OTF Light.otf */,
+				3D5E8C912784067A0005478B /* NEXON Lv1 Gothic OTF.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		3DCE2A2F279437B900CFC4E8 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				3D175BA22742846B00EC142B /* Localizable.strings */,
+				3DCE2A2E2794379600CFC4E8 /* Fonts */,
+				3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */,
+				3DA76A392730D1D0004091CE /* Assets.xcassets */,
+				3DF7934A275A70EA004E9F98 /* CocktailData.json */,
+				3DA76A462730D574004091CE /* Cocktail.plist */,
+				3D0D9B762744D714008C75E7 /* Ingredients.plist */,
+				3DB910FC27588CDE0076CB50 /* Info.plist */,
+				3DB9110527588D110076CB50 /* InfoPlist.strings */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
 		};
 		7D4AF9042760D5610093C3C2 /* Extensions */ = {
 			isa = PBXGroup;

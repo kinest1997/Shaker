@@ -57,26 +57,6 @@ class AssistantViewController: UIViewController {
         viewmodel.showPage
             .emit(to: self.rx.showPages)
             .disposed(by: disposeBag)
-//            .emit(onNext: { [weak self] view in
-//                guard let self = self else { return }
-//                switch view {
-//                case .wishList:
-//                    if Auth.auth().currentUser?.uid == nil {
-//                        self.pleaseLoginAlert()
-//                    } else {
-//                        self.show(self.wishListViewController, sender: nil)
-//                    }
-//                case .myDrink:
-//                    self.show(self.homeBarViewController, sender: nil)
-//                case .myRecipe:
-//                    if Auth.auth().currentUser?.uid == nil {
-//                        self.pleaseLoginAlert()
-//                    } else {
-//                        self.show(self.myOwnCocktailRecipeViewController, sender: nil)
-//                    }
-//                }
-//            })
-//            .disposed(by: disposeBag)
         
         viewmodel.cellData
             .drive(self.mainTableView.rx.items(cellIdentifier: "AssistantCell", cellType: AssistantCell.self)) { index, cellData, cell in
