@@ -59,7 +59,6 @@ struct MyDrinksViewModel: MyDrinkViewBindable {
         showIngredientsView = cellTapped.withLatestFrom(cocktailBaseArray) { index, array in
             return array[index.row]
         }
-        .debug("debug")
         .asSignal(onErrorSignalWith: .empty())
         
         showRecipeListView = whatICanMakeButtonTapped.withLatestFrom(recipeWhatICanMake) { _, array in
