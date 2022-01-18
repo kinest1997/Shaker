@@ -20,8 +20,6 @@ protocol WishListViewBindable {
 
 class WishListCocktailListViewController: UIViewController {
     
-    let wishlistViewModel = WishListCocktailViewModel()
-    
     var wishListRecipe: [Cocktail] = []
     
     let disposeBag = DisposeBag()
@@ -63,12 +61,6 @@ class WishListCocktailListViewController: UIViewController {
         viewModel.showDetailView
             .emit(to: self.rx.showDetailView)
             .disposed(by: disposeBag)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        wishListRecipe = FirebaseRecipe.shared.wishList.sorted { $0.name < $1.name}
-        tableView.reloadData()
     }
 }
 

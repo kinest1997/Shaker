@@ -24,8 +24,6 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     
-    var myOwnRecipe: [Cocktail] = []
-    
     let addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
     
     let detailViewController = CocktailDetailViewController()

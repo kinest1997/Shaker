@@ -2,16 +2,20 @@ import UIKit
 import SnapKit
 
 class WhatIHaveCollectionViewCell: UICollectionViewCell{
+    typealias CellData = (title: String, checked: Bool)
+    
     let mainImageView = UIImageView()
     let nameLabel = UILabel()
     var checkBoxImage = UIImageView()
     let mainView = UIView()
     
+    var isChecked = false
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         mainImageView.contentMode = .scaleAspectFit
         nameLabel.numberOfLines = 0
-        [mainImageView, nameLabel, checkBoxImage, mainView].forEach {
+        [mainImageView, nameLabel, checkBoxImage].forEach {
             contentView.addSubview($0)
         }
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5))
@@ -21,10 +25,7 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
         contentView.clipsToBounds = true
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.splitLineGray.cgColor
-        mainView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        mainView.backgroundColor = .clear
+        
         mainImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
             $0.leading.trailing.equalToSuperview()
@@ -39,5 +40,9 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
             $0.height.width.equalTo(30)
         }
         checkBoxImage.tintColor = .mainOrange
+    }
+    
+    func setImage(bool: Bool) {
+        self.checkBoxImage.image = UIImage(systemName: bool ? "checkmark.circle.fill" : "checkmark.circle")
     }
 }

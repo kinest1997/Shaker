@@ -18,6 +18,8 @@ protocol MyDrinkViewBindable {
     var updateWhatICanMakeButton: Signal<String> { get }
     var updateCellData: Driver<[MyDrinkCell.CellData]> { get }
     var changeButtonColor: Signal<Bool> { get }
+    
+    var whatIhaveViewModel: WhatIHaveViewModel { get }
 }
 
 class MyDrinksViewController: UIViewController {
@@ -25,6 +27,9 @@ class MyDrinksViewController: UIViewController {
     let disposeBag = DisposeBag()
     
     let whatICanMakeViewController = CocktailListViewController()
+    
+    let whatIHaveViewController = WhatIHaveViewController()
+    
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let topNameLabel = UILabel()
@@ -41,6 +46,8 @@ class MyDrinksViewController: UIViewController {
     }
     
     func bind(_ viewModel: MyDrinkViewBindable) {
+        
+        self.whatIHaveViewController.bind(viewModel.whatIhaveViewModel)
         
         self.rx.viewWillAppear
             .map { _ in Void() }
@@ -136,11 +143,8 @@ extension MyDrinksViewController: UICollectionViewDelegateFlowLayout {
 extension Reactive where Base: MyDrinksViewController {
     var showIngredientsListView: Binder<Cocktail.Base> {
         return Binder(base) { base, cocktailBase in
-            
-            //바인딩과정을 바꿔야함 자식뷰가 데이터를 didset으로 설정해서 지금당장은 이렇게 안하면 작동안함
-            let whatIHaveViewController = WhatIHaveViewController()
-            whatIHaveViewController.refreshList = cocktailBase
-            base.show(whatIHaveViewController, sender: nil)
+
+            base.show(base.whatIHaveViewController, sender: nil)
             
 //            base.whatIHaveViewController.refreshList = cocktailBase
 //            base.show(base.whatIHaveViewController, sender: nil)
