@@ -153,6 +153,12 @@ class FirebaseRecipe {
             completion(myRecipes)
         }
     }
+    func uploadWishList() {
+        guard let data = try? JSONEncoder().encode(FirebaseRecipe.shared.wishList),
+              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
+              let uid = uid else { return }
+        ref.child("users").child(uid).child("WishList").setValue(jsonData)
+    }
     
     func getYoutubeContents(completion: @escaping ([YouTubeVideo]) -> (Void)) {
         ref.child("Youtube").observeSingleEvent(of: .value) { snapshot in
@@ -180,6 +186,7 @@ class FirebaseRecipe {
             completion(value)
         }
     }
+
     
     func likeOrDislikeCount(cocktailList: [String: Bool], choice: Bool) -> Int {
         switch choice {
@@ -190,12 +197,6 @@ class FirebaseRecipe {
         }
     }
     
-    func uploadWishList() {
-        guard let data = try? JSONEncoder().encode(FirebaseRecipe.shared.wishList),
-              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
-              let uid = uid else { return }
-        ref.child("users").child(uid).child("WishList").setValue(jsonData)
-    }
     
     func uploadMyRecipe() {
         guard let data = try? JSONEncoder().encode(FirebaseRecipe.shared.myRecipe),
@@ -214,10 +215,6 @@ class FirebaseRecipe {
     func addLike(cocktail: Cocktail) {
         guard let uid = uid else { return }
         Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(true)
-    }
-    
-    func uploadId(cocktail: Cocktail) {
-        Database.database().reference().child("CocktailLikeData").child(cocktail.name).child("id").setValue(cocktail.name)
     }
     
     func addDislike(cocktail: Cocktail) {

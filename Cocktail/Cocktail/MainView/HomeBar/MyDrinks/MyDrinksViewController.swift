@@ -1,12 +1,30 @@
 import UIKit
 import SnapKit
 import StoreKit
+import RxSwift
+import RxCocoa
+import RxAppState
+
+
+protocol MyDrinkViewBindable {
+    //view -> viewModel
+    var whatICanMakeButtonTapped: PublishRelay<Void> { get }
+    var cellTapped: PublishRelay<IndexPath> { get }
+    var viewWillAppear: PublishRelay<Void> { get }
+    
+    //viewModel -> view
+    var showIngredientsView: Signal<Cocktail.Base> { get }
+    var showRecipeListView: Signal<[Cocktail]> { get }
+    var updateWhatICanMakeButton: Signal<String> { get }
+    var updateCellData: Driver<[MyDrinkCell.CellData]> { get }
+    var changeButtonColor: Signal<Bool> { get }
+}
 
 class MyDrinksViewController: UIViewController {
     
-    var myDrink: Set<String> = []
+    let disposeBag = DisposeBag()
     
-    var originRecipe: [Cocktail] = []
+    let whatICanMakeViewController = CocktailListViewController()
     
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let topNameLabel = UILabel()
@@ -16,22 +34,51 @@ class MyDrinksViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        originRecipe = FirebaseRecipe.shared.recipe
         collectionView.register(MyDrinkCell.self, forCellWithReuseIdentifier: "MyDrinkCell")
-        collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.isScrollEnabled = false
         attribute()
         layout()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let data = UserDefaults.standard.object(forKey: "whatIHave") as? [String] {
-            myDrink = Set(data)
-        }
-        collectionView.reloadData()
-        updateWhatICanMakeButton(data: myDrink, button: whatICanMakeButton)
+    func bind(_ viewModel: MyDrinkViewBindable) {
+        
+        self.rx.viewWillAppear
+            .map { _ in Void() }
+            .bind(to: viewModel.viewWillAppear)
+            .disposed(by: disposeBag)
+        
+        self.whatICanMakeButton.rx.tap
+            .bind(to: viewModel.whatICanMakeButtonTapped)
+            .disposed(by: disposeBag)
+        
+        self.collectionView.rx.itemSelected
+            .bind(to: viewModel.cellTapped)
+            .disposed(by: disposeBag)
+        
+        viewModel.showIngredientsView
+            .emit(to: self.rx.showIngredientsListView)
+            .disposed(by: disposeBag)
+        
+        viewModel.showRecipeListView
+            .emit(to: self.rx.showCocktailListView)
+            .disposed(by: disposeBag)
+        
+        viewModel.updateWhatICanMakeButton
+            .emit(to: self.whatICanMakeButton.rx.title())
+            .disposed(by: disposeBag)
+        
+        self.collectionView.rx.setDelegate(self)
+            .disposed(by: disposeBag)
+        
+        viewModel.updateCellData
+            .drive(self.collectionView.rx.items(cellIdentifier: "MyDrinkCell", cellType: MyDrinkCell.self)) { int, cellData, cell in
+                cell.configure(data: cellData)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.changeButtonColor
+            .emit(to: self.whatICanMakeButton.rx.changeButtonState)
+            .disposed(by: disposeBag)
     }
     
     func layout() {
@@ -74,72 +121,45 @@ class MyDrinksViewController: UIViewController {
         topExplainLabel.font = .nexonFont(ofSize: 15, weight: .semibold)
         topExplainLabel.text = "Find out the recipes that you can make with the ingredients you have!".localized
         topExplainLabel.numberOfLines = 0
-        
-        whatICanMakeButton.addAction(UIAction(handler: {[weak self] _ in
-            guard let self = self else { return }
-            let whatICanMakeViewController = CocktailListViewController()
-            whatICanMakeViewController.lastRecipe = self.checkWhatICanMake(myIngredients: self.myDrink)
-            self.show(whatICanMakeViewController, sender: nil)
-        }), for: .touchUpInside)
-    }
-    
-    func updateIngredientsBadge(base: Cocktail.Base) -> Int {
-        let origin = Set(base.list.map {
-            $0.rawValue })
-        let subtracted = origin.subtracting(myDrink)
-        let originCount = origin.count - subtracted.count
-        return originCount
-    }
-    
-    func updateWhatICanMakeButton(data: Set<String>, button: UIButton) {
-        let sortedData = checkWhatICanMake(myIngredients: data)
-        if sortedData.count != 0 {
-             button.backgroundColor = .tappedOrange
-            button.setTitle("\(sortedData.count)" + " " + "EA".localized + " " + "making".localized, for: .normal)
-        } else {
-            button.backgroundColor = .white
-            button.setTitle("Choose more ingredients!".localized, for: .normal)
-        }
-    }
-    
-    func checkWhatICanMake(myIngredients: Set<String>) -> [Cocktail] {
-        var lastRecipe = [Cocktail]()
-        originRecipe.forEach {
-            let someSet = Set($0.ingredients.map({ baby in
-                baby.rawValue
-            }))
-            if someSet.subtracting(myIngredients).isEmpty {
-                lastRecipe.append($0)
-            }
-        }
-        return lastRecipe
     }
 }
 
-extension MyDrinksViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let whatIHaveViewController = WhatIHaveViewController()
-        whatIHaveViewController.refreshList = Cocktail.Base.allCases[indexPath.row]
-        self.show(whatIHaveViewController, sender: nil)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Cocktail.Base.allCases.count
-    }
-    
+extension MyDrinksViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let yourWidth = collectionView.bounds.width/3.5
         let yourHeight = yourWidth
         
         return CGSize(width: yourWidth, height: yourHeight)
     }
+}
+
+extension Reactive where Base: MyDrinksViewController {
+    var showIngredientsListView: Binder<Cocktail.Base> {
+        return Binder(base) { base, cocktailBase in
+            
+            //바인딩과정을 바꿔야함 자식뷰가 데이터를 didset으로 설정해서 지금당장은 이렇게 안하면 작동안함
+            let whatIHaveViewController = WhatIHaveViewController()
+            whatIHaveViewController.refreshList = cocktailBase
+            base.show(whatIHaveViewController, sender: nil)
+            
+//            base.whatIHaveViewController.refreshList = cocktailBase
+//            base.show(base.whatIHaveViewController, sender: nil)
+        }
+    }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyDrinkCell", for: indexPath) as? MyDrinkCell else { return UICollectionViewCell() }
-        cell.nameTextLabel.text = Cocktail.Base.allCases[indexPath.row].rawValue.localized
-        cell.mainImage.image = UIImage(named: Cocktail.Base.allCases[indexPath.row].rawValue)
-        cell.badgecount.text = String(updateIngredientsBadge(base: Cocktail.Base.allCases[indexPath.row]))
-        
-        return cell
+    var showCocktailListView: Binder<[Cocktail]> {
+        return Binder(base) { base, cocktail in
+            base.whatICanMakeViewController.lastRecipe = cocktail
+            base.show(base.whatICanMakeViewController, sender: nil)
+        }
+    }
+}
+
+extension Reactive where Base: MainButton {
+    var changeButtonState: Binder<Bool> {
+        return Binder(base) { base, bool in
+            base.backgroundColor = bool ? .tappedOrange: .white
+            base.isEnabled = bool
+        }
     }
 }

@@ -51,7 +51,7 @@ class AlcoholChoiceViewController: UIViewController {
 
             questionLabel.attributedText = questionText
         } else {
-            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 5), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 10, length: 13), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 5, length: 6))
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 5), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 11, length: 13), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 5, length: 6))
             questionLabel.attributedText = questionText
         }
 
@@ -83,7 +83,6 @@ class AlcoholChoiceViewController: UIViewController {
                 readyToLaunchViewController.bind(ReadyToLaunchViewModel())
                 
                 self.show(readyToLaunchViewController, sender: nil)
-                
                 
             } else {
                 let lastRecipe = self.filteredRecipe.filter { $0.alcohol == self.alcoholSelected }

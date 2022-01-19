@@ -404,7 +404,10 @@ extension TodayCocktailCollectionViewController {
         if Auth.auth().currentUser?.uid == nil {
             self.pleaseLoginAlert()
         } else {
-            self.show(WishListCocktailListViewController(), sender: nil)
+            let wishListCocktailListViewController = WishListCocktailListViewController()
+            let wishListViewModel = WishListCocktailViewModel()
+            wishListCocktailListViewController.bind(wishListViewModel)
+            self.show(wishListCocktailListViewController, sender: nil)
             self.navigationController?.navigationBar.isHidden = false
         }
     }
