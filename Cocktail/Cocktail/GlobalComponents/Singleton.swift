@@ -153,6 +153,12 @@ class FirebaseRecipe {
             completion(myRecipes)
         }
     }
+    func uploadWishList() {
+        guard let data = try? JSONEncoder().encode(FirebaseRecipe.shared.wishList),
+              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
+              let uid = uid else { return }
+        ref.child("users").child(uid).child("WishList").setValue(jsonData)
+    }
     
     func getYoutubeContents(completion: @escaping ([YouTubeVideo]) -> (Void)) {
         ref.child("Youtube").observeSingleEvent(of: .value) { snapshot in
@@ -191,12 +197,6 @@ class FirebaseRecipe {
         }
     }
     
-    func uploadWishList() {
-        guard let data = try? JSONEncoder().encode(FirebaseRecipe.shared.wishList),
-              let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
-              let uid = uid else { return }
-        ref.child("users").child(uid).child("WishList").setValue(jsonData)
-    }
     
     func uploadMyRecipe() {
         guard let data = try? JSONEncoder().encode(FirebaseRecipe.shared.myRecipe),

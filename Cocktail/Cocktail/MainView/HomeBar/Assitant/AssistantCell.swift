@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class AssistantCell: UITableViewCell {
+    typealias CellData = (title: String, explain: String)
+    
     let mainImageView = UIImageView()
     let titleLabel = UILabel()
     let explainLabel = UILabel()
