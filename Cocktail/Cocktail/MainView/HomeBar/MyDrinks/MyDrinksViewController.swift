@@ -30,7 +30,6 @@ class MyDrinksViewController: UIViewController {
     
     let whatIHaveViewController = WhatIHaveViewController()
     
-    
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     let topNameLabel = UILabel()
     let topExplainLabel = UILabel()

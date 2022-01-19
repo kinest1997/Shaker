@@ -7,9 +7,6 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
     let mainImageView = UIImageView()
     let nameLabel = UILabel()
     var checkBoxImage = UIImageView()
-    let mainView = UIView()
-    
-    var isChecked = false
     
     override func layoutSubviews() {
         super.layoutSubviews()

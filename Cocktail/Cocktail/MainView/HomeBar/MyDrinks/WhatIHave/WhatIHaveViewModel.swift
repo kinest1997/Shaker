@@ -10,47 +10,46 @@ import RxCocoa
 import RxSwift
 
 struct WhatIHaveViewModel: WhatIHaveViewBindable {
+    
+    //view -> viewModel
+
     var cellTapped = PublishRelay<IndexPath>()
     
     var viewWillAppear = PublishSubject<Void>()
     
-    var viewWillDisappear = PublishSubject<Void>()
     
-    var listData = PublishSubject<Cocktail.Base>()
+    //viewModel -> view
     
-    var cellData: Driver<[WhatIHaveCollectionViewCell.CellData]>
+    var ingredientsArray: Driver<[WhatIHaveCollectionViewCell.CellData]>
     
-    let nowIngredients = PublishSubject<[String]>()
+    //superViewModel -> viewModel
+    var listData = PublishSubject<[String]>()
     
-    let modifiedCellData = PublishSubject<[WhatIHaveCollectionViewCell.CellData]>()
+    //onlyHere
+    var userData = PublishSubject<[String]>()
     
     let disposeBag = DisposeBag()
     
     init(model: WhatIHaveModel = WhatIHaveModel()) {
-        let totalInredients = listData.map { $0.list.map { $0.rawValue } }
-            .asDriver(onErrorDriveWith: .empty())
         
-        let firstData = viewWillAppear
-            .map { () -> [String] in
-                guard let nowRecipe = UserDefaults.standard.object(forKey: "whatIHave") as? [String] else { return []}
-                return nowRecipe
-            }
-
-        let modifiedRecipe = cellTapped.withLatestFrom(totalInredients) { index, total in
-            model.modifyMyIngredients(total: total, indexPath: index)
-        }
-            .asObservable()
-        
-        Observable.merge(firstData, modifiedRecipe)
-            .debug("why")
-            .bind(to: nowIngredients)
+        viewWillAppear
+            .map { _ -> [String] in
+                guard let data = UserDefaults.standard.object(forKey: "whatIHave") as? [String] else { return []}
+                return data }
+            .bind(to: userData)
             .disposed(by: disposeBag)
         
-        cellData = nowIngredients.withLatestFrom(totalInredients) { total, now in
-            model.returnCellData(total: now, now: total)
+        let first = Observable.combineLatest(listData, userData){ total, iHave in
+            model.returnCellData(total: total, nowIHave: iHave.sorted { $0 < $1 })
         }
-        .debug("celldata")
-        .asDriver(onErrorDriveWith: .empty())
-    
+        
+        let cellTapUpdate = cellTapped.withLatestFrom(listData) { index, iHave -> [(title: String, checked: Bool)] in
+            let array = iHave.sorted { $0 < $1 }
+            model.modifyMyDrinks(ingredient: array[index.row])
+           return model.returnCellData(total: array, nowIHave: model.nowRecipe())
+        }
+        
+        ingredientsArray = Observable.merge(first, cellTapUpdate)
+            .asDriver(onErrorDriveWith: .empty())
     }
 }

@@ -10,33 +10,36 @@ import RxSwift
 import RxCocoa
 
 struct WhatIHaveModel {
-    
-    func returnCellData(total: [String], now: [String]) -> [WhatIHaveCollectionViewCell.CellData] {
-        let iHave = Set(total).intersection(Set(now)).map {
+    ///현재 보여주는 재료목록중 내가 가진것들만 체크해서 뱉어주는것
+    func returnCellData(total: [String], nowIHave: [String]) -> [(title: String, checked: Bool)] {
+        let iHave = Set(total).intersection(Set(nowIHave)).map {
             (title: $0, checked: true)
         }
         
-        let iDontHave = Set(total).subtracting(Set(now)).map {
+        let iDontHave = Set(total).subtracting(Set(nowIHave)).map {
             (title: $0, checked: false)
         }
         
-        let result = Array(iHave + iDontHave).sorted { $0.title > $1.title}
+        let result = Array(iHave + iDontHave).sorted { $0.title < $1.title }
         
         return result
     }
     
-    func modifyMyIngredients(total: [String], indexPath: IndexPath) -> [String]{
-        
-        guard let nowRecipe = UserDefaults.standard.object(forKey: "whatIHave") as? [String] else { return []}
-        
-        var modifiedIngredients = nowRecipe
-        if modifiedIngredients.contains(total[indexPath.row]) {
-            guard let index = modifiedIngredients.firstIndex(of: total[indexPath.row]) else { return modifiedIngredients}
-            modifiedIngredients.remove(at: index)
+    ///단순 userDefault 를 받아오는것
+    func nowRecipe() -> [String] {
+        guard let data = UserDefaults.standard.object(forKey: "whatIHave") as? [String] else { return []}
+        return data
+    }
+    
+    ///선택한 재료를 지우는것
+    func modifyMyDrinks(ingredient: String){
+        var totalIHave = nowRecipe()
+        if totalIHave.contains(ingredient)  {
+            totalIHave.removeAll {$0 == ingredient}
         } else {
-            modifiedIngredients.append(total[indexPath.row])
+            totalIHave.append(ingredient)
         }
-        UserDefaults.standard.set(modifiedIngredients, forKey: "whatIHave")
-        return modifiedIngredients
+        UserDefaults.standard.set(totalIHave, forKey: "whatIHave")
     }
 }
+

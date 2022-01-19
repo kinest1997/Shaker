@@ -163,6 +163,10 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
     
     var dataReciped: [Bool] = []
     
+    //MARK: 임시적으로 바인딩한것 나중에 지우기!
+    let myDrinkViewcontroller = MyDrinksViewController()
+    let myDrinkViewModel = MyDrinksViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Home".localized
@@ -213,6 +217,8 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        //MARK: 임시적으로 바인딩한것 나중에 지우기!
+        myDrinkViewcontroller.bind(myDrinkViewModel)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -235,7 +241,8 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
             if UserDefaults.standard.object(forKey: "whatIHave") == nil {
                 let alert = UIAlertController(title: "Hello".localized, message: "I don't have any alcohol in MyDrinks\nDo you want to go add it?".localized, preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: {[weak self] _ in
-                    self?.goToViewController(number: 2, viewController: MyDrinksViewController())
+                    guard let self = self else { return }
+                    self.goToViewController(number: 2, viewController: self.myDrinkViewcontroller)
                 }))
                 alert.addAction(UIAlertAction(title: "No".localized, style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)

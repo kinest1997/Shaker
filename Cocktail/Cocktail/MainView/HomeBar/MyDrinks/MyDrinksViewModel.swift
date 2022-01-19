@@ -86,7 +86,7 @@ struct MyDrinksViewModel: MyDrinkViewBindable {
         .asDriver(onErrorDriveWith: .empty())
         
          cellTapped.withLatestFrom(cocktailBaseArray) { index, baseArray in
-            baseArray[index.row]
+             baseArray[index.row].list.map { $0.rawValue }
         }
         .bind(to: whatIhaveViewModel.listData)
         .disposed(by: disposeBag)
