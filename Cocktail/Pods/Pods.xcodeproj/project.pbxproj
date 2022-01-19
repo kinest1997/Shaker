@@ -2379,7 +2379,7 @@
 		16F84279F8AE5644126CB65ADB6AA53F /* Pods-Cocktail-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Cocktail-acknowledgements.plist"; sourceTree = "<group>"; };
 		173B28DCE9921C5B8E20592FD245D1E0 /* pb_decode.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = pb_decode.c; sourceTree = "<group>"; };
 		17ADCCDA88D1F8955827661470D08A83 /* FIRComponentContainer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FIRComponentContainer.h; path = FirebaseCore/Sources/Private/FIRComponentContainer.h; sourceTree = "<group>"; };
-		17E70395B3CDD0B7EDA622612E2C3144 /* Siren */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Siren; path = Siren.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		17E70395B3CDD0B7EDA622612E2C3144 /* Siren.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Siren.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1866BCBAD7CC887B4BC669D3CCFEB655 /* GULHeartbeatDateStorable.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GULHeartbeatDateStorable.h; path = GoogleUtilities/Environment/Public/GoogleUtilities/GULHeartbeatDateStorable.h; sourceTree = "<group>"; };
 		1871815CECE9695FF75CE4A9EE74AA59 /* APLevelDB.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = APLevelDB.mm; path = "FirebaseDatabase/Sources/third_party/Wrap-leveldb/APLevelDB.mm"; sourceTree = "<group>"; };
 		18789213BDA8233E488583EA194974C0 /* GDTCOREndpoints.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GDTCOREndpoints.h; path = GoogleDataTransport/GDTCORLibrary/Public/GoogleDataTransport/GDTCOREndpoints.h; sourceTree = "<group>"; };
@@ -3094,7 +3094,7 @@
 		7DD8242BE9EE2C8C75A36D6AC129BDFE /* Timer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Timer.swift; path = RxSwift/Observables/Timer.swift; sourceTree = "<group>"; };
 		7DDB732C84A2922722BB75532912298E /* dumpfile.cc */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = dumpfile.cc; path = db/dumpfile.cc; sourceTree = "<group>"; };
 		7DF26FB852D60B94941C5A666BA25398 /* FBLPromise+Wrap.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "FBLPromise+Wrap.h"; path = "Sources/FBLPromises/include/FBLPromise+Wrap.h"; sourceTree = "<group>"; };
-		7E1E5BCE77830B401E02A8BAD06FD679 /* Pods-Cocktail */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Cocktail"; path = Pods_Cocktail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E1E5BCE77830B401E02A8BAD06FD679 /* Pods_Cocktail.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Cocktail.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E43097833080E15D70619C3659D57E4 /* PerformCheck.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PerformCheck.swift; path = Sources/Models/PerformCheck.swift; sourceTree = "<group>"; };
 		7E47FA524F7308CAB437A72509E1E03C /* coding.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = coding.h; path = util/coding.h; sourceTree = "<group>"; };
 		7E5ED96F85351BF3A3A0811E395FE680 /* SingleAssignmentDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SingleAssignmentDisposable.swift; path = RxSwift/Disposables/SingleAssignmentDisposable.swift; sourceTree = "<group>"; };
@@ -6085,13 +6085,13 @@
 				0A9F46A999C47653013D3AD854352507 /* leveldb.framework */,
 				51BA97E8B5085EFFB47BC9C0B785CEA7 /* Lottie.framework */,
 				06FC5C9CF96D60C50FCD47D339C91951 /* nanopb.framework */,
-				7E1E5BCE77830B401E02A8BAD06FD679 /* Pods-Cocktail */,
+				7E1E5BCE77830B401E02A8BAD06FD679 /* Pods_Cocktail.framework */,
 				3347A1AB6546F0A3977529B8F199DC41 /* FBLPromises.framework */,
 				ED208E682DFD1434E270075258C18E51 /* RxAppState.framework */,
 				BC432FD48A5932251F1CAFBC4BF74894 /* RxCocoa.framework */,
 				FF8B264DFE802855D5D67E7CDDABFC3C /* RxRelay.framework */,
 				809C5FAB588354C9BA37DC3EAB8CB45C /* RxSwift.framework */,
-				17E70395B3CDD0B7EDA622612E2C3144 /* Siren */,
+				17E70395B3CDD0B7EDA622612E2C3144 /* Siren.framework */,
 				979486118B3E90C08386079D57962701 /* SnapKit.framework */,
 				9317E4947CA2FE1B5D5999034C09CCA7 /* Then.framework */,
 			);
@@ -7683,7 +7683,7 @@
 			);
 			name = Siren;
 			productName = Siren;
-			productReference = 17E70395B3CDD0B7EDA622612E2C3144 /* Siren */;
+			productReference = 17E70395B3CDD0B7EDA622612E2C3144 /* Siren.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		B3CE98AF3EECAC6B20346EBE230AA4FD /* Pods-Cocktail */ = {
@@ -7726,7 +7726,7 @@
 			);
 			name = "Pods-Cocktail";
 			productName = Pods_Cocktail;
-			productReference = 7E1E5BCE77830B401E02A8BAD06FD679 /* Pods-Cocktail */;
+			productReference = 7E1E5BCE77830B401E02A8BAD06FD679 /* Pods_Cocktail.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		C17AEFC79E770A2906EFAAB1A3757406 /* Then */ = {
