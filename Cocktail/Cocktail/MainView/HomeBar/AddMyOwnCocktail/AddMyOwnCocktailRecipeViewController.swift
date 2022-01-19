@@ -30,7 +30,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let groupStackView = UIStackView()
     let cocktailImageView = UIImageView()
     
-    let nameLabel = UILabel()
     let nameTextField = UITextField()
     
     let alcoholLabel = UILabel()
@@ -38,11 +37,11 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     let alcoholStackView = UIStackView()
     var alcoholSelectMenuItems: [UIAction] {
         return [
-            UIAction(title: "high".localized, state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("high".localized, for: .normal)
+            UIAction(title: "High".localized, state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("High".localized, for: .normal)
                 alcohol = .high }),
-            UIAction(title: "mid".localized, state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("mid".localized, for: .normal)
+            UIAction(title: "Mid".localized, state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("Mid".localized, for: .normal)
                 alcohol = .mid }),
-            UIAction(title: "low".localized, state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("low".localized, for: .normal)
+            UIAction(title: "Low".localized, state: .off, handler: {[unowned self] _ in self.alcoholChoiceButton.setTitle("Low".localized, for: .normal)
                 alcohol = .low })
         ]
     }
@@ -267,7 +266,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         singleTapGestureRecognizer.isEnabled = true
         singleTapGestureRecognizer.cancelsTouchesInView = false
         view.addGestureRecognizer(singleTapGestureRecognizer)
-        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveRecipe))
+        let saveButton = UIBarButtonItem(title: "Save".localized, style: .plain, target: self, action: #selector(saveRecipe))
         navigationItem.rightBarButtonItem = saveButton
     }
     
@@ -296,7 +295,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         drinkTypeChoiceButton.menu = drinkTypeMenu
         drinkTypeChoiceButton.showsMenuAsPrimaryAction = true
         
-
         addRecipeTableView.backgroundColor = .clear
         
         // 기본 라벨들
@@ -309,7 +307,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
             $0.layer.cornerRadius = 15
             $0.clipsToBounds = true
         }
-        nameTextField.placeholder = "칵테일 이름"
+        nameTextField.placeholder = "Name".localized
         nameTextField.textColor = .black
         nameTextField.font = .nexonFont(ofSize: 24, weight: .heavy)
         
@@ -345,7 +343,6 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         self.view.backgroundColor = .white
         
-        nameLabel.text = "Name".localized
         alcoholLabel.text = "Alcohol".localized
         colorLabel.text = "Color".localized
         baseDrinkLabel.text = "Base".localized
@@ -420,7 +417,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         }
 
         leftStackView.snp.makeConstraints {
-            $0.width.equalTo(60)
+            $0.width.equalTo(70)
             $0.leading.equalTo(myTipTextView)
             $0.top.equalTo(myTipTextView.snp.bottom).offset(30)
         }
@@ -502,7 +499,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
               let myTip = myTipTextView.text,
               let name = nameTextField.text
         else {
-            return presentJustAlert(title: "Hold on".localized, message: "선택하지 않은게 있어요")
+            return presentJustAlert(title: "Hold on".localized, message: "There's something I didn't choose".localized)
         }
         
         if name.isEmpty {
@@ -517,7 +514,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
                     FirebaseRecipe.shared.myRecipe.remove(at: number)
                 }
             }
-            self.loadingView.explainLabel.text = "나의 레시피에 저장중"
+            self.loadingView.explainLabel.text = "Saving it in my recipe".localized
             self.loadingView.isHidden = false
             
             guard let convertedImage = image.pngData(),
@@ -615,13 +612,13 @@ extension AddMyOwnCocktailRecipeViewController: UITableViewDelegate, UITableView
         switch section {
         case 0:
             header.isIngredients = true
-            header.titleLabel.text = "필요한 재료"
+            header.titleLabel.text = "Ingredients".localized
             header.showButton.addAction(UIAction(handler: {[weak self] _ in
                 self?.choiceView.isHidden = false
             }), for: .touchUpInside)
             return header
         case 1:
-            header.titleLabel.text = "레시피"
+            header.titleLabel.text = "Recipe".localized
             header.isIngredients = false
             return header
         default:

@@ -37,13 +37,13 @@ class SettingTableViewController: UITableViewController {
         var rowTitles: [String] {
             switch self {
             case .serviceInformation:
-                return ["버전정보 \(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? ""))", "오픈소스라이브러리"]
+                return ["Version".localized + "\(String(describing: Bundle.main.infoDictionary?["CFBundleShortVersionString"] ?? ""))", "Open Source Library".localized]
             case .alarm:
                 return ["Alarm Setting".localized]
             case .support:
                 return ["Review Shaker in the App Store".localized, "Join the Shaker TestFlight".localized]
             case .developerInfo:
-                return ["개발자들"]
+                return ["Developers".localized]
             case .account:
                 return Auth.auth().currentUser == nil ? ["LogIn".localized] : ["LogOut".localized]
             }
@@ -52,7 +52,7 @@ class SettingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "설정"
+        title = "Settings".localized
         tableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")
     }
     

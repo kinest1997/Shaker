@@ -6,7 +6,23 @@ import RxCocoa
 import UIKit
 import SnapKit
 
+protocol ColorChoiceViewBindable {
+    // view -> viewModel
+    var cellTapped: PublishRelay<IndexPath> { get }
+    var nextButtonTapped: PublishRelay<Void> { get }
+    
+    //viewModel -> view
+    var updateCell: Signal<(indexPath :IndexPath, bool: Bool)> { get }
+    var buttonLabelCountUpdate: Signal<Int> { get }
+    var showNextPage: Driver<Void> { get }
+    var presentAlert: Driver<Void> { get }
+    var colorArray: Driver<[Cocktail.Color]> { get }
+    var myFavor: Signal<Bool> { get }
+    var saveMyFavor: Signal<[Cocktail.Color]> { get }
+}
+
 class ColorChoiceViewController: UIViewController {
+    let alcoholChoiceViewController = AlcoholChoiceViewController()
     
     let questionLabel = UILabel()
     
@@ -61,23 +77,16 @@ class ColorChoiceViewController: UIViewController {
     }
     
     func attribute() {
-        let questionText = NSMutableAttributedString(string: "What's your favorite color?".localized)
-        let firstRange = NSRange(location: 0, length: 5)
-        let secondReange = NSRange(location: 6, length: 8)
-        let smallFont = UIFont.nexonFont(ofSize: 20, weight: .bold)
-        let bigfont = UIFont.nexonFont(ofSize: 24, weight: .bold)
-        let mainColor = UIColor.mainGray
-        
-        questionText.addAttribute(.font, value: smallFont, range: firstRange)
-        questionText.addAttribute(.font, value: smallFont, range: secondReange)
-        
-        questionText.addAttribute(.foregroundColor, value: mainColor, range: firstRange)
-        questionText.addAttribute(.foregroundColor, value: mainColor, range: secondReange)
-        
-        questionText.addAttribute(.font, value: bigfont, range: NSRange(location: 5, length: 1))
-        questionText.addAttribute(.foregroundColor, value: UIColor.mainOrange, range: NSRange(location: 5, length: 1))
-        
-        questionLabel.attributedText = questionText
+        let originText = "What's your favorite Color?".localized
+
+        if NSLocale.current.languageCode == "ko" {
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 5), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 6, length: 8), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 5, length: 1))
+            questionLabel.attributedText = questionText
+        } else {
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 21), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 26, length: 1), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 21, length: 5))
+            questionLabel.attributedText = questionText
+        }
+
         view.backgroundColor = .white
         mainCollectionView.backgroundColor = .white
         questionLabel.textAlignment = .center
@@ -91,7 +100,7 @@ class ColorChoiceViewController: UIViewController {
             let lastRecipe = FirebaseRecipe.shared.recipe.filter {
                 self.selectedColor.contains($0.color)}
             if lastRecipe.isEmpty {
-                self.present(UserFavor.shared.makeAlert(title: "Please choose one or more", message: "I don't have any drinks to recommend"), animated: true, completion: nil)
+                self.present(UserFavor.shared.makeAlert(title: "Please choose one or more".localized, message: "I don't have any drinks to recommend".localized), animated: true, completion: nil)
             } else {
                 let alcoholChoiceViewController = AlcoholChoiceViewController()
                 alcoholChoiceViewController.myFavor = self.myFavor
@@ -318,6 +327,8 @@ extension ColorChoiceViewController: UICollectionViewDelegateFlowLayout {
     //    }
 }
 
+ */
+
 extension Reactive where Base: ColorChoiceViewController {
     var cellTapped: Binder<(indexPath :IndexPath, bool: Bool)> {
         return Binder(base) {base, data in
@@ -333,4 +344,3 @@ extension Reactive where Base: ColorChoiceViewController {
     }
 }
 
-*/

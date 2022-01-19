@@ -6,6 +6,14 @@
   
 */
 
+"마이페이지" = "MyPage";
+"내 술장" = "My Drinks";
+"나의 레시피" = "My Recipes";
+"즐겨찾기" = "Bookmark";
+"로그인시에 사용가능합니다" = "You can use it after you log in";
+"로그인은 설정에서 할수있습니다" = "You can log in from Settings";
+"확인" = "OK";
+
 //Cocktail.Base
 "럼" = "rum";
 "보드카" = "vodka";

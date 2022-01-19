@@ -1,9 +1,7 @@
 /*
   Localizable.strings
   Cocktail
-
   Created by 강희성 on 2021/11/15.
-  
 */
 
 //Global
@@ -12,19 +10,46 @@
 "Cancel" = "취소";
 "Save" = "저장";
 "Next" = "다음";
-"My Drinks" = "내술장";
+"My Drinks" = "내 술장";
 "Bookmark" = "즐겨찾기";
 "My Recipes" = "나의 레시피";
 "Sign in with Apple" = "Apple로 로그인";
 "MyPage" = "마이페이지";
+"Loading" = "로딩중";
+"Start" = "시작하기";
+"Ready to launch Shaker" = "쉐이커를 시작할 준비가 다 되었습니다";
 
 //LoginViewController.swift
 "Start without logging in" = "로그인없이 시작하기";
 
 //ColorChoiceViewController.swift
-"What's your favorite color?" = "선호하는 색은 무엇인가요?";
+"What's your favorite Color?" = "선호하는 색은 무엇인가요?";
 "Please choose one or more" = "하나이상 선택해주세요";
 "I don't have any drinks to recommend" = "추천할술이 없어요";
+
+//DrinkTypeChoiceViewcontroller.swift
+"Favorite cocktail Size" = "선호하는 칵테일 용량";
+
+//AlcoholChoiceViewController.swift
+"What Flavor do you like?" = "어떤 맛을 좋아하세요?";
+"*Standard: Alcohol" = "*기준: 도수";
+"High" = "높음";
+"high" = "높음";
+"Mid" = "중간";
+"mid" = "중간";
+"Low" = "낮음";
+"low" = "낮음";
+"Please choose something else!" = "다른걸 선택해주세요!";
+"I don't have anything to recommend" = "추천할 술이 없어요";
+
+//BaseChoiceViewController.swift
+"What kind of Alcohol do you prefer?" = "어떤 술을 선호하시나요?";
+
+//MyDrinksviewController.swift
+"Find out the recipes that you can make with the ingredients you have!" = "내가 가지고 있는 재료로 만들 수 있는 레시피를 알아봐요!";
+"Let's go see the recipe I made" = "내가 만든 레시피를 보러가요";
+"Choose more ingredients!" = "재료를 더 선택해주세요!";
+"Let's go see the recipe that I added to my favorites" = "내가 즐겨찾기에 추가한 레시피를 보러가요";
 
 //AddMyOwnCocktailRecipeViewController.swift
 "Reset" = "리셋";
@@ -66,18 +91,20 @@
 "shortDrink" = "숏드링크";
 "shooter" = "슈터";
 
+"Name" = "칵테일 이름";
 "Your own name" = "당신만의 이름";
 "Your own recipe" = "당신만의 레시피";
 "Your own tip" = "당신만의 팁";
 
 "Hold on" = "잠깐만요";
-"Write name" = "이름적어!";
-"Write recipe" = "레시피적어!";
-"Write tips" = "팁도좀 적어";
+"Write name" = "이름을 추가해주세요";
+"Write recipe" = "레시피를 추가해주세요";
+"Write tips" = "팁을 추가해주세요";
 "Input Recipes" = "레시피를 입력하세요";
 "Add Recipe" = "레시피 추가";
 "Add" = "추가";
-
+"There's something I didn't choose" = "선텍하지 않은게 있어요";
+"Saving it in my recipe" = "나의 레시피에 저장중";
 
 //MainViewController.swift
 "Recommendation" = "추천";
@@ -90,6 +117,20 @@
 "High Proof" = "고도수 추천";
 "My Own" = "내 추천";
 "Home" = "홈";
+"It's connected through YouTube" = "유튜브 앱으로 연결됩니다";
+"Will you continue?" = "이동하시겠습니까?";
+"Hello" = "반가워요";
+"I don't have any alcohol in MyDrinks\nDo you want to go add it?" = "내술장에 술이 하나도없네요\n추가하러 가시겠어요?";
+"SeeAll" = "전체보기";
+"Going to order" = "주문하러 가기";
+"Recommendation Video" = "홈텐딩 입문자를 위한 추천영상";
+"Let's make my own Recipes" = "나만의 레시피북을 만들어볼까요?";
+"My WishList" = "내가 찜! 한 레시피";
+"May I help your Order?" = "주문 도와드릴까요?";
+"Todays drink?" = "오늘의 한잔은?";
+"The Recipe that I made myself" = "내가 직접 개발한 레시피!";
+"Dibs. Don't forget to watch it again" = "찜한 칵테일, 잊지 말고 다시 보아요";
+"Hard to order? I can help you" = "시작하기 어려우신가요? 쉐이커가 레시피를 추천해드릴게요";
 
 //ChoiceViewController.swift
 "Anything!" = "다 좋아!";
@@ -110,11 +151,12 @@
 "Glass" = "잔";
 "Craft" = "조주방법";
 "Tip" = "팁";
-"high" = "높음";
-"mid" = "중간";
-"low" = "낮음";
 "DrinkType" = "용량";
 "editing" = "편집";
+"I like it!" = "좋아요!";
+"I don't like it..." = "싫어요...";
+"Removed from\nWishList" = "즐겨찾기에서 \n제거되었습니다";
+"Add to\nWishList" = "즐겨찾기에 \n추가되었습니다";
 
 //CocktailRecipeViewController.swift
 "Filter" = "필터";
@@ -228,3 +270,12 @@
 "Support" = "지원";
 "Review Shaker in the App Store" = "앱스토어에 쉐이커 리뷰 남기기";
 "Join the Shaker TestFlight" = "쉐이커 TestFlight 참가";
+"Developers" = "개발자들";
+"Version" = "버전정보";
+"Settings" = "설정";
+"Open Source Library" = "오픈 소스 라이브러리";
+"Developer" = "개발자";
+"Illustrator" = "일러스트레이터";
+"MainDesigner" = "메인 디자이너";
+"SubDesigner" = "서브 디자이너";
+
