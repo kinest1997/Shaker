@@ -11,6 +11,7 @@ import RxCocoa
 import RxAppState
 
 struct AssistantViewModel: AssistantViewBindable {
+    
     var cellTapped = PublishRelay<IndexPath>()
     
     var viewWillappear = PublishSubject<Void>()
@@ -24,6 +25,8 @@ struct AssistantViewModel: AssistantViewBindable {
     let wishListViewModel = WishListCocktailViewModel()
     
     let myOwnRecipeViewModel = MyOwnCocktailViewModel()
+    
+    let myDrinkViewModel = MyDrinksViewModel()
     
     init (model: AssistantModel = AssistantModel()) {
         showPage = cellTapped
