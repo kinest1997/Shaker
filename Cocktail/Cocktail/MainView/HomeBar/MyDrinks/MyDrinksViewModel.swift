@@ -33,6 +33,8 @@ struct MyDrinksViewModel: MyDrinkViewBindable {
     
     let recipeWhatICanMake = PublishSubject<[Cocktail]>()
     
+    let whatIhaveViewModel = WhatIHaveViewModel()
+    
     let disposeBag = DisposeBag()
     
     init(model: MyDrinksModel = MyDrinksModel()) {
@@ -76,11 +78,17 @@ struct MyDrinksViewModel: MyDrinkViewBindable {
             .map(model.updateWhatICanMakeButton)
             .asSignal(onErrorSignalWith: .empty())
         
-        updateCellData = Observable.combineLatest(cocktailBaseArray.asObservable(), ingredientsWhatIHave) { base, ingre in
+        updateCellData = ingredientsWhatIHave.withLatestFrom(cocktailBaseArray.asObservable()) { ingre, base in
             base.map { cocktailBase in
                 (name: cocktailBase.rawValue, count: model.updateIngredientsBadge(base: cocktailBase, whatIHave: ingre))
             }
         }
         .asDriver(onErrorDriveWith: .empty())
+        
+         cellTapped.withLatestFrom(cocktailBaseArray) { index, baseArray in
+             baseArray[index.row].list.map { $0.rawValue }
+        }
+        .bind(to: whatIhaveViewModel.listData)
+        .disposed(by: disposeBag)
     }
 }

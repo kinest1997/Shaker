@@ -63,6 +63,8 @@
 		3DA76A452730D244004091CE /* CocktailStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A442730D244004091CE /* CocktailStruct.swift */; };
 		3DA76A472730D574004091CE /* Cocktail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3DA76A462730D574004091CE /* Cocktail.plist */; };
 		3DA76A4C2730D8B7004091CE /* CocktailRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */; };
+		3DA8764C2795B00B007C703F /* WhatIHaveViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA8764B2795B00B007C703F /* WhatIHaveViewModel.swift */; };
+		3DA8764E2795B018007C703F /* WhatIHaveModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DA8764D2795B018007C703F /* WhatIHaveModel.swift */; };
 		3DB910D427566C1C0076CB50 /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */; };
 		3DB910D6275683B90076CB50 /* AlcoholChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */; };
 		3DB910D827573E420076CB50 /* ReadyToLaunchVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */; };
@@ -177,6 +179,8 @@
 		3DA76A442730D244004091CE /* CocktailStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailStruct.swift; sourceTree = "<group>"; };
 		3DA76A462730D574004091CE /* Cocktail.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Cocktail.plist; sourceTree = "<group>"; };
 		3DA76A4B2730D8B7004091CE /* CocktailRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipeViewController.swift; sourceTree = "<group>"; };
+		3DA8764B2795B00B007C703F /* WhatIHaveViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIHaveViewModel.swift; sourceTree = "<group>"; };
+		3DA8764D2795B018007C703F /* WhatIHaveModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhatIHaveModel.swift; sourceTree = "<group>"; };
 		3DB910D327566C1C0076CB50 /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
 		3DB910D5275683B90076CB50 /* AlcoholChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlcoholChoiceViewController.swift; sourceTree = "<group>"; };
 		3DB910D727573E420076CB50 /* ReadyToLaunchVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadyToLaunchVIewController.swift; sourceTree = "<group>"; };
@@ -396,6 +400,8 @@
 			isa = PBXGroup;
 			children = (
 				3D74812327366C0D0092BD74 /* WhatIHaveViewController.swift */,
+				3DA8764B2795B00B007C703F /* WhatIHaveViewModel.swift */,
+				3DA8764D2795B018007C703F /* WhatIHaveModel.swift */,
 				3D7481282736BC550092BD74 /* WhatIHaveCollectionViewCell.swift */,
 			);
 			path = WhatIHave;
@@ -722,6 +728,7 @@
 			files = (
 				3DCE2A3327947A5500CFC4E8 /* MyDrinksModel.swift in Sources */,
 				7D4AF9062760D57B0093C3C2 /* UIApplication.swift in Sources */,
+				3DA8764C2795B00B007C703F /* WhatIHaveViewModel.swift in Sources */,
 				3D297A972772F901001B8BD4 /* ColorChoiceViewModel.swift in Sources */,
 				3DBD0F6A278357B4001FA460 /* SettingHeaderView.swift in Sources */,
 				3D5685DB278BDB3900B9F5CD /* ReadyToLaunchViewModel.swift in Sources */,
@@ -750,6 +757,7 @@
 				3D83715B274C74F300CA6036 /* MyOwnCocktailRecipeViewController.swift in Sources */,
 				3DE56B33275DF93F0087D979 /* DrinkTypeChoiceViewController.swift in Sources */,
 				3DA0552C277F347600966C90 /* BaseChoiceCollectionViewCell.swift in Sources */,
+				3DA8764E2795B018007C703F /* WhatIHaveModel.swift in Sources */,
 				3D83715D274CD7C300CA6036 /* ChoiceIngredientsView.swift in Sources */,
 				3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */,
 				3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */,
