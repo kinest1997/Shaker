@@ -1,10 +1,26 @@
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
+import RxAppState
+
+protocol CocktailRecpeViewBindable {
+//    view -> ViewModel
+    var firterButtonTapped: PublishRelay<Void> { get }
+    var arrangeButtonTapped: PublishRelay<Void> { get }
+//    viewModel -> view
+    var sortedRecipe: Driver<[Cocktail]> { get }
+    var showFilterView: Signal<Void> { get }
+    var showSortingMenu: Signal<Void> { get }
+    
+//    sortingMenu -> viewModel
+    var menuTapped: Signal<UIAction> { get }
+    
+}
 
 class CocktailRecipeViewController: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
-    
     var unTouchableRecipe: [Cocktail] = []
     var originRecipe: [Cocktail] = []
     var filteredRecipe: [Cocktail] = []
@@ -41,6 +57,7 @@ class CocktailRecipeViewController: UIViewController {
         mainTableView.dataSource = self
         title = "Recipe".localized
         
+        
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
         
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -57,11 +74,11 @@ class CocktailRecipeViewController: UIViewController {
         definesPresentationContext = true
         //화면 이동시에 서치바가 안남아있게 해줌
         searchController.searchBar.keyboardType = .default
-                
-        let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
 
-        navigationItem.rightBarButtonItem = filterButton
+        let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
         let leftarrangeButton = UIBarButtonItem(title: "Sorting".localized, image: nil, primaryAction: nil, menu: filterMenu)
+        
+        navigationItem.rightBarButtonItem = filterButton
         navigationItem.leftBarButtonItem = leftarrangeButton
         
         FirebaseRecipe.shared.getCocktailLikeData {[weak self] data in
@@ -236,4 +253,6 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
         mainTableView.reloadData()
     }
 }
+
+//eΩ
 

@@ -347,7 +347,7 @@ class CocktailDetailViewController: UIViewController {
             $0.numberOfLines = 0
             $0.textColor = .mainGray
         }
-        
+
         [leftStackView, rightStackView].forEach {
             $0.axis = .vertical
             $0.distribution = .fillEqually
