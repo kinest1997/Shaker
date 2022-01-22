@@ -4,21 +4,7 @@ import RxSwift
 import RxCocoa
 import RxAppState
 
-protocol CocktailRecpeViewBindable {
-//    view -> ViewModel
-    var firterButtonTapped: PublishRelay<Void> { get }
-    var arrangeButtonTapped: PublishRelay<Void> { get }
-//    viewModel -> view
-    var sortedRecipe: Driver<[Cocktail]> { get }
-    var showFilterView: Signal<Void> { get }
-    var showSortingMenu: Signal<Void> { get }
-    
-//    sortingMenu -> viewModel
-    var menuTapped: Signal<UIAction> { get }
-    
-}
-
-class CocktailRecipeViewController: UIViewController {
+class CocktailRecipeViewController123: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     var unTouchableRecipe: [Cocktail] = []
@@ -53,15 +39,13 @@ class CocktailRecipeViewController: UIViewController {
         unTouchableRecipe = FirebaseRecipe.shared.recipe
         originRecipe = unTouchableRecipe
         filteredRecipe = originRecipe
-        mainTableView.delegate = self
-        mainTableView.dataSource = self
         title = "Recipe".localized
+        
         
         
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
         
         navigationItem.hidesSearchBarWhenScrolling = false
-        searchController.searchResultsUpdater = self
         //서치바의 텍스트가 변경되는것을 알려준다.
         searchController.obscuresBackgroundDuringPresentation = false
         // 표시된 뷰를 흐리게 해주는것
@@ -93,7 +77,9 @@ class CocktailRecipeViewController: UIViewController {
         unTouchableRecipe = FirebaseRecipe.shared.recipe
         unTouchableRecipe.sort { $0.name < $1.name }
         mainTableView.reloadData()
+    
     }
+    
     
     func layout() {
         view.addSubview(mainTableView)
@@ -180,79 +166,12 @@ class CocktailRecipeViewController: UIViewController {
     }
 }
 
-extension CocktailRecipeViewController: UITableViewDelegate, UITableViewDataSource {
-    //테이블뷰에 관한것
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (isFiltering() && filterView.nowFiltering) || isFiltering() {
-            return filteredRecipe.count
-        } else if filterView.nowFiltering {
-            return originRecipe.count
-        }
-        return unTouchableRecipe.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "key", for: indexPath) as? CocktailListCell else { return UITableViewCell() }
-        
-        if (isFiltering() && filterView.nowFiltering) || isFiltering(){
-            cell.configure(data: filteredRecipe[indexPath.row])
-            return cell
-        } else if filterView.nowFiltering {
-            cell.configure(data: originRecipe[indexPath.row])
-            return cell
-        } else {
-            cell.configure(data: unTouchableRecipe[indexPath.row])
-            return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (isFiltering() && filterView.nowFiltering) || isFiltering() {
-            sendData(recipe: filteredRecipe[indexPath.row])
-        } else if filterView.nowFiltering {
-            sendData(recipe: originRecipe[indexPath.row])
-        }
-        else {
-            sendData(recipe: unTouchableRecipe[indexPath.row])
-        }
-    }
-    
-    func sendData(recipe: Cocktail) {
-        let cocktailData = recipe
-        let cocktailDetailViewController = CocktailDetailViewController()
-        cocktailDetailViewController.setData(data: cocktailData)
-        self.show(cocktailDetailViewController, sender: nil)
-    }
-}
 
-extension CocktailRecipeViewController: UISearchResultsUpdating {
-    //서치바에 관한것
-    func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
-    }
-    
-    func isFiltering() -> Bool {
-        return (searchController.isActive || !searchBarIsEmpty())
-    }
-    
-    func searchBarIsEmpty() -> Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    
-    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
-        let filterRecipe = originRecipe
-        filteredRecipe = filterRecipe.filter({
-            return $0.name.localized.lowercased().contains(searchText) || $0.ingredients.map({ baby in
-                baby.rawValue.localized.lowercased()
-            })[0...].contains(searchText) || $0.glass.rawValue.localized.lowercased().contains(searchText) || $0.color.rawValue.localized.lowercased().contains(searchText) || $0.recipe.contains(searchText)
-        })
-        mainTableView.reloadData()
-    }
-}
-
-//eΩ
+//extension Reactive where Base: UIMenu {
+//    var selectedItem: Binder<Int> {
+//        return Binder(base) { base, int in
+//            base.
+//        }
+//    }
+//}
 

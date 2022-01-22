@@ -75,7 +75,7 @@ class MyDrinksViewController: UIViewController {
         
         self.collectionView.rx.setDelegate(self)
             .disposed(by: disposeBag)
-        
+
         viewModel.updateCellData
             .drive(self.collectionView.rx.items(cellIdentifier: "MyDrinkCell", cellType: MyDrinkCell.self)) { int, cellData, cell in
                 cell.configure(data: cellData)

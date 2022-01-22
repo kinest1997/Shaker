@@ -1,5 +1,20 @@
 import UIKit
 import SnapKit
+import RxCocoa
+import RxSwift
+
+protocol FilterViewBindable {
+    
+    //view -> viewModel
+    var cellTapped: PublishRelay<IndexPath> { get }
+    var closeButtonTapped: PublishRelay<Void> { get }
+    var saveButtonTapped: PublishRelay<Void> { get }
+    var resetButton: PublishRelay<Void> { get }
+    
+//        viewModel ->view
+    var conditionsOfCocktail: [FilteredView.FilterData] { get }
+}
+
 
 class FilteredView: UIView {
     
