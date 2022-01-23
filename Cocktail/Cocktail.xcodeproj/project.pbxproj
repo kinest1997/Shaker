@@ -11,6 +11,8 @@
 		3D01A87C279AA1BD00CEC022 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01A87B279AA1BD00CEC022 /* SearchViewModel.swift */; };
 		3D01A87E279AA1C600CEC022 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01A87D279AA1C600CEC022 /* SearchController.swift */; };
 		3D01A880279AB94500CEC022 /* RxCocktailRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01A87F279AB94400CEC022 /* RxCocktailRecipeView.swift */; };
+		3D11E18B279C356600B739E3 /* CocktailRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D11E18A279C356600B739E3 /* CocktailRecipeModel.swift */; };
+		3D11E18D279D3DE300B739E3 /* FilterCellStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D11E18C279D3DE300B739E3 /* FilterCellStruct.swift */; };
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
 		3D21D4C22733E9C300FE2896 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D21D4C12733E9C300FE2896 /* UIImage.swift */; };
@@ -129,6 +131,8 @@
 		3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail_Widget.swift; sourceTree = "<group>"; };
 		3D072472274F55220061B3F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3D0D9B762744D714008C75E7 /* Ingredients.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Ingredients.plist; sourceTree = "<group>"; };
+		3D11E18A279C356600B739E3 /* CocktailRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipeModel.swift; sourceTree = "<group>"; };
+		3D11E18C279D3DE300B739E3 /* FilterCellStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCellStruct.swift; sourceTree = "<group>"; };
 		3D175BA12742846B00EC142B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3D175BA3274284CD00EC142B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		3D175BA4274284DD00EC142B /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -272,7 +276,9 @@
 			isa = PBXGroup;
 			children = (
 				3D01A87F279AB94400CEC022 /* RxCocktailRecipeView.swift */,
+				3D11E18C279D3DE300B739E3 /* FilterCellStruct.swift */,
 				3D234CB327992E0200F86DE2 /* CoccktailRecipeViewModel.swift */,
+				3D11E18A279C356600B739E3 /* CocktailRecipeModel.swift */,
 				3D6C6D442732B86100C70276 /* CocktailListCell.swift */,
 			);
 			path = CocktailRecipe;
@@ -576,7 +582,6 @@
 				3D4415C627564B4E00CBCC40 /* GoogleService-Info.plist */,
 				3DA76A392730D1D0004091CE /* Assets.xcassets */,
 				3DB910FC27588CDE0076CB50 /* Info.plist */,
-				3DCE2A2F279437B900CFC4E8 /* Assets */,
 			);
 			path = Cocktail;
 			sourceTree = "<group>";
@@ -604,13 +609,6 @@
 				3D5E8C912784067A0005478B /* NEXON Lv1 Gothic OTF.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		3DCE2A2F279437B900CFC4E8 /* Assets */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Assets;
 			sourceTree = "<group>";
 		};
 		7D4AF9042760D5610093C3C2 /* Extensions */ = {
@@ -780,6 +778,7 @@
 				3D5685D4278AFDB400B9F5CD /* YouTube.swift in Sources */,
 				3D7F17C32734D5FF006EDCF9 /* FilteredView.swift in Sources */,
 				3DBD0F5E27833BE6001FA460 /* HashTagCell.swift in Sources */,
+				3D11E18B279C356600B739E3 /* CocktailRecipeModel.swift in Sources */,
 				3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */,
 				3DE56B31275D080A0087D979 /* TodayCocktailCollectionViewHeader.swift in Sources */,
 				3DBD0F6427834D42001FA460 /* UINavigation.swift in Sources */,
@@ -825,6 +824,7 @@
 				3DBD0F4A2781504F001FA460 /* HelpOrderCell.swift in Sources */,
 				3DBF7A13278F1B6C00E0334C /* WishListViewModel.swift in Sources */,
 				3DBD0F4E27817219001FA460 /* IngredientsCell.swift in Sources */,
+				3D11E18D279D3DE300B739E3 /* FilterCellStruct.swift in Sources */,
 				3D6E0EA7276EDF5B00A7B855 /* MainViewController.swift in Sources */,
 				3DCE2A3127947A4C00CFC4E8 /* MyDrinksViewModel.swift in Sources */,
 				3D5E8C9C278580BB0005478B /* PopUpView.swift in Sources */,

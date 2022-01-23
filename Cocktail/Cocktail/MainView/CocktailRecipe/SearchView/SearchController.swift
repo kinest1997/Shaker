@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-protocol SearchControllerBindble {
+protocol SearchControllerBindable {
     
     var inputTexts: PublishRelay<String> { get }
     
@@ -22,7 +22,7 @@ class SearchController: UISearchController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        layout()
+        attribute()
     }
     
     func attribute() {
@@ -33,7 +33,7 @@ class SearchController: UISearchController {
         
     }
     
-    func bind(_ viewModel: SearchControllerBindble) {
+    func bind(_ viewModel: SearchControllerBindable) {
         self.searchBar.rx.text
             .map { $0 ?? ""}
             .bind(to: viewModel.inputTexts)

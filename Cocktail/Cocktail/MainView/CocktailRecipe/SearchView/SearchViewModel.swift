@@ -9,7 +9,7 @@ import RxSwift
 import RxCocoa
 import UIKit
 
-struct SearchViewModel: searchControllerBindble {
+struct SearchViewModel: SearchControllerBindable {
     var inputTexts = PublishRelay<String>()
     
     var outPuts: Signal<String>
@@ -17,6 +17,7 @@ struct SearchViewModel: searchControllerBindble {
     init() {
         outPuts = inputTexts
             .distinctUntilChanged()
+            .startWith("")
             .asSignal(onErrorSignalWith: .empty())
     }
 }

@@ -10,12 +10,13 @@ import RxAppState
 import RxCocoa
 import RxSwift
 import SnapKit
+import RxDataSources
 
 protocol CocktailRecpeViewBindable {
     //    view -> ViewModel
     var filterButtonTapped: PublishRelay<Void> { get }
     var arrangeButtonTapped: PublishRelay<Void> { get }
-//    var showLoadingView: PublishRelay<Void> { get }
+    //    var showLoadingView: PublishRelay<Void> { get }
     var filterRecipe: PublishSubject<SortingStandard> { get }
     var viewWillAppear:PublishSubject<Void> { get }
     
@@ -23,10 +24,11 @@ protocol CocktailRecpeViewBindable {
     var sortedRecipe: Driver<[Cocktail]> { get }
     var showFilterView: Signal<Void> { get }
     var dismissLoadingView: Signal<Void> { get }
+    var dismissFilterView: Signal<Void> { get }
     
     //viewModel
-    var filterviewModel: FilterViewBindable { get }
-    var searchController: SearchControllerBindble { get }
+    var filterviewModel: FilterViewModel { get }
+    var searchViewModel: SearchViewModel { get }
 }
 
 class CocktailRecipeViewController: UIViewController {
@@ -42,8 +44,8 @@ class CocktailRecipeViewController: UIViewController {
     let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: nil, action: nil)
     
     var leftarrangeButton: UIBarButtonItem { UIBarButtonItem(title: "Sorting".localized, image: nil, primaryAction: nil, menu: filterMenu) }
-//
-//
+    //
+    //
     var filterMenu: UIMenu {
         return UIMenu(title: "", image: nil, identifier: nil, options: .singleSelection, children: filtertMenuItems)
     }
@@ -56,15 +58,25 @@ class CocktailRecipeViewController: UIViewController {
         return [
             UIAction(title: "Name".localized, state: .on, handler: {[weak self] _ in
                 guard let self = self else { return }
-                let someObservable = Observable.just(SortingStandard.name)
-                someObservable.bind(to: self.filterOption)
-                    .disposed(by: self.disposeBag)
+                self.filterOption.onNext(SortingStandard.name)
+                
+                //                let someObservable = Observable.just(SortingStandard.name)
+                //                someObservable.bind(to: self.filterOption)
+                //                    .disposed(by: self.disposeBag)
+            }),
+            UIAction(title: "Alcohol".localized, state: .on, handler: {[weak self] _ in
+                guard let self = self else { return }
+                self.filterOption.onNext(SortingStandard.alcohol)
+                
+                //                let someObservable = Observable.just(SortingStandard.name)
+                //                someObservable.bind(to: self.filterOption)
+                //                    .disposed(by: self.disposeBag)
             })
         ]
     }
     
     //메뉴를 선택할때마다 특정값을 바꾼다. 그값을 옵저빙 하는것을 넘겨준다.
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
@@ -73,6 +85,9 @@ class CocktailRecipeViewController: UIViewController {
     }
     
     func bind(_ viewModel: CocktailRecpeViewBindable) {
+        self.searchBar.bind(viewModel.searchViewModel)
+        self.filterView.bind(viewModel.filterviewModel)
+        
         self.filterButton.rx.tap
             .bind(to: viewModel.filterButtonTapped)
             .disposed(by: disposeBag)
@@ -85,14 +100,20 @@ class CocktailRecipeViewController: UIViewController {
             .map { _ in Void() }
             .bind(to: viewModel.viewWillAppear)
             .disposed(by: disposeBag)
-     
+        
         self.filterOption
             .bind(to: viewModel.filterRecipe)
             .disposed(by: disposeBag)
         
+        viewModel.dismissFilterView
+            .emit {[weak self] _ in
+                self?.filterView.isHidden = true
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.showFilterView
             .emit {[weak self] _ in
-                self?.filterView.isHidden = !(self?.filterView.isHidden)!
+                self?.filterView.isHidden = false
             }
             .disposed(by: disposeBag)
         
@@ -120,15 +141,29 @@ class CocktailRecipeViewController: UIViewController {
             $0.top.equalToSuperview()
             $0.leading.trailing.bottom.equalToSuperview()
         }
+        
+        filterView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
     
     func attribute() {
         title = "Recipe".localized
         tableView.backgroundColor = .white
-        filterView.isHidden = true
+//        filterView.isHidden = true
         loadingView.isHidden = true
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.rightBarButtonItem = filterButton
         navigationItem.leftBarButtonItem = leftarrangeButton
+        tableView.rowHeight = 100
+    }
+}
+
+extension Reactive where Base: CocktailRecipeViewController {
+    var updateCellDataL: Binder<(index: IndexPath, checked: [[Bool]])> {
+        return Binder(base) { base, data in
+            let cell = base.tableView.cellForRow(at: data.index) as! FilterViewCell
+            cell.isChecked = data.checked[data.index.section][data.index.row]
+        }
     }
 }

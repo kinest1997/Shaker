@@ -50,7 +50,7 @@ class MainViewController: UITabBarController {
     let settingsViewController = SettingTableViewController(style: .insetGrouped)
     
     let assistantViewModel = AssistantViewModel()
-    
+    let cocktailRecipesViewModel = CocktailRecipeViewModel()
     
     let tabBarItems: [Tab: UITabBarItem] = [
         .today: UITabBarItem(title: Tab.today.name, image: Tab.today.image, selectedImage: Tab.today.selectedImage),
@@ -68,6 +68,7 @@ class MainViewController: UITabBarController {
         assistantViewController.tabBarItem = tabBarItems[.home]
         settingsViewController.tabBarItem = tabBarItems[.preference]
         assistantViewController.bind(viewmodel: assistantViewModel)
+        cocktailRecipeViewController.bind(cocktailRecipesViewModel)
         
         self.viewControllers = [
             UINavigationController(rootViewController: todayCocktailCollectionViewController),
