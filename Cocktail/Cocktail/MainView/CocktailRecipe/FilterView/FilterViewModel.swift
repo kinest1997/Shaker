@@ -12,6 +12,8 @@ import RxDataSources
 import Differentiator
 
 struct FilterViewModel: FilterViewBindable {
+    var resetimages: Signal<[[Bool]]>
+    
     
     //viewModel -> SuperViewModel
     var conditionsOfCocktail: Observable<[FilteredView.FilterData]>
@@ -31,52 +33,33 @@ struct FilterViewModel: FilterViewBindable {
     
     let conditionsArray: Driver<[FilteredView.FilterData]>
     
-    init() {
-        
-        self.conditionsArray = Driver.just(                [
-            (condition: [Cocktail.Alcohol](), section: Cocktail.Alcohol.allCases),
-            (condition: [Cocktail.Base](), section: Cocktail.Base.allCases),
-            (condition: [Cocktail.DrinkType](), section: Cocktail.DrinkType.allCases),
-            (condition: [Cocktail.Craft](), section: Cocktail.Craft.allCases),
-            (condition: [Cocktail.Glass](), section: Cocktail.Glass.allCases),
-            (condition: [Cocktail.Color](), section: Cocktail.Color.allCases)
-        ])
+    var dismissFilterView: Signal<Void>
+    
+    var selectedConditions: Observable<[FilteredView.FilterData]>
+    
+    init(model: FilterModel = FilterModel()) {
+        self.conditionsArray = Driver.just(model.emptyconditionArray)
         
         let resetConditions = resetButton.withLatestFrom(self.conditionsArray)
         
-        let selectedConditions = cellTapped
-            .withLatestFrom(conditionsArray) { index, cellData in
-                (cellData.map { $0.section }[index.section][index.row] , index)
-            }
-            .scan(into: [
-                (condition: [Cocktail.Alcohol](), section: Cocktail.Alcohol.allCases),
-                (condition: [Cocktail.Base](), section: Cocktail.Base.allCases),
-                (condition: [Cocktail.DrinkType](), section: Cocktail.DrinkType.allCases),
-                (condition: [Cocktail.Craft](), section: Cocktail.Craft.allCases),
-                (condition: [Cocktail.Glass](), section: Cocktail.Glass.allCases),
-                (condition: [Cocktail.Color](), section: Cocktail.Color.allCases)
-            ] as! [FilteredView.FilterData] ) {base, data in
-                if base[data.1.section].condition.contains(where: { condition in
-                    condition.rawValue == data.0.rawValue
-                }) {
-                    base[data.1.section].condition.removeAll { condition in
-                        condition.rawValue == data.0.rawValue
-                    }
+        let tappedData = cellTapped
+            .scan(into: model.emptyconditionArray) {base, index in
+                if base[index.section].condition.contains(where: { condition in
+                    condition.rawValue == base.map { $0.section }[index.section][index.row].rawValue
+                }){
+                    guard let number = base[index.section].condition.firstIndex(where: { condition in
+                        condition.rawValue == base.map { $0.section }[index.section][index.row].rawValue
+                    }) else { return }
+                    base[index.section].condition.remove(at: number)
                 } else {
-                    base[data.1.section].condition.append(data.0)
+                    base[index.section].condition.append(base.map { $0.section }[index.section][index.row])
                 }
             }
 
+        selectedConditions = Observable.merge(tappedData, resetButton.map { model.emptyconditionArray })
+        
+        
         conditionsOfCocktail = Observable.merge(resetConditions, selectedConditions)
-            .startWith([
-                (condition: [Cocktail.Alcohol](), section: Cocktail.Alcohol.allCases),
-                (condition: [Cocktail.Base](), section: Cocktail.Base.allCases),
-                (condition: [Cocktail.DrinkType](), section: Cocktail.DrinkType.allCases),
-                (condition: [Cocktail.Craft](), section: Cocktail.Craft.allCases),
-                (condition: [Cocktail.Glass](), section: Cocktail.Glass.allCases),
-                (condition: [Cocktail.Color](), section: Cocktail.Color.allCases)
-            ])
-
         
         let selectedStatus = cellTapped
             .scan(into: [Cocktail.Alcohol.allCases.map {$0.rawValue}, Cocktail.Base.allCases.map {$0.rawValue}, Cocktail.DrinkType.allCases.map {$0.rawValue}, Cocktail.Craft.allCases.map {$0.rawValue}, Cocktail.Glass.allCases.map {$0.rawValue}, Cocktail.Color.allCases.map {$0.rawValue} ].map {
@@ -89,6 +72,15 @@ struct FilterViewModel: FilterViewBindable {
             (index: $0, checked: $1)
         }
         .asSignal(onErrorSignalWith: .empty())
+        
+        dismissFilterView = Observable<Void>.merge(resetButton.asObservable(), closeButtonTapped.asObservable(), saveButtonTapped.asObservable())
+            .asSignal(onErrorSignalWith: .empty())
+
+        resetimages = resetButton.withLatestFrom(selectedStatus) { a, b in
+            return b
+        }
+            .asSignal(onErrorSignalWith: .empty())
+        
     }
 }
 

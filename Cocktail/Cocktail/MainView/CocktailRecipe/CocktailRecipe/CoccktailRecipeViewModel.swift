@@ -41,9 +41,13 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
             }
         
 //        let conditions = filterviewModel.conditionsOfCocktail
-            
         
-        let finalResultRecipes = Observable.combineLatest(firstRecipe, filterviewModel.conditionsOfCocktail, searchViewModel.outPuts.asObservable(), filterRecipe){ recipe, conditions, searchText, sortingStandard -> [Cocktail] in
+        let textOutput = searchViewModel.outPuts
+            .asObservable()
+        
+        filterRecipe.onNext(.name)
+        
+        let finalResultRecipes = Observable.combineLatest(firstRecipe, filterviewModel.conditionsOfCocktail, textOutput, filterRecipe){ recipe, conditions, searchText, sortingStandard -> [Cocktail] in
             
             let filteredRecipe = model.sortingRecipes(
                 origin: recipe,
@@ -55,21 +59,22 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
                 color: conditions[5].condition as! [Cocktail.Color]
             ).sorted { $0.name < $1.name }
             
-            let searchedRecipe = filteredRecipe.filter({
-                return $0.name.localized.lowercased().contains(searchText) || $0.ingredients.map({ baby in
-                    baby.rawValue.localized.lowercased()
-                })[0...].contains(searchText) ||  $0.recipe.contains(searchText)
-            })
-            return model.sorting(standard: sortingStandard, recipe: searchedRecipe)
+            if searchText != "" {
+                let searchedRecipe = filteredRecipe.filter({
+                    return $0.name.localized.lowercased().contains(searchText) || $0.ingredients.map({ baby in
+                        baby.rawValue.localized.lowercased()
+                    })[0...].contains(searchText) ||  $0.recipe.contains(searchText)
+                })
+                return model.sorting(standard: sortingStandard, recipe: searchedRecipe)
+            } else {
+                return model.sorting(standard: sortingStandard, recipe: filteredRecipe)
+            }
         }
             
-        
-        sortedRecipe = Observable.merge(finalResultRecipes, finalResultRecipes)
+        sortedRecipe = Observable.merge(finalResultRecipes, firstRecipe)
             .asDriver(onErrorDriveWith: .empty())
-            
-        dismissFilterView = filterviewModel
-            .closeButtonTapped
-            .asSignal(onErrorSignalWith: .empty())
+        
+        dismissFilterView = filterviewModel.dismissFilterView
         
         showFilterView = filterButtonTapped
             .asSignal(onErrorSignalWith: .empty())
@@ -79,5 +84,4 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
             .take(1)
             .asSignal(onErrorSignalWith: .empty())
     }
-    
 }

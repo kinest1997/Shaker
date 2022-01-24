@@ -35,9 +35,9 @@ class CocktailRecipeViewController: UIViewController {
     
     let loadingView = LoadingView()
     
-    let filterView = FilteredView()
+    var filterView = FilteredView()
     
-    let searchBar = SearchController()
+    let searchBar = SearchController(nibName: nil, bundle: nil)
     
     let tableView = UITableView()
     
@@ -59,18 +59,10 @@ class CocktailRecipeViewController: UIViewController {
             UIAction(title: "Name".localized, state: .on, handler: {[weak self] _ in
                 guard let self = self else { return }
                 self.filterOption.onNext(SortingStandard.name)
-                
-                //                let someObservable = Observable.just(SortingStandard.name)
-                //                someObservable.bind(to: self.filterOption)
-                //                    .disposed(by: self.disposeBag)
             }),
-            UIAction(title: "Alcohol".localized, state: .on, handler: {[weak self] _ in
+            UIAction(title: "Alcohol".localized, state: .off, handler: {[weak self] _ in
                 guard let self = self else { return }
                 self.filterOption.onNext(SortingStandard.alcohol)
-                
-                //                let someObservable = Observable.just(SortingStandard.name)
-                //                someObservable.bind(to: self.filterOption)
-                //                    .disposed(by: self.disposeBag)
             })
         ]
     }
@@ -150,20 +142,11 @@ class CocktailRecipeViewController: UIViewController {
     func attribute() {
         title = "Recipe".localized
         tableView.backgroundColor = .white
-//        filterView.isHidden = true
+        filterView.isHidden = true
         loadingView.isHidden = true
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.rightBarButtonItem = filterButton
         navigationItem.leftBarButtonItem = leftarrangeButton
         tableView.rowHeight = 100
-    }
-}
-
-extension Reactive where Base: CocktailRecipeViewController {
-    var updateCellDataL: Binder<(index: IndexPath, checked: [[Bool]])> {
-        return Binder(base) { base, data in
-            let cell = base.tableView.cellForRow(at: data.index) as! FilterViewCell
-            cell.isChecked = data.checked[data.index.section][data.index.row]
-        }
     }
 }

@@ -121,7 +121,5 @@ struct CocktailRecipeModel {
         default:
             return recipe
         }
-
     }
-    
 }

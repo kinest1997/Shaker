@@ -17,7 +17,6 @@ struct SearchViewModel: SearchControllerBindable {
     init() {
         outPuts = inputTexts
             .distinctUntilChanged()
-            .startWith("")
             .asSignal(onErrorSignalWith: .empty())
     }
 }
