@@ -12,8 +12,8 @@ import RxDataSources
 import Differentiator
 
 struct FilterViewModel: FilterViewBindable {
-    var resetimages: Signal<[[Bool]]>
-    
+    var showFilterView = PublishSubject<Void>()
+
     
     //viewModel -> SuperViewModel
     var conditionsOfCocktail: Observable<[FilteredView.FilterData]>
@@ -26,8 +26,6 @@ struct FilterViewModel: FilterViewBindable {
     var saveButtonTapped = PublishRelay<Void>()
     
     var resetButton = PublishRelay<Void>()
-    
-    let modifiedCondition = PublishSubject<[FilteredView.FilterData]>()
     
     let updateCell: Signal<(index: IndexPath, checked: [[Bool]])>
     
@@ -58,8 +56,10 @@ struct FilterViewModel: FilterViewBindable {
 
         selectedConditions = Observable.merge(tappedData, resetButton.map { model.emptyconditionArray })
         
+        let finalSaveData = Observable.merge(resetConditions, selectedConditions)
         
-        conditionsOfCocktail = Observable.merge(resetConditions, selectedConditions)
+        conditionsOfCocktail = saveButtonTapped.withLatestFrom(finalSaveData)
+        
         
         let selectedStatus = cellTapped
             .scan(into: [Cocktail.Alcohol.allCases.map {$0.rawValue}, Cocktail.Base.allCases.map {$0.rawValue}, Cocktail.DrinkType.allCases.map {$0.rawValue}, Cocktail.Craft.allCases.map {$0.rawValue}, Cocktail.Glass.allCases.map {$0.rawValue}, Cocktail.Color.allCases.map {$0.rawValue} ].map {
@@ -67,6 +67,10 @@ struct FilterViewModel: FilterViewBindable {
             }) { data, index in
                 data[index.section][index.row].toggle()
             }
+        
+        resetButton.withLatestFrom(selectedStatus) { data,asd in
+            
+        }
         
         updateCell = Observable.zip(cellTapped, selectedStatus) {
             (index: $0, checked: $1)
@@ -76,10 +80,6 @@ struct FilterViewModel: FilterViewBindable {
         dismissFilterView = Observable<Void>.merge(resetButton.asObservable(), closeButtonTapped.asObservable(), saveButtonTapped.asObservable())
             .asSignal(onErrorSignalWith: .empty())
 
-        resetimages = resetButton.withLatestFrom(selectedStatus) { a, b in
-            return b
-        }
-            .asSignal(onErrorSignalWith: .empty())
         
     }
 }

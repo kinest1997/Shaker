@@ -3,9 +3,11 @@ import SnapKit
 import RxCocoa
 import RxSwift
 import RxDataSources
-
+import RxAppState
 
 protocol FilterViewBindable {
+    
+    var showFilterView: PublishSubject<Void> { get }
     
     //view -> viewModel
     var cellTapped: PublishRelay<IndexPath> { get }
@@ -16,7 +18,6 @@ protocol FilterViewBindable {
     //        viewModel ->view
     var conditionsOfCocktail: Observable<[FilteredView.FilterData]> { get }
     var updateCell: Signal<(index: IndexPath, checked: [[Bool]])> { get }
-    var resetimages: Signal<[[Bool]]> { get }
     
     //view -> superView
     var dismissFilterView: Signal<Void> { get }
@@ -56,14 +57,11 @@ class FilteredView: UIView {
         self.resetButton.rx.tap
             .bind(to: viewModel.resetButton)
             .disposed(by: disposeBag)
-        
-        viewModel.resetimages
-            .emit(to: self.rx.resetCellData)
-            .disposed(by: disposeBag)
-        
+
         viewModel.updateCell
             .emit(to: self.rx.updateCellData)
             .disposed(by: disposeBag)
+
         
         let sections = [
             SectionOfFilterCell(header: filterSections[0], items: componentsOfCocktail[0]),

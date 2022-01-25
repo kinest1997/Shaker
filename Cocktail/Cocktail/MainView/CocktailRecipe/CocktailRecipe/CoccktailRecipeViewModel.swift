@@ -33,6 +33,8 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
     
     var searchViewModel = SearchViewModel()
     
+    let disposeBag = DisposeBag()
+    
     init(model: CocktailRecipeModel = CocktailRecipeModel()) {
         
         let firstRecipe = viewWillAppear
@@ -78,6 +80,10 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
         
         showFilterView = filterButtonTapped
             .asSignal(onErrorSignalWith: .empty())
+        
+        filterButtonTapped
+            .bind(to: filterviewModel.showFilterView)
+            .disposed(by: disposeBag)
         
         dismissLoadingView = finalResultRecipes
             .map { _ in Void() }
