@@ -20,5 +20,3 @@ struct SearchViewModel: SearchControllerBindable {
             .asSignal(onErrorSignalWith: .empty())
     }
 }
-
-

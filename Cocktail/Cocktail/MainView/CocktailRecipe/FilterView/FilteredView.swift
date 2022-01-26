@@ -58,8 +58,8 @@ class FilteredView: UIView {
 
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfFilterCell> { dataSource, tb, index, data in
             let cell = tb.dequeueReusableCell(withIdentifier: "filterCell", for: index) as! FilterViewCell
-            cell.nameLabel.text = data
-            cell.isChecked = false
+            cell.nameLabel.text = data.name.localized
+            cell.isChecked = data.selected
             return cell
         }
         
@@ -153,26 +153,5 @@ class FilteredView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension Reactive where Base: FilteredView {
-    var updateCellData: Binder<(index: IndexPath, checked: [[Bool]])> {
-        return Binder(base) { base, data in
-            let cell = base.tableView.cellForRow(at: data.index) as! FilterViewCell
-            cell.isChecked = data.checked[data.index.section][data.index.row]
-        }
-    }
-    
-    var resetCellData: Binder<[[Bool]]> {
-        return Binder(base) { base, data in
-            for i in data.enumerated() {
-                for j in i.element.enumerated() {
-                    
-                    let cell = base.tableView.cellForRow(at: IndexPath(row: j.offset, section: i.offset)) as! FilterViewCell
-                    cell.isChecked = false
-                }
-            }
-        }
     }
 }

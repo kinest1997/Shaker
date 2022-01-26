@@ -16,15 +16,16 @@ protocol CocktailRecpeViewBindable {
     //    view -> ViewModel
     var filterButtonTapped: PublishRelay<Void> { get }
     var arrangeButtonTapped: PublishRelay<Void> { get }
-    //    var showLoadingView: PublishRelay<Void> { get }
     var filterRecipe: PublishSubject<SortingStandard> { get }
-    var viewWillAppear:PublishSubject<Void> { get }
+    var viewWillAppear: PublishSubject<Void> { get }
+    var cellTapped: PublishRelay<IndexPath> { get }
     
     //    viewModel -> view
     var sortedRecipe: Driver<[Cocktail]> { get }
     var showFilterView: Signal<Void> { get }
     var dismissLoadingView: Signal<Void> { get }
     var dismissFilterView: Signal<Void> { get }
+    var showDetailview: Signal<Cocktail> { get }
     
     //viewModel
     var filterviewModel: FilterViewModel { get }
@@ -44,8 +45,7 @@ class CocktailRecipeViewController: UIViewController {
     let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: nil, action: nil)
     
     var leftarrangeButton: UIBarButtonItem { UIBarButtonItem(title: "Sorting".localized, image: nil, primaryAction: nil, menu: filterMenu) }
-    //
-    //
+
     var filterMenu: UIMenu {
         return UIMenu(title: "", image: nil, identifier: nil, options: .singleSelection, children: filtertMenuItems)
     }
@@ -63,6 +63,10 @@ class CocktailRecipeViewController: UIViewController {
             UIAction(title: "Alcohol".localized, state: .off, handler: {[weak self] _ in
                 guard let self = self else { return }
                 self.filterOption.onNext(SortingStandard.alcohol)
+            }),
+            UIAction(title: "Ingredients".localized, state: .off, handler: {[weak self] _ in
+                guard let self = self else { return }
+                self.filterOption.onNext(SortingStandard.ingredientsCount)
             })
         ]
     }
@@ -94,7 +98,17 @@ class CocktailRecipeViewController: UIViewController {
             .disposed(by: disposeBag)
         
         self.filterOption
+            .startWith(.name)
             .bind(to: viewModel.filterRecipe)
+            .disposed(by: disposeBag)
+        
+        self.tableView.rx.itemSelected
+            .bind(to: viewModel.cellTapped)
+            .disposed(by: disposeBag)
+        
+        
+        viewModel.showDetailview
+            .emit(to: self.rx.showDetailView)
             .disposed(by: disposeBag)
         
         viewModel.dismissFilterView
