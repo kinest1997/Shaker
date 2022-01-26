@@ -17,7 +17,10 @@ protocol FilterViewBindable {
     
     //        viewModel ->view
     var conditionsOfCocktail: Observable<[FilteredView.FilterData]> { get }
-    var updateCell: Signal<(index: IndexPath, checked: [[Bool]])> { get }
+    var cellData: Observable<[SectionOfFilterCell]> { get }
+    
+    //superViewModel -> ViewModel
+    var viewWillAppear: PublishSubject<Void> { get }
     
     //view -> superView
     var dismissFilterView: Signal<Void> { get }
@@ -34,12 +37,7 @@ class FilteredView: UIView {
     let centerLabel = UILabel()
     let saveButton = UIButton()
     
-    let filterSections = ["Alcohol".localized, "Base".localized, "DrinkType".localized, "Craft".localized, "Glass".localized, "Color".localized ]
-    
     typealias FilterData = (condition: [CocktailCondition], section: [CocktailCondition])
-    
-    let componentsOfCocktail: [[String]] = [Cocktail.Alcohol.allCases.map {$0.rawValue}, Cocktail.Base.allCases.map {$0.rawValue}, Cocktail.DrinkType.allCases.map {$0.rawValue}, Cocktail.Craft.allCases.map {$0.rawValue}, Cocktail.Glass.allCases.map {$0.rawValue}, Cocktail.Color.allCases.map {$0.rawValue} ]
-    
     
     func bind(_ viewModel: FilterViewBindable) {
         self.tableView.rx.itemSelected
@@ -58,23 +56,10 @@ class FilteredView: UIView {
             .bind(to: viewModel.resetButton)
             .disposed(by: disposeBag)
 
-        viewModel.updateCell
-            .emit(to: self.rx.updateCellData)
-            .disposed(by: disposeBag)
-
-        
-        let sections = [
-            SectionOfFilterCell(header: filterSections[0], items: componentsOfCocktail[0]),
-            SectionOfFilterCell(header: filterSections[1], items: componentsOfCocktail[1]),
-            SectionOfFilterCell(header: filterSections[2], items: componentsOfCocktail[2]),
-            SectionOfFilterCell(header: filterSections[3], items: componentsOfCocktail[3]),
-            SectionOfFilterCell(header: filterSections[4], items: componentsOfCocktail[4]),
-            SectionOfFilterCell(header: filterSections[5], items: componentsOfCocktail[5]),
-        ]
-        
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfFilterCell> { dataSource, tb, index, data in
             let cell = tb.dequeueReusableCell(withIdentifier: "filterCell", for: index) as! FilterViewCell
             cell.nameLabel.text = data
+            cell.isChecked = false
             return cell
         }
         
@@ -82,7 +67,7 @@ class FilteredView: UIView {
             return datasource.sectionModels[index].header
         }
         
-        Observable.just(sections)
+        viewModel.cellData
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
@@ -189,7 +174,6 @@ extension Reactive where Base: FilteredView {
                     cell.isChecked = false
                 }
             }
-            
         }
     }
 }

@@ -42,6 +42,10 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
                 model.getRecipeRx()
             }
         
+        viewWillAppear
+            .bind(to: filterviewModel.viewWillAppear)
+            .disposed(by: disposeBag)
+        
 //        let conditions = filterviewModel.conditionsOfCocktail
         
         let textOutput = searchViewModel.outPuts
