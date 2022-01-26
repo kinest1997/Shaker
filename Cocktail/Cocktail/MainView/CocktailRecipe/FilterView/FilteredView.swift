@@ -80,7 +80,6 @@ class FilteredView: UIView {
     }
     
     func layout() {
-        
         addSubview(mainView)
         [tableView, saveButton, cancleButton, resetButton].forEach {
             mainView.addSubview($0)
