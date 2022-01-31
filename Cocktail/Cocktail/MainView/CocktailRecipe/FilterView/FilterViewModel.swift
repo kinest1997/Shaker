@@ -15,7 +15,7 @@ struct FilterViewModel: FilterViewBindable {
     
     //viewModel -> view
     
-    var cellData: Observable<[SectionOfFilterCell]>
+    var cellData: Driver<[SectionOfFilterCell]>
     
     var dismissFilterView: Signal<Void>
     
@@ -51,21 +51,7 @@ struct FilterViewModel: FilterViewBindable {
         //탭될때마다 조건을 합쳐준다, 만약 리셋버튼이 눌리면 모든조건을 초기화 해준다
         Observable.merge(cellTapped.asObservable(), resetButtonTapped)
             .scan(into: model.emptyconditionArray) {base, index in
-                
-                if index == IndexPath(row: 20, section: 20) {
-                    base = model.emptyconditionArray
-                } else {
-                    if base[index.section].condition.contains(where: { condition in
-                        condition.rawValue == base.map { $0.section }[index.section][index.row].rawValue
-                    }){
-                        guard let number = base[index.section].condition.firstIndex(where: { condition in
-                            condition.rawValue == base.map { $0.section }[index.section][index.row].rawValue
-                        }) else { return }
-                        base[index.section].condition.remove(at: number)
-                    } else {
-                        base[index.section].condition.append(base.map { $0.section }[index.section][index.row])
-                    }
-                }
+                model.modifyConditionArray(base: &base, index: index)
             }
             .bind(to: tappedData)
             .disposed(by: disposeBag)
@@ -74,6 +60,7 @@ struct FilterViewModel: FilterViewBindable {
         let sendDataSignal = Observable.merge(saveButtonTapped.asObservable(), resetButton.asObservable())
         
         conditionsOfCocktail = sendDataSignal.withLatestFrom(tappedData)
+            .startWith(model.emptyconditionArray)
 
         //셀이 탭 되면 그 셀을 업데이트 해주고, 리셋버튼이 눌리면 스캔을 초기화 해준다
         Observable.merge(cellTapped.asObservable(), resetButtonTapped)
@@ -106,6 +93,7 @@ struct FilterViewModel: FilterViewBindable {
             }
         
         cellData = Observable.merge(defaultCellData, modifiedCellData)
+            .asDriver(onErrorDriveWith: .empty())
     }
 }
 

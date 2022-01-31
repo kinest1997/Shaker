@@ -14,13 +14,13 @@ protocol FilterViewBindable {
     var resetButton: PublishRelay<Void> { get }
     
     //viewModel ->view
-    var conditionsOfCocktail: Observable<[FilteredView.FilterData]> { get }
-    var cellData: Observable<[SectionOfFilterCell]> { get }
+    var cellData: Driver<[SectionOfFilterCell]> { get }
     
     //superViewModel -> ViewModel
     var viewWillAppear: PublishRelay<Void> { get }
     
     //viewModel -> superView
+    var conditionsOfCocktail: Observable<[FilteredView.FilterData]> { get }
     var dismissFilterView: Signal<Void> { get }
 }
 
@@ -58,6 +58,7 @@ class FilteredView: UIView {
             let cell = tb.dequeueReusableCell(withIdentifier: "filterCell", for: index) as! FilterViewCell
             cell.nameLabel.text = data.name.localized
             cell.isChecked = data.selected
+            cell.selectionStyle = .none
             return cell
         }
         
@@ -66,13 +67,12 @@ class FilteredView: UIView {
         }
         
         viewModel.cellData
-            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .drive(tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        tableView.register(FilterViewCell.self, forCellReuseIdentifier: "filterCell")
         layout()
         attribute()
     }
@@ -120,6 +120,7 @@ class FilteredView: UIView {
         tableView.rowHeight = 45
         resetButton.setTitle("Reset".localized, for: .normal)
         self.backgroundColor = .gray.withAlphaComponent(0.5)
+        tableView.register(FilterViewCell.self, forCellReuseIdentifier: "filterCell")
         
         [resetButton, saveButton].forEach {
             $0.setTitleColor(.black, for: .normal)

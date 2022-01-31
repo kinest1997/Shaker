@@ -30,9 +30,13 @@ class SearchController: UISearchController {
     }
     
     func attribute() {
-        self.searchBar.placeholder = "Name, Ingredients, Base, Glass, Color...".localized
-        self.searchBar.searchTextField.font = .nexonFont(ofSize: 14, weight: .semibold)
-        self.searchBar.keyboardType = .default
+        
+        self.searchBar.do {
+            $0.placeholder = "Name, Ingredients, Base, Glass, Color...".localized
+            $0.searchTextField.font = .nexonFont(ofSize: 14, weight: .semibold)
+            $0.keyboardType = .default
+        }
+        
         self.definesPresentationContext = true
     }
     

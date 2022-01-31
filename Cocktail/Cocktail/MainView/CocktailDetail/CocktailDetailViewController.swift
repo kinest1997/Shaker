@@ -308,7 +308,7 @@ class CocktailDetailViewController: UIViewController {
         [centerLine, firstSplitLine, secondSplitLine, imageSplitLine, alcoholSplitLine].forEach {
             $0.backgroundColor = .splitLineGray
         }
-        
+
         //내용 설정하는곳
         [alcoholLabel, alcoholGuideLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, recipeLabel, drinkTypeLabel, likeCountLabel, disLikeCountLabel].forEach {
             $0.textColor = .mainGray

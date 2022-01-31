@@ -22,7 +22,7 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
     
     var filterRecipe = PublishRelay<SortingStandard>()
     
-    var viewWillAppear = PublishRelay<Void>()
+    var viewDidAppear = PublishRelay<Void>()
     
     //viewModel - > view
     
@@ -30,7 +30,7 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
     
     var filterViewIsHidden: Signal<Bool>
     
-    var dismissLoadingView: Signal<Void>
+    var dismissLoadingView: Signal<Bool>
     
     var sortedRecipe: Driver<[Cocktail]>
     
@@ -45,10 +45,10 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
     
     init(model: CocktailRecipeModel = CocktailRecipeModel()) {
         
-        let firstRecipe = viewWillAppear
+        let firstRecipe = viewDidAppear
             .flatMapLatest(model.getRecipeRx)
         
-        viewWillAppear
+        viewDidAppear
             .bind(to: filterviewModel.viewWillAppear)
             .disposed(by: disposeBag)
         
@@ -82,9 +82,7 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
                 if searchText != "" {
                     let searchedRecipe = filteredRecipe.filter({
                         return $0.name.localized.lowercased().contains(searchText) ||
-                        $0.ingredients.map({ ingredient in
-                            ingredient.rawValue.localized.lowercased()
-                        })[0...].contains(searchText) ||
+                        $0.ingredients.map { $0.rawValue.localized.lowercased() }[0...].contains(searchText) ||
                         $0.recipe.contains(searchText)
                     })
                     return model.sorting(standard: sortingStandard, recipe: searchedRecipe)
@@ -118,7 +116,7 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
         
         //첫 레시피 로딩다하면 로딩뷰 사라지게해줌
         dismissLoadingView = firstRecipe
-            .map { _ in Void() }
+            .map { _ in true }
             .asSignal(onErrorSignalWith: .empty())
         
         showDetailview = cellTapped.withLatestFrom(nowShowingRecipes) { indexPath, recipes in

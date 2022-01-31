@@ -17,12 +17,12 @@ protocol CocktailRecpeViewBindable {
     var filterButtonTapped: PublishRelay<Void> { get }
     var arrangeButtonTapped: PublishRelay<Void> { get }
     var filterRecipe: PublishRelay<SortingStandard> { get }
-    var viewWillAppear: PublishRelay<Void> { get }
+    var viewDidAppear: PublishRelay<Void> { get }
     var cellTapped: PublishRelay<IndexPath> { get }
     
     //    viewModel -> view
     var sortedRecipe: Driver<[Cocktail]> { get }
-    var dismissLoadingView: Signal<Void> { get }
+    var dismissLoadingView: Signal<Bool> { get }
     var showDetailview: Signal<Cocktail> { get }
     var filterViewIsHidden: Signal<Bool> { get }
     
@@ -90,9 +90,9 @@ class CocktailRecipeViewController: UIViewController {
             .bind(to: viewModel.arrangeButtonTapped)
             .disposed(by: disposeBag)
         
-        self.rx.viewWillAppear
+        self.rx.viewDidLoad
             .map { _ in Void() }
-            .bind(to: viewModel.viewWillAppear)
+            .bind(to: viewModel.viewDidAppear)
             .disposed(by: disposeBag)
         
         self.filterOption
@@ -112,14 +112,13 @@ class CocktailRecipeViewController: UIViewController {
             .disposed(by: disposeBag)
 
         viewModel.dismissLoadingView
-            .emit {[weak self] _ in
-                self?.loadingView.isHidden = true
-            }
+            .emit(to: self.loadingView.rx.isHidden)
             .disposed(by: disposeBag)
         
         viewModel.sortedRecipe
-            .drive(self.tableView.rx.items(cellIdentifier: "CocktailListCell", cellType: CocktailListCell.self)) { int, cocktail, cell in
+            .drive(self.tableView.rx.items(cellIdentifier: "CocktailListCell", cellType: CocktailListCell.self)) { _, cocktail, cell in
                 cell.configure(data: cocktail)
+                cell.selectionStyle = .none
             }
             .disposed(by: disposeBag)
     }
@@ -129,11 +128,8 @@ class CocktailRecipeViewController: UIViewController {
         [tableView, loadingView].forEach { view.addSubview($0) }
         [tableView, loadingView, filterView].forEach { $0.snp.makeConstraints { $0.edges.equalToSuperview()} }
         
-        navigationItem.searchController = searchBar
-        
         tableView.snp.makeConstraints{
-            $0.top.equalToSuperview()
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
         
         filterView.snp.makeConstraints {
@@ -143,13 +139,21 @@ class CocktailRecipeViewController: UIViewController {
     
     func attribute() {
         title = "Recipe".localized
-        tableView.backgroundColor = .white
         filterView.isHidden = true
-        loadingView.isHidden = true
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.rightBarButtonItem = filterButton
         navigationItem.leftBarButtonItem = leftarrangeButton
-        tableView.rowHeight = 100
-        tableView.register(CocktailListCell.self, forCellReuseIdentifier: "CocktailListCell")
+        navigationItem.searchController = searchBar
+        
+        tableView.do {
+            $0.backgroundColor = .white
+            $0.rowHeight = 100
+            $0.register(CocktailListCell.self, forCellReuseIdentifier: "CocktailListCell")
+        }
+        
+        loadingView.do {
+            $0.isHidden = false
+            $0.explainLabel.text = "로딩중"
+        }
     }
 }
