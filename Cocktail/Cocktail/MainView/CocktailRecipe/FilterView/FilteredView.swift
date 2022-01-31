@@ -7,22 +7,20 @@ import RxAppState
 
 protocol FilterViewBindable {
     
-    var showFilterView: PublishSubject<Void> { get }
-    
     //view -> viewModel
     var cellTapped: PublishRelay<IndexPath> { get }
     var closeButtonTapped: PublishRelay<Void> { get }
     var saveButtonTapped: PublishRelay<Void> { get }
     var resetButton: PublishRelay<Void> { get }
     
-    //        viewModel ->view
+    //viewModel ->view
     var conditionsOfCocktail: Observable<[FilteredView.FilterData]> { get }
     var cellData: Observable<[SectionOfFilterCell]> { get }
     
     //superViewModel -> ViewModel
-    var viewWillAppear: PublishSubject<Void> { get }
+    var viewWillAppear: PublishRelay<Void> { get }
     
-    //view -> superView
+    //viewModel -> superView
     var dismissFilterView: Signal<Void> { get }
 }
 
@@ -55,7 +53,7 @@ class FilteredView: UIView {
         self.resetButton.rx.tap
             .bind(to: viewModel.resetButton)
             .disposed(by: disposeBag)
-
+        
         let dataSource = RxTableViewSectionedReloadDataSource<SectionOfFilterCell> { dataSource, tb, index, data in
             let cell = tb.dequeueReusableCell(withIdentifier: "filterCell", for: index) as! FilterViewCell
             cell.nameLabel.text = data.name.localized
@@ -84,7 +82,7 @@ class FilteredView: UIView {
         [tableView, saveButton, cancleButton, resetButton].forEach {
             mainView.addSubview($0)
         }
-        
+
         tableView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(50)
             $0.bottom.equalToSuperview().inset(100)

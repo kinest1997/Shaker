@@ -17,8 +17,6 @@ struct FilterViewModel: FilterViewBindable {
     
     var cellData: Observable<[SectionOfFilterCell]>
     
-    var showFilterView = PublishSubject<Void>()
-    
     var dismissFilterView: Signal<Void>
     
     //viewModel -> SuperViewModel
@@ -26,7 +24,7 @@ struct FilterViewModel: FilterViewBindable {
     
     // view -> viewModel
     
-    var viewWillAppear = PublishSubject<Void>()
+    var viewWillAppear = PublishRelay<Void>()
     
     var cellTapped = PublishRelay<IndexPath>()
     
@@ -38,11 +36,11 @@ struct FilterViewModel: FilterViewBindable {
     
     //only here
     
-    var selectedStatus = PublishSubject<[[(name: String, checked: Bool)]]>()
+    private var selectedStatus = PublishSubject<[[(name: String, checked: Bool)]]>()
     
-    let tappedData = PublishSubject<[FilteredView.FilterData]>()
+    private let tappedData = PublishSubject<[FilteredView.FilterData]>()
     
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     init(model: FilterModel = FilterModel()) {
         
@@ -102,7 +100,7 @@ struct FilterViewModel: FilterViewBindable {
         let modifiedCellData = selectedStatus
             .map(model.modifiedFilterCellData)
             
-        let defaultCellData = Observable.merge(resetButton.asObservable(), viewWillAppear)
+        let defaultCellData = Observable.merge(resetButton.asObservable(), viewWillAppear.asObservable())
             .map { _ -> [SectionOfFilterCell] in
                 model.makeDefaultFilterData()
             }

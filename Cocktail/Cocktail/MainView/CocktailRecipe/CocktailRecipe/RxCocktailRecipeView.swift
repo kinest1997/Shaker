@@ -16,16 +16,15 @@ protocol CocktailRecpeViewBindable {
     //    view -> ViewModel
     var filterButtonTapped: PublishRelay<Void> { get }
     var arrangeButtonTapped: PublishRelay<Void> { get }
-    var filterRecipe: PublishSubject<SortingStandard> { get }
-    var viewWillAppear: PublishSubject<Void> { get }
+    var filterRecipe: PublishRelay<SortingStandard> { get }
+    var viewWillAppear: PublishRelay<Void> { get }
     var cellTapped: PublishRelay<IndexPath> { get }
     
     //    viewModel -> view
     var sortedRecipe: Driver<[Cocktail]> { get }
-    var showFilterView: Signal<Void> { get }
     var dismissLoadingView: Signal<Void> { get }
-    var dismissFilterView: Signal<Void> { get }
     var showDetailview: Signal<Cocktail> { get }
+    var filterViewIsHidden: Signal<Bool> { get }
     
     //viewModel
     var filterviewModel: FilterViewModel { get }
@@ -77,7 +76,6 @@ class CocktailRecipeViewController: UIViewController {
         super.viewDidLoad()
         layout()
         attribute()
-        tableView.register(CocktailListCell.self, forCellReuseIdentifier: "CocktailListCell")
     }
     
     func bind(_ viewModel: CocktailRecpeViewBindable) {
@@ -98,7 +96,6 @@ class CocktailRecipeViewController: UIViewController {
             .disposed(by: disposeBag)
         
         self.filterOption
-            .startWith(.name)
             .bind(to: viewModel.filterRecipe)
             .disposed(by: disposeBag)
         
@@ -106,23 +103,14 @@ class CocktailRecipeViewController: UIViewController {
             .bind(to: viewModel.cellTapped)
             .disposed(by: disposeBag)
         
-        
         viewModel.showDetailview
             .emit(to: self.rx.showDetailView)
             .disposed(by: disposeBag)
         
-        viewModel.dismissFilterView
-            .emit {[weak self] _ in
-                self?.filterView.isHidden = true
-            }
+        viewModel.filterViewIsHidden
+            .emit(to: self.filterView.rx.isHidden)
             .disposed(by: disposeBag)
-        
-        viewModel.showFilterView
-            .emit {[weak self] _ in
-                self?.filterView.isHidden = false
-            }
-            .disposed(by: disposeBag)
-        
+
         viewModel.dismissLoadingView
             .emit {[weak self] _ in
                 self?.loadingView.isHidden = true
@@ -162,5 +150,6 @@ class CocktailRecipeViewController: UIViewController {
         navigationItem.rightBarButtonItem = filterButton
         navigationItem.leftBarButtonItem = leftarrangeButton
         tableView.rowHeight = 100
+        tableView.register(CocktailListCell.self, forCellReuseIdentifier: "CocktailListCell")
     }
 }
