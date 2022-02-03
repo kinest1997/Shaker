@@ -63,4 +63,3 @@ class CocktailListCell: UITableViewCell {
         cocktailImageView.kf.setImage(with: URL(string: data.imageURL),placeholder: UIImage(named: "\(data.glass.rawValue)" + "Empty"))
     }
 }
-

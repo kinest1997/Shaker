@@ -16,30 +16,30 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
     //view -> viewModel
     let cellTapped = PublishRelay<IndexPath>()
     
-    var filterButtonTapped = PublishRelay<Void>()
+    let filterButtonTapped = PublishRelay<Void>()
     
-    var arrangeButtonTapped = PublishRelay<Void>()
+    let arrangeButtonTapped = PublishRelay<Void>()
     
-    var filterRecipe = PublishRelay<SortingStandard>()
+    let filterRecipe = PublishRelay<SortingStandard>()
     
-    var viewDidAppear = PublishRelay<Void>()
+    let viewDidAppear = PublishRelay<Void>()
     
     //viewModel - > view
     
-    var showDetailview: Signal<Cocktail>
+    let showDetailview: Signal<Cocktail>
     
-    var filterViewIsHidden: Signal<Bool>
+    let filterViewIsHidden: Signal<Bool>
     
-    var dismissLoadingView: Signal<Bool>
+    let dismissLoadingView: Signal<Bool>
     
-    var sortedRecipe: Driver<[Cocktail]>
+    let sortedRecipe: Driver<[Cocktail]>
     
-    var filterviewModel = FilterViewModel()
+    let filterviewModel = FilterViewModel()
     
-    var searchViewModel = SearchViewModel()
+    let searchViewModel = SearchViewModel()
     
     //only here
-    private var nowShowingRecipes = PublishSubject<[Cocktail]>()
+    private let nowShowingRecipes = PublishSubject<[Cocktail]>()
     
     private let disposeBag = DisposeBag()
     
@@ -69,22 +69,10 @@ struct CocktailRecipeViewModel: CocktailRecpeViewBindable {
                            filterOptionTapped
             ){ recipe, conditions, searchText, sortingStandard -> [Cocktail] in
                 
-                let filteredRecipe = model.sortingRecipes(
-                    origin: recipe,
-                    alcohol: conditions[0].condition as! [Cocktail.Alcohol],
-                    base: conditions[1].condition as! [Cocktail.Base],
-                    drinktype: conditions[2].condition as! [Cocktail.DrinkType],
-                    craft: conditions[3].condition as! [Cocktail.Craft],
-                    glass: conditions[4].condition as! [Cocktail.Glass],
-                    color: conditions[5].condition as! [Cocktail.Color]
-                ).sorted { $0.name < $1.name }
+                let filteredRecipe = model.filteredRecipe(conditions: conditions, recipe: recipe)
                 
                 if searchText != "" {
-                    let searchedRecipe = filteredRecipe.filter({
-                        return $0.name.localized.lowercased().contains(searchText) ||
-                        $0.ingredients.map { $0.rawValue.localized.lowercased() }[0...].contains(searchText) ||
-                        $0.recipe.contains(searchText)
-                    })
+                    let searchedRecipe =  model.serchedRecipe(filteredRecipe: filteredRecipe, searchText: searchText)
                     return model.sorting(standard: sortingStandard, recipe: searchedRecipe)
                 } else {
                     return model.sorting(standard: sortingStandard, recipe: filteredRecipe)

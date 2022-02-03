@@ -9,6 +9,12 @@ import Foundation
 
 struct FilterModel {
     
+    let resetIndex = IndexPath(row: 20, section: 20)
+    
+    let defaultCheckedArray = [Cocktail.Alcohol.allCases.map {$0.rawValue}, Cocktail.Base.allCases.map {$0.rawValue}, Cocktail.DrinkType.allCases.map {$0.rawValue}, Cocktail.Craft.allCases.map {$0.rawValue}, Cocktail.Glass.allCases.map {$0.rawValue}, Cocktail.Color.allCases.map {$0.rawValue} ].map {
+        $0.map { name in (name: name ,checked: false) }
+    }
+    
     let emptyconditionArray: [FilteredView.FilterData] = [
         (condition: [Cocktail.Alcohol](), section: Cocktail.Alcohol.allCases),
         (condition: [Cocktail.Base](), section: Cocktail.Base.allCases),

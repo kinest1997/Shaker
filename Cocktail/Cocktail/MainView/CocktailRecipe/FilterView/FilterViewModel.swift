@@ -8,35 +8,33 @@
 import Foundation
 import RxCocoa
 import RxSwift
-import RxDataSources
-import Differentiator
 
 struct FilterViewModel: FilterViewBindable {
     
     //viewModel -> view
     
-    var cellData: Driver<[SectionOfFilterCell]>
+    let cellData: Driver<[SectionOfFilterCell]>
     
-    var dismissFilterView: Signal<Void>
+    let dismissFilterView: Signal<Void>
     
     //viewModel -> SuperViewModel
-    var conditionsOfCocktail: Observable<[FilteredView.FilterData]>
+    let conditionsOfCocktail: Observable<[FilteredView.FilterData]>
     
     // view -> viewModel
     
-    var viewWillAppear = PublishRelay<Void>()
+    let viewWillAppear = PublishRelay<Void>()
     
-    var cellTapped = PublishRelay<IndexPath>()
+    let cellTapped = PublishRelay<IndexPath>()
     
-    var closeButtonTapped = PublishRelay<Void>()
+    let closeButtonTapped = PublishRelay<Void>()
     
-    var saveButtonTapped = PublishRelay<Void>()
+    let saveButtonTapped = PublishRelay<Void>()
     
-    var resetButton = PublishRelay<Void>()
+    let resetButton = PublishRelay<Void>()
     
     //only here
     
-    private var selectedStatus = PublishSubject<[[(name: String, checked: Bool)]]>()
+    private let selectedStatus = PublishSubject<[[(name: String, checked: Bool)]]>()
     
     private let tappedData = PublishSubject<[FilteredView.FilterData]>()
     
@@ -46,7 +44,7 @@ struct FilterViewModel: FilterViewBindable {
         
         //리셋버튼이 탭될떄 그것을 다른 어떤 특별한 이벤트로 변경
         let resetButtonTapped = resetButton
-            .map { _ in IndexPath(row: 20, section: 20)}
+            .map {model.resetIndex}
         
         //탭될때마다 조건을 합쳐준다, 만약 리셋버튼이 눌리면 모든조건을 초기화 해준다
         Observable.merge(cellTapped.asObservable(), resetButtonTapped)
@@ -61,16 +59,12 @@ struct FilterViewModel: FilterViewBindable {
         
         conditionsOfCocktail = sendDataSignal.withLatestFrom(tappedData)
             .startWith(model.emptyconditionArray)
-
+        
         //셀이 탭 되면 그 셀을 업데이트 해주고, 리셋버튼이 눌리면 스캔을 초기화 해준다
         Observable.merge(cellTapped.asObservable(), resetButtonTapped)
-            .scan(into: [Cocktail.Alcohol.allCases.map {$0.rawValue}, Cocktail.Base.allCases.map {$0.rawValue}, Cocktail.DrinkType.allCases.map {$0.rawValue}, Cocktail.Craft.allCases.map {$0.rawValue}, Cocktail.Glass.allCases.map {$0.rawValue}, Cocktail.Color.allCases.map {$0.rawValue} ].map {
-                $0.map { name in (name: name ,checked: false) }
-            }) { data, index in
-                if index == IndexPath(row: 20, section: 20) {
-                    data = [Cocktail.Alcohol.allCases.map {$0.rawValue}, Cocktail.Base.allCases.map {$0.rawValue}, Cocktail.DrinkType.allCases.map {$0.rawValue}, Cocktail.Craft.allCases.map {$0.rawValue}, Cocktail.Glass.allCases.map {$0.rawValue}, Cocktail.Color.allCases.map {$0.rawValue} ].map {
-                        $0.map { name in (name: name ,checked: false)}
-                    }
+            .scan(into: model.defaultCheckedArray) { data, index in
+                if index == model.resetIndex {
+                    data = model.defaultCheckedArray
                 } else {
                     data[index.section][index.row].checked.toggle()
                 }
@@ -86,7 +80,7 @@ struct FilterViewModel: FilterViewBindable {
         
         let modifiedCellData = selectedStatus
             .map(model.modifiedFilterCellData)
-            
+        
         let defaultCellData = Observable.merge(resetButton.asObservable(), viewWillAppear.asObservable())
             .map { _ -> [SectionOfFilterCell] in
                 model.makeDefaultFilterData()
@@ -94,31 +88,5 @@ struct FilterViewModel: FilterViewBindable {
         
         cellData = Observable.merge(defaultCellData, modifiedCellData)
             .asDriver(onErrorDriveWith: .empty())
-    }
-}
-
-//셀이 탭 될때마다 해당셀의 이미지를 새로고침해준다
-
-//리셋버튼, 또는 저장 버튼이 눌리면 칵테일 필터링 조건을 슈퍼뷰모델로 보내준다
-
-//섹션에 들어가는 정보: 여기선 셀의 정보와 헤더의 이름
-
-struct FilterCellData {
-    var name: String
-    var selected: Bool
-}
-
-struct SectionOfFilterCell {
-    var header: String
-    var items: [FilterCellData]
-}
-
-extension SectionOfFilterCell: SectionModelType {
-    
-    typealias Item = FilterCellData
-    
-    init(original: SectionOfFilterCell, items: [Item]) {
-        self = original
-        self.items = items
     }
 }

@@ -44,7 +44,7 @@ class CocktailRecipeViewController: UIViewController {
     let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: nil, action: nil)
     
     var leftarrangeButton: UIBarButtonItem { UIBarButtonItem(title: "Sorting".localized, image: nil, primaryAction: nil, menu: filterMenu) }
-
+    
     var filterMenu: UIMenu {
         return UIMenu(title: "", image: nil, identifier: nil, options: .singleSelection, children: filtertMenuItems)
     }
@@ -110,7 +110,7 @@ class CocktailRecipeViewController: UIViewController {
         viewModel.filterViewIsHidden
             .emit(to: self.filterView.rx.isHidden)
             .disposed(by: disposeBag)
-
+        
         viewModel.dismissLoadingView
             .emit(to: self.loadingView.rx.isHidden)
             .disposed(by: disposeBag)
@@ -140,10 +140,13 @@ class CocktailRecipeViewController: UIViewController {
     func attribute() {
         title = "Recipe".localized
         filterView.isHidden = true
-        navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.rightBarButtonItem = filterButton
-        navigationItem.leftBarButtonItem = leftarrangeButton
-        navigationItem.searchController = searchBar
+        
+        navigationItem.do {
+            $0.hidesSearchBarWhenScrolling = false
+            $0.rightBarButtonItem = filterButton
+            $0.leftBarButtonItem = leftarrangeButton
+            $0.searchController = searchBar
+        }
         
         tableView.do {
             $0.backgroundColor = .white

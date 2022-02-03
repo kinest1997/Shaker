@@ -82,7 +82,7 @@ class FilteredView: UIView {
         [tableView, saveButton, cancleButton, resetButton].forEach {
             mainView.addSubview($0)
         }
-
+        
         tableView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(50)
             $0.bottom.equalToSuperview().inset(100)

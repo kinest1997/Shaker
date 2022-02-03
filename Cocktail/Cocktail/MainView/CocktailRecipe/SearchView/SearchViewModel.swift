@@ -10,9 +10,9 @@ import RxCocoa
 import UIKit
 
 struct SearchViewModel: SearchControllerBindable {
-    var inputTexts = PublishRelay<String>()
+    let inputTexts = PublishRelay<String>()
     
-    var outPuts: Signal<String>
+    let outPuts: Signal<String>
     
     init() {
         outPuts = inputTexts
