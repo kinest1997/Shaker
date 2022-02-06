@@ -1,13 +1,13 @@
 import UIKit
 import SnapKit
 
-class WhatIHaveCollectionViewCell: UICollectionViewCell{
+class WhatIHaveCollectionViewCell: UICollectionViewCell {
     typealias CellData = (title: String, checked: Bool)
-    
+
     let mainImageView = UIImageView()
     let nameLabel = UILabel()
     var checkBoxImage = UIImageView()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         mainImageView.contentMode = .scaleAspectFit
@@ -22,7 +22,7 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
         contentView.clipsToBounds = true
         contentView.layer.borderWidth = 1
         contentView.layer.borderColor = UIColor.splitLineGray.cgColor
-        
+
         mainImageView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
             $0.leading.trailing.equalToSuperview()
@@ -38,7 +38,7 @@ class WhatIHaveCollectionViewCell: UICollectionViewCell{
         }
         checkBoxImage.tintColor = .mainOrange
     }
-    
+
     func setImage(bool: Bool) {
         self.checkBoxImage.image = UIImage(systemName: bool ? "checkmark.circle.fill" : "checkmark.circle")
     }

@@ -11,9 +11,9 @@ import UIKit
 
 struct SearchViewModel: SearchControllerBindable {
     let inputTexts = PublishRelay<String>()
-    
+
     let outPuts: Signal<String>
-    
+
     init() {
         outPuts = inputTexts
             .distinctUntilChanged()

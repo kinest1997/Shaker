@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 class HelpOrderCell: UICollectionViewCell {
-    
+
     let mainImageView = UIImageView()
-    
+
     let questionLabel = UILabel()
-    
+
     let explainLabel = UILabel()
-    
+
     let orderLabel = UILabel()
 
     override func layoutSubviews() {
@@ -29,22 +29,22 @@ class HelpOrderCell: UICollectionViewCell {
         }
         mainImageView.image = UIImage(systemName: "menucard")
         mainImageView.tintColor = .mainOrange
-        
+
         mainImageView.snp.makeConstraints {
             $0.top.centerX.equalToSuperview()
             $0.width.equalTo(mainImageView.snp.height)
         }
-        
+
         questionLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(mainImageView.snp.bottom).offset(15)
         }
-        
+
         explainLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(questionLabel.snp.bottom).offset(5)
         }
-        
+
         orderLabel.snp.makeConstraints {
             $0.top.equalTo(explainLabel.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
@@ -53,7 +53,7 @@ class HelpOrderCell: UICollectionViewCell {
         orderLabel.textColor = .mainGray
         orderLabel.text = "Going to order".localized + " >"
         orderLabel.font = .nexonFont(ofSize: 12, weight: .bold)
-        
+
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
     }

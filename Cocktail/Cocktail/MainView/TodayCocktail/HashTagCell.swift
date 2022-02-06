@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 class HashTagCell: UICollectionViewCell {
-    
+
     let textLabel = UILabel()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.addSubview(textLabel)
-        
+
         textLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.top.bottom.equalToSuperview()

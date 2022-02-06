@@ -8,8 +8,8 @@
 import UIKit
 import SnapKit
 import FirebaseAuth
-import StoreKit     //For AppStore Review Request
-import MessageUI    //For Send Email
+import StoreKit     // For AppStore Review Request
+import MessageUI    // For Send Email
 
 class SettingTableViewController: UITableViewController {
     enum Settings: Int, CaseIterable {
@@ -18,7 +18,7 @@ class SettingTableViewController: UITableViewController {
         case support
         case developerInfo
         case account
-        
+
         var sectionTitle: String {
             switch self {
             case .serviceInformation:
@@ -33,7 +33,7 @@ class SettingTableViewController: UITableViewController {
                 return "Account".localized
             }
         }
-        
+
         var rowTitles: [String] {
             switch self {
             case .serviceInformation:
@@ -49,22 +49,22 @@ class SettingTableViewController: UITableViewController {
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Settings".localized
         tableView.register(SettingCell.self, forCellReuseIdentifier: "SettingCell")
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
 }
 
-///UITableView DataSource & Delegate
+/// UITableView DataSource & Delegate
 extension SettingTableViewController {
-    
+
     override func tableView(_  tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let myLabel = UILabel()
         myLabel.frame = CGRect(x: 10, y: -10, width: 320, height: 30)
@@ -76,15 +76,15 @@ extension SettingTableViewController {
 
         return headerView
     }
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
         return Settings.allCases.count
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Settings(rawValue: section)?.rowTitles.count ?? 0
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
@@ -112,7 +112,7 @@ extension SettingTableViewController {
             return
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as? SettingCell else { return UITableViewCell() }
         cell.selectionStyle = .none
@@ -141,26 +141,26 @@ extension SettingTableViewController {
             return cell
         }
     }
-    
+
     @objc func switchAction(sender: UISwitch) {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
     }
 }
 
-///Actions per indexPath.row
+/// Actions per indexPath.row
 extension SettingTableViewController {
     private func requestAppStoreReview() {
-        guard let appStoreURL = URL(string: "https://apps.apple.com/app/id1597875622") else { return }    //TODO: 앱아이디 입력해줄 것 예)id100043049583
+        guard let appStoreURL = URL(string: "https://apps.apple.com/app/id1597875622") else { return }    // TODO: 앱아이디 입력해줄 것 예)id100043049583
         var components = URLComponents(url: appStoreURL, resolvingAgainstBaseURL: false)
         components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
         guard let writeReviewURL = components?.url else { return }
         UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
     }
-    
-    private func setlinkAction(appURL: String, webURL: String){
+
+    private func setlinkAction(appURL: String, webURL: String) {
         let appURL = URL(string: appURL)!
         let application = UIApplication.shared
-        
+
         if application.canOpenURL(appURL) {
             application.open(appURL)
         } else {
@@ -168,7 +168,7 @@ extension SettingTableViewController {
             application.open(webURL)
         }
     }
-    
+
     private func logIn() {
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
@@ -178,7 +178,7 @@ extension SettingTableViewController {
         loginViewController.bind(loginViewModel)
         window?.rootViewController = UINavigationController(rootViewController: loginViewController)
     }
-    
+
     private func logOut() {
         let alert = UIAlertController(title: "Do you want to log out?".localized, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Yes".localized, style: .default) { _ in

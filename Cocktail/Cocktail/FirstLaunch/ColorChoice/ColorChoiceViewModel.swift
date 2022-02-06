@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-//struct ColorChoiceViewModel: ColorChoiceBindable {
+// struct ColorChoiceViewModel: ColorChoiceBindable {
 //    var cellTapped: PublishRelay<IndexPath>
 //    
 //    var nextButtontapped: PublishRelay<Void>
@@ -41,4 +41,4 @@ import RxSwift
 //
 //    
 //    }
-//}
+// }

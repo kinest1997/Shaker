@@ -12,6 +12,7 @@ pod 'Kingfisher', '~> 7.0'
 pod 'lottie-ios'
 pod 'Siren'
 pod 'Then'
+pod 'SwiftLint'
 
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'

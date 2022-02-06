@@ -5,35 +5,35 @@ import AuthenticationServices
 import RxCocoa
 import RxSwift
 
-///유저의 개인 취향을 저장하는곳, 설정에서 나중에 취향 재설정 가능하게 하자
+/// 유저의 개인 취향을 저장하는곳, 설정에서 나중에 취향 재설정 가능하게 하자
 
 class UserFavor {
     static let shared = UserFavor()
-    
+
     var colorFavor: [Cocktail.Color] = []
-    
+
     var alcoholFavor: Cocktail.Alcohol?
-    
+
     var drinkTypeFavor: Cocktail.DrinkType?
-    
+
     var baseDrinkFavor: Cocktail.Base?
-    
+
     func makeAlert(title: String, message: String) -> UIAlertController {
         let alert = UIAlertController(title: title.localized, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: nil))
         return alert
     }
-    
+
     private init() { }
 }
 
 class ContentNetwork {
     static let shared = ContentNetwork()
-    
-    func setlinkAction(appURL: String, webURL: String){
+
+    func setlinkAction(appURL: String, webURL: String) {
         let appURL = URL(string: appURL)!
         let application = UIApplication.shared
-        
+
         if application.canOpenURL(appURL) {
             application.open(appURL)
         } else {
@@ -45,24 +45,24 @@ class ContentNetwork {
 
 class FirebaseRecipe {
     static let shared = FirebaseRecipe()
-    
+
     let ref = Database.database().reference()
-    
+
     var recipe: [Cocktail] = []
-    
+
     var wishList: [Cocktail] = []
-    
+
     var myRecipe: [Cocktail] = []
-    
+
     var recommendations: [Recommendation] = []
-    
+
     var youTubeData: [YouTubeVideo] = []
-    
-    var cocktailLikeList: [String:[String: Bool]] = [:]
-    
+
+    var cocktailLikeList: [String: [String: Bool]] = [:]
+
     let uid = Auth.auth().currentUser?.uid
-    
-    func getRecommendations(completion: @escaping ([Recommendation]) -> (Void)) {
+
+    func getRecommendations(completion: @escaping ([Recommendation]) -> Void) {
         ref.child("CocktailRecommendation").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
@@ -72,7 +72,7 @@ class FirebaseRecipe {
             completion(cocktailList)
         }
     }
-    
+
     func getRecommendationsRx() -> Single<[Recommendation]> {
         return Single.create {[weak self] observer in
             self?.ref.child("CocktailRecommendation").observeSingleEvent(of: .value) { snapshot in
@@ -86,7 +86,7 @@ class FirebaseRecipe {
             return Disposables.create()
         }
     }
-    
+
     func getRecipeRx() -> Single<[Cocktail]> {
         return Single.create {[weak self] observer in
             self?.ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
@@ -100,8 +100,8 @@ class FirebaseRecipe {
             return Disposables.create()
         }
     }
-    
-    func getRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
+
+    func getRecipe(completion: @escaping ([Cocktail]) -> Void) {
         ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
@@ -111,8 +111,8 @@ class FirebaseRecipe {
             completion(cocktailList)
         }
     }
-    
-    func getMyRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
+
+    func getMyRecipe(completion: @escaping ([Cocktail]) -> Void) {
         guard let uid = uid else { return }
         ref.child("users").child(uid).child("MyRecipes").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
@@ -124,7 +124,7 @@ class FirebaseRecipe {
             completion(myRecipes)
         }
     }
-    
+
     func getMyRecipeRx() -> Single<[Cocktail]> {
         return Single.create {[weak self] observer in
             guard let uid = self?.uid else { return Disposables.create() }
@@ -140,8 +140,8 @@ class FirebaseRecipe {
             return Disposables.create()
         }
     }
-    
-    func getWishList(completion: @escaping ([Cocktail]) -> (Void)) {
+
+    func getWishList(completion: @escaping ([Cocktail]) -> Void) {
         guard let uid = uid else { return }
         ref.child("users").child(uid).child("WishList").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
@@ -159,8 +159,8 @@ class FirebaseRecipe {
               let uid = uid else { return }
         ref.child("users").child(uid).child("WishList").setValue(jsonData)
     }
-    
-    func getYoutubeContents(completion: @escaping ([YouTubeVideo]) -> (Void)) {
+
+    func getYoutubeContents(completion: @escaping ([YouTubeVideo]) -> Void) {
         ref.child("Youtube").observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [[String: Any]],
                   let data = try? JSONSerialization.data(withJSONObject: value, options: []),
@@ -170,15 +170,15 @@ class FirebaseRecipe {
             completion(youTubeVideoList)
         }
     }
-    
-    func getCocktailLikeData(completion: @escaping ([String:[String: Bool]]) -> (Void)) {
+
+    func getCocktailLikeData(completion: @escaping ([String: [String: Bool]]) -> Void) {
         Database.database().reference().child("CocktailLikeData").observe( .value) { snapshot in
-            guard let value = snapshot.value as? [String:[String: Bool]] else { return }
+            guard let value = snapshot.value as? [String: [String: Bool]] else { return }
             completion(value)
         }
     }
-    
-    func getSingleCocktialData(cocktail: Cocktail, completion: @escaping ([String: Bool]) -> (Void)) {
+
+    func getSingleCocktialData(cocktail: Cocktail, completion: @escaping ([String: Bool]) -> Void) {
         Database.database().reference().child("CocktailLikeData").child(cocktail.name).observeSingleEvent(of: .value) { snapshot in
             guard let value = snapshot.value as? [String: Bool] else {
                 completion([:])
@@ -187,7 +187,6 @@ class FirebaseRecipe {
         }
     }
 
-    
     func likeOrDislikeCount(cocktailList: [String: Bool], choice: Bool) -> Int {
         switch choice {
         case true:
@@ -196,37 +195,36 @@ class FirebaseRecipe {
             return cocktailList.filter { $0.value == false }.count
         }
     }
-    
-    
+
     func uploadMyRecipe() {
         guard let data = try? JSONEncoder().encode(FirebaseRecipe.shared.myRecipe),
               let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]],
               let uid = uid else { return }
         ref.child("users").child(uid).child("MyRecipes").setValue(jsonData)
     }
-    
+
     func uploadWholeRecipe() {
         let cocktailList = getJSONRecipe()
         guard let data = try? JSONEncoder().encode(cocktailList) else { return }
         let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
         Database.database().reference().child("CocktailRecipes").setValue(jsonData)
     }
-    
+
     func addLike(cocktail: Cocktail) {
         guard let uid = uid else { return }
         Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(true)
     }
-    
+
     func addDislike(cocktail: Cocktail) {
         guard let uid = uid else { return }
         Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(false)
     }
-    
+
     func deleteLike(cocktail: Cocktail) {
         guard let uid = uid else { return }
         Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(nil)
     }
-    
+
     func getJSONRecipe() -> [Cocktail] {
         guard let bundleURL = Bundle.main.url(forResource: "CocktailData", withExtension: "json"),
               let cocktailData = FileManager.default.contents(atPath: bundleURL.path) else { return [] }
@@ -235,12 +233,12 @@ class FirebaseRecipe {
                 $0.name < $1.name
             }
             return cocktailList
-        } catch let error{
+        } catch let error {
             print(String(describing: error))
             return []
         }
     }
-    
+
     func uploadyoutube() {
         guard let data = try? JSONEncoder().encode([YouTubeVideo(videoName: "firstName", videoCode: "HzxdVaKaPyA", owner: .drinkLecture)]),
               let jsonData = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else { return }

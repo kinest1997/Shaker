@@ -14,7 +14,7 @@ extension UIViewController {
         let window = windowScene?.windows.first
         return window?.rootViewController
     }
-    
+
     func pleaseLoginAlert() {
         let alert = UIAlertController(title: "로그인시에 사용가능합니다".localized, message: "로그인은 설정에서 할수있습니다".localized, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "확인".localized, style: .default, handler: nil))

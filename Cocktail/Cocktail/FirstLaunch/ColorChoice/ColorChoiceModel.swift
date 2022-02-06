@@ -13,7 +13,7 @@ struct ColorChoiceModel {
     let colorArray = Cocktail.Color.allCases
     var selectedColor = [Cocktail.Color]()
     var myFavor: Bool = true
-    
+
 //    guard let selectedCell = base.mainCollectionView.cellForItem(at: data.indexPath) as? ColorCollectionViewCell else { return }
 //
 //    if base.selectedColor.contains(base.selectedColor[data.indexPath.row]) {

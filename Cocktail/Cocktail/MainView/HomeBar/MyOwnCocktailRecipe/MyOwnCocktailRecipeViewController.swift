@@ -8,30 +8,30 @@ import RxCocoa
 import RxAppState
 
 protocol MyOwnCocktailRecipeViewBindable {
-    //view -> viewModel
+    // view -> viewModel
     var cellTapped: PublishRelay<IndexPath> { get }
     var cellDeleted: PublishRelay<IndexPath> { get }
     var viewWillappear: PublishSubject<Void> { get }
     var addButtonTapped: PublishRelay<Void> { get }
-    
-    //viewModel -> view
+
+    // viewModel -> view
     var updateCellData: Driver<[Cocktail]> { get }
     var showDetailView: Signal<Cocktail> { get }
     var showAddView: Signal<Void> { get }
 }
 
 class MyOwnCocktailRecipeViewController: UIViewController {
-    
+
     let disposeBag = DisposeBag()
-    
+
     let addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
-    
+
     let detailViewController = CocktailDetailViewController()
-    
+
     let mainTableView = UITableView()
-    
+
     let rightAddButton = UIBarButtonItem(title: "Add".localized, style: .plain, target: nil, action: nil)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "My Recipes".localized
@@ -44,36 +44,36 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "CocktailListCell")
         navigationItem.rightBarButtonItem = rightAddButton
     }
-    
+
     func bind(_ viewModel: MyOwnCocktailRecipeViewBindable) {
-        
+
         self.rightAddButton.rx.tap
             .bind(to: viewModel.addButtonTapped)
             .disposed(by: disposeBag)
-        
+
         self.mainTableView.rx.itemSelected
             .bind(to: viewModel.cellTapped)
             .disposed(by: disposeBag)
-        
+
         self.rx.viewWillAppear
             .map { _ in Void()}
             .bind(to: viewModel.viewWillappear)
             .disposed(by: disposeBag)
-        
+
         self.mainTableView.rx.itemDeleted
             .bind(to: viewModel.cellDeleted)
             .disposed(by: disposeBag)
-        
+
         viewModel.updateCellData
-            .drive(mainTableView.rx.items(cellIdentifier: "CocktailListCell", cellType: CocktailListCell.self)) { index, cocktail, cell in
+            .drive(mainTableView.rx.items(cellIdentifier: "CocktailListCell", cellType: CocktailListCell.self)) { _, cocktail, cell in
                 cell.configure(data: cocktail)
             }
             .disposed(by: disposeBag)
-        
+
         viewModel.showDetailView
             .emit(to: self.rx.showDetailView)
             .disposed(by: disposeBag)
-        
+
         viewModel.showAddView
             .emit(to: self.rx.showAddView)
             .disposed(by: disposeBag)
@@ -87,7 +87,7 @@ extension Reactive where Base: MyOwnCocktailRecipeViewController {
             base.show(base.detailViewController, sender: nil)
         }
     }
-    
+
     var showAddView: Binder<Void> {
         return Binder(base) { base, _ in
             base.addMyOwnCocktailRecipeViewController.choiceView.havePresetData = false

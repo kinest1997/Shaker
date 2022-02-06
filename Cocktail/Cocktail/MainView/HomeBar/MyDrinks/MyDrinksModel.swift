@@ -10,7 +10,7 @@ import RxCocoa
 import RxSwift
 
 struct MyDrinksModel {
-        
+
     func updateIngredientsBadge(base: Cocktail.Base, whatIHave: [String]) -> Int {
             let origin = Set(base.list.map {
                 $0.rawValue })
@@ -18,7 +18,7 @@ struct MyDrinksModel {
             let originCount = origin.count - subtracted.count
             return originCount
         }
-        
+
     func updateWhatICanMakeButton(recipes: [Cocktail]) -> String {
             if recipes.count != 0 {
                return "\(recipes.count)" + " " + "EA".localized + " " + "making".localized
@@ -26,7 +26,7 @@ struct MyDrinksModel {
                 return "Choose more ingredients!".localized
             }
         }
-        
+
     func recipeWhatICanMake(myIngredients: Set<String>, recipes: [Cocktail]) -> [Cocktail] {
             var lastRecipe = [Cocktail]()
         recipes.forEach {
@@ -39,7 +39,7 @@ struct MyDrinksModel {
             }
             return lastRecipe
         }
-    
+
     func makeTotalRecipe() -> Single<[Cocktail]> {
         return FirebaseRecipe.shared.getRecipeRx()
     }

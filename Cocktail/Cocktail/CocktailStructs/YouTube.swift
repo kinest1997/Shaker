@@ -7,7 +7,7 @@
 
 import Foundation
 
-//유튜브 관련 컨텐츠 받아오는 객체
+// 유튜브 관련 컨텐츠 받아오는 객체
 struct YouTubeVideo: Codable {
     let videoName: String
     let videoCode: String
