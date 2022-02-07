@@ -24,11 +24,10 @@ enum Like {
 }
 
 struct CocktailLikeNetwork {
-    
+
     let ref = Database.database().reference()
-    
+
     let uid = Auth.auth().currentUser?.uid
-    
 
     func getSingleCocktialDataRx(cocktail: Cocktail) -> Single<[String: Bool]> {
         return Single.create { observer in
@@ -41,13 +40,13 @@ struct CocktailLikeNetwork {
             return Disposables.create()
         }
     }
-    ///칵테일에 대하여 내가 좋아요 싫어요를 눌렀는지 확인하는 함수
+    /// 칵테일에 대하여 내가 좋아요 싫어요를 눌렀는지 확인하는 함수
     func preferenceCheck(likeData: [String: Bool]) -> CocktailLikeData {
         var like: Like = .none
         var likeCount = 0
         var disLikeCount = 0
-        
-        if likeData.contains(where: { (key: String, value: Bool) in
+
+        if likeData.contains(where: { (key: String, _: Bool) in
             key == Auth.auth().currentUser?.uid
         }) {
             switch likeData[Auth.auth().currentUser!.uid] {
@@ -59,28 +58,28 @@ struct CocktailLikeNetwork {
                 like = .none
             }
         }
-        
+
         likeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: likeData, choice: true)
         disLikeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: likeData, choice: false)
-        
+
         return CocktailLikeData(iLike: like, likeCount: likeCount, dislikeCount: disLikeCount)
     }
-    
+
     func addLike(cocktail: Cocktail) {
         guard let uid = uid else { return }
         Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(true)
     }
-    
+
     func addDislike(cocktail: Cocktail) {
         guard let uid = uid else { return }
         Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(false)
     }
-    
+
     func deleteLike(cocktail: Cocktail) {
         guard let uid = uid else { return }
         Database.database().reference().child("CocktailLikeData").child(cocktail.name).child(uid).setValue(nil)
     }
-    
+
     func likeOrDislikeCount(cocktailList: [String: Bool], choice: Bool) -> Int {
         switch choice {
         case true:

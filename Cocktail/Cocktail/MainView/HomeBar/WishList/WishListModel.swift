@@ -9,12 +9,11 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-
 struct WishListmodel {
     let uid = FirebaseRecipe.shared.uid
-    
+
     let ref = FirebaseRecipe.shared.ref
-    
+
     func getWishListRx() -> Single<[Cocktail]> {
         return Single.create { observer in
             ref.child("users").child(uid!).child("WishList").observe(.value) { snapshot in
@@ -28,7 +27,7 @@ struct WishListmodel {
             return Disposables.create()
         }
     }
-    
+
     func deleteWishList(list: [Cocktail], cocktail: Cocktail) {
         guard let number = list.firstIndex(of: cocktail) else { return}
         var modifiedList = list

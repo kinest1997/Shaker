@@ -8,11 +8,11 @@ import UIKit
 import SnapKit
 
 class TitleHeaderView: UICollectionReusableView {
-    
+
     let sectionTextLabel = UILabel()
-    
+
     let titleLabel = UIImageView()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         addSubview(sectionTextLabel)

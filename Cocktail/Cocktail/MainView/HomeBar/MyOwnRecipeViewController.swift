@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 
 class MyOwnRecipeViewController: UIViewController {
-    
+
     var myOwnRecipe: [Cocktail] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }

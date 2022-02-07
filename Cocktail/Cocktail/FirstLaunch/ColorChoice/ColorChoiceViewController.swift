@@ -10,9 +10,9 @@ protocol ColorChoiceViewBindable {
     // view -> viewModel
     var cellTapped: PublishRelay<IndexPath> { get }
     var nextButtonTapped: PublishRelay<Void> { get }
-    
-    //viewModel -> view
-    var updateCell: Signal<(indexPath :IndexPath, bool: Bool)> { get }
+
+    // viewModel -> view
+    var updateCell: Signal<(indexPath: IndexPath, bool: Bool)> { get }
     var buttonLabelCountUpdate: Signal<Int> { get }
     var showNextPage: Driver<Void> { get }
     var presentAlert: Driver<Void> { get }
@@ -23,19 +23,31 @@ protocol ColorChoiceViewBindable {
 
 class ColorChoiceViewController: UIViewController {
     let alcoholChoiceViewController = AlcoholChoiceViewController()
-    
+
     let questionLabel = UILabel()
-    
+
+    let disposeBag = DisposeBag()
+
     var myFavor: Bool = true
-    
+
     let colorArray = Cocktail.Color.allCases
     var selectedColor = [Cocktail.Color]()
     var isCheckedArray = [Bool]()
-    
+
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    
+
     let nextButton = MainButton()
-    
+
+    func bind(_ viewModel: ColorChoiceViewBindable) {
+        nextButton.rx.tap
+            .bind(to: viewModel.nextButtonTapped)
+            .disposed(by: disposeBag)
+
+        mainCollectionView.rx.itemSelected
+            .bind(to: viewModel.cellTapped)
+            .disposed(by: disposeBag)
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         isCheckedArray = colorArray.map { _ in false}
@@ -52,30 +64,30 @@ class ColorChoiceViewController: UIViewController {
         }
         self.navigationController?.navigationBar.isHidden = false
     }
-    
+
     func layout() {
         view.addSubview(questionLabel)
         view.addSubview(mainCollectionView)
         view.addSubview(nextButton)
-        
+
         questionLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(55)
         }
-        
+
         mainCollectionView.snp.makeConstraints {
             $0.top.equalTo(questionLabel.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview().inset(30)
             $0.bottom.equalTo(nextButton.snp.top)
         }
-        
+
         nextButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-50)
             $0.centerX.equalToSuperview()
         }
     }
-    
+
     func attribute() {
         let originText = "What's your favorite Color?".localized
 
@@ -109,7 +121,7 @@ class ColorChoiceViewController: UIViewController {
             }
         }), for: .touchUpInside)
     }
-    
+
     func buttonLabelCountUpdate(button: UIButton) {
         let number = FirebaseRecipe.shared.recipe.filter {
             selectedColor.contains($0.color)
@@ -122,19 +134,19 @@ extension ColorChoiceViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         Cocktail.Color.allCases.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let yourWidth = collectionView.bounds.width/3.9
         let yourHeight = yourWidth
         return CGSize(width: yourWidth, height: yourHeight)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "colorCell", for: indexPath) as? ColorCollectionViewCell else { return UICollectionViewCell() }
         cell.colorView.image = UIImage(named: colorArray[indexPath.row].rawValue)
             return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectedCell = collectionView.cellForItem(at: indexPath) as? ColorCollectionViewCell else { return }
         if isCheckedArray[indexPath.row] == false {
@@ -330,7 +342,7 @@ extension ColorChoiceViewController: UICollectionViewDelegateFlowLayout {
  */
 
 extension Reactive where Base: ColorChoiceViewController {
-    var cellTapped: Binder<(indexPath :IndexPath, bool: Bool)> {
+    var cellTapped: Binder<(indexPath: IndexPath, bool: Bool)> {
         return Binder(base) {base, data in
             guard let cell = base.mainCollectionView.cellForItem(at: data.indexPath) as? ColorCollectionViewCell else { return }
             cell.isChecked = data.bool
@@ -343,4 +355,3 @@ extension Reactive where Base: ColorChoiceViewController {
         }
     }
 }
-

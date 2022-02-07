@@ -12,6 +12,7 @@ pod 'Kingfisher', '~> 7.0'
 pod 'lottie-ios'
 pod 'Siren'
 pod 'Then'
+pod 'SwiftLint'
 
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
@@ -22,6 +23,7 @@ pod 'Firebase/Database'
 pod 'RxSwift', '6.2.0'
 pod 'RxCocoa', '6.2.0'
 pod 'RxAppState'
+pod 'RxDataSources'
 
 end
 

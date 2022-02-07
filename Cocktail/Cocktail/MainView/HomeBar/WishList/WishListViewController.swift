@@ -8,24 +8,24 @@ import RxSwift
 import RxAppState
 
 protocol WishListViewBindable {
-    //view -> viewModel
+    // view -> viewModel
     var cellTapped: PublishRelay<IndexPath> { get }
     var cellDeleted: PublishRelay<IndexPath> { get }
     var viewWillappear: PublishSubject<Void> { get }
-    
-    //viewModel -> view
+
+    // viewModel -> view
     var updateCellData: Driver<[Cocktail]> { get }
     var showDetailView: Signal<Cocktail> { get }
 }
 
 class WishListCocktailListViewController: UIViewController {
-    
+
     var wishListRecipe: [Cocktail] = []
-    
+
     let disposeBag = DisposeBag()
-    
+
     let tableView = UITableView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Bookmark".localized
@@ -37,7 +37,7 @@ class WishListCocktailListViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
     }
-    
+
     func bind(_ viewModel: WishListViewBindable) {
         self.rx.viewWillAppear
             .map { _ in Void() }
@@ -51,13 +51,13 @@ class WishListCocktailListViewController: UIViewController {
         self.tableView.rx.itemDeleted
             .bind(to: viewModel.cellDeleted)
             .disposed(by: disposeBag)
-        
+
         viewModel.updateCellData
-            .drive(self.tableView.rx.items(cellIdentifier: "key", cellType: CocktailListCell.self)) { index, cocktail, cell in
+            .drive(self.tableView.rx.items(cellIdentifier: "key", cellType: CocktailListCell.self)) { _, cocktail, cell in
                 cell.configure(data: cocktail)
             }
             .disposed(by: disposeBag)
-        
+
         viewModel.showDetailView
             .emit(to: self.rx.showDetailView)
             .disposed(by: disposeBag)

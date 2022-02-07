@@ -12,7 +12,7 @@ import UIKit
 
 class OpenSourceView: UIViewController {
     let mainTableView = UITableView(frame: .zero, style: .insetGrouped)
-    
+
     enum OpenSource: Int, CaseIterable {
         case snapkit
         case lottie
@@ -20,7 +20,7 @@ class OpenSourceView: UIViewController {
         case kingfisher
         case firebase
         case siren
-        
+
         var url: String {
             switch self {
             case .snapkit:
@@ -37,7 +37,7 @@ class OpenSourceView: UIViewController {
                 return "https://github.com/ArtSabintsev/Siren/blob/master/LICENSE"
             }
         }
-        
+
         var name: String {
             switch self {
             case .snapkit:
@@ -55,7 +55,7 @@ class OpenSourceView: UIViewController {
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(mainTableView)
@@ -72,7 +72,7 @@ extension OpenSourceView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return OpenSource.allCases.count
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let url = URL(string: OpenSource(rawValue: indexPath.row)!.url) else { return }
         let safariViewController = SFSafariViewController(url: url)

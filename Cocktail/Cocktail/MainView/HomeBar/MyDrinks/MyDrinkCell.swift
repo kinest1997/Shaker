@@ -11,19 +11,19 @@ import SnapKit
 
 class MyDrinkCell: UICollectionViewCell {
     typealias CellData = (name: String, count: Int)
-    
+
     let mainImage = UIImageView()
-    
+
     let badgecount = UILabel()
-    
+
     let nameTextLabel = UILabel()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         [mainImage, badgecount, nameTextLabel].forEach {
             contentView.addSubview($0)
         }
-        
+
         mainImage.snp.makeConstraints {
             $0.leading.trailing.top.equalToSuperview()
             $0.height.equalToSuperview().multipliedBy(0.7)
@@ -33,13 +33,13 @@ class MyDrinkCell: UICollectionViewCell {
             $0.top.equalTo(mainImage.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-        
+
         badgecount.snp.makeConstraints {
             $0.top.equalToSuperview().offset(5)
             $0.trailing.equalToSuperview().offset(-5)
             $0.width.height.equalTo(20)
         }
-        
+
         mainImage.contentMode = .scaleAspectFit
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true
@@ -49,7 +49,7 @@ class MyDrinkCell: UICollectionViewCell {
         nameTextLabel.backgroundColor = .white
         nameTextLabel.textColor = .mainGray
         nameTextLabel.textAlignment = .center
-        
+
         badgecount.textColor = .white
         badgecount.textAlignment = .center
         badgecount.layer.cornerRadius = 10
@@ -61,7 +61,7 @@ class MyDrinkCell: UICollectionViewCell {
             badgecount.backgroundColor = .mainOrange
         }
     }
-    
+
     func configure(data: CellData) {
         nameTextLabel.text = data.name.localized
         mainImage.image = UIImage(named: data.name)
