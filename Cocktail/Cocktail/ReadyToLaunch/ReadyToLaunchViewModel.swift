@@ -11,9 +11,9 @@ import RxCocoa
 
 struct ReadyToLaunchViewModel: ReadyToLaunchViewBindable {
     var readytoLaunchButtonTapped = PublishRelay<Void>()
-    
+
     var showNextPage: Signal<Void>
-    
+
     init() {
         showNextPage = self.readytoLaunchButtonTapped
             .asSignal()

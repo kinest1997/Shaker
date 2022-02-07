@@ -10,12 +10,12 @@ import UIKit
 import SnapKit
 
 class IngredientsCell: UITableViewCell {
-    
+
     let mainLabel = UILabel()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
-        
+
         contentView.addSubview(mainLabel)
         contentView.backgroundColor = .splitLineGray
         mainLabel.textColor = .mainGray
@@ -24,7 +24,7 @@ class IngredientsCell: UITableViewCell {
             $0.leading.equalToSuperview().offset(10)
             $0.top.bottom.equalToSuperview()
         }
-        
+
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5, left: 30, bottom: 5, right: 30))
         contentView.layer.cornerRadius = 15
         contentView.clipsToBounds = true

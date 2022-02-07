@@ -10,12 +10,12 @@ import RxCocoa
 import RxSwift
 
 struct CocktailRecipeModel {
-    
+
     let uid = FirebaseRecipe.shared.uid
-    
+
     let ref = FirebaseRecipe.shared.ref
-    
-    ///칵테일 레시피를 받아오는 것
+
+    /// 칵테일 레시피를 받아오는 것
     func getRecipeRx() -> Single<[Cocktail]> {
         return Single.create { observer in
             ref.child("CocktailRecipes").observeSingleEvent(of: .value) { snapshot in
@@ -29,8 +29,8 @@ struct CocktailRecipeModel {
             return Disposables.create()
         }
     }
-    
-    ///칵테일 조건을 받았을떄 그 조건을 정렬하여 레시피를 반환해주는것
+
+    /// 칵테일 조건을 받았을떄 그 조건을 정렬하여 레시피를 반환해주는것
     func filteredRecipe(conditions: [FilteredView.FilterData], recipe: [Cocktail]) -> [Cocktail] {
         let filteredRecipe = sortingRecipes(
             origin: recipe,
@@ -41,11 +41,11 @@ struct CocktailRecipeModel {
             glass: conditions[4].condition as! [Cocktail.Glass],
             color: conditions[5].condition as! [Cocktail.Color]
         ).sorted { $0.name < $1.name }
-        
+
         return filteredRecipe
     }
-    
-    ///검색창에 의해 필터링된 레시피를 반환
+
+    /// 검색창에 의해 필터링된 레시피를 반환
     func serchedRecipe(filteredRecipe: [Cocktail], searchText: String) -> [Cocktail] {
         let searchedRecipe = filteredRecipe.filter({
             return $0.name.localized.lowercased().contains(searchText) ||
@@ -54,8 +54,8 @@ struct CocktailRecipeModel {
         })
         return searchedRecipe
     }
-    
-    ///칵테일 조건을 받았을떄 그 조건에 따라 필터링된 레시피를 반환
+
+    /// 칵테일 조건을 받았을떄 그 조건에 따라 필터링된 레시피를 반환
     func sortingRecipes(origin: [Cocktail], alcohol: [Cocktail.Alcohol], base: [Cocktail.Base], drinktype: [Cocktail.DrinkType], craft: [Cocktail.Craft], glass: [Cocktail.Glass], color: [Cocktail.Color]) -> [Cocktail] {
         var alcoholSorted = [Cocktail]()
         var baseSorted = [Cocktail]()
@@ -63,7 +63,7 @@ struct CocktailRecipeModel {
         var craftSorted = [Cocktail]()
         var glassSorted = [Cocktail]()
         var colorSorted = [Cocktail]()
-        
+
         if alcohol.isEmpty {
             alcoholSorted = origin
         } else {
@@ -74,7 +74,7 @@ struct CocktailRecipeModel {
                 alcoholSorted.append(contentsOf: alcoholSortedRecipe)
             }
         }
-        
+
         if base.isEmpty {
             baseSorted = origin
         } else {
@@ -85,7 +85,7 @@ struct CocktailRecipeModel {
                 baseSorted.append(contentsOf: baseSortedRecipe)
             }
         }
-        
+
         if drinktype.isEmpty {
             drinktypeSorted = origin
         } else {
@@ -96,7 +96,7 @@ struct CocktailRecipeModel {
                 drinktypeSorted.append(contentsOf: sorted)
             }
         }
-        
+
         if craft.isEmpty {
             craftSorted = origin
         } else {
@@ -107,7 +107,7 @@ struct CocktailRecipeModel {
                 craftSorted.append(contentsOf: sorted)
             }
         }
-        
+
         if glass.isEmpty {
             glassSorted = origin
         } else {
@@ -118,7 +118,7 @@ struct CocktailRecipeModel {
                 glassSorted.append(contentsOf: sorted)
             }
         }
-        
+
         if color.isEmpty {
             colorSorted = origin
         } else {
@@ -133,18 +133,18 @@ struct CocktailRecipeModel {
             .intersection(Set(drinktypeSorted)).intersection(Set(craftSorted)).intersection(Set(glassSorted)).intersection(Set(colorSorted))
         return Array(final)
     }
-    
+
     func sorting(standard: SortingStandard, recipe: [Cocktail]) -> [Cocktail] {
         switch standard {
         case .alcohol:
             return recipe.sorted { $0.alcohol.rank < $1.alcohol.rank}
-            
+
         case .name:
             return recipe.sorted { $0.name < $1.name }
-            
+
         case .ingredientsCount:
             return recipe.sorted { $0.ingredients.count < $1.ingredients.count}
-            
+
         default:
             return recipe
         }

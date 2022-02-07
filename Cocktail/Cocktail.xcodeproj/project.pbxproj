@@ -11,6 +11,7 @@
 		3D01A87C279AA1BD00CEC022 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01A87B279AA1BD00CEC022 /* SearchViewModel.swift */; };
 		3D01A87E279AA1C600CEC022 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01A87D279AA1C600CEC022 /* SearchController.swift */; };
 		3D01A880279AB94500CEC022 /* CocktailRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D01A87F279AB94400CEC022 /* CocktailRecipeView.swift */; };
+		3D0CD84127AEC08400E3139E /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 3D0CD84027AEC08400E3139E /* .swiftlint.yml */; };
 		3D11E18B279C356600B739E3 /* CocktailRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D11E18A279C356600B739E3 /* CocktailRecipeModel.swift */; };
 		3D175BA02742846B00EC142B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D175BA22742846B00EC142B /* Localizable.strings */; };
 		3D175BA6274285BB00EC142B /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D175BA5274285BB00EC142B /* String.swift */; };
@@ -130,6 +131,7 @@
 		3D07246C274F551D0061B3F5 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		3D07246F274F551D0061B3F5 /* Cocktail_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail_Widget.swift; sourceTree = "<group>"; };
 		3D072472274F55220061B3F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3D0CD84027AEC08400E3139E /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		3D0D9B762744D714008C75E7 /* Ingredients.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Ingredients.plist; sourceTree = "<group>"; };
 		3D11E18A279C356600B739E3 /* CocktailRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipeModel.swift; sourceTree = "<group>"; };
 		3D175BA12742846B00EC142B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 		3DA76A242730D1CD004091CE = {
 			isa = PBXGroup;
 			children = (
+				3D0CD84027AEC08400E3139E /* .swiftlint.yml */,
 				3DA76A2F2730D1CD004091CE /* Cocktail */,
 				3D07246E274F551D0061B3F5 /* Cocktail Widget */,
 				3D072469274F551D0061B3F5 /* Frameworks */,
@@ -650,6 +653,7 @@
 				3DA76A2B2730D1CD004091CE /* Resources */,
 				3D07247A274F55220061B3F5 /* Embed App Extensions */,
 				E516B2BB2508AB5C08A97058 /* [CP] Embed Pods Frameworks */,
+				3D0CD83F27AEBFA300E3139E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -699,6 +703,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D0CD84127AEC08400E3139E /* .swiftlint.yml in Resources */,
 				3DA76A3D2730D1D0004091CE /* LaunchScreen.storyboard in Resources */,
 				3D5E8C942784067A0005478B /* NEXON Lv1 Gothic OTF.otf in Resources */,
 				3D3452FD275F3B4400DA3978 /* LoadingAnimation.json in Resources */,
@@ -717,6 +722,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3D0CD83F27AEBFA300E3139E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/SwiftLint/swiftlint autocorrect\n";
+		};
 		DF6E969EA13D7B6ACF1FD1FA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

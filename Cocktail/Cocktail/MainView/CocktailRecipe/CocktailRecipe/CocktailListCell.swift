@@ -15,14 +15,14 @@ class CocktailListCell: UITableViewCell {
     let ingredientCountLabel = UILabel()
     let likeCount = UILabel()
     let disclosureMark = UIImageView(image: UIImage(systemName: "chevron.right"))
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.backgroundColor = .white
         nameLabel.textColor = .mainGray
         ingredientCountLabel.textColor = .gray
         disclosureMark.tintColor = .mainGray
-        
+
         [nameLabel, ingredientCountLabel, cocktailImageView, likeCount, disclosureMark].forEach {
             contentView.addSubview($0)
         }
@@ -31,7 +31,7 @@ class CocktailListCell: UITableViewCell {
         ingredientCountLabel.font = .nexonFont(ofSize: 15, weight: .medium)
         ingredientCountLabel.alpha = 0.7
         likeCount.textColor = .white
-        
+
         cocktailImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.top.bottom.equalToSuperview().inset(5)
@@ -56,10 +56,10 @@ class CocktailListCell: UITableViewCell {
             $0.centerY.equalToSuperview()
         }
     }
-    
+
     func configure(data: Cocktail) {
         nameLabel.text = data.name
         ingredientCountLabel.text = "Ingredients".localized + " \(data.ingredients.count)" + "EA".localized
-        cocktailImageView.kf.setImage(with: URL(string: data.imageURL),placeholder: UIImage(named: "\(data.glass.rawValue)" + "Empty"))
+        cocktailImageView.kf.setImage(with: URL(string: data.imageURL), placeholder: UIImage(named: "\(data.glass.rawValue)" + "Empty"))
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 import RxDataSources
 import Differentiator
 
-//섹션에 들어가는 정보: 여기선 셀의 정보와 헤더의 이름
+// 섹션에 들어가는 정보: 여기선 셀의 정보와 헤더의 이름
 
 struct FilterCellData {
     var name: String
@@ -22,9 +22,9 @@ struct SectionOfFilterCell {
 }
 
 extension SectionOfFilterCell: SectionModelType {
-    
+
     typealias Item = FilterCellData
-    
+
     init(original: SectionOfFilterCell, items: [Item]) {
         self = original
         self.items = items

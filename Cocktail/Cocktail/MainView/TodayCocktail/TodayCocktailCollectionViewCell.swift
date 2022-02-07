@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class TodayCocktailCollectionViewCell: UICollectionViewCell {
-    
+
     let mainImageView = UIImageView()
 
     override func layoutSubviews() {

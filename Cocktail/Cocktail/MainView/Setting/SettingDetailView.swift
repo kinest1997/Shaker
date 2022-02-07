@@ -10,13 +10,13 @@ import SnapKit
 import MessageUI
 
 class SettingDetailViewController: UIViewController {
-    
+
     enum Developers: Int, CaseIterable {
         case developer
         case illustrator
         case mainDesigner
         case subDesigner
-        
+
         var sectionTitle: String {
             switch self {
             case .developer:
@@ -29,7 +29,7 @@ class SettingDetailViewController: UIViewController {
                 return "SubDesigner".localized
             }
         }
-        
+
         var rowTitle: [String] {
             switch self {
             case .developer:
@@ -43,9 +43,9 @@ class SettingDetailViewController: UIViewController {
             }
         }
     }
-    
+
     let mainTableView = UITableView(frame: .zero, style: .insetGrouped)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(mainTableView)
@@ -56,7 +56,7 @@ class SettingDetailViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
     }
-    
+
     func sendEmail(address: String) {
         let composeVC = MFMailComposeViewController()
          composeVC.mailComposeDelegate = self
@@ -79,7 +79,7 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
     func numberOfSections(in tableView: UITableView) -> Int {
         return 4
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let myLabel = UILabel()
         myLabel.frame = CGRect(x: 10, y: -10, width: 320, height: 30)
@@ -91,20 +91,20 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
 
         return headerView
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Developers(rawValue: section)?.rowTitle.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell", for: indexPath) as? SettingCell else { return UITableViewCell() }
         cell.selectionStyle = .none
         cell.mainLabel.text = Developers(rawValue: indexPath.section)?.rowTitle[indexPath.row]
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -134,11 +134,11 @@ extension SettingDetailViewController: UITableViewDelegate, UITableViewDataSourc
             return
         }
     }
-    
-    private func setlinkAction(appURL: String, webURL: String){
+
+    private func setlinkAction(appURL: String, webURL: String) {
         let appURL = URL(string: appURL)!
         let application = UIApplication.shared
-        
+
         if application.canOpenURL(appURL) {
             application.open(appURL)
         } else {

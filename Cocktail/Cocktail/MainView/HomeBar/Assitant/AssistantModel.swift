@@ -7,16 +7,14 @@
 
 import Foundation
 
-
-
 struct AssistantModel {
-    
+
     enum Views {
         case myRecipe
         case wishList
         case myDrink
     }
-    
+
     func sendViewData(indexPath: IndexPath) -> Views? {
         switch indexPath.row {
         case 0:
@@ -29,19 +27,19 @@ struct AssistantModel {
             return nil
         }
     }
-    
+
     func cellData() -> [AssistantCell.CellData] {
         Assist.allCases
             .map { assist in
-                (title: assist.title ,explain: assist.explain)
+                (title: assist.title, explain: assist.explain)
             }
     }
-    
+
     enum Assist: Int, CaseIterable {
         case myDrink
         case myOwnCocktail
         case wishList
-        
+
         var title: String {
             switch self {
             case .myDrink:
@@ -52,7 +50,7 @@ struct AssistantModel {
                 return "즐겨찾기"
             }
         }
-        
+
         var explain: String {
             switch self {
             case .myDrink:
@@ -64,5 +62,5 @@ struct AssistantModel {
             }
         }
     }
-    
+
 }
