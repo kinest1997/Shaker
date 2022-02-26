@@ -39,6 +39,14 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         myOwnRecipe = FirebaseRecipe.shared.myRecipe
+        if myOwnRecipe.isEmpty {
+            let emptyView = EmptyView()
+            emptyView.firstLabel.text = "There's no cocktail added".localized
+            emptyView.secondLabel.text = "Please add some cocktails".localized
+            mainTableView.tableHeaderView = emptyView
+        } else {
+            mainTableView.tableHeaderView = nil
+        }
         mainTableView.reloadData()
     }
     
@@ -105,6 +113,14 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
             FirebaseRecipe.shared.uploadMyRecipe()
             myOwnRecipe = FirebaseRecipe.shared.myRecipe
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if myOwnRecipe.isEmpty {
+                let emptyView = EmptyView()
+                emptyView.firstLabel.text = "There's no cocktail added".localized
+                emptyView.secondLabel.text = "Please add some cocktails".localized
+                mainTableView.tableHeaderView = emptyView
+            } else {
+                mainTableView.tableHeaderView = nil
+            }
         }
     }
 }

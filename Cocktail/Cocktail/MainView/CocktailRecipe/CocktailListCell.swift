@@ -30,6 +30,8 @@ class CocktailListCell: UITableViewCell {
         nameLabel.font = .nexonFont(ofSize: 18, weight: .bold)
         ingredientCountLabel.font = .nexonFont(ofSize: 15, weight: .medium)
         ingredientCountLabel.alpha = 0.7
+        ingredientCountLabel.numberOfLines = 1
+
         likeCount.textColor = .white
         
         cocktailImageView.snp.makeConstraints {
@@ -39,11 +41,12 @@ class CocktailListCell: UITableViewCell {
         }
         nameLabel.snp.makeConstraints {
             $0.leading.equalTo(cocktailImageView.snp.trailing).offset(20)
-            $0.bottom.equalTo(cocktailImageView.snp.centerY)
+            $0.top.equalToSuperview().offset(20)
         }
         ingredientCountLabel.snp.makeConstraints {
             $0.leading.equalTo(nameLabel)
             $0.top.equalTo(nameLabel.snp.bottom).offset(5)
+            $0.trailing.equalTo(disclosureMark.snp.leading).offset(-5)
         }
         likeCount.snp.makeConstraints {
             $0.leading.equalTo(ingredientCountLabel.snp.trailing)
@@ -59,8 +62,12 @@ class CocktailListCell: UITableViewCell {
     
     func configure(data: Cocktail) {
         nameLabel.text = data.name
-        ingredientCountLabel.text = "Ingredients".localized + " \(data.ingredients.count)" + "EA".localized
-        cocktailImageView.kf.setImage(with: URL(string: data.imageURL),placeholder: UIImage(named: "\(data.glass.rawValue)" + "Empty"))
+        var text = data.ingredients.reduce("") {
+            $0 + $1.rawValue.localized + ", "
+        }
+        text.removeLast(2)
+        ingredientCountLabel.text = text
+        cocktailImageView.kf.setImage(with: URL(string: data.imageURL), placeholder: UIImage(named: "\(data.glass.rawValue)" + "Empty"))
     }
 }
 

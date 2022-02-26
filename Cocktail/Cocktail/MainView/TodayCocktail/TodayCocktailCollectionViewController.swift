@@ -177,6 +177,7 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         collectionView.register(TitleHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "TitleHeaderView")
         collectionView.register(NoTitleHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "NoTitleHeader")
         collectionView.register(ButtonFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "ButtonFooterView")
+        collectionView.register(EmptyCell.self, forCellWithReuseIdentifier: "EmptyCell")
         
         collectionView.collectionViewLayout = collectionViewLayout()
         collectionView.delegate = self
@@ -221,7 +222,6 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         self.tabBarController?.tabBar.isHidden = false
         self.wishListData = FirebaseRecipe.shared.wishList
         self.myRecipe = FirebaseRecipe.shared.myRecipe
-
         self.collectionView.reloadData()
     }
     
@@ -254,9 +254,9 @@ extension TodayCocktailCollectionViewController {
             case 0:
                 return self.createYoutubeSection()
             case 1:
-                return self.createWishListSection()
+                return self.createWishListSection(array: self.myRecipe)
             case 2:
-                return self.createWishListSection()
+                return self.createWishListSection(array: self.wishListData)
             case 3:
                 return self.createOrderAssistSection()
             case 4:
@@ -303,14 +303,14 @@ extension TodayCocktailCollectionViewController {
         return section
     }
     
-    func createWishListSection() -> NSCollectionLayoutSection {
+    func createWishListSection(array: [Cocktail]) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = .init(top: 10, leading: 5, bottom: 10, trailing: 5)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9), heightDimension: .fractionalHeight(0.15))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(array.isEmpty ? 1 : 0.9), heightDimension: .fractionalHeight(0.15))
         
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: array.isEmpty ? 1 : 3 )
         let section = NSCollectionLayoutSection(group: group)
         
         section.orthogonalScrollingBehavior = .continuous
@@ -429,9 +429,9 @@ extension TodayCocktailCollectionViewController {
         case 0:
             return youtubeData.count
         case 1:
-            return myRecipe.count
+            return myRecipe.isEmpty ? 1 : myRecipe.count
         case 2:
-            return wishListData.count
+            return wishListData.isEmpty ? 1: wishListData.count
         case 3:
             return 1
         case 4:
@@ -446,7 +446,8 @@ extension TodayCocktailCollectionViewController {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCocktailCollectionViewCell", for: indexPath) as? TodayCocktailCollectionViewCell,
               let helpOrderCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HelpOrderCell", for: indexPath) as? HelpOrderCell,
-              let hashTagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HashTagCell", for: indexPath) as? HashTagCell
+              let hashTagCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HashTagCell", for: indexPath) as? HashTagCell,
+                let emptyCell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath) as? EmptyCell
         else { return UICollectionViewCell() }
         
         switch indexPath.section {
@@ -454,11 +455,24 @@ extension TodayCocktailCollectionViewController {
             cell.mainImageView.kf.setImage(with: URL(string: "https://img.youtube.com/vi/\(youtubeData[indexPath.row].videoCode)/mqdefault.jpg" ), options: nil, completionHandler: nil)
             return cell
         case 1:
-            cell.mainImageView.kf.setImage(with: URL(string: myRecipe[indexPath.row].imageURL), placeholder: UIImage(named: "\(myRecipe[indexPath.row].glass.rawValue)" + "Empty"))
-            return cell
+            if myRecipe.isEmpty {
+                emptyCell.emptyView.firstLabel.text = "There's no cocktail added".localized
+                emptyCell.emptyView.secondLabel.text = "Please add some cocktails".localized
+                return emptyCell
+            } else {
+                cell.mainImageView.kf.setImage(with: URL(string: myRecipe[indexPath.row].imageURL), placeholder: UIImage(named: "\(myRecipe[indexPath.row].glass.rawValue)" + "Empty"))
+                return cell                
+            }
+            
         case 2:
+            if wishListData.isEmpty {
+                emptyCell.emptyView.firstLabel.text = "There's no cocktail added".localized
+                emptyCell.emptyView.secondLabel.text = "Please add some cocktails".localized
+                return emptyCell
+            } else {
             cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(named: "\(wishListData[indexPath.row].glass.rawValue)" + "Empty"))
             return cell
+            }
         case 3:
             helpOrderCell.questionLabel.attributedText = Today(rawValue: indexPath.section)?.titleText
             helpOrderCell.explainLabel.attributedText = Today(rawValue: indexPath.section)?.explainText
@@ -477,15 +491,23 @@ extension TodayCocktailCollectionViewController {
         case 0:
             goToYoutube(videoCode: youtubeData[indexPath.row].videoCode)
         case 1:
-            self.navigationController?.navigationBar.isHidden = false
-            let cocktailDetailViewController = CocktailDetailViewController()
-            cocktailDetailViewController.setData(data: myRecipe[indexPath.row])
-            self.navigationController?.show(cocktailDetailViewController, sender: nil)
+            if myRecipe.isEmpty {
+                showMyList()
+            } else {
+                self.navigationController?.navigationBar.isHidden = false
+                let cocktailDetailViewController = CocktailDetailViewController()
+                cocktailDetailViewController.setData(data: myRecipe[indexPath.row])
+                self.navigationController?.show(cocktailDetailViewController, sender: nil)
+            }
         case 2:
-            self.navigationController?.navigationBar.isHidden = false
-            let cocktailDetailViewController = CocktailDetailViewController()
-            cocktailDetailViewController.setData(data: wishListData[indexPath.row])
-            self.navigationController?.show(cocktailDetailViewController, sender: nil)
+            if wishListData.isEmpty {
+                showWishList()
+            } else {
+                self.navigationController?.navigationBar.isHidden = false
+                let cocktailDetailViewController = CocktailDetailViewController()
+                cocktailDetailViewController.setData(data: wishListData[indexPath.row])
+                self.navigationController?.show(cocktailDetailViewController, sender: nil)
+            }
         case 3:
             let colorChoiceViewController = ColorChoiceViewController()
             colorChoiceViewController.myFavor = false
@@ -500,6 +522,7 @@ extension TodayCocktailCollectionViewController {
             return
         }
     }
+
     
     func goToYoutube(videoCode: String) {
         let alert = UIAlertController(title: "It's connected through YouTube".localized, message: "Will you continue?".localized, preferredStyle: .alert)

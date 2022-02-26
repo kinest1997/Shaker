@@ -40,7 +40,7 @@ class CocktailRecipeViewController: UIViewController {
         mainTableView.delegate = self
         mainTableView.dataSource = self
         title = "Recipe".localized
-        
+        searchController.searchBar.delegate = self
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
         
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -48,7 +48,7 @@ class CocktailRecipeViewController: UIViewController {
         //서치바의 텍스트가 변경되는것을 알려준다.
         searchController.obscuresBackgroundDuringPresentation = false
         // 표시된 뷰를 흐리게 해주는것
-        searchController.searchBar.placeholder = "Name, Ingredients, Base, Glass, Color...".localized
+        searchController.searchBar.placeholder = "Name, Ingredients...".localized
         
         navigationItem.searchController = searchController
         
@@ -57,9 +57,9 @@ class CocktailRecipeViewController: UIViewController {
         definesPresentationContext = true
         //화면 이동시에 서치바가 안남아있게 해줌
         searchController.searchBar.keyboardType = .default
-                
+        
         let filterButton = UIBarButtonItem(title: "Filter".localized, style: .plain, target: self, action: #selector(filtering))
-
+        
         navigationItem.rightBarButtonItem = filterButton
         let leftarrangeButton = UIBarButtonItem(title: "Sorting".localized, image: nil, primaryAction: nil, menu: filterMenu)
         navigationItem.leftBarButtonItem = leftarrangeButton
@@ -115,6 +115,16 @@ class CocktailRecipeViewController: UIViewController {
                 color: filterView.conditionsOfCocktail[5].condition as! [Cocktail.Color]
             ).sorted { $0.name < $1.name }
             self.originRecipe = filteredViewRecipe
+            
+            if originRecipe.isEmpty {
+                let emptyView = EmptyView()
+                emptyView.firstLabel.text = "검색된칵테일이 없어요!"
+                emptyView.secondLabel.text = "다른 키워드로 검색해보세요"
+                mainTableView.tableHeaderView = emptyView
+            } else {
+                mainTableView.tableHeaderView = nil
+            }
+            
             mainTableView.reloadData()
         }), for: .touchUpInside)
         //리셋 버튼의 액션
@@ -212,10 +222,10 @@ extension CocktailRecipeViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
-extension CocktailRecipeViewController: UISearchResultsUpdating {
+extension CocktailRecipeViewController: UISearchResultsUpdating, UISearchBarDelegate {
     //서치바에 관한것
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
+            filterContentForSearchText(searchController.searchBar.text!)
     }
     
     func isFiltering() -> Bool {
@@ -229,11 +239,31 @@ extension CocktailRecipeViewController: UISearchResultsUpdating {
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         let filterRecipe = originRecipe
         filteredRecipe = filterRecipe.filter({
-            return $0.name.localized.lowercased().contains(searchText) || $0.ingredients.map({ baby in
-                baby.rawValue.localized.lowercased()
-            })[0...].contains(searchText) || $0.glass.rawValue.localized.lowercased().contains(searchText) || $0.color.rawValue.localized.lowercased().contains(searchText) || $0.recipe.contains(searchText)
+            return $0.name.localized.lowercased().contains(searchText) ||
+            sortingIngredients(ingredients: $0.ingredients.map{$0.rawValue.localized}, searchText: searchText)
         })
+        if filteredRecipe.isEmpty && !searchText.isEmpty {
+            let emptyView = EmptyView()
+            emptyView.firstLabel.text = "There's no cocktail searched!".localized
+            emptyView.secondLabel.text = "Search for another keyword".localized
+            mainTableView.tableHeaderView = emptyView
+        } else {
+            mainTableView.tableHeaderView = nil
+        }
         mainTableView.reloadData()
+    }
+    
+    
+    func sortingIngredients(ingredients: [String], searchText: String) -> Bool {
+        
+        var contain = false
+        
+        for ingredient in ingredients {
+            if ingredient.contains(searchText) {
+                contain = true
+            }
+        }
+        return contain
     }
 }
 

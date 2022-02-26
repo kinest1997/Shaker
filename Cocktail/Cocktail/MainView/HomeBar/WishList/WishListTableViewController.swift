@@ -17,6 +17,15 @@ class WishListCocktailListViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         wishListRecipe = FirebaseRecipe.shared.wishList.sorted { $0.name < $1.name}
+        if wishListRecipe.isEmpty {
+            let emptyView = EmptyView()
+            emptyView.firstLabel.text = "There's no cocktail added".localized
+            emptyView.secondLabel.text = "Please add some cocktails".localized
+            tableView.tableHeaderView = emptyView
+        } else {
+            tableView.tableHeaderView = nil
+        }
+        
         tableView.reloadData()
     }
 }
@@ -57,6 +66,14 @@ extension WishListCocktailListViewController {
             FirebaseRecipe.shared.uploadWishList()
             wishListRecipe = FirebaseRecipe.shared.wishList
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if wishListRecipe.isEmpty {
+                let emptyView = EmptyView()
+                emptyView.firstLabel.text = "There's no cocktail added".localized
+                emptyView.secondLabel.text = "Please add some cocktails".localized
+                tableView.tableHeaderView = emptyView
+            } else {
+                tableView.tableHeaderView = nil
+            }
         }
     }
 }

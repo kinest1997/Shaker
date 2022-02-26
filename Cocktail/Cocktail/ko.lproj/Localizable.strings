@@ -132,6 +132,10 @@
 "Dibs. Don't forget to watch it again" = "찜한 칵테일, 잊지 말고 다시 보아요";
 "Hard to order? I can help you" = "시작하기 어려우신가요? 쉐이커가 레시피를 추천해드릴게요";
 
+//wishListCocktailListViewController.swift
+"There's no cocktail added" = "추가된 칵테일이 없어요";
+"Please add some cocktails" = "칵테일을 추가해주세요";
+
 //ChoiceViewController.swift
 "Anything!" = "다 좋아!";
 
@@ -160,11 +164,12 @@
 
 //CocktailRecipeViewController.swift
 "Filter" = "필터";
-"Name, Ingredients, Base, Glass, Color..." = "이름, 재료, 기주, 잔, 색깔 등등";
+"Name, Ingredients..." = "이름 또는 재료로 검색해보세요!";
 "Sort" = "정렬";
 "Ingredients Count" = "재료갯수";
 "Sorting" = "정렬";
-
+"There's no cocktail searched!" = "검색된칵테일이 없어요!";
+"Search for another keyword" = "다른 키워드로 검색해보세요";
 //Cocktail.Base
 "rum" = "럼";
 "vodka" = "보드카";
