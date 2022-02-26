@@ -19,6 +19,7 @@ class OpenSourceView: UIViewController {
         case rxSwift
         case kingfisher
         case firebase
+        case siren
         
         var url: String {
             switch self {
@@ -32,6 +33,8 @@ class OpenSourceView: UIViewController {
                 return "https://github.com/onevcat/Kingfisher/blob/master/LICENSE"
             case .firebase:
                 return "https://github.com/firebase/firebase-ios-sdk/blob/master/LICENSE"
+            case .siren:
+                return "https://github.com/ArtSabintsev/Siren/blob/master/LICENSE"
             }
         }
         
@@ -47,6 +50,8 @@ class OpenSourceView: UIViewController {
                 return "KingFisher"
             case .firebase:
                 return "Firebase"
+            case .siren:
+                return "Siren"
             }
         }
     }

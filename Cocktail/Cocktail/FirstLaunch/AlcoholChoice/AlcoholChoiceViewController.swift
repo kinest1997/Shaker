@@ -43,40 +43,32 @@ class AlcoholChoiceViewController: UIViewController {
     }
     
     func attribute() {
-        
-        let questionText = NSMutableAttributedString(string: "어떤 맛을 좋아하세요?")
-        let firstRange = NSRange(location: 0, length: 3)
-        let secondReange = NSRange(location: 4, length: 8)
-        let tintRange = NSRange(location: 3, length: 1)
-        let smallFont = UIFont.nexonFont(ofSize: 20, weight: .bold)
-        let bigfont = UIFont.nexonFont(ofSize: 24, weight: .bold)
-        let mainColor = UIColor.mainGray
-        
-        questionText.addAttribute(.font, value: smallFont, range: firstRange)
-        questionText.addAttribute(.font, value: smallFont, range: secondReange)
-        
-        questionText.addAttribute(.foregroundColor, value: mainColor, range: firstRange)
-        questionText.addAttribute(.foregroundColor, value: mainColor, range: secondReange)
-        
-        questionText.addAttribute(.font, value: bigfont, range: tintRange)
-        questionText.addAttribute(.foregroundColor, value: UIColor.mainOrange, range: tintRange)
-        
-        questionLabel.attributedText = questionText
-        
+         
+        let originText = "What Flavor do you like?".localized
+
+        if NSLocale.current.languageCode == "ko" {
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 3), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 4, length: 8), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 1))
+
+            questionLabel.attributedText = questionText
+        } else {
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 5), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 10, length: 13), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 5, length: 6))
+            questionLabel.attributedText = questionText
+        }
+
         view.backgroundColor = .white
         
         questionLabel.textAlignment = .center
         
-        explainLabel.text = "*기준: 도수"
+        explainLabel.text = "*Standard: Alcohol".localized
         explainLabel.textAlignment = .center
         explainLabel.textColor = .mainGray
-        highLabel.text = "높음"
+        highLabel.text = "High".localized
         highLabel.textColor = .mainGray
         highLabel.textAlignment = .center
-        lowLabel.text = "낮음"
+        lowLabel.text = "Low".localized
         lowLabel.textColor = .mainGray
         lowLabel.textAlignment = .center
-        nextButton.setTitle("다음", for: .normal)
+        nextButton.setTitle("Next".localized, for: .normal)
         
         [highButton, middleButton, lowButton].forEach {
             $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
@@ -87,11 +79,16 @@ class AlcoholChoiceViewController: UIViewController {
             guard let self = self else { return }
             if self.myFavor {
                 UserDefaults.standard.set(self.alcoholSelected?.rawValue, forKey: "AlcoholFavor")
-                self.show(ReadyToLaunchVIewController(), sender: nil)
+                let readyToLaunchViewController = ReadyToLaunchViewController()
+                readyToLaunchViewController.bind(ReadyToLaunchViewModel())
+                
+                self.show(readyToLaunchViewController, sender: nil)
+                
+                
             } else {
                 let lastRecipe = self.filteredRecipe.filter { $0.alcohol == self.alcoholSelected }
                 if lastRecipe.isEmpty {
-                    self.present(UserFavor.shared.makeAlert(title: "다른걸 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
+                    self.present(UserFavor.shared.makeAlert(title: "Please choose something else!".localized , message: "I don't have anything to recommend".localized), animated: true, completion: nil)
                 } else {
                     let drinkTypeChoiceViewController = DrinkTypeChoiceViewController()
                     drinkTypeChoiceViewController.myFavor = self.myFavor
@@ -208,6 +205,6 @@ class AlcoholChoiceViewController: UIViewController {
         } else {
             button.backgroundColor = .tappedOrange
         }
-        button.setTitle("\(number)개의 칵테일 발견", for: .normal)
+        button.setTitle("\(number)" + "cocktails have searched".localized, for: .normal)
     }
 }

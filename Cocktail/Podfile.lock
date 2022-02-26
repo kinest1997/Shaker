@@ -129,6 +129,7 @@ PODS:
   - RxRelay (6.2.0):
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
+  - Siren (6.0.0)
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
@@ -141,6 +142,7 @@ DEPENDENCIES:
   - lottie-ios
   - RxCocoa (= 6.2.0)
   - RxSwift (= 6.2.0)
+  - Siren
   - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
@@ -166,6 +168,7 @@ SPEC REPOS:
     - RxCocoa
     - RxRelay
     - RxSwift
+    - Siren
     - SnapKit
 
 SPEC CHECKSUMS:
@@ -190,8 +193,9 @@ SPEC CHECKSUMS:
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
+  Siren: 1f58945ba6e86a753eeaeddf0afa531cf05cdabf
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: 5cfaff4fbb9b87618e13c0aacef8cd148e9653a9
+PODFILE CHECKSUM: d07358c9b7a7a6a0daef12738345872531ab2540
 
 COCOAPODS: 1.11.2

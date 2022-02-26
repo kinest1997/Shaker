@@ -15,7 +15,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
-        title = "나의 레시피"
+        title = "My Recipes".localized
         myOwnRecipe = FirebaseRecipe.shared.myRecipe
         
         view.addSubview(mainTableView)
@@ -26,7 +26,7 @@ class MyOwnCocktailRecipeViewController: UIViewController {
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "CocktailListCell")
         mainTableView.dataSource = self
         mainTableView.delegate = self
-        let rightAddButton = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(showAddView))
+        let rightAddButton = UIBarButtonItem(title: "Add".localized, style: .plain, target: self, action: #selector(showAddView))
         navigationItem.rightBarButtonItem = rightAddButton
         
         addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
@@ -39,6 +39,14 @@ class MyOwnCocktailRecipeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         myOwnRecipe = FirebaseRecipe.shared.myRecipe
+        if myOwnRecipe.isEmpty {
+            let emptyView = EmptyView()
+            emptyView.firstLabel.text = "There's no cocktail added".localized
+            emptyView.secondLabel.text = "Please add some cocktails".localized
+            mainTableView.tableHeaderView = emptyView
+        } else {
+            mainTableView.tableHeaderView = nil
+        }
         mainTableView.reloadData()
     }
     
@@ -105,6 +113,14 @@ extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDat
             FirebaseRecipe.shared.uploadMyRecipe()
             myOwnRecipe = FirebaseRecipe.shared.myRecipe
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            if myOwnRecipe.isEmpty {
+                let emptyView = EmptyView()
+                emptyView.firstLabel.text = "There's no cocktail added".localized
+                emptyView.secondLabel.text = "Please add some cocktails".localized
+                mainTableView.tableHeaderView = emptyView
+            } else {
+                mainTableView.tableHeaderView = nil
+            }
         }
     }
 }

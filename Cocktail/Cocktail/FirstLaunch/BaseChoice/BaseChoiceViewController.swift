@@ -41,6 +41,7 @@ class BaseChoiceViewController: UIViewController {
         
         questionLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview().inset(30)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(55)
         }
@@ -58,16 +59,22 @@ class BaseChoiceViewController: UIViewController {
     }
     
     func attribute() {
-        
-        let questionText = NSMutableAttributedString.addBigOrangeText(text: "어떤 술을 선호하시나요?", firstRange: NSRange(location: 0, length: 3), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 4, length: 9), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 1))
-        
-        questionLabel.attributedText = questionText
-        
+        let originText = "What kind of Alcohol do you prefer?".localized
+
+        if NSLocale.current.languageCode == "ko" {
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 3), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 4, length: 9), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 3, length: 1))
+
+            questionLabel.attributedText = questionText
+        } else {
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 13), bigFont: UIFont.nexonFont(ofSize: 24, weight: .bold), secondRange: NSRange(location: 21, length: 14), smallFont: UIFont.nexonFont(ofSize: 20, weight: .bold), orangeRange: NSRange(location: 13, length: 7))
+            questionLabel.attributedText = questionText
+        }
         view.backgroundColor = .white
         mainCollectionView.backgroundColor = .white
         questionLabel.textAlignment = .center
+        questionLabel.numberOfLines = 0
         
-        nextButton.setTitle("다음", for: .normal)
+        nextButton.setTitle("Next".localized, for: .normal)
         
         nextButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self else { return }
@@ -77,7 +84,7 @@ class BaseChoiceViewController: UIViewController {
             }
             
             if lastRecipe.isEmpty {
-                self.present(UserFavor.shared.makeAlert(title: "다른걸 선택해주세요!", message: "추천할술이 없어요"), animated: true, completion: nil)
+                self.present(UserFavor.shared.makeAlert(title: "Please choose something else!".localized, message: "I don't have anything to recommend".localized), animated: true, completion: nil)
             } else {
                 let cocktailListViewController = CocktailListViewController()
                 cocktailListViewController.lastRecipe = lastRecipe
@@ -91,7 +98,7 @@ class BaseChoiceViewController: UIViewController {
         let number = filteredRecipe.filter {
             selectedBaseArray.contains($0.base)
         }.count
-        button.setTitle("\(number)개의 칵테일 발견", for: .normal)
+        button.setTitle("\(number)" + "cocktails have searched".localized, for: .normal)
     }
 }
 

@@ -221,23 +221,18 @@ class CocktailDetailViewController: UIViewController {
         }
         
         alcoholStackView.snp.makeConstraints {
-            $0.width.equalToSuperview().multipliedBy(0.3)
             $0.centerX.equalToSuperview()
             $0.top.equalTo(alcoholSplitLine.snp.bottom).offset(20)
         }
         
         alcoholGuideLabel.snp.makeConstraints {
             $0.centerY.equalTo(alcoholStackView)
-            $0.height.equalTo(alcoholStackView)
-            $0.width.equalTo(50)
-            $0.trailing.equalTo(alcoholStackView.snp.leading).offset(5)
+            $0.trailing.equalTo(alcoholStackView.snp.leading).offset(-5)
         }
         
         alcoholLabel.snp.makeConstraints {
             $0.centerY.equalTo(alcoholStackView)
-            $0.height.equalTo(alcoholStackView)
-            $0.width.equalTo(50)
-            $0.leading.equalTo(alcoholStackView.snp.trailing)
+            $0.leading.equalTo(alcoholStackView.snp.trailing).offset(5)
         }
         
         myTipLabel.snp.makeConstraints {
@@ -248,7 +243,7 @@ class CocktailDetailViewController: UIViewController {
         
         groupStackView.snp.makeConstraints {
             $0.top.equalTo(myTipLabel.snp.bottom).offset(30)
-            $0.width.equalToSuperview().multipliedBy(0.4)
+//            $0.width.equalToSuperview().multipliedBy(0.4)
             $0.centerX.equalToSuperview()
         }
         
@@ -397,13 +392,13 @@ class CocktailDetailViewController: UIViewController {
                       self?.pleaseLoginAlert()
                       return }
                 if FirebaseRecipe.shared.wishList.contains(self.cocktailData) {
-                    self.popUpView.animating(text: "즐겨찾기에서 \n제거되었습니다")
+                    self.popUpView.animating(text: "Removed from\nWishList".localized)
                     self.wishListButton.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
                     guard let number = FirebaseRecipe.shared.wishList.firstIndex(of: self.cocktailData) else { return }
                     FirebaseRecipe.shared.wishList.remove(at: number)
                     self.cocktailData.wishList = false
                 } else {
-                    self.popUpView.animating(text: "즐겨찾기에 \n추가되었습니다")
+                    self.popUpView.animating(text: "Add to\nWishList".localized)
                     self.wishListButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
                     var data = self.cocktailData
                     data.wishList = true
@@ -425,7 +420,7 @@ class CocktailDetailViewController: UIViewController {
                 }
                 self.iLike = nil
             } else {
-                self.popUpView.animating(text: "좋아요!")
+                self.popUpView.animating(text: "I like it!".localized)
                 FirebaseRecipe.shared.addLike(cocktail: self.cocktailData)
                 FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
                     self.likeData = data
@@ -445,7 +440,7 @@ class CocktailDetailViewController: UIViewController {
                 }
                 self.iLike = nil
             } else {
-                self.popUpView.animating(text: "싫어요...")
+                self.popUpView.animating(text: "I don't like it...".localized)
                 FirebaseRecipe.shared.addDislike(cocktail: self.cocktailData)
                 FirebaseRecipe.shared.getSingleCocktialData(cocktail: self.cocktailData) { data in
                     self.likeData = data

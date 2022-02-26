@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import StoreKit
 
 class MyDrinksViewController: UIViewController {
     
@@ -45,12 +46,14 @@ class MyDrinksViewController: UIViewController {
             $0.leading.equalTo(topNameLabel)
             $0.trailing.equalToSuperview().offset(-20)
         }
+        
         collectionView.snp.makeConstraints {
             $0.top.equalTo(topExplainLabel.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalTo(collectionView.snp.width)
         }
+        
         whatICanMakeButton.snp.makeConstraints {
             $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
             $0.centerX.equalToSuperview()
@@ -66,10 +69,10 @@ class MyDrinksViewController: UIViewController {
         
         topNameLabel.textColor = .black
         topExplainLabel.textColor = .mainGray
-        topNameLabel.text = "내 술장"
+        topNameLabel.text = "My Drinks".localized
         topNameLabel.font = .nexonFont(ofSize: 30, weight: .bold)
         topExplainLabel.font = .nexonFont(ofSize: 15, weight: .semibold)
-        topExplainLabel.text = "내가 가지고 있는 재료로 만들 수 있는 레시피를 알아봐요!"
+        topExplainLabel.text = "Find out the recipes that you can make with the ingredients you have!".localized
         topExplainLabel.numberOfLines = 0
         
         whatICanMakeButton.addAction(UIAction(handler: {[weak self] _ in
@@ -95,7 +98,7 @@ class MyDrinksViewController: UIViewController {
             button.setTitle("\(sortedData.count)" + " " + "EA".localized + " " + "making".localized, for: .normal)
         } else {
             button.backgroundColor = .white
-            button.setTitle("재료를 더 선택해주세요!", for: .normal)
+            button.setTitle("Choose more ingredients!".localized, for: .normal)
         }
     }
     

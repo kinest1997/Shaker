@@ -51,7 +51,7 @@ class HelpOrderCell: UICollectionViewCell {
         }
 
         orderLabel.textColor = .mainGray
-        orderLabel.text = "주문하러 가기 >"
+        orderLabel.text = "Going to order".localized + " >"
         orderLabel.font = .nexonFont(ofSize: 12, weight: .bold)
         
         contentView.layer.cornerRadius = 15
