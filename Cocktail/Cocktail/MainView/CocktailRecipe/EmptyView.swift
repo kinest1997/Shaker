@@ -21,11 +21,12 @@ class EmptyView: UIView {
         [firstLabel, secondLabel].forEach {
             self.addSubview($0)
             $0.numberOfLines = 0
-            $0.font = .nexonFont(ofSize: 15, weight: .semibold)
             $0.textColor = .borderGray
         }
         
         firstLabel.sizeToFit()
+        firstLabel.font = .nexonFont(ofSize: 14, weight: .bold)
+        secondLabel.font = .nexonFont(ofSize: 12, weight: .regular)
         
         firstLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
@@ -33,7 +34,7 @@ class EmptyView: UIView {
         }
         
         secondLabel.snp.makeConstraints {
-            $0.top.equalTo(firstLabel.snp.bottom).offset(10)
+            $0.top.equalTo(firstLabel.snp.bottom).offset(5)
             $0.centerX.equalToSuperview()
         }
     }

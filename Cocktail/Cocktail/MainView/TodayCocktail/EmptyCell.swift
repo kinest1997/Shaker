@@ -17,7 +17,8 @@ class EmptyCell: UICollectionViewCell {
         contentView.addSubview(emptyView)
         
         emptyView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
