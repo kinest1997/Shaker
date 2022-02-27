@@ -51,7 +51,8 @@ class ReadyToLaunchViewController: UIViewController {
             let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 3, length: 17), bigFont: UIFont.nexonFont(ofSize: 40, weight: .bold), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 36, weight: .semibold), orangeRange: NSRange(location: 0, length: 3))
             startTextLabel.attributedText = questionText
         } else {
-            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 21), bigFont: UIFont.nexonFont(ofSize: 40, weight: .bold), secondRange: NSRange(location: 26, length: 1), smallFont: UIFont.nexonFont(ofSize: 36, weight: .semibold), orangeRange: NSRange(location: 21, length: 5))
+            let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 16), bigFont: UIFont.nexonFont(ofSize: 40, weight: .bold), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 36, weight: .semibold), orangeRange: NSRange(location: 16, length: 6))
+
             startTextLabel.attributedText = questionText
         }
         
