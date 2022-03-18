@@ -25,7 +25,7 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     var beforeEditingData: Cocktail?
     
-    let addRecipeTableView = UITableView(frame: .zero, style: .plain )
+    let addRecipeTableView = UITableView(frame: .zero, style: .grouped )
     
     let groupStackView = UIStackView()
     let cocktailImageView = UIImageView()
@@ -294,8 +294,9 @@ class AddMyOwnCocktailRecipeViewController: UIViewController {
         craftChoiceButton.showsMenuAsPrimaryAction = true
         drinkTypeChoiceButton.menu = drinkTypeMenu
         drinkTypeChoiceButton.showsMenuAsPrimaryAction = true
-        
+        addRecipeTableView.keyboardDismissMode = .onDrag
         addRecipeTableView.backgroundColor = .clear
+        
         
         // 기본 라벨들
         [alcoholLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, drinkTypeLabel, alcoholLabel].forEach {

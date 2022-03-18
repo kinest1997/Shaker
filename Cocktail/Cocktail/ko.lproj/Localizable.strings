@@ -16,6 +16,8 @@
 "Sign in with Apple" = "Apple로 로그인";
 "MyPage" = "마이페이지";
 "Loading" = "로딩중";
+"Loading...\nAre you using VPN?\nIf so, please turn it off and run it again!" = "
+로딩중...\n혹시 VPN을 사용중이신가요?\n그렇다면 끄고 다시 실행해주세요!";
 "Start" = "시작하기";
 "Ready to launch Shaker" = "쉐이커를 시작할 준비가 다 되었습니다";
 

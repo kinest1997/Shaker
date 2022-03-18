@@ -67,6 +67,7 @@ class ChoiceIngredientsView: UIView {
         mainTableView.register(FilterViewCell.self, forCellReuseIdentifier: "Ingredients")
         mainTableView.delegate = self
         mainTableView.dataSource = self
+        
         self.mainTableView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(50)
             $0.bottom.equalToSuperview().inset(100)
@@ -162,6 +163,7 @@ extension ChoiceIngredientsView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "Ingredients") as? FilterViewCell else { return UITableViewCell()}
         
+        cell.selectionStyle = .none
         cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
         cell.nameLabel.text = ingredientsData[indexPath.section][indexPath.row].rawValue.localized
         return cell

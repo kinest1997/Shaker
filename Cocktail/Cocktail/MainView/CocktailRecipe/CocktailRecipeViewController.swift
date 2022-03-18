@@ -32,17 +32,16 @@ class CocktailRecipeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadingView.isHidden = false
+        loadingView.explainLabel.text = "Loading".localized
         attribute()
         layout()
-        unTouchableRecipe = FirebaseRecipe.shared.recipe
-        originRecipe = unTouchableRecipe
-        filteredRecipe = originRecipe
         mainTableView.delegate = self
         mainTableView.dataSource = self
         title = "Recipe".localized
         searchController.searchBar.delegate = self
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "key")
         
+        mainTableView.keyboardDismissMode = .onDrag
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchResultsUpdater = self
         //서치바의 텍스트가 변경되는것을 알려준다.
@@ -69,13 +68,33 @@ class CocktailRecipeViewController: UIViewController {
             self?.loadingView.isHidden = true
             self?.mainTableView.reloadData()
         }
+        
+        FirebaseRecipe.shared.getMyRecipe {[weak self] recipes in
+            guard let self = self else {
+                return
+            }
+            self.unTouchableRecipe = FirebaseRecipe.shared.recipe + recipes
+            self.originRecipe = self.unTouchableRecipe
+            self.filteredRecipe = self.originRecipe
+            self.loadingView.isHidden = true
+            self.unTouchableRecipe.sort { $0.name < $1.name }
+            self.mainTableView.reloadData()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        unTouchableRecipe = FirebaseRecipe.shared.recipe
-        unTouchableRecipe.sort { $0.name < $1.name }
-        mainTableView.reloadData()
+        self.loadingView.isHidden = false
+        
+        FirebaseRecipe.shared.getMyRecipe {[weak self] recipes in
+            guard let self = self else {
+                return
+            }
+            self.unTouchableRecipe = FirebaseRecipe.shared.recipe + recipes
+            self.loadingView.isHidden = true
+            self.unTouchableRecipe.sort { $0.name < $1.name }
+            self.mainTableView.reloadData()
+        }
     }
     
     func layout() {

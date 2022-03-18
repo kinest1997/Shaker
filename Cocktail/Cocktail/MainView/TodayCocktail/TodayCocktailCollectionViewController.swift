@@ -13,10 +13,6 @@ import FirebaseDatabase
 import FirebaseAuth
 import AuthenticationServices
 
-protocol TodayCocktailCollectionViewBindable {
-    
-}
-
 class TodayCocktailCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     enum Today: Int, CaseIterable {
@@ -182,7 +178,8 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
         collectionView.collectionViewLayout = collectionViewLayout()
         collectionView.delegate = self
         collectionView.dataSource = self
-        loadingView.explainLabel.text = "Loading".localized
+        loadingView.explainLabel.text = "Loading...\nAre you using VPN?\nIf so, please turn it off and run it again!".localized
+             
         
         getYoutubeContents {[weak self] data in
             FirebaseRecipe.shared.youTubeData = data.shuffled()
