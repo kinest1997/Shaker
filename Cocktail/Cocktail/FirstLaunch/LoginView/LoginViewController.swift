@@ -13,13 +13,17 @@ import SnapKit
 import FirebaseDatabase
 import RxCocoa
 import RxSwift
+import GoogleSignIn
+import FirebaseCore
 
 protocol LoginViewBiandable {
     // view -> viewModel
     var appleLoginButtonTapped: PublishRelay<Void> { get }
     var justUseButtonTapped: PublishRelay<Void> { get }
+//    var googleLogInButtonTapped: PublishRelay<Void> { get }
     
     // viewModel -> view
+//    var startSignInWithGoogleFlow: Signal<Void> { get }
     var startSignInWithAppleFlow: Signal<Void> { get }
     var updateFirstLogin: Signal<Bool> { get }
     var changeLoginView: Signal<Void> { get }
@@ -41,11 +45,12 @@ class LoginViewController: UIViewController {
     
     private var currentNonce: String?
     
+    let googleLoginButton = UIButton()
     let appleLoginButton = UIButton()
     let justUseButton = UIButton()
     
     func bind(_ viewModel: LoginViewBiandable) {
-//        view -> viewModel
+        //        view -> viewModel
         appleLoginButton.rx.tap
             .bind(to: viewModel.appleLoginButtonTapped)
             .disposed(by: disposeBag)
@@ -53,6 +58,10 @@ class LoginViewController: UIViewController {
         justUseButton.rx.tap
             .bind(to: viewModel.justUseButtonTapped)
             .disposed(by: disposeBag)
+        
+        //        googleLoginButton.rx.tap
+        //            .bind(to: viewModel.googleLogInButtonTapped)
+        //            .disposed(by: disposeBag)
         
         //viewModel -> view
         viewModel.updateFirstLogin
@@ -72,6 +81,9 @@ class LoginViewController: UIViewController {
         viewModel.startSignInWithAppleFlow
             .emit(to: self.rx.startSignWithAppleLogin)
             .disposed(by: disposeBag)
+        
+//        viewModel.startSignInWithGoogleFlow
+//            .emit(to: self.rx.startSignWithGoogleLogin)
     }
     
     override func viewDidLoad() {
@@ -82,6 +94,11 @@ class LoginViewController: UIViewController {
     }
     
     func attribute() {
+        googleLoginButton.contentMode = .scaleAspectFit
+        googleLoginButton.clipsToBounds = true
+        googleLoginButton.layer.cornerRadius = 15
+        
+        googleLoginButton.addTarget(self, action: #selector(startSignInWithGoogleFlow), for: .touchUpInside)
         view.backgroundColor = .white
         mainImageView.image = UIImage(named: "logoImage")
         justUseButton.setTitle("Start without logging in".localized, for: .normal)
@@ -101,17 +118,19 @@ class LoginViewController: UIViewController {
         appleLoginButton.clipsToBounds = true
         appleLoginButton.contentMode = .scaleAspectFit
         if NSLocale.current.languageCode == "ko" {
+            googleLoginButton.setBackgroundImage(UIImage(named: "googleid_button"), for: .normal)
             appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button"), for: .normal)
         } else {
+            googleLoginButton.setBackgroundImage(UIImage(named: "googleid_button_eng"), for: .normal)
             appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button_eng"), for: .normal)
         }
     }
     
     func layout() {
-        [appleLoginButton, justUseButton, loginlabel, mainImageView, shakerLabel].forEach {
+        [appleLoginButton, justUseButton, loginlabel, mainImageView, shakerLabel, googleLoginButton].forEach {
             view.addSubview($0)
         }
-
+        
         mainImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-5)
             $0.height.equalTo(470)
@@ -130,6 +149,12 @@ class LoginViewController: UIViewController {
             $0.top.equalTo(shakerLabel.snp.bottom)
             $0.height.equalTo(shakerLabel)
             $0.bottom.equalTo(mainImageView)
+        }
+        
+        googleLoginButton.snp.makeConstraints {
+            $0.top.equalTo(loginlabel.snp.bottom)
+            $0.leading.trailing.equalTo(appleLoginButton)
+            $0.bottom.equalTo(appleLoginButton.snp.top)
         }
         
         appleLoginButton.snp.makeConstraints {
@@ -184,10 +209,52 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     return
                 }
                 guard let self = self else { return }
-                UserDefaults.standard.set(false, forKey: "firstLaunch")
-//                let colorBind = ColorChoiceViewModel()
-//                self.colorChoiceViewController.bind(colorBind)
-                self.show(self.colorChoiceViewController, sender: nil)
+                DispatchQueue.main.async {
+                    UserDefaults.standard.set(false, forKey: "firstLaunch")
+                    //                let colorBind = ColorChoiceViewModel()
+                    //                self.colorChoiceViewController.bind(colorBind)
+                    self.show(self.colorChoiceViewController, sender: nil)
+                }
+            }
+        }
+    }
+}
+
+extension LoginViewController {
+    @objc
+    func startSignInWithGoogleFlow() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        
+        let config = GIDConfiguration(clientID: clientID)
+        
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) {[weak self] user, error in
+            
+            guard error != nil else {
+                print("errorOccured")
+                return
+            }
+            
+            guard let authentication = user?.authentication,
+                  let idToken = authentication.idToken
+            else {
+                return
+            }
+            
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: authentication.accessToken)
+            
+            Auth.auth().signIn(with: credential) {[weak self] result, error in
+                if let error = error {
+                    print("Google Login Error",error)
+                    return
+                }
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    UserDefaults.standard.set(false, forKey: "firstLaunch")
+                    //                let colorBind = ColorChoiceViewModel()
+                    //                self.colorChoiceViewController.bind(colorBind)
+                    self.show(self.colorChoiceViewController, sender: nil)
+                }
             }
         }
     }
@@ -260,6 +327,12 @@ extension Reactive where Base: LoginViewController {
     var startSignWithAppleLogin: Binder<Void> {
         return Binder(base) { base, _ in
             base.startSignInWithAppleFlow()
+        }
+    }
+    
+    var startSignWithGoogleLogin: Binder<Void> {
+        return Binder(base) { base, _ in
+            base.startSignInWithGoogleFlow()
         }
     }
 }
