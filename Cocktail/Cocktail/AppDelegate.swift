@@ -11,6 +11,7 @@ import UserNotifications
 import FirebaseMessaging
 import FirebaseAnalytics
 import FirebaseAuth
+import GoogleSignIn
 import Siren
 
 @main
@@ -71,6 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         siren.wail()
         
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance.handle(url)
     }
     
     // MARK: UISceneSession Lifecycle
