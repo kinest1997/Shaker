@@ -15,6 +15,7 @@ import RxCocoa
 import RxSwift
 import GoogleSignIn
 import FirebaseCore
+import SwiftUI
 
 protocol LoginViewBiandable {
     // view -> viewModel
@@ -153,8 +154,7 @@ class LoginViewController: UIViewController {
         
         googleLoginButton.snp.makeConstraints {
             $0.top.equalTo(loginlabel.snp.bottom)
-            $0.leading.trailing.equalTo(appleLoginButton)
-            $0.bottom.equalTo(appleLoginButton.snp.top)
+            $0.width.height.centerX.equalTo(appleLoginButton)
         }
         
         appleLoginButton.snp.makeConstraints {
@@ -336,3 +336,16 @@ extension Reactive where Base: LoginViewController {
         }
     }
 }
+
+//struct VCPreview: PreviewProvider {
+//    static var devices = ["iPhone SE"]
+//    
+//    static var previews: some View {
+//        ForEach(devices, id: \.self) { deviceName in
+//            LoginViewController()
+//                .toPreview()
+//                .previewDevice(PreviewDevice(rawValue: deviceName))
+//                .previewDisplayName(deviceName)
+//        }
+//    }
+//}
