@@ -13,8 +13,6 @@ class LoadingView: UIView {
         self.addSubview(explainLabel)
         self.addSubview(animationView)
 
-        animationView.frame = CGRect(x: 0, y: 0, width: 150, height: 150)
-        animationView.center = self.center
         animationView.contentMode = .scaleAspectFit
         animationView.play(fromFrame: 0, toFrame: 120, loopMode: .loop , completion: nil)
         
@@ -28,6 +26,7 @@ class LoadingView: UIView {
         
         animationView.snp.makeConstraints {
             $0.center.equalToSuperview()
+            $0.width.height.equalTo(150)
         }
         
         explainLabel.snp.makeConstraints {

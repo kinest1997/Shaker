@@ -21,10 +21,10 @@ protocol LoginViewBiandable {
     // view -> viewModel
     var appleLoginButtonTapped: PublishRelay<Void> { get }
     var justUseButtonTapped: PublishRelay<Void> { get }
-//    var googleLogInButtonTapped: PublishRelay<Void> { get }
+        var googleLogInButtonTapped: PublishRelay<Void> { get }
     
     // viewModel -> view
-//    var startSignInWithGoogleFlow: Signal<Void> { get }
+        var startSignInWithGoogleFlow: Signal<Void> { get }
     var startSignInWithAppleFlow: Signal<Void> { get }
     var updateFirstLogin: Signal<Bool> { get }
     var changeLoginView: Signal<Void> { get }
@@ -60,9 +60,9 @@ class LoginViewController: UIViewController {
             .bind(to: viewModel.justUseButtonTapped)
             .disposed(by: disposeBag)
         
-        //        googleLoginButton.rx.tap
-        //            .bind(to: viewModel.googleLogInButtonTapped)
-        //            .disposed(by: disposeBag)
+        googleLoginButton.rx.tap
+            .bind(to: viewModel.googleLogInButtonTapped)
+            .disposed(by: disposeBag)
         
         //viewModel -> view
         viewModel.updateFirstLogin
@@ -83,8 +83,9 @@ class LoginViewController: UIViewController {
             .emit(to: self.rx.startSignWithAppleLogin)
             .disposed(by: disposeBag)
         
-//        viewModel.startSignInWithGoogleFlow
-//            .emit(to: self.rx.startSignWithGoogleLogin)
+        viewModel.startSignInWithGoogleFlow
+            .emit(to: self.rx.startSignWithGoogleLogin)
+            .disposed(by: disposeBag)
     }
     
     override func viewDidLoad() {
@@ -229,8 +230,8 @@ extension LoginViewController {
         
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) {[weak self] user, error in
             
-            guard error != nil else {
-                print("errorOccured")
+            guard error == nil else {
+                self?.showAlert(title: "로그인중에 오류가 발생하였습니다", message: "앱을 종료한후 다시 실행해주세요")
                 return
             }
             
