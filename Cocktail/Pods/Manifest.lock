@@ -1,13 +1,9 @@
 PODS:
-<<<<<<< HEAD
   - AppAuth (1.4.0):
     - AppAuth/Core (= 1.4.0)
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
-=======
-  - Differentiator (5.0.0)
->>>>>>> 0747f12c9463bdb8cebce4249a8e486c8be65805
   - Firebase/Analytics (8.8.0):
     - Firebase/Core
   - Firebase/Auth (8.8.0):
@@ -139,23 +135,14 @@ PODS:
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
   - PromisesObjC (2.0.0)
-  - RxAppState (1.7.1):
-    - RxCocoa (~> 6.2)
-    - RxSwift (~> 6.2)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
-  - RxDataSources (5.0.0):
-    - Differentiator (~> 5.0)
-    - RxCocoa (~> 6.0)
-    - RxSwift (~> 6.0)
   - RxRelay (6.2.0):
     - RxSwift (= 6.2.0)
   - RxSwift (6.2.0)
   - Siren (6.0.0)
   - SnapKit (5.0.1)
-  - SwiftLint (0.46.2)
-  - Then (2.7.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -166,7 +153,6 @@ DEPENDENCIES:
   - GoogleSignIn
   - Kingfisher
   - lottie-ios
-<<<<<<< HEAD
   - RxCocoa
   - RxSwift
   - Siren
@@ -175,20 +161,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - AppAuth
-=======
-  - RxAppState
-  - RxCocoa (= 6.2.0)
-  - RxDataSources
-  - RxSwift (= 6.2.0)
-  - Siren
-  - SnapKit (~> 5.0.0)
-  - SwiftLint
-  - Then
-
-SPEC REPOS:
-  trunk:
-    - Differentiator
->>>>>>> 0747f12c9463bdb8cebce4249a8e486c8be65805
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -209,22 +181,14 @@ SPEC REPOS:
     - lottie-ios
     - nanopb
     - PromisesObjC
-    - RxAppState
     - RxCocoa
-    - RxDataSources
     - RxRelay
     - RxSwift
     - Siren
     - SnapKit
-    - SwiftLint
-    - Then
 
 SPEC CHECKSUMS:
-<<<<<<< HEAD
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
-=======
-  Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
->>>>>>> 0747f12c9463bdb8cebce4249a8e486c8be65805
   Firebase: 629510f1a9ddb235f3a7c5c8ceb23ba887f0f814
   FirebaseAnalytics: 5506ea8b867d8423485a84b4cd612d279f7b0b8a
   FirebaseAuth: bcf0adeff88bda5dcb3beeabe5760f1226ab7b2f
@@ -245,20 +209,12 @@ SPEC CHECKSUMS:
   lottie-ios: c058aeafa76daa4cf64d773554bccc8385d0150e
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
-  RxAppState: 9c34f951d4ff8b9034f84016fe766202365bceb2
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
-  RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   Siren: 1f58945ba6e86a753eeaeddf0afa531cf05cdabf
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftLint: 6bc52a21f0fd44cab9aa2dc8e534fb9f5e3ec507
-  Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-<<<<<<< HEAD
 PODFILE CHECKSUM: b460a97fe70e9210d6353fc5b633f868c1011eae
-=======
-PODFILE CHECKSUM: d23c751a446bea128b29876a7220fc604b334de4
->>>>>>> 0747f12c9463bdb8cebce4249a8e486c8be65805
 
 COCOAPODS: 1.11.2
