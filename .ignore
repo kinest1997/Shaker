@@ -1,6 +1,6 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/xcode,swift,objective-c,git,cocoapods
-# Edit at https://www.toptal.com/developers/gitignore?templates=xcode,swift,objective-c,git,cocoapods
+# Created by https://www.toptal.com/developers/gitignore/api/xcode,swift,swiftpackagemanager,swiftpm,cocoapods,git,objective-c
+# Edit at https://www.toptal.com/developers/gitignore?templates=xcode,swift,swiftpackagemanager,swiftpm,cocoapods,git,objective-c
 
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
@@ -145,6 +145,15 @@ Dependencies/
 # https://github.com/johnno1962/injectionforxcode
 
 
+### SwiftPackageManager ###
+Packages
+xcuserdata
+*.xcodeproj
+
+
+### SwiftPM ###
+
+
 ### Xcode ###
 
 ## Xcode 8 and earlier
@@ -157,4 +166,4 @@ Dependencies/
 /*.gcno
 **/xcshareddata/WorkspaceSettings.xcsettings
 
-# End of https://www.toptal.com/developers/gitignore/api/xcode,swift,objective-c,git,cocoapods
+# End of https://www.toptal.com/developers/gitignore/api/xcode,swift,swiftpackagemanager,swiftpm,cocoapods,git,objective-c
