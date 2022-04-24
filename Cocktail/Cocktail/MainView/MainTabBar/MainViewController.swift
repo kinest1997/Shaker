@@ -25,7 +25,7 @@ class MainViewController: UITabBarController {
             case .community: return "Community".localized
             }
         }
-        
+         
         var image: UIImage? {
             switch self {
             case .today: return UIImage(systemName: "eyes")
@@ -64,6 +64,7 @@ class MainViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = .mainOrange
+        tabBar.backgroundColor = .white
         self.tabBar.barStyle = .default
         todayCocktailCollectionViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
@@ -74,8 +75,8 @@ class MainViewController: UITabBarController {
             UINavigationController(rootViewController: todayCocktailCollectionViewController),
             UINavigationController(rootViewController: cocktailRecipeViewController),
             UINavigationController(rootViewController: assistantViewController),
-            UINavigationController(rootViewController: settingsViewController),
-            UINavigationController(rootViewController: communityViewController)
+            UINavigationController(rootViewController: settingsViewController)
+//            UINavigationController(rootViewController: communityViewController)
         ]
     }
 }
