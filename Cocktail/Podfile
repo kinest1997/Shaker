@@ -7,8 +7,8 @@ target 'Cocktail' do
 
   # Pods for Cocktail
 
-pod 'SnapKit', '~> 5.0.0'
-pod 'Kingfisher', '~> 7.0'
+pod 'SnapKit'
+pod 'Kingfisher'
 pod 'lottie-ios'
 pod 'Siren'
 
@@ -19,8 +19,8 @@ pod 'Firebase/Storage'
 pod 'Firebase/Database'
 pod 'GoogleSignIn'
 
-pod 'RxSwift', '6.2.0'
-pod 'RxCocoa', '6.2.0'
+pod 'RxSwift'
+pod 'RxCocoa'
 
 end
 
