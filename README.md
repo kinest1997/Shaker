@@ -1,5 +1,40 @@
 # Cocktail App
 
+## 리팩토링 현황
+> 난개발 유사 MVC 에서 Rx + MVVM 으로
+
+### 홈화면
+- 홈화면: x
+
+### 레시피
+- 레시피: 완료(2021-01-27)
+
+### 마이페이지
+- 내술장: 완료 (2021-01-19)
+- 나의레시피: 완료 (2021-01-17)
+- 즐겨찾기: 완료 (2021-01-16)
+
+### 설정
+- 설정: x
+
+## 사용 라이브러리
+### Convention
+- SnapKit: AutoLayout 을 간결하게 작성하기 위해 사용
+- KingFisher: 이미지 캐싱
+- lottie: 간단한 애니메이션 구현
+- Then: UI관련 코드 가독성 개선
+- Siren: 업데이트 푸시알람
+
+### Rx
+- Rxswift: rx코드를 swift 문법에 결합시키기위해 사용
+- RxCocoa: RxSwift 와 cocoaTouch framework 결합위해 사용
+- RxAppstate: 라이프 사이클과 RxSwift 결합을 위해 사용
+
+### Server
+- FireBaseAuth: 애플 로그인 기능 추가및, uid 식별용
+- FireBaseDatabase: realtimeDatabase 로 칵테일 레시피 및 선호도 정보, 즐겨찾기 정보 관리를 위해 사용
+- FireBaseStorage: 칵테일 이미지 파일 관리를 위해 사용
+
 ## UI변천사
 
 | 화면 |초반 |중반 | 마무리 |
@@ -106,3 +141,5 @@
 | 오픈소스 라이브러리 고지 페이지 완성| SFSafariViewController 사용|
 |좋아요 싫어요 즐겨찾기 팝업 추가| 애니메이션 적용 실패...|
 | 코드정리 및 기타 수정사항 변경. 거의 완성단계| 
+|attributedString 정리| localization도 마무리|
+| 앱 출시! |
