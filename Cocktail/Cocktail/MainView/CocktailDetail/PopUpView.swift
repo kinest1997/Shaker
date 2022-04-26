@@ -11,7 +11,7 @@ import SnapKit
 
 class PopUpView: UIView {
     let textLabel = UILabel()
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(textLabel)
@@ -28,11 +28,11 @@ class PopUpView: UIView {
 
         self.backgroundColor = .mainGray
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func animating(text: String) {
         self.textLabel.text = text
         self.isHidden = false
@@ -40,7 +40,7 @@ class PopUpView: UIView {
             self.isHidden = true
         }
     }
-    //애니메이션 작동안해서 화남
+    // 애니메이션 작동안해서 화남
 //    var animating: Bool = false {
 //        willSet {
 //            self.isHidden = false

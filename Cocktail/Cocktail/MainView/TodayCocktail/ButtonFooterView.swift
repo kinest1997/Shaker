@@ -9,9 +9,9 @@ import UIKit
 import SnapKit
 
 class ButtonFooterView: UICollectionReusableView {
-    
+
     let bottomButton = UIButton()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         addSubview(bottomButton)

@@ -10,9 +10,9 @@ import UIKit
 import SnapKit
 
 class SettingCell: UITableViewCell {
-    
+
     let mainLabel = UILabel()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.addSubview(mainLabel)

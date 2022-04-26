@@ -12,11 +12,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
+
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        
-        if UserDefaults.standard.bool(forKey: "firstLaunch"){
+
+        if UserDefaults.standard.bool(forKey: "firstLaunch") {
             let loginViewController = LoginViewController()
             let loginViewModel = LoginViewModel()
             loginViewController.bind(loginViewModel)

@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '15.0'
+# platform :ios, '12.0'
 
 target 'Cocktail' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -11,6 +11,8 @@ pod 'SnapKit', '~> 5.0.0'
 pod 'Kingfisher', '~> 7.0'
 pod 'lottie-ios'
 pod 'Siren'
+pod 'Then'
+pod 'SwiftLint'
 
 pod 'Firebase/Analytics'
 pod 'Firebase/Auth'
@@ -21,6 +23,8 @@ pod 'GoogleSignIn'
 
 pod 'RxSwift', '6.2.0'
 pod 'RxCocoa', '6.2.0'
+pod 'RxAppState'
+pod 'RxDataSources'
 
 end
 

@@ -4,13 +4,13 @@ import Kingfisher
 import FirebaseDatabase
 import FirebaseAuth
 
-class CocktailDetailViewController: ViewController {
-    
+class CocktailDetailViewController: UIViewController {
+
     var cocktailData: Cocktail = Cocktail(name: "", craft: .blending, glass: .collins, recipe: [], ingredients: [], base: .assets, alcohol: .low, color: .various, mytip: "", drinkType: .longDrink, myRecipe: false, wishList: false, imageURL: "")
-    
+
     var likeData: [String: Bool] = [:] {
         didSet {
-            if likeData.contains(where: { (key: String, value: Bool) in
+            if likeData.contains(where: { (key: String, _: Bool) in
                 key == Auth.auth().currentUser?.uid
             }) {
                 switch likeData[Auth.auth().currentUser!.uid] {
@@ -22,20 +22,20 @@ class CocktailDetailViewController: ViewController {
                     return
                 }
             }
-            
+
             let likeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: likeData, choice: true)
             DispatchQueue.main.async { [weak self] in
                 self?.likeCountLabel.text = String(likeCount)
             }
-            
+
             let dislikeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: likeData, choice: false)
             DispatchQueue.main.async {[weak self] in
                 self?.disLikeCountLabel.text = String(dislikeCount)
-                self?.stopLoading()
+                self?.loadingView.isHidden = true
             }
         }
     }
-    
+
     var iLike: Bool? {
         didSet {
             switch iLike {
@@ -59,63 +59,65 @@ class CocktailDetailViewController: ViewController {
             }
         }
     }
-    
+
     let mainScrollView = UIScrollView()
     let mainView = UIView()
     let popUpView = PopUpView()
-    
+
     let wishListButton = UIButton()
-    
+
     let cocktailImageView = UIImageView()
     let imageSplitLine = UILabel()
     let nameLabel = UILabel()
     let alcoholSplitLine = UILabel()
-    
+
     let alcoholGuideLabel = UILabel()
     let alcoholStackView = UIStackView()
     let lowAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
     let midAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
     let highAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
     let alcoholLabel = UILabel()
-    
+
     let leftStackView = UIStackView()
     let centerLine = UIView()
     let rightStackView = UIStackView()
     let groupStackView = UIStackView()
-    
+
     let colorGuideLabel = UILabel()
     let colorLabel = UILabel()
-    
+
     let baseDrinkGuideLabel = UILabel()
     let baseDrinkLabel = UILabel()
-    
+
     let glassGuideLabel = UILabel()
     let glassLabel = UILabel()
-    
+
     let craftGuideLabel = UILabel()
     let craftLabel = UILabel()
-    
+
     let drinkTypeLabel = UILabel()
     let drinkTypeGuideLabel = UILabel()
-    
+
     let myTipLabel = UILabel()
-    
+
     let firstSplitLine = UILabel()
     let ingredientsGuideLabel = UILabel()
     let ingredientsLabel = UILabel()
-    
+
     let secondSplitLine = UILabel()
     let recipeGuideLabel = UILabel()
     let recipeLabel = UILabel()
-    
+
     let likeButton = UIButton()
     let likeCountLabel = UILabel()
     let disLikeButton = UIButton()
     let disLikeCountLabel = UILabel()
-    
+
+    let loadingView = LoadingView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.startLoading()
+        loadingView.isHidden = false
         attribute()
         layout()
         addBarButton()
@@ -123,7 +125,7 @@ class CocktailDetailViewController: ViewController {
             self?.likeData = data
         }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if cocktailData.myRecipe {
@@ -132,56 +134,56 @@ class CocktailDetailViewController: ViewController {
             }
         }
     }
-    
+
     func layout() {
         view.addSubview(mainScrollView)
         view.addSubview(popUpView)
         mainScrollView.addSubview(mainView)
-        
+
         [nameLabel, alcoholLabel, alcoholGuideLabel, alcoholStackView, ingredientsLabel, ingredientsGuideLabel, firstSplitLine, secondSplitLine, recipeLabel, recipeGuideLabel, myTipLabel, likeButton, likeCountLabel, disLikeCountLabel, disLikeButton, imageSplitLine, alcoholSplitLine].forEach { mainView.addSubview($0) }
-        
+
         [groupStackView, cocktailImageView, wishListButton].forEach { mainView.addSubview($0) }
-        
-        [leftStackView, centerLine, rightStackView].forEach{ groupStackView.addArrangedSubview($0) }
-        
+
+        [leftStackView, centerLine, rightStackView].forEach { groupStackView.addArrangedSubview($0) }
+
         [colorGuideLabel, baseDrinkGuideLabel, drinkTypeGuideLabel, glassGuideLabel, craftGuideLabel].forEach { leftStackView.addArrangedSubview($0) }
-        
+
         [colorLabel, baseDrinkLabel, drinkTypeLabel, glassLabel, craftLabel].forEach { rightStackView.addArrangedSubview($0) }
-        
+
         [lowAlcoholLabel, midAlcoholLabel, highAlcoholLabel].forEach {
             alcoholStackView.addArrangedSubview($0)
             $0.snp.makeConstraints {
                 $0.height.equalTo(lowAlcoholLabel.snp.width)
             }
         }
-        
-        //위에서부터 아래로 쭉 순서대로 찾으면 됨
+
+        // 위에서부터 아래로 쭉 순서대로 찾으면 됨
         wishListButton.snp.makeConstraints {
             $0.width.height.equalTo(30)
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(20)
         }
-        
+
         cocktailImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(wishListButton.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(50)
             $0.height.equalTo(cocktailImageView.snp.width)
         }
-        
+
         imageSplitLine.snp.makeConstraints {
             $0.top.equalTo(cocktailImageView.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(20)
         }
-        
+
         nameLabel.snp.makeConstraints {
             $0.top.equalTo(imageSplitLine.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
             $0.height.equalTo(40)
             $0.width.equalToSuperview()
         }
-        
+
         if cocktailData.myRecipe {
             alcoholSplitLine.snp.makeConstraints {
                 $0.top.equalTo(nameLabel.snp.bottom).offset(20)
@@ -194,184 +196,183 @@ class CocktailDetailViewController: ViewController {
                 $0.width.height.equalTo(30)
                 $0.top.equalTo(nameLabel.snp.bottom).offset(20)
             }
-            
+
             likeCountLabel.snp.makeConstraints {
                 $0.leading.trailing.equalTo(likeButton)
                 $0.top.equalTo(likeButton.snp.bottom)
             }
-            
+
             disLikeButton.snp.makeConstraints {
                 $0.trailing.equalTo(alcoholStackView.snp.trailing)
                 $0.width.height.equalTo(30)
                 $0.top.equalTo(likeButton)
             }
-            
+
             disLikeCountLabel.snp.makeConstraints {
                 $0.leading.trailing.equalTo(disLikeButton)
                 $0.top.equalTo(disLikeButton.snp.bottom)
             }
-            
+
             alcoholSplitLine.snp.makeConstraints {
                 $0.top.equalTo(disLikeCountLabel.snp.bottom).offset(20)
                 $0.leading.trailing.equalToSuperview()
                 $0.height.equalTo(20)
             }
         }
-        
+
         alcoholStackView.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.top.equalTo(alcoholSplitLine.snp.bottom).offset(20)
         }
-        
+
         alcoholGuideLabel.snp.makeConstraints {
             $0.centerY.equalTo(alcoholStackView)
             $0.trailing.equalTo(alcoholStackView.snp.leading).offset(-5)
         }
-        
+
         alcoholLabel.snp.makeConstraints {
             $0.centerY.equalTo(alcoholStackView)
             $0.leading.equalTo(alcoholStackView.snp.trailing).offset(5)
         }
-        
+
         myTipLabel.snp.makeConstraints {
             $0.top.equalTo(alcoholStackView.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().multipliedBy(0.8)
         }
-        
+
         groupStackView.snp.makeConstraints {
             $0.top.equalTo(myTipLabel.snp.bottom).offset(30)
 //            $0.width.equalToSuperview().multipliedBy(0.4)
             $0.centerX.equalToSuperview()
         }
-        
+
         centerLine.snp.makeConstraints {
             $0.width.equalTo(2)
         }
-        
+
         firstSplitLine.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(20)
             $0.centerX.equalToSuperview()
             $0.top.equalTo(groupStackView.snp.bottom).offset(50)
         }
-        
+
         ingredientsGuideLabel.snp.makeConstraints {
             $0.top.equalTo(firstSplitLine.snp.bottom).offset(50)
             $0.height.equalTo(40)
             $0.centerX.equalToSuperview()
         }
-        
+
         ingredientsLabel.snp.makeConstraints {
             $0.top.equalTo(ingredientsGuideLabel.snp.bottom).offset(50)
             $0.leading.trailing.equalToSuperview().inset(40)
             $0.centerX.equalToSuperview()
         }
-        
+
         secondSplitLine.snp.makeConstraints {
             $0.top.equalTo(ingredientsLabel.snp.bottom).offset(50)
             $0.width.equalTo(firstSplitLine)
             $0.height.equalTo(20)
             $0.centerX.equalToSuperview()
         }
-        
+
         recipeGuideLabel.snp.makeConstraints {
             $0.top.equalTo(secondSplitLine.snp.bottom).offset(50)
             $0.height.equalTo(40)
             $0.centerX.equalToSuperview()
         }
-        
+
         recipeLabel.snp.makeConstraints {
             $0.top.equalTo(recipeGuideLabel.snp.bottom).offset(30)
             $0.width.equalTo(ingredientsLabel)
             $0.centerX.equalToSuperview()
         }
-        
+
         mainScrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
+
         mainView.snp.makeConstraints {
             $0.width.equalTo(mainScrollView.frameLayoutGuide)
             $0.edges.equalTo(mainScrollView.contentLayoutGuide)
             $0.bottom.equalTo(recipeLabel.snp.bottom).offset(100)
         }
     }
-    
+
     func attribute() {
         view.backgroundColor = .white
         mainView.backgroundColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
-        //구분선의 색상 설정
+        // 구분선의 색상 설정
         [centerLine, firstSplitLine, secondSplitLine, imageSplitLine, alcoholSplitLine].forEach {
             $0.backgroundColor = .splitLineGray
         }
-        
-        //내용 설정하는곳
+
+        // 내용 설정하는곳
         [alcoholLabel, alcoholGuideLabel, myTipLabel, colorLabel, baseDrinkLabel, glassLabel, craftLabel, ingredientsLabel, recipeLabel, drinkTypeLabel, likeCountLabel, disLikeCountLabel].forEach {
             $0.textColor = .mainGray
             $0.font = .nexonFont(ofSize: 14, weight: .medium)
             $0.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 1000), for: .horizontal)
         }
-        
-        //제목 설정하는곳
+
+        // 제목 설정하는곳
         [colorGuideLabel, baseDrinkGuideLabel, glassGuideLabel, craftGuideLabel, drinkTypeGuideLabel, ingredientsGuideLabel, recipeGuideLabel].forEach {
             $0.textColor = .mainGray
             $0.font = .nexonFont(ofSize: 16, weight: .bold)
         }
-        
-        //제일 두꺼운 칵테일 이름 설정
+
+        // 제일 두꺼운 칵테일 이름 설정
         [nameLabel].forEach {
             $0.textAlignment = .center
             $0.textColor = .mainGray
             $0.font = .nexonFont(ofSize: 24, weight: .heavy)
         }
-        
+
         [alcoholLabel, alcoholGuideLabel, myTipLabel].forEach {
             $0.textAlignment = .center
             $0.numberOfLines = 0
         }
-        
+
         [colorLabel, baseDrinkLabel, glassLabel, craftLabel, drinkTypeLabel].forEach {
             $0.textAlignment = .left
         }
-        
+
         [colorGuideLabel, baseDrinkGuideLabel, glassGuideLabel, craftGuideLabel, drinkTypeGuideLabel].forEach {
             $0.textAlignment = .right
         }
-        
+
         [myTipLabel, recipeLabel, ingredientsLabel].forEach {
             $0.sizeToFit()
             $0.numberOfLines = 0
             $0.textColor = .mainGray
         }
-        
+
         [leftStackView, rightStackView].forEach {
             $0.axis = .vertical
             $0.distribution = .fillEqually
             $0.spacing = 10
         }
-        
+
         [likeButton, disLikeButton, likeCountLabel, disLikeCountLabel].forEach {
             $0.tintColor = .mainGray
         }
-        
+
         wishListButton.tintColor = .mainOrange
         cocktailImageView.contentMode = .scaleAspectFit
 
         alcoholStackView.distribution = .fillEqually
         alcoholStackView.alignment = .center
         alcoholStackView.spacing = 20
-        
+
         groupStackView.axis = .horizontal
         groupStackView.spacing = 10
         groupStackView.distribution = .fillProportionally
-        
+
         likeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsup"), for: .normal)
 
         disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
 
-        
         alcoholGuideLabel.text = "Alcohol".localized
         colorGuideLabel.text = "Color".localized
         baseDrinkGuideLabel.text = "Base".localized
@@ -383,7 +384,7 @@ class CocktailDetailViewController: ViewController {
 
         popUpView.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
         popUpView.isHidden = true
-        
+
         wishListButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self,
                   let _ = Auth.auth().currentUser?.uid else {
@@ -405,7 +406,7 @@ class CocktailDetailViewController: ViewController {
                 }
                 FirebaseRecipe.shared.uploadWishList()
         }), for: .touchUpInside)
-        
+
         likeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self,
                   let _ = Auth.auth().currentUser?.uid else {
@@ -425,7 +426,7 @@ class CocktailDetailViewController: ViewController {
                 }
             }
         }), for: .touchUpInside)
-        
+
         disLikeButton.addAction(UIAction(handler: {[weak self] _ in
             guard let self = self,
                   let _ = Auth.auth().currentUser?.uid else {
@@ -446,18 +447,18 @@ class CocktailDetailViewController: ViewController {
             }
         }), for: .touchUpInside)
     }
-    
+
     func addBarButton() {
         let editingButton = UIBarButtonItem(title: "Add".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
         navigationController?.navigationBar.isHidden = false
     }
-    
+
     @objc func startEditing() {
         guard let _ = Auth.auth().currentUser?.uid else {
                   self.pleaseLoginAlert()
                   return }
-        
+
         let addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
         addMyOwnCocktailRecipeViewController.editing(data: cocktailData)
         addMyOwnCocktailRecipeViewController.beforeEditingData = cocktailData
@@ -466,7 +467,7 @@ class CocktailDetailViewController: ViewController {
         addMyOwnCocktailRecipeViewController.choiceView.havePresetData = true
         show(addMyOwnCocktailRecipeViewController, sender: nil)
     }
-    
+
     func setData(data: Cocktail) {
         nameLabel.text = data.name.localized
         alcoholLabel.text = data.alcohol.rawValue.localized
@@ -490,13 +491,13 @@ class CocktailDetailViewController: ViewController {
         case .low:
             lowAlcoholLabel.tintColor = .mainOrange
         }
-        
+
         var justRecipe = data
         justRecipe.wishList = true
-        
+
         var wishListData = FirebaseRecipe.shared.wishList
         wishListData.indices.forEach { wishListData[$0].wishList = true }
-        
+
         if wishListData.contains(justRecipe) {
             self.cocktailData = justRecipe
             wishListButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)

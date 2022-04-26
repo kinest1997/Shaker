@@ -14,12 +14,12 @@ struct Provider: TimelineProvider {
         let entry = CocktailEntry(date: Date(), configuration: configuration)
         completion(entry)
     }
-    
+
     func placeholder(in context: Context) -> CocktailEntry {
         let configuration = Cocktail(name: "Martini".localized, craft: .blending, glass: .saucer, recipe: ["손으로 막휘젓기"], ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false, imageURL: "")
         return CocktailEntry(date: Date(), configuration: configuration)
     }
-    
+
     func getTimeline(in context: Context, completion: @escaping (Timeline<CocktailEntry>) -> Void) {
 //        let configuration = getWidgetRecipe().randomElement() ?? Cocktail(name: "Martini".localized, craft: .blending, glass: .cocktail, recipe: "손으로 막휘젓기", ingredients: [.baileys], base: .assets, alcohol: .high, color: .blue, mytip: "없습니다", drinkType: .longDrink, myRecipe: false, wishList: false)
 //        print(configuration)
@@ -35,11 +35,11 @@ struct CocktailEntry: TimelineEntry {
     let configuration: Cocktail
 }
 
-struct Cocktail_WidgetEntryView : View {
+struct Cocktail_WidgetEntryView: View {
     var entry: Provider.Entry
-    
+
     var body: some View {
-            VStack  {
+            VStack {
                 Image(uiImage: UIImage(named: entry.configuration.name) ?? UIImage(systemName: "circle")!)
                     .resizable()
                     .frame(width: 100, height: 100, alignment: .center)
@@ -55,7 +55,7 @@ struct Cocktail_WidgetEntryView : View {
 @main
 struct Cocktail_Widget: Widget {
     let kind: String = "Cocktail_Widget"
-    
+
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Cocktail_WidgetEntryView(entry: entry)

@@ -10,27 +10,28 @@ import RxSwift
 import RxCocoa
 
 struct LoginViewModel: LoginViewBiandable {
-    
+
     let startSignInWithGoogleFlow: Signal<Void>
     let startSignInWithAppleFlow: Signal<Void>
     let updateFirstLogin: Signal<Bool>
     let changeLoginView: Signal<Void>
-    
+
     let googleLogInButtonTapped = PublishRelay<Void>()
+
     let appleLoginButtonTapped = PublishRelay<Void>()
     let justUseButtonTapped = PublishRelay<Void>()
-    
+
     init() {
         startSignInWithAppleFlow = appleLoginButtonTapped
             .asSignal()
-        
+
         startSignInWithGoogleFlow = appleLoginButtonTapped
             .asSignal()
-        
+
         updateFirstLogin = appleLoginButtonTapped
             .map { false }
             .asSignal(onErrorJustReturn: false)
-        
+
         changeLoginView = justUseButtonTapped
             .asSignal()
     }

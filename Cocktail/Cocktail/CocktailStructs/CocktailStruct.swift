@@ -25,7 +25,7 @@ struct Cocktail: Codable, Hashable {
     var myRecipe: Bool
     var wishList: Bool
     var imageURL: String
-    
+
     enum Base: String, Codable, CaseIterable, CocktailCondition {
         case rum
         case vodka
@@ -36,11 +36,11 @@ struct Cocktail: Codable, Hashable {
         case liqueur
         case assets
         case beverage
-        
+
         var list: [Ingredients] {
             switch self {
             case .gin:
-                return [Cocktail.Ingredients.gin, Cocktail.Ingredients.bombaySapphire,Cocktail.Ingredients.tanquerayNoTen]
+                return [Cocktail.Ingredients.gin, Cocktail.Ingredients.bombaySapphire, Cocktail.Ingredients.tanquerayNoTen]
             case .rum:
                 return [Cocktail.Ingredients.darkRum, Cocktail.Ingredients.whiteRum, Cocktail.Ingredients.overProofRum, Cocktail.Ingredients.bacardi]
             case .vodka:
@@ -60,13 +60,13 @@ struct Cocktail: Codable, Hashable {
             }
         }
     }
-    
+
     enum DrinkType: String, Codable, CaseIterable, CocktailCondition {
         case longDrink
         case shortDrink
         case shooter
     }
-    
+
     enum Color: String, Codable, CaseIterable, CocktailCondition {
         case red
         case orange
@@ -79,7 +79,7 @@ struct Cocktail: Codable, Hashable {
         case clear
         case various
     }
-    
+
     enum Alcohol: String, Codable, CaseIterable, CocktailCondition {
         case high
         case mid
@@ -95,7 +95,7 @@ struct Cocktail: Codable, Hashable {
             }
         }
     }
-    
+
     enum Glass: String, Codable, CaseIterable, CocktailCondition {
         case highBall
         case shot
@@ -106,7 +106,7 @@ struct Cocktail: Codable, Hashable {
         case margarita
         case philsner
     }
-    
+
     enum Craft: String, Codable, CaseIterable, CocktailCondition {
         case build
         case shaking
@@ -114,27 +114,27 @@ struct Cocktail: Codable, Hashable {
         case stir
         case blending
     }
-    
+
     enum Ingredients: String, Codable, CaseIterable {
-        ///진
+        /// 진
         case gin
         case bombaySapphire
         case tanquerayNoTen
-        
-        ///보드카
+
+        /// 보드카
         case vodka
-        
-        ///위스키
+
+        /// 위스키
         case whiskey
         case scotchWhiskey
         case bourbonWhiskey
         case ryeWhiskey
         case jackDanielWhiskey
-        
-        ///데킬라
+
+        /// 데킬라
         case tequila
-        
-        ///베일리스
+
+        /// 베일리스
         case baileys
         case melonLiqueur
         case whiteCacaoLiqueur
@@ -156,11 +156,11 @@ struct Cocktail: Codable, Hashable {
         case angosturaBitters
         case aperol
         case cremeDeViolet
-        
-        ///브랜디
+
+        /// 브랜디
         case brandy
-        
-        ///음료
+
+        /// 음료
         case coke
         case tonicWater
         case milk
@@ -174,14 +174,14 @@ struct Cocktail: Codable, Hashable {
         case appleJuice
         case cider
         case lemonJuice
-        
-        ///럼
+
+        /// 럼
         case whiteRum
         case darkRum
         case overProofRum
         case bacardi
-        
-        ///라임
+
+        /// 라임
         case lime
         case limeSqueeze
         case limeSyrup

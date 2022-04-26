@@ -2,25 +2,25 @@ import UIKit
 import SnapKit
 
 class FilteredView: UIView {
-    
+
     var nowFiltering: Bool = false
-    
+
     let mainView = UIView()
     let mainTableView = UITableView()
     let resetButton = UIButton()
     let cancleButton = UIButton()
     let centerLabel = UILabel()
     let saveButton = UIButton()
-    
+
     let filterSections = ["Alcohol".localized, "Base".localized, "DrinkType".localized, "Craft".localized, "Glass".localized, "Color".localized ]
-    
+
     var cellIsChecked: [[Bool]] = []
-    
+
     typealias FilterData = (condition: [CocktailCondition], section: [CocktailCondition])
     var conditionsOfCocktail = [FilterData]()
-    
+
     let componentsOfCocktail: [[String]] = [Cocktail.Alcohol.allCases.map {$0.rawValue}, Cocktail.Base.allCases.map {$0.rawValue}, Cocktail.DrinkType.allCases.map {$0.rawValue}, Cocktail.Craft.allCases.map {$0.rawValue}, Cocktail.Glass.allCases.map {$0.rawValue}, Cocktail.Color.allCases.map {$0.rawValue} ]
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         saveButton.setTitle("Save".localized, for: .normal)
@@ -34,7 +34,7 @@ class FilteredView: UIView {
             (condition: [Cocktail.Glass](), section: Cocktail.Glass.allCases),
             (condition: [Cocktail.Color](), section: Cocktail.Color.allCases)
         ]
-        
+
         self.cellIsChecked = componentsOfCocktail.map {
             $0.map { _ in false }
         }
@@ -45,24 +45,24 @@ class FilteredView: UIView {
         mainView.backgroundColor = .white
         mainView.layer.cornerRadius = 10
         mainView.clipsToBounds = true
-        
+
         mainTableView.delegate = self
         mainTableView.dataSource = self
         mainTableView.register(FilterViewCell.self, forCellReuseIdentifier: "filterCell")
-        
+
         cancleButton.setImage(UIImage(systemName: "xmark"), for: .normal)
         cancleButton.tintColor = .black
-        
+
         [resetButton, saveButton].forEach {
             $0.setTitleColor(.black, for: .normal)
             $0.titleLabel!.font = .nexonFont(ofSize: 18, weight: .semibold)
             $0.setTitleColor(.mainGray, for: .normal)
         }
-        
+
         saveButton.backgroundColor = .tappedOrange
         saveButton.layer.cornerRadius = 15
         saveButton.clipsToBounds = true
-        
+
         self.mainTableView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(50)
             $0.bottom.equalToSuperview().inset(100)
@@ -79,29 +79,29 @@ class FilteredView: UIView {
             $0.height.equalTo(50)
             $0.width.equalToSuperview().multipliedBy(0.3)
         }
-        
+
         self.resetButton.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(20)
             $0.height.equalTo(50)
             $0.bottom.equalToSuperview().offset(-20)
             $0.width.equalToSuperview().multipliedBy(0.3)
         }
-        
+
         saveButton.setTitle("Save".localized, for: .normal)
         resetButton.setTitle("Reset".localized, for: .normal)
-        
+
         cancleButton.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
             $0.bottom.equalTo(mainTableView.snp.top)
             $0.width.equalTo(cancleButton.snp.height)
         }
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //걸러내는 함수
+
+    // 걸러내는 함수
     func sortingRecipes(origin: [Cocktail], alcohol: [Cocktail.Alcohol], base: [Cocktail.Base], drinktype: [Cocktail.DrinkType], craft: [Cocktail.Craft], glass: [Cocktail.Glass], color: [Cocktail.Color]) -> [Cocktail] {
         var alcoholSorted = [Cocktail]()
         var baseSorted = [Cocktail]()
@@ -109,7 +109,7 @@ class FilteredView: UIView {
         var craftSorted = [Cocktail]()
         var glassSorted = [Cocktail]()
         var colorSorted = [Cocktail]()
-        
+
         if alcohol.isEmpty {
             alcoholSorted = origin
         } else {
@@ -120,7 +120,7 @@ class FilteredView: UIView {
                 alcoholSorted.append(contentsOf: alcoholSortedRecipe)
             }
         }
-        
+
         if base.isEmpty {
             baseSorted = origin
         } else {
@@ -131,7 +131,7 @@ class FilteredView: UIView {
                 baseSorted.append(contentsOf: baseSortedRecipe)
             }
         }
-        
+
         if drinktype.isEmpty {
             drinktypeSorted = origin
         } else {
@@ -142,7 +142,7 @@ class FilteredView: UIView {
                 drinktypeSorted.append(contentsOf: sorted)
             }
         }
-        
+
         if craft.isEmpty {
             craftSorted = origin
         } else {
@@ -153,7 +153,7 @@ class FilteredView: UIView {
                 craftSorted.append(contentsOf: sorted)
             }
         }
-        
+
         if glass.isEmpty {
             glassSorted = origin
         } else {
@@ -164,7 +164,7 @@ class FilteredView: UIView {
                 glassSorted.append(contentsOf: sorted)
             }
         }
-        
+
         if color.isEmpty {
             colorSorted = origin
         } else {
@@ -182,35 +182,35 @@ class FilteredView: UIView {
 }
 
 extension FilteredView: UITableViewDelegate, UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         filterSections.count
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return filterSections[section].localized
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         componentsOfCocktail[section].count
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath) as? FilterViewCell else { return UITableViewCell()}
         cell.selectionStyle = .none
         cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]
         cell.nameLabel.text = componentsOfCocktail[indexPath.section][indexPath.row].localized
-        
+
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? FilterViewCell else { return }
-        
+
         if cellIsChecked[indexPath.section][indexPath.row] == true {
             cellIsChecked[indexPath.section][indexPath.row] = false
             cell.isChecked = cellIsChecked[indexPath.section][indexPath.row]

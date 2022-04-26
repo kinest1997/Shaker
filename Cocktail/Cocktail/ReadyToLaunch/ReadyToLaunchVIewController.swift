@@ -4,32 +4,32 @@ import RxCocoa
 import RxSwift
 
 protocol ReadyToLaunchViewBindable {
-    //View -> ViewModel
+    // View -> ViewModel
     var readytoLaunchButtonTapped: PublishRelay<Void> { get }
-    
-    //ViewModel -> View
+
+    // ViewModel -> View
     var showNextPage: Signal<Void> { get}
 }
 
 class ReadyToLaunchViewController: UIViewController {
-    
+
     let disposeBag = DisposeBag()
     let mainViewController = MainViewController()
-    
+
     let startTextLabel = UILabel()
     let nextButton = MainButton()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
         layout()
     }
-    
+
     func bind(_ viewModel: ReadyToLaunchViewBindable) {
         nextButton.rx.tap
             .bind(to: viewModel.readytoLaunchButtonTapped)
             .disposed(by: disposeBag)
-        
+
         viewModel.showNextPage
             .emit { [weak self] _ in
                 let scenes = UIApplication.shared.connectedScenes
@@ -39,14 +39,14 @@ class ReadyToLaunchViewController: UIViewController {
             }
             .disposed(by: disposeBag)
     }
-    
+
     func attribute() {
         self.view.backgroundColor = .white
         nextButton.setTitle("Start".localized, for: .normal)
         nextButton.backgroundColor = .tappedOrange
-        
+
         let originText = "Ready to launch Shaker".localized
-        
+
         if NSLocale.current.languageCode == "ko" {
             let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 3, length: 17), bigFont: UIFont.nexonFont(ofSize: 40, weight: .bold), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 36, weight: .semibold), orangeRange: NSRange(location: 0, length: 3))
             startTextLabel.attributedText = questionText
@@ -55,11 +55,11 @@ class ReadyToLaunchViewController: UIViewController {
 
             startTextLabel.attributedText = questionText
         }
-        
+
         startTextLabel.textAlignment = .center
         startTextLabel.numberOfLines = 0
     }
-    
+
     func layout() {
         [startTextLabel, nextButton].forEach { view.addSubview($0) }
         startTextLabel.snp.makeConstraints {

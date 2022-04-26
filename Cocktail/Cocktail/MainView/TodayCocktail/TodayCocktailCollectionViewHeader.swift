@@ -9,12 +9,12 @@ import UIKit
 import SnapKit
 
 class TodayCocktailCollectionViewHeader: UICollectionReusableView {
-    
+
     let sectionTextLabel = UILabel()
-    
+
     let topSplitLine = UILabel()
     let explainLabel = UILabel()
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         [topSplitLine, sectionTextLabel, explainLabel].forEach {
@@ -24,7 +24,7 @@ class TodayCocktailCollectionViewHeader: UICollectionReusableView {
             $0.top.equalTo(topSplitLine.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
         }
-        
+
         explainLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.leading.equalTo(sectionTextLabel)

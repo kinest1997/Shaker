@@ -11,12 +11,12 @@ import SnapKit
 /// 로딩뷰를 가진 뷰 컨트롤러
 class ViewController: UIViewController {
     private lazy var loadingView = LoadingView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(loadingView)
         self.loadingView.isHidden = true
-        
+
         loadingView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }

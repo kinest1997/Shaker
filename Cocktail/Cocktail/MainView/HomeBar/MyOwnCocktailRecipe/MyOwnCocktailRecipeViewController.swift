@@ -3,124 +3,97 @@ import SnapKit
 import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
+import RxSwift
+import RxCocoa
+import RxAppState
+
+protocol MyOwnCocktailRecipeViewBindable {
+    // view -> viewModel
+    var cellTapped: PublishRelay<IndexPath> { get }
+    var cellDeleted: PublishRelay<IndexPath> { get }
+    var viewWillappear: PublishSubject<Void> { get }
+    var addButtonTapped: PublishRelay<Void> { get }
+
+    // viewModel -> view
+    var updateCellData: Driver<[Cocktail]> { get }
+    var showDetailView: Signal<Cocktail> { get }
+    var showAddView: Signal<Void> { get }
+}
 
 class MyOwnCocktailRecipeViewController: UIViewController {
-    
-    var myOwnRecipe: [Cocktail] = []
-    
-    lazy var addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
-    
+
+    let disposeBag = DisposeBag()
+
+    let addMyOwnCocktailRecipeViewController = AddMyOwnCocktailRecipeViewController()
+
+    let detailViewController = CocktailDetailViewController()
+
     let mainTableView = UITableView()
-    
+
+    let rightAddButton = UIBarButtonItem(title: "Add".localized, style: .plain, target: nil, action: nil)
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
         title = "My Recipes".localized
-        myOwnRecipe = FirebaseRecipe.shared.myRecipe
-        
         view.addSubview(mainTableView)
+        mainTableView.rowHeight = 100
+
         mainTableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
         mainTableView.register(CocktailListCell.self, forCellReuseIdentifier: "CocktailListCell")
-        mainTableView.dataSource = self
-        mainTableView.delegate = self
-        let rightAddButton = UIBarButtonItem(title: "Add".localized, style: .plain, target: self, action: #selector(showAddView))
         navigationItem.rightBarButtonItem = rightAddButton
-        
-        addMyOwnCocktailRecipeViewController.myOwnRecipeData = { data in
-            FirebaseRecipe.shared.myRecipe.append(data)
-            FirebaseRecipe.shared.uploadMyRecipe()
-            self.mainTableView.reloadData()
-        }
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        myOwnRecipe = FirebaseRecipe.shared.myRecipe
-        if myOwnRecipe.isEmpty {
-            let emptyView = EmptyView()
-            emptyView.firstLabel.text = "There's no cocktail added".localized
-            emptyView.secondLabel.text = "Please add some cocktails".localized
-            mainTableView.tableHeaderView = emptyView
-        } else {
-            mainTableView.tableHeaderView = nil
-        }
-        mainTableView.reloadData()
-    }
-    
-    @objc func showAddView() {
-        addMyOwnCocktailRecipeViewController.choiceView.havePresetData = false
-        addMyOwnCocktailRecipeViewController.myTipTextView.text = "Your own tip".localized
-        addMyOwnCocktailRecipeViewController.textFieldArray.append(UITextField())
-        show(addMyOwnCocktailRecipeViewController, sender: nil)
+
+    func bind(_ viewModel: MyOwnCocktailRecipeViewBindable) {
+
+        self.rightAddButton.rx.tap
+            .bind(to: viewModel.addButtonTapped)
+            .disposed(by: disposeBag)
+
+        self.mainTableView.rx.itemSelected
+            .bind(to: viewModel.cellTapped)
+            .disposed(by: disposeBag)
+
+        self.rx.viewWillAppear
+            .map { _ in Void()}
+            .bind(to: viewModel.viewWillappear)
+            .disposed(by: disposeBag)
+
+        self.mainTableView.rx.itemDeleted
+            .bind(to: viewModel.cellDeleted)
+            .disposed(by: disposeBag)
+
+        viewModel.updateCellData
+            .drive(mainTableView.rx.items(cellIdentifier: "CocktailListCell", cellType: CocktailListCell.self)) { _, cocktail, cell in
+                cell.configure(data: cocktail)
+            }
+            .disposed(by: disposeBag)
+
+        viewModel.showDetailView
+            .emit(to: self.rx.showDetailView)
+            .disposed(by: disposeBag)
+
+        viewModel.showAddView
+            .emit(to: self.rx.showAddView)
+            .disposed(by: disposeBag)
     }
 }
 
-extension MyOwnCocktailRecipeViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        myOwnRecipe.count
+extension Reactive where Base: MyOwnCocktailRecipeViewController {
+    var showDetailView: Binder<Cocktail> {
+        return Binder(base) { base, cocktail in
+            base.detailViewController.setData(data: cocktail)
+            base.show(base.detailViewController, sender: nil)
+        }
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CocktailListCell") as? CocktailListCell else { return UITableViewCell() }
-        cell.configure(data: myOwnRecipe[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cocktailData = myOwnRecipe[indexPath.row]
-        let cocktailDetailViewController = CocktailDetailViewController()
-        cocktailDetailViewController.setData(data: cocktailData)
-        self.show(cocktailDetailViewController, sender: nil)
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        return .delete
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            guard let number = FirebaseRecipe.shared.myRecipe.firstIndex(of: myOwnRecipe[indexPath.row]) else { return }
-            
-            //내가 가진 레시피가 wishlist에도 추가되어있다면 myrecipe를 삭제할때도 wishlist에서도 동시에 삭제되도록 해주는코드
-            var recipeData = myOwnRecipe[indexPath.row]
-            recipeData.wishList = true
-            if FirebaseRecipe.shared.wishList.contains(recipeData) {
-                guard let wishNumber = FirebaseRecipe.shared.wishList.firstIndex(of: recipeData) else { return }
-                FirebaseRecipe.shared.wishList.remove(at: wishNumber)
-                FirebaseRecipe.shared.uploadWishList()
-            }
-            
-            //나의 레시피가 가진 주소값을 이용하여 Storage 의 데이터를 삭제하는 코드
-            let storage = Storage.storage()
-            let url = myOwnRecipe[indexPath.row].imageURL
-            let storageRef = storage.reference(forURL: url)
-            
-            storageRef.delete { error in
-                if let error = error{
-                    print(error)
-                }
-            }
-            
-            FirebaseRecipe.shared.myRecipe.remove(at: number)
-            FirebaseRecipe.shared.uploadMyRecipe()
-            myOwnRecipe = FirebaseRecipe.shared.myRecipe
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            if myOwnRecipe.isEmpty {
-                let emptyView = EmptyView()
-                emptyView.firstLabel.text = "There's no cocktail added".localized
-                emptyView.secondLabel.text = "Please add some cocktails".localized
-                mainTableView.tableHeaderView = emptyView
-            } else {
-                mainTableView.tableHeaderView = nil
-            }
+
+    var showAddView: Binder<Void> {
+        return Binder(base) { base, _ in
+            base.addMyOwnCocktailRecipeViewController.choiceView.havePresetData = false
+            base.addMyOwnCocktailRecipeViewController.myTipTextView.text = "Your own tip".localized
+            base.addMyOwnCocktailRecipeViewController.textFieldArray.append(UITextField())
+            base.show(base.addMyOwnCocktailRecipeViewController, sender: nil)
         }
     }
 }

@@ -15,7 +15,7 @@ class MainViewController: UITabBarController {
         case home
         case preference
         case community
-        
+
         var name: String {
             switch self {
             case .today: return "Recommendation".localized
@@ -25,7 +25,7 @@ class MainViewController: UITabBarController {
             case .community: return "Community".localized
             }
         }
-         
+
         var image: UIImage? {
             switch self {
             case .today: return UIImage(systemName: "eyes")
@@ -35,7 +35,7 @@ class MainViewController: UITabBarController {
             case .community: return UIImage(systemName: "message")
             }
         }
-        
+
         var selectedImage: UIImage? {
             switch self {
             case .today: return UIImage(systemName: "eyes.inverse")
@@ -46,13 +46,12 @@ class MainViewController: UITabBarController {
             }
         }
     }
-    
+
     let todayCocktailCollectionViewController = TodayCocktailCollectionViewController()
     let cocktailRecipeViewController = CocktailRecipeViewController()
     let assistantViewController = AssistantViewController()
     let settingsViewController = SettingTableViewController(style: .insetGrouped)
-    let communityViewController = MainCommunityViewController()
-    
+
     let tabBarItems: [Tab: UITabBarItem] = [
         .today: UITabBarItem(title: Tab.today.name, image: Tab.today.image, selectedImage: Tab.today.selectedImage),
         .recipe: UITabBarItem(title: Tab.recipe.name, image: Tab.recipe.image, selectedImage: Tab.recipe.selectedImage),
@@ -60,7 +59,7 @@ class MainViewController: UITabBarController {
         .preference: UITabBarItem(title: Tab.preference.name, image: Tab.preference.image, selectedImage: Tab.preference.selectedImage),
         .community: UITabBarItem(title: Tab.community.name, image: Tab.community.image, selectedImage: Tab.community.selectedImage)
     ]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tabBar.tintColor = .mainOrange
@@ -70,13 +69,11 @@ class MainViewController: UITabBarController {
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
         assistantViewController.tabBarItem = tabBarItems[.home]
         settingsViewController.tabBarItem = tabBarItems[.preference]
-        communityViewController.tabBarItem = tabBarItems[.community]
         self.viewControllers = [
             UINavigationController(rootViewController: todayCocktailCollectionViewController),
             UINavigationController(rootViewController: cocktailRecipeViewController),
             UINavigationController(rootViewController: assistantViewController),
             UINavigationController(rootViewController: settingsViewController)
-//            UINavigationController(rootViewController: communityViewController)
         ]
     }
 }

@@ -28,7 +28,7 @@ extension UINavigationController {
     static func setTitleFont(navigation: UINavigationController?) {
         let naviBarTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
         navigation?.navigationBar.titleTextAttributes = naviBarTextAttributes
-        
+
         let naviBarButtonTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 16, weight: .semibold)]
         navigation?.navigationItem.rightBarButtonItem?.setTitleTextAttributes(naviBarButtonTextAttributes, for: .normal)
         navigation?.navigationItem.leftBarButtonItem?.setTitleTextAttributes(naviBarButtonTextAttributes, for: .normal)
