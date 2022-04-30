@@ -13,13 +13,18 @@ import SnapKit
 import FirebaseDatabase
 import RxCocoa
 import RxSwift
+import GoogleSignIn
+import FirebaseCore
+import SwiftUI
 
 protocol LoginViewBiandable {
     // view -> viewModel
     var appleLoginButtonTapped: PublishRelay<Void> { get }
     var justUseButtonTapped: PublishRelay<Void> { get }
+        var googleLogInButtonTapped: PublishRelay<Void> { get }
 
     // viewModel -> view
+        var startSignInWithGoogleFlow: Signal<Void> { get }
     var startSignInWithAppleFlow: Signal<Void> { get }
     var updateFirstLogin: Signal<Bool> { get }
     var changeLoginView: Signal<Void> { get }
@@ -41,17 +46,22 @@ class LoginViewController: UIViewController {
 
     private var currentNonce: String?
 
+    let googleLoginButton = UIButton()
     let appleLoginButton = UIButton()
     let justUseButton = UIButton()
 
     func bind(_ viewModel: LoginViewBiandable) {
-//        view -> viewModel
+        //        view -> viewModel
         appleLoginButton.rx.tap
             .bind(to: viewModel.appleLoginButtonTapped)
             .disposed(by: disposeBag)
 
         justUseButton.rx.tap
             .bind(to: viewModel.justUseButtonTapped)
+            .disposed(by: disposeBag)
+
+        googleLoginButton.rx.tap
+            .bind(to: viewModel.googleLogInButtonTapped)
             .disposed(by: disposeBag)
 
         // viewModel -> view
@@ -72,6 +82,10 @@ class LoginViewController: UIViewController {
         viewModel.startSignInWithAppleFlow
             .emit(to: self.rx.startSignWithAppleLogin)
             .disposed(by: disposeBag)
+
+        viewModel.startSignInWithGoogleFlow
+            .emit(to: self.rx.startSignWithGoogleLogin)
+            .disposed(by: disposeBag)
     }
 
     override func viewDidLoad() {
@@ -82,6 +96,11 @@ class LoginViewController: UIViewController {
     }
 
     func attribute() {
+        googleLoginButton.contentMode = .scaleAspectFit
+        googleLoginButton.clipsToBounds = true
+        googleLoginButton.layer.cornerRadius = 15
+
+        googleLoginButton.addTarget(self, action: #selector(startSignInWithGoogleFlow), for: .touchUpInside)
         view.backgroundColor = .white
         mainImageView.image = UIImage(named: "logoImage")
         justUseButton.setTitle("Start without logging in".localized, for: .normal)
@@ -101,14 +120,16 @@ class LoginViewController: UIViewController {
         appleLoginButton.clipsToBounds = true
         appleLoginButton.contentMode = .scaleAspectFit
         if NSLocale.current.languageCode == "ko" {
+            googleLoginButton.setBackgroundImage(UIImage(named: "googleid_button"), for: .normal)
             appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button"), for: .normal)
         } else {
+            googleLoginButton.setBackgroundImage(UIImage(named: "googleid_button_eng"), for: .normal)
             appleLoginButton.setBackgroundImage(UIImage(named: "appleid_button_eng"), for: .normal)
         }
     }
 
     func layout() {
-        [appleLoginButton, justUseButton, loginlabel, mainImageView, shakerLabel].forEach {
+        [appleLoginButton, justUseButton, loginlabel, mainImageView, shakerLabel, googleLoginButton].forEach {
             view.addSubview($0)
         }
 
@@ -130,6 +151,11 @@ class LoginViewController: UIViewController {
             $0.top.equalTo(shakerLabel.snp.bottom)
             $0.height.equalTo(shakerLabel)
             $0.bottom.equalTo(mainImageView)
+        }
+
+        googleLoginButton.snp.makeConstraints {
+            $0.top.equalTo(loginlabel.snp.bottom)
+            $0.width.height.centerX.equalTo(appleLoginButton)
         }
 
         appleLoginButton.snp.makeConstraints {
@@ -184,10 +210,68 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                     return
                 }
                 guard let self = self else { return }
-                UserDefaults.standard.set(false, forKey: "firstLaunch")
-//                let colorBind = ColorChoiceViewModel()
-//                self.colorChoiceViewController.bind(colorBind)
-                self.show(self.colorChoiceViewController, sender: nil)
+                DispatchQueue.main.async {
+                    UserDefaults.standard.set(false, forKey: "firstLaunch")
+                    //                let colorBind = ColorChoiceViewModel()
+                    //                self.colorChoiceViewController.bind(colorBind)
+                    self.show(self.colorChoiceViewController, sender: nil)
+                }
+            }
+        }
+    }
+}
+
+extension UIViewController {
+    
+    /// 오류 처리를 위한 failure 추후 분기처리 하여 복잡도 증대시켜야함
+    func failure(_ error: Error) {
+        self.showAlert(title: "오류가 발생하였습니다", message: error.localizedDescription)
+    }
+
+    /// 가장 간단한 형태의 alert이다
+    func showAlert(title: String, message: String) {
+        let alertcontroller = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        DispatchQueue.main.async { [weak self] in
+            self?.show(alertcontroller, sender: nil)
+        }
+    }
+}
+
+extension LoginViewController {
+    @objc
+    func startSignInWithGoogleFlow() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        let config = GIDConfiguration(clientID: clientID)
+
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) {[weak self] user, error in
+
+            guard error == nil else {
+                self?.showAlert(title: "로그인중에 오류가 발생하였습니다", message: "앱을 종료한후 다시 실행해주세요")
+                return
+            }
+
+            guard let authentication = user?.authentication,
+                  let idToken = authentication.idToken
+            else {
+                return
+            }
+
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                           accessToken: authentication.accessToken)
+
+            Auth.auth().signIn(with: credential) {[weak self] _, error in
+                if let error = error {
+                    print("Google Login Error", error)
+                    return
+                }
+                guard let self = self else { return }
+                DispatchQueue.main.async {
+                    UserDefaults.standard.set(false, forKey: "firstLaunch")
+                    //                let colorBind = ColorChoiceViewModel()
+                    //                self.colorChoiceViewController.bind(colorBind)
+                    self.show(self.colorChoiceViewController, sender: nil)
+                }
             }
         }
     }
@@ -262,4 +346,23 @@ extension Reactive where Base: LoginViewController {
             base.startSignInWithAppleFlow()
         }
     }
+
+    var startSignWithGoogleLogin: Binder<Void> {
+        return Binder(base) { base, _ in
+            base.startSignInWithGoogleFlow()
+        }
+    }
 }
+
+// struct VCPreview: PreviewProvider {
+//    static var devices = ["iPhone SE"]
+//
+//    static var previews: some View {
+//        ForEach(devices, id: \.self) { deviceName in
+//            LoginViewController()
+//                .toPreview()
+//                .previewDevice(PreviewDevice(rawValue: deviceName))
+//                .previewDisplayName(deviceName)
+//        }
+//    }
+// }

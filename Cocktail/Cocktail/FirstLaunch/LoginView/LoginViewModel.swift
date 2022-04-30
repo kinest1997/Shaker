@@ -17,7 +17,6 @@ struct LoginViewModel: LoginViewBiandable {
     let changeLoginView: Signal<Void>
 
     let googleLogInButtonTapped = PublishRelay<Void>()
-
     let appleLoginButtonTapped = PublishRelay<Void>()
     let justUseButtonTapped = PublishRelay<Void>()
 
