@@ -8,39 +8,40 @@
 import UIKit
 import SnapKit
 
-class DrinkTypeChoiceViewController: UIViewController {
+final class DrinkTypeChoiceViewController: UIViewController {
     
-    var drinkTypeSelected: Cocktail.DrinkType?
+    private var drinkTypeSelected: Cocktail.DrinkType?
     
-    var filteredRecipe = [Cocktail]()
+    private var filteredRecipe = [Cocktail]()
     
-    let explainView = UIView()
-    let exitbutton = UIButton()
+    private let explainView = UIView()
+    private let exitbutton = UIButton()
     
-    let explainStackView = UIStackView()
-    let ozExplainLabel = UILabel()
-    let shotExplainLabel = UILabel()
-    let shortExplainLabel = UILabel()
-    let longExplainLabel = UILabel()
+    private let explainStackView = UIStackView()
+    private let ozExplainLabel = UILabel()
+    private let shotExplainLabel = UILabel()
+    private let shortExplainLabel = UILabel()
+    private let longExplainLabel = UILabel()
     
-    let questionButton = UIButton()
-    let questionLabel = UILabel()
+    private let questionButton = UIButton()
+    private let questionLabel = UILabel()
     
-    let mainStackView = UIStackView()
+    private let mainStackView = UIStackView()
     
-    let shooterButton = UIButton()
-    let shortDrinkButton = UIButton()
-    let longDrinkButton = UIButton()
-    let nextButton = MainButton()
+    private let shooterButton = UIButton()
+    private let shortDrinkButton = UIButton()
+    private let longDrinkButton = UIButton()
+    private let nextButton = MainButton()
     
     var myFavor: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         attribute()
     }
     
-    func layout() {
+    private func layout() {
         [questionLabel, mainStackView, nextButton, explainView, questionButton].forEach {
             view.addSubview($0)
         }
@@ -107,7 +108,7 @@ class DrinkTypeChoiceViewController: UIViewController {
         }
     }
     
-    func attribute() {
+    private func attribute() {
         let originText = "Favorite cocktail Size".localized
 
         if NSLocale.current.languageCode == "ko" {
@@ -203,7 +204,7 @@ class DrinkTypeChoiceViewController: UIViewController {
         }), for: .touchUpInside)
     }
     
-    func setImageAndData(button: UIButton, drinkType: Cocktail.DrinkType) {
+    private func setImageAndData(button: UIButton, drinkType: Cocktail.DrinkType) {
         [shooterButton, shortDrinkButton, longDrinkButton].forEach {
             $0.backgroundColor = .white
         }
@@ -212,7 +213,7 @@ class DrinkTypeChoiceViewController: UIViewController {
         nextButton.isEnabled = true
     }
     
-    func buttonLabelCountUpdate(button: UIButton) {
+    private func buttonLabelCountUpdate(button: UIButton) {
         let number = filteredRecipe.filter {
             $0.drinkType == drinkTypeSelected
         }.count

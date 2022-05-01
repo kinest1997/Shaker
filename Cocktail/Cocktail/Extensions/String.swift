@@ -9,10 +9,12 @@ import Foundation
 import UIKit
 
 extension String {
+    /// 로컬라이즈된 string을 반환해준다
     var localized: String {
         return NSLocalizedString(self, tableName: "Localizable", value: self, comment: "")
     }
     
+    /// 레시피의 ARRAY를받아서 1,2,3,4 순으로 반환해준다
     static func makeRecipeText(recipe: [String]) -> String {
         let spaceStrings = recipe.enumerated().map {
             """
@@ -26,6 +28,7 @@ extension String {
         return fullString
     }
     
+    /// 재료의 ARRAY를 받아서 1,2,3,4 순으로반환해준다
     static func makeIngredientsText(ingredients: [Cocktail.Ingredients]) -> String {
         
         let spaceStrings = ingredients.enumerated().map {
@@ -43,6 +46,7 @@ extension String {
 }
 
 extension NSMutableAttributedString {
+    /// 큰 주황색 텍스트가 있는 타이틀을 만들어준다
     static func addBigOrangeText(text: String, firstRange: NSRange, bigFont: UIFont, secondRange: NSRange, smallFont: UIFont, orangeRange: NSRange) -> NSMutableAttributedString {
         let nsText = NSMutableAttributedString(string: text)
         let mainColor = UIColor.mainGray
@@ -58,6 +62,7 @@ extension NSMutableAttributedString {
         return nsText
     }
     
+    /// 주황색 글자를 만들어준다
     static func addOrangeText(text: String, firstRange: NSRange, secondRange: NSRange, smallFont: UIFont, orangeRange: NSRange) -> NSMutableAttributedString {
         let nsText = NSMutableAttributedString(string: text)
         let mainColor = UIColor.mainGray

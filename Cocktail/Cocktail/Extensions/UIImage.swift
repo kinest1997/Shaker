@@ -1,7 +1,7 @@
 import UIKit
 
-///이미지 크기 변환 해주는것
 extension UIImage {
+    ///이미지 크기 변환 해주는것
     func resize()-> UIImage{
         let size = CGSize(width: 200, height: 200)
         let renderer = UIGraphicsImageRenderer(size: size)

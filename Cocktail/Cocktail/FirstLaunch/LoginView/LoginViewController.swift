@@ -25,24 +25,24 @@ protocol LoginViewBiandable {
     var changeLoginView: Signal<Void> { get }
 }
 
-class LoginViewController: UIViewController {
+final class LoginViewController: ViewController, RxController {
     
-    let colorChoiceViewController = ColorChoiceViewController()
+    private let colorChoiceViewController = ColorChoiceViewController()
     
     let disposeBag = DisposeBag()
     
-    let mainImageView = UIImageView()
+    private let mainImageView = UIImageView()
     
-    let userNotiCenter = UNUserNotificationCenter.current()
+    private let userNotiCenter = UNUserNotificationCenter.current()
     
-    let mainViewController = MainViewController()
-    let shakerLabel = UILabel()
-    let loginlabel = UILabel()
+    private let mainViewController = MainViewController()
+    private let shakerLabel = UILabel()
+    private let loginlabel = UILabel()
     
     private var currentNonce: String?
     
-    let appleLoginButton = UIButton()
-    let justUseButton = UIButton()
+    private let appleLoginButton = UIButton()
+    private let justUseButton = UIButton()
     
     func bind(_ viewModel: LoginViewBiandable) {
 //        view -> viewModel
@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
         attribute()
     }
     
-    func attribute() {
+    private func attribute() {
         view.backgroundColor = .white
         mainImageView.image = UIImage(named: "logoImage")
         justUseButton.setTitle("Start without logging in".localized, for: .normal)
@@ -107,7 +107,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func layout() {
+    private func layout() {
         [appleLoginButton, justUseButton, loginlabel, mainImageView, shakerLabel].forEach {
             view.addSubview($0)
         }
@@ -151,7 +151,7 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    func requestAuthNoti() {
+    private  func requestAuthNoti() {
         let notiAuthOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])
         userNotiCenter.requestAuthorization(options: notiAuthOptions) { (success, error) in
             if let error = error {
@@ -162,7 +162,7 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    private func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
@@ -194,7 +194,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
 }
 
 extension LoginViewController {
-    func startSignInWithAppleFlow() {
+    private func startSignInWithAppleFlow() {
         let nonce = randomNonceString()
         currentNonce = nonce
         let appleIDProvider = ASAuthorizationAppleIDProvider()

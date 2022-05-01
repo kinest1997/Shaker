@@ -11,13 +11,13 @@ protocol ReadyToLaunchViewBindable {
     var showNextPage: Signal<Void> { get}
 }
 
-class ReadyToLaunchViewController: UIViewController {
+final class ReadyToLaunchViewController: UIViewController {
     
     let disposeBag = DisposeBag()
-    let mainViewController = MainViewController()
+    private let mainViewController = MainViewController()
     
-    let startTextLabel = UILabel()
-    let nextButton = MainButton()
+    private let startTextLabel = UILabel()
+    private let nextButton = MainButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class ReadyToLaunchViewController: UIViewController {
         layout()
     }
     
-    func bind(_ viewModel: ReadyToLaunchViewBindable) {
+    private func bind(_ viewModel: ReadyToLaunchViewBindable) {
         nextButton.rx.tap
             .bind(to: viewModel.readytoLaunchButtonTapped)
             .disposed(by: disposeBag)
@@ -40,7 +40,7 @@ class ReadyToLaunchViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    func attribute() {
+    private func attribute() {
         self.view.backgroundColor = .white
         nextButton.setTitle("Start".localized, for: .normal)
         nextButton.backgroundColor = .tappedOrange
@@ -60,7 +60,7 @@ class ReadyToLaunchViewController: UIViewController {
         startTextLabel.numberOfLines = 0
     }
     
-    func layout() {
+    private func layout() {
         [startTextLabel, nextButton].forEach { view.addSubview($0) }
         startTextLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()

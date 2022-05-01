@@ -17,6 +17,7 @@
 		3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */; };
 		3D48C212275A13A2001B40FC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48C211275A13A2001B40FC /* LoadingView.swift */; };
 		3D535666281E4E46004A3538 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D535665281E4E46004A3538 /* ViewController.swift */; };
+		3D535668281E5AAC004A3538 /* RxController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D535667281E5AAC004A3538 /* RxController.swift */; };
 		3D5685D4278AFDB400B9F5CD /* YouTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685D3278AFDB400B9F5CD /* YouTube.swift */; };
 		3D5685D7278B042300B9F5CD /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685D6278B042300B9F5CD /* Recommendation.swift */; };
 		3D5685D9278B048100B9F5CD /* CocktailLikeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685D8278B048100B9F5CD /* CocktailLikeList.swift */; };
@@ -120,6 +121,7 @@
 		3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceViewController.swift; sourceTree = "<group>"; };
 		3D48C211275A13A2001B40FC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		3D535665281E4E46004A3538 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3D535667281E5AAC004A3538 /* RxController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxController.swift; sourceTree = "<group>"; };
 		3D5685D3278AFDB400B9F5CD /* YouTube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTube.swift; sourceTree = "<group>"; };
 		3D5685D6278B042300B9F5CD /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		3D5685D8278B048100B9F5CD /* CocktailLikeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailLikeList.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				3D21D4C12733E9C300FE2896 /* UIImage.swift */,
 				7D4AF9052760D57B0093C3C2 /* UIApplication.swift */,
 				7D4AF9072760D5840093C3C2 /* UIViewController.swift */,
+				3D535667281E5AAC004A3538 /* RxController.swift */,
 				3DC6AC4F2768D68C004E4565 /* TabBarController.swift */,
 				3DA05529277F0F9100966C90 /* UIFont.swift */,
 				3DA05531278080C000966C90 /* UIColor.swift */,
@@ -691,6 +694,7 @@
 				3D74812427366C0E0092BD74 /* WhatIHaveViewController.swift in Sources */,
 				3D5685D4278AFDB400B9F5CD /* YouTube.swift in Sources */,
 				3D7F17C32734D5FF006EDCF9 /* FilteredView.swift in Sources */,
+				3D535668281E5AAC004A3538 /* RxController.swift in Sources */,
 				3DBD0F5E27833BE6001FA460 /* HashTagCell.swift in Sources */,
 				3D6C6D452732B86100C70276 /* CocktailListCell.swift in Sources */,
 				3DE56B31275D080A0087D979 /* TodayCocktailCollectionViewHeader.swift in Sources */,
