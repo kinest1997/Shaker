@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import Lottie
 
-class LoadingView: UIView {
+final class LoadingView: UIView {
     
     let explainLabel = UILabel()
     

@@ -5,9 +5,7 @@ import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
 
-final class AddMyOwnCocktailRecipeViewController: UIViewController {
-    
-    let loadingView = LoadingView()
+final class AddMyOwnCocktailRecipeViewController: ViewController {
     
     var alcohol: Cocktail.Alcohol?
     var color: Cocktail.Color?
@@ -352,14 +350,13 @@ final class AddMyOwnCocktailRecipeViewController: UIViewController {
         myTipLabel.text = "Tip".localized
         drinkTypeLabel.text = "DrinkType".localized
         ingredientsLabel.text = "Ingredients".localized
-        loadingView.isHidden = true
         cameraImage.tintColor = .black
         centerLine.backgroundColor = .splitLineGray
         addRecipeTableView.backgroundView?.backgroundColor = .white
     }
     
-    func layout() {
-        [addRecipeTableView, choiceView, loadingView].forEach {
+    private func layout() {
+        [addRecipeTableView, choiceView].forEach {
             view.addSubview($0)
         }
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 850)
@@ -380,10 +377,6 @@ final class AddMyOwnCocktailRecipeViewController: UIViewController {
         
         [alcoholChoiceButton, colorChoiceButton, baseDrinkChoiceButton, drinkTypeChoiceButton, glassChoiceButton, craftChoiceButton].forEach {
             rightStackView.addArrangedSubview($0)
-        }
-        
-        loadingView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
         }
 
         cocktailImageView.snp.makeConstraints {
@@ -515,8 +508,7 @@ final class AddMyOwnCocktailRecipeViewController: UIViewController {
                     FirebaseRecipe.shared.myRecipe.remove(at: number)
                 }
             }
-            self.loadingView.explainLabel.text = "Saving it in my recipe".localized
-            self.loadingView.isHidden = false
+            self.startLoading(text: "Saving it in my recipe".localized)
             
             guard let convertedImage = image.pngData(),
                   let uid = Auth.auth().currentUser?.uid else { return }
@@ -538,7 +530,7 @@ final class AddMyOwnCocktailRecipeViewController: UIViewController {
                     let cocktailDetailViewController = CocktailDetailViewController()
                     cocktailDetailViewController.setData(data: myRecipe)
                     
-                    self.loadingView.isHidden = true
+                    self.stopLoading()
                     self.navigationController?.popToRootViewController(animated: true)
                     self.show(cocktailDetailViewController, sender: nil)
                 }

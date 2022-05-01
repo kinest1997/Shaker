@@ -4,7 +4,7 @@ import Kingfisher
 import FirebaseDatabase
 import FirebaseAuth
 
-final class CocktailDetailViewController: UIViewController {
+final class CocktailDetailViewController: ViewController {
     
     var cocktailData: Cocktail = Cocktail(name: "", craft: .blending, glass: .collins, recipe: [], ingredients: [], base: .assets, alcohol: .low, color: .various, mytip: "", drinkType: .longDrink, myRecipe: false, wishList: false, imageURL: "")
     
@@ -31,7 +31,7 @@ final class CocktailDetailViewController: UIViewController {
             let dislikeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: likeData, choice: false)
             DispatchQueue.main.async {[weak self] in
                 self?.disLikeCountLabel.text = String(dislikeCount)
-                self?.loadingView.isHidden = true
+                self?.stopLoading()
             }
         }
     }
@@ -113,11 +113,9 @@ final class CocktailDetailViewController: UIViewController {
     private let disLikeButton = UIButton()
     private let disLikeCountLabel = UILabel()
     
-    let loadingView = LoadingView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingView.isHidden = false
+        self.startLoading()
         attribute()
         layout()
         addBarButton()

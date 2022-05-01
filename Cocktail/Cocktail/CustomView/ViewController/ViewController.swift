@@ -10,6 +10,7 @@ import SnapKit
 
 /// 로딩뷰를 가진 뷰 컨트롤러
 class ViewController: UIViewController {
+    /// 맥주모양 로딩뷰
     private lazy var loadingView = LoadingView()
     
     override func viewDidLoad() {
@@ -24,9 +25,11 @@ class ViewController: UIViewController {
     
     /// 로딩 시작및 로딩 문구를 설정해준다
     func startLoading(text: String = "") {
+        self.view.bringSubviewToFront(loadingView)
         self.loadingView.explainLabel.text = text
         self.loadingView.isHidden = false
     }
+    
     /// 로딩 종료
     func stopLoading() {
         self.loadingView.isHidden = true
