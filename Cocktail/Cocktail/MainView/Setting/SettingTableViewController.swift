@@ -150,11 +150,26 @@ extension SettingTableViewController {
 ///Actions per indexPath.row
 extension SettingTableViewController {
     private func requestAppStoreReview() {
-        guard let appStoreURL = URL(string: "https://apps.apple.com/app/id1597875622") else { return }    //TODO: 앱아이디 입력해줄 것 예)id100043049583
-        var components = URLComponents(url: appStoreURL, resolvingAgainstBaseURL: false)
-        components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
-        guard let writeReviewURL = components?.url else { return }
-        UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+        let scenes = UIApplication.shared.connectedScenes
+        guard let windowScene = scenes.first as? UIWindowScene else { return }
+        
+        guard let count = UserDefaults.standard.value(forKey: "ReviewCount") as? Int else {
+            UserDefaults.standard.set(1, forKey: "ReviewCount")
+            SKStoreReviewController.requestReview(in: windowScene)
+            return
+        }
+        
+        if count < 2 {
+            let count = count + 1
+            UserDefaults.standard.set(count, forKey: "ReviewCount")
+            SKStoreReviewController.requestReview(in: windowScene)
+        } else {
+            guard let appStoreURL = URL(string: "https://apps.apple.com/app/id1597875622") else { return }    //TODO: 앱아이디 입력해줄 것 예)id100043049583
+            var components = URLComponents(url: appStoreURL, resolvingAgainstBaseURL: false)
+            components?.queryItems = [URLQueryItem(name: "action", value: "write-review")]
+            guard let writeReviewURL = components?.url else { return }
+            UIApplication.shared.open(writeReviewURL, options: [:], completionHandler: nil)
+        }
     }
     
     private func setlinkAction(appURL: String, webURL: String){

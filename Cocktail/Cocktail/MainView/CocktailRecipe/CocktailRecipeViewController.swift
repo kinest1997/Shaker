@@ -156,6 +156,7 @@ class CocktailRecipeViewController: UIViewController {
             }
             self.filterView.nowFiltering = false
             self.filterView.isHidden = true
+            self.mainTableView.tableHeaderView = nil
             self.filterView.mainTableView.reloadData()
             self.mainTableView.reloadData()
         }), for: .touchUpInside)

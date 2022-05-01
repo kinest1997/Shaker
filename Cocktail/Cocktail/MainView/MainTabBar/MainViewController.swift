@@ -59,6 +59,7 @@ class MainViewController: UITabBarController {
         super.viewDidLoad()
         tabBar.tintColor = .mainOrange
         self.tabBar.barStyle = .default
+        self.tabBar.backgroundColor = .white
         todayCocktailCollectionViewController.tabBarItem = tabBarItems[.today]
         cocktailRecipeViewController.tabBarItem = tabBarItems[.recipe]
         assistantViewController.tabBarItem = tabBarItems[.home]
