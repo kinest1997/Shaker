@@ -5,11 +5,10 @@
 //  Created by 강희성 on 2022/02/26.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-class EmptyView: UIView {
+final class EmptyView: UIView {
     
     let firstLabel = UILabel()
     let secondLabel = UILabel()

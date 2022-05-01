@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class HashTagCell: UICollectionViewCell {
+final class HashTagCell: UICollectionViewCell {
     
     let textLabel = UILabel()
     

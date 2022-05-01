@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TodayCocktailCollectionViewCell: UICollectionViewCell {
+final class TodayCocktailCollectionViewCell: UICollectionViewCell {
     
     let mainImageView = UIImageView()
 

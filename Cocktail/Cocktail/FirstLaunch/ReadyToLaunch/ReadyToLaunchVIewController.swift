@@ -25,7 +25,7 @@ final class ReadyToLaunchViewController: UIViewController {
         layout()
     }
     
-    private func bind(_ viewModel: ReadyToLaunchViewBindable) {
+    func bind(_ viewModel: ReadyToLaunchViewBindable) {
         nextButton.rx.tap
             .bind(to: viewModel.readytoLaunchButtonTapped)
             .disposed(by: disposeBag)
@@ -52,7 +52,7 @@ final class ReadyToLaunchViewController: UIViewController {
             startTextLabel.attributedText = questionText
         } else {
             let questionText = NSMutableAttributedString.addBigOrangeText(text: originText, firstRange: NSRange(location: 0, length: 16), bigFont: UIFont.nexonFont(ofSize: 40, weight: .bold), secondRange: NSRange(), smallFont: UIFont.nexonFont(ofSize: 36, weight: .semibold), orangeRange: NSRange(location: 16, length: 6))
-
+            
             startTextLabel.attributedText = questionText
         }
         

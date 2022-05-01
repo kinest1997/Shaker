@@ -7,7 +7,7 @@
 import UIKit
 import SnapKit
 
-class TitleHeaderView: UICollectionReusableView {
+final class TitleHeaderView: UICollectionReusableView {
     
     let sectionTextLabel = UILabel()
     

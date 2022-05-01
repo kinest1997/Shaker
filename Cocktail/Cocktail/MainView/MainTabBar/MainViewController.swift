@@ -5,10 +5,9 @@
 //  Created by 강희성 on 2021/11/02.
 //
 
-import Foundation
 import UIKit
 
-class MainViewController: UITabBarController {
+final class MainViewController: UITabBarController {
     enum Tab: Int {
         case today
         case recipe
@@ -43,12 +42,12 @@ class MainViewController: UITabBarController {
         }
     }
     
-    let todayCocktailCollectionViewController = TodayCocktailCollectionViewController()
-    let cocktailRecipeViewController = CocktailRecipeViewController()
-    let assistantViewController = AssistantViewController()
-    let settingsViewController = SettingTableViewController(style: .insetGrouped)
+    private let todayCocktailCollectionViewController = TodayCocktailCollectionViewController()
+    private let cocktailRecipeViewController = CocktailRecipeViewController()
+    private let assistantViewController = AssistantViewController()
+    private let settingsViewController = SettingTableViewController(style: .insetGrouped)
     
-    let tabBarItems: [Tab: UITabBarItem] = [
+    private let tabBarItems: [Tab: UITabBarItem] = [
         .today: UITabBarItem(title: Tab.today.name, image: Tab.today.image, selectedImage: Tab.today.selectedImage),
         .recipe: UITabBarItem(title: Tab.recipe.name, image: Tab.recipe.image, selectedImage: Tab.recipe.selectedImage),
         .home: UITabBarItem(title: Tab.home.name, image: Tab.home.image, selectedImage: Tab.home.selectedImage),

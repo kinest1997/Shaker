@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class CocktailRecipeViewController: UIViewController {
+final class CocktailRecipeViewController: UIViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     

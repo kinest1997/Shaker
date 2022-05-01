@@ -4,7 +4,7 @@ import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
 
-class MyOwnCocktailRecipeViewController: UIViewController {
+final class MyOwnCocktailRecipeViewController: UIViewController {
     
     var myOwnRecipe: [Cocktail] = []
     

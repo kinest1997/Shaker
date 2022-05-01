@@ -19,17 +19,17 @@ protocol ColorChoiceViewBindable {
 }
 
 final class ColorChoiceViewController: UIViewController {
-    private let alcoholChoiceViewController = AlcoholChoiceViewController()
+    let alcoholChoiceViewController = AlcoholChoiceViewController()
     
     private let questionLabel = UILabel()
     
     var myFavor: Bool = true
     
     private let colorArray = Cocktail.Color.allCases
-    private var selectedColor = [Cocktail.Color]()
-    private var isCheckedArray = [Bool]()
+    var selectedColor = [Cocktail.Color]()
+    var isCheckedArray = [Bool]()
     
-    private var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     private let nextButton = MainButton()
     

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import MessageUI
 
-class SettingDetailViewController: UIViewController {
+final class SettingDetailViewController: UIViewController {
     
     enum Developers: Int, CaseIterable {
         case developer

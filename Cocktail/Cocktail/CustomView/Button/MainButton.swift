@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 
+/// 가장 기본 스타일 버튼
 class MainButton: UIButton {
 
     override init(frame: CGRect) {

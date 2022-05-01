@@ -5,11 +5,10 @@
 //  Created by 강희성 on 2022/01/05.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-class PopUpView: UIView {
+final class PopUpView: UIView {
     let textLabel = UILabel()
     
     override init(frame: CGRect) {
@@ -40,21 +39,4 @@ class PopUpView: UIView {
             self.isHidden = true
         }
     }
-    //애니메이션 작동안해서 화남
-//    var animating: Bool = false {
-//        willSet {
-//            self.isHidden = false
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-//                self.isHidden = true
-//            }
-//
-//            //            UIView.animate(withDuration: 1, delay: 0, options: .transitionCrossDissolve) {
-//            //                self.textLabel.textColor = .black
-//            //                self.backgroundColor = .borderGray
-//            //            } completion: { bool in
-//            //                self.backgroundColor = .clear
-//            //                self.textLabel.textColor = .clear
-//            //            }
-//        }
-//    }
 }

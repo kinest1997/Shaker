@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import StoreKit
 
-class MyDrinksViewController: UIViewController {
+final class MyDrinksViewController: UIViewController {
     
     var myDrink: Set<String> = []
     

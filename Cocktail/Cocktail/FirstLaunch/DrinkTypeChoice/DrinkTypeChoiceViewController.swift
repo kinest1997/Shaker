@@ -12,7 +12,7 @@ final class DrinkTypeChoiceViewController: UIViewController {
     
     private var drinkTypeSelected: Cocktail.DrinkType?
     
-    private var filteredRecipe = [Cocktail]()
+    var filteredRecipe = [Cocktail]()
     
     private let explainView = UIView()
     private let exitbutton = UIButton()

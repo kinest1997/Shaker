@@ -45,7 +45,7 @@ final class LoginViewController: ViewController, RxController {
     private let justUseButton = UIButton()
     
     func bind(_ viewModel: LoginViewBiandable) {
-//        view -> viewModel
+        //        view -> viewModel
         appleLoginButton.rx.tap
             .bind(to: viewModel.appleLoginButtonTapped)
             .disposed(by: disposeBag)
@@ -111,7 +111,7 @@ final class LoginViewController: ViewController, RxController {
         [appleLoginButton, justUseButton, loginlabel, mainImageView, shakerLabel].forEach {
             view.addSubview($0)
         }
-
+        
         mainImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-5)
             $0.height.equalTo(470)
@@ -162,7 +162,7 @@ final class LoginViewController: ViewController, RxController {
 }
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
-    private func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
@@ -185,8 +185,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 }
                 guard let self = self else { return }
                 UserDefaults.standard.set(false, forKey: "firstLaunch")
-//                let colorBind = ColorChoiceViewModel()
-//                self.colorChoiceViewController.bind(colorBind)
+                //                let colorBind = ColorChoiceViewModel()
+                //                self.colorChoiceViewController.bind(colorBind)
                 self.show(self.colorChoiceViewController, sender: nil)
             }
         }
@@ -194,7 +194,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
 }
 
 extension LoginViewController {
-    private func startSignInWithAppleFlow() {
+    func startSignInWithAppleFlow() {
         let nonce = randomNonceString()
         currentNonce = nonce
         let appleIDProvider = ASAuthorizationAppleIDProvider()

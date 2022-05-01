@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class WhatIHaveViewController: UIViewController {
+final class WhatIHaveViewController: UIViewController {
     
     var ingredientsWhatIhave: [String] = []
     

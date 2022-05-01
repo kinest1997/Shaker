@@ -5,7 +5,7 @@ import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
 
-class AddMyOwnCocktailRecipeViewController: UIViewController {
+final class AddMyOwnCocktailRecipeViewController: UIViewController {
     
     let loadingView = LoadingView()
     

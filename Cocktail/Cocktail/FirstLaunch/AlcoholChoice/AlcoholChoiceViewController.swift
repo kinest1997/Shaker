@@ -12,9 +12,9 @@ final class AlcoholChoiceViewController: UIViewController {
     
     var myFavor: Bool = true
     
-    private var filteredRecipe: [Cocktail] = []
+    var filteredRecipe: [Cocktail] = []
     
-    private var alcoholSelected: Cocktail.Alcohol?
+    var alcoholSelected: Cocktail.Alcohol?
     
     private let questionLabel = UILabel()
     private let explainLabel = UILabel()

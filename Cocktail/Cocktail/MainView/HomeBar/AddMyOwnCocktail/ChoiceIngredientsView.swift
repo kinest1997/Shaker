@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ChoiceIngredientsView: UIView {
+final class ChoiceIngredientsView: UIView {
     
     let mainView = UIView()
     

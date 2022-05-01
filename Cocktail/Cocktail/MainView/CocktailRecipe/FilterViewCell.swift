@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class FilterViewCell: UITableViewCell {
+final class FilterViewCell: UITableViewCell {
     
     let nameLabel = UILabel()
     let appliedCheckImgageView = UIImageView()

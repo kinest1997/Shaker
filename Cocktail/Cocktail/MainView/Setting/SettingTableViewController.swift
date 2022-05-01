@@ -11,7 +11,7 @@ import FirebaseAuth
 import StoreKit     //For AppStore Review Request
 import MessageUI    //For Send Email
 
-class SettingTableViewController: UITableViewController {
+final class SettingTableViewController: UITableViewController {
     enum Settings: Int, CaseIterable {
         case serviceInformation
         case alarm

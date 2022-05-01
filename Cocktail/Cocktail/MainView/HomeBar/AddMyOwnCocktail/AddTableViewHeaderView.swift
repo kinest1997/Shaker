@@ -5,11 +5,10 @@
 //  Created by 강희성 on 2022/01/02.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-class AddTableViewHeaderView: UITableViewHeaderFooterView {
+final class AddTableViewHeaderView: UITableViewHeaderFooterView {
     
     let titleLabel = UILabel()
     let topSplitLine = UILabel()
