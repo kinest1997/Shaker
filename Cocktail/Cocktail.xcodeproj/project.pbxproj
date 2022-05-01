@@ -16,6 +16,7 @@
 		3D4415D127564EA600CBCC40 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D027564EA600CBCC40 /* LoginViewController.swift */; };
 		3D4415D327565DA200CBCC40 /* ColorChoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */; };
 		3D48C212275A13A2001B40FC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D48C211275A13A2001B40FC /* LoadingView.swift */; };
+		3D535666281E4E46004A3538 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D535665281E4E46004A3538 /* ViewController.swift */; };
 		3D5685D4278AFDB400B9F5CD /* YouTube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685D3278AFDB400B9F5CD /* YouTube.swift */; };
 		3D5685D7278B042300B9F5CD /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685D6278B042300B9F5CD /* Recommendation.swift */; };
 		3D5685D9278B048100B9F5CD /* CocktailLikeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D5685D8278B048100B9F5CD /* CocktailLikeList.swift */; };
@@ -118,6 +119,7 @@
 		3D4415D027564EA600CBCC40 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3D4415D227565DA200CBCC40 /* ColorChoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorChoiceViewController.swift; sourceTree = "<group>"; };
 		3D48C211275A13A2001B40FC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		3D535665281E4E46004A3538 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3D5685D3278AFDB400B9F5CD /* YouTube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTube.swift; sourceTree = "<group>"; };
 		3D5685D6278B042300B9F5CD /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		3D5685D8278B048100B9F5CD /* CocktailLikeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailLikeList.swift; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				3DB910F2275759E90076CB50 /* Singleton.swift */,
+				3D535665281E4E46004A3538 /* ViewController.swift */,
 				3D7DE4812774D5A6008FF202 /* MainButton.swift */,
 				3D48C211275A13A2001B40FC /* LoadingView.swift */,
 			);
@@ -743,6 +746,7 @@
 				3D5685D9278B048100B9F5CD /* CocktailLikeList.swift in Sources */,
 				3D297A9B277329B8001B8BD4 /* SettingDetailView.swift in Sources */,
 				3DE56B35275E4F750087D979 /* BaseChoiceViewController.swift in Sources */,
+				3D535666281E4E46004A3538 /* ViewController.swift in Sources */,
 				3D5E8C9627843C370005478B /* OpenSourceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
