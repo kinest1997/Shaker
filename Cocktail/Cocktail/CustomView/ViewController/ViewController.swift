@@ -21,12 +21,10 @@ class ViewController: UIViewController {
             $0.edges.equalToSuperview()
         }
     }
-    /// 로딩문구를 설정해준다
-    func setLoadingTitile(text: String) {
+    
+    /// 로딩 시작및 로딩 문구를 설정해준다
+    func startLoading(text: String = "") {
         self.loadingView.explainLabel.text = text
-    }
-    /// 로딩 시작
-    func startLoading() {
         self.loadingView.isHidden = false
     }
     /// 로딩 종료

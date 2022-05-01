@@ -1,15 +1,13 @@
 import UIKit
 import SnapKit
 
-final class CocktailRecipeViewController: UIViewController {
+final class CocktailRecipeViewController: ViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
     
     var unTouchableRecipe: [Cocktail] = []
     var originRecipe: [Cocktail] = []
     var filteredRecipe: [Cocktail] = []
-    
-    let loadingView = LoadingView()
     
     let filterView = FilteredView()
     
@@ -31,8 +29,7 @@ final class CocktailRecipeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingView.isHidden = false
-        loadingView.explainLabel.text = "Loading".localized
+        startLoading(text: "Loading".localized)
         attribute()
         layout()
         mainTableView.delegate = self
@@ -65,7 +62,7 @@ final class CocktailRecipeViewController: UIViewController {
         
         FirebaseRecipe.shared.getCocktailLikeData {[weak self] data in
             self?.likeData = data
-            self?.loadingView.isHidden = true
+            self?.stopLoading()
             self?.mainTableView.reloadData()
         }
         
@@ -76,36 +73,31 @@ final class CocktailRecipeViewController: UIViewController {
             self.unTouchableRecipe = FirebaseRecipe.shared.recipe + recipes
             self.originRecipe = self.unTouchableRecipe
             self.filteredRecipe = self.originRecipe
-            self.loadingView.isHidden = true
             self.unTouchableRecipe.sort { $0.name < $1.name }
             self.mainTableView.reloadData()
+            self.stopLoading()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.loadingView.isHidden = false
+        self.startLoading()
         
         FirebaseRecipe.shared.getMyRecipe {[weak self] recipes in
             guard let self = self else {
                 return
             }
             self.unTouchableRecipe = FirebaseRecipe.shared.recipe + recipes
-            self.loadingView.isHidden = true
+            self.stopLoading()
             self.unTouchableRecipe.sort { $0.name < $1.name }
             self.mainTableView.reloadData()
         }
     }
     
-    func layout() {
+    private func layout() {
         view.addSubview(mainTableView)
         navigationController?.view.addSubview(filterView)
-        view.addSubview(loadingView)
         mainTableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        
-        loadingView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
@@ -114,7 +106,7 @@ final class CocktailRecipeViewController: UIViewController {
         }
     }
     
-    func attribute() {
+    private func attribute() {
         filterView.isHidden = true
         mainTableView.backgroundColor = .white
         //저장 버튼의 액션
@@ -162,7 +154,7 @@ final class CocktailRecipeViewController: UIViewController {
         }), for: .touchUpInside)
     }
     
-    func sorting(standard: SortingStandard) {
+    private func sorting(standard: SortingStandard) {
         switch standard {
         case .alcohol:
             unTouchableRecipe = unTouchableRecipe.sorted { $0.alcohol.rank < $1.alcohol.rank}
@@ -182,13 +174,13 @@ final class CocktailRecipeViewController: UIViewController {
         mainTableView.reloadData()
     }
     
-    @objc func filtering() {
+    @objc private func filtering() {
         filterView.nowFiltering = true
         filterView.isHidden = false
         mainTableView.reloadData()
     }
     
-    @objc func arrangement() {
+    @objc private func arrangement() {
         filteredRecipe = filteredRecipe.sorted { $0.name < $1.name}
     }
 }

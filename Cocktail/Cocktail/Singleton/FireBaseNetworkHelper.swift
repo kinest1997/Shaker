@@ -5,7 +5,7 @@
 //  Created by 강희성 on 2022/05/01.
 //
 
-import Foundation
+import UIKit
 
 /// 네크워크 관련 로직을 담고있는 프로토콜
 protocol NetworkHelper {
