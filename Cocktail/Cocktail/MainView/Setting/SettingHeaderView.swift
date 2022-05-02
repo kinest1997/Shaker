@@ -5,11 +5,10 @@
 //  Created by 강희성 on 2022/01/04.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-class SettingHeaderView: UITableViewHeaderFooterView {
+final class SettingHeaderView: UITableViewHeaderFooterView {
     let mainLabel = UILabel()
     
     override func layoutSubviews() {

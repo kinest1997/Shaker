@@ -5,11 +5,10 @@
 //  Created by 강희성 on 2022/01/04.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-class SettingCell: UITableViewCell {
+final class SettingCell: UITableViewCell {
     
     let mainLabel = UILabel()
     

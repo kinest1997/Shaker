@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class NoTitleHeader: UICollectionReusableView {
+final class NoTitleHeader: UICollectionReusableView {
     
     let topSplitLine = UILabel()
 

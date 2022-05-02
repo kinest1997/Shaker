@@ -5,11 +5,10 @@
 //  Created by 강희성 on 2021/12/06.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-class BaseChoiceViewController: UIViewController {
+final class BaseChoiceViewController: UIViewController {
     
     var filteredRecipe: [Cocktail] = []
     

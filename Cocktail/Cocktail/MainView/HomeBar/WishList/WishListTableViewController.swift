@@ -3,7 +3,7 @@ import FirebaseStorage
 import FirebaseAuth
 import FirebaseDatabase
 
-class WishListCocktailListViewController: UITableViewController {
+final class WishListCocktailListViewController: UITableViewController {
     
     var wishListRecipe: [Cocktail] = []
     

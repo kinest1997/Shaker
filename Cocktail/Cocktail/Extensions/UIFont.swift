@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 extension UIFont {
+    /// 넥슨 기반 폰트를 반환해준다
     static func nexonFont(ofSize: CGFloat, weight: UIFont.Weight ) -> UIFont {
         switch weight {
         case .bold, .black, .heavy:

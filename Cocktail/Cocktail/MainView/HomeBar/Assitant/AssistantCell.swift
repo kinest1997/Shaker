@@ -5,11 +5,10 @@
 //  Created by 강희성 on 2022/01/02.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-class AssistantCell: UITableViewCell {
+final class AssistantCell: UITableViewCell {
     let mainImageView = UIImageView()
     let titleLabel = UILabel()
     let explainLabel = UILabel()

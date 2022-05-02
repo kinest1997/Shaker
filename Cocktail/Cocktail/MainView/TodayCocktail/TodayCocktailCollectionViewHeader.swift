@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TodayCocktailCollectionViewHeader: UICollectionReusableView {
+final class TodayCocktailCollectionViewHeader: UICollectionReusableView {
     
     let sectionTextLabel = UILabel()
     

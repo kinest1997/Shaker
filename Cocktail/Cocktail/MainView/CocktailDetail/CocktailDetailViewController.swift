@@ -4,7 +4,7 @@ import Kingfisher
 import FirebaseDatabase
 import FirebaseAuth
 
-class CocktailDetailViewController: UIViewController {
+final class CocktailDetailViewController: ViewController {
     
     var cocktailData: Cocktail = Cocktail(name: "", craft: .blending, glass: .collins, recipe: [], ingredients: [], base: .assets, alcohol: .low, color: .various, mytip: "", drinkType: .longDrink, myRecipe: false, wishList: false, imageURL: "")
     
@@ -31,7 +31,7 @@ class CocktailDetailViewController: UIViewController {
             let dislikeCount = FirebaseRecipe.shared.likeOrDislikeCount(cocktailList: likeData, choice: false)
             DispatchQueue.main.async {[weak self] in
                 self?.disLikeCountLabel.text = String(dislikeCount)
-                self?.loadingView.isHidden = true
+                self?.stopLoading()
             }
         }
     }
@@ -60,64 +60,62 @@ class CocktailDetailViewController: UIViewController {
         }
     }
     
-    let mainScrollView = UIScrollView()
-    let mainView = UIView()
-    let popUpView = PopUpView()
+    private let mainScrollView = UIScrollView()
+    private let mainView = UIView()
+    private let popUpView = PopUpView()
     
-    let wishListButton = UIButton()
+    private let wishListButton = UIButton()
     
-    let cocktailImageView = UIImageView()
-    let imageSplitLine = UILabel()
-    let nameLabel = UILabel()
-    let alcoholSplitLine = UILabel()
+    private let cocktailImageView = UIImageView()
+    private let imageSplitLine = UILabel()
+    private let nameLabel = UILabel()
+    private let alcoholSplitLine = UILabel()
     
-    let alcoholGuideLabel = UILabel()
-    let alcoholStackView = UIStackView()
-    let lowAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
-    let midAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
-    let highAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
-    let alcoholLabel = UILabel()
+    private let alcoholGuideLabel = UILabel()
+    private let alcoholStackView = UIStackView()
+    private let lowAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
+    private let midAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
+    private let highAlcoholLabel = UIImageView(image: UIImage(systemName: "circle.fill"))
+    private let alcoholLabel = UILabel()
     
-    let leftStackView = UIStackView()
-    let centerLine = UIView()
-    let rightStackView = UIStackView()
-    let groupStackView = UIStackView()
+    private let leftStackView = UIStackView()
+    private let centerLine = UIView()
+    private let rightStackView = UIStackView()
+    private let groupStackView = UIStackView()
     
-    let colorGuideLabel = UILabel()
-    let colorLabel = UILabel()
+    private let colorGuideLabel = UILabel()
+    private let colorLabel = UILabel()
     
-    let baseDrinkGuideLabel = UILabel()
-    let baseDrinkLabel = UILabel()
+    private let baseDrinkGuideLabel = UILabel()
+    private let baseDrinkLabel = UILabel()
     
-    let glassGuideLabel = UILabel()
-    let glassLabel = UILabel()
+    private let glassGuideLabel = UILabel()
+    private let glassLabel = UILabel()
     
-    let craftGuideLabel = UILabel()
-    let craftLabel = UILabel()
+    private let craftGuideLabel = UILabel()
+    private let craftLabel = UILabel()
     
-    let drinkTypeLabel = UILabel()
-    let drinkTypeGuideLabel = UILabel()
+    private let drinkTypeLabel = UILabel()
+    private let drinkTypeGuideLabel = UILabel()
     
-    let myTipLabel = UILabel()
+    private let myTipLabel = UILabel()
     
-    let firstSplitLine = UILabel()
-    let ingredientsGuideLabel = UILabel()
-    let ingredientsLabel = UILabel()
+    private let firstSplitLine = UILabel()
+    private let ingredientsGuideLabel = UILabel()
+    private let ingredientsLabel = UILabel()
     
-    let secondSplitLine = UILabel()
-    let recipeGuideLabel = UILabel()
-    let recipeLabel = UILabel()
+    private let secondSplitLine = UILabel()
+    private let recipeGuideLabel = UILabel()
+    private let recipeLabel = UILabel()
     
-    let likeButton = UIButton()
-    let likeCountLabel = UILabel()
-    let disLikeButton = UIButton()
-    let disLikeCountLabel = UILabel()
-    
-    let loadingView = LoadingView()
+    private let likeButton = UIButton()
+    private let likeCountLabel = UILabel()
+    private let disLikeButton = UIButton()
+    private let disLikeCountLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingView.isHidden = false
+        self.startLoading()
         attribute()
         layout()
         addBarButton()
@@ -135,7 +133,7 @@ class CocktailDetailViewController: UIViewController {
         }
     }
     
-    func layout() {
+    private func layout() {
         view.addSubview(mainScrollView)
         view.addSubview(popUpView)
         mainScrollView.addSubview(mainView)
@@ -243,7 +241,6 @@ class CocktailDetailViewController: UIViewController {
         
         groupStackView.snp.makeConstraints {
             $0.top.equalTo(myTipLabel.snp.bottom).offset(30)
-//            $0.width.equalToSuperview().multipliedBy(0.4)
             $0.centerX.equalToSuperview()
         }
         
@@ -300,7 +297,7 @@ class CocktailDetailViewController: UIViewController {
         }
     }
     
-    func attribute() {
+    private func attribute() {
         view.backgroundColor = .white
         mainView.backgroundColor = .white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: UIFont.nexonFont(ofSize: 20, weight: .bold)]
@@ -373,7 +370,6 @@ class CocktailDetailViewController: UIViewController {
 
         disLikeButton.setBackgroundImage(UIImage(systemName: "hand.thumbsdown"), for: .normal)
 
-        
         alcoholGuideLabel.text = "Alcohol".localized
         colorGuideLabel.text = "Color".localized
         baseDrinkGuideLabel.text = "Base".localized
@@ -449,13 +445,13 @@ class CocktailDetailViewController: UIViewController {
         }), for: .touchUpInside)
     }
     
-    func addBarButton() {
+    private func addBarButton() {
         let editingButton = UIBarButtonItem(title: "Add".localized, style: .done, target: self, action: #selector(startEditing))
         navigationItem.rightBarButtonItem = editingButton
         navigationController?.navigationBar.isHidden = false
     }
     
-    @objc func startEditing() {
+    @objc private func startEditing() {
         guard let _ = Auth.auth().currentUser?.uid else {
                   self.pleaseLoginAlert()
                   return }

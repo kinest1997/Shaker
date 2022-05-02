@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import FirebaseAuth
 
-class AssistantViewController: UIViewController {
+final class AssistantViewController: UIViewController {
     
     enum Assist: Int, CaseIterable {
         case myDrink

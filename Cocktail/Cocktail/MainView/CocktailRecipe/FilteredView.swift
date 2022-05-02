@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class FilteredView: UIView {
+final class FilteredView: UIView {
     
     var nowFiltering: Bool = false
     

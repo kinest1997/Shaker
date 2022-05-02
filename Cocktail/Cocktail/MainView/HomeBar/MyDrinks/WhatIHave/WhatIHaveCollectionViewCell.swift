@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class WhatIHaveCollectionViewCell: UICollectionViewCell{
+final class WhatIHaveCollectionViewCell: UICollectionViewCell{
     let mainImageView = UIImageView()
     let nameLabel = UILabel()
     var checkBoxImage = UIImageView()

@@ -5,11 +5,13 @@
 //  Created by 강희성 on 2022/02/26.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-class EmptyView: UIView {
+/// 검색된 레시피가 없을떄 보여주는 뷰
+final class EmptyView: UIView {
+    
+    typealias TitleAndBody = (String, String)
     
     let firstLabel = UILabel()
     let secondLabel = UILabel()
@@ -37,9 +39,17 @@ class EmptyView: UIView {
             $0.top.equalTo(firstLabel.snp.bottom).offset(5)
             $0.centerX.equalToSuperview()
         }
+        
+        firstLabel.text = "There's no cocktail added".localized
+        secondLabel.text = "Please add some cocktails".localized
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setUp(_ titleAndBody: TitleAndBody) {
+        firstLabel.text = titleAndBody.0
+        secondLabel.text = titleAndBody.1
     }
 }

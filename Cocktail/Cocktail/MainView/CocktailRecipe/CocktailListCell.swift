@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class CocktailListCell: UITableViewCell {
+final class CocktailListCell: UITableViewCell {
     let cocktailImageView = UIImageView()
     let nameLabel = UILabel()
     let ingredientCountLabel = UILabel()

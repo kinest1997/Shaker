@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 import SnapKit
 
-class BaseChoiceCollectionViewCell: UICollectionViewCell {
+final class BaseChoiceCollectionViewCell: UICollectionViewCell {
     
-    let mainImageView = UIImageView()
+    private let mainImageView = UIImageView()
     
-    let mainView = UIView()
-    let mainLabel = UILabel()
+    private let mainView = UIView()
+    private let mainLabel = UILabel()
     
     var isChecked = false
     
@@ -58,5 +58,3 @@ class BaseChoiceCollectionViewCell: UICollectionViewCell {
         mainImageView.image = image
     }
 }
-
-

@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class AddRecipeCell: UITableViewCell {
+final class AddRecipeCell: UITableViewCell {
     
     let numberLabel = UILabel()
     var explainTextField = UITextField()

@@ -2,9 +2,9 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class CocktailListViewController: UIViewController {
+final class CocktailListViewController: UIViewController {
     
-    let mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private let mainCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     var lastRecipe: [Cocktail] = []
     

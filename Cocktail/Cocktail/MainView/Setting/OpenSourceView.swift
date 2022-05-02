@@ -5,12 +5,11 @@
 //  Created by 강희성 on 2022/01/04.
 //
 
-import Foundation
 import SnapKit
 import SafariServices
 import UIKit
 
-class OpenSourceView: UIViewController {
+final class OpenSourceView: UIViewController {
     let mainTableView = UITableView(frame: .zero, style: .insetGrouped)
     
     enum OpenSource: Int, CaseIterable {

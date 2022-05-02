@@ -25,27 +25,27 @@ protocol LoginViewBiandable {
     var changeLoginView: Signal<Void> { get }
 }
 
-class LoginViewController: UIViewController {
+final class LoginViewController: ViewController, RxController {
     
-    let colorChoiceViewController = ColorChoiceViewController()
+    private let colorChoiceViewController = ColorChoiceViewController()
     
     let disposeBag = DisposeBag()
     
-    let mainImageView = UIImageView()
+    private let mainImageView = UIImageView()
     
-    let userNotiCenter = UNUserNotificationCenter.current()
+    private let userNotiCenter = UNUserNotificationCenter.current()
     
-    let mainViewController = MainViewController()
-    let shakerLabel = UILabel()
-    let loginlabel = UILabel()
+    private let mainViewController = MainViewController()
+    private let shakerLabel = UILabel()
+    private let loginlabel = UILabel()
     
     private var currentNonce: String?
     
-    let appleLoginButton = UIButton()
-    let justUseButton = UIButton()
+    private let appleLoginButton = UIButton()
+    private let justUseButton = UIButton()
     
     func bind(_ viewModel: LoginViewBiandable) {
-//        view -> viewModel
+        //        view -> viewModel
         appleLoginButton.rx.tap
             .bind(to: viewModel.appleLoginButtonTapped)
             .disposed(by: disposeBag)
@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
         attribute()
     }
     
-    func attribute() {
+    private func attribute() {
         view.backgroundColor = .white
         mainImageView.image = UIImage(named: "logoImage")
         justUseButton.setTitle("Start without logging in".localized, for: .normal)
@@ -107,11 +107,11 @@ class LoginViewController: UIViewController {
         }
     }
     
-    func layout() {
+    private func layout() {
         [appleLoginButton, justUseButton, loginlabel, mainImageView, shakerLabel].forEach {
             view.addSubview($0)
         }
-
+        
         mainImageView.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-5)
             $0.height.equalTo(470)
@@ -151,7 +151,7 @@ class LoginViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
     
-    func requestAuthNoti() {
+    private  func requestAuthNoti() {
         let notiAuthOptions = UNAuthorizationOptions(arrayLiteral: [.alert, .badge, .sound])
         userNotiCenter.requestAuthorization(options: notiAuthOptions) { (success, error) in
             if let error = error {
@@ -185,8 +185,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 }
                 guard let self = self else { return }
                 UserDefaults.standard.set(false, forKey: "firstLaunch")
-//                let colorBind = ColorChoiceViewModel()
-//                self.colorChoiceViewController.bind(colorBind)
+                //                let colorBind = ColorChoiceViewModel()
+                //                self.colorChoiceViewController.bind(colorBind)
                 self.show(self.colorChoiceViewController, sender: nil)
             }
         }

@@ -3,9 +3,6 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-import UIKit
-import SnapKit
-
 protocol ColorChoiceViewBindable {
     // view -> viewModel
     var cellTapped: PublishRelay<IndexPath> { get }
@@ -21,20 +18,20 @@ protocol ColorChoiceViewBindable {
     var saveMyFavor: Signal<[Cocktail.Color]> { get }
 }
 
-class ColorChoiceViewController: UIViewController {
+final class ColorChoiceViewController: UIViewController {
     let alcoholChoiceViewController = AlcoholChoiceViewController()
     
-    let questionLabel = UILabel()
+    private let questionLabel = UILabel()
     
     var myFavor: Bool = true
     
-    let colorArray = Cocktail.Color.allCases
+    private let colorArray = Cocktail.Color.allCases
     var selectedColor = [Cocktail.Color]()
     var isCheckedArray = [Bool]()
     
     var mainCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    let nextButton = MainButton()
+    private let nextButton = MainButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()

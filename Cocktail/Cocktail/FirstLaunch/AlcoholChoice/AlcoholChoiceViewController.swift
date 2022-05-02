@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class AlcoholChoiceViewController: UIViewController {
+final class AlcoholChoiceViewController: UIViewController {
     
     var myFavor: Bool = true
     
@@ -16,18 +16,18 @@ class AlcoholChoiceViewController: UIViewController {
     
     var alcoholSelected: Cocktail.Alcohol?
     
-    let questionLabel = UILabel()
-    let explainLabel = UILabel()
+    private let questionLabel = UILabel()
+    private let explainLabel = UILabel()
     
-    let highLabel = UILabel()
-    let highButton = UIButton()
-    let middleButton = UIButton()
-    let lowButton = UIButton()
-    let lowLabel = UILabel()
-    let nextButton = MainButton()
+    private let highLabel = UILabel()
+    private let highButton = UIButton()
+    private let middleButton = UIButton()
+    private let lowButton = UIButton()
+    private let lowLabel = UILabel()
+    private let nextButton = MainButton()
     
-    let topVerticalLine = UILabel()
-    let bottomVerticalLine = UILabel()
+    private let topVerticalLine = UILabel()
+    private let bottomVerticalLine = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class AlcoholChoiceViewController: UIViewController {
         }
     }
     
-    func attribute() {
+    private func attribute() {
          
         let originText = "What Flavor do you like?".localized
 
@@ -120,7 +120,7 @@ class AlcoholChoiceViewController: UIViewController {
         bottomVerticalLine.backgroundColor = .systemGray2
     }
     
-    func setImageAndData(button: UIButton, alcohol: Cocktail.Alcohol) {
+    private func setImageAndData(button: UIButton, alcohol: Cocktail.Alcohol) {
         [lowButton, middleButton, highButton].forEach {
             $0.setBackgroundImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         }
@@ -129,7 +129,7 @@ class AlcoholChoiceViewController: UIViewController {
         nextButton.isEnabled = true
     }
     
-    func layout() {
+    private func layout() {
         [questionLabel, explainLabel, highLabel, highButton, middleButton, lowLabel, lowButton, nextButton, topVerticalLine, bottomVerticalLine].forEach {
             view.addSubview($0)
         }
@@ -196,7 +196,7 @@ class AlcoholChoiceViewController: UIViewController {
         }
     }
     
-    func buttonLabelCountUpdate(button: UIButton) {
+    private func buttonLabelCountUpdate(button: UIButton) {
         let number = filteredRecipe.filter {
             $0.alcohol == alcoholSelected
         }.count

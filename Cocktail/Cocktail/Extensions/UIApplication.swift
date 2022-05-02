@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIApplication {
+    /// 현재 최상단의 뷰컨트롤러를 알려준다
     class func topMostViewController(_ viewController: UIViewController?) -> UIViewController? {
         if let nav = viewController as? UINavigationController {
             return topMostViewController(nav.visibleViewController)

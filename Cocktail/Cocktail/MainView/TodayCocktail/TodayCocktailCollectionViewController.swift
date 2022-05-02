@@ -13,7 +13,7 @@ import FirebaseDatabase
 import FirebaseAuth
 import AuthenticationServices
 
-class TodayCocktailCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+final class TodayCocktailCollectionViewController: FireBaseViewController, UICollectionViewDelegate, UICollectionViewDataSource, NetworkHelper {
     
     enum Today: Int, CaseIterable {
         case firstSection
@@ -122,10 +122,6 @@ class TodayCocktailCollectionViewController: UIViewController, UICollectionViewD
             }
         }
     }
-    
-    let uid = Auth.auth().currentUser?.uid
-    
-    let ref = Database.database().reference()
     
     let loadingView = LoadingView()
     
@@ -453,8 +449,6 @@ extension TodayCocktailCollectionViewController {
             return cell
         case 1:
             if myRecipe.isEmpty {
-                emptyCell.emptyView.firstLabel.text = "There's no cocktail added".localized
-                emptyCell.emptyView.secondLabel.text = "Please add some cocktails".localized
                 return emptyCell
             } else {
                 cell.mainImageView.kf.setImage(with: URL(string: myRecipe[indexPath.row].imageURL), placeholder: UIImage(named: "\(myRecipe[indexPath.row].glass.rawValue)" + "Empty"))
@@ -463,8 +457,6 @@ extension TodayCocktailCollectionViewController {
             
         case 2:
             if wishListData.isEmpty {
-                emptyCell.emptyView.firstLabel.text = "There's no cocktail added".localized
-                emptyCell.emptyView.secondLabel.text = "Please add some cocktails".localized
                 return emptyCell
             } else {
             cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(named: "\(wishListData[indexPath.row].glass.rawValue)" + "Empty"))
@@ -517,64 +509,6 @@ extension TodayCocktailCollectionViewController {
             
         default:
             return
-        }
-    }
-
-    
-    func goToYoutube(videoCode: String) {
-        let alert = UIAlertController(title: "It's connected through YouTube".localized, message: "Will you continue?".localized, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Yes".localized, style: .default, handler: {_ in
-            ContentNetwork.shared.setlinkAction(appURL: "https://www.youtube.com/watch?v=\(videoCode)", webURL: "https://www.youtube.com/watch?v=\(videoCode)")
-        }))
-        alert.addAction(UIAlertAction(title: "No".localized, style: .cancel, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
-    func getMyRecipe(completion: @escaping ([Cocktail]) -> (Void)) {
-        guard let uid = uid else { return }
-        ref.child("users").child(uid).child("MyRecipes").observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value as? [[String: Any]],
-                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
-                      completion([Cocktail]())
-                      return }
-            let myRecipes = cocktailList.filter { $0.myRecipe == true }
-            completion(myRecipes)
-        }
-    }
-    
-    func getWishList(completion: @escaping ([Cocktail]) -> (Void)) {
-        guard let uid = uid else { return }
-        ref.child("users").child(uid).child("WishList").observe( .value) { snapshot in
-            guard let value = snapshot.value as? [[String: Any]],
-                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Cocktail].self, from: data) else {
-                      completion([Cocktail]())
-                      return }
-            let myRecipes = cocktailList.filter { $0.wishList == true }
-            completion(myRecipes)
-        }
-    }
-    
-    func getYoutubeContents(completion: @escaping ([YouTubeVideo]) -> (Void)) {
-        ref.child("Youtube").observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value as? [[String: Any]],
-                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let youTubeVideoList = try? JSONDecoder().decode([YouTubeVideo].self, from: data) else {
-                      completion([YouTubeVideo]())
-                      return }
-            completion(youTubeVideoList)
-        }
-    }
-    
-    func getRecommendations(completion: @escaping ([Recommendation]) -> (Void)) {
-        ref.child("CocktailRecommendation").observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value as? [[String: Any]],
-                  let data = try? JSONSerialization.data(withJSONObject: value, options: []),
-                  let cocktailList = try? JSONDecoder().decode([Recommendation].self, from: data) else {
-                      completion([Recommendation]())
-                      return }
-            completion(cocktailList)
         }
     }
 }
