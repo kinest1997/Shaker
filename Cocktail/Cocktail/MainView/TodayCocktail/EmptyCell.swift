@@ -11,7 +11,7 @@ import SnapKit
 
 final class EmptyCell: UICollectionViewCell {
     
-    let emptyView = EmptyView()
+    private let emptyView = EmptyView()
     
     override func layoutSubviews() {
         contentView.addSubview(emptyView)
@@ -20,5 +20,9 @@ final class EmptyCell: UICollectionViewCell {
             $0.top.equalToSuperview().offset(20)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    func setUp(titleAndBody: EmptyView.TitleAndBody) {
+        emptyView.setUp(titleAndBody)
     }
 }

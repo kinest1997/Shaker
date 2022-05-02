@@ -449,8 +449,6 @@ extension TodayCocktailCollectionViewController {
             return cell
         case 1:
             if myRecipe.isEmpty {
-                emptyCell.emptyView.firstLabel.text = "There's no cocktail added".localized
-                emptyCell.emptyView.secondLabel.text = "Please add some cocktails".localized
                 return emptyCell
             } else {
                 cell.mainImageView.kf.setImage(with: URL(string: myRecipe[indexPath.row].imageURL), placeholder: UIImage(named: "\(myRecipe[indexPath.row].glass.rawValue)" + "Empty"))
@@ -459,8 +457,6 @@ extension TodayCocktailCollectionViewController {
             
         case 2:
             if wishListData.isEmpty {
-                emptyCell.emptyView.firstLabel.text = "There's no cocktail added".localized
-                emptyCell.emptyView.secondLabel.text = "Please add some cocktails".localized
                 return emptyCell
             } else {
             cell.mainImageView.kf.setImage(with: URL(string: wishListData[indexPath.row].imageURL), placeholder: UIImage(named: "\(wishListData[indexPath.row].glass.rawValue)" + "Empty"))
