@@ -138,12 +138,12 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Messaging
   - Firebase/Storage
-  - Kingfisher (~> 7.0)
+  - Kingfisher
   - lottie-ios
-  - RxCocoa (= 6.2.0)
-  - RxSwift (= 6.2.0)
+  - RxCocoa
+  - RxSwift
   - Siren
-  - SnapKit (~> 5.0.0)
+  - SnapKit
 
 SPEC REPOS:
   trunk:
@@ -196,6 +196,6 @@ SPEC CHECKSUMS:
   Siren: 1f58945ba6e86a753eeaeddf0afa531cf05cdabf
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: d07358c9b7a7a6a0daef12738345872531ab2540
+PODFILE CHECKSUM: fa17b3b6bcedc5b2ad89855018e4ecb009c8d64e
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3
