@@ -1,5 +1,7 @@
 # Cocktail App
 
+[현재 코드 구조와 Firebase 데이터 흐름](docs/ARCHITECTURE.md)
+
 ## UI변천사
 
 | 화면 |초반 |중반 | 마무리 |
